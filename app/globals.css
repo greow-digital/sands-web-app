@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Sands Entreprenad färgpalett */
+  --color-primary: #2B74FC;
+  --color-primary-hover: #1D5FD9;
+  --color-dark: #060607;
+  --color-bg-light: #F1F4F7;
+  --color-border: #BDBDBD;
+  --color-accent: #FC5F2A;
+  --color-trust-green: #085B69;
+  --color-white: #FFFFFF;
+
+  /* Typografi — Manrope genomgående (matchar offert.sandsentreprenad.se) */
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+}
+
+/* Nollställ dark mode */
+:root {
+  --background: #ffffff;
+  --foreground: #060607;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+}
