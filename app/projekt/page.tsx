@@ -35,26 +35,26 @@ export default function ProjektPage() {
                   href={`/projekt/${p.slug}`}
                   className="group block"
                 >
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-gray-100">
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-gray-200 relative projekt-thumb">
                     {p.images.length >= 3 ? (
-                      <div className="grid grid-cols-[1.4fr_1fr] gap-1 h-full">
+                      <div className="grid grid-cols-[1.4fr_1fr] gap-[2px] h-full">
                         <div className="relative">
                           <Image
                             src={p.images[0]}
                             alt={p.title}
                             fill
                             sizes="(max-width: 640px) 60vw, 20vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105 projekt-img"
                           />
                         </div>
-                        <div className="grid grid-rows-2 gap-1">
+                        <div className="grid grid-rows-2 gap-[2px]">
                           <div className="relative">
                             <Image
                               src={p.images[1]}
                               alt={`${p.title} — bild 2`}
                               fill
                               sizes="(max-width: 640px) 40vw, 13vw"
-                              className="object-cover"
+                              className="object-cover projekt-img"
                             />
                           </div>
                           <div className="relative">
@@ -63,20 +63,20 @@ export default function ProjektPage() {
                               alt={`${p.title} — bild 3`}
                               fill
                               sizes="(max-width: 640px) 40vw, 13vw"
-                              className="object-cover"
+                              className="object-cover projekt-img"
                             />
                           </div>
                         </div>
                       </div>
                     ) : p.images.length === 2 ? (
-                      <div className="grid grid-cols-[1.4fr_1fr] gap-1 h-full">
+                      <div className="grid grid-cols-[1.4fr_1fr] gap-[2px] h-full">
                         <div className="relative">
                           <Image
                             src={p.images[0]}
                             alt={p.title}
                             fill
                             sizes="(max-width: 640px) 60vw, 20vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105 projekt-img"
                           />
                         </div>
                         <div className="relative">
@@ -85,7 +85,7 @@ export default function ProjektPage() {
                             alt={`${p.title} — bild 2`}
                             fill
                             sizes="(max-width: 640px) 40vw, 13vw"
-                            className="object-cover"
+                            className="object-cover projekt-img"
                           />
                         </div>
                       </div>
@@ -96,7 +96,7 @@ export default function ProjektPage() {
                           alt={p.title}
                           fill
                           sizes="(max-width: 640px) 100vw, 33vw"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105 projekt-img"
                         />
                       </div>
                     )}

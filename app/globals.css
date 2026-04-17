@@ -36,3 +36,22 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.15;
 }
+
+/* Projekt-bilder: enhetlig, professionell look */
+.projekt-img {
+  filter: contrast(1.06) saturate(1.1) brightness(1.02);
+}
+
+.projekt-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+  z-index: 1;
+}
