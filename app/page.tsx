@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star, Quote } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
+import ReviewCarousel from "@/components/ReviewCarousel";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -283,41 +284,8 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── CITAT / TESTIMONIAL ────────────────── */}
-        <section className="py-16 lg:py-24 bg-white border-t border-gray-100">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Quote
-              size={32}
-              className="mx-auto mb-5 opacity-20"
-              style={{ color: "var(--color-primary)" }}
-            />
-            <p
-              className="text-xl lg:text-[26px] leading-[1.5] font-semibold mb-6"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-dark)",
-              }}
-            >
-              &ldquo;Professionellt och pålitligt företag. Fast pris från start
-              och inga överraskningar. Boka ett hembesök — ni ångrar er
-              inte.&rdquo;
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <div className="flex gap-0.5">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star
-                    key={s}
-                    size={14}
-                    className="fill-yellow-400 text-yellow-400"
-                  />
-                ))}
-              </div>
-              <span className="text-sm text-gray-500">
-                Anders L. · Betongtak i Täby
-              </span>
-            </div>
-          </div>
-        </section>
+        {/* ── REVIEWS KARUSELL ─────────────────── */}
+        <ReviewCarousel />
 
         {/* ── FÖRE / EFTER ─────────────────────── */}
         <section
