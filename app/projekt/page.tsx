@@ -35,14 +35,71 @@ export default function ProjektPage() {
                   href={`/projekt/${p.slug}`}
                   className="group block"
                 >
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-gray-100">
-                    <Image
-                      src={p.image}
-                      alt={p.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-gray-100">
+                    {p.images.length >= 3 ? (
+                      <div className="grid grid-cols-[1.4fr_1fr] gap-1 h-full">
+                        <div className="relative">
+                          <Image
+                            src={p.images[0]}
+                            alt={p.title}
+                            fill
+                            sizes="(max-width: 640px) 60vw, 20vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="grid grid-rows-2 gap-1">
+                          <div className="relative">
+                            <Image
+                              src={p.images[1]}
+                              alt={`${p.title} — bild 2`}
+                              fill
+                              sizes="(max-width: 640px) 40vw, 13vw"
+                              className="object-cover"
+                            />
+                          </div>
+                          <div className="relative">
+                            <Image
+                              src={p.images[2]}
+                              alt={`${p.title} — bild 3`}
+                              fill
+                              sizes="(max-width: 640px) 40vw, 13vw"
+                              className="object-cover"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ) : p.images.length === 2 ? (
+                      <div className="grid grid-cols-[1.4fr_1fr] gap-1 h-full">
+                        <div className="relative">
+                          <Image
+                            src={p.images[0]}
+                            alt={p.title}
+                            fill
+                            sizes="(max-width: 640px) 60vw, 20vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="relative">
+                          <Image
+                            src={p.images[1]}
+                            alt={`${p.title} — bild 2`}
+                            fill
+                            sizes="(max-width: 640px) 40vw, 13vw"
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="relative h-full">
+                        <Image
+                          src={p.image}
+                          alt={p.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 33vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
                   </div>
                   <h2
                     className="text-base font-bold mb-1 group-hover:text-[#2B74FC] transition-colors"
