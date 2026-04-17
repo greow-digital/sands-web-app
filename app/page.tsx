@@ -510,7 +510,7 @@ export default function Home() {
                   color: "var(--color-dark)",
                 }}
               >
-                Har du eternittak?
+                Vanliga frågor om takomläggning
               </h2>
             </div>
 
