@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/omdomen" },
   title: "Kundomdömen | Sands Entreprenad — 4.8 i snittbetyg",
   description:
     "Läs vad våra kunder säger om Sands Entreprenad. 4.8 i snittbetyg av 54 omdömen. Takläggare i Stockholm med hög kundnöjdhet.",

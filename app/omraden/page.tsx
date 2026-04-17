@@ -7,6 +7,7 @@ import PageHero from "@/components/PageHero";
 import { omraden } from "@/lib/omraden";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/omraden" },
   title: "Takläggare i Stockholms län — Alla områden | Sands Entreprenad",
   description:
     "Vi utför takbyten och takomläggningar i hela Stockholms län — 27+ kommuner. Certifierad Monier Takpartner med fast pris.",

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/om-oss" },
   title: "Om Sands Entreprenad | Takläggare i Stockholm sedan 2016",
   description:
     "Sands Entreprenad startades 2016 med idén att erbjuda trygga takbyten med fast pris. Certifierad Monier Takpartner med 2 500+ utförda takläggningar.",

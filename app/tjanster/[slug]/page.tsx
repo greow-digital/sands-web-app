@@ -21,6 +21,7 @@ export async function generateMetadata({
   const t = getTjanst(slug);
   if (!t) return {};
   return {
+    alternates: { canonical: `/tjanster/${slug}` },
     title: `${t.title} i Stockholm | Sands Entreprenad`,
     description: t.intro,
     openGraph: {

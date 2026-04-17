@@ -8,6 +8,7 @@ import PageHero from "@/components/PageHero";
 import { tjanster } from "@/lib/tjanster";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/tjanster" },
   title: "Tjänster — Takläggning, renovering & mer | Sands Entreprenad",
   description:
     "Kompletta bygg- och taklösningar — takomläggning, fasadrenovering, badrumsrenovering och mer. Certifierad Monier Takpartner med fast pris.",

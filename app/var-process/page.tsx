@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/var-process" },
   title: "Vår process — Takbyte från start till slut | Sands Entreprenad",
   description:
     "Från hembesök till slutbesiktning — så går ett takbyte till hos Sands Entreprenad. Fast pris, tydlig kommunikation och Monier-garanti.",

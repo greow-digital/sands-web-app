@@ -20,6 +20,7 @@ export async function generateMetadata({
   const a = getArtikel(slug);
   if (!a) return {};
   return {
+    alternates: { canonical: `/blogg/${slug}` },
     title: `${a.titel} | Sands Entreprenad`,
     description: a.ingress,
     openGraph: {

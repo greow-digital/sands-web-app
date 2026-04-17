@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/faq" },
   title: "Vanliga frågor om takbyte | Sands Entreprenad",
   description:
     "Svar på de vanligaste frågorna om takbyte, priser, ROT-avdrag, garantier och processen hos Sands Entreprenad.",

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { CheckCircle, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/tack" },
   title: "Tack för din förfrågan | Sands Entreprenad",
   description: "Vi har tagit emot din förfrågan och återkommer inom 24h.",
   robots: "noindex",

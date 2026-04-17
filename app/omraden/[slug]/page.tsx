@@ -23,6 +23,7 @@ export async function generateMetadata({
   const ort = getOrt(slug);
   if (!ort) return {};
   return {
+    alternates: { canonical: `/omraden/${slug}` },
     title: `Takläggare i ${ort.name} | Sands Entreprenad`,
     description: `Sands Entreprenad utför takbyten och takomläggningar i ${ort.name}. Certifierad Monier Takpartner — boka kostnadsfri takbesiktning idag.`,
     openGraph: {

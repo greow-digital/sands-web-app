@@ -10,6 +10,7 @@ import { projekt as allaProjekt } from "@/lib/projekt";
 const projekt = [...allaProjekt].sort((a, b) => b.år - a.år);
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projekt" },
   title: "Utförda projekt — Takläggning Stockholm | Sands Entreprenad",
   description:
     "Se utförda takläggningsprojekt runt om i Stockholms län. Tegeltak, betongtak, plåttak och eternitbyten med Monier-garanti.",

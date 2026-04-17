@@ -1,49 +1,10 @@
 import { MetadataRoute } from "next";
-import { projekt as allaProjekt } from "@/lib/projekt";
+import { tjanster } from "@/lib/tjanster";
+import { omraden } from "@/lib/omraden";
+import { projekt } from "@/lib/projekt";
+import { artiklar } from "@/lib/blogg";
 
 const BASE = "https://sandsab.se";
-
-const tjänsteSlugs = [
-  "taklaggning",
-  "tegeltak",
-  "betongtak",
-  "plattak",
-  "papptak",
-  "eternittak",
-  "takfonsterkupor",
-  "hangrannorstupror",
-  "totalentreprenad",
-];
-
-const områdesSlugs = [
-  "stockholm",
-  "taby",
-  "nacka",
-  "jarfalla",
-  "huddinge",
-  "sollentuna",
-  "danderyd",
-  "bromma",
-  "tyreso",
-  "norrtälje",
-  "sodertalje",
-  "lidingo",
-  "solna",
-  "sundbyberg",
-  "ekero",
-  "haninge",
-  "botkyrka",
-  "nynashamn",
-  "vallentuna",
-  "vaxholm",
-  "varmdo",
-  "osteraker",
-  "upplands-vasby",
-  "upplands-bro",
-  "sigtuna",
-  "salem",
-  "nykvarn",
-];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
@@ -58,50 +19,46 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/faq`, priority: 0.6 },
     { url: `${BASE}/kontakt`, priority: 0.6 },
     { url: `${BASE}/blogg`, priority: 0.5 },
+    { url: `${BASE}/offert`, priority: 0.5 },
   ].map((p) => ({
     ...p,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
   }));
 
-  const tjänsteSidor = tjänsteSlugs.map((slug) => ({
-    url: `${BASE}/tjanster/${slug}`,
+  const tjänsteSidor = tjanster.map((t) => ({
+    url: `${BASE}/tjanster/${t.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.85,
   }));
 
-  const områdesSidor = områdesSlugs.map((slug) => ({
-    url: `${BASE}/omraden/${slug}`,
+  const områdesSidor = omraden.map((o) => ({
+    url: `${BASE}/omraden/${o.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
-  const projektSlugs = allaProjekt.map((p) => p.slug);
-
-  const bloggSlugs = [
-    "vad-kostar-takbyte",
-    "nar-byta-tak",
-    "monier-garanti",
-    "eternittak-asbest",
-    "rot-avdrag-takbyte",
-    "platttak-eller-tegeltag",
-  ];
-
-  const projektSidor = projektSlugs.map((slug) => ({
-    url: `${BASE}/projekt/${slug}`,
+  const projektSidor = projekt.map((p) => ({
+    url: `${BASE}/projekt/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: "yearly" as const,
     priority: 0.6,
   }));
 
-  const bloggSidor = bloggSlugs.map((slug) => ({
-    url: `${BASE}/blogg/${slug}`,
+  const bloggSidor = artiklar.map((a) => ({
+    url: `${BASE}/blogg/${a.slug}`,
     lastModified: new Date(),
     changeFrequency: "yearly" as const,
     priority: 0.5,
   }));
 
-  return [...staticPages, ...tjänsteSidor, ...områdesSidor, ...projektSidor, ...bloggSidor];
+  return [
+    ...staticPages,
+    ...tjänsteSidor,
+    ...områdesSidor,
+    ...projektSidor,
+    ...bloggSidor,
+  ];
 }

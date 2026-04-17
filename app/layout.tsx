@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
+import MobileCTA from "@/components/MobileCTA";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -16,18 +17,39 @@ const inter = Inter({
   display: "swap",
 });
 
+const BASE_URL = "https://sandsab.se";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: "Takläggare i Stockholm | Fast pris & 30 års garanti | Sands Entreprenad",
   description:
     "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner. Boka kostnadsfri takbesiktning — fast pris utan förbindelser.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "sv_SE",
-    url: "https://sandsab.se",
+    url: BASE_URL,
     siteName: "Sands Entreprenad Stockholm AB",
     title: "Takläggare i Stockholm | Fast pris & 30 års garanti | Sands Entreprenad",
     description:
       "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sands Entreprenad — Takläggare i Stockholm",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Takläggare i Stockholm | Sands Entreprenad",
+    description:
+      "Certifierad Monier Takpartner med fast pris och upp till 30 års garanti.",
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -44,9 +66,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
+              "@type": "Organization",
               name: "Sands Entreprenad Stockholm AB",
-              url: "https://sandsab.se",
+              url: BASE_URL,
               telephone: "08-28 38 88",
               email: "info@sandsab.se",
               address: {
@@ -63,6 +85,7 @@ export default function RootLayout({
                 "@type": "AggregateRating",
                 ratingValue: "4.8",
                 reviewCount: "54",
+                bestRating: "5",
               },
             }),
           }}
@@ -77,7 +100,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">
+        {children}
+        <MobileCTA />
+      </body>
     </html>
   );
 }

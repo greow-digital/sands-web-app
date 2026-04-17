@@ -149,6 +149,12 @@ export default function Header() {
             >
               Kontakt
             </Link>
+            <Link
+              href="/blogg"
+              className="text-gray-700 hover:text-[#2B74FC] transition-colors font-medium"
+            >
+              Blogg
+            </Link>
           </nav>
 
           {/* Desktop right: phone + CTA */}
@@ -259,6 +265,7 @@ export default function Header() {
               { href: "/projekt", label: "Projekt" },
               { href: "/om-oss", label: "Om oss" },
               { href: "/kontakt", label: "Kontakt" },
+              { href: "/blogg", label: "Blogg" },
             ].map((item) => (
               <Link
                 key={item.href}

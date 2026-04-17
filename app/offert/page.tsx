@@ -6,6 +6,7 @@ import LeadForm from "@/components/LeadForm";
 import { CheckCircle, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/offert" },
   title: "Boka kostnadsfri takbesiktning | Sands Entreprenad",
   description:
     "Boka en kostnadsfri takbesiktning — vi inspekterar ditt tak och ger dig ett fast pris utan förbindelser.",

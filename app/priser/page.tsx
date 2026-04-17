@@ -7,6 +7,7 @@ import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/priser" },
   title: "Vad kostar takbyte i Stockholm? Prisguide 2025 | Sands Entreprenad",
   description:
     "Riktpriser för takbyte i Stockholm. Betongtak från 1 200 kr/m², tegeltak från 1 500 kr/m² — alla priser efter ROT-avdrag.",

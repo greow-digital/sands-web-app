@@ -48,6 +48,27 @@ export default function PageHero({
         </>
       )}
 
+      {/* BreadcrumbList JSON-LD */}
+      {breadcrumbs && breadcrumbs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: breadcrumbs.map((c, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: c.label,
+                ...(c.href
+                  ? { item: `https://sandsab.se${c.href}` }
+                  : {}),
+              })),
+            }),
+          }}
+        />
+      )}
+
       <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-24">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav

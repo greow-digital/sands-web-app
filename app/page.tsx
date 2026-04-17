@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import ReviewCarousel from "@/components/ReviewCarousel";
+import SeasonBanner from "@/components/SeasonBanner";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -102,8 +103,9 @@ const eternitFaq = [
 export default function Home() {
   return (
     <>
+      <SeasonBanner />
       <Header />
-      <main className="pt-16 lg:pt-20 bg-white">
+      <main className="pt-[100px] lg:pt-[116px] bg-white">
         {/* ── HERO ─────────────────────────────────── */}
         <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
           {/* Bakgrundsbild */}
@@ -132,9 +134,8 @@ export default function Home() {
                   className="text-[36px] sm:text-[44px] lg:text-[56px] font-extrabold leading-[1.08] tracking-[-0.03em] mb-6"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  Trygg takläggning
-                  <br />
-                  med{" "}
+                  Trygg takläggning<br />
+                  {"med "}
                   <span style={{ color: "var(--color-primary)" }}>
                     fast pris
                   </span>

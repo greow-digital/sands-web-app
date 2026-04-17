@@ -7,6 +7,7 @@ import PageHero from "@/components/PageHero";
 import { artiklar } from "@/lib/blogg";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blogg" },
   title: "Blogg — Tips om takläggning i Stockholm | Sands Entreprenad",
   description:
     "Artiklar och råd om takbyte, material, priser och underhåll från Sands Entreprenad — takläggare i Stockholm.",

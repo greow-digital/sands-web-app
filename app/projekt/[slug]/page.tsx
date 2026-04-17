@@ -22,6 +22,7 @@ export async function generateMetadata({
   const p = getProjekt(slug);
   if (!p) return {};
   return {
+    alternates: { canonical: `/projekt/${slug}` },
     title: `${p.title} | Sands Entreprenad`,
     description: p.beskrivning,
   };
