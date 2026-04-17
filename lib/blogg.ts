@@ -79,6 +79,7 @@ Riktpriserna ovan ger en bra bild, men varje tak är unikt. Vi rekommenderar all
     datum: "2025-02-10",
     kategori: "Råd & tips",
     lästid: "4 min",
+    image: "/images/blogg-nar-byta-tak.jpg",
     innehåll: `## Vanliga tecken på att taket behöver bytas
 
 Det är inte alltid uppenbart att taket är på väg att ge upp. Här är de vanligaste varningssignalerna:

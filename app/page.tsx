@@ -16,25 +16,25 @@ const taktyper = [
     title: "Betongtak",
     slug: "betongtak",
     text: "Robust och prisvärt med lång livslängd.",
-    image: "/images/taktyp-betongtak.png",
+    image: "/images/taktyp-betongtak.jpg",
   },
   {
     title: "Tegeltak",
     slug: "tegeltak",
     text: "Klassiskt naturmaterial som håller i generationer.",
-    image: "/images/taktyp-tegeltak.png",
+    image: "/images/taktyp-tegeltak.jpg",
   },
   {
     title: "Plåttak",
     slug: "plattak",
     text: "Modernt och lättviktigt med minimalt underhåll.",
-    image: "/images/taktyp-plattak.png",
+    image: "/images/taktyp-plattak.jpg",
   },
   {
     title: "Papptak",
     slug: "papptak",
     text: "Prisvärt alternativ för platta konstruktioner.",
-    image: "/images/taktyp-papptak.png",
+    image: "/images/taktyp-papptak.jpg",
   },
 ];
 

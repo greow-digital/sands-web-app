@@ -16,12 +16,12 @@ export type Tjanst = {
 
 const bildKarta: Record<string, string> = {
   taklaggning: "/images/takdiagram.jpg",
-  tegeltak: "/images/taktyp-tegeltak.png",
-  betongtak: "/images/taktyp-betongtak.png",
-  plattak: "/images/taktyp-plattak.png",
-  papptak: "/images/taktyp-papptak.png",
-  eternittak: "/images/taktyp-papptak.png",
-  takfonsterkupor: "/images/taktyp-plattak.png",
+  tegeltak: "/images/taktyp-tegeltak.jpg",
+  betongtak: "/images/taktyp-betongtak.jpg",
+  plattak: "/images/taktyp-plattak.jpg",
+  papptak: "/images/taktyp-papptak.jpg",
+  eternittak: "/images/taktyp-papptak.jpg",
+  takfonsterkupor: "/images/taktyp-plattak.jpg",
   hangrannorstupror: "/images/hangrannor-efter.jpg",
   totalentreprenad: "/images/villa-render.jpg",
   fasadrenovering: "/images/about-sands-building.jpg",
