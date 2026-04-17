@@ -168,7 +168,11 @@ export default function ReviewCarousel() {
         </h2>
       </div>
 
-      <div className="relative">
+      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Blur-kanter */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent" />
+
         <div className="flex gap-5 animate-scroll">
           {doubled.map((r, i) => (
             <ReviewCard key={i} review={r} />
@@ -186,9 +190,8 @@ export default function ReviewCarousel() {
           }
         }
         .animate-scroll {
-          animation: scroll 50s linear infinite;
+          animation: scroll 60s linear infinite;
           width: max-content;
-          padding-left: max(1rem, calc((100vw - 1200px) / 2 + 1rem));
         }
         .animate-scroll:hover {
           animation-play-state: paused;
