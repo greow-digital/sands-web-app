@@ -5,7 +5,9 @@ import { MapPin, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
-import { projekt } from "@/lib/projekt";
+import { projekt as allaProjekt } from "@/lib/projekt";
+
+const projekt = [...allaProjekt].sort((a, b) => b.år - a.år);
 
 export const metadata: Metadata = {
   title: "Utförda projekt — Takläggning Stockholm | Sands Entreprenad",
