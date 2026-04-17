@@ -61,12 +61,12 @@ export default function Header() {
               width={337}
               height={44}
               priority
-              className="h-7 lg:h-9 w-auto"
+              className="h-6 lg:h-7 w-auto"
             />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm">
+          <nav className="hidden lg:flex items-center gap-5 text-[13px]">
             <div
               className="relative"
               onMouseEnter={() => setTjänsterOpen(true)}
@@ -158,7 +158,7 @@ export default function Header() {
           </nav>
 
           {/* Desktop right: phone + CTA */}
-          <div className="hidden lg:flex items-center gap-5">
+          <div className="hidden lg:flex items-center gap-4">
             <a
               href="tel:0828388"
               className="flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-[#2B74FC] transition-colors"
