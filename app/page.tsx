@@ -103,9 +103,8 @@ const eternitFaq = [
 export default function Home() {
   return (
     <>
-      <SeasonBanner />
       <Header />
-      <main className="pt-[100px] lg:pt-[116px] bg-white">
+      <main className="pt-16 lg:pt-20 bg-white">
         {/* ── HERO ─────────────────────────────────── */}
         <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
           {/* Bakgrundsbild */}
@@ -130,6 +129,7 @@ export default function Home() {
             <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
               {/* Left — copy */}
               <div className="text-white">
+                <SeasonBanner />
                 <h1
                   className="text-[36px] sm:text-[44px] lg:text-[56px] font-extrabold leading-[1.08] tracking-[-0.03em] mb-6"
                   style={{ fontFamily: "var(--font-heading)" }}

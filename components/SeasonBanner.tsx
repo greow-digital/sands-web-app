@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-
 function getSeasonMessage(): string {
   const month = new Date().getMonth();
   if (month >= 2 && month <= 4) {
@@ -10,7 +7,7 @@ function getSeasonMessage(): string {
   }
   if (month >= 5 && month <= 7) {
     const monthNames = ["juni", "juli", "augusti"];
-    return `Hög säsong — begränsat antal lediga projekt kvar i ${monthNames[month - 5]}. Boka din besiktning idag.`;
+    return `Hög säsong — begränsat antal lediga projekt kvar i ${monthNames[month - 5]}. Boka idag.`;
   }
   if (month >= 8 && month <= 10) {
     return "Hösten närmar sig — se till att ditt tak är klart innan vintern. Boka besiktning nu.";
@@ -21,18 +18,18 @@ function getSeasonMessage(): string {
 export default function SeasonBanner() {
   return (
     <div
-      className="w-full py-2.5 px-4 text-center text-xs sm:text-sm text-white"
-      style={{ backgroundColor: "var(--color-primary)" }}
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm mb-6"
+      style={{
+        backgroundColor: "rgba(43,116,252,0.15)",
+        border: "1px solid rgba(43,116,252,0.3)",
+        color: "#93B8FD",
+      }}
     >
-      <div className="max-w-[1200px] mx-auto flex items-center justify-center gap-3 flex-wrap">
-        <span>{getSeasonMessage()}</span>
-        <Link
-          href="/offert"
-          className="inline-flex items-center gap-1 font-bold underline underline-offset-2 hover:no-underline whitespace-nowrap"
-        >
-          Boka nu <ArrowRight size={12} />
-        </Link>
-      </div>
+      <span
+        className="w-2 h-2 rounded-full animate-pulse"
+        style={{ backgroundColor: "var(--color-primary)" }}
+      />
+      {getSeasonMessage()}
     </div>
   );
 }
