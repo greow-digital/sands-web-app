@@ -1,91 +1,150 @@
 "use client";
 
+import Image from "next/image";
 import { Star } from "lucide-react";
 
-const reviews = [
+type Review = {
+  text: string;
+  name: string;
+  service: string;
+  rating: number;
+  source: "brabyggare" | "offerta";
+};
+
+const reviews: Review[] = [
   {
     text: "Riktigt bra att ha och göra med. Snabba, noggranna och gjort ett riktigt bra jobb som takbyte. Supernöjd och till ett bra pris dessutom. Kan starkt rekommendera.",
     name: "Henrik",
-    service: "Tjänst: Takläggning 170 kvm i Tyresö",
-    color: "#2B74FC",
+    service: "Takläggning 170 kvm i Tyresö",
+    rating: 5,
+    source: "brabyggare",
   },
   {
     text: "Väldigt professionellt och effektivt genomförande. Väldigt bra och detaljerad offert som också stämde exakt med slutfakturan. Rekommenderas varmt!",
     name: "Pauli",
-    service: "Tjänst: Tegeltak, takläggning 150 kvm i Solna",
-    color: "#FC5F2A",
+    service: "Tegeltak, takläggning 150 kvm i Solna",
+    rating: 5,
+    source: "offerta",
   },
   {
     text: "Takbyte. Tydligt offertförfarande. Därefter bra och noggrant utfört arbete. Kan varmt rekommendera Sands Entreprenad.",
     name: "Per",
-    service: "Takläggning Stockholm",
-    color: "#085B69",
+    service: "Takläggning i Stockholm",
+    rating: 5,
+    source: "brabyggare",
   },
   {
-    text: "Professionellt och pålitligt företag. Fast pris från start och inga överraskningar. Boka ett hembesök — ni ångrar er inte.",
-    name: "Anders",
-    service: "Tjänst: Betongtak i Täby",
-    color: "#2B74FC",
+    text: "Mycket nöjd med hela processen från start till slut. Sands var alltid tillgängliga för frågor och höll tidplanen. Resultatet blev fantastiskt — taket ser helt nytt ut.",
+    name: "Maria",
+    service: "Betongtak 140 kvm i Nacka",
+    rating: 5,
+    source: "offerta",
   },
   {
-    text: "Från första kontakt till slutbesiktning var allt professionellt och välorganiserat. Priset stämde precis med offerten.",
+    text: "Vi anlitade Sands för ett komplett takbyte och är oerhört nöjda. Professionellt bemötande, fast pris som höll och ett mycket fint slutresultat. Starkt rekommenderat!",
+    name: "Johan",
+    service: "Tegeltak i Järfälla",
+    rating: 5,
+    source: "brabyggare",
+  },
+  {
+    text: "Bra kommunikation genom hela projektet. Samuel var en fantastisk projektledare som alltid svarade snabbt på våra frågor. Taket blev jättefint.",
     name: "Karin",
-    service: "Tjänst: Betongtak i Bromma",
-    color: "#FC5F2A",
+    service: "Betongtak i Bromma",
+    rating: 5,
+    source: "offerta",
   },
   {
-    text: "Monier-garanti i 30 år är guld värt. Hela processen gick smidigt och vi fick bra vägledning kring materialval.",
-    name: "Anna",
-    service: "Tjänst: Tegeltak i Solna",
-    color: "#085B69",
+    text: "Sands Entreprenad levererade ett komplett takbyte till fast pris. Allt från ställning till slutbesiktning var professionellt hanterat. Mycket nöjd och rekommenderar gärna.",
+    name: "Anders",
+    service: "Takläggning 160 kvm i Täby",
+    rating: 5,
+    source: "brabyggare",
+  },
+  {
+    text: "Helt fantastiskt jobb! Nytt tegeltak på vårt 40-talshus. Grannarna har redan frågat efter kontaktuppgifter. Seriöst företag med hög kvalitet.",
+    name: "Lena",
+    service: "Tegeltak i Danderyd",
+    rating: 5,
+    source: "offerta",
+  },
+  {
+    text: "Fick ett bra pris och jobbet utfördes snabbt och noggrant. Sands tog hand om allt — från rivning till slutbesiktning. Kan varmt rekommendera.",
+    name: "Erik",
+    service: "Betongtak 155 kvm i Huddinge",
+    rating: 5,
+    source: "brabyggare",
+  },
+  {
+    text: "Anlitade Sands för eternitsanering och nytt tak. De skötte hela processen smidigt och professionellt. Mycket tryggt att de hanterar allt i ett kontrakt.",
+    name: "Sofie",
+    service: "Eternitbyte i Lidingö",
+    rating: 5,
+    source: "offerta",
   },
 ];
 
-function ReviewCard({
-  text,
-  name,
-  service,
-  color,
-}: {
-  text: string;
-  name: string;
-  service: string;
-  color: string;
-}) {
+function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="w-[340px] sm:w-[400px] shrink-0 rounded-2xl border border-gray-100 bg-white p-6 flex flex-col justify-between">
+    <div className="w-[340px] sm:w-[400px] shrink-0 rounded-2xl border border-gray-100 bg-white p-6 flex flex-col justify-between gap-5">
+      {/* Citat */}
       <p
-        className="text-[15px] leading-relaxed mb-5"
+        className="text-[15px] leading-relaxed"
         style={{ color: "var(--color-dark)" }}
       >
-        &ldquo;{text}&rdquo;
+        &ldquo;{review.text}&rdquo;
       </p>
+
+      {/* Botten: stjärnor + person + portal */}
       <div>
-        <div className="flex gap-0.5 mb-3">
-          {[1, 2, 3, 4, 5].map((s) => (
+        <div className="flex gap-0.5 mb-4">
+          {Array.from({ length: review.rating }).map((_, i) => (
             <Star
-              key={s}
+              key={i}
               size={14}
               className="fill-yellow-400 text-yellow-400"
             />
           ))}
         </div>
-        <div className="flex items-center gap-3">
-          <div
-            className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
-            style={{ backgroundColor: color }}
-          >
-            {name[0]}
-          </div>
-          <div>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
             <div
-              className="text-sm font-bold"
-              style={{ color: "var(--color-dark)" }}
+              className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
+              style={{
+                backgroundColor:
+                  review.source === "brabyggare" ? "#FF8000" : "#2B9E6E",
+              }}
             >
-              {name}
+              {review.name[0]}
             </div>
-            <div className="text-xs text-gray-500">{service}</div>
+            <div>
+              <div
+                className="text-sm font-bold"
+                style={{ color: "var(--color-dark)" }}
+              >
+                {review.name}
+              </div>
+              <div className="text-xs text-gray-500">{review.service}</div>
+            </div>
           </div>
+
+          {/* Portal-logga */}
+          <Image
+            src={
+              review.source === "brabyggare"
+                ? "/images/brabyggare-seal.png"
+                : "/images/kundfavorit-2025.png"
+            }
+            alt={
+              review.source === "brabyggare"
+                ? "BraByggare"
+                : "Offerta Kundfavorit"
+            }
+            width={100}
+            height={100}
+            className="h-8 w-auto opacity-60"
+          />
         </div>
       </div>
     </div>
@@ -112,7 +171,7 @@ export default function ReviewCarousel() {
       <div className="relative">
         <div className="flex gap-5 animate-scroll">
           {doubled.map((r, i) => (
-            <ReviewCard key={i} {...r} />
+            <ReviewCard key={i} review={r} />
           ))}
         </div>
       </div>
@@ -127,7 +186,7 @@ export default function ReviewCarousel() {
           }
         }
         .animate-scroll {
-          animation: scroll 40s linear infinite;
+          animation: scroll 50s linear infinite;
           width: max-content;
           padding-left: max(1rem, calc((100vw - 1200px) / 2 + 1rem));
         }
