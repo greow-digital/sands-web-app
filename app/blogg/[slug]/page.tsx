@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar, Clock, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -99,6 +100,22 @@ export default async function ArtikelPage({
             </p>
           </div>
         </section>
+
+        {/* Hero-bild */}
+        {a.image && (
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="relative aspect-[21/9] rounded-2xl overflow-hidden bg-gray-100">
+              <Image
+                src={a.image}
+                alt={a.titel}
+                fill
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        )}
 
         {/* Artikel + sidebar */}
         <section className="py-12 lg:py-20">

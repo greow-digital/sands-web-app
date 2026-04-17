@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -33,8 +34,20 @@ export default function BloggPage() {
                 <Link
                   key={a.slug}
                   href={`/blogg/${a.slug}`}
-                  className="block p-6 rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-colors group"
+                  className="block rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-colors group overflow-hidden"
                 >
+                  {a.image && (
+                    <div className="relative aspect-[16/9] bg-gray-100">
+                      <Image
+                        src={a.image}
+                        alt={a.titel}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6">
                   <div className="flex items-center gap-2 mb-4">
                     <span
                       className="text-xs font-semibold px-2.5 py-1 rounded-full"
@@ -74,6 +87,7 @@ export default function BloggPage() {
                     >
                       Läs mer <ArrowRight size={11} />
                     </span>
+                  </div>
                   </div>
                 </Link>
               ))}
