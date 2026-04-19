@@ -38,7 +38,7 @@ export default function OmradenPage() {
           eyebrow="Stockholms län"
           title="Takläggare i hela"
           titleAccent="Stockholms län"
-          description="Vi utför takbyten och takomläggningar i 27+ kommuner i Stockholms län. Boka kostnadsfri takbesiktning — alltid fast pris."
+          description="Vi utför takbyten och takomläggningar i 27+ kommuner i Stockholms län. Boka kostnadsfri takkontroll — alltid fast pris."
           breadcrumbs={[
             { label: "Hem", href: "/" },
             { label: "Områden" },

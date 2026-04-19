@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: "Takläggare i Stockholm | Fast pris & 30 års garanti | Sands Entreprenad",
   description:
-    "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner. Boka kostnadsfri takbesiktning — fast pris utan förbindelser.",
+    "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner. Boka kostnadsfri takkontroll — fast pris utan förbindelser.",
   alternates: {
     canonical: "/",
   },

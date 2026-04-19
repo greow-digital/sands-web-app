@@ -25,7 +25,7 @@ export default function ProjektPage() {
           eyebrow="Referenser"
           title="Utförda"
           titleAccent="projekt"
-          description="Exempel på takläggningar vi utfört runt om i Stockholms län. Varje projekt genomförs med Monier-material och avslutas med slutbesiktning."
+          description="Exempel på takläggningar vi utfört runt om i Stockholms län. Varje projekt genomförs med Monier-material och avslutas med takkontroll."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Projekt" }]}
         />
 
@@ -135,14 +135,14 @@ export default function ProjektPage() {
               Ditt tak kan vara nästa projekt
             </h2>
             <p className="text-gray-600 mb-6 text-sm">
-              Boka kostnadsfri takbesiktning — fast pris utan förbindelser.
+              Boka kostnadsfri takkontroll — fast pris utan förbindelser.
             </p>
             <Link
               href="/offert"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Boka takbesiktning <ArrowRight size={14} />
+              Boka takkontroll <ArrowRight size={14} />
             </Link>
           </div>
         </section>

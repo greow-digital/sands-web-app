@@ -171,7 +171,7 @@ export default function Header() {
               className="px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Boka takbesiktning
+              Boka takkontroll
             </Link>
           </div>
 

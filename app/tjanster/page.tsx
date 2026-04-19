@@ -169,7 +169,7 @@ export default function TjansterPage() {
               Redo att starta?
             </h2>
             <p className="text-gray-600 mb-8">
-              Boka en kostnadsfri besiktning — vi ger dig ett fast pris utan
+              Boka en kostnadsfri takkontroll — vi ger dig ett fast pris utan
               förbindelser.
             </p>
             <Link
@@ -177,7 +177,7 @@ export default function TjansterPage() {
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Boka kostnadsfri besiktning <ArrowRight size={14} />
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
             </Link>
           </div>
         </section>

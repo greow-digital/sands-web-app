@@ -55,7 +55,7 @@ const reviews: Review[] = [
     source: "offerta",
   },
   {
-    text: "Sands Entreprenad levererade ett komplett takbyte till fast pris. Allt från ställning till slutbesiktning var professionellt hanterat. Mycket nöjd och rekommenderar gärna.",
+    text: "Sands Entreprenad levererade ett komplett takbyte till fast pris. Allt från ställning till takkontroll var professionellt hanterat. Mycket nöjd och rekommenderar gärna.",
     name: "Anders",
     service: "Takläggning 160 kvm i Täby",
     rating: 5,
@@ -69,7 +69,7 @@ const reviews: Review[] = [
     source: "offerta",
   },
   {
-    text: "Fick ett bra pris och jobbet utfördes snabbt och noggrant. Sands tog hand om allt — från rivning till slutbesiktning. Kan varmt rekommendera.",
+    text: "Fick ett bra pris och jobbet utfördes snabbt och noggrant. Sands tog hand om allt — från rivning till takkontroll. Kan varmt rekommendera.",
     name: "Erik",
     service: "Betongtak 155 kvm i Huddinge",
     rating: 5,

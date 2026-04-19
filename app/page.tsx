@@ -57,7 +57,7 @@ const process = [
   {
     num: "04",
     title: "Besiktning",
-    text: "Vi avslutar med en noggrann slutbesiktning tillsammans med dig för att säkerställa att allt är i perfekt skick.",
+    text: "Vi avslutar med en noggrann takkontroll tillsammans med dig för att säkerställa att allt är i perfekt skick.",
   },
 ];
 
@@ -71,16 +71,16 @@ const eternitFaq = [
     a: "Vi är certifierad Monier Takpartner, har F-skattsedel, är fullförsäkrade med ansvars- och allriskförsäkring, och all personal är certifierad inom de moment vi utför.",
   },
   {
-    q: "Erbjuder ni kostnadsfri takbesiktning?",
+    q: "Erbjuder ni kostnadsfri takkontroll?",
     a: "Ja. Vi bokar ett kostnadsfritt hembesök där vi inspekterar taket och lämnar ett fast pris utan förbindelser.",
   },
   {
     q: "Vad innebär totalentreprenad enligt ABT-06?",
-    a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt — från besiktning till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
+    a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt — från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
   },
   {
     q: "Vad kostar ett takbyte i Stockholm?",
-    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² — alla priser efter ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri besiktning.",
+    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² — alla priser efter ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
   },
   {
     q: "Hur lång tid tar ett takbyte?",
@@ -553,7 +553,7 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Boka kostnadsfri takbesiktning <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
             </div>
           </div>

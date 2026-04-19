@@ -7,9 +7,9 @@ import { CheckCircle, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/offert" },
-  title: "Boka kostnadsfri takbesiktning | Sands Entreprenad",
+  title: "Boka kostnadsfri takkontroll | Sands Entreprenad",
   description:
-    "Boka en kostnadsfri takbesiktning — vi inspekterar ditt tak och ger dig ett fast pris utan förbindelser.",
+    "Boka en kostnadsfri takkontroll — vi inspekterar ditt tak och ger dig ett fast pris utan förbindelser.",
 };
 
 export default function OffertPage() {
@@ -18,7 +18,7 @@ export default function OffertPage() {
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
         <PageHero
-          eyebrow="Kostnadsfri besiktning"
+          eyebrow="Kostnadsfri takkontroll"
           title="Boka ditt"
           titleAccent="prisförslag"
           description="Vi bokar ett kostnadsfritt hembesök där din personliga projektledare inspekterar taket och går igenom dina behov. Du får en tydlig bedömning på plats — utan förbindelser."
@@ -31,7 +31,7 @@ export default function OffertPage() {
               <div>
                 <ul className="space-y-4 mb-10">
                   {[
-                    "Kostnadsfri besiktning utan förbindelser",
+                    "Kostnadsfri takkontroll utan förbindelser",
                     "Fast pris med totalentreprenad (ABT-06)",
                     "Upp till 30 års Monier Tätt tak-garanti",
                     "ROT-avdrag 30% — vi sköter ansökan",

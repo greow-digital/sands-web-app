@@ -25,7 +25,7 @@ export async function generateMetadata({
   return {
     alternates: { canonical: `/omraden/${slug}` },
     title: `Takläggare i ${ort.name} | Sands Entreprenad`,
-    description: `Sands Entreprenad utför takbyten och takomläggningar i ${ort.name}. Certifierad Monier Takpartner — boka kostnadsfri takbesiktning idag.`,
+    description: `Sands Entreprenad utför takbyten och takomläggningar i ${ort.name}. Certifierad Monier Takpartner — boka kostnadsfri takkontroll idag.`,
     openGraph: {
       title: `Takläggare i ${ort.name} | Sands Entreprenad`,
       description: ort.beskrivning,
@@ -200,7 +200,7 @@ export default async function OmradesPage({
                 },
                 {
                   num: "04",
-                  title: "Slutbesiktning",
+                  title: "Takkontroll",
                   text: "Vi besiktigar tillsammans med dig",
                 },
               ].map((p) => (
@@ -341,7 +341,7 @@ export default async function OmradesPage({
                 color: "var(--color-dark)",
               }}
             >
-              Boka takbesiktning i {ort.name}
+              Boka takkontroll i {ort.name}
             </h2>
             <p className="text-gray-600 mb-8">
               Vi inspekterar ditt tak kostnadsfritt och ger dig ett fast pris
@@ -353,7 +353,7 @@ export default async function OmradesPage({
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Boka takbesiktning <ArrowRight size={14} />
+                Boka takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:0828388"

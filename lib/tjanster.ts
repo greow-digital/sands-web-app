@@ -37,13 +37,13 @@ export const tjanster: Tjanst[] = [
     title: "Takomläggning",
     h1: "Takomläggning i Stockholm",
     intro:
-      "Planerar du att lägga om taket? Sands Entreprenad utför kompletta takomläggningar i hela Stockholms län. Vi börjar alltid med en kostnadsfri besiktning av ditt tak innan vi lämnar offert — så att du vet exakt vad som behövs och vad det kostar.",
+      "Planerar du att lägga om taket? Sands Entreprenad utför kompletta takomläggningar i hela Stockholms län. Vi börjar alltid med en kostnadsfri takkontroll av ditt tak innan vi lämnar offert — så att du vet exakt vad som behövs och vad det kostar.",
     text:
-      "Vi arbetar med alla typer av tak — tegeltak, betongtak, plåttak och papptak. Som certifierad Monier Takpartner kan vi erbjuda Moniers Tätt tak-garanti på upp till 30 år vid komplett takomläggning med Moniers taksystem.\n\nVarje arbete är unikt och därför börjar vi alltid med en kostnadsfri besiktning. Vid besiktningen får ni som kund en överblick på vilka åtgärder taket behöver. Vi arbetar genom totalentreprenad enligt ABT-06, vilket innebär att allt regleras i ett enda kontrakt till fast pris.",
+      "Vi arbetar med alla typer av tak — tegeltak, betongtak, plåttak och papptak. Som certifierad Monier Takpartner kan vi erbjuda Moniers Tätt tak-garanti på upp till 30 år vid komplett takomläggning med Moniers taksystem.\n\nVarje arbete är unikt och därför börjar vi alltid med en kostnadsfri takkontroll. Vid besiktningen får ni som kund en överblick på vilka åtgärder taket behöver. Vi arbetar genom totalentreprenad enligt ABT-06, vilket innebär att allt regleras i ett enda kontrakt till fast pris.",
     prisIntervall: "Från ca 1 200–2 000 kr/m² efter ROT-avdrag",
     prism2: "1 200–2 000",
     ingår: [
-      "Kostnadsfri takbesiktning och bedömning",
+      "Kostnadsfri takkontroll och bedömning",
       "Rivning av befintlig beläggning",
       "Ny underlagspapp (Icopal Flexilight Prima)",
       "Ny ströläkt & bärläkt (25×48 mm)",
@@ -51,12 +51,12 @@ export const tjanster: Tjanst[] = [
       "Nytt regnvattensystem (hängrännor och stuprör)",
       "Taksäkerhet (stegar, snörasskydd)",
       "Ställning, container och bortforsling",
-      "Slutbesiktning tillsammans med dig",
+      "Takkontroll tillsammans med dig",
     ],
     faq: [
       {
         q: "Hur går en takomläggning till hos Sands?",
-        a: "Vi börjar med ett kostnadsfritt hembesök där vi inspekterar taket och går igenom dina behov. Du får sedan en detaljerad offert med fast pris. När du godkänt offerten utför vi arbetet och avslutar med en slutbesiktning.",
+        a: "Vi börjar med ett kostnadsfritt hembesök där vi inspekterar taket och går igenom dina behov. Du får sedan en detaljerad offert med fast pris. När du godkänt offerten utför vi arbetet och avslutar med en takkontroll.",
       },
       {
         q: "Hur lång tid tar en takomläggning?",
@@ -85,7 +85,7 @@ export const tjanster: Tjanst[] = [
     prisIntervall: "Från ca 1 500 kr/m² efter ROT-avdrag",
     prism2: "1 500",
     ingår: [
-      "Kostnadsfri takbesiktning och bedömning",
+      "Kostnadsfri takkontroll och bedömning",
       "Rivning av befintlig beläggning",
       "Ny underlagspapp",
       "Ny ströläkt & bärläkt",
@@ -127,7 +127,7 @@ export const tjanster: Tjanst[] = [
     prisIntervall: "Från ca 1 200 kr/m² efter ROT-avdrag",
     prism2: "1 200",
     ingår: [
-      "Kostnadsfri takbesiktning och bedömning",
+      "Kostnadsfri takkontroll och bedömning",
       "Rivning av befintlig beläggning",
       "Ny underlagspapp (Icopal Flexilight Prima)",
       "Ny ströläkt & bärläkt (25×48 mm)",
@@ -169,7 +169,7 @@ export const tjanster: Tjanst[] = [
     prisIntervall: "Från ca 1 800 kr/m² efter ROT-avdrag",
     prism2: "1 800",
     ingår: [
-      "Kostnadsfri takbesiktning och bedömning",
+      "Kostnadsfri takkontroll och bedömning",
       "Rivning av befintlig beläggning",
       "Ny underlagspapp / underlagsskiva",
       "Bandtäckt eller dubbelfalsat plåt",
@@ -210,7 +210,7 @@ export const tjanster: Tjanst[] = [
     prisIntervall: "Från ca 800 kr/m² efter ROT-avdrag",
     prism2: "800",
     ingår: [
-      "Kostnadsfri takbesiktning och bedömning",
+      "Kostnadsfri takkontroll och bedömning",
       "Rivning av befintlig beläggning",
       "Kontroll och åtgärd av underlag",
       "Ny tätskiktspapp (Icopal)",
@@ -247,7 +247,7 @@ export const tjanster: Tjanst[] = [
       "Eternittak innehåller asbest och kräver certifierad sanering innan nytt tak kan läggas.",
     text:
       "Har du eternittak? Det är viktigt att hantera det korrekt. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen åt dig — från rivning och asbestsanering till nytt tak med garanti. Du behöver bara göra en kontakt, vi sköter resten.\n\nAsbest är ett hälsofarligt material som inte får hanteras av obehöriga. Vår partner är certifierad för asbestsanering och följer samtliga lagkrav och säkerhetsrutiner.",
-    prisIntervall: "Pris efter besiktning (inkl. sanering)",
+    prisIntervall: "Pris efter takkontroll (inkl. sanering)",
     prism2: "Kontakta oss",
     process: [
       {
@@ -263,8 +263,8 @@ export const tjanster: Tjanst[] = [
         text: "Vi lägger nytt tak med ditt valda material och Monier-garanti.",
       },
       {
-        step: "Slutbesiktning",
-        text: "Vi avslutar med slutbesiktning och du får garantibevis.",
+        step: "Takkontroll",
+        text: "Vi avslutar med takkontroll och du får garantibevis.",
       },
     ],
     faq: [
@@ -282,7 +282,7 @@ export const tjanster: Tjanst[] = [
       },
       {
         q: "Vad kostar det att byta eternittak?",
-        a: "Priset inkluderar sanering och nytt tak. Det är högre än ett vanligt takbyte, men vi ger alltid fast pris efter besiktning.",
+        a: "Priset inkluderar sanering och nytt tak. Det är högre än ett vanligt takbyte, men vi ger alltid fast pris efter takkontroll.",
       },
     ],
     relaterade: ["taklaggning", "tegeltak", "betongtak"],
@@ -296,7 +296,7 @@ export const tjanster: Tjanst[] = [
       "Vi installerar takfönster och bygger takkupor i samband med takomläggning.",
     text:
       "En takkupa är ett effektivt sätt att få in ljus och skapa rymd på övervåningen eller vinden. Takfönster höjer värdet på huset och gör att boytan känns större.\n\nVi installerar takfönster från ledande leverantörer och bygger takkupor i olika utföranden. Arbetet utförs alltid i samband med takomläggning för effektivare utförande och bästa resultat.",
-    prisIntervall: "Pris efter besiktning och val av fönster",
+    prisIntervall: "Pris efter takkontroll och val av fönster",
     prism2: "Kontakta oss",
     faq: [
       {
@@ -323,7 +323,7 @@ export const tjanster: Tjanst[] = [
       "Vi monterar och byter hängrännor, stuprör och vattenavrinningssystem.",
     text:
       "Ett fungerande avvattningssystem är avgörande för att skydda fasad och grund. Vi monterar hängrännor och stuprör i plåt av hög kvalitet — alltid inräknat i det fasta priset vid en komplett takomläggning.\n\nVi kan även utföra byte av enbart hängrännor och stuprör om taket i övrigt är i gott skick. Välj mellan standard halvrunna hängrännor eller fyrkantiga profiler för ett mer modernt utseende.",
-    prisIntervall: "Ingår vid komplett takbyte. Separat: pris efter besiktning",
+    prisIntervall: "Ingår vid komplett takbyte. Separat: pris efter takkontroll",
     prism2: "Kontakta oss",
     faq: [
       {
@@ -347,9 +347,9 @@ export const tjanster: Tjanst[] = [
     title: "Totalentreprenad",
     h1: "Totalentreprenad med fast pris",
     intro:
-      "Vi tar hela ansvaret för ditt projekt — från besiktning till färdigt tak.",
+      "Vi tar hela ansvaret för ditt projekt — från takkontroll till färdigt tak.",
     text:
-      "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt — från besiktning till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06. Du slipper samordna olika hantverkare och får en kontaktperson genom hela processen.\n\nABT-06 (Allmänna bestämmelser för totalentreprenader) är branschstandard och reglerar ansvarsfördelning, garantier och besiktningsprocess. Med oss som totalentreprenör är du alltid skyddad.",
+      "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt — från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06. Du slipper samordna olika hantverkare och får en kontaktperson genom hela processen.\n\nABT-06 (Allmänna bestämmelser för totalentreprenader) är branschstandard och reglerar ansvarsfördelning, garantier och besiktningsprocess. Med oss som totalentreprenör är du alltid skyddad.",
     prisIntervall: "Fast pris enligt offert — inga dolda avgifter",
     prism2: "Fast pris",
     ingår: [
@@ -359,7 +359,7 @@ export const tjanster: Tjanst[] = [
       "Regleras enligt ABT-06",
       "Inga dolda avgifter",
       "Garanti på utförandet",
-      "Slutbesiktning med garantibevis",
+      "Takkontroll med garantibevis",
     ],
     faq: [
       {
@@ -386,16 +386,16 @@ export const tjanster: Tjanst[] = [
       "Vi utför fasadrenoveringar och fasadmålning i samband med takprojekt eller som fristående uppdrag.",
     text:
       "En fasadrenovering ger huset nytt liv och höjer fastighetsvärdet. Vi erbjuder putsning, målning och renovering av fasader i hela Stockholms län. Ofta kombinerar våra kunder fasadrenovering med takbyte — det sparar ställningskostnad och ger ett helhetsmässigt resultat.\n\nVi arbetar med professionella material och metoder som ger lång livslängd. Oavsett om du har puts, trä eller tegelfasad kan vi hjälpa dig med rätt lösning.",
-    prisIntervall: "Pris efter besiktning",
+    prisIntervall: "Pris efter takkontroll",
     prism2: "Kontakta oss",
     ingår: [
-      "Kostnadsfri besiktning och bedömning",
+      "Kostnadsfri takkontroll och bedömning",
       "Tvättning och förbehandling av fasad",
       "Lagning av skador och sprickor",
       "Grundmålning och slutstrykning",
       "Fönsterkarmar och vindskivor vid behov",
       "Ställning",
-      "Slutbesiktning",
+      "Takkontroll",
     ],
     faq: [
       {
@@ -422,16 +422,16 @@ export const tjanster: Tjanst[] = [
       "Vi utför kompletta badrumsrenoveringar — från rivning till inflyttningsklart.",
     text:
       "Sands Entreprenad erbjuder badrumsrenoveringar med samma noggrannhet och kvalitet som våra takprojekt. Vi hanterar hela processen genom totalentreprenad — ett kontrakt, ett fast pris.\n\nOavsett om det gäller ett komplett badrumsbytte med nytt tätskikt, kakel och porslin eller en uppfräschning av ett befintligt badrum kan vi hjälpa dig. Vi samarbetar med certifierade VVS-montörer och elektriker.",
-    prisIntervall: "Pris efter besiktning",
+    prisIntervall: "Pris efter takkontroll",
     prism2: "Kontakta oss",
     ingår: [
-      "Kostnadsfri besiktning och bedömning",
+      "Kostnadsfri takkontroll och bedömning",
       "Rivning av befintligt badrum",
       "Nytt tätskikt (våtrumscertifierat)",
       "Kakel och klinker",
       "Nytt porslin och blandare",
       "El- och VVS-arbete",
-      "Slutbesiktning",
+      "Takkontroll",
     ],
     faq: [
       {
@@ -458,16 +458,16 @@ export const tjanster: Tjanst[] = [
       "Komplett köksrenovering med fast pris — från stomme till inflyttningsklart.",
     text:
       "Vi erbjuder kompletta köksrenoveringar i hela Stockholms län. Oavsett om du vill byta hela köket eller renovera det befintliga tar vi hand om hela processen — rivning, el, VVS, montering av köksluckor, bänkskivor och vitvaror.\n\nPrecis som med våra takprojekt arbetar vi genom totalentreprenad med fast pris. Du får en kontaktperson genom hela projektet och slipper samordna olika hantverkare.",
-    prisIntervall: "Pris efter besiktning",
+    prisIntervall: "Pris efter takkontroll",
     prism2: "Kontakta oss",
     ingår: [
-      "Kostnadsfri besiktning och planering",
+      "Kostnadsfri takkontroll och planering",
       "Rivning av befintligt kök",
       "El- och VVS-arbete",
       "Montering av nytt kök",
       "Bänkskivor, stänkskydd och detaljer",
       "Vitvaruinstallation",
-      "Slutbesiktning",
+      "Takkontroll",
     ],
     faq: [
       {

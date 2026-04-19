@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/var-process" },
   title: "Vår process — Takbyte från start till slut | Sands Entreprenad",
   description:
-    "Från hembesök till slutbesiktning — så går ett takbyte till hos Sands Entreprenad. Fast pris, tydlig kommunikation och Monier-garanti.",
+    "Från hembesök till takkontroll — så går ett takbyte till hos Sands Entreprenad. Fast pris, tydlig kommunikation och Monier-garanti.",
 };
 
 const steg = [
@@ -52,9 +52,9 @@ const steg = [
   },
   {
     num: "04",
-    title: "Slutbesiktning",
+    title: "Takkontroll",
     subtitle: "Garanti och trygghet",
-    text: "Vi avslutar med en noggrann slutbesiktning tillsammans med dig för att säkerställa att allt är i perfekt skick. Du får ett garantibevis och vi finns tillgängliga om du har frågor efteråt.",
+    text: "Vi avslutar med en noggrann takkontroll tillsammans med dig för att säkerställa att allt är i perfekt skick. Du får ett garantibevis och vi finns tillgängliga om du har frågor efteråt.",
     bullets: [
       "Genomgång av allt utfört arbete",
       "Dokumentation och garantibevis",
@@ -172,7 +172,7 @@ export default function VarProcessPage() {
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Boka kostnadsfri takbesiktning <ArrowRight size={14} />
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
             </Link>
           </div>
         </section>

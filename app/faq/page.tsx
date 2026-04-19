@@ -18,7 +18,7 @@ const kategorier = [
     faq: [
       {
         q: "Hur går en takomläggning till hos Sands?",
-        a: "Vi börjar med ett kostnadsfritt hembesök där vi inspekterar taket och går igenom dina behov. Du får sedan en detaljerad offert med fast pris. När du godkänt offerten utför vi arbetet och avslutar med en slutbesiktning tillsammans med dig.",
+        a: "Vi börjar med ett kostnadsfritt hembesök där vi inspekterar taket och går igenom dina behov. Du får sedan en detaljerad offert med fast pris. När du godkänt offerten utför vi arbetet och avslutar med en takkontroll tillsammans med dig.",
       },
       {
         q: "Hur lång tid tar en takomläggning?",
@@ -30,7 +30,7 @@ const kategorier = [
       },
       {
         q: "Vad händer när arbetet är klart?",
-        a: "Vi avslutar med en noggrann slutbesiktning tillsammans med dig. Du får ett garantibevis och vi finns tillgängliga om du har frågor efteråt.",
+        a: "Vi avslutar med en noggrann takkontroll tillsammans med dig. Du får ett garantibevis och vi finns tillgängliga om du har frågor efteråt.",
       },
     ],
   },
@@ -39,7 +39,7 @@ const kategorier = [
     faq: [
       {
         q: "Vad kostar en takomläggning i Stockholm?",
-        a: "Priset varierar beroende på material och takets förutsättningar. Som riktlinje: betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² — alla priser efter ROT-avdrag. Vi ger alltid fast pris efter besiktning.",
+        a: "Priset varierar beroende på material och takets förutsättningar. Som riktlinje: betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² — alla priser efter ROT-avdrag. Vi ger alltid fast pris efter takkontroll.",
       },
       {
         q: "Kan jag använda ROT-avdrag?",
@@ -47,7 +47,7 @@ const kategorier = [
       },
       {
         q: "Vad är totalentreprenad?",
-        a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt — från besiktning till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
+        a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt — från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
       },
     ],
   },

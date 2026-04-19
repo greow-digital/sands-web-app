@@ -46,7 +46,7 @@ Hos Sands Entreprenad ingår alltid:
 - Nytt regnvattensystem (hängrännor och stuprör)
 - Taksäkerhet (stegar, snörasskydd)
 - Ställning, container och bortforsling
-- Slutbesiktning tillsammans med dig
+- Takkontroll tillsammans med dig
 
 Vi arbetar genom totalentreprenad enligt ABT-06 — allt regleras i ett enda kontrakt till fast pris.
 
@@ -69,7 +69,7 @@ Maxbeloppet för ROT-avdrag är 50 000 kr per person och år (2025).
 
 ## Så får du ett exakt pris
 
-Riktpriserna ovan ger en bra bild, men varje tak är unikt. Vi rekommenderar alltid en kostnadsfri takbesiktning där vi inspekterar taket på plats och lämnar ett fast pris utan förbindelser.`,
+Riktpriserna ovan ger en bra bild, men varje tak är unikt. Vi rekommenderar alltid en kostnadsfri takkontroll där vi inspekterar taket på plats och lämnar ett fast pris utan förbindelser.`,
   },
   {
     slug: "nar-byta-tak",
@@ -116,7 +116,7 @@ Att skjuta upp ett takbyte kan leda till:
 
 ## Boka en kostnadsfri takkontroll
 
-Det bästa sättet att veta säkert är att låta en fackman inspektera taket. Vi erbjuder kostnadsfri takbesiktning i hela Stockholms län — vi inspekterar taket och ger dig en ärlig bedömning utan förbindelser.`,
+Det bästa sättet att veta säkert är att låta en fackman inspektera taket. Vi erbjuder kostnadsfri takkontroll i hela Stockholms län — vi inspekterar taket och ger dig en ärlig bedömning utan förbindelser.`,
   },
   {
     slug: "monier-garanti",
@@ -150,13 +150,13 @@ För att garantin ska gälla krävs:
 1. **Certifierad Monier Takpartner** — vi, Sands Entreprenad, är certifierade.
 2. **Komplett Monier-taksystem** — pannor, underlag, nock och detaljer.
 3. **Korrekt montering** — vi följer Moniers monteringsanvisningar.
-4. **Registrering** — vi registrerar ditt tak hos Monier efter slutbesiktning.
+4. **Registrering** — vi registrerar ditt tak hos Monier efter takkontroll.
 
 ## Varför är det viktigt?
 
 De flesta takläggare erbjuder garanti på eget utförande (vanligtvis 5–10 år). Moniers systemgaranti ger dig upp till 30 år — det är en av marknadens starkaste garantier för takläggning.
 
-Du får ett garantibevis vid slutbesiktningen som specificerar exakta villkor och garantitid för ditt specifika tak.
+Du får ett garantibevis vid takkontrollen som specificerar exakta villkor och garantitid för ditt specifika tak.
 
 ## Monier — Nordens ledande taktillverkare
 
@@ -201,7 +201,7 @@ Vi rekommenderar byte om:
 1. **Inspektion** — vi inspekterar taket och bedömer omfattningen.
 2. **Certifierad sanering** — vår saneringspartner (certifierad för asbesthantering) utför rivning enligt alla gällande regler. Materialet förpackas och transporteras till godkänd deponi.
 3. **Nytt tak** — vi lägger nytt tak med ditt valda material och Monier-garanti.
-4. **Slutbesiktning** — vi besiktigar resultatet tillsammans med dig.
+4. **Takkontroll** — vi besiktigar resultatet tillsammans med dig.
 
 ## Vad kostar det?
 
@@ -212,7 +212,7 @@ Eternitbyte kostar mer än ett vanligt takbyte eftersom saneringskostnaden tillk
 - Tillgänglighet och ställningsbehov
 - Val av nytt takmaterial
 
-Vi ger alltid fast pris efter besiktning — inga överraskningar.
+Vi ger alltid fast pris efter takkontroll — inga överraskningar.
 
 ## Vilka regler gäller?
 

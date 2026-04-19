@@ -107,7 +107,7 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
           className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
           style={{ color: "var(--color-primary)" }}
         >
-          Kostnadsfri besiktning
+          Kostnadsfri takkontroll
         </p>
         <h2
           className="text-2xl lg:text-[28px] font-extrabold leading-tight tracking-[-0.02em]"

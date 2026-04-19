@@ -51,7 +51,7 @@ const ingår = [
   "Nya takpannor från Monier",
   "Nytt regnvattensystem (hängrännor och stuprör)",
   "Ställning, container och bortforsling",
-  "Slutbesiktning tillsammans med dig",
+  "Takkontroll tillsammans med dig",
 ];
 
 const påverkar = [
@@ -92,7 +92,7 @@ export default function PriserPage() {
           eyebrow="Prisguide"
           title="Vad kostar takbyte i"
           titleAccent="Stockholm?"
-          description="Alla riktpriser är efter 30% ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri besiktning — inga dolda avgifter."
+          description="Alla riktpriser är efter 30% ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll — inga dolda avgifter."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Priser" }]}
         />
 
@@ -209,7 +209,7 @@ export default function PriserPage() {
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
                     style={{ backgroundColor: "var(--color-primary)" }}
                   >
-                    Boka besiktning <ArrowRight size={14} />
+                    Boka takkontroll <ArrowRight size={14} />
                   </Link>
                   <a
                     href="tel:0828388"
@@ -238,7 +238,7 @@ export default function PriserPage() {
                 Få ditt personliga prisförslag
               </h2>
               <p className="text-gray-500 text-sm">
-                Boka kostnadsfri takbesiktning — vi återkommer inom 24h.
+                Boka kostnadsfri takkontroll — vi återkommer inom 24h.
               </p>
             </div>
             <LeadForm variant="section" />

@@ -3,16 +3,16 @@
 function getSeasonMessage(): string {
   const month = new Date().getMonth();
   if (month >= 2 && month <= 4) {
-    return "Våren är bästa tiden för takbyte — boka besiktning nu för att säkra plats i sommar";
+    return "Våren är bästa tiden för takbyte — boka takkontroll nu för att säkra plats i sommar";
   }
   if (month >= 5 && month <= 7) {
     const monthNames = ["juni", "juli", "augusti"];
     return `Hög säsong — begränsat antal lediga projekt kvar i ${monthNames[month - 5]}. Boka idag.`;
   }
   if (month >= 8 && month <= 10) {
-    return "Hösten närmar sig — se till att ditt tak är klart innan vintern. Boka besiktning nu.";
+    return "Hösten närmar sig — se till att ditt tak är klart innan vintern. Boka takkontroll nu.";
   }
-  return "Planera ditt takbyte i tid — boka kostnadsfri besiktning nu så är du redo till våren.";
+  return "Planera ditt takbyte i tid — boka kostnadsfri takkontroll nu så är du redo till våren.";
 }
 
 export default function SeasonBanner() {
