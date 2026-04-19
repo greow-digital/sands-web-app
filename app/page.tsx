@@ -100,6 +100,38 @@ const eternitFaq = [
     q: "Vad innebär Monier Tätt tak-garanti?",
     a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år — hela taksystemets funktion och täthet garanteras.",
   },
+  {
+    q: "Vad kostar det att lägga om tak?",
+    a: "Att lägga om taket kostar från ca 1 200 kr/m² efter ROT-avdrag, beroende på material och takets förutsättningar. Boka en kostnadsfri takkontroll så ger vi dig ett fast pris.",
+  },
+  {
+    q: "Vad kostar det att byta tak?",
+    a: "Ett komplett takbyte kostar från ca 1 200 kr/m² efter ROT-avdrag. Priset varierar beroende på material — tegel, betong, plåt eller papp. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
+  },
+  {
+    q: "Vad kostar takbyte per kvadratmeter?",
+    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² och papptak från ca 800 kr/m². Alla priser efter ROT-avdrag och baseras på kostnadsfri takkontroll.",
+  },
+  {
+    q: "Hur mycket kostar det att byta takpannor?",
+    a: "Att byta takpannor kostar från ca 1 200 kr/m² efter ROT-avdrag vid komplett omläggning. Enstaka pannor kan bytas till lägre kostnad. Boka en kostnadsfri takkontroll för exakt pris.",
+  },
+  {
+    q: "Vad kostar det att byta plåttak?",
+    a: "Plåttak kostar från ca 1 800 kr/m² efter ROT-avdrag. Bandtäckt och dubbelfalsat plåt ger lång livslängd med minimalt underhåll. Vi ger fast pris efter kostnadsfri takkontroll.",
+  },
+  {
+    q: "Kan man få ROT-avdrag på takbyte?",
+    a: "Ja, du får tillbaka 30 % av arbetskostnaden som ROT-avdrag — direkt på fakturan. Vi hanterar ansökan åt dig. Maxbeloppet är 50 000 kr per person och år.",
+  },
+  {
+    q: "Mitt tak läcker – vad gör jag?",
+    a: "Kontakta oss för en kostnadsfri takkontroll. Vi inspekterar taket, identifierar orsaken till läckaget och ger dig ett fast pris på åtgärd — ofta samma dag.",
+  },
+  {
+    q: "Hur vet jag om taket behöver bytas?",
+    a: "Vanliga tecken är läckage, spruckna eller förskjutna pannor, fukt på vinden och rost på plåtdetaljer. Är taket över 25–40 år gammalt rekommenderar vi en kostnadsfri takkontroll.",
+  },
 ];
 
 // ──────────────────────────────────────────────────────────
