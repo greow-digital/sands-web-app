@@ -334,13 +334,139 @@ export default function Home() {
               <span>· 30 års garanti</span>
             </div>
 
-            <Link
-              href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
-              style={{ backgroundColor: "var(--color-primary)" }}
-            >
-              Boka kostnadsfri takkontroll <ArrowRight size={14} />
-            </Link>
+            {/* Prisexempel */}
+            <div className="mt-12 rounded-2xl border border-gray-100 bg-[#F8F9FB] overflow-hidden">
+              {/* Header */}
+              <div className="px-8 pt-8 pb-6 text-center">
+                <h3
+                  className="text-[22px] lg:text-[28px] font-extrabold tracking-[-0.02em] mb-1"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Takbyte Stockholm – Fast pris &amp; 30 års garanti
+                </h3>
+                <p className="text-xs text-gray-500 uppercase tracking-widest mb-4">
+                  Exempelpris
+                </p>
+                <div
+                  className="text-[40px] lg:text-[52px] font-extrabold tracking-[-0.03em] mb-2"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  från 169 000 kr*
+                </div>
+                <p className="text-sm text-gray-600">
+                  Från ca 1 200 kr/m²
+                </p>
+                <p className="text-xs text-gray-500">
+                  *Efter ROT-avdrag på 30%
+                </p>
+              </div>
+
+              {/* Innehåll */}
+              <div className="px-8 pb-8">
+                <div className="bg-white rounded-xl p-6 lg:p-8">
+                  <h4
+                    className="text-base font-bold mb-4"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--color-dark)",
+                    }}
+                  >
+                    Detta ingår i takpaketet:
+                  </h4>
+                  <ul className="space-y-2.5 mb-8">
+                    {[
+                      "Upp till 30 års tätt tak-garanti genom Moniers taksystem",
+                      "Ny underlagspapp (Icopal Flexilight Prima)",
+                      "Ny strö- och bärläkt (25×48 mm)",
+                      "Nya takpannor från Monier",
+                      "Nytt regnvattensystem (hängrännor och stuprör)",
+                      "Ställning, container och bortforsling ingår",
+                      "Takkontroll tillsammans med dig",
+                    ].map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-sm text-gray-700"
+                      >
+                        <span
+                          className="text-base leading-none mt-0.5"
+                          style={{ color: "var(--color-primary)" }}
+                        >
+                          ✓
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="space-y-5 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-6">
+                    <div>
+                      <strong
+                        className="text-sm font-bold block mb-1"
+                        style={{ color: "var(--color-dark)" }}
+                      >
+                        Om prisexemplet
+                      </strong>
+                      Priset är beräknat 4 mars 2026 och baseras på ett
+                      standardtak (sadeltak) på 140 m² utan större
+                      genomföringar. Det slutliga priset kan variera beroende
+                      på materialval och takets förutsättningar.
+                    </div>
+                    <div>
+                      <strong
+                        className="text-sm font-bold block mb-1"
+                        style={{ color: "var(--color-dark)" }}
+                      >
+                        Monier-garanti
+                      </strong>
+                      När vi lägger ett komplett Monier-taksystem omfattas ditt
+                      tak av Moniers täta tak-garanti i upp till 30 år. Det
+                      innebär att hela takets funktion och täthet är säkrad
+                      under lång tid.
+                    </div>
+                    <div>
+                      <strong
+                        className="text-sm font-bold block mb-1"
+                        style={{ color: "var(--color-dark)" }}
+                      >
+                        ROT-avdrag
+                      </strong>
+                      Med ROT-avdrag dras upp till 30% av arbetskostnaden redan
+                      på fakturan, vi sköter all administration åt dig.
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-gray-100">
+                    <p
+                      className="text-base font-bold mb-4"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      Vill du veta exakt pris för ditt tak?
+                    </p>
+                    <p className="text-sm text-gray-600 mb-5">
+                      Få en kostnadsfri offert inom 24 timmar, helt utan
+                      förpliktelser.
+                    </p>
+                    <Link
+                      href="/offert"
+                      className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                      style={{ backgroundColor: "var(--color-primary)" }}
+                    >
+                      Boka kostnadsfri takkontroll{" "}
+                      <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
