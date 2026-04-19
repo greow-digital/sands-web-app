@@ -66,7 +66,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "RoofingContractor",
               name: "Sands Entreprenad Stockholm AB",
               url: BASE_URL,
               telephone: "08-28 38 88",
@@ -75,12 +75,22 @@ export default function RootLayout({
                 "@type": "PostalAddress",
                 streetAddress: "Spjutvägen 5A",
                 postalCode: "175 61",
-                addressLocality: "Järfälla",
+                addressLocality: "Stockholm",
+                addressRegion: "Stockholms län",
                 addressCountry: "SE",
               },
-              areaServed: "Stockholms län",
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 59.3991,
+                longitude: 17.8414,
+              },
+              areaServed: {
+                "@type": "State",
+                name: "Stockholms län",
+              },
+              priceRange: "från 1 200 kr/m²",
               description:
-                "Takläggare i Stockholm — certifierad Monier Takpartner med upp till 30 års garanti.",
+                "Takläggare i Stockholm — certifierad Monier Takpartner med upp till 30 års garanti. Takbyte, takomläggning och lägga om tak med fast pris.",
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "4.8",
