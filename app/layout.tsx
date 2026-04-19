@@ -21,9 +21,9 @@ const BASE_URL = "https://sandsab.se";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Takläggare i Stockholm | Fast pris & 30 års garanti | Sands Entreprenad",
+  title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
   description:
-    "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner. Boka kostnadsfri takkontroll — fast pris utan förbindelser.",
+    "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti. Tegel, plåt, papp, betong, eternit.",
   alternates: {
     canonical: "/",
   },
@@ -32,23 +32,23 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: BASE_URL,
     siteName: "Sands Entreprenad Stockholm AB",
-    title: "Takläggare i Stockholm | Fast pris & 30 års garanti | Sands Entreprenad",
+    title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
     description:
-      "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner.",
+      "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Sands Entreprenad — Takläggare i Stockholm",
+        alt: "Takbyte i Stockholm — Sands Entreprenad",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Takläggare i Stockholm | Sands Entreprenad",
+    title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
     description:
-      "Certifierad Monier Takpartner med fast pris och upp till 30 års garanti.",
+      "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
     images: ["/og-image.jpg"],
   },
 };
