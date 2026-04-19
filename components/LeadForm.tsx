@@ -204,12 +204,14 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
         {/* Taktyp */}
         <div>
           <label
+            htmlFor="roofType"
             className="block text-xs font-semibold mb-1"
             style={{ color: "var(--color-primary)", fontFamily: "var(--font-body)" }}
           >
             Taktyp *
           </label>
           <select
+            id="roofType"
             className={`w-full px-4 py-3 rounded-[5px] text-sm outline-none border transition-colors appearance-none ${
               errors.roofType
                 ? "border-red-400 bg-red-50"

@@ -148,9 +148,10 @@ export default function Home() {
           {/* Bakgrundsbild */}
           <Image
             src="/images/hero-house.jpg"
-            alt="Villa med nytt tak i Stockholm"
+            alt="Takbyte i Stockholm — villa med nytt tak"
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="object-cover"
           />
