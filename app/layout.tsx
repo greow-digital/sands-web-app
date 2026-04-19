@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import MobileCTA from "@/components/MobileCTA";
+import PhoneClickTracker from "@/components/PhoneClickTracker";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -113,6 +114,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <MobileCTA />
+        <PhoneClickTracker />
       </body>
     </html>
   );
