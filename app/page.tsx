@@ -131,19 +131,19 @@ export default function Home() {
               <div className="text-white">
                 <SeasonBanner />
                 <h1
-                  className="text-[36px] sm:text-[44px] lg:text-[56px] font-extrabold leading-[1.08] tracking-[-0.03em] mb-6"
+                  className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  Trygg takläggning<br />
-                  {"med "}
+                  Takbyte i Stockholm –<br />
+                  {"fast pris när du ska "}
                   <span style={{ color: "var(--color-primary)" }}>
-                    fast pris
+                    lägga om taket
                   </span>
                 </h1>
                 <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-10">
-                  Takläggare i Stockholm som alltid jobbar med fast pris, tydlig
-                  offert och en trygg process från start till slut. Vi är
-                  certifierad Monier Takpartner med upp till 30 års garanti.
+                  Byta tak, lägga om tak eller lägga nytt tak? Vi tar
+                  helhetsansvar för takbyte i hela Stockholms län –
+                  totalentreprenad enligt ABT 06 med 30 års garanti.
                 </p>
 
                 {/* Stats */}
