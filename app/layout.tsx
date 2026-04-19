@@ -21,9 +21,9 @@ const BASE_URL = "https://sandsab.se";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Takläggare i Stockholm | Fast pris & 30 års garanti | Sands Entreprenad",
+  title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
   description:
-    "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner. Boka kostnadsfri takkontroll — fast pris utan förbindelser.",
+    "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti. Tegel, plåt, papp, betong, eternit.",
   alternates: {
     canonical: "/",
   },
@@ -32,23 +32,23 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: BASE_URL,
     siteName: "Sands Entreprenad Stockholm AB",
-    title: "Takläggare i Stockholm | Fast pris & 30 års garanti | Sands Entreprenad",
+    title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
     description:
-      "Sands Entreprenad utför takbyten och takomläggningar i hela Stockholms län. Certifierad Monier Takpartner.",
+      "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Sands Entreprenad — Takläggare i Stockholm",
+        alt: "Takbyte i Stockholm — Sands Entreprenad",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Takläggare i Stockholm | Sands Entreprenad",
+    title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
     description:
-      "Certifierad Monier Takpartner med fast pris och upp till 30 års garanti.",
+      "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
     images: ["/og-image.jpg"],
   },
 };
@@ -66,7 +66,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": "RoofingContractor",
               name: "Sands Entreprenad Stockholm AB",
               url: BASE_URL,
               telephone: "08-28 38 88",
@@ -75,12 +75,22 @@ export default function RootLayout({
                 "@type": "PostalAddress",
                 streetAddress: "Spjutvägen 5A",
                 postalCode: "175 61",
-                addressLocality: "Järfälla",
+                addressLocality: "Stockholm",
+                addressRegion: "Stockholms län",
                 addressCountry: "SE",
               },
-              areaServed: "Stockholms län",
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 59.3991,
+                longitude: 17.8414,
+              },
+              areaServed: {
+                "@type": "State",
+                name: "Stockholms län",
+              },
+              priceRange: "från 1 200 kr/m²",
               description:
-                "Takläggare i Stockholm — certifierad Monier Takpartner med upp till 30 års garanti.",
+                "Takläggare i Stockholm — certifierad Monier Takpartner med upp till 30 års garanti. Takbyte, takomläggning och lägga om tak med fast pris.",
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "4.8",

@@ -13,27 +13,33 @@ import SeasonBanner from "@/components/SeasonBanner";
 
 const taktyper = [
   {
-    title: "Betongtak",
+    title: "Betongtak – lägga om tak med betongpannor",
     slug: "betongtak",
     text: "Robust och prisvärt med lång livslängd.",
     image: "/images/taktyp-betongtak.jpg",
   },
   {
-    title: "Tegeltak",
+    title: "Tegeltak – pris och omläggning",
     slug: "tegeltak",
     text: "Klassiskt naturmaterial som håller i generationer.",
     image: "/images/taktyp-tegeltak.jpg",
   },
   {
-    title: "Plåttak",
+    title: "Plåttak – kostnad för att byta",
     slug: "plattak",
     text: "Modernt och lättviktigt med minimalt underhåll.",
     image: "/images/taktyp-plattak.jpg",
   },
   {
-    title: "Papptak",
+    title: "Papptak – pris per m²",
     slug: "papptak",
     text: "Prisvärt alternativ för platta konstruktioner.",
+    image: "/images/taktyp-papptak.jpg",
+  },
+  {
+    title: "Eternittak – byta eternittak tryggt och säkert",
+    slug: "eternittak",
+    text: "Certifierad sanering och nytt tak i ett kontrakt.",
     image: "/images/taktyp-papptak.jpg",
   },
 ];
@@ -94,6 +100,38 @@ const eternitFaq = [
     q: "Vad innebär Monier Tätt tak-garanti?",
     a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år — hela taksystemets funktion och täthet garanteras.",
   },
+  {
+    q: "Vad kostar det att lägga om tak?",
+    a: "Att lägga om taket kostar från ca 1 200 kr/m² efter ROT-avdrag, beroende på material och takets förutsättningar. Boka en kostnadsfri takkontroll så ger vi dig ett fast pris.",
+  },
+  {
+    q: "Vad kostar det att byta tak?",
+    a: "Ett komplett takbyte kostar från ca 1 200 kr/m² efter ROT-avdrag. Priset varierar beroende på material — tegel, betong, plåt eller papp. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
+  },
+  {
+    q: "Vad kostar takbyte per kvadratmeter?",
+    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² och papptak från ca 800 kr/m². Alla priser efter ROT-avdrag och baseras på kostnadsfri takkontroll.",
+  },
+  {
+    q: "Hur mycket kostar det att byta takpannor?",
+    a: "Att byta takpannor kostar från ca 1 200 kr/m² efter ROT-avdrag vid komplett omläggning. Enstaka pannor kan bytas till lägre kostnad. Boka en kostnadsfri takkontroll för exakt pris.",
+  },
+  {
+    q: "Vad kostar det att byta plåttak?",
+    a: "Plåttak kostar från ca 1 800 kr/m² efter ROT-avdrag. Bandtäckt och dubbelfalsat plåt ger lång livslängd med minimalt underhåll. Vi ger fast pris efter kostnadsfri takkontroll.",
+  },
+  {
+    q: "Kan man få ROT-avdrag på takbyte?",
+    a: "Ja, du får tillbaka 30 % av arbetskostnaden som ROT-avdrag — direkt på fakturan. Vi hanterar ansökan åt dig. Maxbeloppet är 50 000 kr per person och år.",
+  },
+  {
+    q: "Mitt tak läcker – vad gör jag?",
+    a: "Kontakta oss för en kostnadsfri takkontroll. Vi inspekterar taket, identifierar orsaken till läckaget och ger dig ett fast pris på åtgärd — ofta samma dag.",
+  },
+  {
+    q: "Hur vet jag om taket behöver bytas?",
+    a: "Vanliga tecken är läckage, spruckna eller förskjutna pannor, fukt på vinden och rost på plåtdetaljer. Är taket över 25–40 år gammalt rekommenderar vi en kostnadsfri takkontroll.",
+  },
 ];
 
 // ──────────────────────────────────────────────────────────
@@ -131,19 +169,19 @@ export default function Home() {
               <div className="text-white">
                 <SeasonBanner />
                 <h1
-                  className="text-[36px] sm:text-[44px] lg:text-[56px] font-extrabold leading-[1.08] tracking-[-0.03em] mb-6"
+                  className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  Trygg takläggning<br />
-                  {"med "}
+                  Takbyte i Stockholm –<br />
+                  {"fast pris när du ska "}
                   <span style={{ color: "var(--color-primary)" }}>
-                    fast pris
+                    lägga om taket
                   </span>
                 </h1>
                 <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-10">
-                  Takläggare i Stockholm som alltid jobbar med fast pris, tydlig
-                  offert och en trygg process från start till slut. Vi är
-                  certifierad Monier Takpartner med upp till 30 års garanti.
+                  Byta tak, lägga om tak eller lägga nytt tak? Vi tar
+                  helhetsansvar för takbyte i hela Stockholms län –
+                  totalentreprenad enligt ABT 06 med 30 års garanti.
                 </p>
 
                 {/* Stats */}
@@ -222,6 +260,89 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── PRISSEKTION ──────────────────────────── */}
+        <section className="py-14 lg:py-20 bg-white border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-8"
+              style={{
+                fontFamily: "var(--font-heading)",
+                color: "var(--color-dark)",
+              }}
+            >
+              Vad kostar det att byta tak?
+            </h2>
+
+            <div className="grid sm:grid-cols-3 gap-5 mb-8">
+              <div className="p-6 rounded-2xl border border-gray-100">
+                <div
+                  className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Takläggning (komplett takbyte)
+                </div>
+                <div
+                  className="text-2xl font-extrabold"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  från 1 200 kr/m²
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl border border-gray-100">
+                <div
+                  className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Takkontroll
+                </div>
+                <div
+                  className="text-2xl font-extrabold"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  0 kr (kostnadsfri)
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl border border-gray-100">
+                <div
+                  className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Byte av eternittak
+                </div>
+                <div
+                  className="text-2xl font-extrabold"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  från 1 200 kr/m²
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 mb-8">
+              <span>· Fast pris efter kostnadsfri takkontroll</span>
+              <span>· ROT-avdrag möjligt på arbetskostnad</span>
+              <span>· 30 års garanti</span>
+            </div>
+
+            <Link
+              href="/offert"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: "var(--color-primary)" }}
+            >
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
+            </Link>
+          </div>
+        </section>
+
         {/* ── RUBRIK OVANFÖR TAKTYPER ─────────────── */}
         <section className="pt-8 pb-6 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -253,7 +374,7 @@ export default function Home() {
               Taktyper vi jobbar med
             </h3>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
               {taktyper.map((t) => (
                 <Link
                   key={t.slug}
@@ -492,6 +613,55 @@ export default function Home() {
                   {o.name}
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── LÄCKAGE / SKADOR ──────────────────── */}
+        <section
+          className="py-16 lg:py-24 border-t border-gray-100"
+          style={{ backgroundColor: "#F8F9FB" }}
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-10 lg:gap-16 items-center">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-200">
+                <Image
+                  src="/images/hero-house.jpg"
+                  alt="Tak som behöver åtgärdas"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h2
+                  className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em] mb-5"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Läcker taket? Fuktskador, ruttna läkt eller trasiga pannor?
+                </h2>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Ett läckande tak kan snabbt leda till mögel, röta och dyra
+                  följdskador på konstruktionen. Ju längre du väntar, desto
+                  dyrare blir det. Vi erbjuder kostnadsfri takkontroll i hela
+                  Stockholms län — ofta samma vecka.
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  Vi inspekterar taket på plats, identifierar problemet och ger
+                  dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06 —
+                  du slipper samordna och får ett enda kontrakt.
+                </p>
+                <Link
+                  href="/offert"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                  style={{ backgroundColor: "var(--color-primary)" }}
+                >
+                  Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
