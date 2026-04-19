@@ -13,27 +13,33 @@ import SeasonBanner from "@/components/SeasonBanner";
 
 const taktyper = [
   {
-    title: "Betongtak",
+    title: "Betongtak – lägga om tak med betongpannor",
     slug: "betongtak",
     text: "Robust och prisvärt med lång livslängd.",
     image: "/images/taktyp-betongtak.jpg",
   },
   {
-    title: "Tegeltak",
+    title: "Tegeltak – pris och omläggning",
     slug: "tegeltak",
     text: "Klassiskt naturmaterial som håller i generationer.",
     image: "/images/taktyp-tegeltak.jpg",
   },
   {
-    title: "Plåttak",
+    title: "Plåttak – kostnad för att byta",
     slug: "plattak",
     text: "Modernt och lättviktigt med minimalt underhåll.",
     image: "/images/taktyp-plattak.jpg",
   },
   {
-    title: "Papptak",
+    title: "Papptak – pris per m²",
     slug: "papptak",
     text: "Prisvärt alternativ för platta konstruktioner.",
+    image: "/images/taktyp-papptak.jpg",
+  },
+  {
+    title: "Eternittak – byta eternittak tryggt och säkert",
+    slug: "eternittak",
+    text: "Certifierad sanering och nytt tak i ett kontrakt.",
     image: "/images/taktyp-papptak.jpg",
   },
 ];
@@ -336,7 +342,7 @@ export default function Home() {
               Taktyper vi jobbar med
             </h3>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
               {taktyper.map((t) => (
                 <Link
                   key={t.slug}
