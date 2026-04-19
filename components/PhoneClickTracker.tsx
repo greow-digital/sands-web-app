@@ -15,7 +15,7 @@ export default function PhoneClickTracker() {
 
       // Google Ads conversion
       w.gtag("event", "conversion", {
-        send_to: "AW-18004063012/phone_click",
+        send_to: "AW-18004063012/6974CJ7H_54cEKTmgIlD",
       });
 
       // GA4 custom event
