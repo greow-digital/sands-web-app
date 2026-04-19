@@ -300,19 +300,19 @@ export default function Home() {
                 </p>
 
                 {/* Trust-punkter */}
-                <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-700 mb-8">
+                <ul className="space-y-2 text-sm text-gray-700 mb-8">
                   {[
                     "Fast pris efter kostnadsfri takkontroll",
                     "ROT-avdrag 30% på arbetskostnad",
                     "Upp till 30 års Monier-garanti",
                     "Kostnadsfri takkontroll: 0 kr",
                   ].map((t) => (
-                    <span key={t} className="flex items-center gap-2">
+                    <li key={t} className="flex items-center gap-2">
                       <span style={{ color: "var(--color-primary)" }}>✓</span>
                       {t}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
 
                 <Link
                   href="/offert"
