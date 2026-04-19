@@ -222,6 +222,89 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── PRISSEKTION ──────────────────────────── */}
+        <section className="py-14 lg:py-20 bg-white border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-8"
+              style={{
+                fontFamily: "var(--font-heading)",
+                color: "var(--color-dark)",
+              }}
+            >
+              Vad kostar det att byta tak?
+            </h2>
+
+            <div className="grid sm:grid-cols-3 gap-5 mb-8">
+              <div className="p-6 rounded-2xl border border-gray-100">
+                <div
+                  className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Takläggning (komplett takbyte)
+                </div>
+                <div
+                  className="text-2xl font-extrabold"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  från 1 200 kr/m²
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl border border-gray-100">
+                <div
+                  className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Takkontroll
+                </div>
+                <div
+                  className="text-2xl font-extrabold"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  0 kr (kostnadsfri)
+                </div>
+              </div>
+              <div className="p-6 rounded-2xl border border-gray-100">
+                <div
+                  className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                  style={{ color: "var(--color-primary)" }}
+                >
+                  Byte av eternittak
+                </div>
+                <div
+                  className="text-2xl font-extrabold"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  från 1 200 kr/m²
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 mb-8">
+              <span>· Fast pris efter kostnadsfri takkontroll</span>
+              <span>· ROT-avdrag möjligt på arbetskostnad</span>
+              <span>· 30 års garanti</span>
+            </div>
+
+            <Link
+              href="/offert"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              style={{ backgroundColor: "var(--color-primary)" }}
+            >
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
+            </Link>
+          </div>
+        </section>
+
         {/* ── RUBRIK OVANFÖR TAKTYPER ─────────────── */}
         <section className="pt-8 pb-6 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
