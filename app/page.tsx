@@ -617,6 +617,55 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── LÄCKAGE / SKADOR ──────────────────── */}
+        <section
+          className="py-16 lg:py-24 border-t border-gray-100"
+          style={{ backgroundColor: "#F8F9FB" }}
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-10 lg:gap-16 items-center">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-200">
+                <Image
+                  src="/images/hero-house.jpg"
+                  alt="Tak som behöver åtgärdas"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h2
+                  className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em] mb-5"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Läcker taket? Fuktskador, ruttna läkt eller trasiga pannor?
+                </h2>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  Ett läckande tak kan snabbt leda till mögel, röta och dyra
+                  följdskador på konstruktionen. Ju längre du väntar, desto
+                  dyrare blir det. Vi erbjuder kostnadsfri takkontroll i hela
+                  Stockholms län — ofta samma vecka.
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  Vi inspekterar taket på plats, identifierar problemet och ger
+                  dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06 —
+                  du slipper samordna och får ett enda kontrakt.
+                </p>
+                <Link
+                  href="/offert"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                  style={{ backgroundColor: "var(--color-primary)" }}
+                >
+                  Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── FAQ "HAR DU ETERNITTAK?" ───────────── */}
         <section className="py-16 lg:py-24 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
