@@ -56,7 +56,7 @@ const process = [
   },
   {
     num: "04",
-    title: "Besiktning",
+    title: "Slutkontroll",
     text: "Vi avslutar med en noggrann takkontroll tillsammans med dig för att säkerställa att allt är i perfekt skick.",
   },
 ];
