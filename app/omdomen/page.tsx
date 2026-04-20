@@ -7,15 +7,15 @@ import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/omdomen" },
-  title: "Kundomdömen | Sands Entreprenad — 4.8 i snittbetyg",
+  title: "Kundomdömen | Sands Entreprenad – 4.8 i snittbetyg",
   description:
     "Läs vad våra kunder säger om Sands Entreprenad. 4.8 i snittbetyg av 54 omdömen. Takläggare i Stockholm med hög kundnöjdhet.",
 };
 
 const omdömen = [
-  { name: "Anders L.", ort: "Täby", tjänst: "Betongtak", betyg: 5, text: "Professionellt och pålitligt företag. Boka ett hembesök — ni ångrar er inte. Fast pris från start och inga överraskningar." },
+  { name: "Anders L.", ort: "Täby", tjänst: "Betongtak", betyg: 5, text: "Professionellt och pålitligt företag. Boka ett hembesök – ni ångrar er inte. Fast pris från start och inga överraskningar." },
   { name: "Maria S.", ort: "Nacka", tjänst: "Tegeltak", betyg: 5, text: "Snabb offert, tydlig kommunikation och ett riktigt snyggt resultat. Rekommenderar Sands varmt!" },
-  { name: "Erik H.", ort: "Järfälla", tjänst: "Plåttak", betyg: 5, text: "Hade ett gammalt eternittak som behövde bytas. Sands skötte hela processen — sanering och nytt plåttak. Supernöjd!" },
+  { name: "Erik H.", ort: "Järfälla", tjänst: "Plåttak", betyg: 5, text: "Hade ett gammalt eternittak som behövde bytas. Sands skötte hela processen – sanering och nytt plåttak. Supernöjd!" },
   { name: "Karin B.", ort: "Bromma", tjänst: "Betongtak", betyg: 5, text: "Från första kontakt till takkontroll var allt professionellt och välorganiserat. Priset stämde precis med offerten." },
   { name: "Peter M.", ort: "Huddinge", tjänst: "Takomläggning", betyg: 5, text: "Sands team är duktiga och noggranna. De städade efter sig och lämnade tomten i perfekt skick. Skulle anlita igen." },
   { name: "Anna W.", ort: "Solna", tjänst: "Tegeltak", betyg: 5, text: "Monier-garanti i 30 år är guld värt. Hela processen gick smidigt och vi fick bra vägledning kring materialval." },
@@ -55,7 +55,7 @@ export default function OmdömenPage() {
           eyebrow="Omdömen · 4.8 / 5 av 54 kunder"
           title="Vad våra"
           titleAccent="kunder säger"
-          description="Vi är stolta över att få göra skillnad för våra kunder — här kan du läsa vad de tycker om oss."
+          description="Vi är stolta över att få göra skillnad för våra kunder – här kan du läsa vad de tycker om oss."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Omdömen" }]}
         />
 

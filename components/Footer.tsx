@@ -46,7 +46,7 @@ export default function Footer() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Sands Entreprenad kontor — Spjutvägen 5A, Järfälla"
+                title="Sands Entreprenad kontor – Spjutvägen 5A, Järfälla"
               />
             </div>
 

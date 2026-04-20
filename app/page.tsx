@@ -47,7 +47,7 @@ const process = [
   {
     num: "02",
     title: "Offert",
-    text: "Du får en detaljerad offert med fast pris enligt totalentreprenad (ABT-06). Allt i ett kontrakt — inga dolda avgifter.",
+    text: "Du får en detaljerad offert med fast pris enligt totalentreprenad (ABT-06). Allt i ett kontrakt – inga dolda avgifter.",
   },
   {
     num: "03",
@@ -64,7 +64,7 @@ const process = [
 const eternitFaq = [
   {
     q: "Jag vill lägga ett nytt tak men det innehåller eternit?",
-    a: "Eternit innehåller asbest och kräver certifierad sanering innan nytt tak kan läggas. Vi tar hand om hela processen — från rivning och asbestsanering till nytt tak med upp till 30 års Monier-garanti. Du behöver bara göra en kontakt, vi sköter resten.",
+    a: "Eternit innehåller asbest och kräver certifierad sanering innan nytt tak kan läggas. Vi tar hand om hela processen – från rivning och asbestsanering till nytt tak med upp till 30 års Monier-garanti. Du behöver bara göra en kontakt, vi sköter resten.",
   },
   {
     q: "Vilka certifikat har Sands Entreprenad?",
@@ -76,11 +76,11 @@ const eternitFaq = [
   },
   {
     q: "Vad innebär totalentreprenad enligt ABT-06?",
-    a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt — från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
+    a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt – från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
   },
   {
     q: "Vad kostar ett takbyte i Stockholm?",
-    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² — alla priser efter ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
+    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² – alla priser efter ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
   },
   {
     q: "Hur lång tid tar ett takbyte?",
@@ -92,7 +92,7 @@ const eternitFaq = [
   },
   {
     q: "Vad innebär Monier Tätt tak-garanti?",
-    a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år — hela taksystemets funktion och täthet garanteras.",
+    a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år – hela taksystemets funktion och täthet garanteras.",
   },
   {
     q: "Vad kostar det att lägga om tak?",
@@ -100,7 +100,7 @@ const eternitFaq = [
   },
   {
     q: "Vad kostar det att byta tak?",
-    a: "Ett komplett takbyte kostar från ca 1 200 kr/m² efter ROT-avdrag. Priset varierar beroende på material — tegel, betong, plåt eller papp. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
+    a: "Ett komplett takbyte kostar från ca 1 200 kr/m² efter ROT-avdrag. Priset varierar beroende på material – tegel, betong, plåt eller papp. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
   },
   {
     q: "Vad kostar takbyte per kvadratmeter?",
@@ -116,11 +116,11 @@ const eternitFaq = [
   },
   {
     q: "Kan man få ROT-avdrag på takbyte?",
-    a: "Ja, du får tillbaka 30 % av arbetskostnaden som ROT-avdrag — direkt på fakturan. Vi hanterar ansökan åt dig. Maxbeloppet är 50 000 kr per person och år.",
+    a: "Ja, du får tillbaka 30 % av arbetskostnaden som ROT-avdrag – direkt på fakturan. Vi hanterar ansökan åt dig. Maxbeloppet är 50 000 kr per person och år.",
   },
   {
     q: "Mitt tak läcker – vad gör jag?",
-    a: "Kontakta oss för en kostnadsfri takkontroll. Vi inspekterar taket, identifierar orsaken till läckaget och ger dig ett fast pris på åtgärd — ofta samma dag.",
+    a: "Kontakta oss för en kostnadsfri takkontroll. Vi inspekterar taket, identifierar orsaken till läckaget och ger dig ett fast pris på åtgärd – ofta samma dag.",
   },
   {
     q: "Hur vet jag om taket behöver bytas?",
@@ -142,7 +142,7 @@ export default function Home() {
           {/* Bakgrundsbild */}
           <Image
             src="/images/hero-house.jpg"
-            alt="Takbyte i Stockholm — villa med nytt tak"
+            alt="Takbyte i Stockholm – villa med nytt tak"
             fill
             priority
             fetchPriority="high"
@@ -160,7 +160,7 @@ export default function Home() {
 
           <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
             <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
-              {/* Left — copy */}
+              {/* Left – copy */}
               <div className="text-white">
                 <SeasonBanner />
                 <h1
@@ -206,7 +206,7 @@ export default function Home() {
                   <div className="flex items-center gap-2.5 bg-white rounded-full px-5 py-2.5 shadow-lg">
                     <Image
                       src="/images/brabyggare-badge.svg"
-                      alt="BraByggare 4.8 av 5 — 54 omdömen"
+                      alt="BraByggare 4.8 av 5 – 54 omdömen"
                       width={217}
                       height={85}
                       className="h-9 w-auto"
@@ -247,7 +247,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right — formulär */}
+              {/* Right – formulär */}
               <div>
                 <LeadForm variant="hero" />
               </div>
@@ -259,7 +259,7 @@ export default function Home() {
         <section className="py-14 lg:py-20 bg-white border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-start">
-              {/* Vänster — pris + trust */}
+              {/* Vänster – pris + trust */}
               <div>
                 <h2
                   className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-2"
@@ -317,7 +317,7 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Höger — vad ingår + detaljer */}
+              {/* Höger – vad ingår + detaljer */}
               <div className="rounded-2xl border border-gray-100 bg-[#F8F9FB] p-6 lg:p-8">
                 <h3
                   className="text-lg font-bold mb-5"
@@ -363,7 +363,7 @@ export default function Home() {
                   <p>
                     <strong className="text-gray-700">Monier-garanti:</strong>{" "}
                     Med komplett Monier-taksystem omfattas taket av Tätt
-                    tak-garanti i upp till 30 år — funktion och täthet
+                    tak-garanti i upp till 30 år – funktion och täthet
                     garanteras.
                   </p>
                   <p>
@@ -476,17 +476,17 @@ export default function Home() {
               {[
                 {
                   src: "/images/ba-vitthus.jpg",
-                  alt: "Vitt hus — före och efter takbyte",
+                  alt: "Vitt hus – före och efter takbyte",
                   ort: "Vaxholm",
                 },
                 {
                   src: "/images/ba-gulthus.jpg",
-                  alt: "Gult hus — före och efter takbyte",
+                  alt: "Gult hus – före och efter takbyte",
                   ort: "Lidingö",
                 },
                 {
                   src: "/images/ba-rotthus.jpg",
-                  alt: "Rött hus — före och efter takbyte",
+                  alt: "Rött hus – före och efter takbyte",
                   ort: "Norrtälje",
                 },
               ].map((img) => (
@@ -539,7 +539,7 @@ export default function Home() {
                 />
               </div>
 
-              {/* Höger — steg */}
+              {/* Höger – steg */}
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
                   Hur vi jobbar
@@ -681,11 +681,11 @@ export default function Home() {
                   Ett läckande tak kan snabbt leda till mögel, röta och dyra
                   följdskador på konstruktionen. Ju längre du väntar, desto
                   dyrare blir det. Vi erbjuder kostnadsfri takkontroll i hela
-                  Stockholms län — ofta samma vecka.
+                  Stockholms län – ofta samma vecka.
                 </p>
                 <p className="text-gray-600 leading-relaxed mb-8">
                   Vi inspekterar taket på plats, identifierar problemet och ger
-                  dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06 —
+                  dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06 –
                   du slipper samordna och får ett enda kontrakt.
                 </p>
                 <Link

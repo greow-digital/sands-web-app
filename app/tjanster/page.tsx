@@ -9,9 +9,9 @@ import { tjanster } from "@/lib/tjanster";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/tjanster" },
-  title: "Tjänster — Takläggning, renovering & mer | Sands Entreprenad",
+  title: "Tjänster – Takläggning, renovering & mer | Sands Entreprenad",
   description:
-    "Kompletta bygg- och taklösningar — takomläggning, fasadrenovering, badrumsrenovering och mer. Certifierad Monier Takpartner med fast pris.",
+    "Kompletta bygg- och taklösningar – takomläggning, fasadrenovering, badrumsrenovering och mer. Certifierad Monier Takpartner med fast pris.",
 };
 
 export default function TjansterPage() {
@@ -26,7 +26,7 @@ export default function TjansterPage() {
           eyebrow="Våra tjänster"
           title="Allt vi kan hjälpa"
           titleAccent="dig med"
-          description="Från komplett takomläggning och fasadrenovering till badrum och kök — alltid med fast pris och totalentreprenad enligt ABT-06."
+          description="Från komplett takomläggning och fasadrenovering till badrum och kök – alltid med fast pris och totalentreprenad enligt ABT-06."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Tjänster" }]}
         />
 
@@ -112,7 +112,7 @@ export default function TjansterPage() {
                 Vilka tak vi lägger
               </h2>
               <p className="text-gray-600 mt-3 max-w-2xl">
-                Vi är specialister på alla vanliga taktyper — alltid med
+                Vi är specialister på alla vanliga taktyper – alltid med
                 Monier-material och upp till 30 års garanti.
               </p>
             </div>
@@ -169,7 +169,7 @@ export default function TjansterPage() {
               Redo att starta?
             </h2>
             <p className="text-gray-600 mb-8">
-              Boka en kostnadsfri takkontroll — vi ger dig ett fast pris utan
+              Boka en kostnadsfri takkontroll – vi ger dig ett fast pris utan
               förbindelser.
             </p>
             <Link

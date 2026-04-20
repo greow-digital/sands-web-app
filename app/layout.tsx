@@ -41,7 +41,7 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Takbyte i Stockholm — Sands Entreprenad",
+        alt: "Takbyte i Stockholm – Sands Entreprenad",
       },
     ],
   },
@@ -91,7 +91,7 @@ export default function RootLayout({
               },
               priceRange: "från 1 200 kr/m²",
               description:
-                "Takläggare i Stockholm — certifierad Monier Takpartner med upp till 30 års garanti. Takbyte, takomläggning och lägga om tak med fast pris.",
+                "Takläggare i Stockholm – certifierad Monier Takpartner med upp till 30 års garanti. Takbyte, takomläggning och lägga om tak med fast pris.",
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "4.8",

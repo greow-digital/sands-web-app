@@ -11,7 +11,7 @@ const projekt = [...allaProjekt].sort((a, b) => b.år - a.år);
 
 export const metadata: Metadata = {
   alternates: { canonical: "/projekt" },
-  title: "Utförda projekt — Takläggning Stockholm | Sands Entreprenad",
+  title: "Utförda projekt – Takläggning Stockholm | Sands Entreprenad",
   description:
     "Se utförda takläggningsprojekt runt om i Stockholms län. Tegeltak, betongtak, plåttak och eternitbyten med Monier-garanti.",
 };
@@ -54,7 +54,7 @@ export default function ProjektPage() {
                           <div className="relative">
                             <Image
                               src={p.images[1]}
-                              alt={`${p.title} — bild 2`}
+                              alt={`${p.title} – bild 2`}
                               fill
                               sizes="(max-width: 640px) 40vw, 13vw"
                               className="object-cover projekt-img"
@@ -63,7 +63,7 @@ export default function ProjektPage() {
                           <div className="relative">
                             <Image
                               src={p.images[2]}
-                              alt={`${p.title} — bild 3`}
+                              alt={`${p.title} – bild 3`}
                               fill
                               sizes="(max-width: 640px) 40vw, 13vw"
                               className="object-cover projekt-img"
@@ -85,7 +85,7 @@ export default function ProjektPage() {
                         <div className="relative">
                           <Image
                             src={p.images[1]}
-                            alt={`${p.title} — bild 2`}
+                            alt={`${p.title} – bild 2`}
                             fill
                             sizes="(max-width: 640px) 40vw, 13vw"
                             className="object-cover projekt-img"
@@ -135,7 +135,7 @@ export default function ProjektPage() {
               Ditt tak kan vara nästa projekt
             </h2>
             <p className="text-gray-600 mb-6 text-sm">
-              Boka kostnadsfri takkontroll — fast pris utan förbindelser.
+              Boka kostnadsfri takkontroll – fast pris utan förbindelser.
             </p>
             <Link
               href="/offert"

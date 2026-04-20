@@ -8,9 +8,9 @@ import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/var-process" },
-  title: "Vår process — Takbyte från start till slut | Sands Entreprenad",
+  title: "Vår process – Takbyte från start till slut | Sands Entreprenad",
   description:
-    "Från hembesök till takkontroll — så går ett takbyte till hos Sands Entreprenad. Fast pris, tydlig kommunikation och Monier-garanti.",
+    "Från hembesök till takkontroll – så går ett takbyte till hos Sands Entreprenad. Fast pris, tydlig kommunikation och Monier-garanti.",
 };
 
 const steg = [
@@ -18,7 +18,7 @@ const steg = [
     num: "01",
     title: "Hembesök",
     subtitle: "Kostnadsfritt, utan förbindelser",
-    text: "Vi bokar ett kostnadsfritt hembesök där din personliga projektledare inspekterar taket och går igenom dina behov. Du får en tydlig bedömning på plats — vad behöver göras, varför och i vilken ordning.",
+    text: "Vi bokar ett kostnadsfritt hembesök där din personliga projektledare inspekterar taket och går igenom dina behov. Du får en tydlig bedömning på plats – vad behöver göras, varför och i vilken ordning.",
     bullets: [
       "Noggrann inspektion av tak, nock, ventilation och genomföringar",
       "Bedömning av underlagets skick",
@@ -30,9 +30,9 @@ const steg = [
     num: "02",
     title: "Fast offert",
     subtitle: "Totalentreprenad enligt ABT-06",
-    text: "Du får en detaljerad offert med fast pris enligt totalentreprenad (ABT-06). Allt i ett kontrakt — inga dolda avgifter, inga överraskningar. Vi specificerar exakt vilka material, arbetsmoment och garantier som ingår.",
+    text: "Du får en detaljerad offert med fast pris enligt totalentreprenad (ABT-06). Allt i ett kontrakt – inga dolda avgifter, inga överraskningar. Vi specificerar exakt vilka material, arbetsmoment och garantier som ingår.",
     bullets: [
-      "Fast pris — inga löpande kostnader",
+      "Fast pris – inga löpande kostnader",
       "Alla material och arbeten specificerade",
       "Garantivillkor tydliggjorda",
       "ROT-avdrag beräknat",
@@ -73,7 +73,7 @@ export default function VarProcessPage() {
           eyebrow="Hur vi jobbar"
           title="Vår"
           titleAccent="process"
-          description="Från första kontakt till färdigt tak — vi håller dig informerad i varje steg. Alltid fast pris, alltid totalentreprenad."
+          description="Från första kontakt till färdigt tak – vi håller dig informerad i varje steg. Alltid fast pris, alltid totalentreprenad."
           breadcrumbs={[
             { label: "Hem", href: "/" },
             { label: "Vår process" },
@@ -164,7 +164,7 @@ export default function VarProcessPage() {
               Redo att starta steg 1?
             </h2>
             <p className="text-gray-600 mb-8">
-              Boka ett kostnadsfritt hembesök — vi inspekterar ditt tak och ger
+              Boka ett kostnadsfritt hembesök – vi inspekterar ditt tak och ger
               dig ett fast pris utan förbindelser.
             </p>
             <Link

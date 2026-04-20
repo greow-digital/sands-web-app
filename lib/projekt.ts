@@ -16,7 +16,7 @@ export type Projekt = {
 export const projekt: Projekt[] = [
   {
     slug: "fagerasen-vrena",
-    title: "Fageråsen — Vrena",
+    title: "Fageråsen – Vrena",
     ort: "Nyköping",
     kvm: 140,
     typ: "Betongtak",
@@ -29,7 +29,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "plommonvagen-bromma",
-    title: "Plommonvägen — Bromma",
+    title: "Plommonvägen – Bromma",
     ort: "Stockholm",
     kvm: 150,
     typ: "Tegeltak",
@@ -42,7 +42,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "hakevagen-djursholm",
-    title: "Hakevägen — Djursholm",
+    title: "Hakevägen – Djursholm",
     ort: "Danderyd",
     kvm: 160,
     typ: "Betongtak",
@@ -55,7 +55,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "timmerbacken-tumba",
-    title: "Timmerbacken — Tumba",
+    title: "Timmerbacken – Tumba",
     ort: "Botkyrka",
     kvm: 170,
     typ: "Tegeltak",
@@ -68,7 +68,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "skovelvagen-alvsjo",
-    title: "Skovelvägen — Älvsjö",
+    title: "Skovelvägen – Älvsjö",
     ort: "Stockholm",
     kvm: 145,
     typ: "Plåttak",
@@ -81,7 +81,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "solfagravagen-huddinge",
-    title: "Solfagravägen — Huddinge",
+    title: "Solfagravägen – Huddinge",
     ort: "Huddinge",
     kvm: 155,
     typ: "Betongtak",
@@ -94,7 +94,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "sorgardsvagen-bromma",
-    title: "Sörgårdsvägen — Bromma",
+    title: "Sörgårdsvägen – Bromma",
     ort: "Stockholm",
     kvm: 135,
     typ: "Tegeltak",
@@ -107,7 +107,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "kastanjetunet-lidingo",
-    title: "Kastanjetunet — Lidingö",
+    title: "Kastanjetunet – Lidingö",
     ort: "Lidingö",
     kvm: 165,
     typ: "Betongtak",
@@ -120,7 +120,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "prastgardsvagen-tumba",
-    title: "Prästgårdsvägen — Tumba",
+    title: "Prästgårdsvägen – Tumba",
     ort: "Botkyrka",
     kvm: 130,
     typ: "Tegeltak",
@@ -133,7 +133,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "skacklingevagen-tumba",
-    title: "Skäcklingevägen — Tumba",
+    title: "Skäcklingevägen – Tumba",
     ort: "Botkyrka",
     kvm: 175,
     typ: "Plåttak",
@@ -146,7 +146,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "skrattmasvagen-farsta",
-    title: "Skrattmåsvägen — Farsta",
+    title: "Skrattmåsvägen – Farsta",
     ort: "Stockholm",
     kvm: 140,
     typ: "Betongtak",
@@ -159,7 +159,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "vartavagen-taby",
-    title: "Värtavägen — Täby",
+    title: "Värtavägen – Täby",
     ort: "Täby",
     kvm: 150,
     typ: "Tegeltak",
@@ -172,7 +172,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "nytorpsvagen-koping",
-    title: "Nytorpsvägen — Köping",
+    title: "Nytorpsvägen – Köping",
     ort: "Köping",
     kvm: 160,
     typ: "Betongtak",
@@ -185,7 +185,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "norrangsvagen-huddinge",
-    title: "Norrängsvägen — Huddinge",
+    title: "Norrängsvägen – Huddinge",
     ort: "Huddinge",
     kvm: 170,
     typ: "Tegeltak",
@@ -198,7 +198,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "alstromervagen-skarholmen",
-    title: "Alströmervägen — Skärholmen",
+    title: "Alströmervägen – Skärholmen",
     ort: "Stockholm",
     kvm: 145,
     typ: "Plåttak",
@@ -211,7 +211,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takrenovering-taby",
-    title: "Takrenovering — Täby",
+    title: "Takrenovering – Täby",
     ort: "Täby",
     kvm: 155,
     typ: "Betongtak",
@@ -224,7 +224,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takrenovering-sollentuna",
-    title: "Takrenovering — Sollentuna",
+    title: "Takrenovering – Sollentuna",
     ort: "Sollentuna",
     kvm: 135,
     typ: "Tegeltak",
@@ -237,7 +237,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-huddinge",
-    title: "Takomläggning — Huddinge",
+    title: "Takomläggning – Huddinge",
     ort: "Huddinge",
     kvm: 165,
     typ: "Betongtak",
@@ -250,7 +250,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-upplands-vasby",
-    title: "Takomläggning — Upplands Väsby",
+    title: "Takomläggning – Upplands Väsby",
     ort: "Upplands Väsby",
     kvm: 175,
     typ: "Plåttak",
@@ -263,7 +263,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-lidingo",
-    title: "Takomläggning — Lidingö",
+    title: "Takomläggning – Lidingö",
     ort: "Lidingö",
     kvm: 150,
     typ: "Tegeltak",
@@ -276,7 +276,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-enskede",
-    title: "Takomläggning — Enskede",
+    title: "Takomläggning – Enskede",
     ort: "Stockholm",
     kvm: 160,
     typ: "Betongtak",
@@ -289,7 +289,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "totalrenovering-jarfalla",
-    title: "Totalrenovering radhus — Järfälla",
+    title: "Totalrenovering radhus – Järfälla",
     ort: "Järfälla",
     kvm: 155,
     typ: "Betongtak",
@@ -302,7 +302,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "lagenhetsrenovering-kungsholmen",
-    title: "Lägenhetsrenovering — Kungsholmen",
+    title: "Lägenhetsrenovering – Kungsholmen",
     ort: "Stockholm",
     kvm: 135,
     typ: "Tegeltak",
@@ -315,7 +315,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-nykoping",
-    title: "Takomläggning K-märkt — Nyköping",
+    title: "Takomläggning K-märkt – Nyköping",
     ort: "Nyköping",
     kvm: 165,
     typ: "Betongtak",
@@ -328,7 +328,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-farsta",
-    title: "Takomläggning — Farsta",
+    title: "Takomläggning – Farsta",
     ort: "Stockholm",
     kvm: 130,
     typ: "Tegeltak",
@@ -341,7 +341,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-grodinge",
-    title: "Takomläggning — Grödinge",
+    title: "Takomläggning – Grödinge",
     ort: "Botkyrka",
     kvm: 175,
     typ: "Plåttak",
@@ -354,7 +354,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-skokloster",
-    title: "Takomläggning — Skokloster",
+    title: "Takomläggning – Skokloster",
     ort: "Håbo",
     kvm: 170,
     typ: "Tegeltak",
@@ -367,7 +367,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-hasselby",
-    title: "Takomläggning — Hässelby",
+    title: "Takomläggning – Hässelby",
     ort: "Stockholm",
     kvm: 145,
     typ: "Plåttak",
@@ -380,7 +380,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "badrumsrenovering-norsborg",
-    title: "Badrumsrenovering — Norsborg",
+    title: "Badrumsrenovering – Norsborg",
     ort: "Botkyrka",
     kvm: 155,
     typ: "Betongtak",
@@ -393,7 +393,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "fasadmalning-vallingby",
-    title: "Fasadmålning — Vällingby",
+    title: "Fasadmålning – Vällingby",
     ort: "Stockholm",
     kvm: 135,
     typ: "Tegeltak",
@@ -406,7 +406,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "radhusslingan-strangnas",
-    title: "Radhusslingan — Strängnäs",
+    title: "Radhusslingan – Strängnäs",
     ort: "Strängnäs",
     kvm: 165,
     typ: "Betongtak",
@@ -419,7 +419,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "nybyggnation-uttran",
-    title: "Nybyggnation entrébyggnad — Uttran",
+    title: "Nybyggnation entrébyggnad – Uttran",
     ort: "Botkyrka",
     kvm: 130,
     typ: "Tegeltak",
@@ -432,7 +432,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "finplanering-enkoping",
-    title: "Finplanering — Bredsand, Enköping",
+    title: "Finplanering – Bredsand, Enköping",
     ort: "Enköping",
     kvm: 175,
     typ: "Plåttak",
@@ -445,7 +445,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-upplands-bro",
-    title: "Takomläggning plåttak — Upplands Bro",
+    title: "Takomläggning plåttak – Upplands Bro",
     ort: "Upplands-Bro",
     kvm: 140,
     typ: "Betongtak",
@@ -458,7 +458,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "takomlaggning-gnesta",
-    title: "Takomläggning — Gnesta",
+    title: "Takomläggning – Gnesta",
     ort: "Gnesta",
     kvm: 150,
     typ: "Tegeltak",
@@ -471,7 +471,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "frotunagrand-upplands-vasby",
-    title: "Frötunagränd — Upplands Väsby",
+    title: "Frötunagränd – Upplands Väsby",
     ort: "Upplands Väsby",
     kvm: 155,
     typ: "Betongtak",
@@ -484,7 +484,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "stenvagen-vaxholm",
-    title: "Stenvägen — Vaxholm",
+    title: "Stenvägen – Vaxholm",
     ort: "Vaxholm",
     kvm: 135,
     typ: "Tegeltak",
@@ -497,7 +497,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "skovelvagen-alvsjo-2",
-    title: "Skovelvägen — Älvsjö",
+    title: "Skovelvägen – Älvsjö",
     ort: "Stockholm",
     kvm: 165,
     typ: "Betongtak",
@@ -510,7 +510,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "enskededalen-stockholm",
-    title: "Enskededalen — Stockholm",
+    title: "Enskededalen – Stockholm",
     ort: "Stockholm",
     kvm: 130,
     typ: "Tegeltak",
@@ -523,7 +523,7 @@ export const projekt: Projekt[] = [
   },
   {
     slug: "haggvagen-jarfalla",
-    title: "Häggvägen — Järfälla",
+    title: "Häggvägen – Järfälla",
     ort: "Järfälla",
     kvm: 175,
     typ: "Plåttak",

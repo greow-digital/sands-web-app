@@ -9,9 +9,9 @@ import { artiklar } from "@/lib/blogg";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/blogg" },
-  title: "Blogg — Tips om takläggning i Stockholm | Sands Entreprenad",
+  title: "Blogg – Tips om takläggning i Stockholm | Sands Entreprenad",
   description:
-    "Artiklar och råd om takbyte, material, priser och underhåll från Sands Entreprenad — takläggare i Stockholm.",
+    "Artiklar och råd om takbyte, material, priser och underhåll från Sands Entreprenad – takläggare i Stockholm.",
 };
 
 export default function BloggPage() {
