@@ -110,6 +110,7 @@ export default function RootLayout({
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`,
           }}
         />
+        <meta name="google-site-verification" content="cHYKcdLI2nZeK7Bh_2l5In9jEL3Rz1Z7P78sK2M4qh4" />
       </head>
       <body className="min-h-full flex flex-col antialiased">
         {children}
