@@ -174,9 +174,8 @@ export default function Home() {
                   </span>
                 </h1>
                 <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-10">
-                  Byta tak, lägga om tak eller lägga nytt tak? Vi tar
-                  helhetsansvar för takbyte i hela Stockholms län –
-                  totalentreprenad enligt ABT 06 med 30 års garanti.
+                  Anlita en takexpert i Stockholm med över 2 500 utförda
+                  tak, fast pris, trygg process och upp till 30 års garanti.
                 </p>
 
                 {/* Stats */}
