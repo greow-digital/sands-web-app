@@ -7,10 +7,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "offert.sandsentreprenad.se",
       },
-      {
-        protocol: "https",
-        hostname: "sandsab.se",
-      },
     ],
     formats: ["image/webp"],
   },

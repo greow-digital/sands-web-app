@@ -1,7 +1,7 @@
 /**
  * Sands Entreprenad — lead webhook
  *
- * Tar emot POST från sandsab.se (/api/lead), lägger till rad i
+ * Tar emot POST från offert.sandsentreprenad.se (/api/lead), lägger till rad i
  * kalkylarket och skickar mejl till erik@greow.digital.
  *
  * Deploy: Distribuera → Ny distribution → Webbapp → Vem som helst.
@@ -28,14 +28,14 @@ function doPost(e) {
       data.roofType || '',
       data.area || '',
       data.message || '',
-      data.source || 'sandsab.se',
+      data.source || 'offert.sandsentreprenad.se',
     ]);
 
     // Skicka mejl
-    const subject = `Ny lead från ${data.source || 'sandsab.se'} — ${data.name || 'okänd'}`;
+    const subject = `Ny lead från ${data.source || 'offert.sandsentreprenad.se'} — ${data.name || 'okänd'}`;
 
     const bodyLines = [
-      'Ny förfrågan från sandsab.se',
+      'Ny förfrågan från offert.sandsentreprenad.se',
       '',
       'Namn:      ' + (data.name || '-'),
       'Telefon:   ' + (data.phone || '-'),
@@ -45,7 +45,7 @@ function doPost(e) {
       'Meddelande:',
       data.message || '-',
       '',
-      '— Källa: ' + (data.source || 'sandsab.se'),
+      '— Källa: ' + (data.source || 'offert.sandsentreprenad.se'),
       '— Tid:   ' + new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Stockholm' }),
     ];
 

@@ -38,7 +38,7 @@ export async function POST(req: Request) {
 
   const payload = {
     ...data,
-    source: data.source || "sandsab.se",
+    source: data.source || "offert.sandsentreprenad.se",
     submittedAt: new Date().toISOString(),
     userAgent: req.headers.get("user-agent") || "",
   };

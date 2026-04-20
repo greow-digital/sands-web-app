@@ -45,7 +45,7 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
           source:
             typeof window !== "undefined"
               ? window.location.pathname
-              : "sandsab.se",
+              : "offert.sandsentreprenad.se",
         }),
       });
       if (!res.ok) throw new Error("Request failed");
