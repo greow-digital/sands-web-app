@@ -61,7 +61,7 @@ export default function PageHero({
                 position: i + 1,
                 name: c.label,
                 ...(c.href
-                  ? { item: `https://sandsab.se${c.href}` }
+                  ? { item: `https://offert.sandsentreprenad.se${c.href}` }
                   : {}),
               })),
             }),

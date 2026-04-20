@@ -52,7 +52,7 @@ export default async function TjanstPage({
       "@type": "LocalBusiness",
       name: "Sands Entreprenad Stockholm AB",
       telephone: "08-28 38 88",
-      url: "https://sandsab.se",
+      url: "https://offert.sandsentreprenad.se",
     },
     areaServed: "Stockholms län",
     description: t.intro,

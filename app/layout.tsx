@@ -18,7 +18,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const BASE_URL = "https://sandsab.se";
+const BASE_URL = "https://offert.sandsentreprenad.se";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

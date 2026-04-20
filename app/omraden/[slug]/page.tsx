@@ -50,7 +50,7 @@ export default async function OmradesPage({
       "@type": "LocalBusiness",
       name: "Sands Entreprenad Stockholm AB",
       telephone: "08-28 38 88",
-      url: "https://sandsab.se",
+      url: "https://offert.sandsentreprenad.se",
     },
     areaServed: {
       "@type": "City",

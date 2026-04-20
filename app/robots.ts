@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/tack", "/api/"],
     },
-    sitemap: "https://sandsab.se/sitemap.xml",
+    sitemap: "https://offert.sandsentreprenad.se/sitemap.xml",
   };
 }
