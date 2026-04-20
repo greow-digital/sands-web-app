@@ -1,5 +1,8 @@
 @AGENTS.md
 
+## Specifikationer
+Copy- och strukturspecifikationer ligger i parallellt repo: `/Users/wherkligheten/Sands-web/` (startsida, tjänster, FAQ, områden, design, sitemap).
+
 ## Projektregler
 
 **Läs alltid `SEO.md` innan du ändrar copy, metadata, rubriker, FAQ eller strukturerad data.** Den innehåller obligatoriska regler för sökintention, synonymkluster, copy-regler (vad som aldrig får skrivas), prisformatering och teknisk SEO.
