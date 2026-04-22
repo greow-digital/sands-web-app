@@ -19,10 +19,12 @@ export default function OffertPage() {
       <main className="pt-16 lg:pt-20 bg-white">
         <PageHero
           eyebrow="Kostnadsfri takkontroll"
-          title="Boka ditt"
+          title="Få skräddarsytt"
           titleAccent="prisförslag"
           description="Vi bokar ett kostnadsfritt hembesök där din personliga projektledare inspekterar taket och går igenom dina behov. Du får en tydlig bedömning på plats – utan förbindelser."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Boka offert" }]}
+          backgroundImage="/images/hero-offert.jpg"
+          imageAlt="Villa med nytt plåttak i skymning"
         />
 
         <section className="py-16 lg:py-24">
