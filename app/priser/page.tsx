@@ -94,6 +94,8 @@ export default function PriserPage() {
           titleAccent="Stockholm?"
           description="Alla riktpriser är efter 30% ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll – inga dolda avgifter."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Priser" }]}
+          backgroundImage="/images/hero-priser.jpg"
+          imageAlt="Villa i Stockholm med nytt tak"
         />
 
         {/* Prisintervall */}
