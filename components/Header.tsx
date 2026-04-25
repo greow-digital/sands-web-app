@@ -56,12 +56,20 @@ export default function Header() {
             aria-label="Sands Entreprenad – startsida"
           >
             <Image
+              src="/images/logo-sandsentreprenad-icon.svg"
+              alt="Sands Entreprenad"
+              width={64}
+              height={64}
+              priority
+              className="h-8 w-8 sm:hidden"
+            />
+            <Image
               src="/images/logo-sandsentreprenad.svg"
               alt="Sands Entreprenad"
               width={337}
               height={44}
               priority
-              className="h-6 lg:h-7 w-auto"
+              className="hidden sm:block h-6 lg:h-7 w-auto"
             />
           </Link>
 
