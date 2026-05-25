@@ -310,7 +310,7 @@ LCP-elementet är med stor sannolikhet hero-bilden. Det gör den till den **ensk
 
 ### 11.6 Vad som särskilt påverkar den här projektkodbasen
 
-Sidan är byggd som Next.js på Vercel (separat från Framer-sidan `offert.sandsentreprenad.se`). Det ger några specifika verktyg som ska utnyttjas:
+Sidan är byggd som Next.js på Vercel. Det ger några specifika verktyg som ska utnyttjas:
 
 - `next/image` är default för alla bilder. Undvik `<img>` utanför inbäddad markdown.
 - `next/font` för alla fonts – aldrig `@font-face` manuellt eller `<link>` till Google Fonts direkt.

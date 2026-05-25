@@ -18,7 +18,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const BASE_URL = "https://offert.sandsentreprenad.se";
+const BASE_URL = "https://www.sandsab.se";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -110,7 +110,6 @@ export default function RootLayout({
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`,
           }}
         />
-        <meta name="google-site-verification" content="cHYKcdLI2nZeK7Bh_2l5In9jEL3Rz1Z7P78sK2M4qh4" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:3307551,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,

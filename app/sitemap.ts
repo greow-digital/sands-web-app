@@ -4,7 +4,7 @@ import { omraden } from "@/lib/omraden";
 import { projekt } from "@/lib/projekt";
 import { artiklar } from "@/lib/blogg";
 
-const BASE = "https://offert.sandsentreprenad.se";
+const BASE = "https://www.sandsab.se";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

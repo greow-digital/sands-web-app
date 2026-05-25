@@ -5,12 +5,25 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "offert.sandsentreprenad.se",
+        hostname: "www.sandsab.se",
+      },
+      {
+        protocol: "https",
+        hostname: "sandsab.se",
       },
     ],
     formats: ["image/webp"],
   },
-  // Canonical domän
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "offert.sandsentreprenad.se" }],
+        destination: "https://www.sandsab.se/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
