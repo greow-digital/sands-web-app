@@ -18,6 +18,19 @@ function getCookie(name: string): string | undefined {
   return match ? decodeURIComponent(match[1]) : undefined;
 }
 
+// Google gtag stores click IDs as: _gcl_aw / _gcl_gb / _gcl_wb
+// Format: "GCL.<timestamp>.<clickId>" — we want the click ID part.
+function parseGclCookie(name: string): string | undefined {
+  const raw = getCookie(name);
+  if (!raw) return undefined;
+  const parts = raw.split(".");
+  return parts.length >= 3 ? parts.slice(2).join(".") : undefined;
+}
+
+function getClickId(ourCookie: string, gtagCookie: string): string | undefined {
+  return getCookie(ourCookie) || parseGclCookie(gtagCookie);
+}
+
 const taktyper = [
   "Betongtak",
   "Tegeltak",
@@ -52,9 +65,9 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
             typeof window !== "undefined"
               ? window.location.pathname
               : "sandsab.se",
-          gclid: getCookie("gclid"),
-          gbraid: getCookie("gbraid"),
-          wbraid: getCookie("wbraid"),
+          gclid: getClickId("gclid", "_gcl_aw"),
+          gbraid: getClickId("gbraid", "_gcl_gb"),
+          wbraid: getClickId("wbraid", "_gcl_wb"),
         }),
       });
       if (!res.ok) throw new Error("Request failed");
