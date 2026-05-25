@@ -29,6 +29,9 @@ function doPost(e) {
       data.area || '',
       data.message || '',
       data.source || 'sandsab.se',
+      data.gclid || '',
+      data.gbraid || '',
+      data.wbraid || '',
     ]);
 
     // Skicka mejl
@@ -45,8 +48,11 @@ function doPost(e) {
       'Meddelande:',
       data.message || '-',
       '',
-      '— Källa: ' + (data.source || 'sandsab.se'),
-      '— Tid:   ' + new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Stockholm' }),
+      '— Källa:  ' + (data.source || 'sandsab.se'),
+      '— GCLID:  ' + (data.gclid || '-'),
+      '— GBRAID: ' + (data.gbraid || '-'),
+      '— WBRAID: ' + (data.wbraid || '-'),
+      '— Tid:    ' + new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Stockholm' }),
     ];
 
     MailApp.sendEmail({

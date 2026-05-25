@@ -10,6 +10,9 @@ type LeadPayload = {
   area?: string;
   message?: string;
   source?: string;
+  gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
 };
 
 export async function POST(req: Request) {

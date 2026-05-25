@@ -12,6 +12,12 @@ type FormData = {
   area?: string;
 };
 
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
 const taktyper = [
   "Betongtak",
   "Tegeltak",
@@ -46,6 +52,9 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
             typeof window !== "undefined"
               ? window.location.pathname
               : "sandsab.se",
+          gclid: getCookie("gclid"),
+          gbraid: getCookie("gbraid"),
+          wbraid: getCookie("wbraid"),
         }),
       });
       if (!res.ok) throw new Error("Request failed");
