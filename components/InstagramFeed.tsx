@@ -2,7 +2,28 @@
 
 import Script from "next/script";
 import Link from "next/link";
-import { ArrowRight, Instagram } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+function InstagramIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type BeholdWidgetProps = DetailedHTMLProps<
@@ -43,7 +64,7 @@ export default function InstagramFeed() {
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
           >
-            <Instagram size={16} /> Följ @sandsentreprenad <ArrowRight size={14} />
+            <InstagramIcon size={16} /> Följ @sandsentreprenad <ArrowRight size={14} />
           </a>
         </div>
 
