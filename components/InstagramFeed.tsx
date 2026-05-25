@@ -2,7 +2,7 @@
 
 import Script from "next/script";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Instagram } from "lucide-react";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type BeholdWidgetProps = DetailedHTMLProps<
@@ -34,7 +34,7 @@ export default function InstagramFeed() {
                 color: "var(--color-dark)",
               }}
             >
-              Senaste från taken
+              Senaste från vår Instagram
             </h2>
           </div>
           <a
@@ -43,7 +43,7 @@ export default function InstagramFeed() {
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
           >
-            Följ @sandsentreprenad <ArrowRight size={14} />
+            <Instagram size={16} /> Följ @sandsentreprenad <ArrowRight size={14} />
           </a>
         </div>
 
