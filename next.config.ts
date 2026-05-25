@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         destination: "https://www.sandsab.se/:path*",
         permanent: true,
       },
+      {
+        source: "/omraden/norrtälje",
+        destination: "/omraden/norrtalje",
+        permanent: true,
+      },
     ];
   },
   async headers() {

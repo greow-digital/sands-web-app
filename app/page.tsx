@@ -642,7 +642,7 @@ export default function Home() {
                 { name: "Solna", slug: "solna" },
                 { name: "Sundbyberg", slug: "sundbyberg" },
                 { name: "Ekerö", slug: "ekero" },
-                { name: "Norrtälje", slug: "norrtälje" },
+                { name: "Norrtälje", slug: "norrtalje" },
                 { name: "Södertälje", slug: "sodertalje" },
                 { name: "Nykvarn", slug: "nykvarn" },
               ].map((o) => (

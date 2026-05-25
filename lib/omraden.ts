@@ -134,7 +134,7 @@ export const omraden: Ort[] = [
     ],
   },
   {
-    slug: "norrtälje",
+    slug: "norrtalje",
     name: "Norrtälje",
     region: "Övriga",
     beskrivning:
@@ -261,7 +261,7 @@ export const omraden: Ort[] = [
       { slug: "taby", name: "Täby" },
       { slug: "danderyd", name: "Danderyd" },
       { slug: "osteraker", name: "Österåker" },
-      { slug: "norrtälje", name: "Norrtälje" },
+      { slug: "norrtalje", name: "Norrtälje" },
     ],
   },
   {
@@ -300,7 +300,7 @@ export const omraden: Ort[] = [
       { slug: "taby", name: "Täby" },
       { slug: "vallentuna", name: "Vallentuna" },
       { slug: "varmdo", name: "Värmdö" },
-      { slug: "norrtälje", name: "Norrtälje" },
+      { slug: "norrtalje", name: "Norrtälje" },
     ],
   },
   {
