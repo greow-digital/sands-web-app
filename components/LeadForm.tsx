@@ -8,8 +8,7 @@ type FormData = {
   name: string;
   phone: string;
   email?: string;
-  roofType: string;
-  area?: string;
+  message?: string;
 };
 
 function getCookie(name: string): string | undefined {
@@ -30,15 +29,6 @@ function parseGclCookie(name: string): string | undefined {
 function getClickId(ourCookie: string, gtagCookie: string): string | undefined {
   return getCookie(ourCookie) || parseGclCookie(gtagCookie);
 }
-
-const taktyper = [
-  "Betongtak",
-  "Tegeltak",
-  "Plåttak",
-  "Papptak",
-  "Eternittak",
-  "Vet ej",
-];
 
 interface LeadFormProps {
   variant?: "hero" | "section";
@@ -223,54 +213,21 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
           </div>
         </div>
 
-        {/* Taktyp */}
+        {/* Detaljer (valfritt) */}
         <div>
           <label
-            htmlFor="roofType"
+            htmlFor="message"
             className="block text-xs font-semibold mb-1"
             style={{ color: "var(--color-primary)", fontFamily: "var(--font-body)" }}
           >
-            Taktyp *
+            Detaljer <span className="text-gray-400 font-normal">(valfritt)</span>
           </label>
-          <select
-            id="roofType"
-            className={`w-full px-4 py-3 rounded-[5px] text-sm outline-none border transition-colors appearance-none ${
-              errors.roofType
-                ? "border-red-400 bg-red-50"
-                : "border-transparent bg-[#F1F4F7] focus:border-[#2B74FC]"
-            }`}
-            {...register("roofType", { required: "Välj taktyp" })}
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Välj taktyp
-            </option>
-            {taktyper.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-          {errors.roofType && (
-            <p className="text-xs text-red-500 mt-1">
-              {errors.roofType.message}
-            </p>
-          )}
-        </div>
-
-        {/* Area (valfritt) */}
-        <div>
-          <label
-            className="block text-xs font-semibold mb-1"
-            style={{ color: "var(--color-primary)", fontFamily: "var(--font-body)" }}
-          >
-            Ungefärlig yta m² <span className="text-gray-400 font-normal">(valfritt)</span>
-          </label>
-          <input
-            type="text"
-            placeholder="t.ex. 140 m²"
-            className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors"
-            {...register("area")}
+          <textarea
+            id="message"
+            rows={2}
+            placeholder="Ange taktyp, kvm eller annat"
+            className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
+            {...register("message")}
           />
         </div>
 
