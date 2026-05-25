@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
+import InstagramFeed from "@/components/InstagramFeed";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -519,6 +520,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── INSTAGRAM ──────────────────────────── */}
+        <InstagramFeed />
 
         {/* ── VÅR PROCESS ────────────────────────── */}
         <section
