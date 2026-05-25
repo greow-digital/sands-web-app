@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/omraden/norrtälje",
+        source: "/omraden/norrt%C3%A4lje",
         destination: "/omraden/norrtalje",
         permanent: true,
       },
