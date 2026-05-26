@@ -660,6 +660,30 @@ export default function Home() {
                 </Link>
               ))}
             </div>
+
+            <div className="mt-10 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-6 lg:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h3
+                  className="text-lg lg:text-xl font-extrabold mb-1"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Hur väljer du Stockholms bästa takläggare?
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  7 kriterier, 5 röda flaggor och 10 frågor du ska ställa innan du skriver kontrakt.
+                </p>
+              </div>
+              <Link
+                href="/basta-taklaggare-stockholm"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm shrink-0 transition-all hover:scale-[1.02]"
+                style={{ backgroundColor: "var(--color-primary)" }}
+              >
+                Läs köpguiden <ArrowRight size={14} />
+              </Link>
+            </div>
           </div>
         </section>
 

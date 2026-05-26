@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE, priority: 1.0 },
     { url: `${BASE}/tjanster`, priority: 0.9 },
     { url: `${BASE}/omraden`, priority: 0.9 },
+    { url: `${BASE}/basta-taklaggare-stockholm`, priority: 0.9 },
     { url: `${BASE}/priser`, priority: 0.8 },
     { url: `${BASE}/var-process`, priority: 0.7 },
     { url: `${BASE}/projekt`, priority: 0.7 },
