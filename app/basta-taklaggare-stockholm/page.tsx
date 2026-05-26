@@ -591,7 +591,7 @@ export default function BastaTaklaggareStockholm() {
                   color: "var(--color-dark)",
                 }}
               >
-                Tre projekt du kan ringa upp
+                Tre nyligen färdigställda projekt
               </h2>
               <p className="text-gray-600 leading-relaxed">
                 Vi delar adress, omfattning och materialval på tre färdigställda takbyten i Stockholmsområdet. Vill du prata direkt med kunden? Ring oss så förmedlar vi referenskontakten.
