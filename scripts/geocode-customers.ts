@@ -59,7 +59,11 @@ const OUTPUT_FILE = path.join(
 
 const MAX_API_CALLS = 3000;
 const REQUEST_THROTTLE_MS = 100;
-const MIN_CELL_COUNT = 10;
+// Privacy: each customer is snapped to its grid cell center (500m
+// resolution) before being emitted. Cluster aggregation in the map UI
+// ensures individual cells with low counts are only visible at high zoom,
+// where the 500m grid quantization still anonymizes home addresses.
+const MIN_CELL_COUNT = 1;
 
 // Grid resolution: ~500-600m at Stockholm latitude
 const LAT_BUCKET = 0.005;

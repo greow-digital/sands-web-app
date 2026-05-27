@@ -6,7 +6,6 @@ import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
-import "leaflet.heat";
 
 export type ProjektPin = {
   slug: string;
@@ -38,6 +37,70 @@ const PIN_ICON = L.divIcon({
   iconSize: [18, 18],
   iconAnchor: [9, 9],
 });
+
+const CUSTOMER_DOT = L.divIcon({
+  className: "sands-customer-dot",
+  html: `<div style="
+    width: 10px;
+    height: 10px;
+    background: #a78bfa;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    opacity: 0.85;
+  "></div>`,
+  iconSize: [10, 10],
+  iconAnchor: [5, 5],
+});
+
+function projectClusterIcon(cluster: { getChildCount: () => number }) {
+  const count = cluster.getChildCount();
+  const size = count >= 10 ? 44 : 38;
+  return L.divIcon({
+    className: "sands-cluster-project",
+    html: `<div style="
+      background: #2B74FC;
+      color: white;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      font-family: var(--font-heading), system-ui;
+      box-shadow: 0 2px 8px rgba(43,116,252,0.45);
+      border: 3px solid white;
+    ">${count}</div>`,
+    iconSize: [size, size],
+  });
+}
+
+function customerClusterIcon(cluster: { getChildCount: () => number }) {
+  const count = cluster.getChildCount();
+  const size = count >= 1000 ? 60 : count >= 250 ? 52 : count >= 50 ? 44 : 38;
+  const fontSize = count >= 1000 ? 14 : 13;
+  return L.divIcon({
+    className: "sands-cluster-customer",
+    html: `<div style="
+      background: rgba(167,139,250,0.92);
+      color: white;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: ${fontSize}px;
+      font-family: var(--font-heading), system-ui;
+      box-shadow: 0 2px 10px rgba(167,139,250,0.55);
+      border: 3px solid white;
+    ">${count.toLocaleString("sv-SE")}</div>`,
+    iconSize: [size, size],
+  });
+}
 
 function escapeHtml(s: string): string {
   return s
@@ -98,66 +161,45 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
       }
     ).addTo(map);
 
-    // Heatmap layer (below pins) — customer density
-    if (densityCells && densityCells.length > 0) {
-      const maxCount = Math.max(...densityCells.map((c) => c.count));
-      const heatPoints: [number, number, number][] = densityCells.map((c) => [
-        c.lat,
-        c.lng,
-        // Normalize intensity 0-1
-        Math.min(1, c.count / maxCount),
-      ]);
-      (
-        L as unknown as {
-          heatLayer: (
-            points: [number, number, number][],
-            opts: object
-          ) => L.Layer;
-        }
-      )
-        .heatLayer(heatPoints, {
-          radius: 35,
-          blur: 25,
-          maxZoom: 12,
-          minOpacity: 0.35,
-          gradient: {
-            0.2: "#3b82f6",
-            0.4: "#06b6d4",
-            0.6: "#84cc16",
-            0.8: "#facc15",
-            1.0: "#ef4444",
-          },
-        })
-        .addTo(map);
-
-      // Heatmap legend
-      const legend = new L.Control({ position: "bottomleft" });
-      legend.onAdd = () => {
-        const div = L.DomUtil.create("div", "sands-heatmap-legend");
-        div.innerHTML = `
-          <div style="background: white; padding: 10px 12px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.12); font-family: var(--font-body), system-ui; font-size: 11px; line-height: 1.3;">
-            <div style="font-weight: 700; color: #060607; margin-bottom: 6px; letter-spacing: 0.02em;">Kundtäthet</div>
-            <div style="width: 140px; height: 8px; border-radius: 4px; background: linear-gradient(to right, #3b82f6, #06b6d4, #84cc16, #facc15, #ef4444); margin-bottom: 4px;"></div>
-            <div style="display: flex; justify-content: space-between; color: #6B7280; font-size: 10px;">
-              <span>Få kunder</span>
-              <span>Många</span>
-            </div>
-          </div>
-        `;
-        return div;
-      };
-      legend.addTo(map);
-    }
-
-    // markercluster injects markerClusterGroup onto L when imported
-    const cluster = (
+    const markerClusterGroup = (
       L as unknown as {
         markerClusterGroup: (opts?: object) => L.LayerGroup;
       }
-    ).markerClusterGroup({
+    ).markerClusterGroup;
+
+    // Customer cluster (below project pins) — each customer is snapped to
+    // its grid cell center (500m). spiderfy disabled so individual cell
+    // positions are never revealed; markers at identical coords stay
+    // stacked as a single visible dot at max zoom.
+    if (densityCells && densityCells.length > 0) {
+      const customerCluster = markerClusterGroup({
+        showCoverageOnHover: false,
+        spiderfyOnMaxZoom: false,
+        zoomToBoundsOnClick: false,
+        maxClusterRadius: 80,
+        chunkedLoading: true,
+        iconCreateFunction: customerClusterIcon,
+      });
+      for (const cell of densityCells) {
+        for (let i = 0; i < cell.count; i++) {
+          customerCluster.addLayer(
+            L.marker([cell.lat, cell.lng], {
+              icon: CUSTOMER_DOT,
+              interactive: false,
+              keyboard: false,
+            })
+          );
+        }
+      }
+      map.addLayer(customerCluster);
+    }
+
+    // Project cluster (on top) — blue, clickable, popups
+    const cluster = markerClusterGroup({
       showCoverageOnHover: false,
       spiderfyOnMaxZoom: true,
-      maxClusterRadius: 50,
+      maxClusterRadius: 40,
+      iconCreateFunction: projectClusterIcon,
     });
 
     for (const pin of pins) {

@@ -103,7 +103,7 @@ export default async function ProjektSanityPocPage() {
                 <p className="text-sm text-gray-600 leading-relaxed">
                   Blå pins är referensprojekt — klicka för att läsa mer.
                   {density.cells.length > 0
-                    ? " Värmen i bakgrunden visar var våra ~2 500+ kunder finns, anonymiserat på områdesnivå."
+                    ? " Lila bubblor visar var våra kunder finns, anonymiserat på områdesnivå (500 m-rutnät)."
                     : " Pin-positionen visar ungefärlig plats i kommunen — exakta adresser är dolda av integritetsskäl."}
                 </p>
               </div>
