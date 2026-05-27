@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "sandsab.se",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/w7g9aeqj/**",
+      },
     ],
     formats: ["image/webp"],
   },
