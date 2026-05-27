@@ -88,11 +88,15 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
     });
     mapRef.current = map;
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 18,
-    }).addTo(map);
+    L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: "abcd",
+        maxZoom: 19,
+      }
+    ).addTo(map);
 
     // Heatmap layer (below pins) — customer density
     if (densityCells && densityCells.length > 0) {
@@ -125,6 +129,24 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
           },
         })
         .addTo(map);
+
+      // Heatmap legend
+      const legend = new L.Control({ position: "bottomleft" });
+      legend.onAdd = () => {
+        const div = L.DomUtil.create("div", "sands-heatmap-legend");
+        div.innerHTML = `
+          <div style="background: white; padding: 10px 12px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.12); font-family: var(--font-body), system-ui; font-size: 11px; line-height: 1.3;">
+            <div style="font-weight: 700; color: #060607; margin-bottom: 6px; letter-spacing: 0.02em;">Kundtäthet</div>
+            <div style="width: 140px; height: 8px; border-radius: 4px; background: linear-gradient(to right, #3b82f6, #06b6d4, #84cc16, #facc15, #ef4444); margin-bottom: 4px;"></div>
+            <div style="display: flex; justify-content: space-between; color: #6B7280; font-size: 10px;">
+              <span>Få kunder</span>
+              <span>Många</span>
+            </div>
+          </div>
+        `;
+        return div;
+      };
+      legend.addTo(map);
     }
 
     // markercluster injects markerClusterGroup onto L when imported
@@ -149,13 +171,12 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
 
     map.addLayer(cluster);
 
-    // Fit map to all pins (with reasonable padding)
-    if (pins.length > 0) {
-      const bounds = L.latLngBounds(
-        pins.map((p) => [p.lat, p.lng] as [number, number])
-      );
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 11 });
-    }
+    // Lock initial view to Stockholm — outliers (Nyköping/Västerås) still
+    // reachable by zooming out, but heatmap and most pins stay in focus.
+    map.fitBounds(
+      L.latLngBounds([59.22, 17.65], [59.55, 18.35]),
+      { padding: [20, 20] }
+    );
 
     return () => {
       map.remove();
