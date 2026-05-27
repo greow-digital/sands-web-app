@@ -14,14 +14,14 @@ export const artiklar: Artikel[] = [
     slug: "vad-kostar-takbyte",
     titel: "Vad kostar ett takbyte i Stockholm 2025?",
     ingress:
-      "Priset beror på material, takets storlek och komplexitet. Här är en guide med riktpriser för betongtak, tegeltak, plåttak och papptak – alla efter ROT-avdrag.",
+      "Priset beror på material, takets storlek och komplexitet. Här är en guide med riktpriser för betongtak, tegeltak, plåttak och papptak, alla efter ROT-avdrag.",
     datum: "2025-03-15",
     kategori: "Priser",
     lästid: "5 min",
     image: "/images/blogg-vad-kostar-takbyte.jpg",
     innehåll: `## Riktpriser per taktyp
 
-Priset för ett takbyte varierar beroende på vilket material du väljer, takets storlek och konstruktion. Här är de vanligaste materialen och vad de kostar i Stockholmsområdet – alla priser är efter 30% ROT-avdrag.
+Priset för ett takbyte varierar beroende på vilket material du väljer, takets storlek och konstruktion. Här är de vanligaste materialen och vad de kostar i Stockholmsområdet, alla priser är efter 30% ROT-avdrag.
 
 **Betongtak:** Från ca 1 200 kr/m²
 Betongpannor är det vanligaste alternativet i Sverige. De är robusta, prisvärda och finns i ett brett sortiment av kulörer och profiler. Ett tak på 140 m² kostar från ca 169 000 kr efter ROT.
@@ -48,22 +48,22 @@ Hos Sands Entreprenad ingår alltid:
 - Ställning, container och bortforsling
 - Takkontroll tillsammans med dig
 
-Vi arbetar genom totalentreprenad enligt ABT-06 – allt regleras i ett enda kontrakt till fast pris.
+Vi arbetar genom totalentreprenad enligt ABT-06, allt regleras i ett enda kontrakt till fast pris.
 
 ## Vad påverkar priset?
 
 Flera faktorer avgör det slutgiltiga priset:
 
-- **Takets storlek** – fler kvadratmeter innebär ett högre totalpris, men lägre pris per m².
-- **Materialval** – tegel kostar mer än betong, plåt mer än tegel.
-- **Takets lutning och komplexitet** – ett valmat tak med många genomföringar tar längre tid.
-- **Antal genomföringar** – skorstenar, ventilation och takfönster kräver extra arbete.
-- **Underlagets skick** – om råspont eller läkt behöver bytas tillkommer kostnad.
-- **Tillgänglighet** – svåråtkomliga tak kan kräva specialställning.
+- **Takets storlek**, fler kvadratmeter innebär ett högre totalpris, men lägre pris per m².
+- **Materialval**, tegel kostar mer än betong, plåt mer än tegel.
+- **Takets lutning och komplexitet**, ett valmat tak med många genomföringar tar längre tid.
+- **Antal genomföringar**, skorstenar, ventilation och takfönster kräver extra arbete.
+- **Underlagets skick**, om råspont eller läkt behöver bytas tillkommer kostnad.
+- **Tillgänglighet**, svåråtkomliga tak kan kräva specialställning.
 
-## ROT-avdrag – så funkar det
+## ROT-avdrag, så funkar det
 
-Alla priser ovan är efter 30% ROT-avdrag. ROT-avdraget innebär att du får tillbaka 30% av arbetskostnaden direkt på fakturan. Vi hanterar hela ansökan åt dig – du behöver inte göra något extra.
+Alla priser ovan är efter 30% ROT-avdrag. ROT-avdraget innebär att du får tillbaka 30% av arbetskostnaden direkt på fakturan. Vi hanterar hela ansökan åt dig, du behöver inte göra något extra.
 
 Maxbeloppet för ROT-avdrag är 50 000 kr per person och år (2025).
 
@@ -94,7 +94,7 @@ Vattenfläckar i taket eller på vindsvåningen är allvarliga varningssignaler.
 Gå upp på vinden en kall dag. Om du ser fukt, kondens eller mögel kan det bero på att tätskiktet (underlagspappen) är skadat och inte längre håller tätt.
 
 **Rost på plåtdetaljer**
-Rost på hängrännor, stuprör, nockplåtar och fotplåtar tyder på att plåtdetaljerna behöver bytas – ofta i samband med en takomläggning.
+Rost på hängrännor, stuprör, nockplåtar och fotplåtar tyder på att plåtdetaljerna behöver bytas, ofta i samband med en takomläggning.
 
 **Taket närmar sig sin tekniska livslängd**
 Alla tak har en begränsad livslängd:
@@ -109,14 +109,14 @@ Om ditt tak är äldre än dessa intervall bör du boka en inspektion.
 
 Att skjuta upp ett takbyte kan leda till:
 
-- **Vattenskador** – fukt sprider sig till konstruktionen och orsakar röta.
-- **Mögel** – fuktiga miljöer skapar idealiska förhållanden för mögel.
-- **Ökad kostnad** – skador på underlag och konstruktion gör det dyrare.
-- **Sänkt fastighetsvärde** – ett dåligt tak syns vid besiktning.
+- **Vattenskador**, fukt sprider sig till konstruktionen och orsakar röta.
+- **Mögel**, fuktiga miljöer skapar idealiska förhållanden för mögel.
+- **Ökad kostnad**, skador på underlag och konstruktion gör det dyrare.
+- **Sänkt fastighetsvärde**, ett dåligt tak syns vid besiktning.
 
 ## Boka en kostnadsfri takkontroll
 
-Det bästa sättet att veta säkert är att låta en fackman inspektera taket. Vi erbjuder kostnadsfri takkontroll i hela Stockholms län – vi inspekterar taket och ger dig en ärlig bedömning utan förbindelser.`,
+Det bästa sättet att veta säkert är att låta en fackman inspektera taket. Vi erbjuder kostnadsfri takkontroll i hela Stockholms län, vi inspekterar taket och ger dig en ärlig bedömning utan förbindelser.`,
   },
   {
     slug: "monier-garanti",
@@ -129,7 +129,7 @@ Det bästa sättet att veta säkert är att låta en fackman inspektera taket. V
     image: "/images/blogg-monier-garanti.jpg",
     innehåll: `## Vad är Tätt tak-garantin?
 
-Moniers Tätt tak-garanti är en systemgaranti som täcker hela taksystemets funktion och täthet – inte bara enskilda material. Det innebär att om ditt tak läcker under garantitiden åtgärdar Monier problemet utan kostnad för dig.
+Moniers Tätt tak-garanti är en systemgaranti som täcker hela taksystemets funktion och täthet, inte bara enskilda material. Det innebär att om ditt tak läcker under garantitiden åtgärdar Monier problemet utan kostnad för dig.
 
 Garantin gäller i upp till 30 år vid komplett takomläggning med Moniers taksystem.
 
@@ -137,9 +137,9 @@ Garantin gäller i upp till 30 år vid komplett takomläggning med Moniers taksy
 
 Tätt tak-garantin täcker:
 
-- **Takpannornas funktion** – sprickor, frostskador, formförändringar
-- **Underlagspappens täthet** – Icopal-membranet som ligger under pannorna
-- **Taksystemets helhetsförmåga** – att taket håller tätt som system
+- **Takpannornas funktion**, sprickor, frostskador, formförändringar
+- **Underlagspappens täthet**, Icopal-membranet som ligger under pannorna
+- **Taksystemets helhetsförmåga**, att taket håller tätt som system
 
 Garantin förutsätter att alla komponenter i taksystemet är från Monier och att monteringen utförs av en certifierad Monier Takpartner.
 
@@ -147,20 +147,20 @@ Garantin förutsätter att alla komponenter i taksystemet är från Monier och a
 
 För att garantin ska gälla krävs:
 
-1. **Certifierad Monier Takpartner** – vi, Sands Entreprenad, är certifierade.
-2. **Komplett Monier-taksystem** – pannor, underlag, nock och detaljer.
-3. **Korrekt montering** – vi följer Moniers monteringsanvisningar.
-4. **Registrering** – vi registrerar ditt tak hos Monier efter takkontroll.
+1. **Certifierad Monier Takpartner**, vi, Sands Entreprenad, är certifierade.
+2. **Komplett Monier-taksystem**, pannor, underlag, nock och detaljer.
+3. **Korrekt montering**, vi följer Moniers monteringsanvisningar.
+4. **Registrering**, vi registrerar ditt tak hos Monier efter takkontroll.
 
 ## Varför är det viktigt?
 
-De flesta takläggare erbjuder garanti på eget utförande (vanligtvis 5–10 år). Moniers systemgaranti ger dig upp till 30 år – det är en av marknadens starkaste garantier för takläggning.
+De flesta takläggare erbjuder garanti på eget utförande (vanligtvis 5–10 år). Moniers systemgaranti ger dig upp till 30 år, det är en av marknadens starkaste garantier för takläggning.
 
 Du får ett garantibevis vid takkontrollen som specificerar exakta villkor och garantitid för ditt specifika tak.
 
-## Monier – Nordens ledande taktillverkare
+## Monier, Nordens ledande taktillverkare
 
-Monier har tillverkat takprodukter i över 100 år. Deras pannor är utvecklade och testade för nordiskt klimat – frysbeständiga, formstabila och med dokumenterad livslängd.
+Monier har tillverkat takprodukter i över 100 år. Deras pannor är utvecklade och testade för nordiskt klimat, frysbeständiga, formstabila och med dokumenterad livslängd.
 
 Som certifierad Monier Takpartner har vi genomgått utbildning och certifiering som säkerställer att varje tak vi lägger uppfyller Moniers kvalitetskrav.`,
   },
@@ -168,7 +168,7 @@ Som certifierad Monier Takpartner har vi genomgått utbildning och certifiering 
     slug: "eternittak-asbest",
     titel: "Allt du behöver veta om eternittak och asbest",
     ingress:
-      "Har du eternittak? Det är inte farligt att ha – men det måste hanteras korrekt när du byter det. Vår guide om asbestsanering och vad det kostar.",
+      "Har du eternittak? Det är inte farligt att ha, men det måste hanteras korrekt när du byter det. Vår guide om asbestsanering och vad det kostar.",
     datum: "2025-01-05",
     kategori: "Material",
     lästid: "6 min",
@@ -177,13 +177,13 @@ Som certifierad Monier Takpartner har vi genomgått utbildning och certifiering 
 
 Eternit är ett byggmaterial som användes flitigt i Sverige fram till mitten av 1980-talet. Det består av cement blandad med asbestfibrer och användes bland annat som takbeläggning, fasadskivor och rör.
 
-Asbest är ett naturligt mineral som ger materialet styrka och brandmotstånd – men som vid inandning kan orsaka allvarliga lungsjukdomar.
+Asbest är ett naturligt mineral som ger materialet styrka och brandmotstånd, men som vid inandning kan orsaka allvarliga lungsjukdomar.
 
 ## Är det farligt att ha eternittak?
 
 **Intakt eternittak är normalt inte farligt.** Så länge materialet inte är skadat, bearbetat eller vittrat frigörs inga asbestfibrer. Du kan bo med eternittak utan akut hälsofara.
 
-Men – eternit bör aldrig:
+Men, eternit bör aldrig:
 - Borras i, slipad eller sågad
 - Högtryckstvättad
 - Rivas utan certifierad saneringspartner
@@ -198,10 +198,10 @@ Vi rekommenderar byte om:
 
 ## Hur går ett eternitbyte till?
 
-1. **Inspektion** – vi inspekterar taket och bedömer omfattningen.
-2. **Certifierad sanering** – vår saneringspartner (certifierad för asbesthantering) utför rivning enligt alla gällande regler. Materialet förpackas och transporteras till godkänd deponi.
-3. **Nytt tak** – vi lägger nytt tak med ditt valda material och Monier-garanti.
-4. **Takkontroll** – vi besiktigar resultatet tillsammans med dig.
+1. **Inspektion**, vi inspekterar taket och bedömer omfattningen.
+2. **Certifierad sanering**, vår saneringspartner (certifierad för asbesthantering) utför rivning enligt alla gällande regler. Materialet förpackas och transporteras till godkänd deponi.
+3. **Nytt tak**, vi lägger nytt tak med ditt valda material och Monier-garanti.
+4. **Takkontroll**, vi besiktigar resultatet tillsammans med dig.
 
 ## Vad kostar det?
 
@@ -212,7 +212,7 @@ Eternitbyte kostar mer än ett vanligt takbyte eftersom saneringskostnaden tillk
 - Tillgänglighet och ställningsbehov
 - Val av nytt takmaterial
 
-Vi ger alltid fast pris efter takkontroll – inga överraskningar.
+Vi ger alltid fast pris efter takkontroll, inga överraskningar.
 
 ## Vilka regler gäller?
 
@@ -222,11 +222,11 @@ Enligt Arbetsmiljöverkets föreskrifter (AFS 2006:1) krävs:
 - Personlig skyddsutrustning och säkerhetsrutiner
 - Korrekt avfallshantering till godkänd deponi
 
-Vi ser till att alla regler följs – du behöver bara göra en kontakt, vi sköter resten.`,
+Vi ser till att alla regler följs, du behöver bara göra en kontakt, vi sköter resten.`,
   },
   {
     slug: "rot-avdrag-takbyte",
-    titel: "ROT-avdrag vid takbyte – så funkar det",
+    titel: "ROT-avdrag vid takbyte, så funkar det",
     ingress:
       "30% av arbetskostnaden tillbaka direkt på fakturan. Vi förklarar hur ROT-avdraget fungerar och vad du kan dra av vid ett takbyte.",
     datum: "2024-12-01",
@@ -235,7 +235,7 @@ Vi ser till att alla regler följs – du behöver bara göra en kontakt, vi sk�
     image: "/images/blogg-rot-avdrag.jpg",
     innehåll: `## Vad är ROT-avdrag?
 
-ROT-avdraget (Renovering, Ombyggnad, Tillbyggnad) innebär att du som privatperson får en skattereduktion på 30% av arbetskostnaden vid renovering av din bostad. Avdraget dras direkt på fakturan – du betalar alltså bara 70% av arbetskostnaden.
+ROT-avdraget (Renovering, Ombyggnad, Tillbyggnad) innebär att du som privatperson får en skattereduktion på 30% av arbetskostnaden vid renovering av din bostad. Avdraget dras direkt på fakturan, du betalar alltså bara 70% av arbetskostnaden.
 
 ## Hur mycket kan man dra av?
 
@@ -261,10 +261,10 @@ Vid ett takbyte är en stor del av kostnaden arbetskostnad, vilket gör ROT-avdr
 
 1. Vi specificerar arbets- och materialkostnad separat på fakturan.
 2. Vi ansöker om ROT-avdraget hos Skatteverket åt dig.
-3. Du betalar den reducerade summan – 70% av arbetskostnaden + 100% av materialkostnaden.
+3. Du betalar den reducerade summan, 70% av arbetskostnaden + 100% av materialkostnaden.
 4. Vi får mellanskillnaden direkt från Skatteverket.
 
-Du behöver inte göra något extra – vi hanterar hela processen.
+Du behöver inte göra något extra, vi hanterar hela processen.
 
 ## Prisexempel med ROT
 
@@ -287,28 +287,28 @@ Vi kontrollerar alltid att förutsättningarna är uppfyllda innan vi ansöker.`
   },
   {
     slug: "platttak-eller-tegeltag",
-    titel: "Plåttak eller tegeltak – vilket väljer du?",
+    titel: "Plåttak eller tegeltak, vilket väljer du?",
     ingress:
-      "Båda materialen ger ett hållbart resultat – men de passar olika hus och stilar. Vår jämförelse hjälper dig att välja rätt.",
+      "Båda materialen ger ett hållbart resultat, men de passar olika hus och stilar. Vår jämförelse hjälper dig att välja rätt.",
     datum: "2024-11-15",
     kategori: "Material",
     lästid: "5 min",
     image: "/images/blogg-plattak-eller-tegeltak.jpg",
-    innehåll: `## Två utmärkta material – men med olika styrkor
+    innehåll: `## Två utmärkta material, men med olika styrkor
 
 Plåttak och tegeltak är två av de mest hållbara takmaterialen du kan välja. Båda ger ett vackert resultat och lång livslängd, men de passar olika hus och situationer.
 
-## Tegeltak – det klassiska valet
+## Tegeltak, det klassiska valet
 
 **Fördelar:**
 - Naturmaterial som håller i 50–80 år
-- Behåller sin kulör livet ut – behöver aldrig målas
+- Behåller sin kulör livet ut, behöver aldrig målas
 - Frostbeständigt och formstabilt
 - Klassiskt utseende som passar äldre och traditionella hus
 - Enskilda pannor kan bytas vid skada
 
 **Nackdelar:**
-- Tyngre – kräver en stabil takkonstruktion
+- Tyngre, kräver en stabil takkonstruktion
 - Dyrare per m² än betong
 - Begränsad färgpalett (naturliga toner)
 
@@ -316,10 +316,10 @@ Plåttak och tegeltak är två av de mest hållbara takmaterialen du kan välja.
 
 **Passar bäst för:** Äldre villor, 20–50-talshus, tegelhus, lantliga miljöer.
 
-## Plåttak – det moderna valet
+## Plåttak, det moderna valet
 
 **Fördelar:**
-- Lättviktigt – minskar belastningen på konstruktionen
+- Lättviktigt, minskar belastningen på konstruktionen
 - Lång livslängd (40–80 år beroende på material)
 - Minimalt underhåll
 - Slät yta som inte samlar mossa eller skräp
@@ -348,7 +348,7 @@ Plåttak och tegeltak är två av de mest hållbara takmaterialen du kan välja.
 
 ## Vad rekommenderar vi?
 
-Det beror helt på ditt hus och dina preferenser. Vi hjälper dig att välja rätt vid hembesöket – vi inspekterar taket, diskuterar alternativ och ger dig ett fast pris för det material du väljer.
+Det beror helt på ditt hus och dina preferenser. Vi hjälper dig att välja rätt vid hembesöket, vi inspekterar taket, diskuterar alternativ och ger dig ett fast pris för det material du väljer.
 
 Oavsett val erbjuder vi totalentreprenad med fast pris och upp till 30 års Monier-garanti.`,
   },

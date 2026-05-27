@@ -23,7 +23,7 @@ const BASE_URL = "https://www.sandsab.se";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
+  title: "Takbyte Stockholm, Fast pris på att lägga om tak | Sands",
   description:
     "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti. Tegel, plåt, papp, betong, eternit.",
   alternates: {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: BASE_URL,
     siteName: "Sands Entreprenad Stockholm AB",
-    title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
+    title: "Takbyte Stockholm, Fast pris på att lägga om tak | Sands",
     description:
       "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
     images: [
@@ -42,13 +42,13 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Takbyte i Stockholm – Sands Entreprenad",
+        alt: "Takbyte i Stockholm, Sands Entreprenad",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Takbyte Stockholm – Fast pris på att lägga om tak | Sands",
+    title: "Takbyte Stockholm, Fast pris på att lägga om tak | Sands",
     description:
       "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
     images: ["/og-image.jpg"],
@@ -92,7 +92,7 @@ export default function RootLayout({
               },
               priceRange: "från 1 200 kr/m²",
               description:
-                "Takläggare i Stockholm – certifierad Monier Takpartner med upp till 30 års garanti. Takbyte, takomläggning och lägga om tak med fast pris.",
+                "Takläggare i Stockholm, certifierad Monier Takpartner med upp till 30 års garanti. Takbyte, takomläggning och lägga om tak med fast pris.",
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: "4.8",

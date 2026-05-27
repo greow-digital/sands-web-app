@@ -46,7 +46,7 @@ export default function Footer() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Sands Entreprenad kontor – Spjutvägen 5A, Järfälla"
+                title="Sands Entreprenad kontor, Spjutvägen 5A, Järfälla"
               />
             </div>
 
@@ -115,7 +115,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Kolumn 1: Logo + kontakt */}
           <div>
-            <Link href="/" className="inline-block mb-5" aria-label="Sands Entreprenad – startsida">
+            <Link href="/" className="inline-block mb-5" aria-label="Sands Entreprenad, startsida">
               <Image
                 src="/images/logo-sandsentreprenad.svg"
                 alt="Sands Entreprenad"

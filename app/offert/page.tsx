@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/offert" },
   title: "Boka kostnadsfri takkontroll | Sands Entreprenad",
   description:
-    "Boka en kostnadsfri takkontroll – vi inspekterar ditt tak och ger dig ett fast pris utan förbindelser.",
+    "Boka en kostnadsfri takkontroll, vi inspekterar ditt tak och ger dig ett fast pris utan förbindelser.",
 };
 
 export default function OffertPage() {
@@ -21,7 +21,7 @@ export default function OffertPage() {
           eyebrow="Kostnadsfri takkontroll"
           title="Få skräddarsytt"
           titleAccent="prisförslag"
-          description="Vi bokar ett kostnadsfritt hembesök där din personliga projektledare inspekterar taket och går igenom dina behov. Du får en tydlig bedömning på plats – utan förbindelser."
+          description="Vi bokar ett kostnadsfritt hembesök där din personliga projektledare inspekterar taket och går igenom dina behov. Du får en tydlig bedömning på plats, utan förbindelser."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Boka offert" }]}
           backgroundImage="/images/hero-offert.jpg"
           imageAlt="Villa med nytt plåttak i skymning"
@@ -36,7 +36,7 @@ export default function OffertPage() {
                     "Kostnadsfri takkontroll utan förbindelser",
                     "Fast pris med totalentreprenad (ABT-06)",
                     "Upp till 30 års Monier Tätt tak-garanti",
-                    "ROT-avdrag 30% – vi sköter ansökan",
+                    "ROT-avdrag 30%, vi sköter ansökan",
                     "Certifierad Monier Takpartner sedan 2016",
                     "Normalt svar inom 24 timmar",
                   ].map((f) => (

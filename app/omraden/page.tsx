@@ -8,9 +8,9 @@ import { omraden } from "@/lib/omraden";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/omraden" },
-  title: "Takläggare i Stockholms län – Alla områden | Sands Entreprenad",
+  title: "Takläggare i Stockholms län, Alla områden | Sands Entreprenad",
   description:
-    "Vi utför takbyten och takomläggningar i hela Stockholms län – 27+ kommuner. Certifierad Monier Takpartner med fast pris.",
+    "Vi utför takbyten och takomläggningar i hela Stockholms län, 27+ kommuner. Certifierad Monier Takpartner med fast pris.",
 };
 
 const regionOrder = [
@@ -38,7 +38,7 @@ export default function OmradenPage() {
           eyebrow="Stockholms län"
           title="Takläggare i hela"
           titleAccent="Stockholms län"
-          description="Vi utför takbyten och takomläggningar i 27+ kommuner i Stockholms län. Boka kostnadsfri takkontroll – alltid fast pris."
+          description="Vi utför takbyten och takomläggningar i 27+ kommuner i Stockholms län. Boka kostnadsfri takkontroll, alltid fast pris."
           breadcrumbs={[
             { label: "Hem", href: "/" },
             { label: "Områden" },

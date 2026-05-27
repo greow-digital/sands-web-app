@@ -53,7 +53,7 @@ export default function Header() {
           <Link
             href="/"
             className="flex items-center shrink-0"
-            aria-label="Sands Entreprenad – startsida"
+            aria-label="Sands Entreprenad, startsida"
           >
             <Image
               src="/images/logo-sandsentreprenad-icon.svg"

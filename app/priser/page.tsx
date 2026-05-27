@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/priser" },
   title: "Vad kostar takbyte i Stockholm? Prisguide 2025 | Sands Entreprenad",
   description:
-    "Riktpriser för takbyte i Stockholm. Betongtak från 1 200 kr/m², tegeltak från 1 500 kr/m² – alla priser efter ROT-avdrag.",
+    "Riktpriser för takbyte i Stockholm. Betongtak från 1 200 kr/m², tegeltak från 1 500 kr/m², alla priser efter ROT-avdrag.",
 };
 
 const priser = [
@@ -73,7 +73,7 @@ export default function PriserPage() {
         name: "Vad kostar takbyte i Stockholm?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Priset beror på material. Betongtak kostar från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² och papptak från ca 800 kr/m² – alla priser efter ROT-avdrag.",
+          text: "Priset beror på material. Betongtak kostar från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² och papptak från ca 800 kr/m², alla priser efter ROT-avdrag.",
         },
       },
     ],
@@ -92,7 +92,7 @@ export default function PriserPage() {
           eyebrow="Prisguide"
           title="Vad kostar takbyte i"
           titleAccent="Stockholm?"
-          description="Alla riktpriser är efter 30% ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll – inga dolda avgifter."
+          description="Alla riktpriser är efter 30% ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll, inga dolda avgifter."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Priser" }]}
           backgroundImage="/images/hero-priser.jpg"
           imageAlt="Villa i Stockholm med nytt tak"
@@ -165,7 +165,7 @@ export default function PriserPage() {
                     169 000 kr
                   </strong>{" "}
                   för sadeltak 140 m² med betongpannor efter ROT. Allt är
-                  inkluderat – vi lämnar inga dolda notor.
+                  inkluderat, vi lämnar inga dolda notor.
                 </p>
                 <ul className="space-y-3">
                   {ingår.map((item) => (
@@ -240,7 +240,7 @@ export default function PriserPage() {
                 Få ditt personliga prisförslag
               </h2>
               <p className="text-gray-500 text-sm">
-                Boka kostnadsfri takkontroll – vi återkommer inom 24h.
+                Boka kostnadsfri takkontroll, vi återkommer inom 24h.
               </p>
             </div>
             <LeadForm variant="section" />

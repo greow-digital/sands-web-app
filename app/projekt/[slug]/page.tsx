@@ -47,8 +47,8 @@ export default async function ProjektDetailPage({
       <main className="pt-16 lg:pt-20 bg-white">
         <PageHero
           eyebrow={p.typ}
-          title={p.title.split(" – ")[0]}
-          titleAccent={p.title.split(" – ")[1] || ""}
+          title={p.title.split(", ")[0]}
+          titleAccent={p.title.split(", ")[1] || ""}
           description={p.beskrivning}
           breadcrumbs={[
             { label: "Hem", href: "/" },
@@ -112,7 +112,7 @@ export default async function ProjektDetailPage({
                       >
                         <Image
                           src={img}
-                          alt={`${p.title} – bild ${idx + 2}`}
+                          alt={`${p.title}, bild ${idx + 2}`}
                           fill
                           sizes="(max-width: 1024px) 50vw, 30vw"
                           className="object-cover"

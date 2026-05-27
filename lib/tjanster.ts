@@ -37,9 +37,9 @@ export const tjanster: Tjanst[] = [
     title: "Takomläggning",
     h1: "Takomläggning i Stockholm",
     intro:
-      "Planerar du att lägga om taket? Sands Entreprenad utför kompletta takomläggningar i hela Stockholms län. Vi börjar alltid med en kostnadsfri takkontroll av ditt tak innan vi lämnar offert – så att du vet exakt vad som behövs och vad det kostar.",
+      "Planerar du att lägga om taket? Sands Entreprenad utför kompletta takomläggningar i hela Stockholms län. Vi börjar alltid med en kostnadsfri takkontroll av ditt tak innan vi lämnar offert, så att du vet exakt vad som behövs och vad det kostar.",
     text:
-      "Vi arbetar med alla typer av tak – tegeltak, betongtak, plåttak och papptak. Som certifierad Monier Takpartner kan vi erbjuda Moniers Tätt tak-garanti på upp till 30 år vid komplett takomläggning med Moniers taksystem.\n\nVarje arbete är unikt och därför börjar vi alltid med en kostnadsfri takkontroll. Vid besiktningen får ni som kund en överblick på vilka åtgärder taket behöver. Vi arbetar genom totalentreprenad enligt ABT-06, vilket innebär att allt regleras i ett enda kontrakt till fast pris.",
+      "Vi arbetar med alla typer av tak, tegeltak, betongtak, plåttak och papptak. Som certifierad Monier Takpartner kan vi erbjuda Moniers Tätt tak-garanti på upp till 30 år vid komplett takomläggning med Moniers taksystem.\n\nVarje arbete är unikt och därför börjar vi alltid med en kostnadsfri takkontroll. Vid besiktningen får ni som kund en överblick på vilka åtgärder taket behöver. Vi arbetar genom totalentreprenad enligt ABT-06, vilket innebär att allt regleras i ett enda kontrakt till fast pris.",
     prisIntervall: "Från ca 1 200–2 000 kr/m² efter ROT-avdrag",
     prism2: "1 200–2 000",
     ingår: [
@@ -110,7 +110,7 @@ export const tjanster: Tjanst[] = [
       },
       {
         q: "Kan man byta enstaka tegelpannor?",
-        a: "Ja, det är en fördel med tegel – enskilda pannor kan bytas vid skada utan att hela taket behöver läggas om.",
+        a: "Ja, det är en fördel med tegel, enskilda pannor kan bytas vid skada utan att hela taket behöver läggas om.",
       },
     ],
     relaterade: ["betongtak", "taklaggning", "plattak"],
@@ -123,7 +123,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Betongpannor är ett robust och prisvärt val som tål det nordiska klimatet.",
     text:
-      "Betongtak är det vanligaste takmaterialet i Sverige. Pannorna finns i flera färger och profiler och ger ett snyggt och hållbart resultat. Vi arbetar med Moniers betongpannor, bland annat modellen Jönåker Elegant som kombinerar klassisk form med modern prestanda.\n\nBetongpannor är ett ekonomiskt alternativ som ger lång livslängd och lågt underhåll. De är tillgängliga i ett brett sortiment av kulörer och ytor – allt från naturgrå till glaserat.",
+      "Betongtak är det vanligaste takmaterialet i Sverige. Pannorna finns i flera färger och profiler och ger ett snyggt och hållbart resultat. Vi arbetar med Moniers betongpannor, bland annat modellen Jönåker Elegant som kombinerar klassisk form med modern prestanda.\n\nBetongpannor är ett ekonomiskt alternativ som ger lång livslängd och lågt underhåll. De är tillgängliga i ett brett sortiment av kulörer och ytor, allt från naturgrå till glaserat.",
     prisIntervall: "Från ca 1 200 kr/m² efter ROT-avdrag",
     prism2: "1 200",
     ingår: [
@@ -152,7 +152,7 @@ export const tjanster: Tjanst[] = [
       },
       {
         q: "Kan jag välja färg?",
-        a: "Ja, Monier erbjuder betongpannor i ett brett spektrum av kulörer – naturgrå, rödbrun, svart, glaserat med mera.",
+        a: "Ja, Monier erbjuder betongpannor i ett brett spektrum av kulörer, naturgrå, rödbrun, svart, glaserat med mera.",
       },
     ],
     relaterade: ["tegeltak", "taklaggning", "papptak"],
@@ -165,7 +165,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Modernt och lättviktigt material med lång livslängd och minimalt underhåll.",
     text:
-      "Plåttak är ett populärt val för villor och moderna hus. Materialet är lättare än tegel och betong, vilket minskar belastningen på konstruktionen. Vi lägger bandtäckt och dubbelfalsat plåttak med hög precision.\n\nPlåt är ett extremt hållbart material – korrekt lagt håller det i 40–80 år. Det kräver minimalt underhåll och passar utmärkt för tak med flackare lutning eller för hus med en mer modern arkitektur.",
+      "Plåttak är ett populärt val för villor och moderna hus. Materialet är lättare än tegel och betong, vilket minskar belastningen på konstruktionen. Vi lägger bandtäckt och dubbelfalsat plåttak med hög precision.\n\nPlåt är ett extremt hållbart material, korrekt lagt håller det i 40–80 år. Det kräver minimalt underhåll och passar utmärkt för tak med flackare lutning eller för hus med en mer modern arkitektur.",
     prisIntervall: "Från ca 1 800 kr/m² efter ROT-avdrag",
     prism2: "1 800",
     ingår: [
@@ -189,7 +189,7 @@ export const tjanster: Tjanst[] = [
       },
       {
         q: "Passar plåttak på alla hus?",
-        a: "Plåttak passar på de flesta hus – från moderna flacka tak till klassiska sadeltak. Det är ett särskilt bra val vid ombyggnation eller tillägg.",
+        a: "Plåttak passar på de flesta hus, från moderna flacka tak till klassiska sadeltak. Det är ett särskilt bra val vid ombyggnation eller tillägg.",
       },
       {
         q: "Är plåttak mer bullrigt?",
@@ -246,7 +246,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Eternittak innehåller asbest och kräver certifierad sanering innan nytt tak kan läggas.",
     text:
-      "Har du eternittak? Det är viktigt att hantera det korrekt. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen åt dig – från rivning och asbestsanering till nytt tak med garanti. Du behöver bara göra en kontakt, vi sköter resten.\n\nAsbest är ett hälsofarligt material som inte får hanteras av obehöriga. Vår partner är certifierad för asbestsanering och följer samtliga lagkrav och säkerhetsrutiner.",
+      "Har du eternittak? Det är viktigt att hantera det korrekt. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen åt dig, från rivning och asbestsanering till nytt tak med garanti. Du behöver bara göra en kontakt, vi sköter resten.\n\nAsbest är ett hälsofarligt material som inte får hanteras av obehöriga. Vår partner är certifierad för asbestsanering och följer samtliga lagkrav och säkerhetsrutiner.",
     prisIntervall: "Pris efter takkontroll (inkl. sanering)",
     prism2: "Kontakta oss",
     process: [
@@ -270,7 +270,7 @@ export const tjanster: Tjanst[] = [
     faq: [
       {
         q: "Är det farligt att ha eternittak?",
-        a: "Intakt eternittak som inte är skadat utgör vanligtvis ingen direkt fara. Men vid rivning eller skada frigörs asbestfibrer som är hälsofarliga – därför krävs certifierad hantering.",
+        a: "Intakt eternittak som inte är skadat utgör vanligtvis ingen direkt fara. Men vid rivning eller skada frigörs asbestfibrer som är hälsofarliga, därför krävs certifierad hantering.",
       },
       {
         q: "Måste man ha tillstånd för att riva eternittak?",
@@ -322,7 +322,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Vi monterar och byter hängrännor, stuprör och vattenavrinningssystem.",
     text:
-      "Ett fungerande avvattningssystem är avgörande för att skydda fasad och grund. Vi monterar hängrännor och stuprör i plåt av hög kvalitet – alltid inräknat i det fasta priset vid en komplett takomläggning.\n\nVi kan även utföra byte av enbart hängrännor och stuprör om taket i övrigt är i gott skick. Välj mellan standard halvrunna hängrännor eller fyrkantiga profiler för ett mer modernt utseende.",
+      "Ett fungerande avvattningssystem är avgörande för att skydda fasad och grund. Vi monterar hängrännor och stuprör i plåt av hög kvalitet, alltid inräknat i det fasta priset vid en komplett takomläggning.\n\nVi kan även utföra byte av enbart hängrännor och stuprör om taket i övrigt är i gott skick. Välj mellan standard halvrunna hängrännor eller fyrkantiga profiler för ett mer modernt utseende.",
     prisIntervall: "Ingår vid komplett takbyte. Separat: pris efter takkontroll",
     prism2: "Kontakta oss",
     faq: [
@@ -347,10 +347,10 @@ export const tjanster: Tjanst[] = [
     title: "Totalentreprenad",
     h1: "Totalentreprenad med fast pris",
     intro:
-      "Vi tar hela ansvaret för ditt projekt – från takkontroll till färdigt tak.",
+      "Vi tar hela ansvaret för ditt projekt, från takkontroll till färdigt tak.",
     text:
-      "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt – från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06. Du slipper samordna olika hantverkare och får en kontaktperson genom hela processen.\n\nABT-06 (Allmänna bestämmelser för totalentreprenader) är branschstandard och reglerar ansvarsfördelning, garantier och besiktningsprocess. Med oss som totalentreprenör är du alltid skyddad.",
-    prisIntervall: "Fast pris enligt offert – inga dolda avgifter",
+      "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt, från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06. Du slipper samordna olika hantverkare och får en kontaktperson genom hela processen.\n\nABT-06 (Allmänna bestämmelser för totalentreprenader) är branschstandard och reglerar ansvarsfördelning, garantier och besiktningsprocess. Med oss som totalentreprenör är du alltid skyddad.",
+    prisIntervall: "Fast pris enligt offert, inga dolda avgifter",
     prism2: "Fast pris",
     ingår: [
       "Ett kontrakt, ett fast pris",
@@ -385,7 +385,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Vi utför fasadrenoveringar och fasadmålning i samband med takprojekt eller som fristående uppdrag.",
     text:
-      "En fasadrenovering ger huset nytt liv och höjer fastighetsvärdet. Vi erbjuder putsning, målning och renovering av fasader i hela Stockholms län. Ofta kombinerar våra kunder fasadrenovering med takbyte – det sparar ställningskostnad och ger ett helhetsmässigt resultat.\n\nVi arbetar med professionella material och metoder som ger lång livslängd. Oavsett om du har puts, trä eller tegelfasad kan vi hjälpa dig med rätt lösning.",
+      "En fasadrenovering ger huset nytt liv och höjer fastighetsvärdet. Vi erbjuder putsning, målning och renovering av fasader i hela Stockholms län. Ofta kombinerar våra kunder fasadrenovering med takbyte, det sparar ställningskostnad och ger ett helhetsmässigt resultat.\n\nVi arbetar med professionella material och metoder som ger lång livslängd. Oavsett om du har puts, trä eller tegelfasad kan vi hjälpa dig med rätt lösning.",
     prisIntervall: "Pris efter takkontroll",
     prism2: "Kontakta oss",
     ingår: [
@@ -419,9 +419,9 @@ export const tjanster: Tjanst[] = [
     title: "Badrumsrenovering",
     h1: "Badrumsrenovering i Stockholm",
     intro:
-      "Vi utför kompletta badrumsrenoveringar – från rivning till inflyttningsklart.",
+      "Vi utför kompletta badrumsrenoveringar, från rivning till inflyttningsklart.",
     text:
-      "Sands Entreprenad erbjuder badrumsrenoveringar med samma noggrannhet och kvalitet som våra takprojekt. Vi hanterar hela processen genom totalentreprenad – ett kontrakt, ett fast pris.\n\nOavsett om det gäller ett komplett badrumsbytte med nytt tätskikt, kakel och porslin eller en uppfräschning av ett befintligt badrum kan vi hjälpa dig. Vi samarbetar med certifierade VVS-montörer och elektriker.",
+      "Sands Entreprenad erbjuder badrumsrenoveringar med samma noggrannhet och kvalitet som våra takprojekt. Vi hanterar hela processen genom totalentreprenad, ett kontrakt, ett fast pris.\n\nOavsett om det gäller ett komplett badrumsbytte med nytt tätskikt, kakel och porslin eller en uppfräschning av ett befintligt badrum kan vi hjälpa dig. Vi samarbetar med certifierade VVS-montörer och elektriker.",
     prisIntervall: "Pris efter takkontroll",
     prism2: "Kontakta oss",
     ingår: [
@@ -455,9 +455,9 @@ export const tjanster: Tjanst[] = [
     title: "Köksrenovering",
     h1: "Köksrenovering i Stockholm",
     intro:
-      "Komplett köksrenovering med fast pris – från stomme till inflyttningsklart.",
+      "Komplett köksrenovering med fast pris, från stomme till inflyttningsklart.",
     text:
-      "Vi erbjuder kompletta köksrenoveringar i hela Stockholms län. Oavsett om du vill byta hela köket eller renovera det befintliga tar vi hand om hela processen – rivning, el, VVS, montering av köksluckor, bänkskivor och vitvaror.\n\nPrecis som med våra takprojekt arbetar vi genom totalentreprenad med fast pris. Du får en kontaktperson genom hela projektet och slipper samordna olika hantverkare.",
+      "Vi erbjuder kompletta köksrenoveringar i hela Stockholms län. Oavsett om du vill byta hela köket eller renovera det befintliga tar vi hand om hela processen, rivning, el, VVS, montering av köksluckor, bänkskivor och vitvaror.\n\nPrecis som med våra takprojekt arbetar vi genom totalentreprenad med fast pris. Du får en kontaktperson genom hela projektet och slipper samordna olika hantverkare.",
     prisIntervall: "Pris efter takkontroll",
     prism2: "Kontakta oss",
     ingår: [
@@ -476,7 +476,7 @@ export const tjanster: Tjanst[] = [
       },
       {
         q: "Kan ni hjälpa med att välja kök?",
-        a: "Vi kan ge råd om layout och material, men vi rekommenderar att du väljer köksstomme och luckor från en köksåterförsäljare – vi sköter sedan montering och anslutning.",
+        a: "Vi kan ge råd om layout och material, men vi rekommenderar att du väljer köksstomme och luckor från en köksåterförsäljare, vi sköter sedan montering och anslutning.",
       },
       {
         q: "Ingår ROT-avdrag?",

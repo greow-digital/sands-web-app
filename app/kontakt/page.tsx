@@ -219,7 +219,7 @@ export default function KontaktPage() {
                   className="rounded-[10px] h-48 flex items-center justify-center text-gray-400 text-sm"
                   style={{ backgroundColor: "var(--color-dark)" }}
                 >
-                  Järfälla – Stockholms län
+                  Järfälla, Stockholms län
                 </div>
               </div>
 

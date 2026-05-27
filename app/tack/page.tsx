@@ -50,7 +50,7 @@ export default function TackPage() {
               återkommer till dig inom 24 timmar med ett prisförslag.
             </p>
             <p className="text-gray-500 mb-10">
-              Har du bråttom? Ring oss direkt – vi svarar vardagar 07–17.
+              Har du bråttom? Ring oss direkt, vi svarar vardagar 07–17.
             </p>
             <a
               href="tel:0828388"
@@ -90,7 +90,7 @@ export default function TackPage() {
                   icon: FileText,
                   num: "2",
                   title: "Hembesök & offert",
-                  text: "Vi inspekterar taket på plats och lämnar en detaljerad offert med fast pris – inga förbindelser.",
+                  text: "Vi inspekterar taket på plats och lämnar en detaljerad offert med fast pris, inga förbindelser.",
                 },
                 {
                   icon: HardHat,
@@ -161,7 +161,7 @@ export default function TackPage() {
                   className="fill-yellow-400 text-yellow-400"
                 />
                 <strong style={{ color: "var(--color-dark)" }}>4.8</strong>
-                <span>av 5 – 54 omdömen</span>
+                <span>av 5, 54 omdömen</span>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function TackPage() {
         <section className="py-14 border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-sm text-gray-500 mb-5">
-              Under tiden du väntar – läs mer om oss:
+              Under tiden du väntar, läs mer om oss:
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {[

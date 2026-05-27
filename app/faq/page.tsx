@@ -39,7 +39,7 @@ const kategorier = [
     faq: [
       {
         q: "Vad kostar en takomläggning i Stockholm?",
-        a: "Priset varierar beroende på material och takets förutsättningar. Som riktlinje: betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² – alla priser efter ROT-avdrag. Vi ger alltid fast pris efter takkontroll.",
+        a: "Priset varierar beroende på material och takets förutsättningar. Som riktlinje: betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m², alla priser efter ROT-avdrag. Vi ger alltid fast pris efter takkontroll.",
       },
       {
         q: "Kan jag använda ROT-avdrag?",
@@ -47,7 +47,7 @@ const kategorier = [
       },
       {
         q: "Vad är totalentreprenad?",
-        a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt – från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
+        a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt, från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
       },
     ],
   },
@@ -56,7 +56,7 @@ const kategorier = [
     faq: [
       {
         q: "Vad innebär garanti vid takomläggning med Monier?",
-        a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år – det innebär att hela taksystemets funktion och täthet garanteras. Exakta garantitider specificeras alltid i offerten.",
+        a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år, det innebär att hela taksystemets funktion och täthet garanteras. Exakta garantitider specificeras alltid i offerten.",
       },
       {
         q: "Arbetar ni med Monier taksystem?",
@@ -77,11 +77,11 @@ const kategorier = [
       },
       {
         q: "Behöver jag bygglov för att byta tak?",
-        a: "Inte om du behåller samma typ av material och inte förändrar takets utseende. Vid ändringar – kontrollera med din kommun.",
+        a: "Inte om du behåller samma typ av material och inte förändrar takets utseende. Vid ändringar, kontrollera med din kommun.",
       },
       {
         q: "Kan ni byta eternittak?",
-        a: "Ja. Eternittak innehåller asbest och kräver certifierad sanering. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen – från rivning till färdigt tak med garanti.",
+        a: "Ja. Eternittak innehåller asbest och kräver certifierad sanering. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen, från rivning till färdigt tak med garanti.",
       },
       {
         q: "Erbjuder ni takfönster eller takkupor?",

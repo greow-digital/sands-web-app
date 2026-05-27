@@ -22,12 +22,12 @@ const stats = [
 
 const värderingar = [
   {
-    title: "Fast pris – alltid",
+    title: "Fast pris, alltid",
     text: "Vi lämnar aldrig en offert utan att ha besiktigat taket. Fast pris innebär inga överraskningar.",
   },
   {
     title: "Totalentreprenad",
-    text: "Vi tar hela ansvaret – ett kontrakt, en kontaktperson, allt reglerat enligt ABT-06.",
+    text: "Vi tar hela ansvaret, ett kontrakt, en kontaktperson, allt reglerat enligt ABT-06.",
   },
   {
     title: "Monier-certifierade",
@@ -238,7 +238,7 @@ export default function OmOssPage() {
               Redo att ta nästa steg?
             </h2>
             <p className="text-gray-600 mb-8">
-              Boka en kostnadsfri takkontroll – fast pris utan förbindelser.
+              Boka en kostnadsfri takkontroll, fast pris utan förbindelser.
             </p>
             <Link
               href="/offert"

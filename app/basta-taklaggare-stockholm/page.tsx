@@ -11,7 +11,7 @@ import {
   HardHat,
   ScrollText,
   Phone,
-  XCircle,
+  Info,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -163,7 +163,7 @@ const referensProjekt = [
 const fragor = [
   {
     q: "Hur väljer jag Stockholms bästa takläggare?",
-    a: "Använd sju kriterier: F-skatt och redovisad ekonomi, ansvarsförsäkring som täcker dig som kund, dokumenterad garantitid (helst 25–30 år via taksystemsgaranti), externa certifieringar (Monier Takpartner, BraByggare), fast pris i skriftligt kontrakt enligt ABT-06, verifierbara omdömen på externa portaler, samt korrekt taksäkerhet enligt AFS 2014:26. Om ett företag haltar på fler än ett av dessa: välj någon annan.",
+    a: "Det finns sju kriterier som är värda att gå igenom: F-skatt och redovisad ekonomi, ansvarsförsäkring som täcker dig som kund, dokumenterad garantitid (gärna 25–30 år via taksystemsgaranti), externa certifieringar (Monier Takpartner, BraByggare), fast pris i skriftligt kontrakt enligt ABT-06, verifierbara omdömen på externa portaler, samt korrekt taksäkerhet enligt AFS 2014:26. Om flera av punkterna känns oklara är det rimligt att ställa följdfrågor eller jämföra med fler offerter.",
   },
   {
     q: "Vad kostar Stockholms bästa takläggare?",
@@ -259,8 +259,8 @@ export default function BastaTaklaggareStockholm() {
 
         <PageHero
           eyebrow="Köpguide Stockholm 2026"
-          title="Stockholms bästa takläggare"
-          titleAccent="– så vet du att du valt rätt"
+          title="Stockholms bästa takläggare:"
+          titleAccent="så vet du att du valt rätt"
           description="Att välja takläggare är ett av de största enskilda inköp en villaägare gör. Här är de sju kriterier som skiljer ett seriöst takbyte från en kostsam felinvestering, plus hur du själv kan kontrollera varje punkt innan du skriver kontrakt."
           breadcrumbs={[
             { label: "Hem", href: "/" },
@@ -358,10 +358,10 @@ export default function BastaTaklaggareStockholm() {
                   color: "var(--color-dark)",
                 }}
               >
-                7 kriterier för att välja Sveriges bästa takläggare
+                7 kriterier som är bra att gå igenom
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Ramverket nedan är samma som branschorganisationer, Konsumentverket och försäkringsbolag rekommenderar villaägare att använda. Varje kriterium har en faktarad om vad det innebär, och en kort rad om hur Sands lever upp till just den punkten.
+                Ramverket nedan bygger på det branschorganisationer, Konsumentverket och försäkringsbolag brukar rekommendera villaägare att tänka igenom. Varje kriterium har en faktarad om vad det innebär, och en kort rad om hur vi på Sands arbetar med just den punkten.
               </p>
             </div>
 
@@ -416,51 +416,55 @@ export default function BastaTaklaggareStockholm() {
           </div>
         </section>
 
-        {/* ── VARNINGSSIGNALER ──────────────────── */}
+        {/* ── ATT VARA OBSERVANT PÅ ──────────── */}
         <section className="py-16 lg:py-20 border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
-              Röda flaggor
+              Att vara observant på
             </p>
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-8"
+              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-4"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
               }}
             >
-              5 varningssignaler: när du ska tacka nej
+              5 saker att vara extra noga med
             </h2>
+            <p className="text-gray-600 leading-relaxed mb-8">
+              Det här är inte avgörande röda flaggor i sig, men de är värt att vara uppmärksam på och gärna ställa följdfrågor om innan du skriver kontrakt. Ofta finns det bra förklaringar, men ibland är det signaler om att du bör undersöka närmare.
+            </p>
             <ul className="space-y-4">
               {[
                 {
-                  titel: "Pris över telefon utan besiktning",
-                  text: "Ingen seriös takläggare ger fast pris utan att ha varit på plats. Om du får en summa direkt i samtalet är priset antingen för högt (säkerhetsmarginal) eller så glider det när arbetet startar.",
+                  titel: "Fast pris utan att taket har besiktigats på plats",
+                  text: "Be alltid om en fysisk besiktning innan ett fast pris lämnas. En siffra som ges direkt i ett samtal är i praktiken en uppskattning, antingen med säkerhetsmarginal uppåt eller med risk att justeras när arbetet startar.",
                 },
                 {
-                  titel: "Krav på handpenning över 10 %",
-                  text: "Branschstandard är 10–20 % handpenning som först blir aktuell när material beställs. Krav på 50 % i förskott eller kontantbetalning är en stark varningssignal.",
+                  titel: "Höga krav på handpenning",
+                  text: "Branschstandard är 10–20 % handpenning som blir aktuell när material beställs. Möts du av krav på betydligt mer i förskott, eller av kontantbetalning, är det rimligt att fråga om en alternativ betalningsplan och eventuellt jämföra med ett par andra offerter.",
                 },
                 {
                   titel: "Inget skriftligt entreprenadkontrakt",
-                  text: "&quot;Vi tar det med ett handslag&quot; är inte juridiskt bindande på samma sätt som ett ABT-06-kontrakt. Skriftligt avtal är dessutom en förutsättning för ROT-avdrag.",
+                  text: "Ett skriftligt entreprenadkontrakt, till exempel enligt ABT-06, skyddar både dig och takläggaren och är en förutsättning för ROT-avdrag. Muntliga överenskommelser är svårare att luta sig mot om något skulle bli oklart längre fram.",
                 },
                 {
-                  titel: "Bara egna citat, inga externa omdömen",
-                  text: "Om firman bara visar utvalda citat på sin egen hemsida, men inte finns på BraByggare, Offerta, Trustpilot eller Google. Fråga varför. Externa omdömen kan inte filtreras eller manipuleras lika lätt.",
+                  titel: "Begränsat med externa omdömen att luta sig mot",
+                  text: "Utvalda citat på en firmas egen hemsida är ett bra komplement, men titta också på externa portaler som BraByggare, Offerta, Trustpilot och Google. Där ser du snittbetyget av alla omdömen och kan bilda dig en mer komplett uppfattning.",
                 },
                 {
-                  titel: "&quot;Vi börjar imorgon&quot;",
-                  text: "Seriösa takläggare i Stockholm har 4–10 veckors framförhållning. En firma som kan börja imorgon har antingen för lite att göra (varför?) eller använder dig som utfyllnad och prioriterar bort dig när nästa kund ringer.",
+                  titel: "Mycket kort startdatum",
+                  text: "Seriösa takläggare i Stockholm har ofta 4–10 veckors framförhållning. Kan en firma börja redan imorgon kan det vara bra att fråga om de har kapacitet att slutföra arbetet på utlovad tid, eller om det finns risk att projektet pausas när nästa kund hör av sig.",
                 },
               ].map((v, i) => (
                 <li
                   key={i}
                   className="flex items-start gap-4 rounded-2xl border border-gray-100 p-5"
                 >
-                  <XCircle
+                  <Info
                     size={22}
-                    className="shrink-0 mt-0.5 text-red-500"
+                    className="shrink-0 mt-0.5"
+                    style={{ color: "var(--color-primary)" }}
                   />
                   <div>
                     <h3
@@ -469,10 +473,9 @@ export default function BastaTaklaggareStockholm() {
                     >
                       {v.titel}
                     </h3>
-                    <p
-                      className="text-sm text-gray-600 leading-relaxed"
-                      dangerouslySetInnerHTML={{ __html: v.text }}
-                    />
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {v.text}
+                    </p>
                   </div>
                 </li>
               ))}

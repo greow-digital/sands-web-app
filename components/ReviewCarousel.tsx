@@ -34,7 +34,7 @@ const reviews: Review[] = [
     source: "brabyggare",
   },
   {
-    text: "Mycket nöjd med hela processen från start till slut. Sands var alltid tillgängliga för frågor och höll tidplanen. Resultatet blev fantastiskt – taket ser helt nytt ut.",
+    text: "Mycket nöjd med hela processen från start till slut. Sands var alltid tillgängliga för frågor och höll tidplanen. Resultatet blev fantastiskt, taket ser helt nytt ut.",
     name: "Maria",
     service: "Betongtak 140 kvm i Nacka",
     rating: 5,
@@ -69,7 +69,7 @@ const reviews: Review[] = [
     source: "offerta",
   },
   {
-    text: "Fick ett bra pris och jobbet utfördes snabbt och noggrant. Sands tog hand om allt – från rivning till takkontroll. Kan varmt rekommendera.",
+    text: "Fick ett bra pris och jobbet utfördes snabbt och noggrant. Sands tog hand om allt, från rivning till takkontroll. Kan varmt rekommendera.",
     name: "Erik",
     service: "Betongtak 155 kvm i Huddinge",
     rating: 5,

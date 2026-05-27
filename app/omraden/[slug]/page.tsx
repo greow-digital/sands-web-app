@@ -25,7 +25,7 @@ export async function generateMetadata({
   return {
     alternates: { canonical: `/omraden/${slug}` },
     title: `Takläggare i ${ort.name} | Sands Entreprenad`,
-    description: `Sands Entreprenad utför takbyten och takomläggningar i ${ort.name}. Certifierad Monier Takpartner – boka kostnadsfri takkontroll idag.`,
+    description: `Sands Entreprenad utför takbyten och takomläggningar i ${ort.name}. Certifierad Monier Takpartner, boka kostnadsfri takkontroll idag.`,
     openGraph: {
       title: `Takläggare i ${ort.name} | Sands Entreprenad`,
       description: ort.beskrivning,
@@ -144,7 +144,7 @@ export default async function OmradesPage({
                     >
                       Läs vår köpguide
                     </Link>
-                    : sju kriterier för att välja rätt firma, fem röda flaggor att tacka nej till och tio frågor du ska ställa innan du skriver kontrakt.
+                    : sju kriterier att gå igenom, fem saker att vara extra noga med och tio frågor som är bra att ställa innan du skriver kontrakt.
                   </p>
                 </div>
 
@@ -154,7 +154,7 @@ export default async function OmradesPage({
                     className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
                     style={{ color: "var(--color-primary)" }}
                   >
-                    Prisexempel – {ort.name}
+                    Prisexempel, {ort.name}
                   </div>
                   <div
                     className="text-2xl font-extrabold mb-1"
