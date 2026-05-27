@@ -23,13 +23,13 @@ import { projekt } from "@/lib/projekt";
 export const metadata: Metadata = {
   alternates: { canonical: "/basta-taklaggare-stockholm" },
   title:
-    "Stockholms bästa takläggare – så vet du att du valt rätt | Sands",
+    "Stockholms bästa takläggare: så vet du att du valt rätt | Sands",
   description:
     "Hur väljer du Stockholms bästa takläggare? Checklista med F-skatt, försäkring, garantitid och certifieringar. 4,8★ på BraByggare, 30 års Monier-garanti, fast pris.",
   openGraph: {
-    title: "Stockholms bästa takläggare – så vet du att du valt rätt",
+    title: "Stockholms bästa takläggare: så vet du att du valt rätt",
     description:
-      "Komplett guide för att välja rätt takläggare i Stockholm – med checklista, recensioner och referensprojekt från Sands Entreprenad.",
+      "Komplett guide för att välja rätt takläggare i Stockholm med checklista, recensioner och referensprojekt från Sands Entreprenad.",
   },
 };
 
@@ -54,13 +54,13 @@ const kriterier = [
   {
     icon: Shield,
     titel: "2. Ansvarsförsäkring och allriskförsäkring",
-    text: "Ett takbyte är ett känsligt moment där hela huset står utan tätskikt under flera dygn. Om det börjar regna kraftigt och vatten tar sig in – vem betalar för fuktskadade golv, möbler eller elektronik? En takläggare utan rätt försäkring kan inte ersätta dig om något går fel.",
+    text: "Ett takbyte är ett känsligt moment där hela huset står utan tätskikt under flera dygn. Om det börjar regna kraftigt och vatten tar sig in: vem betalar för fuktskadade golv, möbler eller elektronik? En takläggare utan rätt försäkring kan inte ersätta dig om något går fel.",
     sands: "Vi har fullvärdig ansvarsförsäkring (10 Mkr) och allriskförsäkring som täcker både arbetsskador och egendomsskador hos dig som kund. Försäkringsbevis lämnas alltid innan arbetet startar.",
   },
   {
     icon: Award,
     titel: "3. Garantitid och taksystemsgaranti",
-    text: "Branschstandard i Sverige är 10 år enligt konsumenttjänstlagen, men på ett komplett taksystem kan du få upp till 30 år. Skillnaden är att en systemgaranti omfattar både material och funktion – inte bara enskilda komponenter. Be alltid om en specifik garantihandling – inte bara muntliga löften.",
+    text: "Branschstandard i Sverige är 10 år enligt konsumenttjänstlagen, men på ett komplett taksystem kan du få upp till 30 år. Skillnaden är att en systemgaranti omfattar både material och funktion, inte bara enskilda komponenter. Be alltid om en specifik garantihandling, inte bara muntliga löften.",
     sands: "Som certifierad Monier Takpartner kan vi erbjuda Monier Tätt tak-garanti på upp till 30 år på hela taksystemet. Du får alltid ett skriftligt garantibevis när arbetet är slutbesiktigat.",
   },
   {
@@ -71,21 +71,21 @@ const kriterier = [
   },
   {
     icon: FileText,
-    titel: "5. Fast pris i kontrakt – inte löpande räkning",
-    text: "Den enskilt största risken vid takbyte är att priset glider. Be alltid om fast pris efter besiktning, dokumenterat i ett skriftligt entreprenadkontrakt enligt ABT-06 eller motsvarande. Ett seriöst företag har inga problem att binda priset – då vet de att de kalkylerat rätt.",
+    titel: "5. Fast pris i kontrakt, inte löpande räkning",
+    text: "Den enskilt största risken vid takbyte är att priset glider. Be alltid om fast pris efter besiktning, dokumenterat i ett skriftligt entreprenadkontrakt enligt ABT-06 eller motsvarande. Ett seriöst företag har inga problem att binda priset, då vet de att de kalkylerat rätt.",
     sands: "Vi lämnar alltid fast pris efter kostnadsfri takkontroll. Allt regleras i ett ABT-06-kontrakt: omfattning, betalningsplan, garantier och tidplan. Det vi offererat är det du betalar.",
   },
   {
     icon: Star,
     titel: "6. Verifierbara referenser och recensioner",
-    text: "En takläggare som varit verksam i 5+ år ska kunna visa minst 20-30 verifierade omdömen på externa plattformar som BraByggare, Offerta, Trustpilot eller Google. Skepsis är befogad om en firma bara visar utvalda citat på sin egen hemsida – du vill se snittbetyget av alla, inte bara de bästa.",
-    sands: "Vi har 4,8★ i snitt på BraByggare med 54+ verifierade omdömen, ytterligare omdömen på Offerta och Google. Du kan ringa upp tidigare kunder – fråga oss om referenser i ditt område.",
+    text: "En takläggare som varit verksam i 5+ år ska kunna visa minst 20-30 verifierade omdömen på externa plattformar som BraByggare, Offerta, Trustpilot eller Google. Skepsis är befogad om en firma bara visar utvalda citat på sin egen hemsida. Du vill se snittbetyget av alla, inte bara de bästa.",
+    sands: "Vi har 4,8★ i snitt på BraByggare med 54+ verifierade omdömen, ytterligare omdömen på Offerta och Google. Du kan ringa upp tidigare kunder. Fråga oss om referenser i ditt område.",
   },
   {
     icon: HardHat,
     titel: "7. Taksäkerhet och arbetsmiljöansvar",
     text: "Arbete på tak räknas som högrisk och kräver ställning, fallskydd och dokumenterad arbetsmiljöplan. En firma som hoppar över ställning för att 'spara pengar åt dig' bryter mot Arbetsmiljöverkets föreskrifter och riskerar både sina anställdas liv och din försäkring om något händer.",
-    sands: "All vår produktion arbetar enligt AFS 2014:26 – ställning monteras av certifierad ställningsbyggare, BAS-U och BAS-P utses skriftligen och takets befintliga taksäkerhet uppdateras alltid till nuvarande krav (snörasskydd, fästöglor, gångbryggor).",
+    sands: "All vår produktion arbetar enligt AFS 2014:26: ställning monteras av certifierad ställningsbyggare, BAS-U och BAS-P utses skriftligen och takets befintliga taksäkerhet uppdateras alltid till nuvarande krav (snörasskydd, fästöglor, gångbryggor).",
   },
 ];
 
@@ -112,7 +112,7 @@ const inbyggdaRecensioner = [
     kalla: "Offerta",
   },
   {
-    text: "Mycket nöjd med hela processen från start till slut. Sands var alltid tillgängliga för frågor och höll tidplanen. Resultatet blev fantastiskt – taket ser helt nytt ut.",
+    text: "Mycket nöjd med hela processen från start till slut. Sands var alltid tillgängliga för frågor och höll tidplanen. Resultatet blev fantastiskt, taket ser helt nytt ut.",
     namn: "Maria",
     plats: "Nacka",
     typ: "Betongtak 140 kvm",
@@ -130,17 +130,17 @@ const inbyggdaRecensioner = [
 const referensProjekt = [
   {
     slug: "plommonvagen-bromma",
-    titel: "Plommonvägen – Bromma",
+    titel: "Plommonvägen i Bromma",
     typ: "Tegeltak",
     kvm: 150,
     ort: "Stockholm",
     bild: "/images/projekt/plommonvagen-bromma.jpg",
     sammanfattning:
-      "Komplett takbyte på 40-talsvilla i Bromma med Monier tegeltakpannor. Originaltaket hade nått sin tekniska livslängd efter 60+ år – läkten var rutten och regnvattensystemet behövde bytas ut helt.",
+      "Komplett takbyte på 40-talsvilla i Bromma med Monier tegeltakpannor. Originaltaket hade nått sin tekniska livslängd efter 60+ år. Läkten var rutten och regnvattensystemet behövde bytas ut helt.",
   },
   {
     slug: "hakevagen-djursholm",
-    titel: "Hakevägen – Djursholm",
+    titel: "Hakevägen i Djursholm",
     typ: "Betongtak",
     kvm: 160,
     ort: "Danderyd",
@@ -150,28 +150,28 @@ const referensProjekt = [
   },
   {
     slug: "kastanjetunet-lidingo",
-    titel: "Kastanjetunet – Lidingö",
+    titel: "Kastanjetunet i Lidingö",
     typ: "Betongtak",
     kvm: 165,
     ort: "Lidingö",
     bild: "/images/projekt/kastanjetunet-lidingo.jpg",
     sammanfattning:
-      "Takomläggning på 165 kvm på Lidingö med komplett byte av takpannor, läkt, underlagspapp och hängrännor. Kunden valde Sands efter att ha begärt offert från fyra olika takläggare – avgörande blev fast pris och Monier-garantin.",
+      "Takomläggning på 165 kvm på Lidingö med komplett byte av takpannor, läkt, underlagspapp och hängrännor. Kunden valde Sands efter att ha begärt offert från fyra olika takläggare. Avgörande blev fast pris och Monier-garantin.",
   },
 ];
 
 const fragor = [
   {
     q: "Hur väljer jag Stockholms bästa takläggare?",
-    a: "Använd sju kriterier: F-skatt och redovisad ekonomi, ansvarsförsäkring som täcker dig som kund, dokumenterad garantitid (helst 25–30 år via taksystemsgaranti), externa certifieringar (Monier Takpartner, BraByggare), fast pris i skriftligt kontrakt enligt ABT-06, verifierbara omdömen på externa portaler, samt korrekt taksäkerhet enligt AFS 2014:26. Om ett företag haltar på fler än ett av dessa – välj någon annan.",
+    a: "Använd sju kriterier: F-skatt och redovisad ekonomi, ansvarsförsäkring som täcker dig som kund, dokumenterad garantitid (helst 25–30 år via taksystemsgaranti), externa certifieringar (Monier Takpartner, BraByggare), fast pris i skriftligt kontrakt enligt ABT-06, verifierbara omdömen på externa portaler, samt korrekt taksäkerhet enligt AFS 2014:26. Om ett företag haltar på fler än ett av dessa: välj någon annan.",
   },
   {
     q: "Vad kostar Stockholms bästa takläggare?",
-    a: "Pris och kvalitet följs inte alltid åt – men billigast är nästan aldrig bäst. Marknadspris för ett komplett takbyte i Stockholm 2026 ligger på 1 200–1 800 kr/m² efter ROT-avdrag beroende på material (betong är billigast, plåt och tegel dyrare). Misstänk företag som offererar väsentligt under marknadspris – ofta saknas något i specifikationen (ny underlagspapp, byte av läkt, taksäkerhet eller nytt regnvattensystem).",
+    a: "Pris och kvalitet följs inte alltid åt, men billigast är nästan aldrig bäst. Marknadspris för ett komplett takbyte i Stockholm 2026 ligger på 1 200–1 800 kr/m² efter ROT-avdrag beroende på material (betong är billigast, plåt och tegel dyrare). Misstänk företag som offererar väsentligt under marknadspris, ofta saknas något i specifikationen (ny underlagspapp, byte av läkt, taksäkerhet eller nytt regnvattensystem).",
   },
   {
     q: "Hur många takläggare ska jag jämföra?",
-    a: "Tre till fyra offerter är optimalt. Med fler än fyra blir det svårt att jämföra likvärdigt. Säkerställ att alla räknar på samma specifikation – samma material, samma omfattning, samma garanti. Det är när offerterna är jämförbara du kan se vem som faktiskt är bäst.",
+    a: "Tre till fyra offerter är optimalt. Med fler än fyra blir det svårt att jämföra likvärdigt. Säkerställ att alla räknar på samma specifikation: samma material, samma omfattning, samma garanti. Det är när offerterna är jämförbara du kan se vem som faktiskt är bäst.",
   },
   {
     q: "Vad är skillnaden mellan en bra och en dålig takläggare?",
@@ -183,7 +183,7 @@ const fragor = [
   },
   {
     q: "Hur lång garanti kan jag förvänta mig?",
-    a: "Enligt konsumenttjänstlagen gäller 10 års reklamationsrätt. Men på ett komplett Monier-taksystem som installeras av certifierad Monier Takpartner kan du få upp till 30 års Tätt tak-garanti. Garantin omfattar både material och funktion – och täcker hela taksystemet, inte bara enskilda pannor.",
+    a: "Enligt konsumenttjänstlagen gäller 10 års reklamationsrätt. Men på ett komplett Monier-taksystem som installeras av certifierad Monier Takpartner kan du få upp till 30 års Tätt tak-garanti. Garantin omfattar både material och funktion, och täcker hela taksystemet, inte bara enskilda pannor.",
   },
   {
     q: "Hur lång tid tar ett takbyte i Stockholm?",
@@ -261,13 +261,13 @@ export default function BastaTaklaggareStockholm() {
           eyebrow="Köpguide Stockholm 2026"
           title="Stockholms bästa takläggare"
           titleAccent="– så vet du att du valt rätt"
-          description="Att välja takläggare är ett av de största enskilda inköp en villaägare gör. Här är de sju kriterier som skiljer ett seriöst takbyte från en kostsam felinvestering – plus hur du själv kan kontrollera varje punkt innan du skriver kontrakt."
+          description="Att välja takläggare är ett av de största enskilda inköp en villaägare gör. Här är de sju kriterier som skiljer ett seriöst takbyte från en kostsam felinvestering, plus hur du själv kan kontrollera varje punkt innan du skriver kontrakt."
           breadcrumbs={[
             { label: "Hem", href: "/" },
             { label: "Stockholms bästa takläggare" },
           ]}
           backgroundImage="/images/hero-house.jpg"
-          imageAlt="Takläggning i Stockholm – Sands Entreprenad"
+          imageAlt="Takläggning i Stockholm från Sands Entreprenad"
         />
 
         {/* ── STAT-CARDS ──────────────────────── */}
@@ -314,10 +314,10 @@ export default function BastaTaklaggareStockholm() {
             </h2>
             <div className="space-y-5 text-gray-700 leading-relaxed text-[17px]">
               <p>
-                Det finns inte ett enda &quot;bästa&quot; – det finns rätt takläggare för ditt projekt. En firma som är fantastisk på plåtomläggning på en industribyggnad är inte nödvändigtvis bäst för dig som har en 40-talsvilla i Bromma med eternittak. Men vad alla &quot;bästa takläggare&quot; har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar.
+                Det finns inte ett enda &quot;bästa&quot;. Det finns rätt takläggare för ditt projekt. En firma som är fantastisk på plåtomläggning på en industribyggnad är inte nödvändigtvis bäst för dig som har en 40-talsvilla i Bromma med eternittak. Men vad alla &quot;bästa takläggare&quot; har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar.
               </p>
               <p>
-                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54+ verifierade omdömen. Vi har levererat 100+ kompletta takbyten i Stockholms län sedan starten – från innerstadens K-märkta hus till skärgårdens 50-talsvillor. På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
+                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54+ verifierade omdömen. Vi har levererat 100+ kompletta takbyten i Stockholms län sedan starten, från innerstadens K-märkta hus till skärgårdens 50-talsvillor. På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
               </p>
             </div>
 
@@ -361,7 +361,7 @@ export default function BastaTaklaggareStockholm() {
                 7 kriterier för att välja Sveriges bästa takläggare
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Ramverket nedan är samma som branschorganisationer, Konsumentverket och försäkringsbolag rekommenderar villaägare att använda. Varje kriterium har en faktarad om vad det innebär – och en kort rad om hur Sands lever upp till just den punkten.
+                Ramverket nedan är samma som branschorganisationer, Konsumentverket och försäkringsbolag rekommenderar villaägare att använda. Varje kriterium har en faktarad om vad det innebär, och en kort rad om hur Sands lever upp till just den punkten.
               </p>
             </div>
 
@@ -429,7 +429,7 @@ export default function BastaTaklaggareStockholm() {
                 color: "var(--color-dark)",
               }}
             >
-              5 varningssignaler – när du ska tacka nej
+              5 varningssignaler: när du ska tacka nej
             </h2>
             <ul className="space-y-4">
               {[
@@ -446,8 +446,8 @@ export default function BastaTaklaggareStockholm() {
                   text: "&quot;Vi tar det med ett handslag&quot; är inte juridiskt bindande på samma sätt som ett ABT-06-kontrakt. Skriftligt avtal är dessutom en förutsättning för ROT-avdrag.",
                 },
                 {
-                  titel: "Bara egna citat – inga externa omdömen",
-                  text: "Om firman bara visar utvalda citat på sin egen hemsida, men inte finns på BraByggare, Offerta, Trustpilot eller Google – fråga varför. Externa omdömen kan inte filtreras eller manipuleras lika lätt.",
+                  titel: "Bara egna citat, inga externa omdömen",
+                  text: "Om firman bara visar utvalda citat på sin egen hemsida, men inte finns på BraByggare, Offerta, Trustpilot eller Google. Fråga varför. Externa omdömen kan inte filtreras eller manipuleras lika lätt.",
                 },
                 {
                   titel: "&quot;Vi börjar imorgon&quot;",
@@ -497,7 +497,7 @@ export default function BastaTaklaggareStockholm() {
                   color: "var(--color-dark)",
                 }}
               >
-                Vad våra kunder säger – på externa portaler
+                Vad våra kunder säger på externa portaler
               </h2>
               <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-gray-500">
                 <div className="flex items-center gap-1">
@@ -608,7 +608,7 @@ export default function BastaTaklaggareStockholm() {
                   <div className="relative aspect-[4/3] bg-gray-100">
                     <Image
                       src={p.bild}
-                      alt={`${p.titel} – ${p.typ} ${p.kvm} kvm`}
+                      alt={`${p.titel}, ${p.typ} ${p.kvm} kvm`}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -680,13 +680,13 @@ export default function BastaTaklaggareStockholm() {
             </h2>
             <div className="space-y-5 text-gray-700 leading-relaxed text-[17px]">
               <p>
-                Stockholms län är inte en homogen marknad. En takläggare som arbetar mycket i innerstadens 1900-tals stenhus möter helt andra förutsättningar än någon som lägger om plåttak på 80-talsradhus i Tyresö. <strong>Lokalkännedom</strong> handlar inte bara om att &quot;veta var Bromma ligger&quot; – det handlar om att förstå byggnadsåldrar, vanliga konstruktionsfel och vilka bygglovsregler som faktiskt tillämpas i respektive kommun.
+                Stockholms län är inte en homogen marknad. En takläggare som arbetar mycket i innerstadens 1900-tals stenhus möter helt andra förutsättningar än någon som lägger om plåttak på 80-talsradhus i Tyresö. <strong>Lokalkännedom</strong> handlar inte bara om att &quot;veta var Bromma ligger&quot;. Det handlar om att förstå byggnadsåldrar, vanliga konstruktionsfel och vilka bygglovsregler som faktiskt tillämpas i respektive kommun.
               </p>
               <p>
-                I <Link href="/omraden/bromma" className="text-[#2B74FC] font-semibold hover:underline">Bromma</Link> och <Link href="/omraden/lidingo" className="text-[#2B74FC] font-semibold hover:underline">Lidingö</Link> dominerar 1920–1950-talsvillor där underlagspappen ofta är original – det innebär att taket nästan alltid behöver totalrenovering snarare än bara byte av yttertaket. I <Link href="/omraden/taby" className="text-[#2B74FC] font-semibold hover:underline">Täby</Link>, <Link href="/omraden/sollentuna" className="text-[#2B74FC] font-semibold hover:underline">Sollentuna</Link> och <Link href="/omraden/danderyd" className="text-[#2B74FC] font-semibold hover:underline">Danderyd</Link> är 60–70-talsvillor med betongtakpannor vanligast, och pannorna närmar sig nu sin tekniska livslängd. I <Link href="/omraden/nacka" className="text-[#2B74FC] font-semibold hover:underline">Nacka</Link> och <Link href="/omraden/varmdo" className="text-[#2B74FC] font-semibold hover:underline">Värmdö</Link> är fritidshus som omvandlas till permanentbostäder en stor del av marknaden – där krävs ofta uppgradering till modern isolering och taksäkerhet samtidigt som taket byts.
+                I <Link href="/omraden/bromma" className="text-[#2B74FC] font-semibold hover:underline">Bromma</Link> och <Link href="/omraden/lidingo" className="text-[#2B74FC] font-semibold hover:underline">Lidingö</Link> dominerar 1920–1950-talsvillor där underlagspappen ofta är original, vilket innebär att taket nästan alltid behöver totalrenovering snarare än bara byte av yttertaket. I <Link href="/omraden/taby" className="text-[#2B74FC] font-semibold hover:underline">Täby</Link>, <Link href="/omraden/sollentuna" className="text-[#2B74FC] font-semibold hover:underline">Sollentuna</Link> och <Link href="/omraden/danderyd" className="text-[#2B74FC] font-semibold hover:underline">Danderyd</Link> är 60–70-talsvillor med betongtakpannor vanligast, och pannorna närmar sig nu sin tekniska livslängd. I <Link href="/omraden/nacka" className="text-[#2B74FC] font-semibold hover:underline">Nacka</Link> och <Link href="/omraden/varmdo" className="text-[#2B74FC] font-semibold hover:underline">Värmdö</Link> är fritidshus som omvandlas till permanentbostäder en stor del av marknaden, vilket ofta kräver uppgradering till modern isolering och taksäkerhet samtidigt som taket byts.
               </p>
               <p>
-                <strong>Eternittak</strong> är fortfarande mycket vanliga i 50- och 60-talsbestånd i hela länet – särskilt i ytterstaden, Nacka, Tyresö och delar av Lidingö. Eternit innehåller asbest och får bara hanteras av certifierade saneringsföretag. En takläggare utan etablerat samarbete med en sanerare kan inte ta totalansvar för ett sådant projekt.
+                <strong>Eternittak</strong> är fortfarande mycket vanliga i 50- och 60-talsbestånd i hela länet, särskilt i ytterstaden, Nacka, Tyresö och delar av Lidingö. Eternit innehåller asbest och får bara hanteras av certifierade saneringsföretag. En takläggare utan etablerat samarbete med en sanerare kan inte ta totalansvar för ett sådant projekt.
               </p>
               <p>
                 Vi har varit aktiva i Stockholms län sedan starten och hanterar ungefär 50/50 mellan innerstad och kranskommuner. Vår produktionsledning känner till bygglovshanteringen i flertalet kommuner och vet exempelvis att <strong>Lidingö kommun</strong> har striktare estetiska krav på K-märkta hus än många andra, eller att <strong>Norrtälje</strong> ofta kräver lokaltransportlösningar på grund av smala vägar och ölandskap.
@@ -797,12 +797,12 @@ export default function BastaTaklaggareStockholm() {
                   Redo att jämföra oss mot tre andra?
                 </h2>
                 <p className="text-gray-600 leading-relaxed mb-6">
-                  Vi rekommenderar att du tar in 3–4 offerter innan du väljer takläggare. Boka en kostnadsfri takkontroll så får du en fast offert med specificerat material, garantitid och betalningsplan – på samma underlag du kan jämföra med andra.
+                  Vi rekommenderar att du tar in 3–4 offerter innan du väljer takläggare. Boka en kostnadsfri takkontroll så får du en fast offert med specificerat material, garantitid och betalningsplan, på samma underlag du kan jämföra med andra.
                 </p>
                 <ul className="space-y-3 mb-6">
                   {[
                     "Kostnadsfri takkontroll på plats inom 1–2 veckor",
-                    "Fast pris i ABT-06-kontrakt – inga överraskningar",
+                    "Fast pris i ABT-06-kontrakt utan överraskningar",
                     "30 års Monier-garanti på komplett taksystem",
                     "Vi sköter ROT-avdraget åt dig",
                   ].map((b) => (

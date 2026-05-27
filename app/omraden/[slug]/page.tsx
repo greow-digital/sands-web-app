@@ -143,8 +143,8 @@ export default async function OmradesPage({
                       className="font-semibold text-[#2B74FC] hover:underline"
                     >
                       Läs vår köpguide
-                    </Link>{" "}
-                    – sju kriterier för att välja rätt firma, fem röda flaggor att tacka nej till och tio frågor du ska ställa innan du skriver kontrakt.
+                    </Link>
+                    : sju kriterier för att välja rätt firma, fem röda flaggor att tacka nej till och tio frågor du ska ställa innan du skriver kontrakt.
                   </p>
                 </div>
 
