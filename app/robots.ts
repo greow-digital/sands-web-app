@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/tack", "/api/"],
+      disallow: ["/tack", "/api/", "/studio", "/projekt-sanity-poc"],
     },
     sitemap: "https://www.sandsab.se/sitemap.xml",
   };
