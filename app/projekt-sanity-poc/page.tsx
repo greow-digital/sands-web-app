@@ -5,10 +5,13 @@ import { MapPin, ArrowRight, FlaskConical } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import ProjektKartaWrapper from "@/components/ProjektKartaWrapper";
 import { client } from "@/sanity/lib/client";
 import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektCard } from "@/sanity/lib/types";
+import { coordForProjekt } from "@/lib/ort-coords";
+import type { ProjektPin } from "@/components/ProjektKarta";
 
 export const revalidate = 30;
 
@@ -22,6 +25,24 @@ export const metadata: Metadata = {
 
 export default async function ProjektSanityPocPage() {
   const projekt = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
+
+  const pins: ProjektPin[] = projekt.flatMap((p) => {
+    if (!p.slug || !p.ort || !p.title) return [];
+    const coord = coordForProjekt(p.ort, p.slug);
+    if (!coord) return [];
+    return [
+      {
+        slug: p.slug,
+        title: p.title,
+        ort: p.ort,
+        typ: p.typ,
+        kvm: p.kvm,
+        ar: p.ar,
+        lat: coord.lat,
+        lng: coord.lng,
+      },
+    ];
+  });
 
   return (
     <>
@@ -55,6 +76,34 @@ export default async function ProjektSanityPocPage() {
             { label: "Projekt (POC)" },
           ]}
         />
+
+        {/* Karta över utförda projekt */}
+        {pins.length > 0 && (
+          <section className="py-12 lg:py-16 border-b border-gray-100">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-8 max-w-2xl mx-auto">
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                  Geografisk täckning
+                </p>
+                <h2
+                  className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em] mb-3"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  {pins.length} projekt i Stockholmsområdet
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Klicka på en pin för att läsa mer. Pin-positionen visar
+                  ungefärlig plats i kommunen — exakta adresser är dolda av
+                  integritetsskäl.
+                </p>
+              </div>
+              <ProjektKartaWrapper pins={pins} />
+            </div>
+          </section>
+        )}
 
         <section className="py-16 lg:py-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
