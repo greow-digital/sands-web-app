@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import type { ProjektPin } from "./ProjektKarta";
+import type { DensityCell, ProjektPin } from "./ProjektKarta";
 
 const ProjektKarta = dynamic(() => import("./ProjektKarta"), {
   ssr: false,
@@ -10,6 +10,12 @@ const ProjektKarta = dynamic(() => import("./ProjektKarta"), {
   ),
 });
 
-export default function ProjektKartaWrapper({ pins }: { pins: ProjektPin[] }) {
-  return <ProjektKarta pins={pins} />;
+export default function ProjektKartaWrapper({
+  pins,
+  densityCells,
+}: {
+  pins: ProjektPin[];
+  densityCells?: DensityCell[];
+}) {
+  return <ProjektKarta pins={pins} densityCells={densityCells} />;
 }

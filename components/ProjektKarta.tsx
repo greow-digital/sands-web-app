@@ -6,6 +6,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+import "leaflet.heat";
 
 export type ProjektPin = {
   slug: string;
@@ -16,6 +17,12 @@ export type ProjektPin = {
   ar: number | null;
   lat: number;
   lng: number;
+};
+
+export type DensityCell = {
+  lat: number;
+  lng: number;
+  count: number;
 };
 
 const PIN_ICON = L.divIcon({
@@ -63,9 +70,10 @@ function buildPopup(pin: ProjektPin): string {
 
 interface ProjektKartaProps {
   pins: ProjektPin[];
+  densityCells?: DensityCell[];
 }
 
-export default function ProjektKarta({ pins }: ProjektKartaProps) {
+export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMap | null>(null);
 
@@ -85,6 +93,39 @@ export default function ProjektKarta({ pins }: ProjektKartaProps) {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 18,
     }).addTo(map);
+
+    // Heatmap layer (below pins) — customer density
+    if (densityCells && densityCells.length > 0) {
+      const maxCount = Math.max(...densityCells.map((c) => c.count));
+      const heatPoints: [number, number, number][] = densityCells.map((c) => [
+        c.lat,
+        c.lng,
+        // Normalize intensity 0-1
+        Math.min(1, c.count / maxCount),
+      ]);
+      (
+        L as unknown as {
+          heatLayer: (
+            points: [number, number, number][],
+            opts: object
+          ) => L.Layer;
+        }
+      )
+        .heatLayer(heatPoints, {
+          radius: 35,
+          blur: 25,
+          maxZoom: 12,
+          minOpacity: 0.35,
+          gradient: {
+            0.2: "#3b82f6",
+            0.4: "#06b6d4",
+            0.6: "#84cc16",
+            0.8: "#facc15",
+            1.0: "#ef4444",
+          },
+        })
+        .addTo(map);
+    }
 
     // markercluster injects markerClusterGroup onto L when imported
     const cluster = (
@@ -120,7 +161,7 @@ export default function ProjektKarta({ pins }: ProjektKartaProps) {
       map.remove();
       mapRef.current = null;
     };
-  }, [pins]);
+  }, [pins, densityCells]);
 
   return (
     <div

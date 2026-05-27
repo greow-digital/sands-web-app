@@ -80,19 +80,6 @@ if (!csvPath) {
   process.exit(1);
 }
 
-// ───── Encoding fix ─────────────────────────────────────────────────
-
-/** The CSV is double-encoded: UTF-8 bytes interpreted as Latin-1 then re-saved
- *  as UTF-8. Reverse it by treating the string's chars as Latin-1 bytes and
- *  decoding back to UTF-8. "JÃ¤rfÃ¤lla" → "Järfälla". */
-function fixMojibake(s: string): string {
-  if (!s) return s;
-  try {
-    return Buffer.from(s, "binary").toString("utf8");
-  } catch {
-    return s;
-  }
-}
 
 // ───── Address extraction ───────────────────────────────────────────
 
@@ -222,29 +209,45 @@ async function main() {
     process.exit(1);
   }
 
-  // Load CSV (file is stored with mojibake; read as binary)
-  const rawBytes = fs.readFileSync(csvPath);
-  const rawText = rawBytes.toString("utf8");
+  // CSV is UTF-8 encoded (default for modern CRM exports)
+  const rawText = fs.readFileSync(csvPath, "utf8");
 
   type Record = Record<string, string>;
   const records = parse(rawText, {
-    columns: (header: string[]) => header.map((h) => fixMojibake(h)),
+    columns: true,
     skip_empty_lines: true,
     relax_column_count: true,
   }) as Record[];
 
   console.log(`→ Parsed ${records.length} rows from CSV`);
 
-  // Extract addresses
+  // Extract addresses. Also filter out obvious CRM mock/template rows.
+  const SKIP_PATTERNS = [
+    /mall/i,
+    /^badrum/i,
+    /^brutet tak/i,
+    /^takomläggning \d/i,
+    /^exempel /i,
+    /^erbjudande /i,
+    /^offertförslag/i,
+    /^projekt /i,
+    /^test\b/i,
+    /^sdsd/i,
+    /^sasd/i,
+    /^boende/i,
+  ];
+
   const allAddresses: string[] = [];
   for (const row of records) {
-    const fixed: CustomerRow = {
-      postadress: fixMojibake(row["Postadress"] ?? ""),
-      besoksadress: fixMojibake(row["Besöksadress"] ?? ""),
-      fakturaadress: fixMojibake(row["Fakturaadress"] ?? ""),
+    const candidate: CustomerRow = {
+      postadress: row["Postadress"] ?? "",
+      besoksadress: row["Besöksadress"] ?? "",
+      fakturaadress: row["Fakturaadress"] ?? "",
     };
-    const addr = pickAddress(fixed);
-    if (addr) allAddresses.push(addr);
+    const addr = pickAddress(candidate);
+    if (!addr) continue;
+    if (SKIP_PATTERNS.some((re) => re.test(addr))) continue;
+    allAddresses.push(addr);
   }
 
   // Dedupe (normalize for cache key, keep original for API call)

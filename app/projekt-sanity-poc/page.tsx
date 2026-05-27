@@ -11,7 +11,8 @@ import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektCard } from "@/sanity/lib/types";
 import { coordForProjekt } from "@/lib/ort-coords";
-import type { ProjektPin } from "@/components/ProjektKarta";
+import type { DensityCell, ProjektPin } from "@/components/ProjektKarta";
+import { getCustomerDensity } from "@/lib/customer-density";
 
 export const revalidate = 30;
 
@@ -25,6 +26,7 @@ export const metadata: Metadata = {
 
 export default async function ProjektSanityPocPage() {
   const projekt = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
+  const density = getCustomerDensity();
 
   const pins: ProjektPin[] = projekt.flatMap((p) => {
     if (!p.slug || !p.ort || !p.title) return [];
@@ -77,7 +79,7 @@ export default async function ProjektSanityPocPage() {
           ]}
         />
 
-        {/* Karta över utförda projekt */}
+        {/* Karta över utförda projekt + kunddensitet */}
         {pins.length > 0 && (
           <section className="py-12 lg:py-16 border-b border-gray-100">
             <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,15 +94,23 @@ export default async function ProjektSanityPocPage() {
                     color: "var(--color-dark)",
                   }}
                 >
-                  {pins.length} projekt i Stockholmsområdet
+                  {pins.length} projekt
+                  {density.totalCustomers > 0
+                    ? ` och ${density.totalCustomers.toLocaleString("sv-SE")}+ kunder`
+                    : ""}{" "}
+                  i Stockholmsområdet
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Klicka på en pin för att läsa mer. Pin-positionen visar
-                  ungefärlig plats i kommunen — exakta adresser är dolda av
-                  integritetsskäl.
+                  Blå pins är referensprojekt — klicka för att läsa mer.
+                  {density.cells.length > 0
+                    ? " Värmen i bakgrunden visar var våra ~2 500+ kunder finns, anonymiserat på områdesnivå."
+                    : " Pin-positionen visar ungefärlig plats i kommunen — exakta adresser är dolda av integritetsskäl."}
                 </p>
               </div>
-              <ProjektKartaWrapper pins={pins} />
+              <ProjektKartaWrapper
+                pins={pins}
+                densityCells={density.cells}
+              />
             </div>
           </section>
         )}
