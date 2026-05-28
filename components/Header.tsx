@@ -10,6 +10,7 @@ const tjänster = [
   { href: "/tjanster/fasadrenovering", label: "Fasadrenovering" },
   { href: "/tjanster/takfonsterkupor", label: "Takfönster & takkupor" },
   { href: "/tjanster/hangrannorstupror", label: "Hängrännor & Vindskivor" },
+  { href: "/tjanster/taksakerhet", label: "Taksäkerhet" },
   { href: "/tjanster/badrumsrenovering", label: "Badrumsrenovering" },
   { href: "/tjanster/koksrenovering", label: "Köksrenovering" },
   { href: "/tjanster/totalentreprenad", label: "Totalentreprenad" },

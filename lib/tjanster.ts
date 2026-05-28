@@ -4,12 +4,13 @@ export type Tjanst = {
   h1: string;
   intro: string;
   text: string;
-  prisIntervall: string;
+  prisIntervall?: string;
   prism2: string;
   image?: string;
   kategori: "tjanst" | "taktyp";
   ingår?: string[];
   process?: { step: string; text: string }[];
+  komponenter?: { name: string; description: string; image: string }[];
   faq: { q: string; a: string }[];
   relaterade?: string[];
 };
@@ -23,6 +24,7 @@ const bildKarta: Record<string, string> = {
   eternittak: "/images/taktyp-papptak.jpg",
   takfonsterkupor: "/images/taktyp-plattak.jpg",
   hangrannorstupror: "/images/hangrannor-efter.jpg",
+  taksakerhet: "/images/taksakerhet/snorasskydd.jpg",
   totalentreprenad: "/images/villa-render.jpg",
   fasadrenovering: "/images/about-sands-building.jpg",
   badrumsrenovering: "/images/villa-render.jpg",
@@ -352,6 +354,90 @@ export const tjanster: Tjanst[] = [
       },
     ],
     relaterade: ["taklaggning", "papptak"],
+  },
+  {
+    slug: "taksakerhet",
+    kategori: "tjanst",
+    title: "Taksäkerhet",
+    h1: "Taksäkerhet i Stockholm",
+    intro:
+      "Vi installerar komplett taksäkerhet enligt BBR: snörasskydd, gångbryggor, takstegar och säkerhetsräcken som skyddar både dem som vistas på taket och dem som rör sig nedanför.",
+    text:
+      "Taksäkerhet är inte bara ett lagkrav enligt Boverkets byggregler (BBR 8:24), utan också en förutsättning för att sotare, takmontörer och andra hantverkare ska kunna utföra sitt arbete tryggt. Saknas taksäkerhet får sotaren rätt att vägra inspektion, och du som fastighetsägare bär ansvaret om någon skadas på taket eller av nedfallande snö och is.\n\nVi monterar samtliga delar enligt branschstandard och med produkter som följer SS-EN 516 och SS-EN 517 (svenska säkerhetsstandarder för fasta takanordningar). Vid en komplett takomläggning ingår alltid all behövd taksäkerhet i det fasta priset, men vi tar också uppdrag på enbart komplettering, ofta efter besiktningsanmärkning vid husköp eller krav från sotare eller försäkringsbolag.",
+    prism2: "Pris efter takkontroll",
+    komponenter: [
+      {
+        name: "Snörasskydd",
+        description:
+          "Hindrar snö och is från att rasa ner över entréer, gångvägar och uteplatser.",
+        image: "/images/taksakerhet/snorasskydd.jpg",
+      },
+      {
+        name: "Gångbrygga",
+        description:
+          "Säker förflyttning i sidled över taket för sotare och takmontörer.",
+        image: "/images/taksakerhet/gangbrygga.jpg",
+      },
+      {
+        name: "Takstege",
+        description:
+          "Säker åtkomst upp och ned för takfallet, monterad parallellt med takets lutning.",
+        image: "/images/taksakerhet/takstege.jpg",
+      },
+      {
+        name: "Bärläktsteg",
+        description:
+          "Alternativ stegfunktion som följer takets bärläkt — diskret och hållbar.",
+        image: "/images/taksakerhet/barlaktsteg.jpg",
+      },
+      {
+        name: "Nock- och takfotsräcken",
+        description:
+          "Fast räcke längs nock eller takfot som fungerar både som fallskydd och fästpunkt.",
+        image: "/images/taksakerhet/nock-takfotsracke.jpg",
+      },
+      {
+        name: "Räcke för taklucka & takfönster",
+        description:
+          "Monteras kring takluckor och takfönster för att förhindra genomtrampning.",
+        image: "/images/taksakerhet/racke-taklucka.jpg",
+      },
+      {
+        name: "Glidskydd markstege",
+        description:
+          "Säkrar markstegens position vid takåtkomst så den inte glider undan.",
+        image: "/images/taksakerhet/glidskydd-markstege.jpg",
+      },
+      {
+        name: "Vajer- och linsystem",
+        description:
+          "Extra fallskydd vid stora taklängder, kompletterar gångbrygga och takstege.",
+        image: "/images/taksakerhet/vajersystem.jpg",
+      },
+    ],
+    faq: [
+      {
+        q: "Är taksäkerhet lagkrav?",
+        a: "Ja. Enligt Boverkets byggregler (BBR 8:24) ska byggnader förses med fasta säkerhetsanordningar för säkert tillträde, förflyttning och arbete på tak. Kraven gäller både nybyggnation och vid större takomläggningar.",
+      },
+      {
+        q: "Vem ansvarar om sotaren ramlar?",
+        a: "Fastighetsägaren. Saknas eller är taksäkerheten bristfällig kan sotaren vägra utföra sitt arbete, och vid en olycka kan du som ägare hållas ansvarig. Försäkringen täcker inte alltid skador när säkerhetskraven inte uppfylls.",
+      },
+      {
+        q: "När krävs snörasskydd?",
+        a: "Snörasskydd är obligatoriskt över entréer, gångbanor, uteplatser och allmän mark där människor rör sig. För Stockholmsklimat rekommenderar vi alltid komplett snörasskydd, för att skydda mot både person- och egendomsskador.",
+      },
+      {
+        q: "Kan ni montera taksäkerhet utan att byta tak?",
+        a: "Ja, vi monterar både på befintliga tak och som del av en komplett takomläggning. På befintligt tak kontrollerar vi först bärighet och pannornas skick.",
+      },
+      {
+        q: "Måste taksäkerheten besiktigas?",
+        a: "Det finns inget formellt besiktningskrav, men sotaren bedömer skicket vid sin årliga genomgång. Vi rekommenderar kontroll vart 5:e år och direkt efter större takarbeten.",
+      },
+    ],
+    relaterade: ["taklaggning", "hangrannorstupror"],
   },
   {
     slug: "totalentreprenad",

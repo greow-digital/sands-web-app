@@ -20,6 +20,7 @@ const TJANST_ORDER = [
   "fasadrenovering",
   "takfonsterkupor",
   "hangrannorstupror",
+  "taksakerhet",
   "badrumsrenovering",
   "koksrenovering",
   "totalentreprenad",

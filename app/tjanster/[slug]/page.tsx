@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { CheckCircle, ArrowRight, Phone, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -119,26 +120,28 @@ export default async function TjanstPage({
                 ))}
 
                 {/* Pris */}
-                <div className="mt-8 p-6 rounded-2xl border border-gray-100 bg-[#F8F9FB]">
-                  <div
-                    className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
-                    style={{ color: "var(--color-primary)" }}
-                  >
-                    Prisintervall
+                {t.prisIntervall && (
+                  <div className="mt-8 p-6 rounded-2xl border border-gray-100 bg-[#F8F9FB]">
+                    <div
+                      className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
+                      style={{ color: "var(--color-primary)" }}
+                    >
+                      Prisintervall
+                    </div>
+                    <div
+                      className="text-2xl font-extrabold mb-1"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      {t.prisIntervall}
+                    </div>
+                    <p className="text-sm text-gray-500">
+                      Alltid fast pris efter kostnadsfri takkontroll.
+                    </p>
                   </div>
-                  <div
-                    className="text-2xl font-extrabold mb-1"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      color: "var(--color-dark)",
-                    }}
-                  >
-                    {t.prisIntervall}
-                  </div>
-                  <p className="text-sm text-gray-500">
-                    Alltid fast pris efter kostnadsfri takkontroll.
-                  </p>
-                </div>
+                )}
 
                 {/* Vad ingår / process */}
                 {t.ingår && (
@@ -167,6 +170,52 @@ export default async function TjanstPage({
                         </li>
                       ))}
                     </ul>
+                  </div>
+                )}
+
+                {t.komponenter && (
+                  <div className="mt-10">
+                    <h3
+                      className="text-xl font-bold mb-5"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      Komponenter vi monterar
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                      {t.komponenter.map((k) => (
+                        <div
+                          key={k.name}
+                          className="rounded-2xl border border-gray-100 overflow-hidden bg-white"
+                        >
+                          <div className="aspect-[4/3] bg-gray-50 relative">
+                            <Image
+                              src={k.image}
+                              alt={k.name}
+                              fill
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              className="object-cover"
+                            />
+                          </div>
+                          <div className="p-4">
+                            <div
+                              className="text-sm font-bold mb-1"
+                              style={{
+                                fontFamily: "var(--font-heading)",
+                                color: "var(--color-dark)",
+                              }}
+                            >
+                              {k.name}
+                            </div>
+                            <p className="text-sm text-gray-600 leading-relaxed">
+                              {k.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
 
