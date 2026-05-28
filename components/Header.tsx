@@ -6,13 +6,16 @@ import Image from "next/image";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
 const tjänster = [
-  { href: "/tjanster/totalentreprenad", label: "Totalentreprenad" },
   { href: "/tjanster/taklaggning", label: "Takomläggning" },
-  { href: "/tjanster/takfonsterkupor", label: "Takfönster & takkupor" },
-  { href: "/tjanster/hangrannorstupror", label: "Hängrännor & stuprör" },
   { href: "/tjanster/fasadrenovering", label: "Fasadrenovering" },
+  { href: "/tjanster/takfonsterkupor", label: "Takfönster & takkupor" },
+  {
+    href: "/tjanster/hangrannorstupror",
+    label: "Hängrännor/vindskivor/taksäkerhet",
+  },
   { href: "/tjanster/badrumsrenovering", label: "Badrumsrenovering" },
   { href: "/tjanster/koksrenovering", label: "Köksrenovering" },
+  { href: "/tjanster/totalentreprenad", label: "Totalentreprenad" },
 ];
 
 const områden = [

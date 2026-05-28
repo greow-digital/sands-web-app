@@ -14,8 +14,23 @@ export const metadata: Metadata = {
     "Kompletta bygg- och taklösningar, takomläggning, fasadrenovering, badrumsrenovering och mer. Certifierad Monier Takpartner med fast pris.",
 };
 
+// Priority order — also drives the main nav. Update both together.
+const TJANST_ORDER = [
+  "taklaggning",
+  "fasadrenovering",
+  "takfonsterkupor",
+  "hangrannorstupror",
+  "badrumsrenovering",
+  "koksrenovering",
+  "totalentreprenad",
+];
+
 export default function TjansterPage() {
-  const huvudtjanster = tjanster.filter((t) => t.kategori === "tjanst");
+  const huvudtjanster = tjanster
+    .filter((t) => t.kategori === "tjanst")
+    .sort(
+      (a, b) => TJANST_ORDER.indexOf(a.slug) - TJANST_ORDER.indexOf(b.slug)
+    );
   const taktyper = tjanster.filter((t) => t.kategori === "taktyp");
 
   return (
