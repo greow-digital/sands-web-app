@@ -55,3 +55,50 @@ h1, h2, h3, h4, h5, h6 {
   );
   z-index: 1;
 }
+
+/* Takräknare slider: blå progress + vit thumb */
+.sands-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--color-primary) 0%,
+    var(--color-primary) var(--progress, 0%),
+    #E5E7EB var(--progress, 0%),
+    #E5E7EB 100%
+  );
+  outline: none;
+  cursor: pointer;
+}
+.sands-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(43, 116, 252, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.sands-slider::-webkit-slider-thumb:hover,
+.sands-slider::-webkit-slider-thumb:active {
+  transform: scale(1.1);
+}
+.sands-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 3px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(43, 116, 252, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.sands-slider::-moz-range-thumb:hover,
+.sands-slider::-moz-range-thumb:active {
+  transform: scale(1.1);
+}

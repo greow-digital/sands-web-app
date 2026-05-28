@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
+import Takraknare from "@/components/Takraknare";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/priser" },
@@ -97,6 +98,9 @@ export default function PriserPage() {
           backgroundImage="/images/hero-priser.jpg"
           imageAlt="Villa i Stockholm med nytt tak"
         />
+
+        {/* Takräknare */}
+        <Takraknare />
 
         {/* Prisintervall */}
         <section className="py-16 lg:py-24">
