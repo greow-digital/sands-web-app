@@ -6,7 +6,17 @@ function getSeasonMessage(): string {
     return "Våren är bästa tiden för takbyte, boka takkontroll nu för att säkra plats i sommar";
   }
   if (month >= 4 && month <= 7) {
-    return "Sommarsäsongen är igång, boka kostnadsfri takkontroll och få offert inom 24h";
+    const summerMessages = [
+      // May — säsongen startar, öppen tonalitet
+      "Sommarsäsongen är igång, boka kostnadsfri takkontroll och få offert inom 24h",
+      // June — kalendern börjar fyllas, mjuk urgency
+      "Sommarens kalender börjar fyllas, boka takkontroll så får du snabb start",
+      // July — full högsäsong, stark scarcity
+      "Få lediga sommartider kvar, boka takkontroll innan vi blir fullbokade",
+      // August — pivot mot höst innan säsongen är slut
+      "Sommaren går mot sitt slut, boka takkontroll så säkrar vi hösttider åt dig",
+    ];
+    return summerMessages[month - 4];
   }
   if (month >= 8 && month <= 10) {
     return "Hösten närmar sig, se till att ditt tak är klart innan vintern. Boka takkontroll nu.";
