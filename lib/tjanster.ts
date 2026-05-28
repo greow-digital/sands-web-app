@@ -24,7 +24,7 @@ const bildKarta: Record<string, string> = {
   eternittak: "/images/taktyp-papptak.jpg",
   takfonsterkupor: "/images/taktyp-plattak.jpg",
   hangrannorstupror: "/images/hangrannor-efter.jpg",
-  taksakerhet: "/images/taksakerhet/snorasskydd.jpg",
+  taksakerhet: "/images/hero-sands-construction.jpg",
   totalentreprenad: "/images/villa-render.jpg",
   fasadrenovering: "/images/about-sands-building.jpg",
   badrumsrenovering: "/images/villa-render.jpg",
