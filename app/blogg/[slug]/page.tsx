@@ -287,7 +287,7 @@ export default async function ArtikelPage({
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Boka takkontroll <ArrowRight size={14} />
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
             </Link>
           </div>
         </section>

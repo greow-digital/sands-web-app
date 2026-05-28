@@ -366,7 +366,7 @@ export default async function OmradesPage({
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Boka takkontroll <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:0828388"

@@ -162,11 +162,11 @@ export default function FaqPage() {
             <p className="text-gray-600 mb-6">Fick du inte svar på din fråga?</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                href="/kontakt"
+                href="/offert"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Kontakta oss <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:0828388"

@@ -47,7 +47,7 @@ export default function MobileCTA() {
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full text-sm font-semibold text-white transition-colors"
             style={{ backgroundColor: "var(--color-primary)" }}
           >
-            Boka takkontroll
+            Få prisförslag
           </Link>
         </div>
       </div>
