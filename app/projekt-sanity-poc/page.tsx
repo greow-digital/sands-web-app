@@ -94,17 +94,18 @@ export default async function ProjektSanityPocPage() {
                     color: "var(--color-dark)",
                   }}
                 >
-                  {pins.length} projekt
-                  {density.totalCustomers > 0
-                    ? ` och ${density.totalCustomers.toLocaleString("sv-SE")}+ kunder`
-                    : ""}{" "}
-                  i Stockholmsområdet
+                  {(density.totalCustomers + pins.length).toLocaleString(
+                    "sv-SE"
+                  )}
+                  + projekt vi har utfört i Stockholmsområdet
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Blå pins är referensprojekt — klicka för att läsa mer.
-                  {density.cells.length > 0
-                    ? " Lila bubblor visar var våra kunder finns, anonymiserat på områdesnivå (500 m-rutnät)."
-                    : " Pin-positionen visar ungefärlig plats i kommunen — exakta adresser är dolda av integritetsskäl."}
+                  Varje punkt är ett genomfört tak­projekt. De{" "}
+                  <strong className="font-semibold text-[#2B74FC]">
+                    {pins.length} markerade pinsen
+                  </strong>{" "}
+                  är projekt vi har skrivit kundcase om — klicka för att läsa.
+                  Bakgrundspunkterna är anonymiserade till områdesnivå (500 m-rutnät).
                 </p>
               </div>
               <ProjektKartaWrapper

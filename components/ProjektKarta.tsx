@@ -24,40 +24,54 @@ export type DensityCell = {
   count: number;
 };
 
-const PIN_ICON = L.divIcon({
-  className: "sands-pin",
+// Highlighted pin for the projects we've written customer cases about.
+// Larger, fully opaque, with a soft blue halo so it pops out from the
+// background project dots when a cluster breaks apart.
+const CASE_PIN = L.divIcon({
+  className: "sands-case-pin",
   html: `<div style="
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     background: #2B74FC;
-    border: 2.5px solid white;
+    border: 3px solid white;
     border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-  "></div>`,
-  iconSize: [18, 18],
-  iconAnchor: [9, 9],
+    box-shadow:
+      0 0 0 3px rgba(43,116,252,0.25),
+      0 2px 8px rgba(0,0,0,0.3);
+    position: relative;
+  "><div style="
+    position: absolute;
+    inset: 5px;
+    background: white;
+    border-radius: 50%;
+  "></div></div>`,
+  iconSize: [22, 22],
+  iconAnchor: [11, 11],
 });
 
-const CUSTOMER_DOT = L.divIcon({
-  className: "sands-customer-dot",
+// Background project marker — represents one completed job among the
+// 2 600+ we've done. Small and subtle so the case-study pins (CASE_PIN)
+// remain the visual focus.
+const PROJECT_DOT = L.divIcon({
+  className: "sands-project-dot",
   html: `<div style="
-    width: 10px;
-    height: 10px;
-    background: #a78bfa;
-    border: 2px solid white;
+    width: 8px;
+    height: 8px;
+    background: #2B74FC;
+    border: 1.5px solid white;
     border-radius: 50%;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    opacity: 0.85;
+    opacity: 0.75;
   "></div>`,
-  iconSize: [10, 10],
-  iconAnchor: [5, 5],
+  iconSize: [8, 8],
+  iconAnchor: [4, 4],
 });
 
-function projectClusterIcon(cluster: { getChildCount: () => number }) {
+function projektClusterIcon(cluster: { getChildCount: () => number }) {
   const count = cluster.getChildCount();
-  const size = count >= 10 ? 44 : 38;
+  const size = count >= 1000 ? 60 : count >= 250 ? 52 : count >= 50 ? 44 : 38;
+  const fontSize = count >= 1000 ? 14 : 13;
   return L.divIcon({
-    className: "sands-cluster-project",
+    className: "sands-cluster-projekt",
     html: `<div style="
       background: #2B74FC;
       color: white;
@@ -68,34 +82,9 @@ function projectClusterIcon(cluster: { getChildCount: () => number }) {
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 13px;
-      font-family: var(--font-heading), system-ui;
-      box-shadow: 0 2px 8px rgba(43,116,252,0.45);
-      border: 3px solid white;
-    ">${count}</div>`,
-    iconSize: [size, size],
-  });
-}
-
-function customerClusterIcon(cluster: { getChildCount: () => number }) {
-  const count = cluster.getChildCount();
-  const size = count >= 1000 ? 60 : count >= 250 ? 52 : count >= 50 ? 44 : 38;
-  const fontSize = count >= 1000 ? 14 : 13;
-  return L.divIcon({
-    className: "sands-cluster-customer",
-    html: `<div style="
-      background: rgba(167,139,250,0.92);
-      color: white;
-      width: ${size}px;
-      height: ${size}px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
       font-size: ${fontSize}px;
       font-family: var(--font-heading), system-ui;
-      box-shadow: 0 2px 10px rgba(167,139,250,0.55);
+      box-shadow: 0 2px 10px rgba(43,116,252,0.45);
       border: 3px solid white;
     ">${count.toLocaleString("sv-SE")}</div>`,
     iconSize: [size, size],
@@ -117,6 +106,9 @@ function buildPopup(pin: ProjektPin): string {
     .join(" · ");
   return `
     <div style="font-family: var(--font-body), system-ui; min-width: 200px;">
+      <div style="font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2B74FC; margin-bottom: 4px;">
+        Kundcase
+      </div>
       <div style="font-weight: 700; font-size: 14px; color: #060607; margin-bottom: 4px;">
         ${escapeHtml(pin.title)}
       </div>
@@ -125,7 +117,7 @@ function buildPopup(pin: ProjektPin): string {
       </div>
       <a href="/projekt-sanity-poc/${encodeURIComponent(pin.slug)}"
          style="font-size: 13px; font-weight: 600; color: #2B74FC; text-decoration: none;">
-        Se projekt →
+        Läs kundcaset →
       </a>
     </div>
   `;
@@ -161,49 +153,43 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
       }
     ).addTo(map);
 
-    const markerClusterGroup = (
+    // Unified cluster: every completed project (anonymized address dots
+    // + highlighted case-study pins). spiderfy disabled so customer
+    // markers stacked at the same 500m grid cell never expand.
+    const cluster = (
       L as unknown as {
         markerClusterGroup: (opts?: object) => L.LayerGroup;
       }
-    ).markerClusterGroup;
+    ).markerClusterGroup({
+      showCoverageOnHover: false,
+      spiderfyOnMaxZoom: false,
+      zoomToBoundsOnClick: true,
+      maxClusterRadius: 90,
+      chunkedLoading: true,
+      iconCreateFunction: projektClusterIcon,
+    });
 
-    // Customer cluster (below project pins) — each customer is snapped to
-    // its grid cell center (500m). spiderfy disabled so individual cell
-    // positions are never revealed; markers at identical coords stay
-    // stacked as a single visible dot at max zoom.
+    // Background project dots first — case pins added last so they
+    // render on top when a cluster breaks apart.
     if (densityCells && densityCells.length > 0) {
-      const customerCluster = markerClusterGroup({
-        showCoverageOnHover: false,
-        spiderfyOnMaxZoom: false,
-        zoomToBoundsOnClick: false,
-        maxClusterRadius: 80,
-        chunkedLoading: true,
-        iconCreateFunction: customerClusterIcon,
-      });
       for (const cell of densityCells) {
         for (let i = 0; i < cell.count; i++) {
-          customerCluster.addLayer(
+          cluster.addLayer(
             L.marker([cell.lat, cell.lng], {
-              icon: CUSTOMER_DOT,
+              icon: PROJECT_DOT,
               interactive: false,
               keyboard: false,
             })
           );
         }
       }
-      map.addLayer(customerCluster);
     }
 
-    // Project cluster (on top) — blue, clickable, popups
-    const cluster = markerClusterGroup({
-      showCoverageOnHover: false,
-      spiderfyOnMaxZoom: true,
-      maxClusterRadius: 40,
-      iconCreateFunction: projectClusterIcon,
-    });
-
     for (const pin of pins) {
-      const marker = L.marker([pin.lat, pin.lng], { icon: PIN_ICON });
+      const marker = L.marker([pin.lat, pin.lng], {
+        icon: CASE_PIN,
+        zIndexOffset: 1000,
+      });
       marker.bindPopup(buildPopup(pin), {
         closeButton: true,
         autoPanPadding: [40, 40],
@@ -213,8 +199,8 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
 
     map.addLayer(cluster);
 
-    // Lock initial view to Stockholm — outliers (Nyköping/Västerås) still
-    // reachable by zooming out, but heatmap and most pins stay in focus.
+    // Lock initial view to Stockholm — outliers (Nyköping/Västerås)
+    // still reachable by zooming out.
     map.fitBounds(
       L.latLngBounds([59.22, 17.65], [59.55, 18.35]),
       { padding: [20, 20] }
