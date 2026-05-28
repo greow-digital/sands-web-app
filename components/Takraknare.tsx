@@ -57,8 +57,10 @@ const INGAR_EJ = [
 ];
 
 export default function Takraknare() {
-  const [kvm, setKvm] = useState(140);
-  const [open, setOpen] = useState(false);
+  // Default 130 m² landar på ~169 000 kr efter ROT, vilket matchar
+  // exempelpriset på startsidan (sadeltak 140 m² från 169 000 kr).
+  const [kvm, setKvm] = useState(130);
+  const [open, setOpen] = useState(true);
   const r = calculate(kvm);
 
   function handleCtaClick() {
