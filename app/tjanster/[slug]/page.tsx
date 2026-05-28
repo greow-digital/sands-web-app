@@ -8,6 +8,43 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { tjanster, getTjanst } from "@/lib/tjanster";
+import { pageMeta } from "@/lib/seo";
+
+// Per-slug SEO overrides. Only listed slugs get the hand-tuned copy
+// below; everything else falls back to the generic `${title} i Stockholm`
+// template further down.
+const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
+  taklaggning: {
+    title: "Takläggning Stockholm: fast pris, 30 års garanti | Sands AB",
+    description:
+      "Professionell takläggning i Stockholm av certifierade takläggare. Plåttak, tegeltak, papptak. Fast pris från start, ROT-avdrag, kostnadsfri offert.",
+  },
+  tegeltak: {
+    title: "Tegeltak Stockholm: från 1 500 kr/m² | Sands Entreprenad",
+    description:
+      "Tegeltak i Stockholm från 1 500 kr/m². Tegelpannor med 30 års garanti, ROT-avdrag tillämpas. Certifierade takläggare, kostnadsfri offert inom 24 h.",
+  },
+  plattak: {
+    title: "Plåttak Stockholm: från 1 800 kr/m² | Sands Entreprenad",
+    description:
+      "Plåttak i Stockholm från 1 800 kr/m². Bandtäckt, falsat eller klickfals. 30 års garanti, ROT-avdrag, certifierade takläggare i hela Stockholm.",
+  },
+  papptak: {
+    title: "Papptak Stockholm: från 800 kr/m² | Sands Entreprenad",
+    description:
+      "Papptak (takpapp) i Stockholm från 800 kr/m². Lång hållbarhet, fast pris, 30 års garanti. ROT-avdrag tillämpas, offert inom 24 h.",
+  },
+  betongtak: {
+    title: "Betongtak Stockholm: betongpannor från 1 200 kr/m² | Sands",
+    description:
+      "Betongtak och betongpannor i Stockholm från 1 200 kr/m². 30 års garanti, ROT-avdrag, BraByggare-certifierad takläggare. Få prisförslag idag.",
+  },
+  takfonsterkupor: {
+    title: "Takfönster & takkupor i Stockholm | Sands Entreprenad",
+    description:
+      "Montering av takfönster och takkupor i Stockholm. Erfarna takläggare, kvalitetsmaterial, 30 års garanti, ROT-avdrag tillämpas.",
+  },
+};
 
 export async function generateStaticParams() {
   return tjanster.map((t) => ({ slug: t.slug }));
@@ -21,15 +58,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const t = getTjanst(slug);
   if (!t) return {};
-  return {
-    alternates: { canonical: `/tjanster/${slug}` },
-    title: `${t.title} i Stockholm | Sands Entreprenad`,
-    description: t.intro,
-    openGraph: {
-      title: `${t.title} i Stockholm | Sands Entreprenad`,
-      description: t.intro,
-    },
-  };
+  const override = SEO_OVERRIDES[slug];
+  return pageMeta({
+    path: `/tjanster/${slug}`,
+    title: override?.title ?? `${t.title} i Stockholm | Sands Entreprenad`,
+    description: override?.description ?? t.intro,
+  });
 }
 
 export default async function TjanstPage({

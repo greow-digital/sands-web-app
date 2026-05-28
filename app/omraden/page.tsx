@@ -5,13 +5,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { omraden } from "@/lib/omraden";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/omraden" },
-  title: "Takläggare i Stockholms län, Alla områden | Sands Entreprenad",
+export const metadata: Metadata = pageMeta({
+  path: "/omraden",
+  title: "Vi tar tak i hela Stockholm: områden vi servar | Sands AB",
   description:
-    "Vi utför takbyten och takomläggningar i hela Stockholms län, 27+ kommuner. Certifierad Monier Takpartner med fast pris.",
-};
+    "Sands Entreprenad utför takbyte i hela Stockholmsregionen: Bromma, Nacka, Täby, Sollentuna, Norrtälje och 25+ områden. Få prisförslag inom 24 h.",
+});
 
 const regionOrder = [
   "Stockholm stad",

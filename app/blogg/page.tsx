@@ -6,13 +6,14 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { artiklar } from "@/lib/blogg";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/blogg" },
-  title: "Blogg, Tips om takläggning i Stockholm | Sands Entreprenad",
+export const metadata: Metadata = pageMeta({
+  path: "/blogg",
+  title: "Blogg: guider om takbyte och takläggning | Sands Entreprenad",
   description:
-    "Artiklar och råd om takbyte, material, priser och underhåll från Sands Entreprenad, takläggare i Stockholm.",
-};
+    "Guider och artiklar om takbyte, materialval, ROT-avdrag och underhåll. Läs vad det kostar, hur länge tak håller och vilket material som passar din villa.",
+});
 
 export default function BloggPage() {
   return (

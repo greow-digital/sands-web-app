@@ -7,12 +7,14 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { tjanster } from "@/lib/tjanster";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/tjanster" },
-  title: "Tjänster, Takläggning, renovering & mer | Sands Entreprenad",
+import { pageMeta } from "@/lib/seo";
+
+export const metadata: Metadata = pageMeta({
+  path: "/tjanster",
+  title: "Takläggning, takbyte & renovering i Stockholm | Sands Entreprenad",
   description:
-    "Kompletta bygg- och taklösningar, takomläggning, fasadrenovering, badrumsrenovering och mer. Certifierad Monier Takpartner med fast pris.",
-};
+    "Alla taktjänster i Stockholm: takbyte, takläggning, takrenovering. Plåttak, tegeltak, papptak. Fast pris, 30 års garanti, ROT-avdrag tillämpas.",
+});
 
 // Priority order, also drives the main nav. Update both together.
 const TJANST_ORDER = [

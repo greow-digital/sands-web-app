@@ -4,13 +4,14 @@ import { Star, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/omdomen" },
-  title: "Kundomdömen | Sands Entreprenad, 4.8 i snittbetyg",
+export const metadata: Metadata = pageMeta({
+  path: "/omdomen",
+  title: "Kundomdömen: BraByggare 4.8★ & 54 recensioner | Sands AB",
   description:
-    "Läs vad våra kunder säger om Sands Entreprenad. 4.8 i snittbetyg av 54 omdömen. Takläggare i Stockholm med hög kundnöjdhet.",
-};
+    "Se omdömen om Sands Entreprenad: BraByggare 4.8★ med 54 recensioner, Kundfavorit 2025 av Offerta. Riktiga kundberättelser från Stockholms-området.",
+});
 
 const omdömen = [
   { name: "Anders L.", ort: "Täby", tjänst: "Betongtak", betyg: 5, text: "Professionellt och pålitligt företag. Boka ett hembesök, ni ångrar er inte. Fast pris från start och inga överraskningar." },

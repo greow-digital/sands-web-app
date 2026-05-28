@@ -5,13 +5,14 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/var-process" },
-  title: "Vår process, Takbyte från start till slut | Sands Entreprenad",
+export const metadata: Metadata = pageMeta({
+  path: "/var-process",
+  title: "Vår process: så funkar ett takbyte i 4 steg | Sands AB",
   description:
-    "Från hembesök till takkontroll, så går ett takbyte till hos Sands Entreprenad. Fast pris, tydlig kommunikation och Monier-garanti.",
-};
+    "Så funkar ett takbyte med Sands Entreprenad: hembesök, offert, utförande, slutkontroll. Fast pris från start, 30 års garanti, ROT-avdrag tillämpas.",
+});
 
 const steg = [
   {

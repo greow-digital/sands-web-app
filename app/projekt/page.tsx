@@ -6,15 +6,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { projekt as allaProjekt } from "@/lib/projekt";
+import { pageMeta } from "@/lib/seo";
 
 const projekt = [...allaProjekt].sort((a, b) => b.år - a.år);
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/projekt" },
-  title: "Utförda projekt, Takläggning Stockholm | Sands Entreprenad",
+export const metadata: Metadata = pageMeta({
+  path: "/projekt",
+  title: "Slutförda takprojekt i Stockholm: bilder & referenser | Sands",
   description:
-    "Se utförda takläggningsprojekt runt om i Stockholms län. Tegeltak, betongtak, plåttak och eternitbyten med Monier-garanti.",
-};
+    "Se våra senaste takbyten i Stockholm: före/efter-bilder från Vaxholm, Lidingö, Norrtälje, Täby, Bromma och fler. 2 500+ kunder sedan 2016.",
+});
 
 export default function ProjektPage() {
   return (

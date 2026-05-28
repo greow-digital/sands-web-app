@@ -9,10 +9,66 @@ import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { omraden, getOrt } from "@/lib/omraden";
 import { getProjektByOrt } from "@/lib/projekt";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateStaticParams() {
   return omraden.map((o) => ({ slug: o.slug }));
 }
+
+// Per-slug SEO overrides for the 10 top-priority suburbs. All other
+// suburbs use the generic template further down.
+const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
+  stockholm: {
+    title: "Takläggare Stockholm: lokala takexperter sedan 2016 | Sands",
+    description:
+      "Stockholms erfarna takläggare. 2 500+ kunder, BraByggare 4.8★, 30 års garanti. Fast pris från 169 000 kr efter ROT. Ring 08-28 38 88.",
+  },
+  norrtalje: {
+    title: "Takläggare Norrtälje: takbyte med fast pris | Sands AB",
+    description:
+      "Lokal takläggare i Norrtälje och hela kommunen (Hallstavik, Rimbo). Fast pris, 30 års garanti, ROT-avdrag. Kostnadsfri offert inom 24 h.",
+  },
+  bromma: {
+    title: "Takläggare Bromma: lokal takläggning med fast pris | Sands",
+    description:
+      "Takläggare i Bromma med 30 års garanti och fast pris. Tegeltak, plåttak och papptak. ROT-avdrag, kostnadsfri offert inom 24 h.",
+  },
+  nacka: {
+    title: "Takläggare Nacka: takbyte med fast pris | Sands Entreprenad",
+    description:
+      "Erfaren takläggare i Nacka. Fast pris, 30 års Monier-garanti, BraByggare 4.8★. Plåttak, tegeltak, papptak. ROT-avdrag tillämpas.",
+  },
+  taby: {
+    title: "Takläggare Täby: lokal takläggning med 30 års garanti | Sands",
+    description:
+      "Takläggare i Täby med fast pris och 30 års garanti. Plåttak, tegeltak, papptak. Kostnadsfri offert inom 24 h, ROT-avdrag tillämpas.",
+  },
+  sollentuna: {
+    title: "Takläggare Sollentuna: takbyte med fast pris | Sands AB",
+    description:
+      "Takläggare i Sollentuna. 30 års garanti, BraByggare 4.8★, ROT-avdrag. Få kostnadsfri offert på takbyte inom 24 timmar.",
+  },
+  danderyd: {
+    title: "Takläggare Danderyd: erfaren lokal takläggning | Sands",
+    description:
+      "Lokal takläggare i Danderyd med fast pris från start. 30 års Monier-garanti, certifierade takläggare, ROT-avdrag tillämpas.",
+  },
+  lidingo: {
+    title: "Takläggare Lidingö: takbyte med fast pris | Sands AB",
+    description:
+      "Takläggare på Lidingö med 30 års garanti och fast pris. Plåttak, tegeltak, papptak. ROT-avdrag, kostnadsfri offert inom 24 h.",
+  },
+  huddinge: {
+    title: "Takläggare Huddinge: lokal takläggning, fast pris | Sands",
+    description:
+      "Erfaren takläggare i Huddinge. 30 års garanti, fast pris från 169 000 kr efter ROT. BraByggare 4.8★. Få prisförslag inom 24 timmar.",
+  },
+  jarfalla: {
+    title: "Takläggare Järfälla: lokala takexperter | Sands Entreprenad",
+    description:
+      "Sands Entreprenad är baserade i Järfälla och servar hela området. 2 500+ kunder, 30 års garanti, fast pris från start.",
+  },
+};
 
 export async function generateMetadata({
   params,
@@ -22,15 +78,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const ort = getOrt(slug);
   if (!ort) return {};
-  return {
-    alternates: { canonical: `/omraden/${slug}` },
-    title: `Takläggare i ${ort.name} | Sands Entreprenad`,
-    description: `Sands Entreprenad utför takbyten och takomläggningar i ${ort.name}. Certifierad Monier Takpartner, boka kostnadsfri takkontroll idag.`,
-    openGraph: {
-      title: `Takläggare i ${ort.name} | Sands Entreprenad`,
-      description: ort.beskrivning,
-    },
-  };
+  const override = SEO_OVERRIDES[slug];
+  return pageMeta({
+    path: `/omraden/${slug}`,
+    title:
+      override?.title ??
+      `Takläggare ${ort.name}: lokal takläggning med fast pris | Sands`,
+    description:
+      override?.description ??
+      `Takläggare i ${ort.name} med 30 års garanti, fast pris och ROT-avdrag. Plåttak, tegeltak, papptak. Kostnadsfri offert inom 24 h.`,
+  });
 }
 
 export default async function OmradesPage({

@@ -4,13 +4,14 @@ import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/faq" },
-  title: "Vanliga frågor om takbyte | Sands Entreprenad",
+export const metadata: Metadata = pageMeta({
+  path: "/faq",
+  title: "Vanliga frågor om takbyte i Stockholm | Sands Entreprenad",
   description:
-    "Svar på de vanligaste frågorna om takbyte, priser, ROT-avdrag, garantier och processen hos Sands Entreprenad.",
-};
+    "Vad kostar ett takbyte? Hur länge håller olika taktyper? ROT-avdrag, garantier, försäkring: svar på vanliga frågor om takbyte i Stockholm.",
+});
 
 const kategorier = [
   {

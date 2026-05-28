@@ -5,13 +5,14 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/om-oss" },
-  title: "Om Sands Entreprenad | Takläggare i Stockholm sedan 2016",
+export const metadata: Metadata = pageMeta({
+  path: "/om-oss",
+  title: "Om oss: Stockholms takläggare sedan 2016 | Sands Entreprenad",
   description:
-    "Sands Entreprenad startades 2016 med idén att erbjuda trygga takbyten med fast pris. Certifierad Monier Takpartner med 2 500+ utförda takläggningar.",
-};
+    "Sands Entreprenad Stockholm AB. F-skattsedel, ansvarsförsäkring, Monier-certifierade takläggare. 2 500+ kunder, BraByggare 4.8★ med 54 omdömen.",
+});
 
 const stats = [
   { num: "2016", label: "Grundades" },

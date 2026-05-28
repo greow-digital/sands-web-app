@@ -4,13 +4,14 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { CheckCircle, Phone } from "lucide-react";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/offert" },
-  title: "Boka kostnadsfri takkontroll | Sands Entreprenad",
+export const metadata: Metadata = pageMeta({
+  path: "/offert",
+  title: "Få prisförslag på takbyte i Stockholm: inom 24 h | Sands AB",
   description:
-    "Boka en kostnadsfri takkontroll, vi inspekterar ditt tak och ger dig ett fast pris utan förbindelser.",
-};
+    "Begär kostnadsfri offert på ditt takbyte. Hembesök, fast pris från 169 000 kr efter ROT, 30 års garanti. Svar inom 24 timmar.",
+});
 
 export default function OffertPage() {
   return (

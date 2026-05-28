@@ -21,22 +21,23 @@ const inter = Inter({
 
 const BASE_URL = "https://www.sandsab.se";
 
+const HOME_TITLE =
+  "Takläggare Stockholm: takbyte fast pris, 30 års garanti | Sands AB";
+const HOME_DESC =
+  "Erfaren takläggare i Stockholm. Fast pris från 169 000 kr efter ROT, 30 års Monier-garanti. BraByggare 4.8★ med 54 omdömen. Få prisförslag inom 24 h.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Takbyte Stockholm, Fast pris på att lägga om tak | Sands",
-  description:
-    "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti. Tegel, plåt, papp, betong, eternit.",
-  alternates: {
-    canonical: "/",
-  },
+  title: HOME_TITLE,
+  description: HOME_DESC,
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "sv_SE",
     url: BASE_URL,
     siteName: "Sands Entreprenad Stockholm AB",
-    title: "Takbyte Stockholm, Fast pris på att lägga om tak | Sands",
-    description:
-      "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
+    title: HOME_TITLE,
+    description: HOME_DESC,
     images: [
       {
         url: "/og-image.jpg",
@@ -48,9 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Takbyte Stockholm, Fast pris på att lägga om tak | Sands",
-    description:
-      "Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti.",
+    title: HOME_TITLE,
+    description: HOME_DESC,
     images: ["/og-image.jpg"],
   },
 };
