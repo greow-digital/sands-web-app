@@ -104,7 +104,7 @@ export default async function OmradesPage({
                     "Betongtak, tegeltak, plåttak & papptak",
                     "Eternitsanering med certifierad partner",
                     "Takfönster och takkupor",
-                    "Hängrännor och stuprör",
+                    "Hängrännor, stuprör och vindskivor",
                     "Totalentreprenad enligt ABT-06",
                   ].map((item) => (
                     <li

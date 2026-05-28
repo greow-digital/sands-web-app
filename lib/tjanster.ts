@@ -317,12 +317,12 @@ export const tjanster: Tjanst[] = [
   {
     slug: "hangrannorstupror",
     kategori: "tjanst",
-    title: "Hängrännor & stuprör",
-    h1: "Hängrännor & stuprör i Stockholm",
+    title: "Hängrännor & vindskivor",
+    h1: "Hängrännor & vindskivor i Stockholm",
     intro:
-      "Vi monterar och byter hängrännor, stuprör och vattenavrinningssystem.",
+      "Vi monterar och byter hängrännor, stuprör och vindskivor som skyddar din fasad och grund från fukt.",
     text:
-      "Ett fungerande avvattningssystem är avgörande för att skydda fasad och grund. Vi monterar hängrännor och stuprör i plåt av hög kvalitet, alltid inräknat i det fasta priset vid en komplett takomläggning.\n\nVi kan även utföra byte av enbart hängrännor och stuprör om taket i övrigt är i gott skick. Välj mellan standard halvrunna hängrännor eller fyrkantiga profiler för ett mer modernt utseende.",
+      "Hängrännor, stuprör och vindskivor utgör takets ytterhölje och skyddar både fasad och grund. När de börjar läcka, rosta eller ruttna är det dags att byta. Annars riskerar du följdskador på trä, isolering och murverk.\n\nVi monterar plåthängrännor av hög kvalitet (halvrunda eller fyrkantiga) tillsammans med matchande stuprör. Allt ingår alltid när vi gör en komplett takomläggning, men vi byter också enbart hängrännor och stuprör om resten av taket är i gott skick.\n\nVindskivorna är minst lika viktiga. Det är brädorna eller plåten längs takets gavlar som skyddar takets kant från vind och slagregn och döljer takkonstruktionens undersida. När vindskivorna ruttnar eller färgen flagar är det ett tecken på att fukt börjat tränga in. Vi byter både träbaserade och plåtklädda vindskivor, ofta i samma vända som hängrännor och stuprör för bästa resultat och pris.",
     prisIntervall: "Ingår vid komplett takbyte. Separat: pris efter takkontroll",
     prism2: "Kontakta oss",
     faq: [
@@ -337,6 +337,18 @@ export const tjanster: Tjanst[] = [
       {
         q: "Vilket material väljer man?",
         a: "Vi monterar i första hand plåthängrännor (stål med skyddslackering). Koppar och zink är tillval för premium-projekt.",
+      },
+      {
+        q: "Vad är vindskivor?",
+        a: "Vindskivor är brädorna eller plåten längs takets gavlar (där taket möter väggen i triangelformen). De skyddar takets kant från vind och vatten samt döljer takkonstruktionens undersida.",
+      },
+      {
+        q: "Hur ofta behöver vindskivor bytas?",
+        a: "Träbaserade vindskivor bör ses över vart 5–10:e år och målas vid behov. Vid rötangrepp eller om färgen flagar bör de bytas. Plåtklädda vindskivor håller betydligt längre.",
+      },
+      {
+        q: "Kan ni byta enbart vindskivor?",
+        a: "Ja, om taket i övrigt är i gott skick byter vi gärna enbart vindskivorna. Vi rekommenderar dock att kombinera med byte av hängrännor eftersom samma ställning kan användas.",
       },
     ],
     relaterade: ["taklaggning", "papptak"],
