@@ -18,7 +18,7 @@ function getCookie(name: string): string | undefined {
 }
 
 // Google gtag stores click IDs as: _gcl_aw / _gcl_gb / _gcl_wb
-// Format: "GCL.<timestamp>.<clickId>" — we want the click ID part.
+// Format: "GCL.<timestamp>.<clickId>", we want the click ID part.
 function parseGclCookie(name: string): string | undefined {
   const raw = getCookie(name);
   if (!raw) return undefined;

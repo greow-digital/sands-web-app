@@ -104,7 +104,7 @@ export default async function ProjektSanityPocPage() {
                   <strong className="font-semibold text-[#2B74FC]">
                     {pins.length} markerade pinsen
                   </strong>{" "}
-                  är projekt vi har skrivit kundcase om — klicka för att läsa.
+                  är projekt vi har skrivit kundcase om. Klicka för att läsa.
                   Bakgrundspunkterna är anonymiserade till områdesnivå (500 m-rutnät).
                 </p>
               </div>

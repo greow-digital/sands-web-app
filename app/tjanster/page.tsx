@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "Kompletta bygg- och taklösningar, takomläggning, fasadrenovering, badrumsrenovering och mer. Certifierad Monier Takpartner med fast pris.",
 };
 
-// Priority order — also drives the main nav. Update both together.
+// Priority order, also drives the main nav. Update both together.
 const TJANST_ORDER = [
   "taklaggning",
   "fasadrenovering",

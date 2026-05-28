@@ -387,7 +387,7 @@ export const tjanster: Tjanst[] = [
       {
         name: "Bärläktsteg",
         description:
-          "Alternativ stegfunktion som följer takets bärläkt — diskret och hållbar.",
+          "Alternativ stegfunktion som följer takets bärläkt, diskret och hållbar.",
         image: "/images/taksakerhet/barlaktsteg.jpg",
       },
       {

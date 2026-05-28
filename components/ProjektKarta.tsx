@@ -49,7 +49,7 @@ const CASE_PIN = L.divIcon({
   iconAnchor: [11, 11],
 });
 
-// Background project marker — represents one completed job among the
+// Background project marker, represents one completed job among the
 // 2 600+ we've done. Small and subtle so the case-study pins (CASE_PIN)
 // remain the visual focus.
 const PROJECT_DOT = L.divIcon({
@@ -169,7 +169,7 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
       iconCreateFunction: projektClusterIcon,
     });
 
-    // Background project dots first — case pins added last so they
+    // Background project dots first, case pins added last so they
     // render on top when a cluster breaks apart.
     if (densityCells && densityCells.length > 0) {
       for (const cell of densityCells) {
@@ -199,7 +199,7 @@ export default function ProjektKarta({ pins, densityCells }: ProjektKartaProps) 
 
     map.addLayer(cluster);
 
-    // Lock initial view to Stockholm — outliers (Nyköping/Västerås)
+    // Lock initial view to Stockholm, outliers (Nyköping/Västerås)
     // still reachable by zooming out.
     map.fitBounds(
       L.latLngBounds([59.22, 17.65], [59.55, 18.35]),

@@ -7,13 +7,13 @@ function getSeasonMessage(): string {
   }
   if (month >= 4 && month <= 7) {
     const summerMessages = [
-      // May — säsongen startar, öppen tonalitet
+      // May, säsongen startar, öppen tonalitet
       "Sommarsäsongen är igång, boka kostnadsfri takkontroll och få offert inom 24h",
-      // June — kalendern börjar fyllas, mjuk urgency
+      // June, kalendern börjar fyllas, mjuk urgency
       "Sommarens kalender börjar fyllas, boka takkontroll så får du snabb start",
-      // July — full högsäsong, stark scarcity
+      // July, full högsäsong, stark scarcity
       "Få lediga sommartider kvar, boka takkontroll innan vi blir fullbokade",
-      // August — pivot mot höst innan säsongen är slut
+      // August, pivot mot höst innan säsongen är slut
       "Sommaren går mot sitt slut, boka takkontroll så säkrar vi hösttider åt dig",
     ];
     return summerMessages[month - 4];
