@@ -2,12 +2,11 @@
 
 function getSeasonMessage(): string {
   const month = new Date().getMonth();
-  if (month >= 2 && month <= 4) {
+  if (month >= 2 && month <= 3) {
     return "Våren är bästa tiden för takbyte, boka takkontroll nu för att säkra plats i sommar";
   }
-  if (month >= 5 && month <= 7) {
-    const monthNames = ["juni", "juli", "augusti"];
-    return `Hög säsong, begränsat antal lediga projekt kvar i ${monthNames[month - 5]}. Boka idag.`;
+  if (month >= 4 && month <= 7) {
+    return "Sommarsäsongen är igång, boka kostnadsfri takkontroll och få offert inom 24h";
   }
   if (month >= 8 && month <= 10) {
     return "Hösten närmar sig, se till att ditt tak är klart innan vintern. Boka takkontroll nu.";
