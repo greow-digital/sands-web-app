@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import OmradenInline from "@/components/OmradenInline";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -250,6 +251,8 @@ export default function OmOssPage() {
             </Link>
           </div>
         </section>
+
+        <OmradenInline />
       </main>
       <Footer />
     </>

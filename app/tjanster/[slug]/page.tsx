@@ -9,6 +9,7 @@ import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { tjanster, getTjanst } from "@/lib/tjanster";
 import { pageMeta } from "@/lib/seo";
+import OmradenInline from "@/components/OmradenInline";
 
 // Per-slug SEO overrides. Only listed slugs get the hand-tuned copy
 // below; everything else falls back to the generic `${title} i Stockholm`
@@ -406,6 +407,8 @@ export default async function TjanstPage({
             </div>
           </div>
         </section>
+
+        <OmradenInline />
       </main>
       <Footer />
     </>

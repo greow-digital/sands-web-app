@@ -17,6 +17,11 @@ const områdenLinks = [
   { href: "/omraden/nacka", label: "Nacka" },
   { href: "/omraden/jarfalla", label: "Järfälla" },
   { href: "/omraden/huddinge", label: "Huddinge" },
+  { href: "/omraden/vallentuna", label: "Vallentuna" },
+  { href: "/omraden/varmdo", label: "Värmdö" },
+  { href: "/omraden/vaxholm", label: "Vaxholm" },
+  { href: "/omraden/sigtuna", label: "Sigtuna" },
+  { href: "/omraden/upplands-vasby", label: "Upplands Väsby" },
   { href: "/omraden", label: "Alla områden →" },
 ];
 

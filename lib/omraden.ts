@@ -171,6 +171,7 @@ export const omraden: Ort[] = [
       { slug: "stockholm", name: "Stockholm" },
       { slug: "danderyd", name: "Danderyd" },
       { slug: "nacka", name: "Nacka" },
+      { slug: "vaxholm", name: "Vaxholm" },
     ],
   },
   {
@@ -184,6 +185,7 @@ export const omraden: Ort[] = [
       { slug: "stockholm", name: "Stockholm" },
       { slug: "sundbyberg", name: "Sundbyberg" },
       { slug: "sollentuna", name: "Sollentuna" },
+      { slug: "bromma", name: "Bromma" },
     ],
   },
   {
@@ -197,6 +199,7 @@ export const omraden: Ort[] = [
       { slug: "stockholm", name: "Stockholm" },
       { slug: "solna", name: "Solna" },
       { slug: "jarfalla", name: "Järfälla" },
+      { slug: "bromma", name: "Bromma" },
     ],
   },
   {
@@ -210,6 +213,7 @@ export const omraden: Ort[] = [
       { slug: "jarfalla", name: "Järfälla" },
       { slug: "stockholm", name: "Stockholm" },
       { slug: "upplands-bro", name: "Upplands-Bro" },
+      { slug: "bromma", name: "Bromma" },
     ],
   },
   {
@@ -287,6 +291,7 @@ export const omraden: Ort[] = [
     grannar: [
       { slug: "nacka", name: "Nacka" },
       { slug: "osteraker", name: "Österåker" },
+      { slug: "vaxholm", name: "Vaxholm" },
     ],
   },
   {
@@ -301,6 +306,7 @@ export const omraden: Ort[] = [
       { slug: "vallentuna", name: "Vallentuna" },
       { slug: "varmdo", name: "Värmdö" },
       { slug: "norrtalje", name: "Norrtälje" },
+      { slug: "vaxholm", name: "Vaxholm" },
     ],
   },
   {

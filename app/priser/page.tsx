@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import Takraknare from "@/components/Takraknare";
+import OmradenInline from "@/components/OmradenInline";
 
 import { pageMeta } from "@/lib/seo";
 
@@ -231,6 +232,8 @@ export default function PriserPage() {
             </div>
           </div>
         </section>
+
+        <OmradenInline />
 
         {/* Formulär */}
         <section className="py-16 lg:py-20 border-t border-gray-100">
