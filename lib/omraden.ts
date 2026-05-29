@@ -118,6 +118,61 @@ export const omraden: Ort[] = [
       { slug: "jarfalla", name: "Järfälla" },
       { slug: "solna", name: "Solna" },
       { slug: "ekero", name: "Ekerö" },
+      { slug: "vallingby", name: "Vällingby" },
+      { slug: "hasselby", name: "Hässelby" },
+    ],
+  },
+  {
+    slug: "hasselby",
+    name: "Hässelby",
+    region: "Stockholm stad",
+    beskrivning:
+      "Hässelby är en stadsdel i nordvästra Stockholm med ett stort villabestånd från 1950–1970-talet och senare radhusområden. Vi utför takomläggningar i Hässelby villastad, Hässelby gård och Hässelby strand.",
+    stadsdelar: "Hässelby villastad, Hässelby gård, Hässelby strand, Smedshagen",
+    grannar: [
+      { slug: "vallingby", name: "Vällingby" },
+      { slug: "spanga", name: "Spånga" },
+      { slug: "bromma", name: "Bromma" },
+      { slug: "jarfalla", name: "Järfälla" },
+    ],
+  },
+  {
+    slug: "vallingby",
+    name: "Vällingby",
+    region: "Stockholm stad",
+    beskrivning:
+      "Vällingby är en stadsdel i västra Stockholm, känd som 50-talets modellförort med både flerbostadshus och villor. Vi byter och lägger om tak på radhus och villor i Vällingby, Råcksta och Beckomberga.",
+    stadsdelar: "Vällingby centrum, Råcksta, Beckomberga, Vinsta",
+    grannar: [
+      { slug: "hasselby", name: "Hässelby" },
+      { slug: "spanga", name: "Spånga" },
+      { slug: "bromma", name: "Bromma" },
+    ],
+  },
+  {
+    slug: "spanga",
+    name: "Spånga",
+    region: "Stockholm stad",
+    beskrivning:
+      "Spånga är en stadsdel i nordvästra Stockholm med en blandning av äldre villor i Sundby och Solhem och senare radhusområden. Vi utför takomläggningar i Spånga centrum, Sundby, Solhem och Bromsten.",
+    stadsdelar: "Spånga centrum, Sundby, Solhem, Bromsten, Flysta",
+    grannar: [
+      { slug: "hasselby", name: "Hässelby" },
+      { slug: "vallingby", name: "Vällingby" },
+      { slug: "jarfalla", name: "Järfälla" },
+      { slug: "sundbyberg", name: "Sundbyberg" },
+    ],
+  },
+  {
+    slug: "enskede",
+    name: "Enskede",
+    region: "Stockholm stad",
+    beskrivning:
+      "Enskede är en stadsdel i södra Stockholm känd för trädgårdsstaden med små 20- och 30-talsvillor. Vi har lång erfarenhet av takomläggningar på de karaktäristiska tegelhusen i Enskededalen, Gamla Enskede och Stureby.",
+    stadsdelar: "Gamla Enskede, Enskededalen, Stureby, Enskede gård",
+    grannar: [
+      { slug: "stockholm", name: "Stockholm" },
+      { slug: "huddinge", name: "Huddinge" },
     ],
   },
   {

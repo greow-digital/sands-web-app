@@ -72,6 +72,26 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
     description:
       "Sands Entreprenad är baserade i Järfälla och servar hela området. 2 500+ kunder, 30 års garanti, fast pris från start.",
   },
+  hasselby: {
+    title: "Takläggare Hässelby: takbyte med fast pris | Sands Entreprenad",
+    description:
+      "Takläggare i Hässelby villastad, Hässelby gård och Hässelby strand. Erfarna av 50- och 60-talsvillor. 30 års garanti, fast pris, ROT-avdrag.",
+  },
+  vallingby: {
+    title: "Takläggare Vällingby: lokal takläggning | Sands Entreprenad",
+    description:
+      "Takläggare i Vällingby, Råcksta och Beckomberga. Specialister på radhus och villor i 50-tals ABC-stad. 30 års garanti, fast pris, kostnadsfri offert.",
+  },
+  spanga: {
+    title: "Takläggare Spånga: takbyte med fast pris | Sands Entreprenad",
+    description:
+      "Takläggare i Spånga centrum, Sundby, Solhem och Bromsten. 30 års Monier-garanti, fast pris från start, ROT-avdrag tillämpas.",
+  },
+  enskede: {
+    title: "Takläggare Enskede: 20- och 30-talsvillor | Sands Entreprenad",
+    description:
+      "Takläggare i Enskede trädgårdsstad, Enskededalen och Stureby. Specialister på tegeltak och äldre villor. 30 års garanti, fast pris, ROT-avdrag.",
+  },
 };
 
 export async function generateMetadata({
