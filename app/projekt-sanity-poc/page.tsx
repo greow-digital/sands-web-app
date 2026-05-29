@@ -54,6 +54,9 @@ export default async function ProjektSanityPocPage() {
   });
 
   const totalProjekt = density.totalCustomers + pins.length;
+  // Rundas ner till närmaste 500 så trust-signalen alltid ser ärlig ut
+  // ("över 2 500"), oavsett om datat just passerat 2 611 eller 2 999.
+  const trustVolym = Math.floor(totalProjekt / 500) * 500;
 
   return (
     <>
@@ -101,13 +104,16 @@ export default async function ProjektSanityPocPage() {
                   <span style={{ color: "var(--color-primary)" }}>projekt</span>
                 </h1>
                 <p className="text-base lg:text-lg text-gray-600 leading-relaxed max-w-lg">
-                  {totalProjekt.toLocaleString("sv-SE")}+ utförda takprojekt i
-                  Stockholmsregionen.{" "}
+                  Sedan 2016 har vi lagt om över{" "}
                   <strong className="font-semibold text-[#2B74FC]">
-                    {pins.length} kundcase
+                    {trustVolym.toLocaleString("sv-SE")} tak
                   </strong>{" "}
-                  finns publicerade med bilder och detaljer. Klicka på en blå
-                  pin i kartan eller bläddra bland korten nedan.
+                  i Stockholmsregionen. Här visar vi{" "}
+                  <strong className="font-semibold text-[#2B74FC]">
+                    {pins.length}
+                  </strong>{" "}
+                  av de projekt vi är mest stolta över, med bilder och detaljer
+                  för varje takbyte.
                 </p>
               </div>
 
