@@ -22,6 +22,7 @@ export type ProjektCard = {
   kvm: number | null;
   ar: number | null;
   huvudbild: SanityImageWithMeta | null;
+  bilder: SanityImageWithMeta[] | null;
 };
 
 export type ProjektDetail = ProjektCard & {

@@ -15,6 +15,15 @@ const PROJEKT_CARD_FIELDS = /* groq */ `
       url,
       metadata { lqip, dimensions { width, height } }
     }
+  },
+  "bilder": bilder[0...2] {
+    ...,
+    _key,
+    asset->{
+      _id,
+      url,
+      metadata { lqip, dimensions { width, height } }
+    }
   }
 `;
 
