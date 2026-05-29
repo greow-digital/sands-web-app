@@ -7,10 +7,21 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
-import { projekt, getProjekt } from "@/lib/projekt";
+import { client } from "@/sanity/lib/client";
+import {
+  ALL_PROJEKT_QUERY,
+  PROJEKT_BY_SLUG_QUERY,
+  PROJEKT_BY_ORT_QUERY,
+} from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
+import type { ProjektCard, ProjektDetail } from "@/sanity/lib/types";
+import { pageMeta } from "@/lib/seo";
 
 export async function generateStaticParams() {
-  return projekt.map((p) => ({ slug: p.slug }));
+  const all = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
+  return all
+    .filter((p): p is ProjektCard & { slug: string } => Boolean(p.slug))
+    .map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -19,13 +30,17 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const p = getProjekt(slug);
+  const p = (await client.fetch(PROJEKT_BY_SLUG_QUERY, {
+    slug,
+  })) as ProjektDetail | null;
   if (!p) return {};
-  return {
-    alternates: { canonical: `/projekt/${slug}` },
+  return pageMeta({
+    path: `/projekt/${slug}`,
     title: `${p.title} | Sands Entreprenad`,
-    description: p.beskrivning,
-  };
+    description:
+      p.beskrivning?.slice(0, 160) ??
+      `Takprojekt i ${p.ort ?? "Stockholm"} utfört av Sands Entreprenad.`,
+  });
 }
 
 export default async function ProjektDetailPage({
@@ -34,26 +49,37 @@ export default async function ProjektDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const p = getProjekt(slug);
-  if (!p) notFound();
+  const p = (await client.fetch(PROJEKT_BY_SLUG_QUERY, {
+    slug,
+  })) as ProjektDetail | null;
+  if (!p || !p.huvudbild) notFound();
 
-  const relaterade = projekt
+  const ortProjekt = (await client.fetch(PROJEKT_BY_ORT_QUERY, {
+    ort: p.ort ?? "",
+  })) as ProjektCard[];
+  const relaterade = ortProjekt
     .filter((x) => x.slug !== p.slug && x.typ === p.typ)
     .slice(0, 3);
+
+  const heroHuvudbild = urlFor(p.huvudbild)
+    .width(1600)
+    .height(2000)
+    .fit("crop")
+    .url();
 
   return (
     <>
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
         <PageHero
-          eyebrow={p.typ}
-          title={p.title.split(", ")[0]}
-          titleAccent={p.title.split(", ")[1] || ""}
-          description={p.beskrivning}
+          eyebrow={p.typ ?? ""}
+          title={p.title?.split(", ")[0] ?? ""}
+          titleAccent={p.title?.split(", ")[1] || ""}
+          description={p.beskrivning ?? ""}
           breadcrumbs={[
             { label: "Hem", href: "/" },
             { label: "Projekt", href: "/projekt" },
-            { label: p.ort },
+            { label: p.ort ?? "" },
           ]}
         />
 
@@ -62,25 +88,16 @@ export default async function ProjektDetailPage({
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
             <div className="flex flex-wrap gap-6 text-sm text-gray-500">
               <span className="flex items-center gap-2">
-                <MapPin
-                  size={14}
-                  style={{ color: "var(--color-primary)" }}
-                />
+                <MapPin size={14} style={{ color: "var(--color-primary)" }} />
                 {p.ort}
               </span>
               <span className="flex items-center gap-2">
-                <Ruler
-                  size={14}
-                  style={{ color: "var(--color-primary)" }}
-                />
+                <Ruler size={14} style={{ color: "var(--color-primary)" }} />
                 {p.kvm} kvm
               </span>
               <span className="flex items-center gap-2">
-                <Calendar
-                  size={14}
-                  style={{ color: "var(--color-primary)" }}
-                />
-                {p.år}
+                <Calendar size={14} style={{ color: "var(--color-primary)" }} />
+                {p.ar}
               </span>
             </div>
           </div>
@@ -91,43 +108,64 @@ export default async function ProjektDetailPage({
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-start">
               <div>
-                {/* Bildgalleri */}
-                {p.images && p.images.length > 1 ? (
+                {p.bilder && p.bilder.length > 0 ? (
                   <div className="grid grid-cols-2 gap-3 mb-8">
-                    {/* Första bilden stor */}
-                    <div className="relative aspect-[4/5] rounded-2xl overflow-hidden col-span-2">
+                    <div className="relative aspect-[4/5] rounded-2xl overflow-hidden col-span-2 bg-gray-100">
                       <Image
-                        src={p.images[0]}
-                        alt={p.title}
+                        src={heroHuvudbild}
+                        alt={p.huvudbild.alt || p.title || ""}
                         fill
                         sizes="(max-width: 1024px) 100vw, 60vw"
                         className="object-cover"
+                        placeholder={
+                          p.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
+                        }
+                        blurDataURL={p.huvudbild?.asset?.metadata?.lqip ?? undefined}
                       />
                     </div>
-                    {/* Övriga bilder i grid */}
-                    {p.images.slice(1).map((img, idx) => (
-                      <div
-                        key={idx}
-                        className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100"
-                      >
-                        <Image
-                          src={img}
-                          alt={`${p.title}, bild ${idx + 2}`}
-                          fill
-                          sizes="(max-width: 1024px) 50vw, 30vw"
-                          className="object-cover"
-                        />
-                      </div>
-                    ))}
+                    {p.bilder.map((img, idx) => {
+                      if (!img.asset) return null;
+                      const url = urlFor(img)
+                        .width(900)
+                        .height(675)
+                        .fit("crop")
+                        .url();
+                      return (
+                        <div
+                          key={img._key}
+                          className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100"
+                        >
+                          <Image
+                            src={url}
+                            alt={img.alt || `${p.title}, bild ${idx + 2}`}
+                            fill
+                            sizes="(max-width: 1024px) 50vw, 30vw"
+                            className="object-cover"
+                            placeholder={
+                              img.asset?.metadata?.lqip ? "blur" : "empty"
+                            }
+                            blurDataURL={img.asset?.metadata?.lqip ?? undefined}
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
                 ) : (
                   <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-8 bg-gray-100">
                     <Image
-                      src={p.image}
-                      alt={p.title}
+                      src={urlFor(p.huvudbild)
+                        .width(1600)
+                        .height(1000)
+                        .fit("crop")
+                        .url()}
+                      alt={p.huvudbild.alt || p.title || ""}
                       fill
                       sizes="(max-width: 1024px) 100vw, 60vw"
                       className="object-cover"
+                      placeholder={
+                        p.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
+                      }
+                      blurDataURL={p.huvudbild?.asset?.metadata?.lqip ?? undefined}
                     />
                   </div>
                 )}
@@ -146,35 +184,39 @@ export default async function ProjektDetailPage({
                 </p>
 
                 <div className="p-6 rounded-2xl border border-gray-100 bg-[#F8F9FB] space-y-3">
-                  <div>
-                    <span
-                      className="text-xs font-semibold uppercase tracking-[0.15em]"
-                      style={{ color: "var(--color-primary)" }}
-                    >
-                      Material
-                    </span>
-                    <p className="text-sm text-gray-700 mt-0.5">
-                      {p.material}
-                    </p>
-                  </div>
-                  <div>
-                    <span
-                      className="text-xs font-semibold uppercase tracking-[0.15em]"
-                      style={{ color: "var(--color-primary)" }}
-                    >
-                      Typ
-                    </span>
-                    <p className="text-sm text-gray-700 mt-0.5">{p.typ}</p>
-                  </div>
-                  <div>
-                    <span
-                      className="text-xs font-semibold uppercase tracking-[0.15em]"
-                      style={{ color: "var(--color-primary)" }}
-                    >
-                      Plats
-                    </span>
-                    <p className="text-sm text-gray-700 mt-0.5">{p.ort}</p>
-                  </div>
+                  {p.material && (
+                    <div>
+                      <span
+                        className="text-xs font-semibold uppercase tracking-[0.15em]"
+                        style={{ color: "var(--color-primary)" }}
+                      >
+                        Material
+                      </span>
+                      <p className="text-sm text-gray-700 mt-0.5">{p.material}</p>
+                    </div>
+                  )}
+                  {p.typ && (
+                    <div>
+                      <span
+                        className="text-xs font-semibold uppercase tracking-[0.15em]"
+                        style={{ color: "var(--color-primary)" }}
+                      >
+                        Typ
+                      </span>
+                      <p className="text-sm text-gray-700 mt-0.5">{p.typ}</p>
+                    </div>
+                  )}
+                  {p.ort && (
+                    <div>
+                      <span
+                        className="text-xs font-semibold uppercase tracking-[0.15em]"
+                        style={{ color: "var(--color-primary)" }}
+                      >
+                        Plats
+                      </span>
+                      <p className="text-sm text-gray-700 mt-0.5">{p.ort}</p>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -199,35 +241,47 @@ export default async function ProjektDetailPage({
                   color: "var(--color-dark)",
                 }}
               >
-                Fler {p.typ.toLowerCase()}-projekt
+                Fler {(p.typ ?? "").toLowerCase()}-projekt
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                {relaterade.map((r) => (
-                  <Link
-                    key={r.slug}
-                    href={`/projekt/${r.slug}`}
-                    className="group"
-                  >
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3 bg-gray-100">
-                      <Image
-                        src={r.image}
-                        alt={r.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <h3
-                      className="text-sm font-bold mb-0.5 group-hover:text-[#2B74FC] transition-colors"
-                      style={{ color: "var(--color-dark)" }}
+                {relaterade.map((r) => {
+                  if (!r.slug || !r.huvudbild) return null;
+                  const url = urlFor(r.huvudbild)
+                    .width(600)
+                    .height(450)
+                    .fit("crop")
+                    .url();
+                  return (
+                    <Link
+                      key={r._id}
+                      href={`/projekt/${r.slug}`}
+                      className="group"
                     >
-                      {r.title}
-                    </h3>
-                    <div className="flex items-center gap-1 text-xs text-gray-500">
-                      <MapPin size={10} /> {r.ort} · {r.kvm} kvm
-                    </div>
-                  </Link>
-                ))}
+                      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3 bg-gray-100">
+                        <Image
+                          src={url}
+                          alt={r.title ?? ""}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 33vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          placeholder={
+                            r.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
+                          }
+                          blurDataURL={r.huvudbild?.asset?.metadata?.lqip ?? undefined}
+                        />
+                      </div>
+                      <h3
+                        className="text-sm font-bold mb-0.5 group-hover:text-[#2B74FC] transition-colors"
+                        style={{ color: "var(--color-dark)" }}
+                      >
+                        {r.title}
+                      </h3>
+                      <div className="flex items-center gap-1 text-xs text-gray-500">
+                        <MapPin size={10} /> {r.ort} · {r.kvm} kvm
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </section>

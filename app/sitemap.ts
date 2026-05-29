@@ -1,12 +1,15 @@
 import { MetadataRoute } from "next";
 import { tjanster } from "@/lib/tjanster";
 import { omraden } from "@/lib/omraden";
-import { projekt } from "@/lib/projekt";
 import { artiklar } from "@/lib/blogg";
+import { client } from "@/sanity/lib/client";
+import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
+import type { ProjektCard } from "@/sanity/lib/types";
 
 const BASE = "https://www.sandsab.se";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const projekt = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
   const staticPages = [
     { url: BASE, priority: 1.0 },
     { url: `${BASE}/tjanster`, priority: 0.9 },
@@ -41,12 +44,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const projektSidor = projekt.map((p) => ({
-    url: `${BASE}/projekt/${p.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "yearly" as const,
-    priority: 0.6,
-  }));
+  const projektSidor = projekt
+    .filter((p): p is ProjektCard & { slug: string } => Boolean(p.slug))
+    .map((p) => ({
+      url: `${BASE}/projekt/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    }));
 
   const bloggSidor = artiklar.map((a) => ({
     url: `${BASE}/blogg/${a.slug}`,

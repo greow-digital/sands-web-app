@@ -8,8 +8,12 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { omraden, getOrt } from "@/lib/omraden";
-import { getProjektByOrt } from "@/lib/projekt";
 import { pageMeta } from "@/lib/seo";
+import { client } from "@/sanity/lib/client";
+import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
+import type { ProjektCard } from "@/sanity/lib/types";
+import { matchProjektForOrt } from "@/lib/projekt-matching";
+import RelateradeProjekt from "@/components/RelateradeProjekt";
 
 export async function generateStaticParams() {
   return omraden.map((o) => ({ slug: o.slug }));
@@ -116,7 +120,8 @@ export default async function OmradesPage({
     description: ort.beskrivning,
   };
 
-  const ortProjekt = getProjektByOrt(ort.name);
+  const allaProjekt = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
+  const ortProjekt = matchProjektForOrt(allaProjekt, slug, ort.name);
 
   return (
     <>
@@ -298,75 +303,12 @@ export default async function OmradesPage({
         </section>
 
         {/* ── PROJEKT I OMRÅDET ────────────────── */}
-        {ortProjekt.length > 0 && (
-          <section className="py-16 lg:py-24 bg-white border-t border-gray-100">
-            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex items-end justify-between mb-10">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
-                    Referenser
-                  </p>
-                  <h2
-                    className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em]"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      color: "var(--color-dark)",
-                    }}
-                  >
-                    Projekt i {ort.name}
-                  </h2>
-                </div>
-                <Link
-                  href="/projekt"
-                  className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
-                >
-                  Alla projekt <ArrowRight size={14} />
-                </Link>
-              </div>
+        <RelateradeProjekt
+          projekt={ortProjekt}
+          heading={`Projekt vi har utfört i ${ort.name}`}
+          limit={6}
+        />
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-                {ortProjekt.slice(0, 8).map((p) => (
-                  <Link
-                    key={p.slug}
-                    href={`/projekt/${p.slug}`}
-                    className="group block"
-                  >
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-3 bg-gray-100">
-                      <Image
-                        src={p.image}
-                        alt={p.title}
-                        fill
-                        sizes="(max-width: 640px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <h3
-                      className="text-sm font-bold group-hover:text-[#2B74FC] transition-colors"
-                      style={{ color: "var(--color-dark)" }}
-                    >
-                      {p.title}
-                    </h3>
-                    <p className="text-xs text-gray-500 mt-0.5">
-                      {p.typ} · {p.kvm} kvm
-                    </p>
-                  </Link>
-                ))}
-              </div>
-
-              {ortProjekt.length > 8 && (
-                <div className="text-center mt-8">
-                  <Link
-                    href="/projekt"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
-                  >
-                    Se alla {ortProjekt.length} projekt i {ort.name}{" "}
-                    <ArrowRight size={14} />
-                  </Link>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
 
         {/* ── GRANNAR ───────────────────────────── */}
         {ort.grannar.length > 0 && (

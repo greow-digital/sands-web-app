@@ -18,7 +18,8 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { omraden } from "@/lib/omraden";
-import { projekt } from "@/lib/projekt";
+import { client } from "@/sanity/lib/client";
+import { PROJEKT_COUNT_QUERY } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/basta-taklaggare-stockholm" },
@@ -199,7 +200,9 @@ const fragor = [
 // Component
 // ──────────────────────────────────────────────────────────
 
-export default function BastaTaklaggareStockholm() {
+export default async function BastaTaklaggareStockholm() {
+  const projektCount =
+    ((await client.fetch(PROJEKT_COUNT_QUERY)) as number) ?? 0;
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -657,7 +660,7 @@ export default function BastaTaklaggareStockholm() {
                 href="/projekt"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
               >
-                Se alla {projekt.length} projekt <ArrowRight size={14} />
+                Se alla {projektCount} projekt <ArrowRight size={14} />
               </Link>
             </div>
           </div>
