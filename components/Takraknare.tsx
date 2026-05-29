@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronDown, CheckCircle, AlertCircle } from "lucide-react";
 
@@ -56,24 +56,36 @@ const INGAR_EJ = [
   "Fasadställning runt hela huset",
 ];
 
+type GtagFn = (event: string, name: string, params: object) => void;
+
+function fireGtag(name: string, value: number) {
+  if (typeof window === "undefined" || !("gtag" in window)) return;
+  const w = window as unknown as { gtag: GtagFn };
+  w.gtag("event", name, {
+    event_category: "engagement",
+    event_label: "takraknare",
+    value,
+  });
+}
+
 export default function Takraknare() {
   // Default 130 m² landar på ~169 000 kr efter ROT, vilket matchar
   // exempelpriset på startsidan (sadeltak 140 m² från 169 000 kr).
   const [kvm, setKvm] = useState(130);
   const [open, setOpen] = useState(true);
+  const engagedRef = useRef(false);
   const r = calculate(kvm);
 
-  function handleCtaClick() {
-    if (typeof window !== "undefined" && "gtag" in window) {
-      const w = window as unknown as {
-        gtag: (event: string, name: string, params: object) => void;
-      };
-      w.gtag("event", "calculator_cta_click", {
-        event_category: "engagement",
-        event_label: "takraknare",
-        value: kvm,
-      });
+  function handleSliderChange(next: number) {
+    setKvm(next);
+    if (!engagedRef.current) {
+      engagedRef.current = true;
+      fireGtag("calculator_engage", next);
     }
+  }
+
+  function handleCtaClick() {
+    fireGtag("calculator_cta_click", kvm);
   }
 
   const sliderProgress = ((kvm - 60) / (300 - 60)) * 100;
@@ -139,7 +151,7 @@ export default function Takraknare() {
                 max={300}
                 step={5}
                 value={kvm}
-                onChange={(e) => setKvm(Number(e.target.value))}
+                onChange={(e) => handleSliderChange(Number(e.target.value))}
                 className="sands-slider w-full"
                 style={
                   {
