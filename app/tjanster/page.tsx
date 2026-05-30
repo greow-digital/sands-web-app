@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import LeadForm from "@/components/LeadForm";
 import { tjanster } from "@/lib/tjanster";
 
 import { pageMeta } from "@/lib/seo";
@@ -106,6 +107,69 @@ export default function TjansterPage() {
                   </div>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── BOKA TAKKONTROLL (formulär + trust) ── */}
+        <section className="py-16 lg:py-24 border-t border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                  Boka takkontroll
+                </p>
+                <h2
+                  className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em] mb-5"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Få fast pris på din tjänst, oavsett tak
+                </h2>
+                <p className="text-gray-600 mb-8 leading-relaxed">
+                  Vi gör en kostnadsfri takkontroll på plats och lämnar ett
+                  komplett fast pris inom 24 timmar. Inga dolda kostnader, inga
+                  säljsamtal i efterhand.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    "BraByggare 4.8★ med 54 omdömen",
+                    "2 500+ utförda projekt sedan 2016",
+                    "Monier-certifierad takpartner",
+                    "30 års tätt tak-garanti",
+                    "F-skatt, ansvars- och allriskförsäkring",
+                    "Fast pris i ABT-06-kontrakt",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm text-gray-700"
+                    >
+                      <CheckCircle
+                        size={16}
+                        className="shrink-0 mt-0.5"
+                        style={{ color: "var(--color-primary)" }}
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-gray-500">
+                  Svar inom 24 timmar. Du kan även ringa{" "}
+                  <a
+                    href="tel:0828388"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    08-28 38 88
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <aside className="lg:sticky lg:top-28 h-fit">
+                <LeadForm variant="section" />
+              </aside>
             </div>
           </div>
         </section>

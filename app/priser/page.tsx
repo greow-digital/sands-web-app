@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle, ArrowRight, Phone } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
@@ -146,13 +146,13 @@ export default function PriserPage() {
           </div>
         </section>
 
-        {/* Sands takpaket */}
+        {/* Sands takpaket + LeadForm sticky aside */}
         <section
           className="py-16 lg:py-24 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+            <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
                   Takpaket från Sands
@@ -174,7 +174,7 @@ export default function PriserPage() {
                   för sadeltak 140 m² med betongpannor efter ROT. Allt är
                   inkluderat, vi lämnar inga dolda notor.
                 </p>
-                <ul className="space-y-3">
+                <ul className="space-y-3 mb-10">
                   {ingår.map((item) => (
                     <li
                       key={item}
@@ -189,11 +189,9 @@ export default function PriserPage() {
                     </li>
                   ))}
                 </ul>
-              </div>
 
-              <div>
                 <h3
-                  className="text-xl font-bold mb-5"
+                  className="text-xl font-bold mb-4"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -212,49 +210,27 @@ export default function PriserPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-wrap gap-3">
-                  <Link
-                    href="/offert"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
-                    style={{ backgroundColor: "var(--color-primary)" }}
-                  >
-                    Boka kostnadsfri takkontroll <ArrowRight size={14} />
-                  </Link>
+
+                <p className="text-xs text-gray-500">
+                  Föredrar du telefon? Ring{" "}
                   <a
                     href="tel:0828388"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
-                    style={{ color: "var(--color-dark)" }}
+                    className="font-semibold text-[#2B74FC] hover:underline"
                   >
-                    <Phone size={14} /> 08-28 38 88
+                    08-28 38 88
                   </a>
-                </div>
+                  .
+                </p>
               </div>
+
+              <aside className="lg:sticky lg:top-28 h-fit">
+                <LeadForm variant="section" />
+              </aside>
             </div>
           </div>
         </section>
 
         <OmradenInline />
-
-        {/* Formulär */}
-        <section className="py-16 lg:py-20 border-t border-gray-100">
-          <div className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-8">
-              <h2
-                className="text-2xl lg:text-3xl font-extrabold tracking-[-0.02em] mb-2"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  color: "var(--color-dark)",
-                }}
-              >
-                Få ditt personliga prisförslag
-              </h2>
-              <p className="text-gray-500 text-sm">
-                Boka kostnadsfri takkontroll, vi återkommer inom 24h.
-              </p>
-            </div>
-            <LeadForm variant="section" />
-          </div>
-        </section>
       </main>
       <Footer />
     </>
