@@ -111,7 +111,7 @@ export const omraden: Ort[] = [
     name: "Bromma",
     region: "Stockholm stad",
     beskrivning:
-      "Bromma är en välmående stadsdel i västra Stockholm med ett stort antal villor från 1920–1950-talet. Vi har lång erfarenhet av att arbeta med de karakteristiska bungalowerna och 40-talsvillorna i Bromma.",
+      "Bromma är en stadsdel i västra Stockholm med ett varierat villabestånd. Vi utför takbyten och takomläggningar i hela Bromma, från Abrahamsberg och Nockeby till Bromma kyrka och Ulvsunda.",
     stadsdelar:
       "Abrahamsberg, Blackeberg, Bromma kyrka, Ulvsunda, Nockeby, Vällingby, Hässelby",
     grannar: [

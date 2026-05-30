@@ -56,7 +56,7 @@ const kriterier = [
     icon: Shield,
     titel: "2. Ansvarsförsäkring och allriskförsäkring",
     text: "Ett takbyte är ett känsligt moment där hela huset står utan tätskikt under flera dygn. Om det börjar regna kraftigt och vatten tar sig in: vem betalar för fuktskadade golv, möbler eller elektronik? En takläggare utan rätt försäkring kan inte ersätta dig om något går fel.",
-    sands: "Vi har fullvärdig ansvarsförsäkring (10 Mkr) och allriskförsäkring som täcker både arbetsskador och egendomsskador hos dig som kund. Försäkringsbevis lämnas alltid innan arbetet startar.",
+    sands: "Vi har fullvärdig ansvarsförsäkring och allriskförsäkring som täcker både arbetsskador och egendomsskador hos dig som kund.",
   },
   {
     icon: Award,
@@ -692,7 +692,7 @@ export default async function BastaTaklaggareStockholm() {
                 I <Link href="/omraden/bromma" className="text-[#2B74FC] font-semibold hover:underline">Bromma</Link> och <Link href="/omraden/lidingo" className="text-[#2B74FC] font-semibold hover:underline">Lidingö</Link> dominerar 1920–1950-talsvillor där underlagspappen ofta är original, vilket innebär att taket nästan alltid behöver totalrenovering snarare än bara byte av yttertaket. I <Link href="/omraden/taby" className="text-[#2B74FC] font-semibold hover:underline">Täby</Link>, <Link href="/omraden/sollentuna" className="text-[#2B74FC] font-semibold hover:underline">Sollentuna</Link> och <Link href="/omraden/danderyd" className="text-[#2B74FC] font-semibold hover:underline">Danderyd</Link> är 60–70-talsvillor med betongtakpannor vanligast, och pannorna närmar sig nu sin tekniska livslängd. I <Link href="/omraden/nacka" className="text-[#2B74FC] font-semibold hover:underline">Nacka</Link> och <Link href="/omraden/varmdo" className="text-[#2B74FC] font-semibold hover:underline">Värmdö</Link> är fritidshus som omvandlas till permanentbostäder en stor del av marknaden, vilket ofta kräver uppgradering till modern isolering och taksäkerhet samtidigt som taket byts.
               </p>
               <p>
-                <strong>Eternittak</strong> är fortfarande mycket vanliga i 50- och 60-talsbestånd i hela länet, särskilt i ytterstaden, Nacka, Tyresö och delar av Lidingö. Eternit innehåller asbest och får bara hanteras av certifierade saneringsföretag. En takläggare utan etablerat samarbete med en sanerare kan inte ta totalansvar för ett sådant projekt.
+                <strong>Eternittak</strong> är fortfarande mycket vanliga i 50- och 60-talsbestånd i hela länet, särskilt i ytterstaden, Nacka, Tyresö och delar av Lidingö. Eternit innehåller asbest och får bara hanteras av certifierade saneringsföretag.
               </p>
               <p>
                 Vi har varit aktiva i Stockholms län sedan starten och hanterar ungefär 50/50 mellan innerstad och kranskommuner. Vår produktionsledning känner till bygglovshanteringen i flertalet kommuner och vet exempelvis att <strong>Lidingö kommun</strong> har striktare estetiska krav på K-märkta hus än många andra, eller att <strong>Norrtälje</strong> ofta kräver lokaltransportlösningar på grund av smala vägar och ölandskap.

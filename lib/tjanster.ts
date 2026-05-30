@@ -423,7 +423,7 @@ export const tjanster: Tjanst[] = [
       },
       {
         q: "Vem ansvarar om sotaren ramlar?",
-        a: "Fastighetsägaren. Saknas eller är taksäkerheten bristfällig kan sotaren vägra utföra sitt arbete, och vid en olycka kan du som ägare hållas ansvarig. Försäkringen täcker inte alltid skador när säkerhetskraven inte uppfylls.",
+        a: "Som fastighetsägare har du ansvar för att taksäkerheten är godkänd. Saknas eller är den bristfällig kan sotaren vägra utföra sitt arbete tills brister åtgärdats.",
       },
       {
         q: "När krävs snörasskydd?",
