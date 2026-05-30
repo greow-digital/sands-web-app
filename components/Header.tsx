@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
 const tjänster = [
-  { href: "/tjanster/taklaggning", label: "Takomläggning" },
+  { href: "/tjanster/taklaggning", label: "Takläggning" },
   { href: "/tjanster/fasadrenovering", label: "Fasadrenovering" },
   { href: "/tjanster/takfonsterkupor", label: "Takfönster & takkupor" },
   { href: "/tjanster/hangrannorstupror", label: "Hängrännor & Vindskivor" },

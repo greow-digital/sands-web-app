@@ -20,6 +20,7 @@ export const metadata: Metadata = pageMeta({
 // Priority order, also drives the main nav. Update both together.
 const TJANST_ORDER = [
   "taklaggning",
+  "takbesiktning",
   "fasadrenovering",
   "takfonsterkupor",
   "hangrannorstupror",

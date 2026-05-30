@@ -25,6 +25,7 @@ const bildKarta: Record<string, string> = {
   takfonsterkupor: "/images/taktyp-plattak.jpg",
   hangrannorstupror: "/images/hangrannor-efter.jpg",
   taksakerhet: "/images/hero-sands-construction.jpg",
+  takbesiktning: "/images/hero-house.jpg",
   totalentreprenad: "/images/villa-render.jpg",
   fasadrenovering: "/images/about-sands-building.jpg",
   badrumsrenovering: "/images/villa-render.jpg",
@@ -36,10 +37,10 @@ export const tjanster: Tjanst[] = [
   {
     slug: "taklaggning",
     kategori: "tjanst",
-    title: "Takomläggning",
-    h1: "Takomläggning i Stockholm",
+    title: "Takläggning",
+    h1: "Takbyte, takomläggning & takrenovering i Stockholm",
     intro:
-      "Planerar du att lägga om taket? Sands Entreprenad utför kompletta takomläggningar i hela Stockholms län. Vi börjar alltid med en kostnadsfri takkontroll av ditt tak innan vi lämnar offert, så att du vet exakt vad som behövs och vad det kostar.",
+      "Komplett takbyte, omläggning av befintliga pannor eller riktade punktinsatser. Vi börjar alltid med en kostnadsfri takkontroll och rekommenderar det alternativ som faktiskt löser ditt problem.",
     text:
       "Vi arbetar med alla typer av tak, tegeltak, betongtak, plåttak och papptak. Som certifierad Monier Takpartner kan vi erbjuda Moniers Tätt tak-garanti på upp till 30 år vid komplett takomläggning med Moniers taksystem.\n\nVarje arbete är unikt och därför börjar vi alltid med en kostnadsfri takkontroll. Vid besiktningen får ni som kund en överblick på vilka åtgärder taket behöver. Vi arbetar genom totalentreprenad enligt ABT-06, vilket innebär att allt regleras i ett enda kontrakt till fast pris.",
     prisIntervall: "Från ca 1 200–2 000 kr/m² efter ROT-avdrag",
@@ -438,6 +439,37 @@ export const tjanster: Tjanst[] = [
       },
     ],
     relaterade: ["taklaggning", "hangrannorstupror"],
+  },
+  {
+    slug: "takbesiktning",
+    kategori: "tjanst",
+    title: "Takbesiktning",
+    h1: "Takbesiktning i Stockholm",
+    intro:
+      "Kostnadsfri takbesiktning av certifierad takläggare. Vi går upp på taket, bedömer skicket och ger en ärlig rekommendation. Bra inför takbyte, husköp eller för att veta hur länge taket håller till.",
+    text:
+      "En takbesiktning är en systematisk genomgång av takets skick. Vi inspekterar pannor och plåt, plåtdetaljer, hängrännor, skorsten utvändigt och vinden där det är åtkomligt.\n\nDu följer med på inspektionen om du vill. Efter genomgången går vi tillsammans igenom vad vi sett och vad som behöver göras, om något. Om åtgärd behövs lämnar vi fast pris direkt. Är taket i bra skick får du veta det.\n\nBesiktningen är kostnadsfri och utan förbindelse, oavsett om du väljer oss för efterföljande arbete eller inte.",
+    prism2: "0 kr",
+    prisIntervall: "Kostnadsfri",
+    faq: [
+      {
+        q: "Kostar takbesiktningen något?",
+        a: "Nej. Besiktningen är kostnadsfri och utan förbindelse att välja oss för efterföljande arbete.",
+      },
+      {
+        q: "Går ni upp på taket eller bara tittar nedifrån?",
+        a: "Vi går upp på taket. En seriös bedömning kräver att vi inspekterar pannor och plåtdetaljer på nära håll.",
+      },
+      {
+        q: "Kan jag boka besiktning inför ett husköp?",
+        a: "Ja. Vi prioriterar bostadsköp för snabbast möjliga tid och du får dokumentation som kan användas i förhandling med säljaren.",
+      },
+      {
+        q: "Vad är skillnaden mot offert?",
+        a: "Ingen i praktiken. Vid besiktning får du både skickbedömning och fast pris i samma besök.",
+      },
+    ],
+    relaterade: ["taklaggning", "taksakerhet"],
   },
   {
     slug: "totalentreprenad",
