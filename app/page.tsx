@@ -89,7 +89,11 @@ const eternitFaq = [
   },
   {
     q: "Kan jag använda ROT-avdrag?",
-    a: "Ja. ROT-avdraget innebär att du får tillbaka 30% av arbetskostnaden direkt på fakturan. Vi hanterar ansökan åt dig.",
+    a: "Ja. ROT-avdraget innebär att du får tillbaka 30 % av arbetskostnaden direkt på fakturan, max 50 000 kr per person och år (kombinerat med RUT max 75 000 kr). Endast arbetskostnaden ger avdrag, inte material. Vi sköter ansökan åt dig.",
+  },
+  {
+    q: "Behöver jag bygglov för takbyte?",
+    a: "För en- och tvåfamiljshus krävs inte längre bygglov för takbyte sedan 1 december 2025, även om du byter taktyp eller färg. För flerbostadshus eller kulturhistoriskt skyddade byggnader kan bygglov fortfarande krävas. Vi kontrollerar alltid innan vi börjar.",
   },
   {
     q: "Vad innebär Monier Tätt tak-garanti?",

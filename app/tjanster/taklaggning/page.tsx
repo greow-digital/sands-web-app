@@ -12,13 +12,22 @@ import { client } from "@/sanity/lib/client";
 import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import type { ProjektCard } from "@/sanity/lib/types";
 import { pageMeta } from "@/lib/seo";
+import {
+  FAQ_BYGGLOV,
+  FAQ_MATERIAL,
+  FAQ_MONIER,
+  FAQ_ROT,
+  FAQ_SNORAS,
+} from "@/lib/faq-snippets";
+import SourcesFooter from "@/components/SourcesFooter";
+import TrustPillars from "@/components/TrustPillars";
 
 export const metadata: Metadata = pageMeta({
   path: "/tjanster/taklaggning",
   title:
-    "Takbyte, takomläggning & takrenovering i Stockholm | Sands Entreprenad",
+    "Takläggning Stockholm: takbyte, takomläggning & renovering | Sands AB",
   description:
-    "Komplett takbyte, takomläggning eller punktinsats i Stockholm. Fast pris efter kostnadsfri takkontroll, 30 års Monier-garanti, ROT-avdrag. Få prisförslag inom 24 h.",
+    "Erfaren takläggare i Stockholm. Takbyte, takomläggning och takrenovering med fast pris och 30 års Monier-garanti. Slipp bygglov sedan 1 dec 2025. Få prisförslag inom 24 h.",
 });
 
 // Pris-formel matchar Takräknaren (inkl 25 % moms, ROT-cap 50 000 kr).
@@ -39,10 +48,12 @@ function formatKr(n: number) {
   return rounded.toLocaleString("sv-SE") + " kr";
 }
 
-const faq = [
+// Sidan har en fokuserad introduktions-FAQ + de delade snippets för
+// regler/garantier (FAQ_ROT, FAQ_BYGGLOV, FAQ_MONIER, FAQ_SNORAS).
+const faqIntro = [
   {
     q: "Vad är skillnaden mellan takbyte, takomläggning och takrenovering?",
-    a: "Takbyte innebär att hela taket rivs och ersätts med nytt material (pannor, papp, läkt). Takomläggning innebär att vi behåller befintliga pannor men byter underlagspapp och läkt — du sparar 30–40 % mot fullt byte om pannorna är hela. Takrenovering är riktade punktinsatser (laga läckage, byta enstaka pannor, nya hängrännor) utan att hela taket görs om.",
+    a: "Takbyte innebär att hela taket rivs och ersätts med nytt material (pannor, papp, läkt). Takomläggning innebär att vi behåller befintliga pannor men byter underlagspapp och läkt, du sparar 30-40 % mot fullt byte om pannorna är hela. Takrenovering är riktade punktinsatser (laga läckage, byta enstaka pannor, nya hängrännor) utan att hela taket görs om.",
   },
   {
     q: "Hur vet jag vilket alternativ jag behöver?",
@@ -50,27 +61,15 @@ const faq = [
   },
   {
     q: "Hur länge tar ett takbyte?",
-    a: "5–10 arbetsdagar för en normalstor villa, beroende på storlek, material och komplexitet. Omläggning tar oftast 4–7 dagar. Vi täcker alltid taket med presenningar varje kväll.",
+    a: "5-10 arbetsdagar för en normalstor villa, beroende på storlek, material och komplexitet. Omläggning tar oftast 4-7 dagar. Vi täcker alltid taket med presenningar varje kväll.",
   },
   {
     q: "Vilket material ska jag välja?",
-    a: "Betongpannor är prisvärt och håller 50+ år. Tegel ger klassiskt utseende och håller minst lika länge. Plåttak (bandtäckt) håller 60+ år och är dyrast men har lägst underhåll. Vi går igenom valet på besöket utifrån din villa.",
-  },
-  {
-    q: "Får jag bygglov för takbyte?",
-    a: "Om du byter till samma typ av tak behövs oftast inget bygglov. Vid taktypsbyte (t.ex. tegel till plåt) krävs ofta bygglov. Vi hjälper dig med ansökan om det behövs.",
-  },
-  {
-    q: "Hur fungerar ROT-avdraget?",
-    a: "Du får 30 % rabatt på arbetskostnaden direkt på fakturan. Vi sköter ansökan till Skatteverket åt dig. Maxbeloppet är 50 000 kr per person per år, så vid två ägare kan ROT bli upp till 100 000 kr.",
-  },
-  {
-    q: "Vilken garanti gäller?",
-    a: "Som certifierad Monier Takpartner kan vi erbjuda upp till 30 års tätt-tak-garanti vid komplett takbyte eller takomläggning med Moniers taksystem. Garantin täcker både material och täthet i taket.",
+    a: "Betongpannor är prisvärt och håller 40-60 år. Tegel ger klassiskt utseende och håller 50-100 år. Plåttak (bandtäckt) håller 40-70 år och har lägst underhåll. Papp/asfalt 20-30 år. Vi går igenom valet på besöket utifrån din villa.",
   },
   {
     q: "Vad ingår i det fasta priset?",
-    a: "Allt: rivning, bortforsling, ny underlagspapp, ströläkt och bärläkt, nya pannor eller plåt, hängrännor och stuprör, vindskivor, plåtdetaljer, ställning och container. Slutbesiktning ingår också. Inga dolda kostnader.",
+    a: "Rivning, bortforsling, ny underlagspapp, ströläkt och bärläkt, nya pannor eller plåt, hängrännor och stuprör, vindskivor, plåtdetaljer, ställning och container. Slutbesiktning ingår också. Inga dolda kostnader.",
   },
   {
     q: "Vad kan tillkomma i pris?",
@@ -78,8 +77,18 @@ const faq = [
   },
   {
     q: "Behöver jag flytta saker eller bo någon annanstans?",
-    a: "Nej. Dammbildning är minimal och du kan bo kvar hela tiden. Vi arbetar 07:00–17:00 vardagar. Eventuella känsliga föremål på vinden bör täckas över.",
+    a: "Nej. Dammbildning är minimal och du kan bo kvar hela tiden. Vi arbetar 07:00-17:00 vardagar. Eventuella känsliga föremål på vinden bör täckas över.",
   },
+];
+
+// Sammanslagen lista för JSON-LD + FAQ-rendering på sidan.
+const faq = [
+  ...faqIntro,
+  ...FAQ_BYGGLOV,
+  ...FAQ_ROT,
+  ...FAQ_MONIER,
+  ...FAQ_MATERIAL,
+  ...FAQ_SNORAS,
 ];
 
 const faqLd = {
@@ -168,7 +177,7 @@ export default async function TaklaggningPage() {
           eyebrow="Takläggning"
           title="Takbyte, takomläggning &"
           titleAccent="takrenovering"
-          description="Komplett takbyte, omläggning av befintliga pannor eller riktade punktinsatser, i Stockholm och hela länet. Fast pris efter kostnadsfri takkontroll, 30 års Monier-garanti, ROT-avdrag tillämpas."
+          description="Komplett takbyte, omläggning av befintliga pannor eller riktade punktinsatser i Stockholm och hela länet. Fast pris efter kostnadsfri takkontroll, 30 års Monier-garanti, ROT-avdrag direkt på fakturan. Sedan 1 dec 2025 krävs inget bygglov för takbyte på villa."
           breadcrumbs={[
             { label: "Hem", href: "/" },
             { label: "Tjänster", href: "/tjanster" },
@@ -177,6 +186,78 @@ export default async function TaklaggningPage() {
           backgroundImage="/images/hero-house.jpg"
           imageAlt="Villa i Stockholm med nylagt tak"
         />
+
+        {/* ── STICKY JUMP-NAV ──────────────────── */}
+        <nav
+          className="sticky top-16 lg:top-20 z-30 bg-white/95 backdrop-blur border-b border-gray-100"
+          aria-label="Hoppa till sektion"
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <ul className="flex gap-1 sm:gap-2 overflow-x-auto py-3 -mx-1 sm:mx-0 text-sm">
+              {[
+                { href: "#takbyte", label: "Takbyte" },
+                { href: "#takomlaggning", label: "Takomläggning" },
+                { href: "#takrenovering", label: "Takrenovering" },
+                {
+                  href: "/tjanster/takbesiktning",
+                  label: "Takbesiktning",
+                  external: true,
+                },
+                {
+                  href: "/tjanster/taksakerhet",
+                  label: "Taksäkerhet",
+                  external: true,
+                },
+                { href: "#faq", label: "FAQ" },
+              ].map((item) => (
+                <li key={item.href} className="shrink-0">
+                  <a
+                    href={item.href}
+                    className="inline-flex items-center px-3 py-1.5 rounded-full text-gray-600 hover:text-[#2B74FC] hover:bg-blue-50 transition-colors font-medium"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
+        {/* ── BYGGLOV-NYHET ────────────────────── */}
+        <section
+          className="py-8 border-b border-gray-100"
+          style={{ backgroundColor: "rgba(43,116,252,0.06)" }}
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex items-start gap-4">
+            <span className="text-2xl shrink-0">🎉</span>
+            <div>
+              <p
+                className="text-sm font-bold mb-1"
+                style={{ color: "var(--color-dark)" }}
+              >
+                Slipp vänta på bygglov
+              </p>
+              <p className="text-sm text-gray-700 leading-relaxed">
+                Sedan 1 december 2025 krävs inte längre bygglov för takbyte på
+                en- och tvåfamiljshus, även om du byter taktyp eller färg. Det
+                betyder att vi kan starta så snart materialet är på plats.{" "}
+                <a
+                  href="#faq"
+                  className="font-semibold text-[#2B74FC] hover:underline"
+                >
+                  Läs villkoren →
+                </a>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── TRUST-STRIP ────────────────────────── */}
+        <section className="py-8 lg:py-10 border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <TrustPillars variant="horizontal" />
+          </div>
+        </section>
 
         {/* ── BESLUTSHJÄLP ───────────────────────── */}
         <section className="py-16 lg:py-24 border-b border-gray-100">
@@ -303,9 +384,10 @@ export default async function TaklaggningPage() {
                   vid komplett byte med Moniers taksystem.
                 </p>
                 <p className="text-gray-600 mb-8 leading-relaxed">
-                  Fast pris efter besiktning, inga tillägg under vägen. Vi
-                  hanterar bygglovsansökan om du byter taktyp (t.ex. tegel till
-                  plåt). Hela arbetet regleras i ett ABT-06-kontrakt.
+                  Fast pris efter besiktning, inga tillägg under vägen. Sedan
+                  1 december 2025 krävs inte längre bygglov för takbyte på en-
+                  och tvåfamiljshus, även vid byte av taktyp. Hela arbetet
+                  regleras i ett ABT-06-kontrakt.
                 </p>
 
                 <h3
@@ -401,13 +483,56 @@ export default async function TaklaggningPage() {
                   Uppskattningar för sadeltak utan större genomföringar.
                   Exakt pris efter kostnadsfri takkontroll.
                 </p>
-                <p className="text-sm">
+                <p className="text-sm mb-10">
                   <Link
                     href="/priser#takraknare"
                     className="font-semibold text-[#2B74FC] hover:underline"
                   >
                     Räkna ut ditt pris i Takräknaren →
                   </Link>
+                </p>
+
+                <h3
+                  className="text-lg font-bold mb-4"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Hur länge håller olika takmaterial?
+                </h3>
+                <div className="rounded-2xl border border-gray-100 bg-white overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-gray-50 text-left">
+                        <th className="px-4 py-3 font-semibold text-gray-700">
+                          Material
+                        </th>
+                        <th className="px-4 py-3 font-semibold text-gray-700 text-right">
+                          Förväntad livslängd
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-100">
+                      {[
+                        ["Betongpannor", "40-60 år"],
+                        ["Tegelpannor", "50-100 år"],
+                        ["Plåttak (bandtäckt)", "40-70 år"],
+                        ["Papp / asfalt", "20-30 år"],
+                      ].map(([m, l]) => (
+                        <tr key={m}>
+                          <td className="px-4 py-3 text-gray-700">{m}</td>
+                          <td className="px-4 py-3 text-gray-600 text-right tabular-nums">
+                            {l}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-xs text-gray-500 mt-3">
+                  Branschstandard. Faktisk livslängd beror på utförande, lutning
+                  och underhåll.
                 </p>
               </div>
 
@@ -643,11 +768,76 @@ export default async function TaklaggningPage() {
           </div>
         </section>
 
+        {/* ── ANDRA TAKARBETEN (cards till dedikerade sidor) ── */}
+        <section className="py-16 lg:py-20 border-t border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 max-w-2xl mx-auto">
+              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                Andra tjänster
+              </p>
+              <h2
+                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em]"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  color: "var(--color-dark)",
+                }}
+              >
+                Vi tar hela taket, inte bara takpannorna
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
+              {[
+                {
+                  href: "/tjanster/takbesiktning",
+                  title: "Takbesiktning",
+                  desc: "Kostnadsfri inspektion av takets skick av certifierad takläggare. Vi går upp på taket, ger ärlig bedömning och fast pris om åtgärd behövs.",
+                  cta: "Läs om takbesiktning",
+                },
+                {
+                  href: "/tjanster/taksakerhet",
+                  title: "Taksäkerhet",
+                  desc: "Snörasskydd, takstegar, gångbryggor och säkerhetsräcken enligt BBR och SS 831335. Lagkrav vid taklutning över 1:3 eller fasadhöjd över 8 m.",
+                  cta: "Läs om taksäkerhet",
+                },
+              ].map((card) => (
+                <Link
+                  key={card.href}
+                  href={card.href}
+                  className="group block p-6 lg:p-7 rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-all hover:shadow-[0_8px_30px_rgba(43,116,252,0.08)]"
+                >
+                  <h3
+                    className="text-xl font-bold mb-3 group-hover:text-[#2B74FC] transition-colors"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--color-dark)",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-5">
+                    {card.desc}
+                  </p>
+                  <span
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold"
+                    style={{ color: "var(--color-primary)" }}
+                  >
+                    {card.cta} <ChevronRight size={14} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── KUNDOMDÖMEN ───────────────────────── */}
         <ReviewCarousel />
 
         {/* ── FAQ ───────────────────────────────── */}
-        <section className="py-16 lg:py-24 border-t border-gray-100">
+        <section
+          id="faq"
+          className="py-16 lg:py-24 border-t border-gray-100 scroll-mt-32"
+        >
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
               <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
@@ -728,6 +918,8 @@ export default async function TaklaggningPage() {
             </Link>
           </div>
         </section>
+
+        <SourcesFooter />
       </main>
       <Footer />
     </>

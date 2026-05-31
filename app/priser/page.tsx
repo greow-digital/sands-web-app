@@ -7,6 +7,7 @@ import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import Takraknare from "@/components/Takraknare";
 import OmradenInline from "@/components/OmradenInline";
+import SourcesFooter from "@/components/SourcesFooter";
 
 import { pageMeta } from "@/lib/seo";
 
@@ -96,11 +97,23 @@ export default function PriserPage() {
           eyebrow="Prisguide"
           title="Vad kostar takbyte i"
           titleAccent="Stockholm?"
-          description="Alla riktpriser är efter 30% ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll, inga dolda avgifter."
+          description="Alla riktpriser är efter 30 % ROT-avdrag. Vi ger fast pris efter kostnadsfri takkontroll, inga dolda avgifter. Sedan 1 dec 2025 krävs inte längre bygglov för takbyte på villor."
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Priser" }]}
           backgroundImage="/images/hero-priser.jpg"
           imageAlt="Villa i Stockholm med nytt tak"
         />
+
+        {/* ROT-info över Takräknaren */}
+        <section className="py-8 border-b border-gray-100 bg-gray-50/60">
+          <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-sm text-gray-700 leading-relaxed">
+              Du betalar bara 70 % av arbetskostnaden, Skatteverket står för
+              resterande 30 % via ROT-avdraget (max 50 000 kr per person och
+              år, kombinerat med RUT max 75 000 kr). Endast arbetskostnad
+              kvalificerar för avdrag, inte material. Vi sköter ansökan åt dig.
+            </p>
+          </div>
+        </section>
 
         {/* Takräknare */}
         <Takraknare />
@@ -231,6 +244,8 @@ export default function PriserPage() {
         </section>
 
         <OmradenInline />
+
+        <SourcesFooter show={["rot", "bygglov"]} />
       </main>
       <Footer />
     </>
