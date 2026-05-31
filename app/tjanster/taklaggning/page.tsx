@@ -790,12 +790,14 @@ export default async function TaklaggningPage() {
               {[
                 {
                   href: "/tjanster/takbesiktning",
+                  id: "takbesiktning",
                   title: "Takbesiktning",
                   desc: "Kostnadsfri inspektion av takets skick av certifierad takläggare. Vi går upp på taket, ger ärlig bedömning och fast pris om åtgärd behövs.",
                   cta: "Läs om takbesiktning",
                 },
                 {
                   href: "/tjanster/taksakerhet",
+                  id: "taksakerhet",
                   title: "Taksäkerhet",
                   desc: "Snörasskydd, takstegar, gångbryggor och säkerhetsräcken enligt BBR och SS 831335. Lagkrav vid taklutning över 1:3 eller fasadhöjd över 8 m.",
                   cta: "Läs om taksäkerhet",
@@ -804,10 +806,11 @@ export default async function TaklaggningPage() {
                 <Link
                   key={card.href}
                   href={card.href}
-                  className="group block p-6 lg:p-7 rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-all hover:shadow-[0_8px_30px_rgba(43,116,252,0.08)]"
+                  className="group block p-6 lg:p-7 rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-all hover:shadow-[0_8px_30px_rgba(43,116,252,0.08)] scroll-mt-32"
                 >
                   <h3
-                    className="text-xl font-bold mb-3 group-hover:text-[#2B74FC] transition-colors"
+                    id={card.id}
+                    className="text-xl font-bold mb-3 group-hover:text-[#2B74FC] transition-colors scroll-mt-32"
                     style={{
                       fontFamily: "var(--font-heading)",
                       color: "var(--color-dark)",
