@@ -65,16 +65,10 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
       setSubmitted(true);
       reset();
 
-      if (typeof window !== "undefined") {
-        const w = window as unknown as {
-          gtag?: (...a: unknown[]) => void;
-        };
-        if (typeof w.gtag === "function") {
-          w.gtag("event", "conversion", {
-            send_to: "AW-18004063012",
-          });
-        }
-      }
+      // Konverteringsspårning sker på /tack-sidan (både Google Ads och
+      // GA4 generate_lead) så vi slipper race conditions där pixel-pingen
+      // hinner inte ut innan navigationen. /tack är säker landningsplats
+      // som har gtag och sendBeacon-flush i page load.
       window.location.href = "/tack";
     } catch {
       alert(

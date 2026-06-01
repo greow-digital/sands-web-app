@@ -17,10 +17,12 @@ export default function TackPage() {
     <>
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
-        {/* Konverteringsspårning */}
+        {/* Konverteringsspårning — Google Ads + GA4 generate_lead.
+            generate_lead är GA4:s rekommenderade event för formulär-leads och
+            visas direkt i GA4 → Realtime + Engagement → Events. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(typeof gtag!=='undefined'){gtag('event','conversion',{send_to:'AW-18004063012/lead'});}`,
+            __html: `if(typeof gtag!=='undefined'){gtag('event','conversion',{send_to:'AW-18004063012/lead'});gtag('event','generate_lead',{currency:'SEK',value:1});}`,
           }}
         />
 
