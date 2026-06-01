@@ -65,10 +65,22 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
       setSubmitted(true);
       reset();
 
-      // Konverteringsspårning sker på /tack-sidan (både Google Ads och
-      // GA4 generate_lead) så vi slipper race conditions där pixel-pingen
-      // hinner inte ut innan navigationen. /tack är säker landningsplats
-      // som har gtag och sendBeacon-flush i page load.
+      // Generera unikt transaction_id för konverteringen och spara i
+      // sessionStorage. /tack-sidan läser samma id, så refresh på /tack
+      // räknas som SAMMA konvertering (Google deduplicerar på matching
+      // transaction_id). Ny formulär-submit ger nytt id automatiskt
+      // eftersom sessionStorage skrivs över här.
+      if (typeof window !== "undefined") {
+        const txn = `lead_${Date.now()}_${Math.random()
+          .toString(36)
+          .slice(2, 9)}`;
+        try {
+          sessionStorage.setItem("sands_lead_txn", txn);
+        } catch {
+          // sessionStorage kan vara blockerat (privat läge etc).
+          // /tack faller då tillbaka på client-side-genererat id.
+        }
+      }
       window.location.href = "/tack";
     } catch {
       alert(

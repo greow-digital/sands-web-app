@@ -17,12 +17,15 @@ export default function TackPage() {
     <>
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
-        {/* Konverteringsspårning — Google Ads + GA4 generate_lead.
-            generate_lead är GA4:s rekommenderade event för formulär-leads och
-            visas direkt i GA4 → Realtime + Engagement → Events. */}
+        {/* Konverteringsspårning.
+            form_submit auto-importeras till Google Ads conversion
+            7624071599 ("Submit lead form", PRIMARY) via GA4-länkningen.
+            generate_lead syns i GA4 Engagement-rapporter.
+            transaction_id sätts av LeadForm vid submit och dedupliceras
+            av Google, så refresh på /tack räknas som samma konvertering. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(typeof gtag!=='undefined'){gtag('event','conversion',{send_to:'AW-18004063012/lead'});gtag('event','generate_lead',{currency:'SEK',value:1});}`,
+            __html: `if(typeof gtag!=='undefined'){var txn;try{txn=sessionStorage.getItem('sands_lead_txn')}catch(e){}if(!txn)txn='lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);gtag('event','form_submit',{currency:'SEK',value:1500,transaction_id:txn});gtag('event','generate_lead',{currency:'SEK',value:1500,transaction_id:txn});}`,
           }}
         />
 
