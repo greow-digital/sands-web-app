@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
+import FormPromise from "@/components/FormPromise";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
 import InstagramFeed from "@/components/InstagramFeed";
@@ -189,6 +190,9 @@ export default function Home() {
               {/* Formulär */}
               <div className="mb-10 lg:mb-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center">
                 <LeadForm variant="hero" />
+                <div className="mt-4">
+                  <FormPromise variant="pills" theme="light" />
+                </div>
               </div>
 
               {/* Stats + badges block */}

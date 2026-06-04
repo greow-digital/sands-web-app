@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
+import FormPromise from "@/components/FormPromise";
 import { tjanster } from "@/lib/tjanster";
 
 import { pageMeta } from "@/lib/seo";
@@ -170,6 +171,9 @@ export default function TjansterPage() {
 
               <aside className="lg:sticky lg:top-28 h-fit">
                 <LeadForm variant="section" />
+                <div className="mt-4">
+                  <FormPromise variant="checklist" />
+                </div>
               </aside>
             </div>
           </div>

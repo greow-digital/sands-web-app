@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
+import FormPromise from "@/components/FormPromise";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import OmradenInline from "@/components/OmradenInline";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
@@ -538,6 +539,9 @@ export default async function TaklaggningPage() {
 
               <aside className="lg:sticky lg:top-28 h-fit">
                 <LeadForm variant="section" />
+                <div className="mt-4">
+                  <FormPromise variant="checklist" />
+                </div>
               </aside>
             </div>
           </div>

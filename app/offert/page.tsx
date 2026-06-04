@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
+import FormPromise from "@/components/FormPromise";
 import { CheckCircle, Phone } from "lucide-react";
 import { pageMeta } from "@/lib/seo";
 
@@ -75,6 +76,9 @@ export default function OffertPage() {
 
               <aside>
                 <LeadForm variant="section" />
+                <div className="mt-4">
+                  <FormPromise variant="checklist" />
+                </div>
               </aside>
             </div>
           </div>
