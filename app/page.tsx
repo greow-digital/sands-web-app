@@ -154,7 +154,8 @@ export default function Home() {
             fill
             priority
             fetchPriority="high"
-            sizes="100vw"
+            sizes="(max-width: 768px) 768px, (max-width: 1200px) 1200px, 1920px"
+            quality={80}
             className="object-cover"
           />
           {/* Gradient overlay: 70% mörk vänster → 20% höger */}

@@ -63,6 +63,9 @@ export default function RootLayout({
   return (
     <html lang="sv" className={`${manrope.variable} ${inter.variable} h-full`}>
       <head>
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://static.hotjar.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
