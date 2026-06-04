@@ -158,8 +158,8 @@ export default async function TaklaggningPage() {
       alt: "Hus med nytt tak, takbyte av Sands Entreprenad",
     },
     omlaggning: {
-      src: "/images/blogg-monier-garanti.jpg",
-      alt: "Takomläggning med 30 års Monier-garanti",
+      src: "/images/villa-render.jpg",
+      alt: "Villa med omlagt tak",
     },
     renovering: {
       src: "/images/hero-sands-construction.jpg",
