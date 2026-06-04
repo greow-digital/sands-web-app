@@ -154,16 +154,16 @@ export default async function TaklaggningPage() {
   // för flera sektioner när typ-fältet inte matchade tydligt.)
   const serviceImages = {
     takbyte: {
-      src: "/images/projekt-vitthus-efter.jpg",
-      alt: "Villa med nylagt tak, takbyte av Sands Entreprenad",
+      src: "/images/about-sands-building.jpg",
+      alt: "Hus med nytt tak, takbyte av Sands Entreprenad",
     },
     omlaggning: {
-      src: "/images/ba-vitthus.jpg",
-      alt: "Takomläggning på vit villa av Sands Entreprenad",
+      src: "/images/blogg-monier-garanti.jpg",
+      alt: "Takomläggning med 30 års Monier-garanti",
     },
     renovering: {
-      src: "/images/ba-rotthus.jpg",
-      alt: "Takrenovering på rödmålad villa av Sands Entreprenad",
+      src: "/images/hero-sands-construction.jpg",
+      alt: "Takrenovering av Sands Entreprenad",
     },
   } as const;
 
