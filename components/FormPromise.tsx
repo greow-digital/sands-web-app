@@ -27,8 +27,6 @@ export default function FormPromise({
       theme === "light" ? "text-white/70" : "text-gray-500";
     const dotCls =
       theme === "light" ? "text-white/40" : "text-gray-300";
-    const subCls =
-      theme === "light" ? "text-white/55" : "text-gray-400";
 
     return (
       <div className={`text-center ${className}`}>
@@ -37,7 +35,7 @@ export default function FormPromise({
         >
           <span className="inline-flex items-center gap-1.5">
             <Clock size={14} className={iconCls} />
-            Svar inom 2-4 h
+            Svarar samma vardag
           </span>
           <span className={dotCls}>·</span>
           <span className="inline-flex items-center gap-1.5">
@@ -56,9 +54,6 @@ export default function FormPromise({
             Utan förpliktelser
           </span>
         </div>
-        <p className={`text-[11px] mt-1.5 ${subCls}`}>
-          Vardagar 07:00-17:00
-        </p>
       </div>
     );
   }
@@ -77,7 +72,7 @@ export default function FormPromise({
         {[
           "Kostnadsfri takkontroll på plats",
           "Helt utan förpliktelser",
-          "Svar inom 2-4 h på vardagar",
+          "Svarar samma vardag",
         ].map((item) => (
           <li
             key={item}

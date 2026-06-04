@@ -5,6 +5,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
+import StatsRow from "@/components/StatsRow";
+import TrustBadgesRow from "@/components/TrustBadgesRow";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
 import InstagramFeed from "@/components/InstagramFeed";
@@ -197,67 +199,8 @@ export default function Home() {
 
               {/* Stats + badges block */}
               <div className="text-white lg:col-start-1 lg:row-start-2 lg:mt-10">
-                <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-xl mb-10">
-                  {[
-                    { num: "500+", label: "Nöjda kunder" },
-                    { num: "2 500+", label: "Takläggningar" },
-                    { num: "30 år", label: "Monier garanti" },
-                  ].map((s) => (
-                    <div key={s.label}>
-                      <div
-                        className="text-[34px] sm:text-[42px] lg:text-[52px] font-extrabold leading-none tracking-[-0.03em] mb-2 text-white"
-                        style={{ fontFamily: "var(--font-heading)" }}
-                      >
-                        {s.num}
-                      </div>
-                      <div className="text-xs sm:text-sm text-gray-300">
-                        {s.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-4 flex-wrap">
-                  <div className="flex items-center gap-2.5 bg-white rounded-full px-5 py-2.5 shadow-lg">
-                    <Image
-                      src="/images/brabyggare-badge.svg"
-                      alt="BraByggare 4.8 av 5, 54 omdömen"
-                      width={217}
-                      height={85}
-                      className="h-9 w-auto"
-                    />
-                  </div>
-                  <div className="flex items-center gap-2.5 bg-white rounded-full px-3 py-1.5 shadow-lg">
-                    <Image
-                      src="/images/kundfavorit-2025.png"
-                      alt="Offerta Kundfavorit 2025"
-                      width={200}
-                      height={200}
-                      className="h-10 w-auto"
-                    />
-                    <span
-                      className="text-xs font-bold pr-2 leading-tight"
-                      style={{ color: "var(--color-dark)" }}
-                    >
-                      Kundfavorit<br />2025
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white rounded-full px-3 py-1.5 shadow-lg">
-                    <Image
-                      src="/images/monier-tatt-tak.jpg"
-                      alt="Monier Tätt tak-garanti"
-                      width={100}
-                      height={140}
-                      className="h-10 w-auto rounded-sm"
-                    />
-                    <span
-                      className="text-xs font-bold pr-2 leading-tight"
-                      style={{ color: "var(--color-dark)" }}
-                    >
-                      Upp till 30 års<br />garanti
-                    </span>
-                  </div>
-                </div>
+                <StatsRow theme="light" className="mb-10" />
+                <TrustBadgesRow />
               </div>
             </div>
           </div>

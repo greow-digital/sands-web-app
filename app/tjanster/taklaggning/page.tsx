@@ -21,7 +21,10 @@ import {
   FAQ_SNORAS,
 } from "@/lib/faq-snippets";
 import SourcesFooter from "@/components/SourcesFooter";
-import TrustPillars from "@/components/TrustPillars";
+import StatsRow from "@/components/StatsRow";
+import TrustBadgesRow from "@/components/TrustBadgesRow";
+import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
 
 export const metadata: Metadata = pageMeta({
   path: "/tjanster/taklaggning",
@@ -146,6 +149,24 @@ export default async function TaklaggningPage() {
     })
     .slice(0, 6);
 
+  // Hero-bild per service-sektion. Hittar första matchande Sanity-projekt
+  // med huvudbild så vi får autentisk visuell anchor per sektion. Fallback
+  // till takomläggning om specifik typ saknas (vanligaste i datat).
+  const firstWithImage = (predicate: (t: string) => boolean) =>
+    allaProjekt.find((p) => {
+      const t = (p.typ ?? "").toLowerCase();
+      return predicate(t) && p.huvudbild?.asset;
+    });
+  const fallbackImg = allaProjekt.find((p) => p.huvudbild?.asset)?.huvudbild;
+  const takbyteImg =
+    (firstWithImage((t) => t.includes("takbyte"))?.huvudbild) ||
+    (firstWithImage((t) => t.includes("takläggning"))?.huvudbild) ||
+    fallbackImg;
+  const omlaggningImg =
+    firstWithImage((t) => t.includes("takomlägg"))?.huvudbild || fallbackImg;
+  const renoveringImg =
+    firstWithImage((t) => t.includes("takrenov"))?.huvudbild || fallbackImg;
+
   // Prismatris för jämförelsetabellen
   const priser = {
     takbyte: {
@@ -253,10 +274,11 @@ export default async function TaklaggningPage() {
           </div>
         </section>
 
-        {/* ── TRUST-STRIP ────────────────────────── */}
-        <section className="py-8 lg:py-10 border-b border-gray-100">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <TrustPillars variant="horizontal" />
+        {/* ── STATS + BADGES STRIP ─────────────── */}
+        <section className="py-10 lg:py-14 border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-8 lg:gap-12">
+            <StatsRow theme="dark" />
+            <TrustBadgesRow />
           </div>
         </section>
 
@@ -356,6 +378,52 @@ export default async function TaklaggningPage() {
           </div>
         </section>
 
+        {/* ── VAD INGÅR ALLTID ─────────────────── */}
+        <section className="py-12 lg:py-16 border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12 items-start">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                  Trygghet
+                </p>
+                <h2
+                  className="text-[24px] lg:text-[30px] font-extrabold tracking-[-0.02em]"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Vad ingår alltid i vårt fasta pris
+                </h2>
+              </div>
+              <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                {[
+                  "Kostnadsfri takkontroll och uppmätning",
+                  "Material i högsta kvalitetsklass (Monier-system)",
+                  "Borttransport av gammalt material",
+                  "Daglig presenningstäckning under arbetet",
+                  "30 års Monier tätt-tak-garanti",
+                  "ROT-avdrag direkt på fakturan (vi sköter ansökan)",
+                  "Ansvars- och allriskförsäkring",
+                  "F-skattsedel och ABT-06-kontrakt",
+                ].map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 text-sm text-gray-700"
+                  >
+                    <CheckCircle
+                      size={16}
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* ── DETALJER: TAKBYTE ─────────────────── */}
         <section
           id="takbyte"
@@ -365,6 +433,19 @@ export default async function TaklaggningPage() {
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
+                {takbyteImg?.asset && (
+                  <div className="relative aspect-[5/2] rounded-2xl overflow-hidden bg-gray-100 mb-6">
+                    <Image
+                      src={urlFor(takbyteImg).width(1200).height(480).fit("crop").url()}
+                      alt="Takbyte av Sands Entreprenad"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                      className="object-cover"
+                      placeholder={takbyteImg.asset.metadata?.lqip ? "blur" : "empty"}
+                      blurDataURL={takbyteImg.asset.metadata?.lqip ?? undefined}
+                    />
+                  </div>
+                )}
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
                   Komplett takbyte
                 </p>
@@ -553,6 +634,19 @@ export default async function TaklaggningPage() {
           className="py-16 lg:py-24 border-t border-gray-100 scroll-mt-20"
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            {omlaggningImg?.asset && (
+              <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
+                <Image
+                  src={urlFor(omlaggningImg).width(1400).height(560).fit("crop").url()}
+                  alt="Takomläggning av Sands Entreprenad"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
+                  placeholder={omlaggningImg.asset.metadata?.lqip ? "blur" : "empty"}
+                  blurDataURL={omlaggningImg.asset.metadata?.lqip ?? undefined}
+                />
+              </div>
+            )}
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
               Takomläggning
             </p>
@@ -677,6 +771,19 @@ export default async function TaklaggningPage() {
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            {renoveringImg?.asset && (
+              <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
+                <Image
+                  src={urlFor(renoveringImg).width(1400).height(560).fit("crop").url()}
+                  alt="Takrenovering av Sands Entreprenad"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
+                  placeholder={renoveringImg.asset.metadata?.lqip ? "blur" : "empty"}
+                  blurDataURL={renoveringImg.asset.metadata?.lqip ?? undefined}
+                />
+              </div>
+            )}
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
               Takrenovering
             </p>
@@ -833,6 +940,95 @@ export default async function TaklaggningPage() {
                   </span>
                 </Link>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── PROCESS (4 STEG) ─────────────────── */}
+        <section
+          className="py-16 lg:py-20 border-t border-gray-100"
+          style={{ backgroundColor: "#F8F9FB" }}
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 max-w-2xl mx-auto">
+              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                Vår process
+              </p>
+              <h2
+                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] mb-3"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  color: "var(--color-dark)",
+                }}
+              >
+                Från första kontakt till slutbesiktning
+              </h2>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Fyra tydliga steg. Inget rusas, inga överraskningar längs
+                vägen.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+              {[
+                {
+                  num: "01",
+                  title: "Hembesök",
+                  text: "Vi inspekterar taket på plats och går igenom dina behov. Kostnadsfritt, utan förpliktelser.",
+                },
+                {
+                  num: "02",
+                  title: "Fast offert",
+                  text: "Detaljerad offert med fast pris enligt ABT-06. Alla material och garantier specificerade.",
+                },
+                {
+                  num: "03",
+                  title: "Utförande",
+                  text: "Vårt team utför arbetet noggrant. Projektledare tillgänglig under hela tiden.",
+                },
+                {
+                  num: "04",
+                  title: "Takkontroll",
+                  text: "Slutbesiktning tillsammans med dig. Du får garantibevis och dokumentation.",
+                },
+              ].map((step) => (
+                <div
+                  key={step.num}
+                  className="p-5 lg:p-6 rounded-2xl bg-white border border-gray-100"
+                >
+                  <div
+                    className="text-3xl font-extrabold mb-3 tabular-nums"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--color-primary)",
+                    }}
+                  >
+                    {step.num}
+                  </div>
+                  <h3
+                    className="text-base font-bold mb-2"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--color-dark)",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {step.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-8">
+              <Link
+                href="/var-process"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold hover:underline"
+                style={{ color: "var(--color-primary)" }}
+              >
+                Läs hela processen i detalj <ChevronRight size={14} />
+              </Link>
             </div>
           </div>
         </section>
