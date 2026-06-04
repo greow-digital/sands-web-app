@@ -1,8 +1,8 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { Phone } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState, type FocusEvent } from "react";
 
 type FormData = {
   name: string;
@@ -43,6 +43,46 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
   } = useForm<FormData>();
 
   const [submitted, setSubmitted] = useState(false);
+
+  // Field-by-field tracking: fire form_field_complete för varje fält
+  // när det förlorar fokus med ett ifyllt värde. completedFields-ref
+  // ser till att samma fält bara räknas en gång per session — om
+  // användaren redigerar och blurrar igen registreras det inte två
+  // gånger. Identifierar var användare droppar av i formuläret.
+  const completedFields = useRef(new Set<string>());
+
+  function fireFieldComplete(fieldName: string) {
+    if (completedFields.current.has(fieldName)) return;
+    completedFields.current.add(fieldName);
+    if (typeof window === "undefined" || !("gtag" in window)) return;
+    const w = window as unknown as {
+      gtag: (event: string, name: string, params: object) => void;
+    };
+    w.gtag("event", "form_field_complete", {
+      event_category: "engagement",
+      event_label: "leadform",
+      field_name: fieldName,
+      form_variant: variant,
+    });
+  }
+
+  function trackField(
+    fieldName: string,
+    reg: UseFormRegisterReturn
+  ): UseFormRegisterReturn {
+    const originalOnBlur = reg.onBlur;
+    return {
+      ...reg,
+      onBlur: async (
+        e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+      ) => {
+        const result = await originalOnBlur(e);
+        const value = e.target.value?.trim();
+        if (value) fireFieldComplete(fieldName);
+        return result;
+      },
+    };
+  }
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -155,7 +195,10 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
                 ? "border-red-400 bg-red-50"
                 : "border-transparent bg-[#F1F4F7] focus:border-[#2B74FC]"
             }`}
-            {...register("name", { required: "Ange ditt namn" })}
+            {...trackField(
+              "name",
+              register("name", { required: "Ange ditt namn" })
+            )}
           />
           {errors.name && (
             <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>
@@ -179,13 +222,16 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
                   ? "border-red-400 bg-red-50"
                   : "border-transparent bg-[#F1F4F7] focus:border-[#2B74FC]"
               }`}
-              {...register("phone", {
-                required: "Ange telefonnummer",
-                pattern: {
-                  value: /^[0-9+\s\-]{7,}$/,
-                  message: "Ogiltigt nummer",
-                },
-              })}
+              {...trackField(
+                "phone",
+                register("phone", {
+                  required: "Ange telefonnummer",
+                  pattern: {
+                    value: /^[0-9+\s\-]{7,}$/,
+                    message: "Ogiltigt nummer",
+                  },
+                })
+              )}
             />
             {errors.phone && (
               <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>
@@ -206,12 +252,15 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
                   ? "border-red-400 bg-red-50"
                   : "border-transparent bg-[#F1F4F7] focus:border-[#2B74FC]"
               }`}
-              {...register("email", {
-                pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  message: "Ogiltig e-post",
-                },
-              })}
+              {...trackField(
+                "email",
+                register("email", {
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Ogiltig e-post",
+                  },
+                })
+              )}
             />
             {errors.email && (
               <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
@@ -233,7 +282,7 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
             rows={2}
             placeholder="Ange taktyp, kvm eller annat"
             className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
-            {...register("message")}
+            {...trackField("message", register("message"))}
           />
         </div>
 
