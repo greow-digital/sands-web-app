@@ -78,7 +78,7 @@ export default function RootLayout({
                 "@type": "PostalAddress",
                 streetAddress: "Spjutvägen 5A",
                 postalCode: "175 61",
-                addressLocality: "Stockholm",
+                addressLocality: "Järfälla",
                 addressRegion: "Stockholms län",
                 addressCountry: "SE",
               },
