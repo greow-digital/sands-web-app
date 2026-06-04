@@ -252,7 +252,11 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
             (e.currentTarget.style.backgroundColor = "var(--color-primary)")
           }
         >
-          {isSubmitting ? "Skickar..." : "Få prisförslag"}
+          {isSubmitting
+            ? "Skickar..."
+            : variant === "hero"
+              ? "Få prisförslag"
+              : "Få mitt prisförslag"}
         </button>
 
         {/* Phone fallback */}
