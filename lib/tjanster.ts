@@ -29,7 +29,7 @@ const bildKarta: Record<string, string> = {
   totalentreprenad: "/images/totalentreprenad.jpg",
   fasadrenovering: "/images/about-sands-building.jpg",
   badrumsrenovering: "/images/badrum.png",
-  koksrenovering: "/images/villa-render.jpg",
+  koksrenovering: "/images/koksrenovering.jpg",
   ovriga: "/images/about-sands-building.jpg",
 };
 
