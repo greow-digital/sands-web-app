@@ -23,7 +23,6 @@ import {
 import SourcesFooter from "@/components/SourcesFooter";
 import StatsRow from "@/components/StatsRow";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
-import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
 export const metadata: Metadata = pageMeta({
@@ -149,23 +148,24 @@ export default async function TaklaggningPage() {
     })
     .slice(0, 6);
 
-  // Hero-bild per service-sektion. Hittar första matchande Sanity-projekt
-  // med huvudbild så vi får autentisk visuell anchor per sektion. Fallback
-  // till takomläggning om specifik typ saknas (vanligaste i datat).
-  const firstWithImage = (predicate: (t: string) => boolean) =>
-    allaProjekt.find((p) => {
-      const t = (p.typ ?? "").toLowerCase();
-      return predicate(t) && p.huvudbild?.asset;
-    });
-  const fallbackImg = allaProjekt.find((p) => p.huvudbild?.asset)?.huvudbild;
-  const takbyteImg =
-    (firstWithImage((t) => t.includes("takbyte"))?.huvudbild) ||
-    (firstWithImage((t) => t.includes("takläggning"))?.huvudbild) ||
-    fallbackImg;
-  const omlaggningImg =
-    firstWithImage((t) => t.includes("takomlägg"))?.huvudbild || fallbackImg;
-  const renoveringImg =
-    firstWithImage((t) => t.includes("takrenov"))?.huvudbild || fallbackImg;
+  // Hero-bild per service-sektion. Tre distinkta villa-bilder från
+  // /public/images så varje sektion får sin egen visuella anchor.
+  // (Tidigare Sanity-baserad logik tenderade att landa på samma fallback
+  // för flera sektioner när typ-fältet inte matchade tydligt.)
+  const serviceImages = {
+    takbyte: {
+      src: "/images/projekt-vitthus-efter.jpg",
+      alt: "Villa med nylagt tak, takbyte av Sands Entreprenad",
+    },
+    omlaggning: {
+      src: "/images/ba-vitthus.jpg",
+      alt: "Takomläggning på vit villa av Sands Entreprenad",
+    },
+    renovering: {
+      src: "/images/ba-rotthus.jpg",
+      alt: "Takrenovering på rödmålad villa av Sands Entreprenad",
+    },
+  } as const;
 
   // Prismatris för jämförelsetabellen
   const priser = {
@@ -433,19 +433,15 @@ export default async function TaklaggningPage() {
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
-                {takbyteImg?.asset && (
-                  <div className="relative aspect-[5/2] rounded-2xl overflow-hidden bg-gray-100 mb-6">
-                    <Image
-                      src={urlFor(takbyteImg).width(1200).height(480).fit("crop").url()}
-                      alt="Takbyte av Sands Entreprenad"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover"
-                      placeholder={takbyteImg.asset.metadata?.lqip ? "blur" : "empty"}
-                      blurDataURL={takbyteImg.asset.metadata?.lqip ?? undefined}
-                    />
-                  </div>
-                )}
+                <div className="relative aspect-[5/2] rounded-2xl overflow-hidden bg-gray-100 mb-6">
+                  <Image
+                    src={serviceImages.takbyte.src}
+                    alt={serviceImages.takbyte.alt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    className="object-cover"
+                  />
+                </div>
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
                   Komplett takbyte
                 </p>
@@ -634,19 +630,15 @@ export default async function TaklaggningPage() {
           className="py-16 lg:py-24 border-t border-gray-100 scroll-mt-20"
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            {omlaggningImg?.asset && (
-              <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
-                <Image
-                  src={urlFor(omlaggningImg).width(1400).height(560).fit("crop").url()}
-                  alt="Takomläggning av Sands Entreprenad"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="object-cover"
-                  placeholder={omlaggningImg.asset.metadata?.lqip ? "blur" : "empty"}
-                  blurDataURL={omlaggningImg.asset.metadata?.lqip ?? undefined}
-                />
-              </div>
-            )}
+            <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
+              <Image
+                src={serviceImages.omlaggning.src}
+                alt={serviceImages.omlaggning.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover"
+              />
+            </div>
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
               Takomläggning
             </p>
@@ -771,19 +763,15 @@ export default async function TaklaggningPage() {
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            {renoveringImg?.asset && (
-              <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
-                <Image
-                  src={urlFor(renoveringImg).width(1400).height(560).fit("crop").url()}
-                  alt="Takrenovering av Sands Entreprenad"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 60vw"
-                  className="object-cover"
-                  placeholder={renoveringImg.asset.metadata?.lqip ? "blur" : "empty"}
-                  blurDataURL={renoveringImg.asset.metadata?.lqip ?? undefined}
-                />
-              </div>
-            )}
+            <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
+              <Image
+                src={serviceImages.renovering.src}
+                alt={serviceImages.renovering.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover"
+              />
+            </div>
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
               Takrenovering
             </p>

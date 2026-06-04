@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
-import { CheckCircle, ChevronRight, Phone, Star } from "lucide-react";
+import { CheckCircle, ChevronRight, Star } from "lucide-react";
 import Link from "next/link";
 import { pageMeta } from "@/lib/seo";
 
@@ -59,9 +59,9 @@ export default function OffertPage() {
     <>
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
-        {/* ── HERO + FORM ─────────────────────── */}
-        <section className="pt-10 lg:pt-14 pb-12 lg:pb-16 border-b border-gray-100">
-          <div className="max-w-[840px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* ── HERO + FORM (2-kol) ─────────────── */}
+        <section className="pt-8 lg:pt-12 pb-12 lg:pb-16 border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-xs text-gray-400 mb-6">
               <Link href="/" className="hover:text-gray-600">
@@ -71,63 +71,47 @@ export default function OffertPage() {
               <span>Boka offert</span>
             </nav>
 
-            <div className="text-center mb-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
-                Kostnadsfri takkontroll
-              </p>
-              <h1
-                className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] leading-[1.05] mb-5"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  color: "var(--color-dark)",
-                }}
-              >
-                Boka din kostnadsfria{" "}
-                <span style={{ color: "var(--color-primary)" }}>
-                  takkontroll
-                </span>
-              </h1>
-              <p className="text-base text-gray-600 leading-relaxed max-w-xl mx-auto">
-                Vi kommer hem till dig, inspekterar taket och lämnar ett fast
-                prisförslag med ROT-avdrag. Inga förpliktelser.
-              </p>
-            </div>
+            <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">
+              {/* Vänster: rubrik + trust */}
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                  Kostnadsfri takkontroll
+                </p>
+                <h1
+                  className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] leading-[1.05] mb-5"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Boka din kostnadsfria{" "}
+                  <span style={{ color: "var(--color-primary)" }}>
+                    takkontroll
+                  </span>
+                </h1>
+                <p className="text-base text-gray-600 leading-relaxed mb-7 max-w-lg">
+                  Vi kommer hem till dig, inspekterar taket och lämnar ett
+                  fast prisförslag med ROT-avdrag. Inga förpliktelser.
+                </p>
 
-            {/* Trust-rad: 6 punkter i wrapping flex */}
-            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mb-8 text-sm text-gray-700">
-              {TRUST_BULLETS.map((b) => (
-                <li key={b} className="inline-flex items-center gap-1.5">
-                  <CheckCircle
-                    size={14}
-                    className="shrink-0"
-                    style={{ color: "var(--color-primary)" }}
-                  />
-                  <span className="font-medium">{b}</span>
-                </li>
-              ))}
-            </ul>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2.5 text-sm text-gray-700">
+                  {TRUST_BULLETS.map((b) => (
+                    <li key={b} className="inline-flex items-center gap-2">
+                      <CheckCircle
+                        size={15}
+                        className="shrink-0"
+                        style={{ color: "var(--color-primary)" }}
+                      />
+                      <span className="font-medium">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            {/* Form */}
-            <div className="max-w-[560px] mx-auto">
-              <LeadForm variant="section" />
-            </div>
-
-            {/* Phone fallback */}
-            <div className="text-center mt-6">
-              <p className="text-sm text-gray-500 mb-1">
-                Föredrar du att ringa?
-              </p>
-              <a
-                href="tel:0828388"
-                className="inline-flex items-center gap-2 text-2xl font-extrabold"
-                style={{
-                  color: "var(--color-primary)",
-                  fontFamily: "var(--font-heading)",
-                }}
-              >
-                <Phone size={20} />
-                08-28 38 88
-              </a>
+              {/* Höger: form */}
+              <div>
+                <LeadForm variant="section" />
+              </div>
             </div>
           </div>
         </section>
