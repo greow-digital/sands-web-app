@@ -70,6 +70,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "RoofingContractor",
               name: "Sands Entreprenad Stockholm AB",
+              alternateName: ["Sands Entreprenad", "Sands Tak", "Sands AB"],
               url: BASE_URL,
               telephone: "08-28 38 88",
               email: "info@sandsab.se",
@@ -81,6 +82,15 @@ export default function RootLayout({
                 addressRegion: "Stockholms län",
                 addressCountry: "SE",
               },
+              sameAs: [
+                "https://www.instagram.com/sandsentreprenad/",
+                "https://www.facebook.com/profile.php?id=100063582700739",
+                "https://www.brabyggare.se/hantverkare/25532/",
+                "https://www.allabolag.se/foretag/sands-entreprenad-stockholm-ab/solna/byggm%C3%A4stare/2KGIRZRI5YDDT",
+                "https://www.hitta.se/verksamhet/sands-entreprenad-stockholm-ab-mptdddlrs",
+                "https://www.eniro.se/sands+entreprenad+stockholm+ab+solna/129401425/firma",
+                "https://bygg.se/sands-entreprenad-jarfalla-ab/",
+              ],
               geo: {
                 "@type": "GeoCoordinates",
                 latitude: 59.3991,
