@@ -25,7 +25,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   stockholm: {
     title: "Takläggare Stockholm: lokala takexperter sedan 2016 | Sands",
     description:
-      "Stockholms erfarna takläggare. 2 500+ kunder, BraByggare 4.8★, 30 års garanti. Fast pris från 169 000 kr efter ROT. Ring 08-28 38 88.",
+      "Stockholms erfarna takläggare. 2 500+ kunder, BraByggare 4,8 av 5, 30 års garanti. Fast pris från 169 000 kr efter ROT. Ring 08-28 38 88.",
   },
   norrtalje: {
     title: "Takläggare Norrtälje: takbyte med fast pris | Sands AB",
@@ -40,7 +40,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   nacka: {
     title: "Takläggare Nacka: takbyte med fast pris | Sands Entreprenad",
     description:
-      "Erfaren takläggare i Nacka. Fast pris, 30 års Monier-garanti, BraByggare 4.8★. Plåttak, tegeltak, papptak. ROT-avdrag tillämpas.",
+      "Erfaren takläggare i Nacka. Fast pris, 30 års Monier-garanti, BraByggare 4,8 av 5. Plåttak, tegeltak, papptak. ROT-avdrag tillämpas.",
   },
   taby: {
     title: "Takläggare Täby: lokal takläggning med 30 års garanti | Sands",
@@ -50,7 +50,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   sollentuna: {
     title: "Takläggare Sollentuna: takbyte med fast pris | Sands AB",
     description:
-      "Takläggare i Sollentuna. 30 års garanti, BraByggare 4.8★, ROT-avdrag. Få kostnadsfri offert på takbyte inom 24 timmar.",
+      "Takläggare i Sollentuna. 30 års garanti, BraByggare 4,8 av 5, ROT-avdrag. Få kostnadsfri offert på takbyte inom 24 timmar.",
   },
   danderyd: {
     title: "Takläggare Danderyd: erfaren lokal takläggning | Sands",
@@ -65,7 +65,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   huddinge: {
     title: "Takläggare Huddinge: lokal takläggning, fast pris | Sands",
     description:
-      "Erfaren takläggare i Huddinge. 30 års garanti, fast pris från 169 000 kr efter ROT. BraByggare 4.8★. Få prisförslag inom 24 timmar.",
+      "Erfaren takläggare i Huddinge. 30 års garanti, fast pris från 169 000 kr efter ROT. BraByggare 4,8 av 5. Få prisförslag inom 24 timmar.",
   },
   jarfalla: {
     title: "Takläggare Järfälla: lokala takexperter | Sands Entreprenad",

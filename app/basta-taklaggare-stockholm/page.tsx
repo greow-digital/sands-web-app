@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   title:
     "Stockholms bästa takläggare: så vet du att du valt rätt | Sands",
   description:
-    "Hur väljer du Stockholms bästa takläggare? Checklista med F-skatt, försäkring, garantitid och certifieringar. 4,8★ på BraByggare, 30 års Monier-garanti, fast pris.",
+    "Hur väljer du Stockholms bästa takläggare? Checklista med F-skatt, försäkring, garantitid och certifieringar. 4,8 av 5 på BraByggare, 30 års Monier-garanti, fast pris.",
   openGraph: {
     title: "Stockholms bästa takläggare: så vet du att du valt rätt",
     description:

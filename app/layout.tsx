@@ -24,7 +24,7 @@ const BASE_URL = "https://www.sandsab.se";
 const HOME_TITLE =
   "Takläggare Stockholm: takbyte fast pris, 30 års garanti | Sands AB";
 const HOME_DESC =
-  "Erfaren takläggare i Stockholm. Fast pris från 169 000 kr efter ROT, 30 års Monier-garanti. BraByggare 4.8★ med 54 omdömen. Få prisförslag inom 24 h.";
+  "Erfaren takläggare i Stockholm. Fast pris från 169 000 kr efter ROT, 30 års Monier-garanti. BraByggare 4,8 av 5 med 54 omdömen. Få prisförslag inom 24 h.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

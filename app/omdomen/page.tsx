@@ -8,9 +8,9 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/omdomen",
-  title: "Kundomdömen: BraByggare 4.8★ & 54 recensioner | Sands AB",
+  title: "Kundomdömen: 54 recensioner på BraByggare | Sands AB",
   description:
-    "Se omdömen om Sands Entreprenad: BraByggare 4.8★ med 54 recensioner, Kundfavorit 2025 av Offerta. Riktiga kundberättelser från Stockholms-området.",
+    "Se omdömen om Sands Entreprenad: BraByggare 4,8 av 5 med 54 recensioner, Kundfavorit 2025 av Offerta. Riktiga kundberättelser från Stockholms-området.",
 });
 
 const omdömen = [
