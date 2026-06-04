@@ -164,9 +164,11 @@ export default function Home() {
           />
 
           <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
-            <div className="grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-14 items-center">
-              {/* Left, copy */}
-              <div className="text-white">
+            {/* På mobil: titel → form → stats → badges (form högre upp för CRO).
+                På desktop: 2-kol-grid med form höger som spänner båda raderna. */}
+            <div className="lg:grid lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:items-center">
+              {/* Titel block */}
+              <div className="text-white lg:col-start-1 lg:row-start-1">
                 <SeasonBanner />
                 <h1
                   className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
@@ -178,12 +180,19 @@ export default function Home() {
                     lägga om taket
                   </span>
                 </h1>
-                <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-10">
+                <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-10 lg:mb-0">
                   Anlita en takexpert i Stockholm med över 2 500 utförda
                   tak, fast pris, trygg process och upp till 30 års garanti.
                 </p>
+              </div>
 
-                {/* Stats */}
+              {/* Formulär */}
+              <div className="mb-10 lg:mb-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center">
+                <LeadForm variant="hero" />
+              </div>
+
+              {/* Stats + badges block */}
+              <div className="text-white lg:col-start-1 lg:row-start-2 lg:mt-10">
                 <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-xl mb-10">
                   {[
                     { num: "500+", label: "Nöjda kunder" },
@@ -204,9 +213,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                {/* Trust badges */}
                 <div className="flex items-center gap-4 flex-wrap">
-                  {/* BraByggare */}
                   <div className="flex items-center gap-2.5 bg-white rounded-full px-5 py-2.5 shadow-lg">
                     <Image
                       src="/images/brabyggare-badge.svg"
@@ -216,7 +223,6 @@ export default function Home() {
                       className="h-9 w-auto"
                     />
                   </div>
-                  {/* Kundfavorit 2025 */}
                   <div className="flex items-center gap-2.5 bg-white rounded-full px-3 py-1.5 shadow-lg">
                     <Image
                       src="/images/kundfavorit-2025.png"
@@ -232,7 +238,6 @@ export default function Home() {
                       Kundfavorit<br />2025
                     </span>
                   </div>
-                  {/* Monier Tätt tak */}
                   <div className="flex items-center gap-2 bg-white rounded-full px-3 py-1.5 shadow-lg">
                     <Image
                       src="/images/monier-tatt-tak.jpg"
@@ -249,11 +254,6 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
-              </div>
-
-              {/* Right, formulär */}
-              <div>
-                <LeadForm variant="hero" />
               </div>
             </div>
           </div>
