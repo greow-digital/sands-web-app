@@ -28,7 +28,7 @@ const bildKarta: Record<string, string> = {
   takbesiktning: "/images/hero-house.jpg",
   totalentreprenad: "/images/villa-render.jpg",
   fasadrenovering: "/images/about-sands-building.jpg",
-  badrumsrenovering: "/images/villa-render.jpg",
+  badrumsrenovering: "/images/badrum.png",
   koksrenovering: "/images/villa-render.jpg",
   ovriga: "/images/about-sands-building.jpg",
 };
