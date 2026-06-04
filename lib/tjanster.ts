@@ -26,7 +26,7 @@ const bildKarta: Record<string, string> = {
   hangrannorstupror: "/images/hangrannor-efter.jpg",
   taksakerhet: "/images/hero-sands-construction.jpg",
   takbesiktning: "/images/hero-house.jpg",
-  totalentreprenad: "/images/villa-render.jpg",
+  totalentreprenad: "/images/totalentreprenad.jpg",
   fasadrenovering: "/images/about-sands-building.jpg",
   badrumsrenovering: "/images/badrum.png",
   koksrenovering: "/images/villa-render.jpg",
