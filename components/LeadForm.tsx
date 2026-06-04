@@ -2,7 +2,7 @@
 
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { Phone } from "lucide-react";
-import { useRef, useState, type FocusEvent } from "react";
+import { useRef, useState } from "react";
 
 type FormData = {
   name: string;
@@ -73,12 +73,10 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
     const originalOnBlur = reg.onBlur;
     return {
       ...reg,
-      onBlur: async (
-        e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-      ) => {
+      onBlur: async (e) => {
         const result = await originalOnBlur(e);
-        const value = e.target.value?.trim();
-        if (value) fireFieldComplete(fieldName);
+        const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+        if (target.value?.trim()) fireFieldComplete(fieldName);
         return result;
       },
     };
