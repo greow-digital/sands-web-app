@@ -169,7 +169,10 @@ export default function OffertPage() {
         {/* ── TESTIMONIALS ────────────────────── */}
         <section className="py-14 lg:py-20 border-t border-gray-100">
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid sm:grid-cols-2 gap-5 lg:gap-6">
+            <div
+              data-nosnippet
+              className="grid sm:grid-cols-2 gap-5 lg:gap-6"
+            >
               {TESTIMONIALS.map((t) => (
                 <figure
                   key={t.name}
