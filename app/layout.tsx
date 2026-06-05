@@ -3,6 +3,7 @@ import { Manrope, Inter } from "next/font/google";
 import MobileCTA from "@/components/MobileCTA";
 import PhoneClickTracker from "@/components/PhoneClickTracker";
 import ClickIdCapture from "@/components/ClickIdCapture";
+import ThirdPartyScripts from "@/components/ThirdPartyScripts";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -64,8 +65,6 @@ export default function RootLayout({
     <html lang="sv" className={`${manrope.variable} ${inter.variable} h-full`}>
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://static.hotjar.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -115,18 +114,12 @@ export default function RootLayout({
             }),
           }}
         />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18004063012"
-        />
+        {/* gtag-shim + config eager (kostar ~0, ingen network). Events koas i
+            dataLayer. Sjalva gtag/js-skriptet (175 KB) + Hotjar laddas forst
+            vid interaktion via ThirdPartyScripts. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:3307551,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
           }}
         />
       </head>
@@ -135,6 +128,7 @@ export default function RootLayout({
         <MobileCTA />
         <PhoneClickTracker />
         <ClickIdCapture />
+        <ThirdPartyScripts />
       </body>
     </html>
   );
