@@ -178,15 +178,17 @@ export default function Home() {
                   className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  Takbyte i Stockholm,<br />
-                  {"fast pris när du ska "}
+                  Din takläggare i Stockholm:<br />
+                  fast pris och{" "}
                   <span style={{ color: "var(--color-primary)" }}>
-                    lägga om taket
+                    30 års garanti
                   </span>
                 </h1>
                 <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-10 lg:mb-0">
-                  Anlita en takexpert i Stockholm med över 2 500 utförda
-                  tak, fast pris, trygg process och upp till 30 års garanti.
+                  Som auktoriserad takläggare i Stockholm har Sands
+                  Entreprenad utfört 2 500+ tak sedan 2016. Takbyte,
+                  takomläggning och renovering med transparent prissättning,
+                  ROT-avdrag direkt på fakturan och svar samma vardag.
                 </p>
               </div>
 
