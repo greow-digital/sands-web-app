@@ -2,10 +2,9 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { MapPin, Calendar, Ruler, ArrowRight } from "lucide-react";
+import { MapPin, Calendar, Ruler, ArrowRight, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { client } from "@/sanity/lib/client";
 import {
@@ -72,58 +71,112 @@ export default async function ProjektDetailPage({
     <>
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
-        <PageHero
-          eyebrow={p.typ ?? ""}
-          title={p.title?.split(", ")[0] ?? ""}
-          titleAccent={p.title?.split(", ")[1] || ""}
-          description={p.beskrivning ?? ""}
-          breadcrumbs={[
-            { label: "Hem", href: "/" },
-            { label: "Projekt", href: "/projekt" },
-            { label: p.ort ?? "" },
-          ]}
-        />
-
-        {/* Meta stripe */}
+        {/* HERO — split layout: text vänster + huvudbild höger */}
         <section className="border-b border-gray-100">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-5">
-            <div className="flex flex-wrap gap-6 text-sm text-gray-500">
-              <span className="flex items-center gap-2">
-                <MapPin size={14} style={{ color: "var(--color-primary)" }} />
-                {p.ort}
-              </span>
-              <span className="flex items-center gap-2">
-                <Ruler size={14} style={{ color: "var(--color-primary)" }} />
-                {p.kvm} kvm
-              </span>
-              <span className="flex items-center gap-2">
-                <Calendar size={14} style={{ color: "var(--color-primary)" }} />
-                {p.ar}
-              </span>
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+            <nav className="flex items-center gap-2 text-xs text-gray-400 mb-6">
+              <Link href="/" className="hover:text-gray-600">
+                Hem
+              </Link>
+              <ChevronRight size={12} />
+              <Link href="/projekt" className="hover:text-gray-600">
+                Projekt
+              </Link>
+              <ChevronRight size={12} />
+              <span>{p.ort}</span>
+            </nav>
+
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+              {/* Bild — order-first på mobil, höger på desktop */}
+              <div className="relative aspect-[4/5] lg:aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 order-first lg:order-last">
+                <Image
+                  src={heroHuvudbild}
+                  alt={p.huvudbild.alt || p.title || ""}
+                  fill
+                  priority
+                  fetchPriority="high"
+                  sizes="(max-width: 1024px) 100vw, 600px"
+                  className="object-cover"
+                  placeholder={
+                    p.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
+                  }
+                  blurDataURL={
+                    p.huvudbild?.asset?.metadata?.lqip ?? undefined
+                  }
+                />
+              </div>
+
+              {/* Text */}
+              <div className="lg:order-first">
+                {p.typ && (
+                  <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                    {p.typ}
+                  </p>
+                )}
+                <h1
+                  className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] leading-[1.05] mb-5"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  {p.title?.split(", ")[0]}
+                  {p.title?.split(", ")[1] && (
+                    <>
+                      ,{" "}
+                      <span style={{ color: "var(--color-primary)" }}>
+                        {p.title.split(", ")[1]}
+                      </span>
+                    </>
+                  )}
+                </h1>
+                <p className="text-base lg:text-lg text-gray-600 leading-relaxed mb-6">
+                  {p.beskrivning}
+                </p>
+
+                <div className="flex flex-wrap gap-5 text-sm text-gray-500 mb-7">
+                  <span className="flex items-center gap-2">
+                    <MapPin
+                      size={14}
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    {p.ort}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Ruler
+                      size={14}
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    {p.kvm} kvm
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Calendar
+                      size={14}
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    {p.ar}
+                  </span>
+                </div>
+
+                <Link
+                  href="/offert"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                  style={{ backgroundColor: "var(--color-primary)" }}
+                >
+                  Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Bild + beskrivning */}
-        <section className="py-16 lg:py-24">
+        {/* Galleri + video + fakta + LeadForm */}
+        <section className="py-14 lg:py-20">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-start">
               <div>
-                {p.bilder && p.bilder.length > 0 ? (
-                  <div className="grid grid-cols-2 gap-3 mb-8">
-                    <div className="relative aspect-[4/5] rounded-2xl overflow-hidden col-span-2 bg-gray-100">
-                      <Image
-                        src={heroHuvudbild}
-                        alt={p.huvudbild.alt || p.title || ""}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 60vw"
-                        className="object-cover"
-                        placeholder={
-                          p.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
-                        }
-                        blurDataURL={p.huvudbild?.asset?.metadata?.lqip ?? undefined}
-                      />
-                    </div>
+                {p.bilder && p.bilder.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {p.bilder.map((img, idx) => {
                       if (!img.asset) return null;
                       const url = urlFor(img)
@@ -140,7 +193,7 @@ export default async function ProjektDetailPage({
                             src={url}
                             alt={img.alt || `${p.title}, bild ${idx + 2}`}
                             fill
-                            sizes="(max-width: 1024px) 50vw, 30vw"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
                             className="object-cover"
                             placeholder={
                               img.asset?.metadata?.lqip ? "blur" : "empty"
@@ -150,24 +203,6 @@ export default async function ProjektDetailPage({
                         </div>
                       );
                     })}
-                  </div>
-                ) : (
-                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-8 bg-gray-100">
-                    <Image
-                      src={urlFor(p.huvudbild)
-                        .width(1600)
-                        .height(1000)
-                        .fit("crop")
-                        .url()}
-                      alt={p.huvudbild.alt || p.title || ""}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 60vw"
-                      className="object-cover"
-                      placeholder={
-                        p.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
-                      }
-                      blurDataURL={p.huvudbild?.asset?.metadata?.lqip ?? undefined}
-                    />
                   </div>
                 )}
 
@@ -182,19 +217,6 @@ export default async function ProjektDetailPage({
                     />
                   </div>
                 )}
-
-                <h2
-                  className="text-2xl font-bold mb-4"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Om projektet
-                </h2>
-                <p className="text-base text-gray-600 leading-relaxed mb-6">
-                  {p.beskrivning}
-                </p>
 
                 <div className="p-6 rounded-2xl border border-gray-100 bg-[#F8F9FB] space-y-3">
                   {p.material && (
