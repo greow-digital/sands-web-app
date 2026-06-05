@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ChevronDown, CheckCircle, AlertCircle } from "lucide-react";
+import { ArrowRight, ChevronDown, CheckCircle, AlertCircle, X } from "lucide-react";
 
 // Alla siffror är exkl moms från Sands interna kalkyl. Multiplikatorn
 // nedan ger konsumentpriser (inkl 25% moms) som matchar resten av sajten.
@@ -68,25 +68,61 @@ function fireGtag(name: string, value: number) {
   });
 }
 
+const STICKY_DISMISSED_KEY = "sands_calc_sticky_dismissed";
+
 export default function Takraknare() {
   // Default 130 m² landar på ~169 000 kr efter ROT, vilket matchar
   // exempelpriset på startsidan (sadeltak 140 m² från 169 000 kr).
   const [kvm, setKvm] = useState(130);
   const [open, setOpen] = useState(true);
+  const [stickyVisible, setStickyVisible] = useState(false);
   const engagedRef = useRef(false);
+  const stickyFiredRef = useRef(false);
   const r = calculate(kvm);
 
+  // Trigger sticky CTA forsta gangen anvandaren engagerar med slidern.
+  // Visas inte om anvandaren redan dismissat den i samma session.
   function handleSliderChange(next: number) {
     setKvm(next);
     if (!engagedRef.current) {
       engagedRef.current = true;
       fireGtag("calculator_engage", next);
+
+      let dismissed = false;
+      try {
+        dismissed = sessionStorage.getItem(STICKY_DISMISSED_KEY) === "1";
+      } catch {
+        // sessionStorage kan vara blockerat
+      }
+      if (!dismissed) setStickyVisible(true);
     }
   }
 
   function handleCtaClick() {
     fireGtag("calculator_cta_click", kvm);
   }
+
+  function handleStickyClick() {
+    fireGtag("calc_sticky_click", kvm);
+  }
+
+  function handleStickyDismiss() {
+    fireGtag("calc_sticky_dismiss", kvm);
+    setStickyVisible(false);
+    try {
+      sessionStorage.setItem(STICKY_DISMISSED_KEY, "1");
+    } catch {
+      // sessionStorage blockerat - bar visas igen vid ny engagement i denna session
+    }
+  }
+
+  // Impression-event nar sticky visas forsta gangen
+  useEffect(() => {
+    if (stickyVisible && !stickyFiredRef.current) {
+      stickyFiredRef.current = true;
+      fireGtag("calc_sticky_view", kvm);
+    }
+  }, [stickyVisible, kvm]);
 
   const sliderProgress = ((kvm - 60) / (300 - 60)) * 100;
 
@@ -367,6 +403,58 @@ export default function Takraknare() {
           </p>
         </div>
       </div>
+
+      {/* Sticky post-engagement CTA-bar.
+          Visas efter forsta slider-engagement. Dismissable; flagga i
+          sessionStorage sa den inte popas upp igen pa samma session. */}
+      {stickyVisible && (
+        <div
+          className="fixed bottom-0 inset-x-0 z-40 px-3 pb-3 pt-2 sm:px-6 sm:pb-5 animate-[slideUp_0.3s_ease-out]"
+          style={{ animation: "slideUp 0.3s ease-out" }}
+        >
+          <div
+            className="max-w-[900px] mx-auto rounded-2xl shadow-2xl border border-white/10 px-4 py-3 sm:px-6 sm:py-4 flex items-center gap-3 sm:gap-5"
+            style={{ backgroundColor: "var(--color-dark)" }}
+          >
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-sm sm:text-base font-bold leading-tight">
+                Ditt pris ser klart ut!
+              </p>
+              <p className="text-gray-300 text-xs sm:text-sm leading-tight mt-0.5">
+                Få ett bindande prisförslag samma vardag.
+              </p>
+            </div>
+            <Link
+              href="/offert"
+              onClick={handleStickyClick}
+              className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-white font-semibold text-xs sm:text-sm whitespace-nowrap transition-all hover:scale-[1.02] shadow-lg shrink-0"
+              style={{ backgroundColor: "var(--color-primary)" }}
+            >
+              Få prisförslag <ArrowRight size={14} />
+            </Link>
+            <button
+              type="button"
+              onClick={handleStickyDismiss}
+              aria-label="Stäng"
+              className="text-gray-400 hover:text-white transition-colors shrink-0 -mr-1"
+            >
+              <X size={18} />
+            </button>
+          </div>
+          <style jsx>{`
+            @keyframes slideUp {
+              from {
+                transform: translateY(100%);
+                opacity: 0;
+              }
+              to {
+                transform: translateY(0);
+                opacity: 1;
+              }
+            }
+          `}</style>
+        </div>
+      )}
     </section>
   );
 }
