@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 export default function MobileCTA() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
+  const [calcStickyActive, setCalcStickyActive] = useState(false);
 
   const hideOnPages = ["/offert", "/kontakt", "/tack"];
   const shouldHide = hideOnPages.includes(pathname);
@@ -24,7 +25,16 @@ export default function MobileCTA() {
     return () => observer.disconnect();
   }, []);
 
-  if (shouldHide) return null;
+  // Kalkylator-stickyn (/priser) ersatter denna bar medan den syns, sa de
+  // inte staplas pa varandra. Takraknare dispatchar "sands:calc-sticky".
+  useEffect(() => {
+    const handler = (e: Event) =>
+      setCalcStickyActive(!!(e as CustomEvent).detail?.visible);
+    window.addEventListener("sands:calc-sticky", handler);
+    return () => window.removeEventListener("sands:calc-sticky", handler);
+  }, []);
+
+  if (shouldHide || calcStickyActive) return null;
 
   return (
     <div

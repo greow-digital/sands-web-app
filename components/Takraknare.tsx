@@ -104,6 +104,12 @@ export default function Takraknare() {
 
   function handleStickyClick() {
     fireGtag("calc_sticky_click", kvm);
+    if (typeof window !== "undefined" && "gtag" in window) {
+      (window as unknown as { gtag: GtagFn }).gtag("event", "cta_click", {
+        cta_location: "priser_sticky",
+        cta_destination: "/offert",
+      });
+    }
   }
 
   function handleStickyDismiss() {
@@ -123,6 +129,20 @@ export default function Takraknare() {
       fireGtag("calc_sticky_view", kvm);
     }
   }, [stickyVisible, kvm]);
+
+  // Talar om for den globala MobileCTA att doja sig medan denna bar syns,
+  // sa de inte staplas pa varandra i botten. Stadar upp vid unmount.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(
+      new CustomEvent("sands:calc-sticky", { detail: { visible: stickyVisible } })
+    );
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent("sands:calc-sticky", { detail: { visible: false } })
+      );
+    };
+  }, [stickyVisible]);
 
   const sliderProgress = ((kvm - 60) / (300 - 60)) * 100;
 

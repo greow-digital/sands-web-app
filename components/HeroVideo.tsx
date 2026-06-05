@@ -50,8 +50,8 @@ export default function HeroVideo({ posterSrc, videoSrc, alt }: HeroVideoProps) 
         fill
         priority
         fetchPriority="high"
-        sizes="(max-width: 768px) 768px, (max-width: 1200px) 1200px, 1920px"
-        quality={70}
+        sizes="100vw"
+        quality={65}
         className="object-cover"
       />
       {mountVideo && (

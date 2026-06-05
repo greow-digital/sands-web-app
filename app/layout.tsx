@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Manrope, Inter } from "next/font/google";
 import MobileCTA from "@/components/MobileCTA";
 import PhoneClickTracker from "@/components/PhoneClickTracker";
@@ -115,26 +116,28 @@ export default function RootLayout({
             }),
           }}
         />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18004063012"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`,
-          }}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:3307551,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
-          }}
-        />
       </head>
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <MobileCTA />
         <PhoneClickTracker />
         <ClickIdCapture />
+        {/* Google Ads/gtag: afterInteractive — laddas direkt efter hydrering
+            sa hero-bilden (LCP) inte konkurrerar om bandbredden vid sidladdning.
+            gclid fangas separat av ClickIdCapture; konverteringar ar GA4-import
+            pa form_submit, sa nagra sekunders fordrojning pa pixeln ar ofarlig. */}
+        <Script
+          id="gtag-src"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18004063012"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`}
+        </Script>
+        {/* Hotjar: lazyOnload — ren analys/heatmaps, behovs inte i kritisk path. */}
+        <Script id="hotjar" strategy="lazyOnload">
+          {`(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:3307551,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`}
+        </Script>
       </body>
     </html>
   );
