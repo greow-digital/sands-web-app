@@ -147,7 +147,7 @@ export default function PriserPage() {
               Prisguide
             </p>
             <h1
-              className="text-[34px] sm:text-[44px] lg:text-[54px] font-extrabold leading-[1.04] tracking-[-0.035em] max-w-3xl mx-auto"
+              className="text-white text-[34px] sm:text-[44px] lg:text-[54px] font-extrabold leading-[1.04] tracking-[-0.035em] max-w-3xl mx-auto"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Vad kostar takbyte i{" "}

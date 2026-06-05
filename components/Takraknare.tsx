@@ -79,8 +79,8 @@ export default function Takraknare({
   // Default 130 m² landar på ~169 000 kr efter ROT, vilket matchar
   // exempelpriset på startsidan (sadeltak 140 m² från 169 000 kr).
   const [kvm, setKvm] = useState(130);
-  // Breakdown stängd som standard i hero-läget så kortet håller sig kompakt.
-  const [open, setOpen] = useState(!embedded);
+  // Breakdown öppen som standard (även i hero) så detaljerna syns direkt.
+  const [open, setOpen] = useState(true);
   const [stickyVisible, setStickyVisible] = useState(false);
   const engagedRef = useRef(false);
   const stickyFiredRef = useRef(false);
