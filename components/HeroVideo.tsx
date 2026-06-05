@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 interface HeroVideoProps {
@@ -23,31 +23,21 @@ interface HeroVideoProps {
  * undviker autoplay-restriktioner i iOS Low Data mode.
  */
 export default function HeroVideo({ posterSrc, videoSrc, alt }: HeroVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [mountVideo, setMountVideo] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.innerWidth < 768) return;
-
-    // Respekt prefers-reduced-motion: skippa autoplay
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const start = () => {
-      const v = videoRef.current;
-      if (!v) return;
-      v.preload = "auto";
-      v.load();
-      v.play().catch(() => {
-        // Autoplay-block (sällsynt på muted video men händer)
-      });
-    };
+    const start = () => setMountVideo(true);
 
     if (document.readyState === "complete") {
-      const id = setTimeout(start, 300);
+      const id = setTimeout(start, 800);
       return () => clearTimeout(id);
     }
-    const onLoad = () => setTimeout(start, 300);
+    const onLoad = () => setTimeout(start, 800);
     window.addEventListener("load", onLoad, { once: true });
     return () => window.removeEventListener("load", onLoad);
   }, []);
@@ -64,20 +54,21 @@ export default function HeroVideo({ posterSrc, videoSrc, alt }: HeroVideoProps) 
         quality={70}
         className="object-cover"
       />
-      <video
-        ref={videoRef}
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-hidden="true"
-        onCanPlay={() => setVideoReady(true)}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-          videoReady ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
+      {mountVideo && (
+        <video
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          onCanPlay={() => setVideoReady(true)}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            videoReady ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
     </>
   );
 }

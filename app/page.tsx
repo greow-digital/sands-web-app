@@ -274,7 +274,7 @@ export default async function Home() {
         {/* ── TAKTYPER ───────────────────────────── */}
         <section className="py-16 lg:py-20 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h3
+            <h2
               className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-10"
               style={{
                 fontFamily: "var(--font-heading)",
@@ -282,7 +282,7 @@ export default async function Home() {
               }}
             >
               Taktyper vi jobbar med
-            </h3>
+            </h2>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {taktyper.map((t) => (
