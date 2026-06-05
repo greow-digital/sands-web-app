@@ -178,8 +178,7 @@ export default function Home() {
                   className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
-                  Din takläggare i Stockholm:<br />
-                  fast pris och{" "}
+                  Din takläggare i Stockholm, med fast pris och{" "}
                   <span style={{ color: "var(--color-primary)" }}>
                     30 års garanti
                   </span>
