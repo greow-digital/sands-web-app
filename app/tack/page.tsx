@@ -25,7 +25,7 @@ export default function TackPage() {
             av Google, så refresh på /tack räknas som samma konvertering. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(typeof gtag!=='undefined'){var txn;try{txn=sessionStorage.getItem('sands_lead_txn')}catch(e){}if(!txn)txn='lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);gtag('event','form_submit',{currency:'SEK',value:1500,transaction_id:txn});gtag('event','generate_lead',{currency:'SEK',value:1500,transaction_id:txn});}`,
+            __html: `if(typeof gtag!=='undefined'){var txn,src,variant;try{txn=sessionStorage.getItem('sands_lead_txn');src=sessionStorage.getItem('sands_lead_source')||'unknown';variant=sessionStorage.getItem('sands_lead_variant')||'unknown'}catch(e){src='unknown';variant='unknown'}if(!txn)txn='lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);var p={currency:'SEK',value:1500,transaction_id:txn,form_source:src,form_variant:variant};gtag('event','form_submit',p);gtag('event','generate_lead',p);}`,
           }}
         />
 

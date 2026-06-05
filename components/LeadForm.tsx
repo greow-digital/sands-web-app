@@ -114,6 +114,11 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
           .slice(2, 9)}`;
         try {
           sessionStorage.setItem("sands_lead_txn", txn);
+          // Source-tracking: /tack laser denna och skickar med pa
+          // form_submit + generate_lead - sa vi kan i GA4 se vilken
+          // yta som driver konverteringar (hero vs offert-sida).
+          sessionStorage.setItem("sands_lead_source", window.location.pathname);
+          sessionStorage.setItem("sands_lead_variant", variant);
         } catch {
           // sessionStorage kan vara blockerat (privat läge etc).
           // /tack faller då tillbaka på client-side-genererat id.

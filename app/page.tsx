@@ -1,10 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import LeadForm from "@/components/LeadForm";
-import FormPromise from "@/components/FormPromise";
 import StatsRow from "@/components/StatsRow";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
 import ReviewCarousel from "@/components/ReviewCarousel";
@@ -12,6 +10,7 @@ import SeasonBanner from "@/components/SeasonBanner";
 import InstagramFeed from "@/components/InstagramFeed";
 import LatestProjekt from "@/components/LatestProjekt";
 import HeroVideo from "@/components/HeroVideo";
+import HeroCtaTracker from "@/components/HeroCtaTracker";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -146,6 +145,7 @@ export default async function Home() {
   return (
     <>
       <Header />
+      <HeroCtaTracker />
       <main className="pt-16 lg:pt-20 bg-white">
         {/* ── HERO ─────────────────────────────────── */}
         <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
@@ -167,40 +167,68 @@ export default async function Home() {
           <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
             {/* På mobil: titel → form → stats → badges (form högre upp för CRO).
                 På desktop: 2-kol-grid med form höger som spänner båda raderna. */}
-            <div className="lg:grid lg:grid-cols-[1.15fr_1fr] lg:gap-14 lg:items-center">
-              {/* Titel block */}
-              <div className="text-white lg:col-start-1 lg:row-start-1">
-                <SeasonBanner />
-                <h1
-                  className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Din takläggare i Stockholm, med fast pris och{" "}
-                  <span style={{ color: "var(--color-primary)" }}>
-                    30 års garanti
-                  </span>
-                </h1>
-                <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-10 lg:mb-0">
-                  Som auktoriserad takläggare i Stockholm har Sands
-                  Entreprenad utfört 2 500+ tak sedan 2016. Takbyte,
-                  takomläggning och renovering med transparent prissättning,
-                  ROT-avdrag direkt på fakturan och svar samma vardag.
-                </p>
-              </div>
+            <div className="text-white max-w-3xl">
+              <SeasonBanner />
 
-              {/* Formulär */}
-              <div className="mb-10 lg:mb-0 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-center">
-                <LeadForm variant="hero" />
-                <div className="mt-4">
-                  <FormPromise variant="pills" theme="light" />
+              {/* Trust-rad ovanfor H1: stjarnor + recensions-snippet */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-5 text-sm">
+                <div className="flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={14}
+                        className="fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+                  </div>
+                  <span className="font-semibold">4,8</span>
+                  <span className="text-gray-300">BraByggare</span>
                 </div>
+                <span className="text-gray-400">·</span>
+                <span className="font-medium">
+                  2 500+ utforda tak sedan 2016
+                </span>
               </div>
 
-              {/* Stats + badges block */}
-              <div className="text-white lg:col-start-1 lg:row-start-2 lg:mt-10">
-                <StatsRow theme="light" className="mb-10" />
-                <TrustBadgesRow />
+              <h1
+                className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Din takläggare i Stockholm, med fast pris och{" "}
+                <span style={{ color: "var(--color-primary)" }}>
+                  30 års garanti
+                </span>
+              </h1>
+              <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-8">
+                Auktoriserad takläggare i Stockholm. Takbyte, takomläggning
+                och renovering med transparent prissättning, ROT-avdrag
+                direkt på fakturan och svar samma vardag.
+              </p>
+
+              {/* CTA + ring-lank */}
+              <div className="flex flex-wrap items-center gap-5 mb-12 lg:mb-16">
+                <Link
+                  href="/offert"
+                  data-hero-cta
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02] shadow-lg"
+                  style={{ backgroundColor: "var(--color-primary)" }}
+                >
+                  Boka kostnadsfri takkontroll <ArrowRight size={16} />
+                </Link>
+                <span className="text-sm text-gray-300">
+                  Eller ring{" "}
+                  <a
+                    href="tel:0828388"
+                    className="font-bold underline underline-offset-4 text-white hover:text-[#2B74FC]"
+                  >
+                    08-28 38 88
+                  </a>
+                </span>
               </div>
+
+              <StatsRow theme="light" className="mb-8" />
+              <TrustBadgesRow />
             </div>
           </div>
         </section>
