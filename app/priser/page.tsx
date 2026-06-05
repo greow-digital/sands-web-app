@@ -114,8 +114,9 @@ export default function PriserPage() {
           }}
         />
 
-        {/* Split-hero: rubrik + trust till vänster, kalkylator till höger.
-            Kalkylatorn är konverteringsmotorn så den ligger ovanför fold. */}
+        {/* Kompakt centrerad hero. Kalkylatorn (nedan) overlappar upp hit sa
+            den blir hjalten nara fold men bred och mittstalld, med plats for
+            expanderbara detaljer och allt innehall under. */}
         <section className="relative overflow-hidden">
           <Image
             src="/images/hero-priser.jpg"
@@ -129,12 +130,12 @@ export default function PriserPage() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(90deg, rgba(6,6,7,0.92) 0%, rgba(6,6,7,0.82) 38%, rgba(6,6,7,0.62) 72%, rgba(6,6,7,0.42) 100%)",
+                "linear-gradient(180deg, rgba(6,6,7,0.74) 0%, rgba(6,6,7,0.70) 45%, rgba(6,6,7,0.84) 100%)",
             }}
           />
 
-          <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-            <nav className="flex items-center gap-2 text-xs text-gray-300 mb-8">
+          <div className="relative max-w-[820px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-8 lg:pt-12 lg:pb-36 text-left lg:text-center">
+            <nav className="flex items-center justify-start lg:justify-center gap-2 text-xs text-gray-300 mb-6">
               <Link href="/" className="hover:text-white">
                 Hem
               </Link>
@@ -142,57 +143,53 @@ export default function PriserPage() {
               <span className="text-gray-200">Priser</span>
             </nav>
 
-            <div className="grid lg:grid-cols-[1fr_minmax(340px,420px)] gap-10 lg:gap-14 items-center">
-              <div className="text-white">
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-300 mb-4">
-                  Prisguide
-                </p>
-                <h1
-                  className="text-[34px] sm:text-[44px] lg:text-[52px] font-extrabold leading-[1.04] tracking-[-0.035em]"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  Vad kostar takbyte i{" "}
-                  <span style={{ color: "var(--color-primary)" }}>
-                    Stockholm?
-                  </span>
-                </h1>
-                <p className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-xl mt-5">
-                  Dra i reglaget för en direkt prisuppskattning. Alla riktpriser
-                  är efter 30 % ROT-avdrag, fast pris efter kostnadsfri
-                  takkontroll och inga dolda avgifter.
-                </p>
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-8 text-sm text-gray-100">
-                  <span className="flex items-center gap-2">
-                    <Star
-                      size={16}
-                      className="fill-current"
-                      style={{ color: "var(--color-primary)" }}
-                    />
-                    4,8 av 5 på BraByggare
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <CheckCircle
-                      size={16}
-                      style={{ color: "var(--color-primary)" }}
-                    />
-                    Fast pris
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <CheckCircle
-                      size={16}
-                      style={{ color: "var(--color-primary)" }}
-                    />
-                    Upp till 30 års garanti
-                  </span>
-                </div>
-              </div>
-
-              <div>
-                <Takraknare embedded />
-              </div>
+            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-300 mb-3">
+              Prisguide
+            </p>
+            <h1
+              className="text-[34px] sm:text-[44px] lg:text-[54px] font-extrabold leading-[1.04] tracking-[-0.035em] max-w-3xl mx-auto"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Vad kostar takbyte i{" "}
+              <span style={{ color: "var(--color-primary)" }}>Stockholm?</span>
+            </h1>
+            <p className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl mx-auto mt-5">
+              Dra i reglaget för en direkt prisuppskattning. Alla riktpriser är
+              efter 30 % ROT-avdrag, fast pris efter kostnadsfri takkontroll och
+              inga dolda avgifter.
+            </p>
+            <div className="flex flex-wrap items-center justify-start lg:justify-center gap-x-6 gap-y-3 mt-7 text-sm text-gray-100">
+              <span className="flex items-center gap-2">
+                <Star
+                  size={16}
+                  className="fill-current"
+                  style={{ color: "var(--color-primary)" }}
+                />
+                4,8 av 5 på BraByggare
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle
+                  size={16}
+                  style={{ color: "var(--color-primary)" }}
+                />
+                Fast pris
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle
+                  size={16}
+                  style={{ color: "var(--color-primary)" }}
+                />
+                Upp till 30 års garanti
+              </span>
             </div>
           </div>
         </section>
+
+        {/* Mobil: staplad direkt under heron (ingen overlap, som Erik gillar).
+            Desktop: bred, mittställd, overlappar upp i heron. */}
+        <div className="relative z-10 mt-6 lg:-mt-28 mb-4 lg:mb-8 max-w-[880px] mx-auto px-4 sm:px-6 lg:px-8">
+          <Takraknare embedded />
+        </div>
 
         {/* ROT-info under heron */}
         <section className="py-8 border-b border-gray-100 bg-gray-50/60">
