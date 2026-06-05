@@ -95,7 +95,7 @@ export default async function ProjektPage() {
                   </strong>{" "}
                   i Stockholmsregionen. Här visar vi{" "}
                   <strong className="font-semibold text-[#2B74FC]">
-                    {pins.length}
+                    {projekt.length}
                   </strong>{" "}
                   av de projekt vi är mest stolta över, med bilder och detaljer
                   för varje takbyte.

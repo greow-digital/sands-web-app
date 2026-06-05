@@ -11,6 +11,7 @@ import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
 import InstagramFeed from "@/components/InstagramFeed";
 import LatestProjekt from "@/components/LatestProjekt";
+import HeroVideo from "@/components/HeroVideo";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -148,16 +149,11 @@ export default async function Home() {
       <main className="pt-16 lg:pt-20 bg-white">
         {/* ── HERO ─────────────────────────────────── */}
         <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
-          {/* Bakgrundsbild */}
-          <Image
-            src="/images/hero-house.jpg"
+          {/* Bakgrund: bild som LCP + video som tonas in efter page load */}
+          <HeroVideo
+            posterSrc="/images/hero-house.jpg"
+            videoSrc="/videos/hero.mp4"
             alt="Takbyte i Stockholm, villa med nytt tak"
-            fill
-            priority
-            fetchPriority="high"
-            sizes="(max-width: 768px) 768px, (max-width: 1200px) 1200px, 1920px"
-            quality={80}
-            className="object-cover"
           />
           {/* Gradient overlay: 70% mörk vänster → 20% höger */}
           <div
