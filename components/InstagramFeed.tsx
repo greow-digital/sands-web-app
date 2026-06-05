@@ -1,8 +1,8 @@
 "use client";
 
-import Script from "next/script";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
 function InstagramIcon({ size = 16 }: { size?: number }) {
   return (
@@ -24,7 +24,6 @@ function InstagramIcon({ size = 16 }: { size?: number }) {
     </svg>
   );
 }
-import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
 type BeholdWidgetProps = DetailedHTMLProps<
   HTMLAttributes<HTMLElement>,
@@ -39,7 +38,41 @@ declare module "react" {
   }
 }
 
+const BEHOLD_SRC = "https://w.behold.so/widget.js";
+
 export default function InstagramFeed() {
+  const slotRef = useRef<HTMLDivElement>(null);
+  const [show, setShow] = useState(false);
+
+  // Ladda Behold forst nar sektionen narmar sig viewport. Feeden ligger
+  // under fold, sa Lighthouse (som inte scrollar) ser den aldrig.
+  useEffect(() => {
+    const el = slotRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShow(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Injicera widget.js en gang nar den ska visas.
+  useEffect(() => {
+    if (!show) return;
+    if (document.querySelector(`script[src="${BEHOLD_SRC}"]`)) return;
+    const s = document.createElement("script");
+    s.type = "module";
+    s.async = true;
+    s.src = BEHOLD_SRC;
+    document.body.appendChild(s);
+  }, [show]);
+
   return (
     <section className="py-16 lg:py-24 bg-white">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,13 +101,12 @@ export default function InstagramFeed() {
           </a>
         </div>
 
-        <behold-widget feed-id="yyTUepYBaDC9vzg061gK"></behold-widget>
-
-        <Script
-          type="module"
-          src="https://w.behold.so/widget.js"
-          strategy="lazyOnload"
-        />
+        {/* min-h reserverar plats sa footern inte hoppar nar feeden laddas */}
+        <div ref={slotRef} className="min-h-[320px]">
+          {show && (
+            <behold-widget feed-id="yyTUepYBaDC9vzg061gK"></behold-widget>
+          )}
+        </div>
       </div>
     </section>
   );

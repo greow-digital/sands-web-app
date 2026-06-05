@@ -7,7 +7,7 @@ import StatsRow from "@/components/StatsRow";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
-import InstagramFeed from "@/components/InstagramFeed";
+// import InstagramFeed from "@/components/InstagramFeed"; // avstangd, se nedan
 import LatestProjekt from "@/components/LatestProjekt";
 import HeroVideo from "@/components/HeroVideo";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
@@ -540,8 +540,12 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── INSTAGRAM ──────────────────────────── */}
-        <InstagramFeed />
+        {/* ── INSTAGRAM ──────────────────────────────
+            Avstangd: IG-bilderna holler for lag kvalitet och drar ner
+            intrycket. Komponenten finns kvar i components/InstagramFeed.tsx
+            (lazy-laddad via IntersectionObserver) sa den ar latt att sla
+            pa igen genom att avkommentera nedan. */}
+        {/* <InstagramFeed /> */}
 
         {/* ── OMRÅDEN ────────────────────────────── */}
         <section className="py-16 lg:py-24 bg-white">
