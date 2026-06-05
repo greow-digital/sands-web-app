@@ -8,16 +8,13 @@ type HotjarWindow = Window & {
 };
 
 /**
- * Laddar tunga tredjepartsskript (gtag/Google Ads 175 KB + Hotjar) FORST vid
- * forsta anvandarinteraktion, inte vid sidladdning. Det holler dem helt
- * utanfor LCP/TBT-fonstret (Lighthouse simulerar ingen interaktion).
+ * Laddar Hotjar (56 KB heatmaps/analys) FORST vid forsta anvandarinteraktion
+ * istallet for vid sidladdning, sa det halls utanfor LCP/TBT-fonstret.
  *
- * Tracking opaverkad: dataLayer-shimmen + gtag('config') ligger eager i
- * <head>, sa gtag('event')-anrop koas i dataLayer och fyras nar skriptet
- * laddas. gclid fangas separat av ClickIdCapture, konverteringar ar
- * GA4-import pa form_submit (langt efter interaktion).
- *
- * Inget fallback (Eriks val): sessioner som aldrig interagerar sparas ej.
+ * gtag/Google Ads laddas DAREMOT eager i <head> (layout.tsx) sa GA4 page_view
+ * registreras for alla sessioner, aven de som aldrig interagerar. Hotjar ar
+ * ren heatmap-data och paverkar inte sessions-/konverteringsdata, sa den
+ * tal att deferras.
  */
 export default function ThirdPartyScripts() {
   useEffect(() => {
@@ -40,14 +37,6 @@ export default function ThirdPartyScripts() {
       loaded = true;
       remove();
 
-      // gtag / Google Ads
-      const gtagScript = document.createElement("script");
-      gtagScript.async = true;
-      gtagScript.src =
-        "https://www.googletagmanager.com/gtag/js?id=AW-18004063012";
-      document.head.appendChild(gtagScript);
-
-      // Hotjar
       const w = window as HotjarWindow;
       w.hj =
         w.hj ||

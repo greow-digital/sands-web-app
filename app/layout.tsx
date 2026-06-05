@@ -65,6 +65,7 @@ export default function RootLayout({
     <html lang="sv" className={`${manrope.variable} ${inter.variable} h-full`}>
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -114,9 +115,13 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* gtag-shim + config eager (kostar ~0, ingen network). Events koas i
-            dataLayer. Sjalva gtag/js-skriptet (175 KB) + Hotjar laddas forst
-            vid interaktion via ThirdPartyScripts. */}
+        {/* gtag/Google Ads eager sa GA4 page_view registreras for ALLA
+            sessioner (aven noll-interaktion). Endast Hotjar deferras till
+            interaktion via ThirdPartyScripts. */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18004063012"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`,
