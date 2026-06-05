@@ -31,3 +31,15 @@ export type ProjektDetail = ProjektCard & {
   taggar: string[] | null;
   bilder: SanityImageWithMeta[] | null;
 };
+
+export type ProjektLatest = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  ort: string | null;
+  typ: string | null;
+  ar: number | null;
+  huvudbild: SanityImageWithMeta | null;
+  foreImage: SanityImageWithMeta | null;
+  efterImage: SanityImageWithMeta | null;
+};

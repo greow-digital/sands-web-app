@@ -86,3 +86,27 @@ export const PROJEKT_SLUGS_QUERY = defineQuery(/* groq */ `
 export const PROJEKT_COUNT_QUERY = defineQuery(/* groq */ `
   count(*[_type == "projekt" && defined(slug.current)])
 `);
+
+export const LATEST_PROJEKT_QUERY = defineQuery(/* groq */ `
+  *[_type == "projekt" && defined(slug.current)]
+  | order(ar desc, _createdAt desc)[0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    ort,
+    typ,
+    ar,
+    huvudbild {
+      ...,
+      asset->{ _id, url, metadata { lqip } }
+    },
+    foreImage {
+      ...,
+      asset->{ _id, url, metadata { lqip } }
+    },
+    efterImage {
+      ...,
+      asset->{ _id, url, metadata { lqip } }
+    }
+  }
+`);

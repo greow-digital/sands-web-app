@@ -10,6 +10,7 @@ import TrustBadgesRow from "@/components/TrustBadgesRow";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
 import InstagramFeed from "@/components/InstagramFeed";
+import LatestProjekt from "@/components/LatestProjekt";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -140,7 +141,7 @@ const eternitFaq = [
 // Page
 // ──────────────────────────────────────────────────────────
 
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <Header />
@@ -486,83 +487,8 @@ export default function Home() {
         {/* ── REVIEWS KARUSELL ─────────────────── */}
         <ReviewCarousel />
 
-        {/* ── FÖRE / EFTER ─────────────────────── */}
-        <section
-          className="py-16 lg:py-24"
-          style={{ backgroundColor: "#F8F9FB" }}
-        >
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
-                  Resultat
-                </p>
-                <h2
-                  className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em]"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Före & efter
-                </h2>
-              </div>
-              <Link
-                href="/projekt"
-                className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
-              >
-                Se alla projekt <ArrowRight size={14} />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
-              {[
-                {
-                  src: "/images/ba-vitthus.jpg",
-                  alt: "Vitt hus, före och efter takbyte",
-                  ort: "Vaxholm",
-                },
-                {
-                  src: "/images/ba-gulthus.jpg",
-                  alt: "Gult hus, före och efter takbyte",
-                  ort: "Lidingö",
-                },
-                {
-                  src: "/images/ba-rotthus.jpg",
-                  alt: "Rött hus, före och efter takbyte",
-                  ort: "Norrtälje",
-                },
-              ].map((img) => (
-                <div key={img.src} className="group">
-                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-gray-200">
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
-                    />
-                    {/* Före / efter labels */}
-                    <div className="absolute bottom-0 inset-x-0 flex">
-                      <div className="flex-1 py-2 text-center text-xs font-bold text-white bg-black/50 backdrop-blur-sm">
-                        FÖRE
-                      </div>
-                      <div
-                        className="flex-1 py-2 text-center text-xs font-bold text-white backdrop-blur-sm"
-                        style={{ backgroundColor: "rgba(43,116,252,0.7)" }}
-                      >
-                        EFTER
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm font-semibold mt-3" style={{ color: "var(--color-dark)" }}>
-                    Takbyte i {img.ort}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* ── SENASTE PROJEKT (dynamisk fr Sanity) ────── */}
+        <LatestProjekt />
 
         {/* ── MID-PAGE CTA ──────────────────── */}
         <section className="py-14 lg:py-16 border-t border-gray-100 bg-white text-center">

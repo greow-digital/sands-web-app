@@ -169,6 +169,36 @@ export const projekt = defineType({
         },
       ],
     }),
+    defineField({
+      name: "foreImage",
+      title: "Före-bild",
+      type: "image",
+      description:
+        "Valfri. Om både Före- och Efter-bild fylls i visas projektet med en före/efter-jämförelse i 'Senaste projekt'-listan på startsidan.",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt-text",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
+      name: "efterImage",
+      title: "Efter-bild",
+      type: "image",
+      description:
+        "Valfri. Används i kombination med Före-bild för före/efter-jämförelse på startsidan. Kan vara samma som huvudbilden.",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt-text",
+          type: "string",
+        }),
+      ],
+    }),
   ],
   orderings: [
     {
