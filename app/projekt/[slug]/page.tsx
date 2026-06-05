@@ -16,6 +16,7 @@ import {
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektCard, ProjektDetail } from "@/sanity/lib/types";
 import { pageMeta } from "@/lib/seo";
+import { PROJEKT_VIDEOS } from "@/lib/projekt-videos";
 
 export async function generateStaticParams() {
   const all = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
@@ -166,6 +167,18 @@ export default async function ProjektDetailPage({
                         p.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
                       }
                       blurDataURL={p.huvudbild?.asset?.metadata?.lqip ?? undefined}
+                    />
+                  </div>
+                )}
+
+                {p.slug && PROJEKT_VIDEOS[p.slug] && (
+                  <div className="relative aspect-video rounded-2xl overflow-hidden mb-8 bg-black">
+                    <video
+                      src={PROJEKT_VIDEOS[p.slug]}
+                      controls
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
