@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle } from "lucide-react";
+import Image from "next/image";
+import { CheckCircle, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
 import Takraknare from "@/components/Takraknare";
@@ -94,17 +94,107 @@ export default function PriserPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        <PageHero
-          eyebrow="Prisguide"
-          title="Vad kostar takbyte i"
-          titleAccent="Stockholm?"
-          description="Alla riktpriser är efter 30 % ROT-avdrag. Vi ger fast pris efter kostnadsfri takkontroll, inga dolda avgifter. Sedan 1 dec 2025 krävs inte längre bygglov för takbyte på villor."
-          breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Priser" }]}
-          backgroundImage="/images/hero-priser.jpg"
-          imageAlt="Villa i Stockholm med nytt tak"
+        {/* BreadcrumbList JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Hem",
+                  item: "https://www.sandsab.se/",
+                },
+                { "@type": "ListItem", position: 2, name: "Priser" },
+              ],
+            }),
+          }}
         />
 
-        {/* ROT-info över Takräknaren */}
+        {/* Split-hero: rubrik + trust till vänster, kalkylator till höger.
+            Kalkylatorn är konverteringsmotorn så den ligger ovanför fold. */}
+        <section className="relative overflow-hidden">
+          <Image
+            src="/images/hero-priser.jpg"
+            alt="Villa i Stockholm med nytt tak"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(6,6,7,0.92) 0%, rgba(6,6,7,0.82) 38%, rgba(6,6,7,0.62) 72%, rgba(6,6,7,0.42) 100%)",
+            }}
+          />
+
+          <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+            <nav className="flex items-center gap-2 text-xs text-gray-300 mb-8">
+              <Link href="/" className="hover:text-white">
+                Hem
+              </Link>
+              <span>/</span>
+              <span className="text-gray-200">Priser</span>
+            </nav>
+
+            <div className="grid lg:grid-cols-[1fr_minmax(340px,420px)] gap-10 lg:gap-14 items-center">
+              <div className="text-white">
+                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-300 mb-4">
+                  Prisguide
+                </p>
+                <h1
+                  className="text-[34px] sm:text-[44px] lg:text-[52px] font-extrabold leading-[1.04] tracking-[-0.035em]"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  Vad kostar takbyte i{" "}
+                  <span style={{ color: "var(--color-primary)" }}>
+                    Stockholm?
+                  </span>
+                </h1>
+                <p className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-xl mt-5">
+                  Dra i reglaget för en direkt prisuppskattning. Alla riktpriser
+                  är efter 30 % ROT-avdrag, fast pris efter kostnadsfri
+                  takkontroll och inga dolda avgifter.
+                </p>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mt-8 text-sm text-gray-100">
+                  <span className="flex items-center gap-2">
+                    <Star
+                      size={16}
+                      className="fill-current"
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    4,8 av 5 på BraByggare
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <CheckCircle
+                      size={16}
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    Fast pris
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <CheckCircle
+                      size={16}
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    Upp till 30 års garanti
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <Takraknare embedded />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ROT-info under heron */}
         <section className="py-8 border-b border-gray-100 bg-gray-50/60">
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-sm text-gray-700 leading-relaxed">
@@ -115,9 +205,6 @@ export default function PriserPage() {
             </p>
           </div>
         </section>
-
-        {/* Takräknare */}
-        <Takraknare />
 
         {/* Prisintervall */}
         <section className="py-16 lg:py-24">

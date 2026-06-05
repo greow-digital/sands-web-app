@@ -70,11 +70,17 @@ function fireGtag(name: string, value: number) {
 
 const STICKY_DISMISSED_KEY = "sands_calc_sticky_dismissed";
 
-export default function Takraknare() {
+export default function Takraknare({
+  embedded = false,
+}: {
+  // embedded = renderas inuti hero-split utan egen rubrik/sektion-padding.
+  embedded?: boolean;
+} = {}) {
   // Default 130 m² landar på ~169 000 kr efter ROT, vilket matchar
   // exempelpriset på startsidan (sadeltak 140 m² från 169 000 kr).
   const [kvm, setKvm] = useState(130);
-  const [open, setOpen] = useState(true);
+  // Breakdown stängd som standard i hero-läget så kortet håller sig kompakt.
+  const [open, setOpen] = useState(!embedded);
   const [stickyVisible, setStickyVisible] = useState(false);
   const engagedRef = useRef(false);
   const stickyFiredRef = useRef(false);
@@ -149,10 +155,19 @@ export default function Takraknare() {
   return (
     <section
       id="takraknare"
-      className="py-16 lg:py-20 border-t border-gray-100 scroll-mt-24"
+      className={
+        embedded
+          ? "scroll-mt-24"
+          : "py-16 lg:py-20 border-t border-gray-100 scroll-mt-24"
+      }
     >
-      <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className={
+          embedded ? "" : "max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8"
+        }
+      >
         {/* Header */}
+        {!embedded && (
         <div className="text-center mb-10">
           <span
             className="inline-block text-xs font-semibold uppercase tracking-[0.15em] px-3 py-1 rounded-full mb-4"
@@ -177,6 +192,7 @@ export default function Takraknare() {
             efter ROT-avdrag.
           </p>
         </div>
+        )}
 
         {/* Slider-kort */}
         <div className="rounded-3xl border border-gray-100 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
