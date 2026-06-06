@@ -115,13 +115,10 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* gtag/Google Ads eager sa GA4 page_view registreras for ALLA
-            sessioner (aven noll-interaktion). Endast Hotjar deferras till
-            interaktion via ThirdPartyScripts. */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18004063012"
-        />
+        {/* dataLayer-shim + config eager (kostar ~0, ingen network) sa
+            page_view koas direkt. Sjalva gtag/js (176 KB) laddas pa load+idle
+            via ThirdPartyScripts sa det inte blockerar LCP-renderingen, men
+            anda fyras for alla sessioner (aven utan interaktion). */}
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`,

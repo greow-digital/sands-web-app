@@ -7,16 +7,45 @@ type HotjarWindow = Window & {
   _hjSettings?: { hjid: number; hjsv: number };
 };
 
+type IdleWindow = Window & {
+  requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
+};
+
 /**
- * Laddar Hotjar (56 KB heatmaps/analys) FORST vid forsta anvandarinteraktion
- * istallet for vid sidladdning, sa det halls utanfor LCP/TBT-fonstret.
+ * gtag/Google Ads laddas pa `load` + idle (INTE eager i head, INTE gatad pa
+ * interaktion). Skalet: eager i head blockerade LCP-renderingen ~2 s (176 KB
+ * parse pa main-thread precis nar hero-bilden skulle malas). Genom att ladda
+ * efter load-eventet malas LCP forst, men gtag fyras anda for ALLA sessioner
+ * som stannar nagon sekund (aven utan interaktion) sa GA tappar inga sessioner.
+ * dataLayer-shim + gtag('config') ligger eager i <head> sa page_view koas.
  *
- * gtag/Google Ads laddas DAREMOT eager i <head> (layout.tsx) sa GA4 page_view
- * registreras for alla sessioner, aven de som aldrig interagerar. Hotjar ar
- * ren heatmap-data och paverkar inte sessions-/konverteringsdata, sa den
- * tal att deferras.
+ * Hotjar (56 KB heatmaps) laddas forst vid forsta interaktion, ren heatmap-
+ * data som inte paverkar sessions-/konverteringsdata.
  */
 export default function ThirdPartyScripts() {
+  // gtag: efter load + idle.
+  useEffect(() => {
+    const loadGtag = () => {
+      if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]'))
+        return;
+      const s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=AW-18004063012";
+      document.head.appendChild(s);
+    };
+    const schedule = () => {
+      const w = window as IdleWindow;
+      if (w.requestIdleCallback) w.requestIdleCallback(loadGtag, { timeout: 3000 });
+      else setTimeout(loadGtag, 1500);
+    };
+    if (document.readyState === "complete") schedule();
+    else {
+      window.addEventListener("load", schedule, { once: true });
+      return () => window.removeEventListener("load", schedule);
+    }
+  }, []);
+
+  // Hotjar: vid forsta interaktion.
   useEffect(() => {
     const events = [
       "scroll",
