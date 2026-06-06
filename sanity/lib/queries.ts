@@ -110,3 +110,21 @@ export const LATEST_PROJEKT_QUERY = defineQuery(/* groq */ `
     }
   }
 `);
+
+// Senaste 3 projekt for referensprojekt-kort (med kvm + beskrivning).
+export const REFERENS_PROJEKT_QUERY = defineQuery(/* groq */ `
+  *[_type == "projekt" && defined(slug.current)]
+  | order(ar desc, _createdAt desc)[0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    ort,
+    typ,
+    kvm,
+    beskrivning,
+    huvudbild {
+      ...,
+      asset->{ _id, url, metadata { lqip } }
+    }
+  }
+`);

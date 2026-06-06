@@ -43,3 +43,14 @@ export type ProjektLatest = {
   foreImage: SanityImageWithMeta | null;
   efterImage: SanityImageWithMeta | null;
 };
+
+export type ProjektReferens = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  ort: string | null;
+  typ: string | null;
+  kvm: number | null;
+  beskrivning: string | null;
+  huvudbild: SanityImageWithMeta | null;
+};

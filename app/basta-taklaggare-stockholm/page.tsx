@@ -19,7 +19,12 @@ import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { omraden } from "@/lib/omraden";
 import { client } from "@/sanity/lib/client";
-import { PROJEKT_COUNT_QUERY } from "@/sanity/lib/queries";
+import {
+  PROJEKT_COUNT_QUERY,
+  REFERENS_PROJEKT_QUERY,
+} from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
+import type { ProjektReferens } from "@/sanity/lib/types";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/basta-taklaggare-stockholm" },
@@ -128,39 +133,6 @@ const inbyggdaRecensioner = [
   },
 ];
 
-const referensProjekt = [
-  {
-    slug: "plommonvagen-bromma",
-    titel: "Plommonvägen i Bromma",
-    typ: "Tegeltak",
-    kvm: 150,
-    ort: "Stockholm",
-    bild: "/images/projekt/plommonvagen-bromma.jpg",
-    sammanfattning:
-      "Komplett takbyte på 40-talsvilla i Bromma med Monier tegeltakpannor. Originaltaket hade nått sin tekniska livslängd efter 60+ år. Läkten var rutten och regnvattensystemet behövde bytas ut helt.",
-  },
-  {
-    slug: "hakevagen-djursholm",
-    titel: "Hakevägen i Djursholm",
-    typ: "Betongtak",
-    kvm: 160,
-    ort: "Danderyd",
-    bild: "/images/projekt/hakevagen-djursholm.jpg",
-    sammanfattning:
-      "Exklusiv villa i Djursholm där kunden bytte från eternittak till Monier betongtakpannor. Saneringen av asbest skedde av certifierad partner och hela projektet hanterades som en totalentreprenad i ett kontrakt.",
-  },
-  {
-    slug: "kastanjetunet-lidingo",
-    titel: "Kastanjetunet i Lidingö",
-    typ: "Betongtak",
-    kvm: 165,
-    ort: "Lidingö",
-    bild: "/images/projekt/kastanjetunet-lidingo.jpg",
-    sammanfattning:
-      "Takomläggning på 165 kvm på Lidingö med komplett byte av takpannor, läkt, underlagspapp och hängrännor. Kunden valde Sands efter att ha begärt offert från fyra olika takläggare. Avgörande blev fast pris och Monier-garantin.",
-  },
-];
-
 const fragor = [
   {
     q: "Hur väljer jag Stockholms bästa takläggare?",
@@ -201,8 +173,10 @@ const fragor = [
 // ──────────────────────────────────────────────────────────
 
 export default async function BastaTaklaggareStockholm() {
-  const projektCount =
-    ((await client.fetch(PROJEKT_COUNT_QUERY)) as number) ?? 0;
+  const [projektCount, referensProjekt] = await Promise.all([
+    client.fetch(PROJEKT_COUNT_QUERY).then((n) => (n as number) ?? 0),
+    client.fetch(REFERENS_PROJEKT_QUERY) as Promise<ProjektReferens[]>,
+  ]);
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -607,33 +581,56 @@ export default async function BastaTaklaggareStockholm() {
             <div className="grid md:grid-cols-3 gap-7">
               {referensProjekt.map((p) => (
                 <Link
-                  key={p.slug}
+                  key={p._id}
                   href={`/projekt/${p.slug}`}
                   className="group block rounded-2xl border border-gray-100 overflow-hidden hover:border-[#2B74FC] transition-colors"
                 >
                   <div className="relative aspect-[4/3] bg-gray-100">
-                    <Image
-                      src={p.bild}
-                      alt={`${p.titel}, ${p.typ} ${p.kvm} kvm`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                    {p.huvudbild?.asset && (
+                      <Image
+                        src={urlFor(p.huvudbild)
+                          .width(800)
+                          .height(600)
+                          .fit("crop")
+                          .url()}
+                        alt={
+                          p.huvudbild.alt ||
+                          [p.title, p.typ, p.kvm && `${p.kvm} kvm`]
+                            .filter(Boolean)
+                            .join(", ")
+                        }
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        placeholder={
+                          p.huvudbild.asset.metadata?.lqip ? "blur" : "empty"
+                        }
+                        blurDataURL={
+                          p.huvudbild.asset.metadata?.lqip ?? undefined
+                        }
+                      />
+                    )}
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
-                      <span
-                        className="font-semibold uppercase tracking-wide px-2 py-0.5 rounded"
-                        style={{
-                          backgroundColor: "rgba(43,116,252,0.08)",
-                          color: "var(--color-primary)",
-                        }}
-                      >
-                        {p.typ}
-                      </span>
-                      <span>{p.kvm} kvm</span>
-                      <span>·</span>
-                      <span>{p.ort}</span>
+                      {p.typ && (
+                        <span
+                          className="font-semibold uppercase tracking-wide px-2 py-0.5 rounded"
+                          style={{
+                            backgroundColor: "rgba(43,116,252,0.08)",
+                            color: "var(--color-primary)",
+                          }}
+                        >
+                          {p.typ}
+                        </span>
+                      )}
+                      {p.kvm && <span>{p.kvm} kvm</span>}
+                      {p.ort && (
+                        <>
+                          <span>·</span>
+                          <span>{p.ort}</span>
+                        </>
+                      )}
                     </div>
                     <h3
                       className="text-lg font-extrabold mb-2 group-hover:text-[#2B74FC] transition-colors"
@@ -642,11 +639,13 @@ export default async function BastaTaklaggareStockholm() {
                         color: "var(--color-dark)",
                       }}
                     >
-                      {p.titel}
+                      {p.title}
                     </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {p.sammanfattning}
-                    </p>
+                    {p.beskrivning && (
+                      <p className="text-sm text-gray-600 leading-relaxed line-clamp-4">
+                        {p.beskrivning}
+                      </p>
+                    )}
                     <div className="mt-4 flex items-center gap-1 text-sm font-semibold text-gray-500 group-hover:text-[#2B74FC] transition-colors">
                       Läs hela projektet <ArrowRight size={12} />
                     </div>
