@@ -214,6 +214,8 @@ Eternitbyte kostar mer än ett vanligt takbyte eftersom saneringskostnaden tillk
 
 Vi ger alltid fast pris efter takkontroll, inga överraskningar.
 
+Eternittak är fortfarande vanliga på äldre hus och gårdar i Roslagen. Är du i området hjälper vår <a href="/omraden/norrtalje" class="text-[#2B74FC] font-semibold">takläggare i Norrtälje</a> dig med både säker asbestsanering och nytt tak.
+
 ## Vilka regler gäller?
 
 Enligt Arbetsmiljöverkets föreskrifter (AFS 2006:1) krävs:

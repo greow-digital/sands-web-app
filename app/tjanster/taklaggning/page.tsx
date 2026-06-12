@@ -465,7 +465,15 @@ export default async function TaklaggningPage() {
                   Fast pris efter besiktning, inga tillägg under vägen. Sedan
                   1 december 2025 krävs inte längre bygglov för takbyte på en-
                   och tvåfamiljshus, även vid byte av taktyp. Hela arbetet
-                  regleras i ett ABT-06-kontrakt.
+                  regleras i ett ABT-06-kontrakt. Vi arbetar i hela Stockholms
+                  län, från innerstaden till{" "}
+                  <Link
+                    href="/omraden/norrtalje"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    takbyte i Norrtälje
+                  </Link>{" "}
+                  och Roslagen.
                 </p>
 
                 <h3

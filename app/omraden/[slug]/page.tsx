@@ -17,7 +17,11 @@ import { matchProjektForOrt } from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 
 export async function generateStaticParams() {
-  return omraden.map((o) => ({ slug: o.slug }));
+  // norrtalje har en egen dedikerad route (app/omraden/norrtalje/page.tsx)
+  // och exkluderas här för att undvika att två sidor löser samma path.
+  return omraden
+    .filter((o) => o.slug !== "norrtalje")
+    .map((o) => ({ slug: o.slug }));
 }
 
 // Per-slug SEO overrides for the 10 top-priority suburbs. All other
@@ -392,7 +396,7 @@ export default async function OmradesPage({
                 Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
-                href="tel:0828388"
+                href="tel:08283888"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
                 style={{ color: "var(--color-dark)" }}
               >
