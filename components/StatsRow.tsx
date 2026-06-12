@@ -1,3 +1,5 @@
+import { stats, garanti } from "@/lib/company";
+
 interface StatsRowProps {
   /** "light" = vita siffror (mörk bakgrund), "dark" = mörk text */
   theme?: "light" | "dark";
@@ -5,10 +7,10 @@ interface StatsRowProps {
 }
 
 const STATS = [
-  { num: "500+", label: "Nöjda kunder" },
-  { num: "2 500+", label: "Takläggningar" },
-  { num: "30 år", label: "Monier garanti" },
-] as const;
+  { num: stats.kunder, label: "Nöjda kunder" },
+  { num: stats.tak, label: "Takläggningar" },
+  { num: garanti.ar, label: garanti.label },
+];
 
 export default function StatsRow({
   theme = "light",

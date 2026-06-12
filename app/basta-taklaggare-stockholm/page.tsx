@@ -25,6 +25,7 @@ import {
 } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektReferens } from "@/sanity/lib/types";
+import { stats as companyStats, garanti } from "@/lib/company";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/basta-taklaggare-stockholm" },
@@ -44,10 +45,10 @@ export const metadata: Metadata = {
 // ──────────────────────────────────────────────────────────
 
 const stats = [
-  { value: "4,8★", label: "Snittbetyg BraByggare" },
-  { value: "54+", label: "Verifierade omdömen" },
-  { value: "30 år", label: "Tätt tak-garanti (Monier)" },
-  { value: "27+", label: "Kommuner i Stockholms län" },
+  { value: `${companyStats.betyg}★`, label: "Snittbetyg BraByggare" },
+  { value: companyStats.omdomen, label: "Verifierade omdömen" },
+  { value: garanti.ar, label: "Tätt tak-garanti (upp till)" },
+  { value: companyStats.kommuner, label: "Kommuner i Stockholms län" },
 ];
 
 const kriterier = [
@@ -85,7 +86,7 @@ const kriterier = [
     icon: Star,
     titel: "6. Verifierbara referenser och recensioner",
     text: "En takläggare som varit verksam i 5+ år ska kunna visa minst 20-30 verifierade omdömen på externa plattformar som BraByggare, Offerta, Trustpilot eller Google. Skepsis är befogad om en firma bara visar utvalda citat på sin egen hemsida. Du vill se snittbetyget av alla, inte bara de bästa.",
-    sands: "Vi har 4,8★ i snitt på BraByggare med 54+ verifierade omdömen, ytterligare omdömen på Offerta och Google. Du kan ringa upp tidigare kunder. Fråga oss om referenser i ditt område.",
+    sands: "Vi har 4,8★ i snitt på BraByggare med 54 verifierade omdömen, ytterligare omdömen på Offerta och Google. Du kan ringa upp tidigare kunder. Fråga oss om referenser i ditt område.",
   },
   {
     icon: HardHat,
@@ -294,7 +295,7 @@ export default async function BastaTaklaggareStockholm() {
                 Det finns inte ett enda &quot;bästa&quot;. Det finns rätt takläggare för ditt projekt. En firma som är fantastisk på plåtomläggning på en industribyggnad är inte nödvändigtvis bäst för dig som har en 40-talsvilla i Bromma med eternittak. Men vad alla &quot;bästa takläggare&quot; har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar.
               </p>
               <p>
-                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54+ verifierade omdömen. Vi har levererat 2 500+ kompletta takbyten i Stockholms län sedan starten, från innerstadens K-märkta hus till skärgårdens 50-talsvillor. På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
+                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54 verifierade omdömen. Vi har levererat 2 500+ kompletta takbyten i Stockholms län sedan starten, från innerstadens K-märkta hus till skärgårdens 50-talsvillor. På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
               </p>
             </div>
 
@@ -492,7 +493,7 @@ export default async function BastaTaklaggareStockholm() {
                 <span className="font-semibold text-gray-700">
                   4,8 / 5 på BraByggare
                 </span>
-                <span>· 54+ omdömen ·</span>
+                <span>· 54 omdömen ·</span>
                 <span>Offerta Kundfavorit 2025</span>
               </div>
             </div>

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import OmradenInline from "@/components/OmradenInline";
 import { pageMeta } from "@/lib/seo";
+import { stats as companyStats, garanti, company } from "@/lib/company";
 
 export const metadata: Metadata = pageMeta({
   path: "/om-oss",
@@ -16,10 +17,10 @@ export const metadata: Metadata = pageMeta({
 });
 
 const stats = [
-  { num: "2016", label: "Grundades" },
-  { num: "2 500+", label: "Takläggningar" },
-  { num: "30 år", label: "Monier garanti" },
-  { num: "6", label: "Anställda" },
+  { num: company.grundades, label: "Grundades" },
+  { num: companyStats.tak, label: "Takläggningar" },
+  { num: garanti.ar, label: garanti.label },
+  { num: company.anstallda, label: "Anställda" },
 ];
 
 const värderingar = [

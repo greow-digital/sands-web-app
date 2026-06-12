@@ -83,7 +83,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Taktegel är ett rent naturmaterial som bara blir vackrare med åren. Vi lägger tegeltak från Monier med upp till 30 års garanti.",
     text:
-      "Tegeltak har en lång tradition i Sverige och är känt för sin hållbarhet och sitt klassiska utseende. Ett korrekt lagt tegeltak kan hålla i över 50 år. Vi arbetar med Moniers tegelpannor som ger ett komplett taksystem med materialgaranti och montagegaranti.\n\nTegelpannor är tillverkade av naturligt lera och bränd i hög temperatur. De är frostbeständiga, formstabila och behåller sin kulör livet ut utan att behöva målas eller underhållas.",
+      "Tegeltak har en lång tradition i Sverige och är känt för sin hållbarhet och sitt klassiska utseende. Ett korrekt lagt tegeltak kan hålla i 50-100 år. Vi arbetar med Moniers tegelpannor som ger ett komplett taksystem med materialgaranti och montagegaranti.\n\nTegelpannor är tillverkade av naturligt lera och bränd i hög temperatur. De är frostbeständiga, formstabila och behåller sin kulör livet ut utan att behöva målas eller underhållas.",
     prisIntervall: "Från ca 1 500 kr/m² efter ROT-avdrag",
     prism2: "1 500",
     ingår: [
@@ -99,7 +99,7 @@ export const tjanster: Tjanst[] = [
     faq: [
       {
         q: "Hur länge håller ett tegeltak?",
-        a: "Ett korrekt lagt tegeltak med Moniers system kan hålla i 50 år eller mer. Med Tätt tak-garantin täcks hela taksystemets funktion i upp till 30 år.",
+        a: "Ett korrekt lagt tegeltak med Moniers system kan hålla i 50-100 år. Med Tätt tak-garantin täcks hela taksystemets funktion i upp till 30 år.",
       },
       {
         q: "Väger tegeltak mer än betongtak?",
@@ -140,7 +140,7 @@ export const tjanster: Tjanst[] = [
     faq: [
       {
         q: "Hur länge håller ett betongtak?",
-        a: "Med korrekt läggning och Moniers taksystem håller ett betongtak i 30–50 år. Tätt tak-garantin täcker upp till 30 år.",
+        a: "Med korrekt läggning och Moniers taksystem håller ett betongtak i 40-60 år. Tätt tak-garantin täcker upp till 30 år.",
       },
       {
         q: "Vad är skillnaden på betongtak och tegeltak?",
@@ -165,7 +165,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Modernt och lättviktigt material med lång livslängd och minimalt underhåll.",
     text:
-      "Plåttak är ett populärt val för villor och moderna hus. Materialet är lättare än tegel och betong, vilket minskar belastningen på konstruktionen. Vi lägger bandtäckt och dubbelfalsat plåttak med hög precision.\n\nPlåt är ett extremt hållbart material, korrekt lagt håller det i 40–80 år. Det kräver minimalt underhåll och passar utmärkt för tak med flackare lutning eller för hus med en mer modern arkitektur.",
+      "Plåttak är ett populärt val för villor och moderna hus. Materialet är lättare än tegel och betong, vilket minskar belastningen på konstruktionen. Vi lägger bandtäckt och dubbelfalsat plåttak med hög precision.\n\nPlåt är ett extremt hållbart material, korrekt lagt håller det i 40-70 år. Det kräver minimalt underhåll och passar utmärkt för tak med flackare lutning eller för hus med en mer modern arkitektur.",
     prisIntervall: "Från ca 1 800 kr/m² efter ROT-avdrag",
     prism2: "1 800",
     ingår: [
@@ -180,7 +180,7 @@ export const tjanster: Tjanst[] = [
     faq: [
       {
         q: "Hur länge håller ett plåttak?",
-        a: "Ett korrekt lagt plåttak håller i 40–80 år beroende på material och behandling. Zink och koppar kan hålla ännu längre.",
+        a: "Ett korrekt lagt plåttak håller i 40-70 år beroende på material och behandling. Zink och koppar kan hålla ännu längre.",
       },
       {
         q: "Vilket plåtmaterial väljer man?",
@@ -220,7 +220,7 @@ export const tjanster: Tjanst[] = [
     faq: [
       {
         q: "Hur länge håller ett papptak?",
-        a: "Ett professionellt lagt papptak håller i 15–25 år beroende på system och exponering. Regelbunden inspektion förlänger livslängden.",
+        a: "Ett professionellt lagt papptak håller i 20-30 år beroende på system och exponering. Regelbunden inspektion förlänger livslängden.",
       },
       {
         q: "Passar papptak bara för platta tak?",
