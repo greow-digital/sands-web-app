@@ -149,7 +149,7 @@ export default function KontaktPage() {
                         Telefon
                       </div>
                       <a
-                        href="tel:0828388"
+                        href="tel:08283888"
                         className="text-xl font-extrabold"
                         style={{ color: "var(--color-primary)", fontFamily: "var(--font-heading)" }}
                       >

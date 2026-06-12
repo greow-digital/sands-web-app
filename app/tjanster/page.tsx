@@ -160,7 +160,7 @@ export default function TjansterPage() {
                 <p className="text-xs text-gray-500">
                   Svar inom 24 timmar. Du kan även ringa{" "}
                   <a
-                    href="tel:0828388"
+                    href="tel:08283888"
                     className="font-semibold text-[#2B74FC] hover:underline"
                   >
                     08-28 38 88

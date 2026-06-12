@@ -58,7 +58,7 @@ export default function TackPage() {
               Har du bråttom? Ring oss direkt, vi svarar vardagar 07–17.
             </p>
             <a
-              href="tel:0828388"
+              href="tel:08283888"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >

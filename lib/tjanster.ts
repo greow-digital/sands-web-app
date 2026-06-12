@@ -52,7 +52,6 @@ export const tjanster: Tjanst[] = [
       "Ny ströläkt & bärläkt (25×48 mm)",
       "Nya takpannor/beläggning",
       "Nytt regnvattensystem (hängrännor och stuprör)",
-      "Taksäkerhet (stegar, snörasskydd)",
       "Ställning, container och bortforsling",
       "Takkontroll tillsammans med dig",
     ],
@@ -95,7 +94,6 @@ export const tjanster: Tjanst[] = [
       "Tegelpannor från Monier",
       "Nockpannor, kantdetaljer och genomföringar",
       "Nytt regnvattensystem",
-      "Taksäkerhet",
       "Ställning, container och bortforsling",
     ],
     faq: [
@@ -137,7 +135,6 @@ export const tjanster: Tjanst[] = [
       "Betongpannor från Monier",
       "Nockpannor, kantdetaljer och genomföringar",
       "Nytt regnvattensystem",
-      "Taksäkerhet",
       "Ställning, container och bortforsling",
     ],
     faq: [
@@ -178,7 +175,6 @@ export const tjanster: Tjanst[] = [
       "Bandtäckt eller dubbelfalsat plåt",
       "Plåtdetaljer, nockplåt, genomföringar",
       "Nytt regnvattensystem i plåt",
-      "Taksäkerhet",
       "Ställning, container och bortforsling",
     ],
     faq: [
@@ -364,7 +360,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Vi installerar komplett taksäkerhet enligt BBR: snörasskydd, gångbryggor, takstegar och säkerhetsräcken som skyddar både dem som vistas på taket och dem som rör sig nedanför.",
     text:
-      "Taksäkerhet är inte bara ett lagkrav enligt Boverkets byggregler (BBR 8:24), utan också en förutsättning för att sotare, takmontörer och andra hantverkare ska kunna utföra sitt arbete tryggt. Saknas taksäkerhet får sotaren rätt att vägra inspektion, och du som fastighetsägare bär ansvaret om någon skadas på taket eller av nedfallande snö och is.\n\nVi monterar samtliga delar enligt branschstandard och med produkter som följer SS-EN 516 och SS-EN 517 (svenska säkerhetsstandarder för fasta takanordningar). Vid en komplett takomläggning ingår alltid all behövd taksäkerhet i det fasta priset, men vi tar också uppdrag på enbart komplettering, ofta efter besiktningsanmärkning vid husköp eller krav från sotare eller försäkringsbolag.",
+      "Taksäkerhet är inte bara ett lagkrav enligt Boverkets byggregler (BBR 8:24), utan också en förutsättning för att sotare, takmontörer och andra hantverkare ska kunna utföra sitt arbete tryggt. Saknas taksäkerhet får sotaren rätt att vägra inspektion, och du som fastighetsägare bär ansvaret om någon skadas på taket eller av nedfallande snö och is.\n\nVi monterar samtliga delar enligt branschstandard och med produkter som följer SS-EN 516 och SS-EN 517 (svenska säkerhetsstandarder för fasta takanordningar). Vid en komplett takomläggning ingår arbetssäkerhet och ställning i det fasta priset. Taksäkerhetsprodukter som snörasskydd, takstegar och gångbryggor offereras som en separat post utifrån vad just ditt tak kräver. Vi tar även uppdrag på enbart komplettering, ofta efter besiktningsanmärkning vid husköp eller krav från sotare eller försäkringsbolag.",
     prism2: "Pris efter takkontroll",
     komponenter: [
       {

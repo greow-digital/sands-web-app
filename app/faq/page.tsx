@@ -27,7 +27,7 @@ const kategorier = [
       },
       {
         q: "Vad ingår i en komplett takomläggning?",
-        a: "En komplett takomläggning inkluderar rivning av befintlig beläggning, ny underlagspapp, ny läkt, nytt takmaterial, nytt regnvattensystem, taksäkerhet, ställning, container och bortforsling. Allt ingår i det fasta priset.",
+        a: "En komplett takomläggning inkluderar rivning av befintlig beläggning, ny underlagspapp, ny läkt, nytt takmaterial, nytt regnvattensystem, ställning, container och bortforsling. Allt ingår i det fasta priset. Taksäkerhetsprodukter som snörasskydd och takstegar offereras som en separat post utifrån vad ditt tak kräver.",
       },
       {
         q: "Vad händer när arbetet är klart?",
@@ -78,7 +78,7 @@ const kategorier = [
       },
       {
         q: "Behöver jag bygglov för att byta tak?",
-        a: "Inte om du behåller samma typ av material och inte förändrar takets utseende. Vid ändringar, kontrollera med din kommun.",
+        a: "För en- och tvåfamiljshus krävs inte längre bygglov för takbyte sedan 1 december 2025. Det gäller även om du byter taktyp (t.ex. betong till plåt) eller färg. För flerbostadshus och inom vissa kulturhistoriskt värdefulla områden kan andra regler gälla, så hör av dig om du är osäker.",
       },
       {
         q: "Kan ni byta eternittak?",
@@ -170,7 +170,7 @@ export default function FaqPage() {
                 Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
-                href="tel:0828388"
+                href="tel:08283888"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
                 style={{ color: "var(--color-dark)" }}
               >

@@ -169,7 +169,7 @@ export default function Header() {
           {/* Desktop right: phone + CTA */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              href="tel:0828388"
+              href="tel:08283888"
               className="flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-[#2B74FC] transition-colors"
             >
               <Phone size={14} />
@@ -209,7 +209,7 @@ export default function Header() {
         <div className="lg:hidden border-t border-gray-100 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 pb-6 pt-4 space-y-1">
             <a
-              href="tel:0828388"
+              href="tel:08283888"
               className="flex items-center gap-2 px-3 py-3 text-sm font-bold text-[#2B74FC]"
             >
               <Phone size={14} />

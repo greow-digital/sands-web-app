@@ -397,7 +397,7 @@ export default async function TjanstPage({
                 Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
-                href="tel:0828388"
+                href="tel:08283888"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
                 style={{ color: "var(--color-dark)" }}
               >

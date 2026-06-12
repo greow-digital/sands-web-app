@@ -294,7 +294,7 @@ export default async function BastaTaklaggareStockholm() {
                 Det finns inte ett enda &quot;bästa&quot;. Det finns rätt takläggare för ditt projekt. En firma som är fantastisk på plåtomläggning på en industribyggnad är inte nödvändigtvis bäst för dig som har en 40-talsvilla i Bromma med eternittak. Men vad alla &quot;bästa takläggare&quot; har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar.
               </p>
               <p>
-                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54+ verifierade omdömen. Vi har levererat 100+ kompletta takbyten i Stockholms län sedan starten, från innerstadens K-märkta hus till skärgårdens 50-talsvillor. På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
+                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54+ verifierade omdömen. Vi har levererat 2 500+ kompletta takbyten i Stockholms län sedan starten, från innerstadens K-märkta hus till skärgårdens 50-talsvillor. På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
               </p>
             </div>
 
@@ -307,7 +307,7 @@ export default async function BastaTaklaggareStockholm() {
                 Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
-                href="tel:0828388"
+                href="tel:08283888"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
                 style={{ color: "var(--color-dark)" }}
               >
@@ -826,7 +826,7 @@ export default async function BastaTaklaggareStockholm() {
                 </ul>
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href="tel:0828388"
+                    href="tel:08283888"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
                     style={{ color: "var(--color-dark)" }}
                   >

@@ -312,7 +312,7 @@ export default function PriserPage() {
                 <p className="text-xs text-gray-500">
                   Föredrar du telefon? Ring{" "}
                   <a
-                    href="tel:0828388"
+                    href="tel:08283888"
                     className="font-semibold text-[#2B74FC] hover:underline"
                   >
                     08-28 38 88

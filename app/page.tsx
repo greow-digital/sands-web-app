@@ -187,7 +187,7 @@ export default async function Home() {
                 </div>
                 <span className="text-gray-400">·</span>
                 <span className="font-medium">
-                  2 500+ utforda tak sedan 2016
+                  2 500+ utförda tak sedan 2016
                 </span>
               </div>
 
@@ -219,7 +219,7 @@ export default async function Home() {
                 <span className="text-sm text-gray-300">
                   Eller ring{" "}
                   <a
-                    href="tel:0828388"
+                    href="tel:08283888"
                     className="font-bold underline underline-offset-4 text-white hover:text-[#2B74FC]"
                   >
                     08-28 38 88

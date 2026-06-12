@@ -167,7 +167,7 @@ export default function OmOssPage() {
                     </p>
                     <p>
                       <a
-                        href="tel:0828388"
+                        href="tel:08283888"
                         className="font-bold hover:text-[#2B74FC]"
                       >
                         08-28 38 88

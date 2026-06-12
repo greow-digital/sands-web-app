@@ -45,7 +45,7 @@ export default function MobileCTA() {
       <div className="bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-4 py-3">
         <div className="flex gap-3">
           <a
-            href="tel:0828388"
+            href="tel:08283888"
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full border border-gray-200 text-sm font-semibold transition-colors"
             style={{ color: "var(--color-dark)" }}
           >
