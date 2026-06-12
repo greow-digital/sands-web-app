@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { pageMeta } from "@/lib/seo";
-import { testimonials } from "@/lib/testimonials";
+import { testimonials, SOURCE_LABEL } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMeta({
   path: "/omdomen",
@@ -27,11 +27,12 @@ export default function OmdömenPage() {
       reviewCount: "54",
       bestRating: "5",
     },
-    review: omdömen.slice(0, 4).map((o) => ({
+    review: omdömen.slice(0, 6).map((o) => ({
       "@type": "Review",
       author: { "@type": "Person", name: o.name },
-      reviewRating: { "@type": "Rating", ratingValue: o.betyg },
+      reviewRating: { "@type": "Rating", ratingValue: o.betyg, bestRating: 5 },
       reviewBody: o.text,
+      datePublished: o.datumISO,
     })),
   };
 
@@ -80,7 +81,11 @@ export default function OmdömenPage() {
                       {o.name}
                     </div>
                     <div className="text-xs text-gray-500">
-                      {o.tjanst} · {o.ort}
+                      {o.tjanst}
+                      {o.ort ? ` · ${o.ort}` : ""}
+                    </div>
+                    <div className="text-[11px] text-gray-400 mt-0.5">
+                      {o.datum} · via {SOURCE_LABEL[o.source]}
                     </div>
                   </div>
                 </div>

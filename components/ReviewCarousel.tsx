@@ -2,20 +2,43 @@
 
 import Image from "next/image";
 import { Star } from "lucide-react";
-import { testimonials } from "@/lib/testimonials";
+import {
+  testimonials,
+  SOURCE_LABEL,
+  type ReviewSource,
+} from "@/lib/testimonials";
 
 type Review = {
   text: string;
   name: string;
   service: string;
   rating: number;
-  source: "brabyggare" | "offerta";
+  source: ReviewSource;
+};
+
+const SOURCE_META: Record<
+  ReviewSource,
+  { color: string; logo?: string; alt?: string }
+> = {
+  brabyggare: {
+    color: "#FF8000",
+    logo: "/images/brabyggare-seal.png",
+    alt: "BraByggare",
+  },
+  offerta: {
+    color: "#2B9E6E",
+    logo: "/images/kundfavorit-2025.png",
+    alt: "Offerta Kundfavorit",
+  },
+  servicefinder: { color: "#2B74FC" },
 };
 
 const reviews: Review[] = testimonials.map((t) => ({
   text: t.text,
   name: t.name,
-  service: `${t.tjanst}${t.kvm ? ` ${t.kvm} kvm` : ""} i ${t.ort}`,
+  service: `${t.tjanst}${t.kvm ? ` ${t.kvm} kvm` : ""}${
+    t.ort ? ` i ${t.ort}` : ""
+  }`,
   rating: t.betyg,
   source: t.source,
 }));
@@ -25,7 +48,7 @@ function ReviewCard({ review }: { review: Review }) {
     <div className="w-[340px] sm:w-[400px] shrink-0 rounded-2xl border border-gray-100 bg-white p-6 flex flex-col justify-between gap-5">
       {/* Citat */}
       <p
-        className="text-[15px] leading-relaxed"
+        className="text-[15px] leading-relaxed line-clamp-[8]"
         style={{ color: "var(--color-dark)" }}
       >
         &ldquo;{review.text}&rdquo;
@@ -43,44 +66,41 @@ function ReviewCard({ review }: { review: Review }) {
           ))}
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0"
-              style={{
-                backgroundColor:
-                  review.source === "brabyggare" ? "#FF8000" : "#2B9E6E",
-              }}
+              style={{ backgroundColor: SOURCE_META[review.source].color }}
             >
               {review.name[0]}
             </div>
-            <div>
+            <div className="min-w-0">
               <div
-                className="text-sm font-bold"
+                className="text-sm font-bold truncate"
                 style={{ color: "var(--color-dark)" }}
               >
                 {review.name}
               </div>
-              <div className="text-xs text-gray-500">{review.service}</div>
+              <div className="text-xs text-gray-500 truncate">
+                {review.service}
+              </div>
             </div>
           </div>
 
-          {/* Portal-logga */}
-          <Image
-            src={
-              review.source === "brabyggare"
-                ? "/images/brabyggare-seal.png"
-                : "/images/kundfavorit-2025.png"
-            }
-            alt={
-              review.source === "brabyggare"
-                ? "BraByggare"
-                : "Offerta Kundfavorit"
-            }
-            width={100}
-            height={100}
-            className="h-8 w-auto opacity-60"
-          />
+          {/* Portal */}
+          {SOURCE_META[review.source].logo ? (
+            <Image
+              src={SOURCE_META[review.source].logo!}
+              alt={SOURCE_META[review.source].alt ?? ""}
+              width={100}
+              height={100}
+              className="h-8 w-auto opacity-60 shrink-0"
+            />
+          ) : (
+            <span className="text-[11px] font-medium text-gray-400 shrink-0">
+              via {SOURCE_LABEL[review.source]}
+            </span>
+          )}
         </div>
       </div>
     </div>
