@@ -4,6 +4,7 @@ import MobileCTA from "@/components/MobileCTA";
 import PhoneClickTracker from "@/components/PhoneClickTracker";
 import ClickIdCapture from "@/components/ClickIdCapture";
 import ThirdPartyScripts from "@/components/ThirdPartyScripts";
+import ExitPopup from "@/components/ExitPopup";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -128,6 +129,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <MobileCTA />
+        <ExitPopup />
         <PhoneClickTracker />
         <ClickIdCapture />
         <ThirdPartyScripts />

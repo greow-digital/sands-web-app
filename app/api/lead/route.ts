@@ -10,6 +10,8 @@ type LeadPayload = {
   area?: string;
   message?: string;
   source?: string;
+  formId?: string;
+  tag?: string;
   gclid?: string;
   gbraid?: string;
   wbraid?: string;
@@ -23,7 +25,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  if (!data.name || !data.phone) {
+  // Popup-leads ("personlig service"-kontakten) har inget namnfält och
+  // kräver minst ett av e-post/telefon. Övriga formulär kräver namn+telefon.
+  const isPopup = data.formId === "popup";
+  if (isPopup) {
+    if (!data.email && !data.phone) {
+      return NextResponse.json(
+        { error: "E-post eller telefon krävs" },
+        { status: 400 }
+      );
+    }
+  } else if (!data.name || !data.phone) {
     return NextResponse.json(
       { error: "Namn och telefon krävs" },
       { status: 400 }

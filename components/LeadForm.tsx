@@ -169,6 +169,10 @@ export default function LeadForm({
           sessionStorage.setItem("sands_lead_source", window.location.pathname);
           sessionStorage.setItem("sands_lead_variant", variant);
           sessionStorage.setItem("sands_lead_formid", formId);
+          // Suppression: visa inte inaktivitets-popupen för någon som
+          // redan skickat ett formulär (30 dagar).
+          document.cookie =
+            "sands_submitted=1; max-age=2592000; path=/; samesite=lax";
         } catch {
           // sessionStorage kan vara blockerat (privat läge etc).
           // /tack faller då tillbaka på client-side-genererat id.

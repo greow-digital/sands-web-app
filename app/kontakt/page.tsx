@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
@@ -22,6 +22,22 @@ function KontaktForm() {
     reset,
   } = useForm<FormData>();
   const [sent, setSent] = useState(false);
+  const startedRef = useRef(false);
+
+  function fireFormStart() {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    if (typeof window === "undefined" || !("gtag" in window)) return;
+    (
+      window as unknown as {
+        gtag: (e: string, n: string, p: object) => void;
+      }
+    ).gtag("event", "form_start", {
+      event_category: "engagement",
+      event_label: "leadform",
+      form_id: "kontakt",
+    });
+  }
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -51,7 +67,7 @@ function KontaktForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-white rounded-[10px] p-8 shadow-sm" noValidate>
+    <form onSubmit={handleSubmit(onSubmit)} onFocus={fireFormStart} className="space-y-4 bg-white rounded-[10px] p-8 shadow-sm" noValidate>
       <h2
         className="text-xl font-bold mb-5"
         style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
