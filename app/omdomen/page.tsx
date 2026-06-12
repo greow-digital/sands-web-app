@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import { pageMeta } from "@/lib/seo";
+import { testimonials } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMeta({
   path: "/omdomen",
@@ -13,16 +14,7 @@ export const metadata: Metadata = pageMeta({
     "Se omdömen om Sands Entreprenad: BraByggare 4,8 av 5 med 54 recensioner, Kundfavorit 2025 av Offerta. Riktiga kundberättelser från Stockholms-området.",
 });
 
-const omdömen = [
-  { name: "Anders L.", ort: "Täby", tjänst: "Betongtak", betyg: 5, text: "Professionellt och pålitligt företag. Boka ett hembesök, ni ångrar er inte. Fast pris från start och inga överraskningar." },
-  { name: "Maria S.", ort: "Nacka", tjänst: "Tegeltak", betyg: 5, text: "Snabb offert, tydlig kommunikation och ett riktigt snyggt resultat. Rekommenderar Sands varmt!" },
-  { name: "Erik H.", ort: "Järfälla", tjänst: "Plåttak", betyg: 5, text: "Hade ett gammalt eternittak som behövde bytas. Sands skötte hela processen, sanering och nytt plåttak. Supernöjd!" },
-  { name: "Karin B.", ort: "Bromma", tjänst: "Betongtak", betyg: 5, text: "Från första kontakt till takkontroll var allt professionellt och välorganiserat. Priset stämde precis med offerten." },
-  { name: "Peter M.", ort: "Huddinge", tjänst: "Takomläggning", betyg: 5, text: "Sands team är duktiga och noggranna. De städade efter sig och lämnade tomten i perfekt skick. Skulle anlita igen." },
-  { name: "Anna W.", ort: "Solna", tjänst: "Tegeltak", betyg: 5, text: "Monier-garanti i 30 år är guld värt. Hela processen gick smidigt och vi fick bra vägledning kring materialval." },
-  { name: "Johan R.", ort: "Tyresö", tjänst: "Betongtak", betyg: 5, text: "Extremt nöjd! Projektet höll tidplan och budget. Projektledaren var alltid tillgänglig och svarade snabbt på frågor." },
-  { name: "Lena K.", ort: "Danderyd", tjänst: "Tegeltak", betyg: 5, text: "Fantastiskt jobb på vårt gamla hus. Tegelpannorna ser ut precis som vi hoppades och grannarna hör av sig för att fråga om hantverkare." },
-];
+const omdömen = testimonials;
 
 export default function OmdömenPage() {
   const jsonLd = {
@@ -88,7 +80,7 @@ export default function OmdömenPage() {
                       {o.name}
                     </div>
                     <div className="text-xs text-gray-500">
-                      {o.tjänst} · {o.ort}
+                      {o.tjanst} · {o.ort}
                     </div>
                   </div>
                 </div>
