@@ -8,6 +8,7 @@ import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import OmradenInline from "@/components/OmradenInline";
+import { prisEfterRot, FLAGGSKEPP_PRIS } from "@/lib/material";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import { client } from "@/sanity/lib/client";
 import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
@@ -36,15 +37,6 @@ export const metadata: Metadata = pageMeta({
 // Pris-formel matchar Takräknaren (inkl 25 % moms, ROT-cap 50 000 kr).
 // MaterialFactor: betong = 1.0, tegel ≈ 1.25, plåt ≈ 1.5 (baseline från
 // "från X kr/m²"-priserna på startsidan).
-function prisEfterRot(kvm: number, materialFactor = 1) {
-  const FAST_INKL_MOMS = 35200 * 1.25;
-  const RORLIGT_KR_M2 = 979 * 1.25 * materialFactor;
-  const ARBETE_KR_M2 = 700 * 1.25;
-  const total = FAST_INKL_MOMS + RORLIGT_KR_M2 * kvm;
-  const rot = Math.min(ARBETE_KR_M2 * kvm * 0.3, 50000);
-  return Math.round(total - rot);
-}
-
 function formatKr(n: number) {
   // Avrunda till närmaste tusental
   const rounded = Math.round(n / 1000) * 1000;
@@ -167,18 +159,22 @@ export default async function TaklaggningPage() {
     },
   } as const;
 
-  // Prismatris för jämförelsetabellen
+  // Prismatris för jämförelsetabellen. Linjär modell från lib/material
+  // (= /priser + kalkylatorn). Flaggskeppet (betong 140 m²) använder det
+  // kanoniska 169 000 så exemplet matchar resten av sajten.
   const priser = {
     takbyte: {
-      kvm120Betong: prisEfterRot(120, 1.0),
-      kvm140Tegel: prisEfterRot(140, 1.25),
-      kvm165Plat: prisEfterRot(165, 1.5),
+      betong140: FLAGGSKEPP_PRIS,
+      betong120: prisEfterRot("betong", 120),
+      tegel140: prisEfterRot("tegel", 140),
+      plat165: prisEfterRot("plat", 165),
     },
     omlaggning: {
       // Omläggning behåller pannor → ca 70 % av motsvarande takbyte
-      kvm120Betong: Math.round(prisEfterRot(120, 1.0) * 0.7),
-      kvm140Tegel: Math.round(prisEfterRot(140, 1.25) * 0.7),
-      kvm165Betong: Math.round(prisEfterRot(165, 1.0) * 0.7),
+      betong140: FLAGGSKEPP_PRIS * 0.7,
+      betong120: prisEfterRot("betong", 120) * 0.7,
+      tegel140: prisEfterRot("tegel", 140) * 0.7,
+      betong165: prisEfterRot("betong", 165) * 0.7,
     },
   };
 
@@ -312,16 +308,16 @@ export default async function TaklaggningPage() {
                   title: "Takbyte",
                   desc: "Hela taket rivs och ersätts: nya pannor eller plåt, ny underlagspapp, ny läkt. När det är dags",
                   when: "Tak över 35 år, läckage på flera ställen, vittrade pannor.",
-                  from: formatKr(priser.takbyte.kvm120Betong),
-                  fromLabel: "Från, 120 m² betong efter ROT",
+                  from: formatKr(priser.takbyte.betong140),
+                  fromLabel: "Från, 140 m² betong efter ROT",
                 },
                 {
                   anchor: "takomlaggning",
                   title: "Takomläggning",
                   desc: "Befintliga pannor lyfts av, nytt undertak monteras (papp + läkt), pannorna läggs tillbaka.",
                   when: "Tak under 30 år, pannor i bra skick men undertaket slutkört.",
-                  from: formatKr(priser.omlaggning.kvm120Betong),
-                  fromLabel: "Från, 120 m² betong efter ROT",
+                  from: formatKr(priser.omlaggning.betong140),
+                  fromLabel: "Från, 140 m² betong efter ROT",
                 },
                 {
                   anchor: "takrenovering",
@@ -543,14 +539,14 @@ export default async function TaklaggningPage() {
                           Betongpannor
                         </td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.takbyte.kvm120Betong)}
+                          {formatKr(priser.takbyte.betong120)}
                         </td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 text-gray-700">140 m²</td>
                         <td className="px-4 py-3 text-gray-600">Tegelpannor</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.takbyte.kvm140Tegel)}
+                          {formatKr(priser.takbyte.tegel140)}
                         </td>
                       </tr>
                       <tr>
@@ -559,7 +555,7 @@ export default async function TaklaggningPage() {
                           Plåttak (bandtäckt)
                         </td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.takbyte.kvm165Plat)}
+                          {formatKr(priser.takbyte.plat165)}
                         </td>
                       </tr>
                     </tbody>
@@ -735,21 +731,21 @@ export default async function TaklaggningPage() {
                         <td className="px-4 py-3 text-gray-700">120 m²</td>
                         <td className="px-4 py-3 text-gray-600">Betong</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.omlaggning.kvm120Betong)}
+                          {formatKr(priser.omlaggning.betong120)}
                         </td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 text-gray-700">140 m²</td>
                         <td className="px-4 py-3 text-gray-600">Tegel</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.omlaggning.kvm140Tegel)}
+                          {formatKr(priser.omlaggning.tegel140)}
                         </td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 text-gray-700">165 m²</td>
                         <td className="px-4 py-3 text-gray-600">Betong</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.omlaggning.kvm165Betong)}
+                          {formatKr(priser.omlaggning.betong165)}
                         </td>
                       </tr>
                     </tbody>

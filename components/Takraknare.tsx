@@ -13,28 +13,27 @@ import {
   X,
 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
+import {
+  MATERIAL_LIST,
+  KOMPLEX_MULTIPLIER,
+  type MaterialKey,
+} from "@/lib/material";
 
-// Priserna är "från ca X kr/m² efter ROT-avdrag" — samma riktvärden som
-// på /priser. Övre intervall = +30% för komplexa tak (kupor, ränndalar,
-// branta lutningar). ROT-avdraget som visas baseras på arbetskostnaden.
+// Priser och livslängder kommer från delad lib/material (= /priser och
+// takläggningssidan). ROT-avdraget som visas baseras på arbetskostnaden.
 const ROT_PROCENT = 0.3;
 const ROT_CAP = 50000; // max ROT per person/år
 const ARBETE_KR_M2 = 875; // för ROT-uppskattning (inkl moms)
-const KOMPLEX = 1.3;
+const KOMPLEX = KOMPLEX_MULTIPLIER;
 
-type MaterialKey = "betong" | "tegel" | "plat" | "papp";
+const ICONS: Record<MaterialKey, typeof Layers> = {
+  betong: Square,
+  tegel: Grid3x3,
+  plat: AlignJustify,
+  papp: Layers,
+};
 
-const MATERIAL: {
-  key: MaterialKey;
-  namn: string;
-  prisM2: number;
-  icon: typeof Layers;
-}[] = [
-  { key: "betong", namn: "Betongpannor", prisM2: 1200, icon: Square },
-  { key: "tegel", namn: "Tegeltak", prisM2: 1500, icon: Grid3x3 },
-  { key: "plat", namn: "Plåttak", prisM2: 1800, icon: AlignJustify },
-  { key: "papp", namn: "Papptak", prisM2: 800, icon: Layers },
-];
+const MATERIAL = MATERIAL_LIST.map((m) => ({ ...m, icon: ICONS[m.key] }));
 
 const INGAR = [
   "Rivning och bortforsling av gammalt tak",
