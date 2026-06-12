@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import {
   ChevronDown,
   CheckCircle,
@@ -8,6 +9,8 @@ import {
   Grid3x3,
   AlignJustify,
   Square,
+  ArrowRight,
+  X,
 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
 
@@ -60,6 +63,8 @@ function formatKr(value: number): string {
   return Math.round(value).toLocaleString("sv-SE") + " kr";
 }
 
+const STICKY_DISMISSED_KEY = "sands_calc_sticky_dismissed";
+
 type GtagFn = (event: string, name: string, params: object) => void;
 
 function fireGtag(name: string, params: object) {
@@ -82,8 +87,10 @@ export default function Takraknare({
   const [useBoyta, setUseBoyta] = useState(false);
   const [boyta, setBoyta] = useState(120);
 
+  const [stickyVisible, setStickyVisible] = useState(false);
   const engagedRef = useRef(false);
   const bridgeViewedRef = useRef(false);
+  const stickyFiredRef = useRef(false);
   const bridgeRef = useRef<HTMLDivElement>(null);
 
   const valtMaterial = MATERIAL.find((m) => m.key === material)!;
@@ -93,6 +100,33 @@ export default function Takraknare({
     if (engagedRef.current) return;
     engagedRef.current = true;
     fireGtag("calculator_engage", { material });
+
+    // Posta-engagement sticky-bar (visas en gång per session om ej dismissad)
+    let dismissed = false;
+    try {
+      dismissed = sessionStorage.getItem(STICKY_DISMISSED_KEY) === "1";
+    } catch {
+      // sessionStorage blockerat
+    }
+    if (!dismissed) setStickyVisible(true);
+  }
+
+  function handleCtaClick() {
+    fireGtag("calc_cta_click", { material, area: kvm });
+  }
+
+  function handleStickyClick() {
+    fireGtag("calc_sticky_click", { material, area: kvm });
+  }
+
+  function handleStickyDismiss() {
+    fireGtag("calc_sticky_dismiss", { material, area: kvm });
+    setStickyVisible(false);
+    try {
+      sessionStorage.setItem(STICKY_DISMISSED_KEY, "1");
+    } catch {
+      // sessionStorage blockerat: kan visas igen vid nytt engagement
+    }
   }
 
   function handleMaterial(next: MaterialKey) {
@@ -130,6 +164,28 @@ export default function Takraknare({
     // material/kvm avsiktligt ej i deps: vi vill bara fyra första gången.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Impression-event när sticky-baren visas första gången
+  useEffect(() => {
+    if (stickyVisible && !stickyFiredRef.current) {
+      stickyFiredRef.current = true;
+      fireGtag("calc_sticky_view", { material, area: kvm });
+    }
+  }, [stickyVisible, material, kvm]);
+
+  // Talar om för globala MobileCTA att dölja sig medan denna bar syns,
+  // så de inte staplas i botten. Städar vid unmount.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.dispatchEvent(
+      new CustomEvent("sands:calc-sticky", { detail: { visible: stickyVisible } })
+    );
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent("sands:calc-sticky", { detail: { visible: false } })
+      );
+    };
+  }, [stickyVisible]);
 
   const sliderProgress = ((kvm - 60) / (300 - 60)) * 100;
 
@@ -394,7 +450,73 @@ export default function Takraknare({
             />
           </div>
         </div>
+
+        {/* Statisk footer-CTA + prisreservation */}
+        <div className="text-center mt-10">
+          <Link
+            href="/offert"
+            onClick={handleCtaClick}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02] hover:shadow-lg"
+            style={{ backgroundColor: "var(--color-primary)" }}
+          >
+            Boka kostnadsfri takkontroll <ArrowRight size={14} />
+          </Link>
+          <p className="text-xs text-gray-400 mt-4 max-w-md mx-auto">
+            Priserna är uppskattningar och kan variera med takets skick och
+            komplexitet. Exakt pris ges alltid vid kostnadsfri hembesiktning.
+          </p>
+        </div>
       </div>
+
+      {/* Post-engagement sticky-bar (visas efter första interaktion) */}
+      {stickyVisible && (
+        <div
+          className="fixed bottom-0 inset-x-0 z-40 px-3 pb-3 pt-2 sm:px-6 sm:pb-5"
+          style={{ animation: "slideUp 0.3s ease-out" }}
+        >
+          <div
+            className="max-w-[900px] mx-auto rounded-2xl shadow-2xl border border-white/10 px-4 py-3 sm:px-6 sm:py-4 flex items-center gap-3 sm:gap-5"
+            style={{ backgroundColor: "var(--color-dark)" }}
+          >
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-sm sm:text-base font-bold leading-tight">
+                Ditt pris ser klart ut!
+              </p>
+              <p className="text-gray-300 text-xs sm:text-sm leading-tight mt-0.5">
+                Få ett bindande prisförslag samma vardag.
+              </p>
+            </div>
+            <Link
+              href="/offert"
+              onClick={handleStickyClick}
+              className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-white font-semibold text-xs sm:text-sm whitespace-nowrap transition-all hover:scale-[1.02] shadow-lg shrink-0"
+              style={{ backgroundColor: "var(--color-primary)" }}
+            >
+              Få prisförslag <ArrowRight size={14} />
+            </Link>
+            <button
+              type="button"
+              onClick={handleStickyDismiss}
+              aria-label="Stäng"
+              className="text-gray-400 hover:text-white transition-colors shrink-0 -mr-1"
+            >
+              <X size={18} />
+            </button>
+          </div>
+          <style jsx>{`
+            @keyframes slideUp {
+              from {
+                transform: translateY(100%);
+                opacity: 0;
+              }
+              to {
+                transform: translateY(0);
+                opacity: 1;
+              }
+            }
+          `}</style>
+        </div>
+      )}
     </section>
   );
 }

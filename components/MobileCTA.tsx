@@ -61,7 +61,7 @@ export default function MobileCTA() {
             className="flex-1 flex items-center justify-center py-3 rounded-full text-sm font-semibold text-white transition-colors"
             style={{ backgroundColor: "var(--color-primary)" }}
           >
-            Boka kostnadsfri takkontroll
+            Få gratis offert
           </Link>
           {/* Sekundär: telefon, liten ikon utan text */}
           <a
