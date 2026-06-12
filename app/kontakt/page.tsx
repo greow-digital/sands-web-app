@@ -147,9 +147,9 @@ export default function KontaktPage() {
         />
 
         {/* Grid */}
-        <section className="py-16 lg:py-24">
+        <section className="pt-10 lg:pt-14 pb-16 lg:pb-24">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
               {/* Kontaktinfo */}
               <div>
                 <div className="space-y-6 mb-8">
@@ -230,12 +230,17 @@ export default function KontaktPage() {
                   </div>
                 </div>
 
-                {/* Karta placeholder */}
-                <div
-                  className="rounded-[10px] h-48 flex items-center justify-center text-gray-400 text-sm"
-                  style={{ backgroundColor: "var(--color-dark)" }}
-                >
-                  Järfälla, Stockholms län
+                {/* Karta */}
+                <div className="rounded-[10px] overflow-hidden h-56 lg:h-64 border border-gray-100">
+                  <iframe
+                    title="Karta till Sands Entreprenad, Spjutvägen 5A, Järfälla"
+                    src="https://maps.google.com/maps?q=Spjutv%C3%A4gen%205A%2C%20175%2061%20J%C3%A4rf%C3%A4lla&z=14&output=embed"
+                    width="100%"
+                    height="100%"
+                    loading="lazy"
+                    style={{ border: 0 }}
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
                 </div>
               </div>
 

@@ -12,7 +12,7 @@ import { X } from "lucide-react";
 
 const EXCLUDED = ["/offert", "/tack", "/integritetspolicy"];
 const MIN_TIME_MS = 20000; // aldrig före 20 sek total sidtid
-const INACTIVITY_MS = 35000; // 35 sek inaktivitet
+const SHOW_AFTER_MS = 35000; // visas efter 35 sek total sidtid (oavsett aktivitet)
 const MAX_PER_30D = 2;
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
@@ -114,7 +114,6 @@ export default function ExitPopup() {
     if (recentShowCount() >= MAX_PER_30D) return;
 
     const pageStart = Date.now();
-    let inactivityTimer: ReturnType<typeof setTimeout> | undefined;
 
     const eligible = () =>
       !shownRef.current && Date.now() - pageStart >= MIN_TIME_MS;
@@ -123,22 +122,8 @@ export default function ExitPopup() {
       if (eligible()) show();
     };
 
-    const resetInactivity = () => {
-      if (inactivityTimer) clearTimeout(inactivityTimer);
-      inactivityTimer = setTimeout(trigger, INACTIVITY_MS);
-    };
-
-    const activityEvents = [
-      "mousemove",
-      "keydown",
-      "scroll",
-      "touchstart",
-      "click",
-    ];
-    activityEvents.forEach((e) =>
-      window.addEventListener(e, resetInactivity, { passive: true })
-    );
-    resetInactivity();
+    // Visas efter 35 sek total sidtid, oavsett om besökaren är aktiv.
+    const timer = setTimeout(trigger, SHOW_AFTER_MS);
 
     // Exit-intent endast på desktop (fin pekare).
     const isDesktop =
@@ -150,10 +135,7 @@ export default function ExitPopup() {
     if (isDesktop) document.addEventListener("mouseout", onMouseOut);
 
     return () => {
-      if (inactivityTimer) clearTimeout(inactivityTimer);
-      activityEvents.forEach((e) =>
-        window.removeEventListener(e, resetInactivity)
-      );
+      clearTimeout(timer);
       if (isDesktop) document.removeEventListener("mouseout", onMouseOut);
     };
   }, [excluded, show]);

@@ -305,7 +305,7 @@ export default async function BastaTaklaggareStockholm() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                Få gratis offert <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:08283888"

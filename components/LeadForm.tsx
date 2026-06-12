@@ -395,8 +395,7 @@ export default function LeadForm({
         >
           {isSubmitting
             ? "Skickar..."
-            : ctaText ||
-              (variant === "hero" ? "Få prisförslag" : "Få mitt prisförslag")}
+            : ctaText || "Få gratis offert"}
         </button>
 
         {notBindingNote && (

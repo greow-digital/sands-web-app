@@ -214,7 +214,7 @@ export default async function Home() {
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02] shadow-lg"
                   style={{ backgroundColor: "var(--color-primary)" }}
                 >
-                  Boka kostnadsfri takkontroll <ArrowRight size={16} />
+                  Få gratis offert <ArrowRight size={16} />
                 </Link>
                 <span className="text-sm text-gray-300">
                   Eller ring{" "}
@@ -444,7 +444,7 @@ export default async function Home() {
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
                   style={{ backgroundColor: "var(--color-primary)" }}
                 >
-                  Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                  Få gratis offert <ArrowRight size={14} />
                 </Link>
               </div>
 
@@ -535,7 +535,7 @@ export default async function Home() {
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få prisförslag <ArrowRight size={14} />
+              Få gratis offert <ArrowRight size={14} />
             </Link>
           </div>
         </section>
@@ -684,7 +684,7 @@ export default async function Home() {
                   className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
                   style={{ backgroundColor: "var(--color-primary)" }}
                 >
-                  Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                  Få gratis offert <ArrowRight size={14} />
                 </Link>
               </div>
             </div>
@@ -748,7 +748,7 @@ export default async function Home() {
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                Få gratis offert <ArrowRight size={14} />
               </Link>
             </div>
           </div>
@@ -781,7 +781,7 @@ export default async function Home() {
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få prisförslag <ArrowRight size={14} />
+              Få gratis offert <ArrowRight size={14} />
             </Link>
           </div>
         </section>

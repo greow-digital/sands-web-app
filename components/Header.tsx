@@ -180,7 +180,7 @@ export default function Header() {
               className="px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få prisförslag
+              Få gratis offert
             </Link>
           </div>
 
@@ -191,7 +191,7 @@ export default function Header() {
               className="px-3.5 py-2 rounded-full text-xs font-semibold text-white"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få prisförslag
+              Få gratis offert
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
