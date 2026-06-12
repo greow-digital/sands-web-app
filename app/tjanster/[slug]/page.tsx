@@ -33,7 +33,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   papptak: {
     title: "Papptak Stockholm: från 800 kr/m² | Sands Entreprenad",
     description:
-      "Papptak (takpapp) i Stockholm från 800 kr/m². Lång hållbarhet, fast pris, 30 års garanti. ROT-avdrag tillämpas, offert inom 24 h.",
+      "Papptak (takpapp) i Stockholm från 800 kr/m². Lång hållbarhet, fast pris och garanti på utförandet. ROT-avdrag tillämpas, offert inom 24 h.",
   },
   betongtak: {
     title: "Betongtak Stockholm: betongpannor från 1 200 kr/m² | Sands",
