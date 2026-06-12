@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "@/components/SanityImage";
 import { ArrowRight } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektCard, SanityImageWithMeta } from "@/sanity/lib/types";
