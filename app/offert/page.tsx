@@ -60,10 +60,10 @@ export default function OffertPage() {
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
         {/* ── HERO + FORM (2-kol) ─────────────── */}
-        <section className="pt-8 lg:pt-12 pb-12 lg:pb-16 border-b border-gray-100">
+        <section className="pt-6 lg:pt-12 pb-12 lg:pb-16 border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-xs text-gray-400 mb-6">
+            <nav className="flex items-center gap-2 text-xs text-gray-400 mb-4 lg:mb-6">
               <Link href="/" className="hover:text-gray-600">
                 Hem
               </Link>
@@ -71,14 +71,14 @@ export default function OffertPage() {
               <span>Boka offert</span>
             </nav>
 
-            <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">
-              {/* Vänster: rubrik + trust */}
-              <div>
+            <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-start">
+              {/* Text: visas under formuläret på mobil, vänster på desktop */}
+              <div className="order-2 lg:order-1">
                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
                   Kostnadsfri takkontroll
                 </p>
                 <h1
-                  className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] leading-[1.05] mb-5"
+                  className="text-[26px] lg:text-[46px] font-extrabold tracking-[-0.03em] leading-[1.1] lg:leading-[1.05] mb-4 lg:mb-5"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -108,8 +108,8 @@ export default function OffertPage() {
                 </ul>
               </div>
 
-              {/* Höger: form */}
-              <div>
+              {/* Form: först på mobil (över fold), höger på desktop */}
+              <div className="order-1 lg:order-2">
                 <LeadForm variant="section" />
               </div>
             </div>

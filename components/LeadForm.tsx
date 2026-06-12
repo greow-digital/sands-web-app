@@ -149,7 +149,7 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
         </h3>
         <p className="text-gray-600 text-sm">
           Du kan även nå oss direkt på{" "}
-          <a href="tel:0828388" className="font-semibold text-[#2B74FC]">
+          <a href="tel:08283888" className="font-semibold text-[#2B74FC]">
             08-28 38 88
           </a>
         </p>
@@ -160,7 +160,7 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
   return (
     <div
       className={`bg-white rounded-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] border border-gray-100 ${
-        variant === "hero" ? "p-7 lg:p-9" : "p-8"
+        variant === "hero" ? "p-7 lg:p-9" : "p-5 sm:p-7 lg:p-8"
       }`}
     >
       <div className="mb-6">
@@ -315,7 +315,7 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
         <div className="flex items-center justify-center gap-2 pt-1">
           <span className="text-xs text-gray-500">Eller ring oss:</span>
           <a
-            href="tel:0828388"
+            href="tel:08283888"
             className="flex items-center gap-1 text-xs font-bold text-[#2B74FC]"
           >
             <Phone size={12} />
