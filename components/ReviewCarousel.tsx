@@ -2,9 +2,12 @@
 
 import Image from "next/image";
 import { Star } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
   testimonials,
   SOURCE_LABEL,
+  SOURCE_META,
   type ReviewSource,
 } from "@/lib/testimonials";
 
@@ -16,24 +19,8 @@ type Review = {
   source: ReviewSource;
 };
 
-const SOURCE_META: Record<
-  ReviewSource,
-  { color: string; logo?: string; alt?: string }
-> = {
-  brabyggare: {
-    color: "#FF8000",
-    logo: "/images/brabyggare-seal.png",
-    alt: "BraByggare",
-  },
-  offerta: {
-    color: "#2B9E6E",
-    logo: "/images/kundfavorit-2025.png",
-    alt: "Offerta Kundfavorit",
-  },
-  servicefinder: { color: "#2B74FC" },
-};
-
-const reviews: Review[] = testimonials.map((t) => ({
+// Karusellen visar ett urval; hela samlingen finns på /omdomen.
+const reviews: Review[] = testimonials.slice(0, 12).map((t) => ({
   text: t.text,
   name: t.name,
   service: `${t.tjanst}${t.kvm ? ` ${t.kvm} kvm` : ""}${
@@ -91,10 +78,10 @@ function ReviewCard({ review }: { review: Review }) {
           {SOURCE_META[review.source].logo ? (
             <Image
               src={SOURCE_META[review.source].logo!}
-              alt={SOURCE_META[review.source].alt ?? ""}
-              width={100}
+              alt={SOURCE_META[review.source].label}
+              width={120}
               height={100}
-              className="h-8 w-auto opacity-60 shrink-0"
+              className="h-7 w-auto opacity-70 shrink-0"
             />
           ) : (
             <span className="text-[11px] font-medium text-gray-400 shrink-0">
@@ -112,7 +99,7 @@ export default function ReviewCarousel() {
 
   return (
     <section className="py-16 lg:py-24 bg-white border-t border-gray-100 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 flex flex-wrap items-end justify-between gap-4">
         <h2
           className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em]"
           style={{
@@ -122,6 +109,12 @@ export default function ReviewCarousel() {
         >
           Vad våra kunder säger
         </h2>
+        <Link
+          href="/omdomen"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B74FC] hover:gap-2.5 transition-all"
+        >
+          Se alla omdömen <ArrowRight size={15} />
+        </Link>
       </div>
 
       {/* data-nosnippet hindrar Google från att plocka review-text som

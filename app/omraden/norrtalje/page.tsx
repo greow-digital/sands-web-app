@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CheckCircle, ArrowRight, Phone, MapPin, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import OmdomenInline from "@/components/OmdomenInline";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
@@ -453,6 +454,13 @@ export default function NorrtaljePage() {
             </div>
           </div>
         </section>
+
+        {/* ── OMDÖMEN ─────────────────────────── */}
+        <OmdomenInline
+          heading="Vad våra kunder säger"
+          match={["tak"]}
+          background
+        />
 
         {/* ── BOTTOM CTA ───────────────────────── */}
         <section className="py-16 lg:py-24 border-t border-gray-100">

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
+import OmdomenInline from "@/components/OmdomenInline";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
-import { CheckCircle, ChevronRight, Star } from "lucide-react";
+import { CheckCircle, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { pageMeta } from "@/lib/seo";
 
@@ -38,19 +39,6 @@ const STEPS = [
     num: "03",
     title: "Fast prisförslag",
     text: "Du får en komplett offert med fast pris efter ROT, inga dolda kostnader.",
-  },
-];
-
-const TESTIMONIALS = [
-  {
-    text: "Väldigt professionellt och effektivt genomförande. Väldigt bra och detaljerad offert som också stämde exakt med slutfakturan. Rekommenderas varmt!",
-    name: "Pauli",
-    detail: "Tegeltak 150 kvm, Solna",
-  },
-  {
-    text: "Tydligt offertförfarande. Därefter bra och noggrant utfört arbete. Kan varmt rekommendera Sands Entreprenad.",
-    name: "Per",
-    detail: "Takläggning, Stockholm",
   },
 ];
 
@@ -171,39 +159,19 @@ export default function OffertPage() {
           </div>
         </section>
 
-        {/* ── TESTIMONIALS ────────────────────── */}
-        <section className="py-14 lg:py-20 border-t border-gray-100">
-          <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div
-              data-nosnippet
-              className="grid sm:grid-cols-2 gap-5 lg:gap-6"
-            >
-              {TESTIMONIALS.map((t) => (
-                <figure
-                  key={t.name}
-                  className="p-6 rounded-2xl border border-gray-100 bg-white"
-                >
-                  <div className="flex items-center gap-1 mb-3">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        className="fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <blockquote className="text-sm text-gray-700 leading-relaxed mb-3">
-                    &ldquo;{t.text}&rdquo;
-                  </blockquote>
-                  <figcaption className="text-xs text-gray-500">
-                    <strong className="text-gray-800">{t.name}</strong>
-                    <span className="block">{t.detail}</span>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* ── OMDÖMEN ─────────────────────────── */}
+        <OmdomenInline
+          heading="Trygg från offert till färdigt"
+          match={[
+            "offert",
+            "tydlig",
+            "kommunikation",
+            "seriös",
+            "professionell",
+            "trygg",
+          ]}
+          limit={3}
+        />
 
         {/* ── TRUST BADGES ────────────────────── */}
         <section className="py-12 lg:py-16 border-t border-gray-100 bg-[#F8F9FB]">

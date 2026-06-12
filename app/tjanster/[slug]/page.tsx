@@ -10,6 +10,23 @@ import LeadForm from "@/components/LeadForm";
 import { tjanster, getTjanst } from "@/lib/tjanster";
 import { pageMeta } from "@/lib/seo";
 import OmradenInline from "@/components/OmradenInline";
+import OmdomenInline from "@/components/OmdomenInline";
+
+// Nyckelord per tjänst för att plocka relevanta omdömen.
+const REVIEW_MATCH: Record<string, string[]> = {
+  tegeltak: ["tegel"],
+  betongtak: ["betong"],
+  plattak: ["plåt"],
+  papptak: ["papp"],
+  eternittak: ["eternit"],
+  taklaggning: ["takläggning", "takbyte", "takomläggning"],
+  taksakerhet: ["vindskiv", "snöras", "säkerhet"],
+  takbesiktning: ["besiktning", "inspektion"],
+  fasadrenovering: ["fasad", "målning"],
+  totalentreprenad: ["renovering", "entreprenad"],
+  hangrannorstupror: ["hängränn", "stuprör", "vindskiv"],
+  takfonsterkupor: ["fönster", "kupa"],
+};
 
 // Per-slug SEO overrides. Only listed slugs get the hand-tuned copy
 // below; everything else falls back to the generic `${title} i Stockholm`
@@ -371,6 +388,13 @@ export default async function TjanstPage({
             </div>
           </section>
         )}
+
+        {/* ── OMDÖMEN ─────────────────────────── */}
+        <OmdomenInline
+          heading={`Vad kunderna säger om ${t.title.toLowerCase()}`}
+          match={REVIEW_MATCH[slug] ?? ["tak"]}
+          background
+        />
 
         {/* ── BOTTOM CTA ────────────────────────── */}
         <section className="py-16 lg:py-24 border-t border-gray-100">

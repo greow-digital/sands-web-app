@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
 import Takraknare from "@/components/Takraknare";
+import OmdomenInline from "@/components/OmdomenInline";
 import OmradenInline from "@/components/OmradenInline";
 import SourcesFooter from "@/components/SourcesFooter";
 
@@ -202,6 +203,12 @@ export default function PriserPage() {
             </p>
           </div>
         </section>
+
+        <OmdomenInline
+          heading="Nöjda kunder om pris och offert"
+          match={["offert", "faktura", "pris", "överenskomm", "konkurrensmässig"]}
+          background
+        />
 
         {/* Prisintervall */}
         <section className="py-16 lg:py-24">

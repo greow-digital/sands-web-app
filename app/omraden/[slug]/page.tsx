@@ -15,6 +15,7 @@ import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import type { ProjektCard } from "@/sanity/lib/types";
 import { matchProjektForOrt } from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
+import OmdomenInline from "@/components/OmdomenInline";
 
 export async function generateStaticParams() {
   // norrtalje har en egen dedikerad route (app/omraden/norrtalje/page.tsx)
@@ -337,6 +338,13 @@ export default async function OmradesPage({
           limit={6}
         />
 
+        {/* ── OMDÖMEN ─────────────────────────── */}
+        <OmdomenInline
+          heading="Vad våra kunder säger"
+          ort={ort.name}
+          match={["tak"]}
+          background
+        />
 
         {/* ── GRANNAR ───────────────────────────── */}
         {ort.grannar.length > 0 && (

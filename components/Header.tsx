@@ -147,6 +147,12 @@ export default function Header() {
               Projekt
             </Link>
             <Link
+              href="/omdomen"
+              className="text-gray-700 hover:text-[#2B74FC] transition-colors font-medium"
+            >
+              Omdömen
+            </Link>
+            <Link
               href="/om-oss"
               className="text-gray-700 hover:text-[#2B74FC] transition-colors font-medium"
             >
@@ -272,6 +278,7 @@ export default function Header() {
             {[
               { href: "/priser", label: "Priser" },
               { href: "/projekt", label: "Projekt" },
+              { href: "/omdomen", label: "Omdömen" },
               { href: "/om-oss", label: "Om oss" },
               { href: "/kontakt", label: "Kontakt" },
               { href: "/blogg", label: "Blogg" },

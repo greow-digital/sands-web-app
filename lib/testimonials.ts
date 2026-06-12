@@ -18,6 +18,42 @@ export const SOURCE_LABEL: Record<ReviewSource, string> = {
   offerta: "Offerta",
 };
 
+/** Delad metadata per marknadsplats: etikett, accentfärg och ev. logga. */
+export const SOURCE_META: Record<
+  ReviewSource,
+  { label: string; color: string; logo?: string }
+> = {
+  brabyggare: {
+    label: "BraByggare",
+    color: "#FF8000",
+    logo: "/images/brabyggare-seal.png",
+  },
+  offerta: {
+    label: "Offerta",
+    color: "#2B9E6E",
+    logo: "/images/kundfavorit-2025.png",
+  },
+  // logo aktiveras så snart public/images/servicefinder-logo.png finns på disk
+  servicefinder: { label: "Servicefinder", color: "#1E2A52" },
+};
+
+/**
+ * Verkliga plattformstotaler (antal omdömen + snitt) per marknadsplats.
+ * Detta är de officiella siffrorna, inte antalet vi visar med text nedan.
+ */
+export const PLATFORM_STATS: {
+  source: ReviewSource;
+  antal: number;
+  snitt: string;
+}[] = [
+  { source: "brabyggare", antal: 55, snitt: "4,8" },
+  { source: "offerta", antal: 22, snitt: "4,6" },
+  { source: "servicefinder", antal: 17, snitt: "4,8" },
+];
+
+export const TOTAL_REVIEWS = PLATFORM_STATS.reduce((s, p) => s + p.antal, 0); // 94
+export const AVG_RATING = "4,8";
+
 export interface Testimonial {
   name: string;
   ort?: string;
@@ -354,5 +390,196 @@ export const testimonials: Testimonial[] = [
     source: "brabyggare",
     datum: "17 mars 2018",
     datumISO: "2018-03-17",
+  },
+  {
+    name: "M. Svensson",
+    tjanst: "Målning, kolonistuga",
+    betyg: 5,
+    text: "Lätt och bra kommunikation med firman. Mycket väl utfört arbete, över förväntan. Lämnade allt rent och snyggt efteråt. Rekommenderas på det varmaste!",
+    source: "brabyggare",
+    datum: "6 oktober 2025",
+    datumISO: "2025-10-06",
+  },
+  {
+    name: "Bo",
+    ort: "Spånga",
+    tjanst: "Takläggning",
+    kvm: 85,
+    betyg: 5,
+    text: "Mycket bra genomfört arbete, snabbare än planerat och perfekt timade transporter till och från.",
+    source: "offerta",
+    datum: "9 oktober 2023",
+    datumISO: "2023-10-09",
+  },
+  {
+    name: "N Larsson",
+    tjanst: "Bandfalsad plåt, shingeltak",
+    betyg: 5,
+    text: "Trevligt bemötande från start till slut. Professionellt utförande in i minsta detalj på mitt avancerade shingeltak med fyra ränndalar. De bytte fuktskadad råspont, lade nytt shingel och gjorde trippla beläggningar i ränndalarna för att säkra ordentligt. Så vackert! Jag lämnar mina allra varmaste rekommendationer.",
+    source: "brabyggare",
+    datum: "7 november 2018",
+    datumISO: "2018-11-07",
+  },
+  {
+    name: "Leo Anka",
+    tjanst: "Takbesiktning, shingeltak",
+    betyg: 5,
+    text: "Jag hade fått indikationer från andra takfirmor att taket behövde bytas. Sands kom på utsatt tid och gick pedagogiskt igenom statusen på alla komponenter. Slutsatsen blev att inte röra taket, det fungerade utmärkt, utan bara göra smärre reparationer. Det kändes seriöst och kunnigt, jag kommer definitivt anlita Sands när det väl är dags.",
+    source: "brabyggare",
+    datum: "6 september 2018",
+    datumISO: "2018-09-06",
+  },
+  {
+    name: "Bengt",
+    tjanst: "Takbyte",
+    betyg: 5,
+    text: "Vi tog in tre offerter. Sands gjorde det mest kunniga intrycket vid första kontakten och hade dessutom det lägsta priset. Man kan följa arbetet genom bilder som laddas upp via en app, mycket bra. I offerten ingick även en besiktning utförd av OBM-gruppen, vilket ger extra trygghet. Vi kan verkligen rekommendera Sands Entreprenad.",
+    source: "brabyggare",
+    datum: "3 september 2018",
+    datumISO: "2018-09-03",
+  },
+  {
+    name: "Björn & Beata Schumacher",
+    ort: "Lidingö",
+    tjanst: "Takomläggning, radhus",
+    betyg: 5,
+    text: "De gamla betongpannorna höll på att upplösas och tätningen kring skorsten var bristfällig. Sands erbjöd takomläggning i en väl genomtänkt offert som vittnade om god teknisk kunskap. Arbetena genomfördes med fast hand, snabbt och effektivt. Betalning skedde först efter att arbetet fullgjorts och besiktigats av en neutral besiktningsman.",
+    source: "brabyggare",
+    datum: "8 augusti 2018",
+    datumISO: "2018-08-08",
+  },
+  {
+    name: "Lars Ö",
+    ort: "Danderyd",
+    tjanst: "Takomläggning & fasad",
+    betyg: 5,
+    text: "Vi anlitade Sands för omläggning av vårt tak på dryga 300 kvm. Jobbet innebar nytt undertak, nya tegelpannor Hollander från Monier samt reparation av kopparrännor, och vi passade på att måla om fasaden. De kom när de lovade, höll tidplanen och priserna, och gjorde ett riktigt bra jobb. Två besiktningar av oberoende besiktningsman utan anmärkning. Betyg 5 av 5.",
+    source: "brabyggare",
+    datum: "18 oktober 2017",
+    datumISO: "2017-10-18",
+  },
+  {
+    name: "Xinyu W",
+    tjanst: "Takomläggning",
+    betyg: 5,
+    text: "Vi köpte ett gammalt hus och behövde göra en takomläggning. Vi fick in fyra offerter. Vi gick vidare med Sands tack vare arbetssättet och en smidig kommunikation. Projektledaren kom snabbt på plats och presenterade olika lösningar. Mycket bra gjord takomläggning, enligt tidsschema och anpassad efter väderprognos. Vi vill absolut ge Sands våra rekommendationer.",
+    source: "brabyggare",
+    datum: "22 oktober 2017",
+    datumISO: "2017-10-22",
+  },
+  {
+    name: "Camilla Ekbo",
+    tjanst: "Takbyte & takfönster",
+    betyg: 5,
+    text: "Jag är mycket nöjd. Tydlig offert, professionellt bemötande, de höll vad de lovat både i tid och utförande, ingen onödig åverkan på tomten och trädgården städades efteråt. Mycket bra resultat både ute och inne. Rekommenderas.",
+    source: "brabyggare",
+    datum: "29 november 2018",
+    datumISO: "2018-11-29",
+  },
+  {
+    name: "Umit",
+    tjanst: "Tak- och vindsrenovering",
+    betyg: 5,
+    text: "Vi anlitade Sands för att byta tak och vind på vårt hus från -74. De har varit grymt bra från start till slut. Takarbetarna gjorde ett fantastiskt jobb och projektledaren var till stor hjälp och svarade alltid på frågor. Ni som funderar på att byta tak kan jag bara rekommendera att kontakta Sands.",
+    source: "brabyggare",
+    datum: "11 juni 2018",
+    datumISO: "2018-06-11",
+  },
+  {
+    name: "Klas",
+    tjanst: "Takrenovering",
+    betyg: 5,
+    text: "Jag har precis fått mitt tak renoverat av Sands. Det har varit fantastiskt bra, med bra samarbete, information, leverans och löpande uppföljning. Proffsigt gjort rakt igenom, kan inte tänka mig ett bättre företag att anlita.",
+    source: "brabyggare",
+    datum: "21 augusti 2018",
+    datumISO: "2018-08-21",
+  },
+  {
+    name: "Eleonor",
+    tjanst: "Renovering, trappa & golv",
+    betyg: 5,
+    text: "Väldigt snabba från att jag valt dem till start av arbete och slutförande. Enkelt att kommunicera under arbetet, ställa frågor och få svar på mina funderingar.",
+    source: "servicefinder",
+    datum: "20 november 2025",
+    datumISO: "2025-11-20",
+  },
+  {
+    name: "Bernhard",
+    tjanst: "Fasadrenovering & isolering",
+    betyg: 5,
+    text: "Vi är mycket nöjda med resultatet. Jobbet utfördes effektivt och kommunikationen med arbetsledaren var bra. Det avtalade priset blev också slutpriset. Inga otrevliga överraskningar helt enkelt. Mycket bra jobb!",
+    source: "servicefinder",
+    datum: "4 november 2025",
+    datumISO: "2025-11-04",
+  },
+  {
+    name: "Åsa",
+    ort: "Stockholm",
+    tjanst: "Fasadmålning",
+    betyg: 5,
+    text: "Mycket trevligt bemötande, snabbt utfört jobb och jättefint resultat. Jag är jättenöjd!",
+    source: "servicefinder",
+    datum: "27 juni 2024",
+    datumISO: "2024-06-27",
+  },
+  {
+    name: "Joachim",
+    ort: "Enköping",
+    tjanst: "Fasadmålning",
+    betyg: 5,
+    text: "Entreprenören skötte uppdraget föredömligt. Bra bemötande och dialog innan, det faktiska arbetet samt hantering av planer och tidsramar. Man svarade dessutom väldigt bra på mina arbetsgivar-, skatte- och försäkringsfrågor. Väldigt seriösa. Bra jobbat Sands!",
+    source: "servicefinder",
+    datum: "26 juni 2023",
+    datumISO: "2023-06-26",
+  },
+  {
+    name: "Kalle",
+    ort: "Upplands-Bro",
+    tjanst: "Fasadrenovering",
+    betyg: 5,
+    text: "Jag är jättenöjd. Trevliga människor och ett snabbt och fint arbete.",
+    source: "servicefinder",
+    datum: "25 oktober 2023",
+    datumISO: "2023-10-25",
+  },
+  {
+    name: "Krister",
+    ort: "Sollentuna",
+    tjanst: "Målning & träfasad",
+    betyg: 5,
+    text: "Kvalitet och lyhördhet i ett snabbt utfört arbete ger toppbetyg.",
+    source: "servicefinder",
+    datum: "29 maj 2023",
+    datumISO: "2023-05-29",
+  },
+  {
+    name: "Ulrica",
+    ort: "Upplands-Bro",
+    tjanst: "Fasadmålning",
+    betyg: 5,
+    text: "Målaren var grymt duktig, trevlig, punktlig och framförallt väldigt noggrann och samtidigt extremt effektiv. Vill klassa arbetet som mycket hög kvalitet. Använder gärna denna firma igen!",
+    source: "servicefinder",
+    datum: "11 augusti 2022",
+    datumISO: "2022-08-11",
+  },
+  {
+    name: "Ulf",
+    ort: "Viksjö",
+    tjanst: "Panel & vindskivor",
+    betyg: 5,
+    text: "Ett väl genomfört arbete från början till slut. Jag har inga klagomål på genomförandet och smidigheten vid de små utökningar jag begärde. Jag kan utan att tveka rekommendera Sands Entreprenad Stockholm AB.",
+    source: "servicefinder",
+    datum: "11 juni 2023",
+    datumISO: "2023-06-11",
+  },
+  {
+    name: "Nalin",
+    ort: "Huddinge",
+    tjanst: "Fasadmålning",
+    betyg: 5,
+    text: "Gjorde ett bra jobb med fasadmålningen och blev färdig snabbt.",
+    source: "offerta",
+    datum: "6 juni 2020",
+    datumISO: "2020-06-06",
   },
 ];
