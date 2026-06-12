@@ -446,6 +446,14 @@ export default async function Home() {
                 >
                   Få gratis offert <ArrowRight size={14} />
                 </Link>
+                <div className="mt-4">
+                  <Link
+                    href="/priser#takraknare"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
+                  >
+                    Räkna på ditt eget tak <ArrowRight size={13} />
+                  </Link>
+                </div>
               </div>
 
               {/* Höger, vad ingår + detaljer */}

@@ -387,7 +387,7 @@ export default async function OmradesPage({
               Vi inspekterar ditt tak kostnadsfritt och ger dig ett fast pris
               utan förbindelser.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-col items-center gap-4">
               <Link
                 href="/offert"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
@@ -397,11 +397,10 @@ export default async function OmradesPage({
               </Link>
               <a
                 href="tel:08283888"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
-                style={{ color: "var(--color-dark)" }}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-[#2B74FC] transition-colors"
               >
-                <Phone size={14} />
-                08-28 38 88
+                <Phone size={13} />
+                Eller ring 08-28 38 88
               </a>
             </div>
           </div>

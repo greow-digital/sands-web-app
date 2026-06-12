@@ -161,7 +161,7 @@ export default function FaqPage() {
         <section className="py-16 border-t border-gray-100 text-center">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-gray-600 mb-6">Fick du inte svar på din fråga?</p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-col items-center gap-4">
               <Link
                 href="/offert"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
@@ -171,10 +171,9 @@ export default function FaqPage() {
               </Link>
               <a
                 href="tel:08283888"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-gray-200 font-semibold text-sm hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
-                style={{ color: "var(--color-dark)" }}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-[#2B74FC] transition-colors"
               >
-                Ring 08-28 38 88
+                Eller ring 08-28 38 88
               </a>
             </div>
           </div>
