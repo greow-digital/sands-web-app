@@ -110,7 +110,12 @@ export default function OffertPage() {
 
               {/* Form: först på mobil (över fold), höger på desktop */}
               <div className="order-1 lg:order-2">
-                <LeadForm variant="section" />
+                <LeadForm
+                  variant="section"
+                  formId="offert"
+                  notBindingNote
+                  privacyNote
+                />
               </div>
             </div>
           </div>

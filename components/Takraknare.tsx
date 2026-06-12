@@ -1,35 +1,58 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, ChevronDown, CheckCircle, AlertCircle, X } from "lucide-react";
+import {
+  ChevronDown,
+  CheckCircle,
+  Layers,
+  Grid3x3,
+  AlignJustify,
+  Square,
+} from "lucide-react";
+import LeadForm from "@/components/LeadForm";
 
-// Alla siffror är exkl moms från Sands interna kalkyl. Multiplikatorn
-// nedan ger konsumentpriser (inkl 25% moms) som matchar resten av sajten.
-const MOMS = 1.25;
-const FAST_KR = 35200 * MOMS;            // 44 000 kr (ställning, container, transport, kran)
-const RORLIGT_KR_M2 = 979 * MOMS;        // 1 223,75 kr/m² (arbete + material)
-const ARBETE_KR_M2 = 700 * MOMS;         // 875 kr/m²
-const MATERIAL_KR_M2 = 279 * MOMS;       // 348,75 kr/m²
-const ROT_PROCENT = 0.30;
-const ROT_CAP = 50000;                   // Max ROT per person/år
-const KOMPLEX_MULTIPLIER = 1.3;          // Övre prisintervall = +30%
+// Priserna är "från ca X kr/m² efter ROT-avdrag" — samma riktvärden som
+// på /priser. Övre intervall = +30% för komplexa tak (kupor, ränndalar,
+// branta lutningar). ROT-avdraget som visas baseras på arbetskostnaden.
+const ROT_PROCENT = 0.3;
+const ROT_CAP = 50000; // max ROT per person/år
+const ARBETE_KR_M2 = 875; // för ROT-uppskattning (inkl moms)
+const KOMPLEX = 1.3;
 
-function calculate(kvm: number) {
-  const totalpris = FAST_KR + RORLIGT_KR_M2 * kvm;
-  const rotRaw = ARBETE_KR_M2 * kvm * ROT_PROCENT;
-  const rot = Math.min(rotRaw, ROT_CAP);
-  const undre = totalpris - rot;
-  const ovre = undre * KOMPLEX_MULTIPLIER;
+type MaterialKey = "betong" | "tegel" | "plat" | "papp";
+
+const MATERIAL: {
+  key: MaterialKey;
+  namn: string;
+  prisM2: number;
+  icon: typeof Layers;
+}[] = [
+  { key: "betong", namn: "Betongpannor", prisM2: 1200, icon: Square },
+  { key: "tegel", namn: "Tegeltak", prisM2: 1500, icon: Grid3x3 },
+  { key: "plat", namn: "Plåttak", prisM2: 1800, icon: AlignJustify },
+  { key: "papp", namn: "Papptak", prisM2: 800, icon: Layers },
+];
+
+const INGAR = [
+  "Rivning och bortforsling av gammalt tak",
+  "Ny underlagspapp (Icopal Flexilight Prima)",
+  "Ny ströläkt & bärläkt",
+  "Nytt takmaterial",
+  "Nytt regnvattensystem (hängrännor och stuprör)",
+  "Ställning, container och transport",
+];
+
+function calc(prisM2: number, kvm: number) {
+  const undreEfterRot = prisM2 * kvm;
+  const ovreEfterRot = undreEfterRot * KOMPLEX;
+  const rot = Math.min(ARBETE_KR_M2 * kvm * ROT_PROCENT, ROT_CAP);
   return {
-    totalpris,
+    undreEfterRot,
+    ovreEfterRot,
+    undreForeRot: undreEfterRot + rot,
+    ovreForeRot: ovreEfterRot + rot,
     rot,
-    rotCapped: rotRaw > ROT_CAP,
-    undre,
-    ovre,
-    arbete: ARBETE_KR_M2 * kvm,
-    material: MATERIAL_KR_M2 * kvm,
-    perM2: undre / kvm,
+    rotCapped: ARBETE_KR_M2 * kvm * ROT_PROCENT > ROT_CAP,
   };
 }
 
@@ -37,118 +60,76 @@ function formatKr(value: number): string {
   return Math.round(value).toLocaleString("sv-SE") + " kr";
 }
 
-const INGAR = [
-  "Rivning av befintligt tak",
-  "Nya betongpannor (Monier Jönåker Elegant)",
-  "Underlagspapp (Icopal Flexilight Prima)",
-  "Ny ströläkt & bärläkt",
-  "Vindskivor och beslag",
-  "Hängrännor & 2 stuprör",
-  "Hålpanna & nockregel",
-  "Färg och småmaterial",
-];
-
-const INGAR_EJ = [
-  "Taksäkerhet (stegar, snörasskydd)",
-  "Råspontbyte vid rötskador",
-  "Plåtarbeten utöver standard",
-  "Kupor och ränndalar",
-  "Fasadställning runt hela huset",
-];
-
 type GtagFn = (event: string, name: string, params: object) => void;
 
-function fireGtag(name: string, value: number) {
+function fireGtag(name: string, params: object) {
   if (typeof window === "undefined" || !("gtag" in window)) return;
-  const w = window as unknown as { gtag: GtagFn };
-  w.gtag("event", name, {
+  (window as unknown as { gtag: GtagFn }).gtag("event", name, {
     event_category: "engagement",
     event_label: "takraknare",
-    value,
+    ...params,
   });
 }
-
-const STICKY_DISMISSED_KEY = "sands_calc_sticky_dismissed";
 
 export default function Takraknare({
   embedded = false,
 }: {
-  // embedded = renderas inuti hero-split utan egen rubrik/sektion-padding.
   embedded?: boolean;
 } = {}) {
-  // Default 130 m² landar på ~169 000 kr efter ROT, vilket matchar
-  // exempelpriset på startsidan (sadeltak 140 m² från 169 000 kr).
-  const [kvm, setKvm] = useState(130);
-  // Breakdown öppen som standard (även i hero) så detaljerna syns direkt.
-  const [open, setOpen] = useState(true);
-  const [stickyVisible, setStickyVisible] = useState(false);
+  const [material, setMaterial] = useState<MaterialKey>("betong");
+  const [kvm, setKvm] = useState(140);
+  const [open, setOpen] = useState(false);
+  const [useBoyta, setUseBoyta] = useState(false);
+  const [boyta, setBoyta] = useState(120);
+
   const engagedRef = useRef(false);
-  const stickyFiredRef = useRef(false);
-  const r = calculate(kvm);
+  const bridgeViewedRef = useRef(false);
+  const bridgeRef = useRef<HTMLDivElement>(null);
 
-  // Trigger sticky CTA forsta gangen anvandaren engagerar med slidern.
-  // Visas inte om anvandaren redan dismissat den i samma session.
-  function handleSliderChange(next: number) {
+  const valtMaterial = MATERIAL.find((m) => m.key === material)!;
+  const r = calc(valtMaterial.prisM2, kvm);
+
+  function firstEngage() {
+    if (engagedRef.current) return;
+    engagedRef.current = true;
+    fireGtag("calculator_engage", { material });
+  }
+
+  function handleMaterial(next: MaterialKey) {
+    setMaterial(next);
+    firstEngage();
+    fireGtag("calc_step_complete", { step: 1, material: next });
+  }
+
+  function handleSlider(next: number) {
     setKvm(next);
-    if (!engagedRef.current) {
-      engagedRef.current = true;
-      fireGtag("calculator_engage", next);
-
-      let dismissed = false;
-      try {
-        dismissed = sessionStorage.getItem(STICKY_DISMISSED_KEY) === "1";
-      } catch {
-        // sessionStorage kan vara blockerat
-      }
-      if (!dismissed) setStickyVisible(true);
-    }
+    firstEngage();
   }
 
-  function handleCtaClick() {
-    fireGtag("calculator_cta_click", kvm);
+  function commitSize(value: number) {
+    fireGtag("calc_step_complete", { step: 2, material });
+    firstEngage();
+    setKvm(value);
   }
 
-  function handleStickyClick() {
-    fireGtag("calc_sticky_click", kvm);
-    if (typeof window !== "undefined" && "gtag" in window) {
-      (window as unknown as { gtag: GtagFn }).gtag("event", "cta_click", {
-        cta_location: "priser_sticky",
-        cta_destination: "/offert",
-      });
-    }
-  }
-
-  function handleStickyDismiss() {
-    fireGtag("calc_sticky_dismiss", kvm);
-    setStickyVisible(false);
-    try {
-      sessionStorage.setItem(STICKY_DISMISSED_KEY, "1");
-    } catch {
-      // sessionStorage blockerat - bar visas igen vid ny engagement i denna session
-    }
-  }
-
-  // Impression-event nar sticky visas forsta gangen
+  // calc_bridge_view: fyras en gång när bro-formuläret syns i viewporten.
   useEffect(() => {
-    if (stickyVisible && !stickyFiredRef.current) {
-      stickyFiredRef.current = true;
-      fireGtag("calc_sticky_view", kvm);
-    }
-  }, [stickyVisible, kvm]);
-
-  // Talar om for den globala MobileCTA att doja sig medan denna bar syns,
-  // sa de inte staplas pa varandra i botten. Stadar upp vid unmount.
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    window.dispatchEvent(
-      new CustomEvent("sands:calc-sticky", { detail: { visible: stickyVisible } })
+    const el = bridgeRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !bridgeViewedRef.current) {
+          bridgeViewedRef.current = true;
+          fireGtag("calc_bridge_view", { material, area: kvm });
+        }
+      },
+      { threshold: 0.4 }
     );
-    return () => {
-      window.dispatchEvent(
-        new CustomEvent("sands:calc-sticky", { detail: { visible: false } })
-      );
-    };
-  }, [stickyVisible]);
+    obs.observe(el);
+    return () => obs.disconnect();
+    // material/kvm avsiktligt ej i deps: vi vill bara fyra första gången.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sliderProgress = ((kvm - 60) / (300 - 60)) * 100;
 
@@ -162,48 +143,83 @@ export default function Takraknare({
       }
     >
       <div
-        className={
-          embedded ? "" : "max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8"
-        }
+        className={embedded ? "" : "max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8"}
       >
-        {/* Header */}
         {!embedded && (
-        <div className="text-center mb-10">
-          <span
-            className="inline-block text-xs font-semibold uppercase tracking-[0.15em] px-3 py-1 rounded-full mb-4"
-            style={{
-              color: "var(--color-primary)",
-              backgroundColor: "rgba(43,116,252,0.10)",
-            }}
-          >
-            Prisuppskattning
-          </span>
-          <h2
-            className="text-[28px] lg:text-[40px] font-extrabold tracking-[-0.03em] mb-3"
-            style={{
-              fontFamily: "var(--font-heading)",
-              color: "var(--color-dark)",
-            }}
-          >
-            Vad kostar ditt takbyte?
-          </h2>
-          <p className="text-sm text-gray-500">
-            Baserat på enkelt sadeltak med Monier betongpannor, inkl moms och
-            efter ROT-avdrag.
-          </p>
-        </div>
+          <div className="text-center mb-10">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-[0.15em] px-3 py-1 rounded-full mb-4"
+              style={{
+                color: "var(--color-primary)",
+                backgroundColor: "rgba(43,116,252,0.10)",
+              }}
+            >
+              Prisuppskattning
+            </span>
+            <h2
+              className="text-[28px] lg:text-[40px] font-extrabold tracking-[-0.03em] mb-3"
+              style={{
+                fontFamily: "var(--font-heading)",
+                color: "var(--color-dark)",
+              }}
+            >
+              Vad kostar ditt takbyte?
+            </h2>
+            <p className="text-sm text-gray-500">
+              Välj takmaterial och yta för en uppskattning, inkl. moms och efter
+              ROT-avdrag.
+            </p>
+          </div>
         )}
 
-        {/* Slider-kort */}
         <div className="rounded-3xl border border-gray-100 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
+          {/* STEG 1 — Material */}
+          <div className="p-6 lg:p-8 border-b border-gray-100">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500 mb-4">
+              1. Vilket takmaterial?
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {MATERIAL.map((m) => {
+                const active = m.key === material;
+                const Icon = m.icon;
+                return (
+                  <button
+                    key={m.key}
+                    type="button"
+                    onClick={() => handleMaterial(m.key)}
+                    aria-pressed={active}
+                    className={`flex flex-col items-center gap-2 rounded-2xl border px-3 py-4 text-center transition-all ${
+                      active
+                        ? "border-[#2B74FC] bg-[rgba(43,116,252,0.06)]"
+                        : "border-gray-200 hover:border-gray-300"
+                    }`}
+                  >
+                    <Icon
+                      size={22}
+                      style={{
+                        color: active
+                          ? "var(--color-primary)"
+                          : "var(--color-dark)",
+                      }}
+                    />
+                    <span
+                      className="text-xs sm:text-sm font-semibold leading-tight"
+                      style={{ color: "var(--color-dark)" }}
+                    >
+                      {m.namn}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* STEG 2 — Storlek */}
           <div className="p-6 lg:p-8">
             <div className="flex items-baseline justify-between mb-4">
-              <label
-                htmlFor="takyta"
-                className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500"
-              >
-                Takyta
-              </label>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500">
+                2. Hur stort är taket?
+              </h3>
               <div
                 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em]"
                 style={{
@@ -223,57 +239,95 @@ export default function Takraknare({
                 max={300}
                 step={5}
                 value={kvm}
-                onChange={(e) => handleSliderChange(Number(e.target.value))}
+                onChange={(e) => handleSlider(Number(e.target.value))}
+                onPointerUp={() => commitSize(kvm)}
+                onKeyUp={() => commitSize(kvm)}
                 className="sands-slider w-full"
-                style={
-                  {
-                    "--progress": `${sliderProgress}%`,
-                  } as React.CSSProperties
-                }
+                style={{ "--progress": `${sliderProgress}%` } as React.CSSProperties}
                 aria-label="Takyta i kvadratmeter"
+                disabled={useBoyta}
               />
             </div>
-
             <div className="flex justify-between text-xs text-gray-400 mt-1">
               <span>60 m²</span>
               <span>300 m²</span>
             </div>
+
+            {/* Vet ej-toggle: boyta + 20% */}
+            <div className="mt-5 rounded-2xl bg-gray-50 border border-gray-100 p-4">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={useBoyta}
+                  onChange={(e) => {
+                    const on = e.target.checked;
+                    setUseBoyta(on);
+                    if (on) commitSize(Math.round(boyta * 1.2));
+                  }}
+                  className="h-4 w-4 accent-[#2B74FC]"
+                />
+                <span className="text-sm font-medium text-gray-700">
+                  Vet ej takytan — räkna på husets boyta + 20%
+                </span>
+              </label>
+              {useBoyta && (
+                <div className="mt-3 flex items-center gap-3">
+                  <span className="text-sm text-gray-500">Boyta</span>
+                  <input
+                    type="number"
+                    min={40}
+                    max={250}
+                    value={boyta}
+                    onChange={(e) => {
+                      const v = Number(e.target.value);
+                      setBoyta(v);
+                      if (v >= 40) commitSize(Math.round(v * 1.2));
+                    }}
+                    className="w-24 px-3 py-2 rounded-lg border border-gray-200 text-sm outline-none focus:border-[#2B74FC]"
+                  />
+                  <span className="text-sm text-gray-500">
+                    m² → ca {Math.round(boyta * 1.2)} m² takyta
+                  </span>
+                </div>
+              )}
+              {!useBoyta && (
+                <p className="text-xs text-gray-400 mt-1.5 pl-7">
+                  Takytan är oftast 15–25% större än boytan på grund av taklutningen.
+                </p>
+              )}
+            </div>
           </div>
 
-          {/* Prisvisning (mörkt) */}
+          {/* STEG 3 — Resultat */}
           <div
             className="px-6 py-8 lg:px-8 lg:py-10"
             style={{ backgroundColor: "var(--color-dark)" }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3 text-center">
-              Uppskattat pris efter ROT-avdrag
+              Ditt uppskattade pris efter ROT-avdrag
             </p>
             <div
               className="text-center text-[28px] lg:text-[40px] font-extrabold tracking-[-0.02em] text-white mb-3 tabular-nums"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              {formatKr(r.undre)} – {formatKr(r.ovre)}
+              {formatKr(r.undreEfterRot)} – {formatKr(r.ovreEfterRot)}
             </div>
-            <p className="text-xs lg:text-sm text-gray-400 text-center">
-              Från {Math.round(r.perM2).toLocaleString("sv-SE")} kr/m² · ROT-avdrag:{" "}
-              {formatKr(r.rot)}
-              {r.rotCapped && (
-                <span className="text-gray-500"> (max 50 000 kr/person)</span>
-              )}
+            <p className="text-xs lg:text-sm text-gray-400 text-center leading-relaxed">
+              Före ROT: {formatKr(r.undreForeRot)} – {formatKr(r.ovreForeRot)}
+              <br />
+              Inkl. material, arbete, ställning och bortforsling. Inga dolda
+              tillägg.
             </p>
           </div>
 
-          {/* Expanderbar breakdown */}
+          {/* Expanderbar: vad ingår */}
           <button
             type="button"
             onClick={() => setOpen(!open)}
             aria-expanded={open}
             className="w-full flex items-center justify-between px-6 py-5 lg:px-8 border-t border-gray-100 hover:bg-gray-50 transition-colors"
           >
-            <span
-              className="text-sm font-bold"
-              style={{ color: "var(--color-dark)" }}
-            >
+            <span className="text-sm font-bold" style={{ color: "var(--color-dark)" }}>
               Vad ingår i priset?
             </span>
             <ChevronDown
@@ -283,214 +337,64 @@ export default function Takraknare({
               }`}
             />
           </button>
-
           {open && (
             <div className="px-6 pb-8 lg:px-8 lg:pb-10 border-t border-gray-100 bg-gray-50/50">
-              {/* Fasta kostnader */}
-              <div className="pt-6">
-                <div className="flex items-baseline justify-between mb-3">
-                  <h3
-                    className="text-sm font-bold uppercase tracking-[0.1em] text-gray-500"
+              <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-2 pt-6">
+                {INGAR.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2 text-sm text-gray-700"
                   >
-                    Fasta kostnader
-                  </h3>
-                  <span
-                    className="text-sm font-bold tabular-nums"
-                    style={{ color: "var(--color-dark)" }}
-                  >
-                    {formatKr(FAST_KR)}
-                  </span>
-                </div>
-                <ul className="text-sm text-gray-600 space-y-1.5">
-                  <li className="flex justify-between">
-                    <span>Ställning (långsidor + fallskydd)</span>
-                    <span className="tabular-nums text-gray-500">
-                      {formatKr(17500 * MOMS)}
-                    </span>
+                    <CheckCircle
+                      size={14}
+                      className="shrink-0 mt-0.5"
+                      style={{ color: "var(--color-primary)" }}
+                    />
+                    {item}
                   </li>
-                  <li className="flex justify-between">
-                    <span>Containrar & bortforsling</span>
-                    <span className="tabular-nums text-gray-500">
-                      {formatKr(11000 * MOMS)}
-                    </span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Transport</span>
-                    <span className="tabular-nums text-gray-500">
-                      {formatKr(1100 * MOMS)}
-                    </span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>Kran</span>
-                    <span className="tabular-nums text-gray-500">
-                      {formatKr(5600 * MOMS)}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Rörliga kostnader */}
-              <div className="pt-6 mt-6 border-t border-gray-200">
-                <div className="flex items-baseline justify-between mb-3">
-                  <h3
-                    className="text-sm font-bold uppercase tracking-[0.1em] text-gray-500"
-                  >
-                    Rörliga kostnader · {kvm} m²
-                  </h3>
-                  <span
-                    className="text-sm font-bold tabular-nums"
-                    style={{ color: "var(--color-dark)" }}
-                  >
-                    {formatKr(r.arbete + r.material)}
-                  </span>
-                </div>
-                <ul className="text-sm text-gray-600 space-y-1.5">
-                  <li className="flex justify-between">
-                    <span>
-                      Arbete ({Math.round(ARBETE_KR_M2).toLocaleString("sv-SE")}{" "}
-                      kr/m²)
-                    </span>
-                    <span className="tabular-nums text-gray-500">
-                      {formatKr(r.arbete)}
-                    </span>
-                  </li>
-                  <li className="flex justify-between">
-                    <span>
-                      Material ({Math.round(MATERIAL_KR_M2).toLocaleString(
-                        "sv-SE"
-                      )}{" "}
-                      kr/m²)
-                    </span>
-                    <span className="tabular-nums text-gray-500">
-                      {formatKr(r.material)}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Ingår */}
-              <div className="pt-6 mt-6 border-t border-gray-200">
-                <h3 className="text-sm font-bold uppercase tracking-[0.1em] text-gray-500 mb-3">
-                  Ingår i priset
-                </h3>
-                <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-2">
-                  {INGAR.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 text-sm text-gray-700"
-                    >
-                      <CheckCircle
-                        size={14}
-                        className="shrink-0 mt-0.5"
-                        style={{ color: "var(--color-primary)" }}
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Ingår ej, varningsblock */}
-              <div className="mt-6 p-5 rounded-2xl border border-amber-200 bg-amber-50">
-                <div className="flex items-start gap-3 mb-3">
-                  <AlertCircle
-                    size={18}
-                    className="shrink-0 mt-0.5 text-amber-600"
-                  />
-                  <div>
-                    <h3 className="text-sm font-bold text-amber-900 mb-1">
-                      Ingår inte, kan tillkomma
-                    </h3>
-                    <p className="text-xs text-amber-800 leading-relaxed">
-                      Här uppstår vanligtvis de största prisskillnaderna mellan
-                      enkla och komplexa projekt.
-                    </p>
-                  </div>
-                </div>
-                <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-1.5 pl-7">
-                  {INGAR_EJ.map((item) => (
-                    <li
-                      key={item}
-                      className="text-sm text-amber-900 flex items-start gap-2"
-                    >
-                      <span className="text-amber-600 mt-0.5">•</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                ))}
+              </ul>
             </div>
           )}
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-8">
-          <Link
-            href="/offert"
-            onClick={handleCtaClick}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02] hover:shadow-lg"
-            style={{ backgroundColor: "var(--color-primary)" }}
-          >
-            Boka kostnadsfri takkontroll <ArrowRight size={14} />
-          </Link>
-          <p className="text-xs text-gray-400 mt-4 max-w-md mx-auto">
-            Priserna är uppskattningar för enkelt sadeltak med betongpannor.
-            Exakt pris ges alltid vid kostnadsfri hembesiktning.
-          </p>
+        {/* STEG 4 — Bron (lead-formulär, samma pipeline som /offert) */}
+        <div ref={bridgeRef} className="mt-8">
+          <div className="text-center mb-5 max-w-lg mx-auto">
+            <h3
+              className="text-[22px] lg:text-[28px] font-extrabold tracking-[-0.02em] mb-2"
+              style={{
+                fontFamily: "var(--font-heading)",
+                color: "var(--color-dark)",
+              }}
+            >
+              Få ditt exakta fasta pris
+            </h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Vi gör en kostnadsfri takkontroll och lämnar ett bindande fast
+              prisförslag inom 24 h. Inte bindande för dig.
+            </p>
+          </div>
+          <div className="max-w-md mx-auto">
+            <LeadForm
+              variant="section"
+              formId="calc_bridge"
+              fields="minimal"
+              hideHeader
+              ctaText="Få mitt fasta pris"
+              confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²`}
+              extraPayload={{
+                roofType: valtMaterial.namn,
+                area: `${kvm} m²`,
+              }}
+              privacyNote
+              onSubmitSuccess={() =>
+                fireGtag("calc_bridge_submit", { material, area: kvm })
+              }
+            />
+          </div>
         </div>
       </div>
-
-      {/* Sticky post-engagement CTA-bar.
-          Visas efter forsta slider-engagement. Dismissable; flagga i
-          sessionStorage sa den inte popas upp igen pa samma session. */}
-      {stickyVisible && (
-        <div
-          className="fixed bottom-0 inset-x-0 z-40 px-3 pb-3 pt-2 sm:px-6 sm:pb-5 animate-[slideUp_0.3s_ease-out]"
-          style={{ animation: "slideUp 0.3s ease-out" }}
-        >
-          <div
-            className="max-w-[900px] mx-auto rounded-2xl shadow-2xl border border-white/10 px-4 py-3 sm:px-6 sm:py-4 flex items-center gap-3 sm:gap-5"
-            style={{ backgroundColor: "var(--color-dark)" }}
-          >
-            <div className="flex-1 min-w-0">
-              <p className="text-white text-sm sm:text-base font-bold leading-tight">
-                Ditt pris ser klart ut!
-              </p>
-              <p className="text-gray-300 text-xs sm:text-sm leading-tight mt-0.5">
-                Få ett bindande prisförslag samma vardag.
-              </p>
-            </div>
-            <Link
-              href="/offert"
-              onClick={handleStickyClick}
-              className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-white font-semibold text-xs sm:text-sm whitespace-nowrap transition-all hover:scale-[1.02] shadow-lg shrink-0"
-              style={{ backgroundColor: "var(--color-primary)" }}
-            >
-              Få prisförslag <ArrowRight size={14} />
-            </Link>
-            <button
-              type="button"
-              onClick={handleStickyDismiss}
-              aria-label="Stäng"
-              className="text-gray-400 hover:text-white transition-colors shrink-0 -mr-1"
-            >
-              <X size={18} />
-            </button>
-          </div>
-          <style jsx>{`
-            @keyframes slideUp {
-              from {
-                transform: translateY(100%);
-                opacity: 0;
-              }
-              to {
-                transform: translateY(0);
-                opacity: 1;
-              }
-            }
-          `}</style>
-        </div>
-      )}
     </section>
   );
 }
