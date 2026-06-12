@@ -153,6 +153,24 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Interna/POC-sidor: noindex via header (crawlbara så Google kan
+      // läsa taggen och slänga dem ur indexet). Se app/robots.ts.
+      {
+        source: "/studio/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/studio",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/projekt-sanity-poc/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/projekt-sanity-poc",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 type HotjarWindow = Window & {
   hj?: { (...args: unknown[]): void; q?: unknown[] };
@@ -23,8 +24,14 @@ type IdleWindow = Window & {
  * data som inte paverkar sessions-/konverteringsdata.
  */
 export default function ThirdPartyScripts() {
+  // Datahygien: ladda inga marknads-/analysskript i Sanity Studio eller
+  // POC-sidor. De är interna och ska inte spåras eller smutsa ner GA4/Ads.
+  const pathname = usePathname();
+  const excluded = /^\/(studio|projekt-sanity-poc)(\/|$)/.test(pathname);
+
   // gtag: efter load + idle.
   useEffect(() => {
+    if (excluded) return;
     const loadGtag = () => {
       if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]'))
         return;
@@ -43,10 +50,11 @@ export default function ThirdPartyScripts() {
       window.addEventListener("load", schedule, { once: true });
       return () => window.removeEventListener("load", schedule);
     }
-  }, []);
+  }, [excluded]);
 
   // Hotjar: vid forsta interaktion.
   useEffect(() => {
+    if (excluded) return;
     const events = [
       "scroll",
       "mousemove",
@@ -88,7 +96,7 @@ export default function ThirdPartyScripts() {
     );
 
     return remove;
-  }, []);
+  }, [excluded]);
 
   return null;
 }

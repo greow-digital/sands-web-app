@@ -51,6 +51,25 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
   // gånger. Identifierar var användare droppar av i formuläret.
   const completedFields = useRef(new Set<string>());
 
+  // form_start: fyras en gång när användaren först interagerar med
+  // formuläret (fokuserar valfritt fält). Markerar toppen av
+  // formulär-funneln i GA4, så drop-off mellan start och submit kan mätas.
+  const formStarted = useRef(false);
+
+  function fireFormStart() {
+    if (formStarted.current) return;
+    formStarted.current = true;
+    if (typeof window === "undefined" || !("gtag" in window)) return;
+    const w = window as unknown as {
+      gtag: (event: string, name: string, params: object) => void;
+    };
+    w.gtag("event", "form_start", {
+      event_category: "engagement",
+      event_label: "leadform",
+      form_variant: variant,
+    });
+  }
+
   function fireFieldComplete(fieldName: string) {
     if (completedFields.current.has(fieldName)) return;
     completedFields.current.add(fieldName);
@@ -181,7 +200,12 @@ export default function LeadForm({ variant = "hero" }: LeadFormProps) {
         </h2>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        onFocus={fireFormStart}
+        className="space-y-4"
+        noValidate
+      >
         {/* Namn */}
         <div>
           <label

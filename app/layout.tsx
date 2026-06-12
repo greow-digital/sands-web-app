@@ -121,7 +121,7 @@ export default function RootLayout({
             anda fyras for alla sessioner (aven utan interaktion). */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18004063012');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());if(!/^\\/(studio|projekt-sanity-poc)(\\/|$)/.test(location.pathname)){gtag('config','AW-18004063012');}`,
           }}
         />
       </head>
