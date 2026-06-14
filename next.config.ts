@@ -2,6 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Vercels bildoptimering slår återkommande i gratistakets transformations-
+    // kvot (5 000/mån) och returnerar då 402 för lokala bilder -> trasiga
+    // hero-bilder över hela sajten. Vi serverar därför bilder direkt
+    // (ooptimerat). Sanity-bilder var redan ooptimerade via SanityImage.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

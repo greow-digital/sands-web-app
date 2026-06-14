@@ -137,8 +137,8 @@ export default function NorrtaljePage() {
             { label: "Områden", href: "/omraden" },
             { label: "Norrtälje" },
           ]}
-          backgroundImage="/images/projekt-vitthus-efter.jpg"
-          imageAlt="Färdigt takbyte med nya takpannor utfört av Sands Entreprenad"
+          backgroundImage="/images/hero-sands-construction.jpg"
+          imageAlt="Sands Entreprenads servicebilar vid ett pågående takbyte"
         />
 
         {/* ── HERO-CTA + TRUST ─────────────────── */}
