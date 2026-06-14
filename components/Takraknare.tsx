@@ -423,7 +423,7 @@ export default function Takraknare({
                 color: "var(--color-dark)",
               }}
             >
-              Få ditt exakta fasta pris
+              Få ditt exakta pris
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
               Vi gör en kostnadsfri takkontroll och lämnar ett bindande fast
@@ -436,7 +436,7 @@ export default function Takraknare({
               formId="calc_bridge"
               fields="minimal"
               hideHeader
-              ctaText="Få mitt fasta pris"
+              ctaText="Få ditt pris"
               confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²`}
               extraPayload={{
                 roofType: valtMaterial.namn,
