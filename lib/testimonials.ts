@@ -73,7 +73,7 @@ export interface Testimonial {
   datumISO: string;
 }
 
-export const testimonials: Testimonial[] = [
+const rawTestimonials: Testimonial[] = [
   {
     name: "KHOSRO SAFAEI",
     tjanst: "Takbyte",
@@ -586,3 +586,9 @@ export const testimonials: Testimonial[] = [
     datumISO: "2020-06-06",
   },
 ];
+
+// Alltid sorterade nyast först (ISO-datum sorterar korrekt lexikografiskt),
+// så /omdomen och karusellen visar senaste omdömena överst.
+export const testimonials: Testimonial[] = [...rawTestimonials].sort((a, b) =>
+  b.datumISO.localeCompare(a.datumISO)
+);
