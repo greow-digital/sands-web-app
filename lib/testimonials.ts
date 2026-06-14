@@ -33,8 +33,11 @@ export const SOURCE_META: Record<
     color: "#2B9E6E",
     logo: "/images/kundfavorit-2025.png",
   },
-  // logo aktiveras så snart public/images/servicefinder-logo.png finns på disk
-  servicefinder: { label: "Servicefinder", color: "#1E2A52" },
+  servicefinder: {
+    label: "Servicefinder",
+    color: "#1E2A52",
+    logo: "/images/servicefinder-logo.png",
+  },
 };
 
 /**
