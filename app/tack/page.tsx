@@ -25,7 +25,7 @@ export default function TackPage() {
             av Google, så refresh på /tack räknas som samma konvertering. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `if(typeof gtag!=='undefined'){var txn,src,variant,fid;try{txn=sessionStorage.getItem('sands_lead_txn');src=sessionStorage.getItem('sands_lead_source')||'unknown';variant=sessionStorage.getItem('sands_lead_variant')||'unknown';fid=sessionStorage.getItem('sands_lead_formid')||'offert'}catch(e){src='unknown';variant='unknown';fid='offert'}if(!txn)txn='lead_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);var p={currency:'SEK',value:1500,transaction_id:txn,form_source:src,form_variant:variant,form_id:fid};gtag('event','form_submit',p);gtag('event','generate_lead',p);}`,
+            __html: `if(typeof gtag!=='undefined'){var txn,src,variant,fid,fired;try{txn=sessionStorage.getItem('sands_lead_txn');src=sessionStorage.getItem('sands_lead_source')||'unknown';variant=sessionStorage.getItem('sands_lead_variant')||'unknown';fid=sessionStorage.getItem('sands_lead_formid')||'offert';fired=sessionStorage.getItem('sands_lead_fired')}catch(e){}if(txn&&fired!==txn){var p={currency:'SEK',value:1500,transaction_id:txn,form_source:src,form_variant:variant,form_id:fid};gtag('event','form_submit',p);gtag('event','generate_lead',p);try{sessionStorage.setItem('sands_lead_fired',txn)}catch(e){}}}`,
           }}
         />
 
