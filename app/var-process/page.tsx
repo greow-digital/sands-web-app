@@ -65,11 +65,29 @@ const steg = [
   },
 ];
 
+const howToLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Så går ett takbyte till med Sands Entreprenad",
+  description:
+    "Från första kontakt till färdigt tak i 4 steg. Fast pris, totalentreprenad och 30 års Monier-garanti.",
+  step: steg.map((s, i) => ({
+    "@type": "HowToStep",
+    position: i + 1,
+    name: s.title,
+    text: s.text,
+  })),
+};
+
 export default function VarProcessPage() {
   return (
     <>
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+        />
         <PageHero
           eyebrow="Hur vi jobbar"
           title="Vår"

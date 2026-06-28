@@ -46,10 +46,38 @@ export default async function ArtikelPage({
     .filter((x) => x.slug !== a.slug)
     .slice(0, 3);
 
+  const blogPostingLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: a.titel,
+    description: a.ingress,
+    datePublished: a.datum,
+    dateModified: a.datum,
+    author: {
+      "@type": "Organization",
+      name: "Sands Entreprenad Stockholm AB",
+      url: "https://www.sandsab.se",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Sands Entreprenad Stockholm AB",
+      url: "https://www.sandsab.se",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.sandsab.se/blogg/${a.slug}`,
+    },
+    ...(a.image ? { image: `https://www.sandsab.se${a.image}` } : {}),
+  };
+
   return (
     <>
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }}
+        />
         {/* Header */}
         <section className="border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">

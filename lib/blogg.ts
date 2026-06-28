@@ -12,10 +12,10 @@ export type Artikel = {
 export const artiklar: Artikel[] = [
   {
     slug: "vad-kostar-takbyte",
-    titel: "Vad kostar ett takbyte i Stockholm 2025?",
+    titel: "Vad kostar ett takbyte i Stockholm 2026?",
     ingress:
       "Priset beror på material, takets storlek och komplexitet. Här är en guide med riktpriser för betongtak, tegeltak, plåttak och papptak, alla efter ROT-avdrag.",
-    datum: "2025-03-15",
+    datum: "2026-06-28",
     kategori: "Priser",
     lästid: "5 min",
     image: "/images/blogg-vad-kostar-takbyte.jpg",
@@ -65,7 +65,7 @@ Flera faktorer avgör det slutgiltiga priset:
 
 Alla priser ovan är efter 30% ROT-avdrag. ROT-avdraget innebär att du får tillbaka 30% av arbetskostnaden direkt på fakturan. Vi hanterar hela ansökan åt dig, du behöver inte göra något extra.
 
-Maxbeloppet för ROT-avdrag är 50 000 kr per person och år (2025).
+Maxbeloppet för ROT-avdrag är 50 000 kr per person och år (2026).
 
 ## Så får du ett exakt pris
 
@@ -242,7 +242,7 @@ ROT-avdraget (Renovering, Ombyggnad, Tillbyggnad) innebär att du som privatpers
 ## Hur mycket kan man dra av?
 
 - **30%** av arbetskostnaden (ej material)
-- **Max 50 000 kr** per person och år (2025)
+- **Max 50 000 kr** per person och år (2026)
 - Gäller för dig som äger och bor i bostaden
 
 Om två personer äger bostaden tillsammans kan ni alltså dra av upp till 100 000 kr totalt.
