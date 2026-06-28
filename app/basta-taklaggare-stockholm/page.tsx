@@ -30,7 +30,7 @@ import { stats as companyStats, garanti } from "@/lib/company";
 export const metadata: Metadata = {
   alternates: { canonical: "/basta-taklaggare-stockholm" },
   title:
-    "Stockholms bästa takläggare: så vet du att du valt rätt | Sands",
+    "Stockholms bästa takläggare: så vet du att du valt rätt | Sands Entreprenad",
   description:
     "Hur väljer du Stockholms bästa takläggare? Checklista med F-skatt, försäkring, garantitid och certifieringar. 4,8 av 5 på BraByggare, 30 års Monier-garanti, fast pris.",
   openGraph: {

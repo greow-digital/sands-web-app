@@ -33,7 +33,7 @@ const REVIEW_MATCH: Record<string, string[]> = {
 // template further down.
 const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   taklaggning: {
-    title: "Takläggning Stockholm: fast pris, 30 års garanti | Sands AB",
+    title: "Takläggning Stockholm: fast pris, 30 års garanti | Sands Entreprenad",
     description:
       "Professionell takläggning i Stockholm av certifierade takläggare. Plåttak, tegeltak, papptak. Fast pris från start, ROT-avdrag, kostnadsfri offert.",
   },
@@ -53,7 +53,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
       "Papptak (takpapp) i Stockholm från 800 kr/m². Lång hållbarhet, fast pris och garanti på utförandet. ROT-avdrag tillämpas, offert inom 24 h.",
   },
   betongtak: {
-    title: "Betongtak Stockholm: betongpannor från 1 200 kr/m² | Sands",
+    title: "Betongtak Stockholm: betongpannor från 1 200 kr/m² | Sands Entreprenad",
     description:
       "Betongtak och betongpannor i Stockholm från 1 200 kr/m². 30 års garanti, ROT-avdrag, BraByggare-certifierad takläggare. Få prisförslag idag.",
   },

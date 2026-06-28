@@ -24,7 +24,7 @@ const inter = Inter({
 const BASE_URL = "https://www.sandsab.se";
 
 const HOME_TITLE =
-  "Takläggare Stockholm: takbyte fast pris, 30 års garanti | Sands AB";
+  "Takläggare Stockholm – takbyte till fast pris | Sands Entreprenad";
 const HOME_DESC =
   "Erfaren takläggare i Stockholm. Fast pris från 169 000 kr efter ROT, 30 års Monier-garanti. BraByggare 4,8 av 5 med 54 omdömen. Få prisförslag inom 24 h.";
 
@@ -73,11 +73,19 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "RoofingContractor",
+              "@id": `${BASE_URL}/#organization`,
               name: "Sands Entreprenad Stockholm AB",
-              alternateName: ["Sands Entreprenad", "Sands Tak", "Sands AB"],
+              alternateName: "Sands Entreprenad",
               url: BASE_URL,
+              logo: `${BASE_URL}/images/logo-sandsentreprenad.svg`,
+              image: `${BASE_URL}/og-image.jpg`,
               telephone: "08-28 38 88",
               email: "info@sandsab.se",
+              identifier: {
+                "@type": "PropertyValue",
+                propertyID: "SE-orgnr",
+                value: "559063-8135",
+              },
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Spjutvägen 5A",
@@ -85,6 +93,15 @@ export default function RootLayout({
                 addressLocality: "Järfälla",
                 addressRegion: "Stockholms län",
                 addressCountry: "SE",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 59.3991,
+                longitude: 17.8414,
+              },
+              areaServed: {
+                "@type": "AdministrativeArea",
+                name: "Stockholms län",
               },
               sameAs: [
                 "https://www.instagram.com/sandsentreprenad/",
@@ -95,24 +112,9 @@ export default function RootLayout({
                 "https://www.eniro.se/sands+entreprenad+stockholm+ab+solna/129401425/firma",
                 "https://bygg.se/sands-entreprenad-jarfalla-ab/",
               ],
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 59.3991,
-                longitude: 17.8414,
-              },
-              areaServed: {
-                "@type": "State",
-                name: "Stockholms län",
-              },
               priceRange: "från 1 200 kr/m²",
               description:
                 "Takläggare i Stockholm, certifierad Monier Takpartner med upp till 30 års garanti. Takbyte, takomläggning och lägga om tak med fast pris.",
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.8",
-                reviewCount: "54",
-                bestRating: "5",
-              },
             }),
           }}
         />

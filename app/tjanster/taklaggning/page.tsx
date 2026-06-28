@@ -29,7 +29,7 @@ import Image from "next/image";
 export const metadata: Metadata = pageMeta({
   path: "/tjanster/taklaggning",
   title:
-    "Takläggning Stockholm: takbyte, takomläggning & renovering | Sands AB",
+    "Takläggning Stockholm: takbyte, takomläggning & renovering | Sands Entreprenad",
   description:
     "Erfaren takläggare i Stockholm. Takbyte, takomläggning och takrenovering med fast pris och 30 års Monier-garanti. Slipp bygglov sedan 1 dec 2025. Få prisförslag inom 24 h.",
 });

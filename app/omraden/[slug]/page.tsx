@@ -29,17 +29,17 @@ export async function generateStaticParams() {
 // suburbs use the generic template further down.
 const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   stockholm: {
-    title: "Takläggare Stockholm: lokala takexperter sedan 2016 | Sands",
+    title: "Takläggare Stockholm: lokala takexperter sedan 2016 | Sands Entreprenad",
     description:
       "Stockholms erfarna takläggare. 2 500+ kunder, BraByggare 4,8 av 5, 30 års garanti. Fast pris från 169 000 kr efter ROT. Ring 08-28 38 88.",
   },
   norrtalje: {
-    title: "Takläggare Norrtälje: takbyte med fast pris | Sands AB",
+    title: "Takläggare Norrtälje: takbyte med fast pris | Sands Entreprenad",
     description:
       "Lokal takläggare i Norrtälje och hela kommunen (Hallstavik, Rimbo). Fast pris, 30 års garanti, ROT-avdrag. Kostnadsfri offert inom 24 h.",
   },
   bromma: {
-    title: "Takläggare Bromma: lokal takläggning med fast pris | Sands",
+    title: "Takläggare Bromma: lokal takläggning med fast pris | Sands Entreprenad",
     description:
       "Takläggare i Bromma med 30 års garanti och fast pris. Tegeltak, plåttak och papptak. ROT-avdrag, kostnadsfri offert inom 24 h.",
   },
@@ -49,27 +49,27 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
       "Erfaren takläggare i Nacka. Fast pris, 30 års Monier-garanti, BraByggare 4,8 av 5. Plåttak, tegeltak, papptak. ROT-avdrag tillämpas.",
   },
   taby: {
-    title: "Takläggare Täby: lokal takläggning med 30 års garanti | Sands",
+    title: "Takläggare Täby: lokal takläggning med 30 års garanti | Sands Entreprenad",
     description:
       "Takläggare i Täby med fast pris och 30 års garanti. Plåttak, tegeltak, papptak. Kostnadsfri offert inom 24 h, ROT-avdrag tillämpas.",
   },
   sollentuna: {
-    title: "Takläggare Sollentuna: takbyte med fast pris | Sands AB",
+    title: "Takläggare Sollentuna: takbyte med fast pris | Sands Entreprenad",
     description:
       "Takläggare i Sollentuna. 30 års garanti, BraByggare 4,8 av 5, ROT-avdrag. Få kostnadsfri offert på takbyte inom 24 timmar.",
   },
   danderyd: {
-    title: "Takläggare Danderyd: erfaren lokal takläggning | Sands",
+    title: "Takläggare Danderyd: erfaren lokal takläggning | Sands Entreprenad",
     description:
       "Lokal takläggare i Danderyd med fast pris från start. 30 års Monier-garanti, certifierade takläggare, ROT-avdrag tillämpas.",
   },
   lidingo: {
-    title: "Takläggare Lidingö: takbyte med fast pris | Sands AB",
+    title: "Takläggare Lidingö: takbyte med fast pris | Sands Entreprenad",
     description:
       "Takläggare på Lidingö med 30 års garanti och fast pris. Plåttak, tegeltak, papptak. ROT-avdrag, kostnadsfri offert inom 24 h.",
   },
   huddinge: {
-    title: "Takläggare Huddinge: lokal takläggning, fast pris | Sands",
+    title: "Takläggare Huddinge: lokal takläggning, fast pris | Sands Entreprenad",
     description:
       "Erfaren takläggare i Huddinge. 30 års garanti, fast pris från 169 000 kr efter ROT. BraByggare 4,8 av 5. Få prisförslag inom 24 timmar.",
   },
@@ -113,7 +113,7 @@ export async function generateMetadata({
     path: `/omraden/${slug}`,
     title:
       override?.title ??
-      `Takläggare ${ort.name}: lokal takläggning med fast pris | Sands`,
+      `Takläggare ${ort.name}: lokal takläggning med fast pris | Sands Entreprenad`,
     description:
       override?.description ??
       `Takläggare i ${ort.name} med 30 års garanti, fast pris och ROT-avdrag. Plåttak, tegeltak, papptak. Kostnadsfri offert inom 24 h.`,
