@@ -225,7 +225,14 @@ export default async function OmradesPage({
 
                 <div className="mb-10 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
                   <p className="text-sm text-gray-700 leading-relaxed">
-                    Letar du efter <strong>Stockholms bästa takläggare</strong> i {ort.name}?{" "}
+                    Letar du efter en{" "}
+                    <Link
+                      href="/"
+                      className="font-semibold text-[#2B74FC] hover:underline"
+                    >
+                      takläggare i Stockholm
+                    </Link>
+                    {" "}med verksamhet i {ort.name}?{" "}
                     <Link
                       href="/basta-taklaggare-stockholm"
                       className="font-semibold text-[#2B74FC] hover:underline"

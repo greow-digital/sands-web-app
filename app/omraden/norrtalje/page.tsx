@@ -209,7 +209,15 @@ export default function NorrtaljePage() {
                   Vi utför takbyte och takomläggning med betongpannor, tegel,
                   plåt och papp, och tar hand om hela kedjan: besiktning,
                   materialval, ROT-avdrag, ställning, läggning och
-                  slutbesiktning enligt ABT-06.
+                  slutbesiktning enligt ABT-06. Som{" "}
+                  <Link
+                    href="/"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    takläggare i Stockholm
+                  </Link>
+                  {" "}med bas i Järfälla servar vi hela Stockholms län, inklusive
+                  hela Norrtälje kommun och Roslagen.
                 </p>
 
                 {/* Sektion 2 */}
