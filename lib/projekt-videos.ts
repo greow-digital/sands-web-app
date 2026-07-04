@@ -4,4 +4,5 @@ export const PROJEKT_VIDEOS: Record<string, string> = {
   "volmvagen-jarfalla": "/videos/volmvagen-jarfalla.mp4",
   "altanbygge-hasselby": "/videos/altanbygge-hasselby.mp4",
   "viksjo-jarfalla": "/videos/viksjo-jarfalla.mp4",
+  "karl-nordstromsvag-bromma": "/videos/karl-nordstromsvag-bromma.mp4",
 };
