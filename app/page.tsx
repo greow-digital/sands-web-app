@@ -96,12 +96,20 @@ const eternitFaq = [
     a: "Ja. ROT-avdraget innebär att du får tillbaka 30 % av arbetskostnaden direkt på fakturan, max 50 000 kr per person och år (kombinerat med RUT max 75 000 kr). Endast arbetskostnaden ger avdrag, inte material. Vi sköter ansökan åt dig.",
   },
   {
+    q: "Behöver jag betala i förskott?",
+    a: "Nej. Vi fakturerar 100% av kostnaden när arbetet är slutfört och du har godkänt resultatet. Ingen förskottsbetalning eller delbetalning under byggtiden. Betalningstiden är 10 dagar netto.",
+  },
+  {
     q: "Behöver jag bygglov för takbyte?",
     a: "För en- och tvåfamiljshus krävs inte längre bygglov för takbyte sedan 1 december 2025, även om du byter taktyp eller färg. För flerbostadshus eller kulturhistoriskt skyddade byggnader kan bygglov fortfarande krävas. Vi kontrollerar alltid innan vi börjar.",
   },
   {
     q: "Vad innebär Monier Tätt tak-garanti?",
     a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år, hela taksystemets funktion och täthet garanteras.",
+  },
+  {
+    q: "Vad är Sands Entreprenads garantitid?",
+    a: "Sands Entreprenad lämnar 15 års hantverksgaranti på utfört arbete. När vi lägger ett komplett Monier-taksystem tillkommer Moniers Tätt tak-garanti i upp till 30 år. Garantibeviset är registrerat digitalt och kan alltid tas fram med ditt offertnummer.",
   },
   {
     q: "Vad kostar det att lägga om tak?",
@@ -431,6 +439,7 @@ export default async function Home() {
                     "ROT-avdrag 30% på arbetskostnad",
                     "Upp till 30 års Monier-garanti",
                     "Kostnadsfri takkontroll: 0 kr",
+                    "Betalning efter avslutat arbete",
                   ].map((t) => (
                     <li key={t} className="flex items-center gap-2">
                       <span style={{ color: "var(--color-primary)" }}>✓</span>
@@ -476,6 +485,9 @@ export default async function Home() {
                     "Nytt regnvattensystem (hängrännor och stuprör)",
                     "Ställning, container och bortforsling ingår",
                     "Takkontroll tillsammans med dig",
+                    "Reservpannor (ca 8 st) lämnas kvar för framtida reparationer",
+                    "Läktsystem förberett för eventuella solpaneler",
+                    "Taket täcks med presseningar vid regn under byggtiden",
                   ].map((item) => (
                     <li
                       key={item}
@@ -509,6 +521,11 @@ export default async function Home() {
                     <strong className="text-gray-700">ROT-avdrag:</strong>{" "}
                     30% av arbetskostnaden dras direkt på fakturan. Vi sköter
                     all administration.
+                  </p>
+                  <p>
+                    <strong className="text-gray-700">Betalning:</strong>{" "}
+                    Vi fakturerar 100% när arbetet är klart och godkänt.
+                    Ingen förskottsbetalning. Betalningstid 10 dagar.
                   </p>
                 </div>
               </div>
