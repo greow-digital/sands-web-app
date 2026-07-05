@@ -34,9 +34,10 @@ export async function generateMetadata({
     slug,
   })) as ProjektDetail | null;
   if (!p) return {};
+  const displayTitle = [p.typ, p.ort].filter(Boolean).join(", ");
   return pageMeta({
     path: `/projekt/${slug}`,
-    title: `${p.title} | Sands Entreprenad`,
+    title: `${displayTitle} | Sands Entreprenad`,
     description:
       p.beskrivning?.slice(0, 160) ??
       `Takprojekt i ${p.ort ?? "Stockholm"} utfört av Sands Entreprenad.`,
@@ -120,12 +121,12 @@ export default async function ProjektDetailPage({
                     color: "var(--color-dark)",
                   }}
                 >
-                  {p.title?.split(", ")[0]}
-                  {p.title?.split(", ")[1] && (
+                  {p.typ ?? "Takbyte"}
+                  {p.ort && (
                     <>
                       ,{" "}
                       <span style={{ color: "var(--color-primary)" }}>
-                        {p.title.split(", ")[1]}
+                        {p.ort}
                       </span>
                     </>
                   )}
@@ -309,7 +310,7 @@ export default async function ProjektDetailPage({
                         className="text-sm font-bold mb-0.5 group-hover:text-[#2B74FC] transition-colors"
                         style={{ color: "var(--color-dark)" }}
                       >
-                        {r.title}
+                        {[r.typ, r.ort].filter(Boolean).join(", ")}
                       </h3>
                       <div className="flex items-center gap-1 text-xs text-gray-500">
                         <MapPin size={10} /> {r.ort} · {r.kvm} kvm

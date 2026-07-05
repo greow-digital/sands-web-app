@@ -124,7 +124,7 @@ export default function RelateradeProjekt({
                     color: "var(--color-dark)",
                   }}
                 >
-                  {p.title}
+                  {[p.typ, p.ort].filter(Boolean).join(", ")}
                 </h3>
                 <div className="flex flex-wrap items-center gap-1.5">
                   {p.typ && (

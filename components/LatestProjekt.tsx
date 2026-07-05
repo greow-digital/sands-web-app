@@ -123,7 +123,7 @@ function ProjektCard({ p }: { p: ProjektLatest }) {
         className="text-sm font-semibold group-hover:text-[#2B74FC] transition-colors"
         style={{ color: "var(--color-dark)" }}
       >
-        {p.title}
+        {[p.typ, p.ort].filter(Boolean).join(", ")}
       </p>
       <p className="text-xs text-gray-500 mt-0.5">
         {[p.typ, p.ar].filter(Boolean).join(" · ")}

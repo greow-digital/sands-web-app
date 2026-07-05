@@ -219,7 +219,7 @@ export default async function ProjektPage() {
                           color: "var(--color-dark)",
                         }}
                       >
-                        {p.title}
+                        {[p.typ, p.ort].filter(Boolean).join(", ")}
                       </h2>
                       <div className="flex flex-wrap items-center gap-1.5">
                         {p.ort && (
