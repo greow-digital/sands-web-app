@@ -25,79 +25,32 @@ export async function generateStaticParams() {
     .map((o) => ({ slug: o.slug }));
 }
 
-// Per-slug SEO overrides for the 10 top-priority suburbs. All other
-// suburbs use the generic template further down.
-const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
-  stockholm: {
-    title: "Takläggare Stockholm: lokala takexperter sedan 2016 | Sands Entreprenad",
-    description:
-      "Stockholms erfarna takläggare. 2 500+ kunder, BraByggare 4,8 av 5, 30 års garanti. Fast pris från 169 000 kr efter ROT. Ring 08-28 38 88.",
-  },
-  norrtalje: {
-    title: "Takläggare Norrtälje: takbyte med fast pris | Sands Entreprenad",
-    description:
-      "Lokal takläggare i Norrtälje och hela kommunen (Hallstavik, Rimbo). Fast pris, 30 års garanti, ROT-avdrag. Kostnadsfri offert inom 24 h.",
-  },
-  bromma: {
-    title: "Takläggare Bromma: lokal takläggning med fast pris | Sands Entreprenad",
-    description:
-      "Takläggare i Bromma med 30 års garanti och fast pris. Tegeltak, plåttak och papptak. ROT-avdrag, kostnadsfri offert inom 24 h.",
-  },
-  nacka: {
-    title: "Takläggare Nacka: takbyte med fast pris | Sands Entreprenad",
-    description:
-      "Erfaren takläggare i Nacka. Fast pris, 30 års Monier-garanti, BraByggare 4,8 av 5. Plåttak, tegeltak, papptak. ROT-avdrag tillämpas.",
-  },
-  taby: {
-    title: "Takläggare Täby: lokal takläggning med 30 års garanti | Sands Entreprenad",
-    description:
-      "Takläggare i Täby med fast pris och 30 års garanti. Plåttak, tegeltak, papptak. Kostnadsfri offert inom 24 h, ROT-avdrag tillämpas.",
-  },
-  sollentuna: {
-    title: "Takläggare Sollentuna: takbyte med fast pris | Sands Entreprenad",
-    description:
-      "Takläggare i Sollentuna. 30 års garanti, BraByggare 4,8 av 5, ROT-avdrag. Få kostnadsfri offert på takbyte inom 24 timmar.",
-  },
-  danderyd: {
-    title: "Takläggare Danderyd: erfaren lokal takläggning | Sands Entreprenad",
-    description:
-      "Lokal takläggare i Danderyd med fast pris från start. 30 års Monier-garanti, certifierade takläggare, ROT-avdrag tillämpas.",
-  },
-  lidingo: {
-    title: "Takläggare Lidingö: takbyte med fast pris | Sands Entreprenad",
-    description:
-      "Takläggare på Lidingö med 30 års garanti och fast pris. Plåttak, tegeltak, papptak. ROT-avdrag, kostnadsfri offert inom 24 h.",
-  },
-  huddinge: {
-    title: "Takläggare Huddinge: lokal takläggning, fast pris | Sands Entreprenad",
-    description:
-      "Erfaren takläggare i Huddinge. 30 års garanti, fast pris från 169 000 kr efter ROT. BraByggare 4,8 av 5. Få prisförslag inom 24 timmar.",
-  },
-  jarfalla: {
-    title: "Takläggare Järfälla: lokala takexperter | Sands Entreprenad",
-    description:
-      "Sands Entreprenad är baserade i Järfälla och servar hela området. 2 500+ kunder, 30 års garanti, fast pris från start.",
-  },
+// Per-slug config. Only hasselby has a full bespoke override; all others
+// use the shared template, optionally enriched with localDetail.
+// shortTitle: true -> omit "30 års" from title to stay ≤60 chars (long slugs).
+const OMRADE_CONFIG: Record<
+  string,
+  {
+    localDetail?: string;
+    customTitle?: string;
+    customDesc?: string;
+    shortTitle?: boolean;
+  }
+> = {
   hasselby: {
-    title: "Takläggare Hässelby: takbyte med fast pris | Sands Entreprenad",
-    description:
-      "Takläggare i Hässelby villastad, Hässelby gård och Hässelby strand. Erfarna av 50- och 60-talsvillor. 30 års garanti, fast pris, ROT-avdrag.",
+    customTitle:
+      "Takläggare i Hässelby – villaspecialist med 30 års garanti | Sands",
+    customDesc:
+      "Takläggare i Hässelby villastad, gård och strand. Specialister på 50–60-talsvillor – fast pris, upp till 30 års garanti och ROT på fakturan. Boka kostnadsfri takkontroll.",
   },
-  vallingby: {
-    title: "Takläggare Vällingby: lokal takläggning | Sands Entreprenad",
-    description:
-      "Takläggare i Vällingby, Råcksta och Beckomberga. Specialister på radhus och villor i 50-tals ABC-stad. 30 års garanti, fast pris, kostnadsfri offert.",
-  },
-  spanga: {
-    title: "Takläggare Spånga: takbyte med fast pris | Sands Entreprenad",
-    description:
-      "Takläggare i Spånga centrum, Sundby, Solhem och Bromsten. 30 års Monier-garanti, fast pris från start, ROT-avdrag tillämpas.",
-  },
-  enskede: {
-    title: "Takläggare Enskede: 20- och 30-talsvillor | Sands Entreprenad",
-    description:
-      "Takläggare i Enskede trädgårdsstad, Enskededalen och Stureby. Specialister på tegeltak och äldre villor. 30 års garanti, fast pris, ROT-avdrag.",
-  },
+  enskede: { localDetail: " trädgårdsstad" },
+  danderyd: { localDetail: " – Djursholm och Enebyberg" },
+  nacka: { localDetail: " – Saltsjöbaden och Boo" },
+  lidingo: { localDetail: " – Larsberg och Torsvik" },
+  bromma: { localDetail: " – Abrahamsberg och Nockeby" },
+  taby: { localDetail: " – Arninge och Näsbypark" },
+  "upplands-vasby": { shortTitle: true, localDetail: " – Väsby och Bollstanäs" },
+  "upplands-bro": { shortTitle: true, localDetail: " – Kungsängen och Bro" },
 };
 
 export async function generateMetadata({
@@ -108,15 +61,23 @@ export async function generateMetadata({
   const { slug } = await params;
   const ort = getOrt(slug);
   if (!ort) return {};
-  const override = SEO_OVERRIDES[slug];
+
+  const cfg = OMRADE_CONFIG[slug] ?? {};
+
+  const title =
+    cfg.customTitle ??
+    (cfg.shortTitle
+      ? `Takläggare i ${ort.name} – fast pris & garanti | Sands`
+      : `Takläggare i ${ort.name} – fast pris & 30 års garanti | Sands`);
+
+  const description =
+    cfg.customDesc ??
+    `Takläggare i ${ort.name}${cfg.localDetail ?? ""}. Fast pris, upp till 30 års garanti och ROT på fakturan. Boka kostnadsfri takkontroll.`;
+
   return pageMeta({
     path: `/omraden/${slug}`,
-    title:
-      override?.title ??
-      `Takläggare ${ort.name}: lokal takläggning med fast pris | Sands Entreprenad`,
-    description:
-      override?.description ??
-      `Takläggare i ${ort.name} med 30 års garanti, fast pris och ROT-avdrag. Plåttak, tegeltak, papptak. Kostnadsfri offert inom 24 h.`,
+    title,
+    description,
   });
 }
 
