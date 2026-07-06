@@ -10,7 +10,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/offert",
-  title: "Få prisförslag på takbyte i Stockholm: inom 24 h | Sands Entreprenad",
+  title: "Få prisförslag på takbyte i Stockholm | inom 24 h | Sands Entreprenad",
   description:
     "Begär kostnadsfri offert på ditt takbyte. Hembesök, fast pris från 169 000 kr efter ROT, 30 års garanti. Svarar samma vardag.",
 });

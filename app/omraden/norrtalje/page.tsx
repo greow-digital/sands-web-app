@@ -12,7 +12,7 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   path: "/omraden/norrtalje",
   title:
-    "Takläggare Norrtälje: takbyte med fast pris & 30 års garanti | Sands Entreprenad",
+    "Takläggare Norrtälje | takbyte med fast pris & 30 års garanti | Sands Entreprenad",
   description:
     "Auktoriserad takläggare i Norrtälje och hela Roslagen. Takbyte, takomläggning och takrenovering för villor och fritidshus. Fast pris, ROT-avdrag och upp till 30 års garanti. Boka kostnadsfri takkontroll.",
 });

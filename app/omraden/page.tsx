@@ -9,7 +9,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/omraden",
-  title: "Vi tar tak i hela Stockholm: områden vi servar | Sands Entreprenad",
+  title: "Vi tar tak i hela Stockholm | områden vi servar | Sands Entreprenad",
   description:
     "Sands Entreprenad utför takbyte i hela Stockholmsregionen: Bromma, Nacka, Täby, Sollentuna, Norrtälje och 25+ områden. Få prisförslag inom 24 h.",
 });

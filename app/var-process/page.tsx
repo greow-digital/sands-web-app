@@ -9,7 +9,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/var-process",
-  title: "Vår process: så funkar ett takbyte i 4 steg | Sands Entreprenad",
+  title: "Vår process | så funkar ett takbyte i 4 steg | Sands Entreprenad",
   description:
     "Så funkar ett takbyte med Sands Entreprenad: hembesök, offert, utförande, slutkontroll. Fast pris från start, 30 års garanti, ROT-avdrag tillämpas.",
 });

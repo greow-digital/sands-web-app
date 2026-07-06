@@ -11,7 +11,7 @@ import { stats as companyStats, garanti, company } from "@/lib/company";
 
 export const metadata: Metadata = pageMeta({
   path: "/om-oss",
-  title: "Om oss: Stockholms takläggare sedan 2016 | Sands Entreprenad",
+  title: "Om oss | Stockholms takläggare sedan 2016 | Sands Entreprenad",
   description:
     "Sands Entreprenad Stockholm AB. F-skattsedel, ansvarsförsäkring, Monier-certifierade takläggare. 2 500+ kunder, BraByggare 4,8 av 5 med 54 omdömen.",
 });

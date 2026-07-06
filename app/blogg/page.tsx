@@ -10,7 +10,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/blogg",
-  title: "Blogg: guider om takbyte och takläggning | Sands Entreprenad",
+  title: "Blogg | guider om takbyte och takläggning | Sands Entreprenad",
   description:
     "Guider och artiklar om takbyte, materialval, ROT-avdrag och underhåll. Läs vad det kostar, hur länge tak håller och vilket material som passar din villa.",
 });

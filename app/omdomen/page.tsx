@@ -17,7 +17,7 @@ import {
 
 export const metadata: Metadata = pageMeta({
   path: "/omdomen",
-  title: `Kundomdömen: ${TOTAL_REVIEWS} omdömen, ${AVG_RATING} av 5 | Sands Entreprenad`,
+  title: `Kundomdömen | ${TOTAL_REVIEWS} omdömen, ${AVG_RATING} av 5 | Sands Entreprenad`,
   description:
     "Läs riktiga kundomdömen om Sands Entreprenad från BraByggare, Offerta och Servicefinder. 4,8 av 5 i snitt på takbyte, takomläggning och fasad i Stockholmsområdet.",
 });

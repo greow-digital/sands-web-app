@@ -11,7 +11,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/tjanster/takbesiktning",
-  title: "Takbesiktning Stockholm: kostnadsfri takkontroll | Sands Entreprenad",
+  title: "Takbesiktning Stockholm | kostnadsfri takkontroll | Sands Entreprenad",
   description:
     "Kostnadsfri takbesiktning i Stockholm av certifierad takläggare. Vi går upp på taket, bedömer skicket och ger fast pris om åtgärd behövs. Boka idag.",
 });
