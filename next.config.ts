@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  trailingSlash: false,
   images: {
     // Vercels bildoptimering slår återkommande i gratistakets transformations-
     // kvot (5 000/mån) och returnerar då 402 för lokala bilder -> trasiga

@@ -20,7 +20,7 @@ export function pageMeta(opts: {
   const url = `${BASE_URL}${path}`;
 
   return {
-    alternates: { canonical: path },
+    alternates: { canonical: url },
     title,
     description,
     openGraph: {
