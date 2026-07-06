@@ -45,3 +45,5 @@ scripts/cache/
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+image.jpg
+hero-sands-construction.avif
