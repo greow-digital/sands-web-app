@@ -28,15 +28,16 @@ import type { ProjektReferens } from "@/sanity/lib/types";
 import { stats as companyStats, garanti } from "@/lib/company";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "/basta-taklaggare-stockholm" },
+  alternates: { canonical: "https://www.sandsab.se/basta-taklaggare-stockholm" },
   title:
-    "Stockholms bästa takläggare: så vet du att du valt rätt | Sands Entreprenad",
+    "Bästa takläggare i Stockholm – så väljer du rätt takfirma | Sands Entreprenad",
   description:
-    "Hur väljer du Stockholms bästa takläggare? Checklista med F-skatt, försäkring, garantitid och certifieringar. 4,8 av 5 på BraByggare, 30 års Monier-garanti, fast pris.",
+    "Hur hittar du en seriös takläggare i Stockholm? Checklista: F-skatt, försäkring, auktorisering och garantitid. Sands Entreprenad: 4,8★ BraByggare, Monier-certifierad, fast pris.",
   openGraph: {
-    title: "Stockholms bästa takläggare: så vet du att du valt rätt",
+    title: "Bästa takläggare i Stockholm – så väljer du rätt takfirma",
     description:
-      "Komplett guide för att välja rätt takläggare i Stockholm med checklista, recensioner och referensprojekt från Sands Entreprenad.",
+      "Guide för att välja auktoriserad takläggare i Stockholm: checklista, vanliga misstag, FAQ och referensprojekt från Sands Entreprenad.",
+    url: "https://www.sandsab.se/basta-taklaggare-stockholm",
   },
 };
 
@@ -136,24 +137,30 @@ const inbyggdaRecensioner = [
 
 const fragor = [
   {
-    q: "Hur väljer jag Stockholms bästa takläggare?",
-    a: "Det finns sju kriterier som är värda att gå igenom: F-skatt och redovisad ekonomi, ansvarsförsäkring som täcker dig som kund, dokumenterad garantitid (gärna 25–30 år via taksystemsgaranti), externa certifieringar (Monier Takpartner, BraByggare), fast pris i skriftligt kontrakt enligt ABT-06, verifierbara omdömen på externa portaler, samt korrekt taksäkerhet enligt AFS 2014:26. Om flera av punkterna känns oklara är det rimligt att ställa följdfrågor eller jämföra med fler offerter.",
+    q: "Hur hittar jag en bra takläggare?",
+    a: "Börja med att kontrollera F-skatt på allabolag.se och be om bevis på ansvarsförsäkring. Titta sedan på externa omdömen på BraByggare, Offerta eller Google, inte bara citat på firmornas egna hemsidor. Hämta tre till fyra offerter på samma specifikation och jämföra garantitid, material och vad som ingår. En takläggare som ger fast pris utan fysisk besiktning eller inte kan visa certifieringar är en signal att gräva djupare.",
   },
   {
-    q: "Vad kostar Stockholms bästa takläggare?",
-    a: "Pris och kvalitet följs inte alltid åt, men billigast är nästan aldrig bäst. Marknadspris för ett komplett takbyte i Stockholm 2026 ligger på 1 200–1 800 kr/m² efter ROT-avdrag beroende på material (betong är billigast, plåt och tegel dyrare). Misstänk företag som offererar väsentligt under marknadspris, ofta saknas något i specifikationen (ny underlagspapp, byte av läkt, taksäkerhet eller nytt regnvattensystem).",
+    q: "Vilket är det bästa takföretaget i Stockholm?",
+    a: "Det finns ingen enda objektiv lista, men Sands Entreprenad Stockholm AB är ett av de mest välbetygsatta takföretagen i Stockholm med 4,8★ på BraByggare och 54 verifierade omdömen. Vi är certifierad Monier Takpartner och har utfört 2 500+ takbyten i Stockholms län. Det som avgör om ett företag är rätt för just dig är att de uppfyller kriterierna på F-skatt, försäkring, certifiering, fast pris och lång garantitid.",
   },
   {
-    q: "Hur många takläggare ska jag jämföra?",
-    a: "Tre till fyra offerter är optimalt. Med fler än fyra blir det svårt att jämföra likvärdigt. Säkerställ att alla räknar på samma specifikation: samma material, samma omfattning, samma garanti. Det är när offerterna är jämförbara du kan se vem som faktiskt är bäst.",
+    q: "Vilka företag erbjuder bäst takrenovering i Stockholm?",
+    a: "Sands Entreprenad är specialister på takrenovering i Stockholm och erbjuder betongtak, tegeltak och plåttak med Monier Tätt tak-garanti på upp till 30 år. Vi täcker hela Stockholms län och arbetar med fast pris i ABT-06-kontrakt. Andra seriösa alternativ att jämföra med är företag som är listade på BraByggare eller är Monier Takpartner, vilket garanterar oberoende granskning av kvalitet och ekonomi.",
   },
   {
-    q: "Vad är skillnaden mellan en bra och en dålig takläggare?",
-    a: "En bra takläggare ger fast pris efter fysisk besiktning på plats, lämnar skriftligt entreprenadkontrakt, har försäkring och certifieringar du kan verifiera, och kan visa minst 20 referensobjekt. En dålig takläggare ger pris över telefon utan besiktning, vill skriva avtal på en lapp eller via SMS, och har inga externa omdömen.",
+    q: "Hur vet jag att en takläggare är seriös?",
+    a: "Sju tecken på en seriös takläggare: (1) F-skatt och redovisad ekonomi på allabolag.se, (2) dokumenterad ansvarsförsäkring, (3) skriftlig garantihandling på minst 10 år (gärna 25–30 år via taksystemsgaranti), (4) externa certifieringar som Monier Takpartner eller BraByggare, (5) fast pris i skriftligt kontrakt enligt ABT-06, (6) minst 20 verifierbara omdömen på externa portaler, (7) korrekt taksäkerhet med ställning och fallskydd enligt AFS 2014:26.",
+  },
+  {
+    q: "Vad kostar det att anlita takläggare i Stockholm?",
+    a: "Marknadspris för ett komplett takbyte i Stockholm 2026 ligger på 1 200–1 800 kr/m² efter ROT-avdrag beroende på material. Betongtak är billigast, plåt och tegel dyrare. Misstänk offerter som ligger väsentligt under marknadspris, ofta saknas något i specifikationen.",
+    href: "/priser",
+    hrefLabel: "Se riktpriser per taktyp",
   },
   {
     q: "Vad ska finnas med i en seriös takoffert?",
-    a: "En komplett takoffert ska innehålla: specifikation av material (fabrikat och modell), uppmätt takyta i kvm, omfattning av rivningsarbete, byte av underlagspapp, byte av läkt, taksäkerhet, regnvattensystem, ställning, container och bortforsling. Den ska också ange totalpris före och efter ROT, betalningsplan, garantitid, sluttidpunkt och försäkringsskydd.",
+    a: "En komplett takoffert ska innehålla: specifikation av material (fabrikat och modell), uppmätt takyta i kvm, rivningsarbete, byte av underlagspapp och läkt, taksäkerhet, regnvattensystem, ställning, container och bortforsling. Den ska också ange totalpris före och efter ROT, betalningsplan, garantitid, sluttidpunkt och försäkringsskydd.",
   },
   {
     q: "Hur lång garanti kan jag förvänta mig?",
@@ -162,10 +169,6 @@ const fragor = [
   {
     q: "Hur lång tid tar ett takbyte i Stockholm?",
     a: "För en normalvilla på 120–160 kvm tar ett komplett takbyte 1–2 veckor inklusive ställning och takkontroll. Vid eternitsanering tillkommer 2–3 dagar för saneringen som utförs av certifierad partner. Vintertid (november–februari) kan tidplanen påverkas av väder och kortare arbetsdagar.",
-  },
-  {
-    q: "Vad ska jag fråga takläggaren innan jag skriver kontrakt?",
-    a: "Tio kritiska frågor: (1) Har ni F-skatt och allabolag-historik? (2) Vilken ansvarsförsäkring har ni? (3) Vilken garantitid får jag och på vad? (4) Är ni certifierade Monier-takpartner? (5) Får jag fast pris i ABT-06-kontrakt? (6) Kan ni visa minst tre referensobjekt i mitt område? (7) Hur hanterar ni eventuell asbest? (8) Vem är BAS-U och BAS-P för projektet? (9) Hur fungerar ROT-avdraget? (10) Vad händer om vädret förstör arbetet?",
   },
 ];
 
@@ -237,8 +240,8 @@ export default async function BastaTaklaggareStockholm() {
 
         <PageHero
           eyebrow="Köpguide Stockholm 2026"
-          title="Stockholms bästa takläggare:"
-          titleAccent="så vet du att du valt rätt"
+          title="Bästa takläggare i Stockholm –"
+          titleAccent="så väljer du rätt takfirma"
           description="Att välja takläggare är ett av de största enskilda inköp en villaägare gör. Här är de sju kriterier som skiljer ett seriöst takbyte från en kostsam felinvestering, plus hur du själv kan kontrollera varje punkt innan du skriver kontrakt."
           breadcrumbs={[
             { label: "Hem", href: "/" },
@@ -288,14 +291,26 @@ export default async function BastaTaklaggareStockholm() {
                 color: "var(--color-dark)",
               }}
             >
-              Vem är egentligen Stockholms bästa takläggare?
+              Vem är egentligen bästa takläggaren i Stockholm?
             </h2>
             <div className="space-y-5 text-gray-700 leading-relaxed text-[17px]">
               <p>
-                Det finns inte ett enda &quot;bästa&quot;. Det finns rätt takläggare för ditt projekt. En firma som är fantastisk på plåtomläggning på en industribyggnad är inte nödvändigtvis bäst för dig som har en 40-talsvilla i Bromma med eternittak. Men vad alla &quot;bästa takläggare&quot; har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar.
+                Det finns inte ett enda &quot;bästa&quot;. Det finns rätt takläggare för ditt projekt. En firma som är fantastisk på{" "}
+                <Link href="/tjanster/plattak" className="text-[#2B74FC] hover:underline font-medium">plåttak</Link>{" "}
+                är inte nödvändigtvis bäst för dig som vill ha{" "}
+                <Link href="/tjanster/tegeltak" className="text-[#2B74FC] hover:underline font-medium">tegeltak</Link>{" "}
+                eller{" "}
+                <Link href="/tjanster/betongtak" className="text-[#2B74FC] hover:underline font-medium">betongtak</Link>.
+                Men vad alla seriösa{" "}
+                <Link href="/tjanster/taklaggning" className="text-[#2B74FC] hover:underline font-medium">takläggare i Stockholm</Link>{" "}
+                har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar.
               </p>
               <p>
-                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54 verifierade omdömen. Vi har levererat 2 500+ kompletta takbyten i Stockholms län sedan starten, från innerstadens K-märkta hus till skärgårdens 50-talsvillor. På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
+                <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54 verifierade omdömen. Vi har levererat 2 500+ kompletta{" "}
+                <Link href="/tjanster/taklaggning" className="text-[#2B74FC] hover:underline font-medium">takbyten i Stockholms län</Link>{" "}
+                sedan starten, från innerstadens K-märkta hus till skärgårdens 50-talsvillor. Vill du veta{" "}
+                <Link href="/priser" className="text-[#2B74FC] hover:underline font-medium">vad ett takbyte kostar</Link>?
+                På den här sidan visar vi hur vi mäter oss mot varje kriterium och hur du själv kan verifiera påståendena innan du tar beslut.
               </p>
             </div>
 
@@ -335,7 +350,7 @@ export default async function BastaTaklaggareStockholm() {
                   color: "var(--color-dark)",
                 }}
               >
-                7 kriterier som är bra att gå igenom
+                Så känner du igen en seriös takläggare
               </h2>
               <p className="text-gray-600 leading-relaxed">
                 Ramverket nedan bygger på det branschorganisationer, Konsumentverket och försäkringsbolag brukar rekommendera villaägare att tänka igenom. Varje kriterium har en faktarad om vad det innebär, och en kort rad om hur vi på Sands arbetar med just den punkten.
@@ -397,7 +412,7 @@ export default async function BastaTaklaggareStockholm() {
         <section className="py-16 lg:py-20 border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
-              Att vara observant på
+              Vanliga misstag
             </p>
             <h2
               className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-4"
@@ -406,7 +421,7 @@ export default async function BastaTaklaggareStockholm() {
                 color: "var(--color-dark)",
               }}
             >
-              5 saker att vara extra noga med
+              Vanliga misstag när man väljer takläggare
             </h2>
             <p className="text-gray-600 leading-relaxed mb-8">
               Det här är inte avgörande röda flaggor i sig, men de är värt att vara uppmärksam på och gärna ställa följdfrågor om innan du skriver kontrakt. Ofta finns det bra förklaringar, men ibland är det signaler om att du bör undersöka närmare.
@@ -733,6 +748,15 @@ export default async function BastaTaklaggareStockholm() {
                   </h3>
                   <p className="text-[15px] text-gray-700 leading-relaxed">
                     {f.a}
+                    {f.href && (
+                      <>
+                        {" "}
+                        <Link href={f.href} className="text-[#2B74FC] hover:underline font-medium">
+                          {f.hrefLabel}
+                        </Link>
+                        .
+                      </>
+                    )}
                   </p>
                 </div>
               ))}

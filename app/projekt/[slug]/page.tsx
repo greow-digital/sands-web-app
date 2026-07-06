@@ -17,6 +17,33 @@ import type { ProjektCard, ProjektDetail } from "@/sanity/lib/types";
 import { pageMeta } from "@/lib/seo";
 import { PROJEKT_VIDEOS } from "@/lib/projekt-videos";
 
+const BASE_URL = "https://www.sandsab.se";
+
+const TYP_TO_TJANST: Record<string, { slug: string; label: string }> = {
+  Tegeltak: { slug: "tegeltak", label: "tegeltak" },
+  Betongtak: { slug: "betongtak", label: "betongtak" },
+  "Plåttak": { slug: "plattak", label: "plåttak" },
+  Papptak: { slug: "papptak", label: "papptak" },
+  Fasadrenovering: { slug: "fasadrenovering", label: "fasadrenovering" },
+  "Fasadmålning": { slug: "fasadrenovering", label: "fasadmålning" },
+  Badrumsrenovering: { slug: "badrumsrenovering", label: "badrumsrenovering" },
+  "Köksrenovering": { slug: "koksrenovering", label: "köksrenovering" },
+};
+
+const ORT_TO_OMRADE: Record<string, string> = {
+  Stockholm: "stockholm", Bromma: "bromma", "Täby": "taby",
+  "Järfälla": "jarfalla", Huddinge: "huddinge", Sollentuna: "sollentuna",
+  Danderyd: "danderyd", "Hässelby": "hasselby", "Vällingby": "vallingby",
+  "Spånga": "spanga", Enskede: "enskede", "Tyresö": "tyreso",
+  "Norrtälje": "norrtalje", "Södertälje": "sodertalje", "Lidingö": "lidingo",
+  Solna: "solna", Sundbyberg: "sundbyberg", "Ekerö": "ekero",
+  Haninge: "haninge", Botkyrka: "botkyrka", "Nynäshamn": "nynashamn",
+  Vallentuna: "vallentuna", Vaxholm: "vaxholm", "Värmdö": "varmdo",
+  "Österåker": "osteraker", "Upplands Väsby": "upplands-vasby",
+  "Upplands-Bro": "upplands-bro", Sigtuna: "sigtuna", Salem: "salem",
+  Nykvarn: "nykvarn", Nacka: "nacka",
+};
+
 export async function generateStaticParams() {
   const all = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
   return all
@@ -68,8 +95,26 @@ export default async function ProjektDetailPage({
     .fit("crop")
     .url();
 
+  const tjanst = p.typ ? TYP_TO_TJANST[p.typ] : undefined;
+  const omradeSlug = p.ort ? ORT_TO_OMRADE[p.ort] : undefined;
+  const displayTitle = [p.typ, p.ort].filter(Boolean).join(", ");
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Hem", item: BASE_URL },
+              { "@type": "ListItem", position: 2, name: "Projekt", item: `${BASE_URL}/projekt` },
+              { "@type": "ListItem", position: 3, name: displayTitle, item: `${BASE_URL}/projekt/${slug}` },
+            ],
+          }),
+        }}
+      />
       <Header />
       <main className="pt-16 lg:pt-20 bg-white">
         {/* HERO — split layout: text vänster + huvudbild höger */}
@@ -254,6 +299,35 @@ export default async function ProjektDetailPage({
                     </div>
                   )}
                 </div>
+
+                {(tjanst || omradeSlug) && (
+                  <p className="mt-5 text-sm text-gray-500 leading-relaxed">
+                    {tjanst && (
+                      <>
+                        Läs mer om{" "}
+                        <Link
+                          href={`/tjanster/${tjanst.slug}`}
+                          className="text-[#2B74FC] hover:underline font-medium"
+                        >
+                          {tjanst.label} i Stockholm
+                        </Link>
+                      </>
+                    )}
+                    {tjanst && omradeSlug && " eller se "}
+                    {!tjanst && omradeSlug && "Se "}
+                    {omradeSlug && (
+                      <>
+                        <Link
+                          href={`/omraden/${omradeSlug}`}
+                          className="text-[#2B74FC] hover:underline font-medium"
+                        >
+                          fler projekt i {p.ort}
+                        </Link>
+                      </>
+                    )}
+                    {(tjanst || omradeSlug) && "."}
+                  </p>
+                )}
               </div>
 
               <aside className="lg:sticky lg:top-28 h-fit">
