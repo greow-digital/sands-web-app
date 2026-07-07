@@ -147,28 +147,22 @@ export default function Header() {
               Projekt
             </Link>
             <Link
-              href="/omdomen"
-              className="text-gray-700 hover:text-[#2B74FC] transition-colors font-medium"
-            >
-              Omdömen
-            </Link>
-            <Link
               href="/om-oss"
               className="text-gray-700 hover:text-[#2B74FC] transition-colors font-medium"
             >
               Om oss
             </Link>
             <Link
-              href="/kontakt"
-              className="text-gray-700 hover:text-[#2B74FC] transition-colors font-medium"
-            >
-              Kontakt
-            </Link>
-            <Link
               href="/blogg"
               className="text-gray-700 hover:text-[#2B74FC] transition-colors font-medium"
             >
               Blogg
+            </Link>
+            <Link
+              href="/taktest"
+              className="font-semibold text-[#2B74FC] hover:opacity-80 transition-opacity"
+            >
+              Taktest
             </Link>
           </nav>
 
@@ -278,9 +272,7 @@ export default function Header() {
             {[
               { href: "/priser", label: "Priser" },
               { href: "/projekt", label: "Projekt" },
-              { href: "/omdomen", label: "Omdömen" },
               { href: "/om-oss", label: "Om oss" },
-              { href: "/kontakt", label: "Kontakt" },
               { href: "/blogg", label: "Blogg" },
             ].map((item) => (
               <Link
@@ -292,6 +284,13 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/taktest"
+              className="block px-3 py-3 text-sm font-bold text-[#2B74FC]"
+              onClick={() => setMobileOpen(false)}
+            >
+              Taktest
+            </Link>
           </div>
         </div>
       )}

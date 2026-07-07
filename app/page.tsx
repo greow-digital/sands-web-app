@@ -9,6 +9,7 @@ import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
 // import InstagramFeed from "@/components/InstagramFeed"; // avstangd, se nedan
 import LatestProjekt from "@/components/LatestProjekt";
+import TaktestCta from "@/components/TaktestCta";
 import HeroVideo from "@/components/HeroVideo";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
 
@@ -394,6 +395,9 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ── TAKTEST-CTA ──────────────────────────── */}
+        <TaktestCta />
+
         {/* ── PRISSEKTION ──────────────────────────── */}
         <section className="py-14 lg:py-20 bg-white border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -704,13 +708,21 @@ export default async function Home() {
                   dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06,
                   du slipper samordna och får ett enda kontrakt.
                 </p>
-                <Link
-                  href="/offert"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
-                  style={{ backgroundColor: "var(--color-primary)" }}
-                >
-                  Få gratis offert <ArrowRight size={14} />
-                </Link>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/offert"
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                    style={{ backgroundColor: "var(--color-primary)" }}
+                  >
+                    Få gratis offert <ArrowRight size={14} />
+                  </Link>
+                  <Link
+                    href="/taktest"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    Osäker? Gör taktestet först <ArrowRight size={14} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

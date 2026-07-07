@@ -148,11 +148,24 @@ export default function TakbesiktningPage() {
                   genomgången går vi tillsammans igenom vad vi sett och vad
                   som behöver göras, om något.
                 </p>
-                <p className="text-gray-600 mb-8 leading-relaxed">
+                <p className="text-gray-600 mb-6 leading-relaxed">
                   Om taket behöver åtgärd lämnar vi fast pris direkt. Är det i
                   bra skick får du veta det. Ingen säljpitch i efterhand, ingen
                   förbindelse att välja oss.
                 </p>
+
+                <div className="mb-8 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+                  <p className="text-sm text-gray-700 flex-1">
+                    Osäker på om taket behöver ses över? Gör vårt kostnadsfria
+                    taktest på en minut, så får du en första bedömning direkt.
+                  </p>
+                  <Link
+                    href="/taktest"
+                    className="inline-flex items-center gap-1.5 shrink-0 text-sm font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    Gör taktestet <ArrowRight size={14} />
+                  </Link>
+                </div>
 
                 <h3
                   className="text-lg font-bold mb-4"

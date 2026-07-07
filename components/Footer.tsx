@@ -27,6 +27,7 @@ const områdenLinks = [
 
 const omOssLinks = [
   { href: "/om-oss", label: "Om Sands" },
+  { href: "/taktest", label: "Taktest" },
   { href: "/projekt", label: "Projekt" },
   { href: "/omdomen", label: "Omdömen" },
   { href: "/faq", label: "FAQ" },
