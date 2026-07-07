@@ -62,7 +62,7 @@ export default function OffertPage() {
             <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-start">
               {/* Text: visas under formuläret på mobil, vänster på desktop */}
               <div className="order-2 lg:order-1">
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Kostnadsfri takkontroll
                 </p>
                 <h1
@@ -113,7 +113,7 @@ export default function OffertPage() {
         <section className="py-14 lg:py-20 bg-[#F8F9FB]">
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Efter du skickat in
               </p>
               <h2
@@ -150,7 +150,7 @@ export default function OffertPage() {
                   >
                     {s.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-base text-gray-600 leading-relaxed">
                     {s.text}
                   </p>
                 </div>

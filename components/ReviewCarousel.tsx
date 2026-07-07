@@ -98,10 +98,10 @@ export default function ReviewCarousel() {
   const doubled = [...reviews, ...reviews];
 
   return (
-    <section className="py-16 lg:py-24 bg-white border-t border-gray-100 overflow-hidden">
+    <section className="py-20 lg:py-28 bg-white border-t border-gray-100 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 flex flex-wrap items-end justify-between gap-4">
         <h2
-          className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em]"
+          className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em]"
           style={{
             fontFamily: "var(--font-heading)",
             color: "var(--color-dark)",

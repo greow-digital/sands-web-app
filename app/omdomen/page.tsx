@@ -134,7 +134,7 @@ export default function OmdömenPage() {
         </section>
 
         {/* Alla omdömen */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {omdömen.map((o, i) => {
@@ -212,7 +212,7 @@ export default function OmdömenPage() {
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />

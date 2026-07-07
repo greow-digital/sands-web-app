@@ -28,7 +28,7 @@ export default function BloggPage() {
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "Blogg" }]}
         />
 
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {artiklar.map((a) => (
@@ -70,7 +70,7 @@ export default function BloggPage() {
                   >
                     {a.titel}
                   </h2>
-                  <p className="text-sm text-gray-500 leading-relaxed mb-5 line-clamp-3">
+                  <p className="text-[15px] text-gray-500 leading-relaxed mb-5 line-clamp-3">
                     {a.ingress}
                   </p>
                   <div className="flex items-center justify-between">

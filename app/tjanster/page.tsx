@@ -52,14 +52,14 @@ export default function TjansterPage() {
         />
 
         {/* ── TJÄNSTER ────────────────────────────── */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-14">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">
                 Tjänster
               </p>
               <h2
-                className="text-[28px] lg:text-[38px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -114,15 +114,15 @@ export default function TjansterPage() {
         </section>
 
         {/* ── BOKA TAKKONTROLL (formulär + trust) ── */}
-        <section className="py-16 lg:py-24 border-t border-gray-100">
+        <section className="py-20 lg:py-28 border-t border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Boka takkontroll
                 </p>
                 <h2
-                  className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em] mb-5"
+                  className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em] mb-5"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -181,16 +181,16 @@ export default function TjansterPage() {
 
         {/* ── TAKTYPER ────────────────────────────── */}
         <section
-          className="py-16 lg:py-24 border-t border-gray-100"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-14">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">
                 Taktyper
               </p>
               <h2
-                className="text-[28px] lg:text-[38px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -261,7 +261,7 @@ export default function TjansterPage() {
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />

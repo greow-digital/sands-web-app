@@ -69,7 +69,7 @@ export default function PageHero({
         />
       )}
 
-      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-24">
+      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-28">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             className={`flex items-center gap-2 text-xs mb-6 ${
@@ -102,7 +102,7 @@ export default function PageHero({
 
         {eyebrow && (
           <p
-            className={`text-sm font-semibold uppercase tracking-[0.15em] mb-3 ${
+            className={`text-[13px] font-semibold uppercase tracking-[0.18em] mb-4 ${
               hasImage ? "text-gray-300" : "text-gray-400"
             }`}
           >
@@ -132,7 +132,7 @@ export default function PageHero({
 
         {description && (
           <p
-            className={`text-lg leading-relaxed max-w-2xl mt-6 ${
+            className={`text-xl leading-relaxed max-w-2xl mt-7 ${
               hasImage ? "text-gray-200" : "text-gray-600"
             }`}
           >

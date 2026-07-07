@@ -16,17 +16,17 @@ export default async function LatestProjekt() {
 
   return (
     <section
-      className="py-16 lg:py-24"
+      className="py-20 lg:py-28"
       style={{ backgroundColor: "#F8F9FB" }}
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">
               Senaste arbeten
             </p>
             <h2
-              className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em]"
+              className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em]"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",

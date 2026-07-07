@@ -155,7 +155,7 @@ export default async function ProjektDetailPage({
               {/* Text */}
               <div className="lg:order-first">
                 {p.typ && (
-                  <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                  <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                     {p.typ}
                   </p>
                 )}
@@ -301,7 +301,7 @@ export default async function ProjektDetailPage({
                 </div>
 
                 {(tjanst || omradeSlug) && (
-                  <p className="mt-5 text-sm text-gray-500 leading-relaxed">
+                  <p className="mt-5 text-[15px] text-gray-500 leading-relaxed">
                     {tjanst && (
                       <>
                         Läs mer om{" "}
@@ -408,7 +408,7 @@ export default async function ProjektDetailPage({
             <div>
               <Link
                 href="/offert"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
                 Få gratis offert <ArrowRight size={14} />

@@ -25,7 +25,7 @@ export default function RelateradeProjekt({
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">
               Referenser
             </p>
             <h2

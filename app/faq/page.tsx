@@ -121,7 +121,7 @@ export default function FaqPage() {
           breadcrumbs={[{ label: "Hem", href: "/" }, { label: "FAQ" }]}
         />
 
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
             {kategorier.map((kat) => (
               <div key={kat.titel}>
@@ -146,7 +146,7 @@ export default function FaqPage() {
                       >
                         {f.q}
                       </h3>
-                      <p className="text-sm text-gray-600 leading-relaxed">
+                      <p className="text-base text-gray-600 leading-relaxed">
                         {f.a}
                       </p>
                     </div>

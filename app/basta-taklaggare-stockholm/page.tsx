@@ -280,13 +280,13 @@ export default async function BastaTaklaggareStockholm() {
         </section>
 
         {/* ── TL;DR / SNABBSVARET ──────────────── */}
-        <section className="py-16 lg:py-20">
+        <section className="py-20 lg:py-24">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
               Snabbsvaret
             </p>
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-6"
+              className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.02em] mb-6"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -346,16 +346,16 @@ export default async function BastaTaklaggareStockholm() {
 
         {/* ── 7 KRITERIER ──────────────────────── */}
         <section
-          className="py-16 lg:py-24 border-t border-gray-100"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14 max-w-2xl mx-auto">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Köpguide
               </p>
               <h2
-                className="text-[28px] lg:text-[42px] font-extrabold tracking-[-0.03em] mb-4"
+                className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em] mb-4"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -420,13 +420,13 @@ export default async function BastaTaklaggareStockholm() {
         </section>
 
         {/* ── ATT VARA OBSERVANT PÅ ──────────── */}
-        <section className="py-16 lg:py-20 border-t border-gray-100">
+        <section className="py-20 lg:py-24 border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
               Vanliga misstag
             </p>
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-4"
+              className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.02em] mb-4"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -476,7 +476,7 @@ export default async function BastaTaklaggareStockholm() {
                     >
                       {v.titel}
                     </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
+                    <p className="text-base text-gray-600 leading-relaxed">
                       {v.text}
                     </p>
                   </div>
@@ -488,16 +488,16 @@ export default async function BastaTaklaggareStockholm() {
 
         {/* ── RECENSIONER ──────────────────────── */}
         <section
-          className="py-16 lg:py-24 border-t border-gray-100"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Verifierade omdömen
               </p>
               <h2
-                className="text-[28px] lg:text-[42px] font-extrabold tracking-[-0.03em] mb-4"
+                className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em] mb-4"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -584,14 +584,14 @@ export default async function BastaTaklaggareStockholm() {
         </section>
 
         {/* ── REFERENSPROJEKT ──────────────────── */}
-        <section className="py-16 lg:py-24 border-t border-gray-100">
+        <section className="py-20 lg:py-28 border-t border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 max-w-2xl mx-auto">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Referensprojekt
               </p>
               <h2
-                className="text-[28px] lg:text-[42px] font-extrabold tracking-[-0.03em] mb-4"
+                className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em] mb-4"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -669,7 +669,7 @@ export default async function BastaTaklaggareStockholm() {
                       {p.title}
                     </h3>
                     {p.beskrivning && (
-                      <p className="text-sm text-gray-600 leading-relaxed line-clamp-4">
+                      <p className="text-base text-gray-600 leading-relaxed line-clamp-4">
                         {p.beskrivning}
                       </p>
                     )}
@@ -694,15 +694,15 @@ export default async function BastaTaklaggareStockholm() {
 
         {/* ── LOKALKÄNNEDOM ──────────────────────── */}
         <section
-          className="py-16 lg:py-20 border-t border-gray-100"
+          className="py-20 lg:py-24 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
               Stockholms takbestånd
             </p>
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-6"
+              className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.02em] mb-6"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -728,14 +728,14 @@ export default async function BastaTaklaggareStockholm() {
         </section>
 
         {/* ── FRÅGOR ──────────────────────────── */}
-        <section className="py-16 lg:py-24 border-t border-gray-100">
+        <section className="py-20 lg:py-28 border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vanliga frågor
               </p>
               <h2
-                className="text-[28px] lg:text-[42px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -786,16 +786,16 @@ export default async function BastaTaklaggareStockholm() {
 
         {/* ── OMRÅDEN-CLOUD ───────────────────── */}
         <section
-          className="py-16 lg:py-20 border-t border-gray-100"
+          className="py-20 lg:py-24 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Områden vi är takläggare i
               </p>
               <h2
-                className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em]"
+                className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.02em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -821,11 +821,11 @@ export default async function BastaTaklaggareStockholm() {
         </section>
 
         {/* ── FINAL CTA ──────────────────────── */}
-        <section className="py-16 lg:py-24 border-t border-gray-100">
+        <section className="py-20 lg:py-28 border-t border-gray-100">
           <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-start">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Boka takkontroll
                 </p>
                 <h2

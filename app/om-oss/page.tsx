@@ -107,15 +107,15 @@ export default function OmOssPage() {
         </section>
 
         {/* Historia + värderingar */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Vår historia
                 </p>
                 <h2
-                  className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em] mb-6"
+                  className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em] mb-6"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -216,7 +216,7 @@ export default function OmOssPage() {
                         >
                           {v.title}
                         </h4>
-                        <p className="text-sm text-gray-600 leading-relaxed">
+                        <p className="text-base text-gray-600 leading-relaxed">
                           {v.text}
                         </p>
                       </div>
@@ -245,7 +245,7 @@ export default function OmOssPage() {
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />

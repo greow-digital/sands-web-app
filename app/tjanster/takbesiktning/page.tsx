@@ -126,15 +126,15 @@ export default function TakbesiktningPage() {
         />
 
         {/* ── HUVUDSEKTION: vad besiktning är + sticky form ── */}
-        <section className="py-16 lg:py-24 border-b border-gray-100">
+        <section className="py-20 lg:py-28 border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Vad är en takbesiktning?
                 </p>
                 <h2
-                  className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-5"
+                  className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] mb-5"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -259,7 +259,7 @@ export default function TakbesiktningPage() {
                   >
                     0 kr. Kostnadsfri, alltid.
                   </p>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-base text-gray-600 leading-relaxed">
                     Takbesiktningen ingår alltid i vår offertprocess. Ingen
                     avgift, ingen förbindelse att välja oss för efterföljande
                     arbete.
@@ -278,14 +278,14 @@ export default function TakbesiktningPage() {
         <ReviewCarousel />
 
         {/* ── FAQ ─────────────────────────────── */}
-        <section className="py-16 lg:py-24 border-t border-gray-100">
+        <section className="py-20 lg:py-28 border-t border-gray-100">
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vanliga frågor
               </p>
               <h2
-                className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -315,7 +315,7 @@ export default function TakbesiktningPage() {
                       className="shrink-0 mt-1 text-gray-400 transition-transform group-open:rotate-90"
                     />
                   </summary>
-                  <div className="px-5 pb-5 -mt-1 text-sm text-gray-600 leading-relaxed">
+                  <div className="px-5 pb-5 -mt-1 text-base text-gray-600 leading-relaxed">
                     {f.a}
                   </div>
                 </details>
@@ -328,10 +328,10 @@ export default function TakbesiktningPage() {
         <OmradenInline heading="Vi besiktar tak i hela Stockholmsregionen" />
 
         {/* ── FINAL CTA ──────────────────────── */}
-        <section className="py-16 lg:py-20 border-t border-gray-100 text-center">
+        <section className="py-20 lg:py-24 border-t border-gray-100 text-center">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-4"
+              className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.02em] mb-4"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -345,7 +345,7 @@ export default function TakbesiktningPage() {
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />

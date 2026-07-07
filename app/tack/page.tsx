@@ -30,7 +30,7 @@ export default function TackPage() {
         />
 
         {/* Hero */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div
               className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
@@ -59,7 +59,7 @@ export default function TackPage() {
             </p>
             <a
               href="tel:08283888"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               <Phone size={16} />
@@ -70,12 +70,12 @@ export default function TackPage() {
 
         {/* Vad händer nu? */}
         <section
-          className="py-16 lg:py-20 border-t border-gray-100"
+          className="py-20 lg:py-24 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <h2
-              className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em] mb-10 text-center"
+              className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.02em] mb-10 text-center"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -120,7 +120,7 @@ export default function TackPage() {
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-base text-gray-600 leading-relaxed">
                     {step.text}
                   </p>
                 </div>

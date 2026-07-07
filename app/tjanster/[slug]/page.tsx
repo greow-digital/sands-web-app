@@ -149,12 +149,12 @@ export default async function TjanstPage({
         />
 
         {/* ── BESKRIVNING + SIDEBAR FORM ─────────── */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
                 <h2
-                  className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] mb-6"
+                  className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.02em] mb-6"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -261,7 +261,7 @@ export default async function TjanstPage({
                             >
                               {k.name}
                             </div>
-                            <p className="text-sm text-gray-600 leading-relaxed">
+                            <p className="text-base text-gray-600 leading-relaxed">
                               {k.description}
                             </p>
                           </div>
@@ -322,16 +322,16 @@ export default async function TjanstPage({
 
         {/* ── FAQ ───────────────────────────────── */}
         <section
-          className="py-16 lg:py-24 border-t border-gray-100"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vanliga frågor
               </p>
               <h2
-                className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -352,7 +352,7 @@ export default async function TjanstPage({
                   >
                     {f.q}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{f.a}</p>
+                  <p className="text-base text-gray-600 leading-relaxed">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -397,7 +397,7 @@ export default async function TjanstPage({
         />
 
         {/* ── BOTTOM CTA ────────────────────────── */}
-        <section className="py-16 lg:py-24 border-t border-gray-100">
+        <section className="py-20 lg:py-28 border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2
               className="text-[26px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-4"
@@ -415,7 +415,7 @@ export default async function TjanstPage({
             <div className="flex flex-col items-center gap-4">
               <Link
                 href="/offert"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full font-semibold text-white text-base transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
                 Få gratis offert <ArrowRight size={14} />

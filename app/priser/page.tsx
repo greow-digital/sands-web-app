@@ -145,7 +145,7 @@ export default function PriserPage() {
               <span className="text-gray-200">Priser</span>
             </nav>
 
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-300 mb-3">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-300 mb-3">
               Prisguide
             </p>
             <h1
@@ -220,7 +220,7 @@ export default function PriserPage() {
         />
 
         {/* Prisintervall */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {priser.map((p) => (
@@ -262,17 +262,17 @@ export default function PriserPage() {
 
         {/* Sands takpaket + LeadForm sticky aside */}
         <section
-          className="py-16 lg:py-24 border-t border-gray-100"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Takpaket från Sands
                 </p>
                 <h2
-                  className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em] mb-5"
+                  className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em] mb-5"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",

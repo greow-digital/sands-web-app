@@ -46,7 +46,7 @@ export default function OmradenPage() {
           ]}
         />
 
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
             {regionOrder.map((region) => (
               <div key={region}>

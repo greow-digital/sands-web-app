@@ -57,7 +57,7 @@ export default function OmdomenInline({
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
           <h2
-            className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em]"
+            className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.02em]"
             style={{
               fontFamily: "var(--font-heading)",
               color: "var(--color-dark)",

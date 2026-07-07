@@ -287,10 +287,10 @@ export default async function TaklaggningPage() {
         </section>
 
         {/* ── BESLUTSHJÄLP ───────────────────────── */}
-        <section className="py-16 lg:py-24 border-b border-gray-100">
+        <section className="py-20 lg:py-28 border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 max-w-2xl mx-auto">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vilken tjänst behöver jag?
               </p>
               <h2
@@ -350,7 +350,7 @@ export default async function TaklaggningPage() {
                   >
                     {opt.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                  <p className="text-base text-gray-600 leading-relaxed mb-4">
                     {opt.desc}
                   </p>
                   <p className="text-xs text-gray-500 mb-5">
@@ -387,7 +387,7 @@ export default async function TaklaggningPage() {
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12 items-start">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Trygghet
                 </p>
                 <h2
@@ -431,7 +431,7 @@ export default async function TaklaggningPage() {
         {/* ── DETALJER: TAKBYTE ─────────────────── */}
         <section
           id="takbyte"
-          className="py-16 lg:py-24 scroll-mt-20"
+          className="py-20 lg:py-28 scroll-mt-20"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -446,11 +446,11 @@ export default async function TaklaggningPage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Komplett takbyte
                 </p>
                 <h2
-                  className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-5"
+                  className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] mb-5"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -639,7 +639,7 @@ export default async function TaklaggningPage() {
         {/* ── DETALJER: TAKOMLÄGGNING ───────────── */}
         <section
           id="takomlaggning"
-          className="py-16 lg:py-24 border-t border-gray-100 scroll-mt-20"
+          className="py-20 lg:py-28 border-t border-gray-100 scroll-mt-20"
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
@@ -651,11 +651,11 @@ export default async function TaklaggningPage() {
                 className="object-cover"
               />
             </div>
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
               Takomläggning
             </p>
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-5 max-w-2xl"
+              className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] mb-5 max-w-2xl"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -771,7 +771,7 @@ export default async function TaklaggningPage() {
         {/* ── DETALJER: TAKRENOVERING ───────────── */}
         <section
           id="takrenovering"
-          className="py-16 lg:py-24 border-t border-gray-100 scroll-mt-20"
+          className="py-20 lg:py-28 border-t border-gray-100 scroll-mt-20"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -784,11 +784,11 @@ export default async function TaklaggningPage() {
                 className="object-cover"
               />
             </div>
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
               Takrenovering
             </p>
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-5 max-w-2xl"
+              className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] mb-5 max-w-2xl"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -880,14 +880,14 @@ export default async function TaklaggningPage() {
         </section>
 
         {/* ── ANDRA TAKARBETEN (cards till dedikerade sidor) ── */}
-        <section className="py-16 lg:py-20 border-t border-gray-100">
+        <section className="py-20 lg:py-24 border-t border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Andra tjänster
               </p>
               <h2
-                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em]"
+                className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.02em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -929,7 +929,7 @@ export default async function TaklaggningPage() {
                   >
                     {card.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-5">
+                  <p className="text-base text-gray-600 leading-relaxed mb-5">
                     {card.desc}
                   </p>
                   <span
@@ -946,16 +946,16 @@ export default async function TaklaggningPage() {
 
         {/* ── PROCESS (4 STEG) ─────────────────── */}
         <section
-          className="py-16 lg:py-20 border-t border-gray-100"
+          className="py-20 lg:py-24 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vår process
               </p>
               <h2
-                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] mb-3"
+                className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.02em] mb-3"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -963,7 +963,7 @@ export default async function TaklaggningPage() {
               >
                 Från första kontakt till slutbesiktning
               </h2>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-base text-gray-600 leading-relaxed">
                 Fyra tydliga steg. Inget rusas, inga överraskningar längs
                 vägen.
               </p>
@@ -1014,7 +1014,7 @@ export default async function TaklaggningPage() {
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-base text-gray-600 leading-relaxed">
                     {step.text}
                   </p>
                 </div>
@@ -1039,15 +1039,15 @@ export default async function TaklaggningPage() {
         {/* ── FAQ ───────────────────────────────── */}
         <section
           id="faq"
-          className="py-16 lg:py-24 border-t border-gray-100 scroll-mt-32"
+          className="py-20 lg:py-28 border-t border-gray-100 scroll-mt-32"
         >
           <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vanliga frågor
               </p>
               <h2
-                className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -1077,7 +1077,7 @@ export default async function TaklaggningPage() {
                       className="shrink-0 mt-1 text-gray-400 transition-transform group-open:rotate-90"
                     />
                   </summary>
-                  <div className="px-5 pb-5 -mt-1 text-sm text-gray-600 leading-relaxed">
+                  <div className="px-5 pb-5 -mt-1 text-base text-gray-600 leading-relaxed">
                     {f.a}
                   </div>
                 </details>
@@ -1097,10 +1097,10 @@ export default async function TaklaggningPage() {
         <OmradenInline heading="Vi lägger om tak i hela Stockholmsregionen" />
 
         {/* ── FINAL CTA ─────────────────────────── */}
-        <section className="py-16 lg:py-20 border-t border-gray-100 text-center">
+        <section className="py-20 lg:py-24 border-t border-gray-100 text-center">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-4"
+              className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.02em] mb-4"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -1114,7 +1114,7 @@ export default async function TaklaggningPage() {
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />

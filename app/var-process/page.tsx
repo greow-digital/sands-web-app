@@ -99,7 +99,7 @@ export default function VarProcessPage() {
           ]}
         />
 
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16 items-start">
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-100 lg:sticky lg:top-28">
@@ -188,7 +188,7 @@ export default function VarProcessPage() {
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />

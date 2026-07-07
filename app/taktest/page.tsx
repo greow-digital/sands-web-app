@@ -46,14 +46,14 @@ export default function TaktestPage() {
         <Taktest />
 
         {/* ── SÅ FUNGERAR DET ─────────────────── */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-14">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Så fungerar taktestet
               </p>
               <h2
-                className="text-[28px] lg:text-[38px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -100,7 +100,7 @@ export default function TaktestPage() {
                   >
                     {s.titel}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-base text-gray-600 leading-relaxed">
                     {s.text}
                   </p>
                 </div>
@@ -111,16 +111,16 @@ export default function TaktestPage() {
 
         {/* ── TECKEN + LÄNKAR ─────────────────── */}
         <section
-          className="py-16 lg:py-24 border-t border-gray-100"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-start">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vanliga tecken
               </p>
               <h2
-                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] mb-5"
+                className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.02em] mb-5"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -181,14 +181,14 @@ export default function TaktestPage() {
         </section>
 
         {/* ── FAQ ─────────────────────────────── */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vanliga frågor
               </p>
               <h2
-                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em]"
+                className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.02em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",

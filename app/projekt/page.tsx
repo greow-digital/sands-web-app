@@ -75,7 +75,7 @@ export default async function ProjektPage() {
 
             <div className="grid lg:grid-cols-[1fr_1.25fr] gap-8 lg:gap-12 items-center">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Referenser
                 </p>
                 <h1
@@ -115,7 +115,7 @@ export default async function ProjektPage() {
         </section>
 
         {/* Projekt-grid */}
-        <section className="py-16 lg:py-24">
+        <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {projekt.length === 0 ? (
               <div className="text-center py-20">
@@ -269,7 +269,7 @@ export default async function ProjektPage() {
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />
