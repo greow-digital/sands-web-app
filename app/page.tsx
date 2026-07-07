@@ -157,7 +157,7 @@ export default async function Home() {
       <HeroCtaTracker />
       <main className="pt-16 lg:pt-20 bg-white">
         {/* ── HERO ─────────────────────────────────── */}
-        <section className="relative overflow-hidden min-h-[640px] lg:min-h-[720px] flex items-center">
+        <section className="relative overflow-hidden min-h-[700px] lg:min-h-[820px] flex items-center">
           {/* Bakgrund: bild som LCP + video som tonas in efter page load */}
           <HeroVideo
             posterSrc="/images/hero-house.jpg"
@@ -201,7 +201,7 @@ export default async function Home() {
               </div>
 
               <h1
-                className="text-[32px] sm:text-[40px] lg:text-[50px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-6"
+                className="text-[40px] sm:text-[52px] lg:text-[66px] font-extrabold leading-[1.03] tracking-[-0.035em] mb-6"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Din takläggare i Stockholm, med fast pris och{" "}
@@ -209,7 +209,7 @@ export default async function Home() {
                   30 års garanti
                 </span>
               </h1>
-              <p className="text-lg text-gray-200 leading-relaxed max-w-xl mb-8">
+              <p className="text-xl text-gray-200 leading-relaxed max-w-xl mb-10">
                 Auktoriserad takläggare i Stockholm. Takbyte, takomläggning
                 och renovering med transparent prissättning, ROT-avdrag
                 direkt på fakturan och svar samma vardag.
@@ -220,12 +220,12 @@ export default async function Home() {
                 <Link
                   href="/offert"
                   data-hero-cta
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02] shadow-lg"
+                  className="inline-flex items-center gap-2.5 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02] shadow-lg"
                   style={{ backgroundColor: "var(--color-primary)" }}
                 >
-                  Få gratis offert <ArrowRight size={16} />
+                  Få gratis offert <ArrowRight size={18} />
                 </Link>
-                <span className="text-sm text-gray-300">
+                <span className="text-base text-gray-300">
                   Eller ring{" "}
                   <a
                     href="tel:08283888"
@@ -281,10 +281,10 @@ export default async function Home() {
         </section>
 
         {/* ── TAKTYPER ───────────────────────────── */}
-        <section className="py-16 lg:py-20 bg-white">
+        <section className="py-20 lg:py-28 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-10"
+              className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em] mb-12"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -310,7 +310,7 @@ export default async function Home() {
                     />
                   </div>
                   <h4
-                    className="text-lg font-bold mb-1.5"
+                    className="text-xl lg:text-[22px] font-bold mb-2"
                     style={{
                       fontFamily: "var(--font-heading)",
                       color: "var(--color-dark)",
@@ -318,7 +318,7 @@ export default async function Home() {
                   >
                     {t.title}
                   </h4>
-                  <p className="text-sm text-gray-500 leading-relaxed">{t.text}</p>
+                  <p className="text-[15px] text-gray-500 leading-relaxed">{t.text}</p>
                 </Link>
               ))}
             </div>
@@ -345,11 +345,11 @@ export default async function Home() {
 
               {/* Höger, steg */}
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
                   Hur vi jobbar
                 </p>
                 <h2
-                  className="text-[32px] lg:text-[48px] font-extrabold tracking-[-0.03em] mb-10"
+                  className="text-[36px] lg:text-[52px] font-extrabold tracking-[-0.035em] mb-12"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -358,14 +358,14 @@ export default async function Home() {
                   Vår Process
                 </h2>
 
-                <div className="space-y-8">
+                <div className="space-y-9">
                   {process.map((p) => (
                     <div
                       key={p.num}
-                      className="flex gap-5 pb-8 border-b border-gray-200 last:border-b-0 last:pb-0"
+                      className="flex gap-6 pb-9 border-b border-gray-200 last:border-b-0 last:pb-0"
                     >
                       <div
-                        className="text-3xl font-extrabold shrink-0 w-12"
+                        className="text-4xl font-extrabold shrink-0 w-14"
                         style={{
                           fontFamily: "var(--font-heading)",
                           color: "var(--color-primary)",
@@ -375,7 +375,7 @@ export default async function Home() {
                       </div>
                       <div>
                         <h3
-                          className="text-lg font-bold mb-1"
+                          className="text-xl font-bold mb-1.5"
                           style={{
                             fontFamily: "var(--font-heading)",
                             color: "var(--color-dark)",
@@ -383,7 +383,7 @@ export default async function Home() {
                         >
                           {p.title}
                         </h3>
-                        <p className="text-sm text-gray-600 leading-relaxed">
+                        <p className="text-[15px] text-gray-600 leading-relaxed">
                           {p.text}
                         </p>
                       </div>
@@ -399,13 +399,13 @@ export default async function Home() {
         <TaktestCta />
 
         {/* ── PRISSEKTION ──────────────────────────── */}
-        <section className="py-14 lg:py-20 bg-white border-b border-gray-100">
+        <section className="py-20 lg:py-28 bg-white border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-start">
+            <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 items-start">
               {/* Vänster, pris + trust */}
               <div>
                 <h2
-                  className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.03em] mb-2"
+                  className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.035em] mb-3"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -413,13 +413,13 @@ export default async function Home() {
                 >
                   Vad kostar det att byta tak?
                 </h2>
-                <p className="text-xs text-gray-500 uppercase tracking-widest mb-6">
+                <p className="text-[13px] text-gray-500 uppercase tracking-widest mb-7">
                   Exempelpris · sadeltak 140 m²
                 </p>
 
                 <div className="flex items-baseline gap-3 mb-1">
                   <span
-                    className="text-[44px] lg:text-[56px] font-extrabold tracking-[-0.03em]"
+                    className="text-[52px] lg:text-[68px] font-extrabold tracking-[-0.035em]"
                     style={{
                       fontFamily: "var(--font-heading)",
                       color: "var(--color-dark)",
@@ -429,15 +429,15 @@ export default async function Home() {
                   </span>
                   <span className="text-lg text-gray-400 font-bold">*</span>
                 </div>
-                <p className="text-sm text-gray-600 mb-1">
+                <p className="text-base text-gray-600 mb-1">
                   Från ca 1 200 kr/m²
                 </p>
-                <p className="text-xs text-gray-400 mb-8">
+                <p className="text-[13px] text-gray-400 mb-9">
                   *Efter ROT-avdrag på 30%
                 </p>
 
                 {/* Trust-punkter */}
-                <ul className="space-y-2 text-sm text-gray-700 mb-8">
+                <ul className="space-y-3 text-base text-gray-700 mb-9">
                   {[
                     "Fast pris efter kostnadsfri takkontroll",
                     "ROT-avdrag 30% på arbetskostnad",
@@ -454,25 +454,25 @@ export default async function Home() {
 
                 <Link
                   href="/offert"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                  className="inline-flex items-center gap-2.5 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
                   style={{ backgroundColor: "var(--color-primary)" }}
                 >
-                  Få gratis offert <ArrowRight size={14} />
+                  Få gratis offert <ArrowRight size={16} />
                 </Link>
-                <div className="mt-4">
+                <div className="mt-5">
                   <Link
                     href="/priser#takraknare"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
+                    className="inline-flex items-center gap-1.5 text-base font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
                   >
-                    Räkna på ditt eget tak <ArrowRight size={13} />
+                    Räkna på ditt eget tak <ArrowRight size={14} />
                   </Link>
                 </div>
               </div>
 
               {/* Höger, vad ingår + detaljer */}
-              <div className="rounded-2xl border border-gray-100 bg-[#F8F9FB] p-6 lg:p-8">
+              <div className="rounded-3xl border border-gray-100 bg-[#F8F9FB] p-7 lg:p-10">
                 <h3
-                  className="text-lg font-bold mb-5"
+                  className="text-xl font-bold mb-6"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -480,7 +480,7 @@ export default async function Home() {
                 >
                   Detta ingår i takpaketet:
                 </h3>
-                <ul className="space-y-2.5 mb-6">
+                <ul className="space-y-3 mb-7">
                   {[
                     "Upp till 30 års tätt tak-garanti genom Moniers taksystem",
                     "Ny underlagspapp (Icopal Flexilight Prima)",
@@ -495,10 +495,10 @@ export default async function Home() {
                   ].map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-3 text-sm text-gray-700"
+                      className="flex items-start gap-3 text-[15px] text-gray-700"
                     >
                       <span
-                        className="text-base leading-none mt-0.5"
+                        className="text-lg leading-none mt-0.5"
                         style={{ color: "var(--color-primary)" }}
                       >
                         ✓
@@ -508,7 +508,7 @@ export default async function Home() {
                   ))}
                 </ul>
 
-                <div className="space-y-4 text-[13px] text-gray-500 leading-relaxed border-t border-gray-200 pt-5">
+                <div className="space-y-4 text-sm text-gray-500 leading-relaxed border-t border-gray-200 pt-6">
                   <p>
                     <strong className="text-gray-700">Om prisexemplet:</strong>{" "}
                     Baseras på standardtak (sadeltak) 140 m² utan större
@@ -544,10 +544,10 @@ export default async function Home() {
         <LatestProjekt />
 
         {/* ── MID-PAGE CTA ──────────────────── */}
-        <section className="py-14 lg:py-16 border-t border-gray-100 bg-white text-center">
+        <section className="py-20 lg:py-24 border-t border-gray-100 bg-white text-center">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
-              className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] mb-3"
+              className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.03em] mb-4"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -555,13 +555,13 @@ export default async function Home() {
             >
               Redo att få ditt prisförslag?
             </h2>
-            <p className="text-gray-600 mb-7 text-sm">
+            <p className="text-gray-600 mb-8 text-lg leading-relaxed">
               Kostnadsfri takkontroll, fast pris efter besiktning.
               Svarar samma vardag.
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />
@@ -577,15 +577,15 @@ export default async function Home() {
         {/* <InstagramFeed /> */}
 
         {/* ── OMRÅDEN ────────────────────────────── */}
-        <section className="py-16 lg:py-24 bg-white">
+        <section className="py-20 lg:py-28 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-8">
+            <div className="flex items-end justify-between mb-10">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Stockholms län
                 </p>
                 <h2
-                  className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em]"
+                  className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em]"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -635,7 +635,7 @@ export default async function Home() {
                 <Link
                   key={o.slug}
                   href={`/omraden/${o.slug}`}
-                  className="px-4 py-2 rounded-full border border-gray-200 text-sm font-medium hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
+                  className="px-5 py-2.5 rounded-full border border-gray-200 text-[15px] font-medium hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
                   style={{ color: "var(--color-dark)" }}
                 >
                   {o.name}
@@ -643,10 +643,10 @@ export default async function Home() {
               ))}
             </div>
 
-            <div className="mt-10 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-6 lg:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="mt-12 rounded-3xl border border-gray-100 bg-[#F8F9FB] p-8 lg:p-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
               <div>
                 <h3
-                  className="text-lg lg:text-xl font-extrabold mb-1"
+                  className="text-xl lg:text-2xl font-extrabold mb-2"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -654,7 +654,7 @@ export default async function Home() {
                 >
                   Hur väljer du Stockholms bästa takläggare?
                 </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-[15px] text-gray-600 leading-relaxed">
                   7 kriterier att gå igenom, 5 saker att vara extra noga med och 10 frågor som är bra att ställa innan du skriver kontrakt.
                 </p>
               </div>
@@ -662,10 +662,10 @@ export default async function Home() {
                 href="/basta-taklaggare-stockholm"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm shrink-0 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold text-base shrink-0 transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Läs köpguiden <ArrowRight size={14} />
+                Läs köpguiden <ArrowRight size={16} />
               </Link>
             </div>
           </div>
@@ -673,12 +673,12 @@ export default async function Home() {
 
         {/* ── LÄCKAGE / SKADOR ──────────────────── */}
         <section
-          className="py-16 lg:py-24 border-t border-gray-100"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-10 lg:gap-16 items-center">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-200">
+            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-center">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200">
                 <Image
                   src="/images/hero-house.jpg"
                   alt="Tak som behöver åtgärdas"
@@ -689,7 +689,7 @@ export default async function Home() {
               </div>
               <div>
                 <h2
-                  className="text-[24px] lg:text-[32px] font-extrabold tracking-[-0.02em] mb-5"
+                  className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.03em] mb-6"
                   style={{
                     fontFamily: "var(--font-heading)",
                     color: "var(--color-dark)",
@@ -697,28 +697,28 @@ export default async function Home() {
                 >
                   Läcker taket? Fuktskador, ruttna läkt eller trasiga pannor?
                 </h2>
-                <p className="text-gray-600 leading-relaxed mb-4">
+                <p className="text-lg text-gray-600 leading-relaxed mb-5">
                   Ett läckande tak kan snabbt leda till mögel, röta och dyra
                   följdskador på konstruktionen. Ju längre du väntar, desto
                   dyrare blir det. Vi erbjuder kostnadsfri takkontroll i hela
                   Stockholms län, ofta samma vecka.
                 </p>
-                <p className="text-gray-600 leading-relaxed mb-8">
+                <p className="text-lg text-gray-600 leading-relaxed mb-9">
                   Vi inspekterar taket på plats, identifierar problemet och ger
                   dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06,
                   du slipper samordna och får ett enda kontrakt.
                 </p>
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-5">
                   <Link
                     href="/offert"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+                    className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
                     style={{ backgroundColor: "var(--color-primary)" }}
                   >
-                    Få gratis offert <ArrowRight size={14} />
+                    Få gratis offert <ArrowRight size={16} />
                   </Link>
                   <Link
                     href="/taktest"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B74FC] hover:underline"
+                    className="inline-flex items-center gap-1.5 text-base font-semibold text-[#2B74FC] hover:underline"
                   >
                     Osäker? Gör taktestet först <ArrowRight size={14} />
                   </Link>
@@ -729,14 +729,14 @@ export default async function Home() {
         </section>
 
         {/* ── FAQ "HAR DU ETERNITTAK?" ───────────── */}
-        <section className="py-16 lg:py-24 bg-white border-t border-gray-100">
+        <section className="py-20 lg:py-28 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+            <div className="text-center mb-14">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                 Vanliga frågor
               </p>
               <h2
-                className="text-[30px] lg:text-[42px] font-extrabold tracking-[-0.03em]"
+                className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em]"
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -764,9 +764,9 @@ export default async function Home() {
 
             <div className="divide-y divide-gray-200">
               {eternitFaq.map((f) => (
-                <div key={f.q} className="py-6">
+                <div key={f.q} className="py-7">
                   <h3
-                    className="text-base lg:text-lg font-bold mb-2"
+                    className="text-lg lg:text-xl font-bold mb-2.5"
                     style={{
                       fontFamily: "var(--font-heading)",
                       color: "var(--color-dark)",
@@ -774,18 +774,18 @@ export default async function Home() {
                   >
                     {f.q}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{f.a}</p>
+                  <p className="text-base text-gray-600 leading-relaxed">{f.a}</p>
                 </div>
               ))}
             </div>
 
-            <div className="text-center mt-10">
+            <div className="text-center mt-12">
               <Link
                 href="/offert"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full font-semibold text-white text-base transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Få gratis offert <ArrowRight size={14} />
+                Få gratis offert <ArrowRight size={16} />
               </Link>
             </div>
           </div>
@@ -793,15 +793,15 @@ export default async function Home() {
 
         {/* ── BOTTOM CTA ────────────────────── */}
         <section
-          className="py-16 lg:py-20 border-t border-gray-100 text-center"
+          className="py-24 lg:py-32 border-t border-gray-100 text-center"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
+            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
               Sista steget
             </p>
             <h2
-              className="text-[28px] lg:text-[36px] font-extrabold tracking-[-0.02em] mb-4"
+              className="text-[36px] lg:text-[52px] font-extrabold tracking-[-0.035em] mb-5"
               style={{
                 fontFamily: "var(--font-heading)",
                 color: "var(--color-dark)",
@@ -809,13 +809,13 @@ export default async function Home() {
             >
               Boka kostnadsfri takkontroll
             </h2>
-            <p className="text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-600 mb-9 leading-relaxed">
               Vi inspekterar taket på plats och lämnar ett komplett fast
               pris inom 24 timmar. Helt utan förpliktelser.
             </p>
             <Link
               href="/offert"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               Få gratis offert <ArrowRight size={14} />
