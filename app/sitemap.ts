@@ -15,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/tjanster`, priority: 0.9 },
     { url: `${BASE}/omraden`, priority: 0.9 },
     { url: `${BASE}/basta-taklaggare-stockholm`, priority: 0.9 },
+    { url: `${BASE}/taktest`, priority: 0.8 },
     { url: `${BASE}/priser`, priority: 0.8 },
     { url: `${BASE}/var-process`, priority: 0.7 },
     { url: `${BASE}/projekt`, priority: 0.7 },

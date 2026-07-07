@@ -102,3 +102,15 @@ h1, h2, h3, h4, h5, h6 {
 .sands-slider::-moz-range-thumb:active {
   transform: scale(1.1);
 }
+
+/* Taktest: mjuk fade mellan frågesteg */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
