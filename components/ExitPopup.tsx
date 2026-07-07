@@ -85,6 +85,13 @@ export default function ExitPopup() {
 
   const show = useCallback(() => {
     if (shownRef.current) return;
+    // Koordinering med taktest-widgeten: visa inte popupen medan chatt-
+    // widgeten är öppen (undviker två överlappande dialoger).
+    if (
+      typeof window !== "undefined" &&
+      (window as unknown as { __sandsWidgetOpen?: boolean }).__sandsWidgetOpen
+    )
+      return;
     shownRef.current = true;
     recordShow();
     setOpen(true);
@@ -108,6 +115,9 @@ export default function ExitPopup() {
     if (getCookie("sands_submitted")) return;
     try {
       if (sessionStorage.getItem(SESSION_SHOWN)) return;
+      // Taktest genomfört i sessionen: besökaren har redan fått en
+      // lead-möjlighet via widgeten, trigga inte exit-popupen ovanpå.
+      if (sessionStorage.getItem("sands_taktest_done")) return;
     } catch {
       // ignore
     }

@@ -16,6 +16,7 @@ import type { ProjektCard } from "@/sanity/lib/types";
 import { matchProjektForOrt } from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import OmdomenInline from "@/components/OmdomenInline";
+import TaktestWidgetLoader from "@/components/TaktestWidgetLoader";
 
 export async function generateStaticParams() {
   // norrtalje har en egen dedikerad route (app/omraden/norrtalje/page.tsx)
@@ -396,6 +397,8 @@ export default async function OmradesPage({
         </section>
       </main>
       <Footer />
+      {/* Pilot: taktest-chattwidget körs tills vidare bara på Hässelby. */}
+      {slug === "hasselby" && <TaktestWidgetLoader />}
     </>
   );
 }

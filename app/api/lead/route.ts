@@ -15,6 +15,13 @@ type LeadPayload = {
   gclid?: string;
   gbraid?: string;
   wbraid?: string;
+  // Taktest-widgetens metadata (skickas med när formId === "taktest")
+  roofAge?: string;
+  symptoms?: string;
+  leak?: string;
+  decade?: string;
+  urgency?: string;
+  leadSource?: string;
 };
 
 export async function POST(req: Request) {
@@ -25,10 +32,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  // Popup-leads ("personlig service"-kontakten) har inget namnfält och
-  // kräver minst ett av e-post/telefon. Övriga formulär kräver namn+telefon.
-  const isPopup = data.formId === "popup";
-  if (isPopup) {
+  // Popup-leads ("personlig service") och taktest-widgeten kräver minst ett
+  // av e-post/telefon (taktest ber om "telefon eller e-post"). Övriga
+  // formulär kräver namn+telefon.
+  const contactOnly = data.formId === "popup" || data.formId === "taktest";
+  if (contactOnly) {
     if (!data.email && !data.phone) {
       return NextResponse.json(
         { error: "E-post eller telefon krävs" },
