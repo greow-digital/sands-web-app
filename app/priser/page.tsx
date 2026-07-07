@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
 import Takraknare from "@/components/Takraknare";
+import TaktestInlineCta from "@/components/TaktestInlineCta";
 import OmdomenInline from "@/components/OmdomenInline";
 import OmradenInline from "@/components/OmradenInline";
 import SourcesFooter from "@/components/SourcesFooter";
@@ -190,6 +191,14 @@ export default function PriserPage() {
             Desktop: bred, mittställd, overlappar upp i heron. */}
         <div className="relative z-10 mt-6 lg:-mt-28 mb-4 lg:mb-8 max-w-[880px] mx-auto px-4 sm:px-6 lg:px-8">
           <Takraknare embedded />
+        </div>
+
+        {/* Taktest-CTA: fånga den som inte vet om taket ens behöver bytas */}
+        <div className="max-w-[880px] mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+          <TaktestInlineCta
+            heading="Innan du räknar pris, behöver taket ens bytas?"
+            text="Osäker på om det är dags? Gör vårt kostnadsfria taktest på en minut och få en personlig bedömning av takets skick först."
+          />
         </div>
 
         {/* ROT-info under heron */}

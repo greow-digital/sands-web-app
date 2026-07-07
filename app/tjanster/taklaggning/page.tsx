@@ -10,6 +10,7 @@ import ReviewCarousel from "@/components/ReviewCarousel";
 import OmradenInline from "@/components/OmradenInline";
 import { prisEfterRot, FLAGGSKEPP_PRIS } from "@/lib/material";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
+import TaktestInlineCta from "@/components/TaktestInlineCta";
 import { client } from "@/sanity/lib/client";
 import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import type { ProjektCard } from "@/sanity/lib/types";
@@ -267,6 +268,13 @@ export default async function TaklaggningPage() {
                 </a>
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* ── TAKTEST-CTA ─────────────────────── */}
+        <section className="py-10 lg:py-14 border-b border-gray-100 bg-white">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+            <TaktestInlineCta />
           </div>
         </section>
 

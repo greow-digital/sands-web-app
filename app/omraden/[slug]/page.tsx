@@ -17,6 +17,7 @@ import { matchProjektForOrt } from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import OmdomenInline from "@/components/OmdomenInline";
 import TaktestWidgetLoader from "@/components/TaktestWidgetLoader";
+import TaktestInlineCta from "@/components/TaktestInlineCta";
 
 export async function generateStaticParams() {
   // norrtalje har en egen dedikerad route (app/omraden/norrtalje/page.tsx)
@@ -310,6 +311,16 @@ export default async function OmradesPage({
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── TAKTEST-CTA ──────────────────────── */}
+        <section className="py-10 lg:py-14 bg-white border-t border-gray-100">
+          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
+            <TaktestInlineCta
+              heading={`Osäker på ditt tak i ${ort.name}?`}
+              text="Gör vårt kostnadsfria taktest på en minut, så får du en personlig bedömning av takets skick, innan du bokar en takkontroll."
+            />
           </div>
         </section>
 

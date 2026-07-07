@@ -6,6 +6,7 @@ import { ArrowRight, Calendar, Clock, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
+import TaktestInlineCta from "@/components/TaktestInlineCta";
 import { artiklar, getArtikel } from "@/lib/blogg";
 
 export async function generateStaticParams() {
@@ -253,6 +254,13 @@ export default async function ArtikelPage({
                     />
                   );
                 })}
+                {slug === "nar-byta-tak" && (
+                  <TaktestInlineCta
+                    className="mt-8 not-prose"
+                    heading="Är det dags att byta tak hos dig?"
+                    text="Gör vårt kostnadsfria taktest på en minut, så får du en personlig bedömning av takets skick baserat på ålder, material och synliga tecken."
+                  />
+                )}
               </article>
 
               {/* Sidebar */}

@@ -26,6 +26,7 @@ import {
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektReferens } from "@/sanity/lib/types";
 import { stats as companyStats, garanti } from "@/lib/company";
+import TaktestInlineCta from "@/components/TaktestInlineCta";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.sandsab.se/basta-taklaggare-stockholm" },
@@ -330,6 +331,16 @@ export default async function BastaTaklaggareStockholm() {
                 Eller ring 08-28 38 88
               </a>
             </div>
+          </div>
+        </section>
+
+        {/* ── TAKTEST-CTA ──────────────────────── */}
+        <section className="pb-4 lg:pb-8 bg-white">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <TaktestInlineCta
+              heading="Vet du om ditt tak behöver bytas?"
+              text="Innan du jämför takläggare, gör vårt kostnadsfria taktest på en minut och få en första bedömning av takets skick."
+            />
           </div>
         </section>
 
