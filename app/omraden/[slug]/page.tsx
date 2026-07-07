@@ -26,16 +26,14 @@ export async function generateStaticParams() {
 }
 
 // Per-slug config. Only hasselby has a full bespoke override; all others
-// use the shared template, optionally enriched with localDetail.
+// use the shared template. Descriptions are otherwise auto-built from the
+// ort's stadsdelar so each area page gets a specific, ~150-char meta
+// description (thin/generic descriptions get overridden by Google with
+// on-page text — see the Järfälla SERP where our old desc was ignored).
 // shortTitle: true -> omit "30 års" from title to stay ≤60 chars (long slugs).
 const OMRADE_CONFIG: Record<
   string,
-  {
-    localDetail?: string;
-    customTitle?: string;
-    customDesc?: string;
-    shortTitle?: boolean;
-  }
+  { customTitle?: string; customDesc?: string; shortTitle?: boolean }
 > = {
   hasselby: {
     customTitle:
@@ -43,15 +41,21 @@ const OMRADE_CONFIG: Record<
     customDesc:
       "Takläggare i Hässelby villastad, gård och strand. Specialister på 50–60-talsvillor – fast pris, upp till 30 års garanti och ROT på fakturan. Boka kostnadsfri takkontroll.",
   },
-  enskede: { localDetail: " trädgårdsstad" },
-  danderyd: { localDetail: " – Djursholm och Enebyberg" },
-  nacka: { localDetail: " – Saltsjöbaden och Boo" },
-  lidingo: { localDetail: " – Larsberg och Torsvik" },
-  bromma: { localDetail: " – Abrahamsberg och Nockeby" },
-  taby: { localDetail: " – Arninge och Näsbypark" },
-  "upplands-vasby": { shortTitle: true, localDetail: " – Väsby och Bollstanäs" },
-  "upplands-bro": { shortTitle: true, localDetail: " – Kungsängen och Bro" },
+  "upplands-vasby": { shortTitle: true },
+  "upplands-bro": { shortTitle: true },
 };
+
+// "Jakobsberg, Kallhäll, Barkarby, Viksjö" -> "Jakobsberg, Kallhäll och Barkarby"
+function joinStadsdelar(stadsdelar: string | undefined, max: number): string {
+  if (!stadsdelar) return "";
+  const parts = stadsdelar
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, max);
+  if (parts.length <= 1) return parts[0] ?? "";
+  return `${parts.slice(0, -1).join(", ")} och ${parts[parts.length - 1]}`;
+}
 
 export async function generateMetadata({
   params,
@@ -70,9 +74,18 @@ export async function generateMetadata({
       ? `Takläggare i ${ort.name} – fast pris & garanti | Sands`
       : `Takläggare i ${ort.name} – fast pris & 30 års garanti | Sands`);
 
-  const description =
-    cfg.customDesc ??
-    `Takläggare i ${ort.name}${cfg.localDetail ?? ""}. Fast pris, upp till 30 års garanti och ROT på fakturan. Boka kostnadsfri takkontroll.`;
+  const tail =
+    "Fast pris, upp till 30 års garanti och ROT-avdrag på fakturan. Boka kostnadsfri takkontroll.";
+  // Try 3 stadsdelar, fall back to 2, then none, to stay within ~160 chars.
+  const buildDesc = (): string => {
+    for (const n of [3, 2]) {
+      const hoods = joinStadsdelar(ort.stadsdelar, n);
+      const candidate = `Takläggare i ${ort.name} – ${hoods}. ${tail}`;
+      if (hoods && candidate.length <= 162) return candidate;
+    }
+    return `Takläggare i ${ort.name}. ${tail}`;
+  };
+  const description = cfg.customDesc ?? buildDesc();
 
   return pageMeta({
     path: `/omraden/${slug}`,

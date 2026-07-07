@@ -22,7 +22,7 @@ export const metadata: Metadata = pageMeta({
   path: "/projekt",
   title: "Slutförda takprojekt i Stockholm | bilder & referenser | Sands Entreprenad",
   description:
-    "Se våra senaste takbyten i Stockholm: före/efter-bilder från Vaxholm, Lidingö, Norrtälje, Täby, Bromma och fler. 2 500+ kunder sedan 2016.",
+    "Se våra senaste takbyten i Stockholm – bilder från färdiga projekt i Vaxholm, Lidingö, Norrtälje, Täby, Bromma och fler. 2 500+ kunder sedan 2016.",
 });
 
 function imgSrc(img: SanityImageWithMeta, w: number, h: number) {
