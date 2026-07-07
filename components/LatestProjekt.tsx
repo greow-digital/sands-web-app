@@ -56,67 +56,24 @@ export default async function LatestProjekt() {
 function ProjektCard({ p }: { p: ProjektLatest }) {
   if (!p.slug) return null;
 
-  const hasBeforeAfter = Boolean(
-    p.foreImage?.asset?._id && p.efterImage?.asset?._id
-  );
+  // Visa en enda utvald efterbild per projekt (foll. huvudbild om efterbild
+  // saknas). Vi visar inte langre en fore/efter-split eftersom fore-bilderna
+  // inte alltid holl tillrackligt bra kvalitet.
+  const bild = p.efterImage?.asset ? p.efterImage : p.huvudbild;
 
   return (
     <Link href={`/projekt/${p.slug}`} className="group block">
       <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-gray-200 mb-3">
-        {hasBeforeAfter ? (
-          <div className="absolute inset-0 grid grid-cols-2 gap-[2px]">
-            <div className="relative">
-              <Image
-                src={urlFor(p.foreImage!).width(600).height(750).fit("crop").url()}
-                alt={p.foreImage?.alt || `${p.title}, före`}
-                fill
-                sizes="(max-width: 768px) 50vw, 17vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                placeholder={
-                  p.foreImage?.asset?.metadata?.lqip ? "blur" : "empty"
-                }
-                blurDataURL={p.foreImage?.asset?.metadata?.lqip ?? undefined}
-              />
-            </div>
-            <div className="relative">
-              <Image
-                src={urlFor(p.efterImage!).width(600).height(750).fit("crop").url()}
-                alt={p.efterImage?.alt || `${p.title}, efter`}
-                fill
-                sizes="(max-width: 768px) 50vw, 17vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                placeholder={
-                  p.efterImage?.asset?.metadata?.lqip ? "blur" : "empty"
-                }
-                blurDataURL={p.efterImage?.asset?.metadata?.lqip ?? undefined}
-              />
-            </div>
-            <div className="absolute bottom-0 inset-x-0 flex z-10">
-              <div className="flex-1 py-2 text-center text-xs font-bold text-white bg-black/50 backdrop-blur-sm">
-                FÖRE
-              </div>
-              <div
-                className="flex-1 py-2 text-center text-xs font-bold text-white backdrop-blur-sm"
-                style={{ backgroundColor: "rgba(43,116,252,0.7)" }}
-              >
-                EFTER
-              </div>
-            </div>
-          </div>
-        ) : (
-          p.huvudbild?.asset && (
-            <Image
-              src={urlFor(p.huvudbild).width(1200).height(750).fit("crop").url()}
-              alt={p.huvudbild.alt || p.title || ""}
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              placeholder={
-                p.huvudbild?.asset?.metadata?.lqip ? "blur" : "empty"
-              }
-              blurDataURL={p.huvudbild?.asset?.metadata?.lqip ?? undefined}
-            />
-          )
+        {bild?.asset && (
+          <Image
+            src={urlFor(bild).width(1200).height(750).fit("crop").url()}
+            alt={bild.alt || p.title || ""}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            placeholder={bild.asset.metadata?.lqip ? "blur" : "empty"}
+            blurDataURL={bild.asset.metadata?.lqip ?? undefined}
+          />
         )}
       </div>
       <p

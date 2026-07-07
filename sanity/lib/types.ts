@@ -40,7 +40,6 @@ export type ProjektLatest = {
   typ: string | null;
   ar: number | null;
   huvudbild: SanityImageWithMeta | null;
-  foreImage: SanityImageWithMeta | null;
   efterImage: SanityImageWithMeta | null;
 };
 

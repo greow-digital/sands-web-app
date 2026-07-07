@@ -100,10 +100,6 @@ export const LATEST_PROJEKT_QUERY = defineQuery(/* groq */ `
       ...,
       asset->{ _id, url, metadata { lqip } }
     },
-    foreImage {
-      ...,
-      asset->{ _id, url, metadata { lqip } }
-    },
     efterImage {
       ...,
       asset->{ _id, url, metadata { lqip } }
