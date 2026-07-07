@@ -23,7 +23,8 @@ const TEASER_DELAY_MS = 12000;
 const STORAGE_KEY = "sands_taktest_widget";
 const DONE_FLAG = "sands_taktest_done";
 const LEAD_FIRED_FLAG = "sands_taktest_lead_fired";
-const AVATAR = "/images/logo-sandsentreprenad-icon.svg";
+// Foto på en riktig takexpert från Sands gör chatten mänskligare än loggan.
+const AVATAR = "/images/chat-takexpert.jpg";
 
 type Flow =
   | "intro"
@@ -430,8 +431,8 @@ export default function TaktestWidget() {
             className="flex items-center gap-3 px-4 py-3.5 shrink-0"
             style={{ backgroundColor: "var(--color-primary)" }}
           >
-            <div className="w-9 h-9 rounded-full bg-white/95 flex items-center justify-center overflow-hidden shrink-0">
-              <Image src={AVATAR} alt="Sands" width={24} height={24} className="w-5 h-5" />
+            <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-white/20 ring-2 ring-white/40">
+              <AgentAvatar sizePx={40} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-white font-bold text-sm leading-tight">Taktest</p>
@@ -609,11 +610,29 @@ function isPast(flow: Flow, step: Flow): boolean {
 }
 
 // ── Delkomponenter ─────────────────────────────────────
+
+// Foto på takexpert med graciös fallback till loggan om filen saknas.
+const AGENT_FALLBACK = "/images/logo-sandsentreprenad-icon.svg";
+function AgentAvatar({ sizePx }: { sizePx: number }) {
+  const [src, setSrc] = useState(AVATAR);
+  const isFallback = src === AGENT_FALLBACK;
+  return (
+    <Image
+      src={src}
+      alt="Takexpert på Sands Entreprenad"
+      fill
+      sizes={`${sizePx}px`}
+      className={isFallback ? "object-contain p-1.5 bg-white" : "object-cover"}
+      onError={() => setSrc(AGENT_FALLBACK)}
+    />
+  );
+}
+
 function Bot({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-start gap-2.5 animate-[fadeIn_0.25s_ease]">
-      <div className="w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center overflow-hidden shrink-0 mt-0.5">
-        <Image src={AVATAR} alt="" width={18} height={18} className="w-4 h-4" />
+      <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 mt-0.5 border border-gray-200">
+        <AgentAvatar sizePx={32} />
       </div>
       <div className="max-w-[80%] rounded-2xl rounded-tl-sm bg-white border border-gray-100 px-3.5 py-2.5 text-[13.5px] text-gray-700 leading-relaxed shadow-sm">
         {children}
