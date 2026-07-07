@@ -10,6 +10,7 @@ import SeasonBanner from "@/components/SeasonBanner";
 // import InstagramFeed from "@/components/InstagramFeed"; // avstangd, se nedan
 import LatestProjekt from "@/components/LatestProjekt";
 import TaktestCta from "@/components/TaktestCta";
+import TaktestWidgetLoader from "@/components/TaktestWidgetLoader";
 import HeroVideo from "@/components/HeroVideo";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
 
@@ -825,6 +826,7 @@ export default async function Home() {
 
       </main>
       <Footer />
+      <TaktestWidgetLoader />
     </>
   );
 }
