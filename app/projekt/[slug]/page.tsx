@@ -252,15 +252,22 @@ export default async function ProjektDetailPage({
                   </div>
                 )}
 
-                {p.slug && PROJEKT_VIDEOS[p.slug] && (
-                  <div className="relative aspect-video rounded-2xl overflow-hidden mb-8 bg-black">
-                    <video
-                      src={PROJEKT_VIDEOS[p.slug]}
-                      controls
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-full object-cover"
-                    />
+                {p.slug && PROJEKT_VIDEOS[p.slug]?.length > 0 && (
+                  <div className="space-y-4 mb-8">
+                    {PROJEKT_VIDEOS[p.slug].map((src) => (
+                      <div
+                        key={src}
+                        className="relative aspect-video rounded-2xl overflow-hidden bg-black"
+                      >
+                        <video
+                          src={src}
+                          controls
+                          playsInline
+                          preload="metadata"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
                   </div>
                 )}
 

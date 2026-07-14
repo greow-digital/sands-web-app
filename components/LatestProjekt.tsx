@@ -5,6 +5,8 @@ import { client } from "@/sanity/lib/client";
 import { LATEST_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektLatest } from "@/sanity/lib/types";
+import { PROJEKT_VIDEOS } from "@/lib/projekt-videos";
+import ProjektCardVideo from "@/components/ProjektCardVideo";
 
 // On-demand ISR via revalidate-sanity webhook (samma som /projekt).
 // Ingen `revalidate`-konstant här - revalideras nar redaktor publicerar i Studio.
@@ -61,6 +63,11 @@ function ProjektCard({ p }: { p: ProjektLatest }) {
   // inte alltid holl tillrackligt bra kvalitet.
   const bild = p.efterImage?.asset ? p.efterImage : p.huvudbild;
 
+  // Finns video pa projektet spelas den som tyst loop ovanpa stillbilden.
+  // Bilden ligger kvar som basskikt -> ingen LCP/CLS-paverkan, och videon
+  // laddas forst nar kortet ar nara viewporten (se ProjektCardVideo).
+  const video = PROJEKT_VIDEOS[p.slug]?.[0];
+
   return (
     <Link href={`/projekt/${p.slug}`} className="group block">
       <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-gray-200 mb-3">
@@ -75,6 +82,7 @@ function ProjektCard({ p }: { p: ProjektLatest }) {
             blurDataURL={bild.asset.metadata?.lqip ?? undefined}
           />
         )}
+        {video && <ProjektCardVideo src={video} />}
       </div>
       <p
         className="text-sm font-semibold group-hover:text-[#2B74FC] transition-colors"
