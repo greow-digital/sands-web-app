@@ -121,7 +121,7 @@ export default function TakbesiktningPage() {
             { label: "Tjänster", href: "/tjanster" },
             { label: "Takbesiktning" },
           ]}
-          backgroundImage="/images/hero-house.jpg"
+          backgroundImage="/images/bromma-tak-hero.jpg"
           imageAlt="Takbesiktning utförd av certifierad takläggare"
         />
 

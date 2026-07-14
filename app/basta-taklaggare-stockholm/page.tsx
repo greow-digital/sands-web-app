@@ -248,7 +248,7 @@ export default async function BastaTaklaggareStockholm() {
             { label: "Hem", href: "/" },
             { label: "Stockholms bästa takläggare" },
           ]}
-          backgroundImage="/images/hero-house.jpg"
+          backgroundImage="/images/bromma-tak-hero.jpg"
           imageAlt="Takläggning i Stockholm från Sands Entreprenad"
         />
 

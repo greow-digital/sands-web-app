@@ -184,8 +184,8 @@ export default function OmOssPage() {
               <div>
                 <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-100 mb-8">
                   <Image
-                    src="/images/about-sands-building.jpg"
-                    alt="Sands Entreprenad"
+                    src="/images/solna-uteplats-skymning.jpg"
+                    alt="Uteplats i Solna med pool, altan och belyst staket, byggd av Sands Entreprenad"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"

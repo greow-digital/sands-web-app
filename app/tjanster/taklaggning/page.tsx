@@ -147,12 +147,12 @@ export default async function TaklaggningPage() {
   // för flera sektioner när typ-fältet inte matchade tydligt.)
   const serviceImages = {
     takbyte: {
-      src: "/images/about-sands-building.jpg",
-      alt: "Hus med nytt tak, takbyte av Sands Entreprenad",
+      src: "/images/bromma-tak-takbyte.jpg",
+      alt: "Villa i Bromma med nytt tegeltak efter takbyte av Sands Entreprenad",
     },
     omlaggning: {
-      src: "/images/villa-render.jpg",
-      alt: "Villa med omlagt tak",
+      src: "/images/bromma-tak-efter.jpg",
+      alt: "Nylagt tvåkupigt lertegel sett ovanifrån efter takomläggning",
     },
     renovering: {
       src: "/images/hero-sands-construction.jpg",
@@ -202,7 +202,7 @@ export default async function TaklaggningPage() {
             { label: "Tjänster", href: "/tjanster" },
             { label: "Takläggning" },
           ]}
-          backgroundImage="/images/hero-house.jpg"
+          backgroundImage="/images/bromma-tak-hero.jpg"
           imageAlt="Villa i Stockholm med nylagt tak"
         />
 

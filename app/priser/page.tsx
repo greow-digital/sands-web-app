@@ -121,7 +121,7 @@ export default function PriserPage() {
             expanderbara detaljer och allt innehall under. */}
         <section className="relative overflow-hidden">
           <Image
-            src="/images/hero-priser.jpg"
+            src="/images/bromma-tak-efter.jpg"
             alt="Villa i Stockholm med nytt tak"
             fill
             priority

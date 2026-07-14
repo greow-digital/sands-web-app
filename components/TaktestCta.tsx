@@ -12,7 +12,7 @@ export default function TaktestCta() {
           {/* Bild */}
           <div className="relative h-56 sm:h-72 lg:h-auto lg:absolute lg:inset-0">
             <Image
-              src="/images/hero-offert.jpg"
+              src="/images/bromma-tak-takbyte.jpg"
               alt="Villa i skymning med nylagt plåttak i Stockholm"
               fill
               sizes="(max-width: 1024px) 100vw, 1200px"

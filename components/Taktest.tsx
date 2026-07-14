@@ -312,7 +312,7 @@ function fireGtag(name: string, params: object) {
   });
 }
 
-const BG = "/images/hero-house.jpg";
+const BG = "/images/bromma-tak-hero.jpg";
 
 // ──────────────────────────────────────────────────────────
 // Komponent

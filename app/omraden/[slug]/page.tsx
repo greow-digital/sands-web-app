@@ -144,7 +144,7 @@ export default async function OmradesPage({
             { label: "Områden", href: "/omraden" },
             { label: ort.name },
           ]}
-          backgroundImage="/images/hero-house.jpg"
+          backgroundImage="/images/bromma-tak-hero.jpg"
           imageAlt={`Takläggning i ${ort.name}`}
         />
 

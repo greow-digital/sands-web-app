@@ -25,12 +25,12 @@ const bildKarta: Record<string, string> = {
   takfonsterkupor: "/images/taktyp-plattak.jpg",
   hangrannorstupror: "/images/hangrannor-efter.jpg",
   taksakerhet: "/images/hero-sands-construction.jpg",
-  takbesiktning: "/images/hero-house.jpg",
+  takbesiktning: "/images/bromma-tak-hero.jpg",
   totalentreprenad: "/images/totalentreprenad.jpg",
-  fasadrenovering: "/images/about-sands-building.jpg",
+  fasadrenovering: "/images/fasad-panelbyte-bromma.jpg",
   badrumsrenovering: "/images/badrum.png",
   koksrenovering: "/images/koksrenovering.jpg",
-  ovriga: "/images/about-sands-building.jpg",
+  ovriga: "/images/solna-uteplats-dag.jpg",
 };
 
 export const tjanster: Tjanst[] = [

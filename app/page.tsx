@@ -336,8 +336,8 @@ export default async function Home() {
               {/* Vänster bild */}
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-200">
                 <Image
-                  src="/images/hero-sands-construction.jpg"
-                  alt="Sands Entreprenad takläggare i arbete"
+                  src="/images/process-takomlaggning-bromma.jpg"
+                  alt="Nylagt tegeltak på villa i Bromma, sett från ovan med Sands Entreprenads ställningsbanderoll på fasaden"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -681,8 +681,8 @@ export default async function Home() {
             <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-center">
               <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200">
                 <Image
-                  src="/images/hero-house.jpg"
-                  alt="Tak som behöver åtgärdas"
+                  src="/images/bromma-tak-fore.jpg"
+                  alt="Slitet tegeltak med urblekta och skadade pannor, sett ovanifrån"
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover"
