@@ -16,6 +16,17 @@ export default async function LatestProjekt() {
 
   if (!projekt || projekt.length === 0) return null;
 
+  // Prioritera de senaste projekten som har video så att swimlanen får
+  // rörelse (drönarklipp). Bägge listorna behåller frågans senaste-ordning,
+  // så vi visar de tre nyaste projekten med video och fyller vid behov på
+  // med de nyaste utan.
+  const hasVideo = (p: ProjektLatest) =>
+    Boolean(p.slug && PROJEKT_VIDEOS[p.slug]?.length);
+  const valda = [
+    ...projekt.filter(hasVideo),
+    ...projekt.filter((p) => !hasVideo(p)),
+  ].slice(0, 3);
+
   return (
     <section
       className="py-20 lg:py-28"
@@ -46,7 +57,7 @@ export default async function LatestProjekt() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
-          {projekt.map((p) => (
+          {valda.map((p) => (
             <ProjektCard key={p._id} p={p} />
           ))}
         </div>

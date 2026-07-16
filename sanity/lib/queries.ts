@@ -87,9 +87,12 @@ export const PROJEKT_COUNT_QUERY = defineQuery(/* groq */ `
   count(*[_type == "projekt" && defined(slug.current)])
 `);
 
+// Hämtar ett bredare fönster av de senaste projekten. Urvalet till de tre
+// korten på startsidan görs i LatestProjekt-komponenten, som prioriterar
+// projekt med video (se PROJEKT_VIDEOS) så att swimlanen visar rörelse.
 export const LATEST_PROJEKT_QUERY = defineQuery(/* groq */ `
   *[_type == "projekt" && defined(slug.current)]
-  | order(ar desc, _createdAt desc)[0...3] {
+  | order(ar desc, _createdAt desc)[0...12] {
     _id,
     title,
     "slug": slug.current,
