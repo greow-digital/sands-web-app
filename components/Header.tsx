@@ -160,9 +160,13 @@ export default function Header() {
             </Link>
             <Link
               href="/taktest"
-              className="font-semibold text-[#2B74FC] hover:opacity-80 transition-opacity"
+              className="px-5 py-2.5 rounded-full text-sm font-semibold border-2 transition-all hover:scale-[1.02]"
+              style={{
+                color: "var(--color-primary)",
+                borderColor: "var(--color-primary)",
+              }}
             >
-              Taktest
+              Gör vårt taktest
             </Link>
           </nav>
 
@@ -286,10 +290,14 @@ export default function Header() {
             ))}
             <Link
               href="/taktest"
-              className="block px-3 py-3 text-sm font-bold text-[#2B74FC]"
+              className="block text-center mx-3 mt-3 px-4 py-3 rounded-full text-sm font-semibold border-2"
+              style={{
+                color: "var(--color-primary)",
+                borderColor: "var(--color-primary)",
+              }}
               onClick={() => setMobileOpen(false)}
             >
-              Taktest
+              Gör vårt taktest
             </Link>
           </div>
         </div>
