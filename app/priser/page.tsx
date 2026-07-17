@@ -257,6 +257,24 @@ export default function PriserPage() {
             <p className="text-xs text-gray-400 mt-6">
               * Exempelpris sadeltak 140 m² efter ROT-avdrag 30%.
             </p>
+            <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mt-6">
+              Priserna gäller en komplett{" "}
+              <Link
+                href="/tjanster/taklaggning"
+                className="font-semibold text-[#2B74FC] hover:underline"
+              >
+                takomläggning
+              </Link>{" "}
+              inklusive rivning, nytt underlag, plåt och taksäkerhet. Vill du
+              veta hur du bedömer en offert och{" "}
+              <Link
+                href="/basta-taklaggare-stockholm"
+                className="font-semibold text-[#2B74FC] hover:underline"
+              >
+                jämför takläggare i Stockholm
+              </Link>{" "}
+              har vi samlat råden i vår köpguide.
+            </p>
           </div>
         </section>
 

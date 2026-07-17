@@ -21,7 +21,7 @@ export const artiklar: Artikel[] = [
     image: "/images/blogg-vad-kostar-takbyte.jpg",
     innehåll: `## Riktpriser per taktyp
 
-Priset för ett takbyte varierar beroende på vilket material du väljer, takets storlek och konstruktion. Här är de vanligaste materialen och vad de kostar i Stockholmsområdet, alla priser är efter 30% ROT-avdrag.
+Priset för <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">ett takbyte</a> varierar beroende på vilket material du väljer, takets storlek och konstruktion. Här är de vanligaste materialen och vad de kostar i Stockholmsområdet, alla priser är efter 30% ROT-avdrag.
 
 **Betongtak:** Från ca 1 200 kr/m²
 Betongpannor är det vanligaste alternativet i Sverige. De är robusta, prisvärda och finns i ett brett sortiment av kulörer och profiler. Ett tak på 140 m² kostar från ca 169 000 kr efter ROT.
@@ -69,7 +69,7 @@ Maxbeloppet för ROT-avdrag är 50 000 kr per person och år (2026).
 
 ## Så får du ett exakt pris
 
-Riktpriserna ovan ger en bra bild, men varje tak är unikt. Vi rekommenderar alltid en kostnadsfri takkontroll där vi inspekterar taket på plats och lämnar ett fast pris utan förbindelser.`,
+Riktpriserna ovan ger en bra bild, men varje tak är unikt. Vi rekommenderar alltid en kostnadsfri takkontroll där vi inspekterar taket på plats och lämnar ett fast pris utan förbindelser. Vill du jämföra kostnader för olika taktyper hittar du fler räkneexempel på vår <a href="/priser" class="text-[#2B74FC] font-semibold">prissida för takbyten</a>.`,
   },
   {
     slug: "nar-byta-tak",
@@ -85,7 +85,7 @@ Riktpriserna ovan ger en bra bild, men varje tak är unikt. Vi rekommenderar all
 Det är inte alltid uppenbart att taket är på väg att ge upp. Här är de vanligaste varningssignalerna:
 
 **Synliga skador på takpannorna**
-Spruckna, förskjutna eller saknade pannor är tydliga tecken på att taket närmar sig slutet av sin livslängd. Enstaka pannor kan bytas, men om skadorna är utbredda bör hela taket läggas om.
+Spruckna, förskjutna eller saknade pannor är tydliga tecken på att taket närmar sig slutet av sin livslängd. Enstaka pannor kan bytas, men om skadorna är utbredda bör <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">hela taket läggas om</a>.
 
 **Läckage och fuktfläckar**
 Vattenfläckar i taket eller på vindsvåningen är allvarliga varningssignaler. Läckage kan orsaka mögel, röta och skador på isoleringen som blir dyra att åtgärda.
@@ -116,7 +116,7 @@ Att skjuta upp ett takbyte kan leda till:
 
 ## Boka en kostnadsfri takkontroll
 
-Det bästa sättet att veta säkert är att låta en fackman inspektera taket. Vi erbjuder kostnadsfri takkontroll i hela Stockholms län, vi inspekterar taket och ger dig en ärlig bedömning utan förbindelser.`,
+Det bästa sättet att veta säkert är att låta en fackman inspektera taket. Vi erbjuder kostnadsfri takkontroll i hela Stockholms län, vi inspekterar taket och ger dig en ärlig bedömning utan förbindelser. Ska du byta tak är det också värt att läsa hur du <a href="/basta-taklaggare-stockholm" class="text-[#2B74FC] font-semibold">väljer rätt takläggare i Stockholm</a> innan du skriver kontrakt.`,
   },
   {
     slug: "monier-garanti",
@@ -131,7 +131,7 @@ Det bästa sättet att veta säkert är att låta en fackman inspektera taket. V
 
 Moniers Tätt tak-garanti är en systemgaranti som täcker hela taksystemets funktion och täthet, inte bara enskilda material. Det innebär att om ditt tak läcker under garantitiden åtgärdar Monier problemet utan kostnad för dig.
 
-Garantin gäller i upp till 30 år vid komplett takomläggning med Moniers taksystem.
+Garantin gäller i upp till 30 år vid <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">komplett takomläggning</a> med Moniers taksystem.
 
 ## Vad täcker garantin?
 
@@ -154,7 +154,7 @@ För att garantin ska gälla krävs:
 
 ## Varför är det viktigt?
 
-De flesta takläggare erbjuder garanti på eget utförande (vanligtvis 5–10 år). Moniers systemgaranti ger dig upp till 30 år, det är en av marknadens starkaste garantier för takläggning.
+De flesta takläggare erbjuder garanti på eget utförande (vanligtvis 5–10 år). Moniers systemgaranti ger dig upp till 30 år, det är en av marknadens starkaste garantier för takläggning. Garantin är en av de viktigaste punkterna att jämföra när du <a href="/basta-taklaggare-stockholm" class="text-[#2B74FC] font-semibold">letar efter en bra takläggare</a>.
 
 Du får ett garantibevis vid takkontrollen som specificerar exakta villkor och garantitid för ditt specifika tak.
 
@@ -212,7 +212,7 @@ Eternitbyte kostar mer än ett vanligt takbyte eftersom saneringskostnaden tillk
 - Tillgänglighet och ställningsbehov
 - Val av nytt takmaterial
 
-Vi ger alltid fast pris efter takkontroll, inga överraskningar.
+Vi ger alltid fast pris efter takkontroll, inga överraskningar. Se hela vår tjänst för <a href="/tjanster/eternittak" class="text-[#2B74FC] font-semibold">eternitsanering och takbyte</a>.
 
 Eternittak är fortfarande vanliga på äldre hus och gårdar i Roslagen. Är du i området hjälper vår <a href="/omraden/norrtalje" class="text-[#2B74FC] font-semibold">takläggare i Norrtälje</a> dig med både säker asbestsanering och nytt tak.
 
@@ -249,7 +249,7 @@ Om två personer äger bostaden tillsammans kan ni alltså dra av upp till 100 0
 
 ## Vad kan man dra av vid takbyte?
 
-Vid ett takbyte är en stor del av kostnaden arbetskostnad, vilket gör ROT-avdraget särskilt fördelaktigt. Du kan dra av arbetskostnaden för:
+Vid ett <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">takbyte</a> är en stor del av kostnaden arbetskostnad, vilket gör ROT-avdraget särskilt fördelaktigt. Du kan dra av arbetskostnaden för:
 
 - Rivning av gammalt tak
 - Montering av nytt underlag, läkt och pannor
@@ -276,7 +276,7 @@ Takbyte 140 m² med betongpannor:
 - ROT-avdrag (30%): **−42 000 kr**
 - **Du betalar: ca 199 000 kr**
 
-Med två ägare som delar avdraget kan besparingen bli ännu större.
+Med två ägare som delar avdraget kan besparingen bli ännu större. Fler räkneexempel för olika taktyper hittar du på vår <a href="/priser" class="text-[#2B74FC] font-semibold">sida med aktuella takpriser</a>.
 
 ## Villkor att tänka på
 
@@ -316,7 +316,7 @@ Plåttak och tegeltak är två av de mest hållbara takmaterialen du kan välja.
 
 **Pris:** Från ca 1 500 kr/m² efter ROT
 
-**Passar bäst för:** Äldre villor, 20–50-talshus, tegelhus, lantliga miljöer.
+**Passar bäst för:** Äldre villor, 20–50-talshus, tegelhus, lantliga miljöer. Läs mer om <a href="/tjanster/tegeltak" class="text-[#2B74FC] font-semibold">tegeltak som takmaterial</a>.
 
 ## Plåttak, det moderna valet
 
@@ -334,7 +334,7 @@ Plåttak och tegeltak är två av de mest hållbara takmaterialen du kan välja.
 
 **Pris:** Från ca 1 800 kr/m² efter ROT
 
-**Passar bäst för:** Moderna villor, hus med flack taklutning, tillbyggnader, moderna arkitektritade hus.
+**Passar bäst för:** Moderna villor, hus med flack taklutning, tillbyggnader, moderna arkitektritade hus. Läs mer om <a href="/tjanster/plattak" class="text-[#2B74FC] font-semibold">plåttak och dess fördelar</a>.
 
 ## Jämförelse
 

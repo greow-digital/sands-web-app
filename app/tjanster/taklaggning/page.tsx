@@ -305,7 +305,15 @@ export default async function TaklaggningPage() {
               <p className="text-gray-600 leading-relaxed">
                 Vid kostnadsfri takkontroll går vi igenom takets skick och
                 rekommenderar det alternativ som faktiskt löser ditt problem.
-                Du betalar bara för det du behöver.
+                Du betalar bara för det du behöver. Osäker på vem du ska anlita?
+                Vår guide till att{" "}
+                <Link
+                  href="/basta-taklaggare-stockholm"
+                  className="font-semibold text-[#2B74FC] hover:underline"
+                >
+                  välja bästa takläggare i Stockholm
+                </Link>{" "}
+                går igenom vad du bör kolla först.
               </p>
             </div>
 
@@ -461,7 +469,20 @@ export default async function TaklaggningPage() {
                 <p className="text-gray-600 mb-4 leading-relaxed">
                   Vi river hela det gamla taket, byter råspont där det behövs,
                   lägger ny underlagspapp och tar på en helt ny taktäckning i
-                  betong, tegel, plåt eller papp. Som certifierad Monier
+                  <Link
+                    href="/tjanster/betongtak"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    betong
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="/tjanster/tegeltak"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    tegel
+                  </Link>
+                  , plåt eller papp. Som certifierad Monier
                   Takpartner sedan 2016 ingår upp till 30 års tätt-tak-garanti
                   vid komplett byte med Moniers taksystem.
                 </p>
