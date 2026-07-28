@@ -106,6 +106,20 @@ async function captureLead(params: LeadArgs): Promise<string> {
   }
 }
 
+// Ber om mik-tillstånd och SLÄPPER strömmen direkt. Annars håller vår probe
+// kvar mikrofonen, och SDK:ns egen getUserMedia (för LiveKit-publish-spåret)
+// får en upptagen enhet -> trackID undefined -> rummet kopplas ner precis
+// efter hälsningen. Konsolen bekräftade exakt det förloppet.
+async function acquireMic(): Promise<boolean> {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    stream.getTracks().forEach((t) => t.stop());
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // ── UI ───────────────────────────────────────────────────────────
 
 export default function VoiceSession({ onClose }: { onClose: () => void }) {
@@ -130,24 +144,21 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
 
   async function start() {
     setMicDenied(false);
-    try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-      startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
-    } catch {
+    if (!(await acquireMic())) {
       setMicDenied(true);
+      return;
     }
+    startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
   }
 
   // Starta vid mount, avsluta vid unmount.
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      try {
-        await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (!cancelled) startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
-      } catch {
-        if (!cancelled) setMicDenied(true);
-      }
+      const ok = await acquireMic();
+      if (cancelled) return;
+      if (ok) startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+      else setMicDenied(true);
     })();
     return () => {
       cancelled = true;
