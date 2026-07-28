@@ -2,12 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Phone } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 type GtagFn = (event: string, name: string, params: object) => void;
 
-function fireStickyClick(type: "form" | "phone") {
+function fireStickyClick(type: "form" | "voice") {
   if (typeof window === "undefined" || !("gtag" in window)) return;
   (window as unknown as { gtag: GtagFn }).gtag("event", "sticky_cta_click", {
     event_category: "engagement",
@@ -63,15 +62,23 @@ export default function MobileCTA() {
           >
             Få gratis offert
           </Link>
-          {/* Sekundär: telefon, liten ikon utan text */}
-          <a
-            href="tel:08283888"
-            onClick={() => fireStickyClick("phone")}
-            aria-label="Ring oss på 08-28 38 88"
-            className="shrink-0 flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 text-gray-500 hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
+          {/* Sekundär: prata med röstrådgivaren (öppnar voice-panelen) */}
+          <button
+            type="button"
+            onClick={() => {
+              fireStickyClick("voice");
+              window.dispatchEvent(new Event("sands:open-voice"));
+            }}
+            aria-label="Prata med vår takrådgivare"
+            className="shrink-0 flex items-center gap-2 h-12 pl-1.5 pr-4 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
           >
-            <Phone size={18} />
-          </a>
+            <img
+              src="/images/voice-avatar.jpg"
+              alt=""
+              className="h-9 w-9 rounded-full object-cover"
+            />
+            Prata
+          </button>
         </div>
       </div>
     </div>

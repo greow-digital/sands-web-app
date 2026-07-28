@@ -321,7 +321,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed bottom-24 right-4 z-40 flex w-[calc(100vw-2rem)] max-w-xs flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-4 right-4 z-40 flex w-[calc(100vw-2rem)] max-w-xs flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl sm:bottom-6 sm:right-6">
       {/* Rubrik */}
       <div className="flex items-center gap-2.5 px-4 py-3">
         <div className="relative shrink-0">
