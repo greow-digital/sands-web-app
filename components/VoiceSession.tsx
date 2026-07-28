@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ConversationProvider,
   useConversation,
@@ -116,92 +116,62 @@ export default function VoiceSession({ onClose }: { onClose: () => void }) {
   );
 }
 
-// Om anslutningen hänger i "connecting" längre än så här utan att bli
-// "connected", behandlar vi det som ett tapp så användaren aldrig fastnar.
-const CONNECT_TIMEOUT_MS = 20000;
-
 function VoiceInner({ onClose }: { onClose: () => void }) {
   const [micDenied, setMicDenied] = useState(false);
-  const [dropped, setDropped] = useState(false);
-  const userClosing = useRef(false);
-  const watchdog = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [everConnected, setEverConnected] = useState(false);
 
+  // Client tool: stabil modul-funktion, registreras en gång.
   useConversationClientTool("capture_lead", captureLead);
 
-  const { status, isSpeaking, startSession, endSession } = useConversation({
-    onDisconnect: (details) => {
-      // Vi stängde själva (X-knapp eller unmount): ingen "fortsätt"-prompt.
-      if (userClosing.current || details.reason === "user") return;
-      // Agenten avslutade eller anslutningen bröts. reason loggas så du i
-      // ElevenLabs kan se om det är agent-config (turn/slut) eller nät.
-      console.warn("[voice] frånkopplad, reason:", details.reason);
-      setDropped(true);
-    },
-    onError: (message) => {
-      console.warn("[voice] fel:", message);
-      setDropped(true);
-    },
-  });
+  // Inga callbacks/options här med flit: inline-callbacks får ny identitet
+  // vid varje re-render (och agenten re-renderar när den pratar), vilket kan
+  // störa den live-anslutningen. Vi driver UI:t enbart från status.
+  const { status, isSpeaking, startSession, endSession } = useConversation();
 
-  function clearWatchdog() {
-    if (watchdog.current) {
-      clearTimeout(watchdog.current);
-      watchdog.current = null;
-    }
-  }
-
-  async function connect() {
+  async function start() {
     setMicDenied(false);
-    setDropped(false);
-    clearWatchdog();
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
       startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
-      watchdog.current = setTimeout(() => setDropped(true), CONNECT_TIMEOUT_MS);
     } catch {
       setMicDenied(true);
     }
   }
 
-  // Starta vid mount, städa vid unmount.
+  // Starta vid mount, avsluta vid unmount.
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
         await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (cancelled) return;
-        startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
-        watchdog.current = setTimeout(() => setDropped(true), CONNECT_TIMEOUT_MS);
+        if (!cancelled) startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
       } catch {
         if (!cancelled) setMicDenied(true);
       }
     })();
     return () => {
       cancelled = true;
-      userClosing.current = true;
-      clearWatchdog();
       endSession();
     };
     // startSession/endSession är ref-stabila; kör bara vid mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Uppkopplad igen: rensa watchdog och "dropped".
   useEffect(() => {
-    if (status === "connected") {
-      clearWatchdog();
-      setDropped(false);
-    } else if (status === "error") {
-      clearWatchdog();
-      setDropped(true);
-    }
+    if (status === "connected") setEverConnected(true);
   }, [status]);
 
-  const restartable = micDenied || dropped;
+  // "Slut" = ett fel, eller frånkopplad EFTER att vi en gång varit
+  // uppkopplade (så initiala "disconnected" innan start inte flaggas).
+  const ended =
+    !micDenied &&
+    (status === "error" || (status === "disconnected" && everConnected));
+  const restartable = micDenied || ended;
+
   const label = micDenied
     ? "Mikrofon behövs, tryck för att försöka igen"
-    : dropped
-    ? "Samtalet avslutades, tryck för att fortsätta"
+    : ended
+    ? "Samtalet avslutades, tryck för att prata igen"
     : status === "connected"
     ? isSpeaking
       ? "Rådgivaren pratar…"
@@ -210,7 +180,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
 
   const dotColor = micDenied
     ? "#ef4444"
-    : dropped
+    : ended
     ? "#f59e0b"
     : status === "connected"
     ? isSpeaking
@@ -219,8 +189,6 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     : "#9ca3af";
 
   function handleClose() {
-    userClosing.current = true;
-    clearWatchdog();
     endSession();
     onClose();
   }
@@ -229,7 +197,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     <div className="fixed bottom-24 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-3 shadow-xl">
       <button
         type="button"
-        onClick={restartable ? connect : undefined}
+        onClick={restartable ? start : undefined}
         disabled={!restartable}
         aria-label={restartable ? "Starta samtal igen" : "Samtalsstatus"}
         className={`flex items-center gap-3 ${
