@@ -2,21 +2,29 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Voice-sessionen drar in ElevenLabs React SDK + WebRTC (LiveKit), vilket är
-// tungt. Den lazy-laddas därför först när besökaren klickar, så /projekt
-// behåller sin laddtid och Core Web Vitals vid sidladdning. Mountas just nu
-// bara på /projekt som ett test av röstagenten (agent "Takrenovering").
+// tungt. Den lazy-laddas därför först när besökaren klickar, så sidladdningen
+// och Core Web Vitals inte påverkas. Mountas site-wide via app/layout.tsx.
 const VoiceSession = dynamic(() => import("@/components/VoiceSession"), {
   ssr: false,
 });
 
-// Synlig versionsmarkör på voice-knappen. Bumpa vid varje deploy så det går
-// att se i produktion vilken build som faktiskt serveras.
-const BUILD = "v16";
+// Sidor där röst-bubblan inte ska visas: offertformuläret, tack-sidan samt
+// Studio/POC-sidor.
+const HIDDEN_PREFIXES = ["/offert", "/tack", "/studio", "/projekt-sanity-poc"];
 
 export default function ElevenLabsWidget() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  if (
+    pathname &&
+    HIDDEN_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + "/"))
+  ) {
+    return null;
+  }
 
   if (open) return <VoiceSession onClose={() => setOpen(false)} />;
 
@@ -33,10 +41,6 @@ export default function ElevenLabsWidget() {
         className="h-8 w-8 shrink-0 rounded-full object-cover ring-2 ring-white/40"
       />
       Prata med oss
-      {/* Synlig build-markör för felsökning. Bumpas vid varje deploy. */}
-      <span className="ml-1 rounded bg-white/25 px-1.5 py-0.5 text-[10px] font-bold leading-none">
-        {BUILD}
-      </span>
     </button>
   );
 }

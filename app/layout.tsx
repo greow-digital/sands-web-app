@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import MobileCTA from "@/components/MobileCTA";
+import ElevenLabsWidget from "@/components/ElevenLabsWidget";
 import PhoneClickTracker from "@/components/PhoneClickTracker";
 import ClickIdCapture from "@/components/ClickIdCapture";
 import ThirdPartyScripts from "@/components/ThirdPartyScripts";
@@ -130,6 +131,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <MobileCTA />
+        <ElevenLabsWidget />
         <PhoneClickTracker />
         <ClickIdCapture />
         <ThirdPartyScripts />

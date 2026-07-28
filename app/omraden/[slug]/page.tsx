@@ -16,7 +16,6 @@ import type { ProjektCard } from "@/sanity/lib/types";
 import { matchProjektForOrt } from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import OmdomenInline from "@/components/OmdomenInline";
-import TaktestWidgetLoader from "@/components/TaktestWidgetLoader";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
 
 export async function generateStaticParams() {
@@ -408,8 +407,6 @@ export default async function OmradesPage({
         </section>
       </main>
       <Footer />
-      {/* Pilot: taktest-chattwidget körs tills vidare bara på Hässelby. */}
-      {slug === "hasselby" && <TaktestWidgetLoader />}
     </>
   );
 }

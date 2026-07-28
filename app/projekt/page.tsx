@@ -13,7 +13,6 @@ import { coordForProjekt } from "@/lib/ort-coords";
 import type { ProjektPin } from "@/components/ProjektKarta";
 import { getCustomerDensity } from "@/lib/customer-density";
 import { pageMeta } from "@/lib/seo";
-import ElevenLabsWidget from "@/components/ElevenLabsWidget";
 
 // On-demand ISR: vi revaliderar /projekt via Sanity-webhook när redaktörer
 // publicerar i Studion (se app/api/revalidate-sanity/route.ts). Ingen
@@ -277,7 +276,6 @@ export default async function ProjektPage() {
             </Link>
           </div>
         </section>
-        <ElevenLabsWidget />
       </main>
       <Footer />
     </>
