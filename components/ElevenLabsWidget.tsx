@@ -13,7 +13,7 @@ const VoiceSession = dynamic(() => import("@/components/VoiceSession"), {
 
 // Synlig versionsmarkör på voice-knappen. Bumpa vid varje deploy så det går
 // att se i produktion vilken build som faktiskt serveras.
-const BUILD = "v15";
+const BUILD = "v16";
 
 export default function ElevenLabsWidget() {
   const [open, setOpen] = useState(false);

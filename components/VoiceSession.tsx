@@ -347,7 +347,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
           <p className="text-sm font-semibold text-gray-800">Andreas</p>
           <p className="text-xs text-gray-500">{statusLabel}</p>
         </div>
-        {connectFailed && (
+        {connectFailed && leadStatus !== "sent" && (
           <button
             type="button"
             onClick={() => void connect()}
