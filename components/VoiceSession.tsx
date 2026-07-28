@@ -148,7 +148,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
       setMicDenied(true);
       return;
     }
-    startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+    startSession({ agentId: AGENT_ID, connectionType: "websocket" });
   }
 
   // Starta vid mount, avsluta vid unmount.
@@ -157,7 +157,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     (async () => {
       const ok = await acquireMic();
       if (cancelled) return;
-      if (ok) startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+      if (ok) startSession({ agentId: AGENT_ID, connectionType: "websocket" });
       else setMicDenied(true);
     })();
     return () => {
