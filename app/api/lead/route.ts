@@ -22,6 +22,8 @@ type LeadPayload = {
   decade?: string;
   urgency?: string;
   leadSource?: string;
+  // Voice-agentens transkript (skickas med när formId === "voice")
+  transcript?: string;
 };
 
 export async function POST(req: Request) {

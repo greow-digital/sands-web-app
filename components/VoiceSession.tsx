@@ -1,18 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ConversationProvider,
   useConversation,
   useConversationClientTool,
 } from "@elevenlabs/react";
-import { X } from "lucide-react";
+import { PhoneOff, Send } from "lucide-react";
 
 // ── Lead-pipeline ────────────────────────────────────────────────
-// capture_lead speglar exakt hur LeadForm och TaktestWidget skickar
-// leads: samma /api/lead-endpoint (Google Sheets + mejl) och samma
-// konverterings-events (form_submit + generate_lead, value 1500 SEK)
-// som /tack firar. Voice-leads får formId "voice" så de kan skiljas ut.
+// Röst-leads går genom samma /api/lead (Google Sheets + mejl) och firar
+// samma konvertering (form_submit + generate_lead, value 1500 SEK) som
+// /tack. Men användaren bekräftar sina uppgifter i panelen och klickar
+// Skicka själv, inget skickas i det tysta. Transkriptet följer med.
 
 function getCookie(name: string): string | undefined {
   if (typeof document === "undefined") return undefined;
@@ -35,22 +35,20 @@ function fireGtag(name: string, params: object) {
   ).gtag("event", name, params);
 }
 
-// Firar konverteringen max en gång per sidladdning (som /tack:s dedup).
 let leadFired = false;
 
-type LeadArgs = {
-  name?: string;
-  phone?: string;
-  email?: string;
-  area?: string;
-  roofType?: string;
-  urgency?: string;
-  message?: string;
+type Lead = {
+  name: string;
+  contact: string; // telefon eller e-post
+  area: string;
+  roofType: string;
+  urgency: string;
 };
 
-async function captureLead(params: LeadArgs): Promise<string> {
+// Skickar leadet till pipelinen och firar konverteringen en gång.
+async function submitLead(lead: Lead, transcript: string): Promise<boolean> {
   try {
-    const contact = (params.phone || params.email || "").trim();
+    const contact = lead.contact.trim();
     const isEmail = contact.includes("@");
     const pathname =
       typeof window !== "undefined" ? window.location.pathname : "sandsab.se";
@@ -59,13 +57,14 @@ async function captureLead(params: LeadArgs): Promise<string> {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        name: params.name?.trim() || undefined,
-        phone: params.phone?.trim() || (isEmail ? undefined : contact) || undefined,
-        email: params.email?.trim() || (isEmail ? contact : undefined) || undefined,
-        area: params.area?.trim() || undefined,
-        roofType: params.roofType?.trim() || undefined,
-        urgency: params.urgency?.trim() || undefined,
-        message: params.message?.trim() || "Röstagent på sandsab.se.",
+        name: lead.name.trim() || undefined,
+        phone: isEmail ? undefined : contact || undefined,
+        email: isEmail ? contact : undefined,
+        area: lead.area.trim() || undefined,
+        roofType: lead.roofType.trim() || undefined,
+        urgency: lead.urgency.trim() || undefined,
+        message: "Röstsamtal via Sanna (se transkript).",
+        transcript: transcript || undefined,
         formId: "voice",
         tag: "voice",
         leadSource: "voice",
@@ -75,7 +74,7 @@ async function captureLead(params: LeadArgs): Promise<string> {
         wbraid: clickId("wbraid", "_gcl_wb"),
       }),
     });
-    if (!res.ok) return "Kunde tyvärr inte spara uppgifterna just nu.";
+    if (!res.ok) return false;
 
     if (!leadFired) {
       leadFired = true;
@@ -98,14 +97,13 @@ async function captureLead(params: LeadArgs): Promise<string> {
         /* cookies kan vara blockerat */
       }
     }
-    return "Tack, jag har registrerat dina uppgifter. En takläggare hör av sig inom kort.";
+    return true;
   } catch {
-    return "Kunde tyvärr inte spara uppgifterna just nu.";
+    return false;
   }
 }
 
-// Ber om mik-tillstånd och SLÄPPER strömmen direkt, så SDK:n äger miken
-// ensam vid start (undviker att en hängande probe-ström blockerar den).
+// Ber om mik-tillstånd och släpper strömmen direkt, så SDK:n äger miken ensam.
 async function acquireMic(): Promise<boolean> {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -116,9 +114,8 @@ async function acquireMic(): Promise<boolean> {
   }
 }
 
-// Hämtar en autentiserad signed URL server-side (API-nyckeln ligger i
-// /api/voice-token). Vi kör websocket-transporten med den, den funkar över
-// vanlig TCP/443 och undviker WebRTC/LiveKit som kräver UDP.
+// Autentiserad signed URL (API-nyckeln ligger server-side i /api/voice-token).
+// Vi kör websocket med den (TCP/443, undviker WebRTC/UDP).
 async function fetchSignedUrl(): Promise<string | null> {
   try {
     const res = await fetch("/api/voice-token", { cache: "no-store" });
@@ -131,6 +128,8 @@ async function fetchSignedUrl(): Promise<string | null> {
 }
 
 // ── UI ───────────────────────────────────────────────────────────
+
+type Msg = { role: "agent" | "user"; text: string };
 
 export default function VoiceSession({ onClose }: { onClose: () => void }) {
   return (
@@ -145,13 +144,53 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
   const [startError, setStartError] = useState(false);
   const [everConnected, setEverConnected] = useState(false);
 
-  // Client tool: stabil modul-funktion, registreras en gång.
-  useConversationClientTool("capture_lead", captureLead);
+  const [messages, setMessages] = useState<Msg[]>([]);
+  const [lead, setLead] = useState<Lead>({
+    name: "",
+    contact: "",
+    area: "",
+    roofType: "",
+    urgency: "",
+  });
+  const [prefilled, setPrefilled] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
-  // Inga inline-callbacks/options här med flit: de får ny identitet vid varje
-  // re-render (och agenten re-renderar när den pratar), vilket kan störa den
-  // live-anslutningen. UI:t drivs enbart av status.
-  const { status, isSpeaking, startSession, endSession } = useConversation();
+  const transcriptRef = useRef<HTMLDivElement>(null);
+
+  // Transkript: append varje meddelande (stabil callback).
+  const onMessage = useCallback(
+    (p: { message: string; source: "user" | "ai" }) => {
+      if (!p?.message) return;
+      setMessages((prev) => [
+        ...prev,
+        { role: p.source === "ai" ? "agent" : "user", text: p.message },
+      ]);
+    },
+    []
+  );
+
+  // capture_lead förfyller formuläret istället för att skicka direkt.
+  useConversationClientTool(
+    "capture_lead",
+    useCallback((params: Record<string, unknown>) => {
+      const s = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+      setLead((prev) => ({
+        name: s(params.name) || prev.name,
+        contact: s(params.phone) || s(params.email) || prev.contact,
+        area: s(params.area) || prev.area,
+        roofType: s(params.roofType) || prev.roofType,
+        urgency: s(params.urgency) || prev.urgency,
+      }));
+      setPrefilled(true);
+      return "Jag har fyllt i uppgifterna i rutan. Be kunden kontrollera att de stämmer och klicka Skicka.";
+    }, [])
+  );
+
+  const { status, isSpeaking, startSession, endSession } = useConversation({
+    onMessage,
+  });
 
   async function connect(shouldAbort?: () => boolean) {
     setMicDenied(false);
@@ -169,7 +208,6 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     startSession({ signedUrl, connectionType: "websocket" });
   }
 
-  // Starta vid mount, avsluta vid unmount.
   useEffect(() => {
     let cancelled = false;
     void connect(() => cancelled);
@@ -177,7 +215,6 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
       cancelled = true;
       endSession();
     };
-    // startSession/endSession är ref-stabila; kör bara vid mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -185,53 +222,70 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     if (status === "connected") setEverConnected(true);
   }, [status]);
 
-  // "Slut" = fel, eller frånkopplad EFTER att vi en gång varit uppkopplade
-  // (så initiala "disconnected" innan start inte flaggas).
-  const ended =
-    !micDenied &&
-    !startError &&
-    (status === "error" || (status === "disconnected" && everConnected));
-  const restartable = micDenied || startError || ended;
+  // Rulla transkriptet till senaste raden.
+  useEffect(() => {
+    const el = transcriptRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [messages]);
 
-  const label = micDenied
-    ? "Mikrofon behövs, tryck för att försöka igen"
+  const connectFailed =
+    micDenied ||
+    startError ||
+    status === "error" ||
+    (status === "disconnected" && everConnected);
+
+  const statusLabel = micDenied
+    ? "Mikrofon behövs"
     : startError
-    ? "Kunde inte starta samtalet, tryck för att försöka igen"
-    : ended
-    ? "Samtalet avslutades, tryck för att prata igen"
+    ? "Kunde inte starta"
     : status === "connected"
     ? isSpeaking
-      ? "Rådgivaren pratar…"
+      ? "Sanna pratar…"
       : "Lyssnar…"
+    : connectFailed
+    ? "Samtalet avslutat"
     : "Ansluter…";
 
-  const dotColor = micDenied
+  const dotColor = micDenied || startError
     ? "#ef4444"
-    : startError || ended
-    ? "#f59e0b"
     : status === "connected"
     ? isSpeaking
       ? "var(--color-primary)"
       : "#22c55e"
+    : connectFailed
+    ? "#9ca3af"
     : "#9ca3af";
 
-  function handleClose() {
+  function hangUp() {
     endSession();
     onClose();
   }
 
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!lead.name.trim() || !lead.contact.trim()) {
+      setFormError("Fyll i namn och telefon eller e-post.");
+      return;
+    }
+    setFormError(null);
+    setSubmitting(true);
+    const transcript = messages
+      .map((m) => `${m.role === "agent" ? "Sanna" : "Kund"}: ${m.text}`)
+      .join("\n");
+    const ok = await submitLead(lead, transcript);
+    setSubmitting(false);
+    if (ok) setSubmitted(true);
+    else setFormError("Något gick fel. Försök igen eller ring 08-28 38 88.");
+  }
+
+  const field =
+    "w-full px-3 py-2 rounded-lg text-sm outline-none border border-gray-200 bg-white focus:border-[#2B74FC] transition-colors";
+
   return (
-    <div className="fixed bottom-24 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-3 shadow-xl">
-      <button
-        type="button"
-        onClick={restartable ? () => void connect() : undefined}
-        disabled={!restartable}
-        aria-label={restartable ? "Starta samtal igen" : "Samtalsstatus"}
-        className={`flex items-center gap-3 ${
-          restartable ? "cursor-pointer" : "cursor-default"
-        }`}
-      >
-        <span className="relative flex h-3 w-3 shrink-0">
+    <div className="fixed bottom-24 right-4 z-40 flex w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl sm:bottom-6 sm:right-6">
+      {/* Rubrik */}
+      <div className="flex items-center gap-2.5 border-b border-gray-100 px-4 py-3">
+        <span className="relative flex h-2.5 w-2.5 shrink-0">
           {status === "connected" && (
             <span
               className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
@@ -239,19 +293,114 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
             />
           )}
           <span
-            className="relative inline-flex h-3 w-3 rounded-full"
+            className="relative inline-flex h-2.5 w-2.5 rounded-full"
             style={{ backgroundColor: dotColor }}
           />
         </span>
-        <span className="text-sm font-medium text-gray-700">{label}</span>
-      </button>
-      <button
-        onClick={handleClose}
-        aria-label="Stäng"
-        className="ml-1 rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700"
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold text-gray-800">Sanna</p>
+          <p className="text-xs text-gray-500">{statusLabel}</p>
+        </div>
+        {connectFailed && (
+          <button
+            type="button"
+            onClick={() => void connect()}
+            className="rounded-full px-2.5 py-1 text-xs font-semibold text-[#2B74FC] hover:bg-blue-50"
+          >
+            Försök igen
+          </button>
+        )}
+        <button
+          type="button"
+          onClick={hangUp}
+          aria-label="Lägg på"
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-red-500 transition-colors hover:bg-red-100"
+        >
+          <PhoneOff size={16} />
+        </button>
+      </div>
+
+      {/* Transkript */}
+      <div
+        ref={transcriptRef}
+        className="max-h-56 min-h-[80px] space-y-2 overflow-y-auto px-4 py-3"
       >
-        <X size={18} />
-      </button>
+        {messages.length === 0 ? (
+          <p className="pt-4 text-center text-xs text-gray-400">
+            Säg hej till Sanna, konversationen visas här.
+          </p>
+        ) : (
+          messages.map((m, i) => (
+            <div
+              key={i}
+              className={`flex ${
+                m.role === "user" ? "justify-end" : "justify-start"
+              }`}
+            >
+              <span
+                className={`inline-block max-w-[85%] rounded-2xl px-3 py-1.5 text-sm ${
+                  m.role === "user"
+                    ? "bg-[#2B74FC] text-white"
+                    : "bg-gray-100 text-gray-700"
+                }`}
+              >
+                {m.text}
+              </span>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Bekräfta & skicka */}
+      {submitted ? (
+        <div className="border-t border-gray-100 bg-[#F8F9FB] px-4 py-5 text-center">
+          <p className="text-sm font-semibold text-gray-800">
+            Tack, vi har tagit emot din förfrågan!
+          </p>
+          <p className="mt-1 text-xs text-gray-500">
+            En takläggare hör av sig inom kort.
+          </p>
+        </div>
+      ) : (
+        <form
+          onSubmit={onSubmit}
+          className="space-y-2 border-t border-gray-100 bg-[#F8F9FB] px-4 py-3"
+        >
+          <p className="text-xs font-semibold text-gray-600">
+            {prefilled
+              ? "Stämmer uppgifterna? Rätta vid behov och skicka."
+              : "Lämna dina uppgifter så hör vi av oss."}
+          </p>
+          <input
+            className={field}
+            placeholder="Namn"
+            value={lead.name}
+            onChange={(e) => setLead({ ...lead, name: e.target.value })}
+          />
+          <input
+            className={field}
+            placeholder="Telefon eller e-post"
+            value={lead.contact}
+            onChange={(e) => setLead({ ...lead, contact: e.target.value })}
+          />
+          <input
+            className={field}
+            placeholder="Ort (valfritt)"
+            value={lead.area}
+            onChange={(e) => setLead({ ...lead, area: e.target.value })}
+          />
+          {formError && <p className="text-xs text-red-500">{formError}</p>}
+          <button
+            type="submit"
+            disabled={submitting}
+            className="flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+            style={{ backgroundColor: "var(--color-primary)" }}
+          >
+            <Send size={15} />
+            {submitting ? "Skickar…" : "Skicka förfrågan"}
+          </button>
+        </form>
+      )}
     </div>
   );
 }
