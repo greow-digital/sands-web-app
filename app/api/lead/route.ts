@@ -37,11 +37,17 @@ export async function POST(req: Request) {
   // Popup-leads ("personlig service") och taktest-widgeten kräver minst ett
   // av e-post/telefon (taktest ber om "telefon eller e-post"). Övriga
   // formulär kräver namn+telefon.
-  const contactOnly =
-    data.formId === "popup" ||
-    data.formId === "taktest" ||
-    data.formId === "voice";
-  if (contactOnly) {
+  if (data.formId === "voice") {
+    // Röst-leads: kontaktuppgift ELLER transkript räcker. Transkriptet
+    // innehåller ofta kontakten i klartext som en människa kan läsa, även
+    // när siffertolkningen inte kunde plocka ut ett rent telefonnummer.
+    if (!data.email && !data.phone && !data.transcript) {
+      return NextResponse.json(
+        { error: "Kontakt eller transkript krävs" },
+        { status: 400 }
+      );
+    }
+  } else if (data.formId === "popup" || data.formId === "taktest") {
     if (!data.email && !data.phone) {
       return NextResponse.json(
         { error: "E-post eller telefon krävs" },
