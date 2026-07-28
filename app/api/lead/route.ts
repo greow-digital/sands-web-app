@@ -35,7 +35,10 @@ export async function POST(req: Request) {
   // Popup-leads ("personlig service") och taktest-widgeten kräver minst ett
   // av e-post/telefon (taktest ber om "telefon eller e-post"). Övriga
   // formulär kräver namn+telefon.
-  const contactOnly = data.formId === "popup" || data.formId === "taktest";
+  const contactOnly =
+    data.formId === "popup" ||
+    data.formId === "taktest" ||
+    data.formId === "voice";
   if (contactOnly) {
     if (!data.email && !data.phone) {
       return NextResponse.json(
