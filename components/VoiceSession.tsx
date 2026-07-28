@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ConversationProvider,
   useConversation,
   useConversationClientTool,
 } from "@elevenlabs/react";
-import { Mic, X } from "lucide-react";
+import { X } from "lucide-react";
 
 const AGENT_ID = "agent_6001kykxzdsqfhnafwc9hp5z535s";
 
@@ -97,7 +97,7 @@ async function captureLead(params: LeadArgs): Promise<string> {
         document.cookie =
           "sands_submitted=1; max-age=2592000; path=/; samesite=lax";
       } catch {
-        /* sessionStorage/cookies kan vara blockerat */
+        /* cookies kan vara blockerat */
       }
     }
     return "Tack, jag har registrerat dina uppgifter. En takläggare hör av sig inom kort.";
@@ -116,69 +116,143 @@ export default function VoiceSession({ onClose }: { onClose: () => void }) {
   );
 }
 
+// Om anslutningen hänger i "connecting" längre än så här utan att bli
+// "connected", behandlar vi det som ett tapp så användaren aldrig fastnar.
+const CONNECT_TIMEOUT_MS = 20000;
+
 function VoiceInner({ onClose }: { onClose: () => void }) {
   const [micDenied, setMicDenied] = useState(false);
-  useConversationClientTool("capture_lead", captureLead);
-  const { status, isSpeaking, startSession, endSession } = useConversation();
+  const [dropped, setDropped] = useState(false);
+  const userClosing = useRef(false);
+  const watchdog = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  useConversationClientTool("capture_lead", captureLead);
+
+  const { status, isSpeaking, startSession, endSession } = useConversation({
+    onDisconnect: (details) => {
+      // Vi stängde själva (X-knapp eller unmount): ingen "fortsätt"-prompt.
+      if (userClosing.current || details.reason === "user") return;
+      // Agenten avslutade eller anslutningen bröts. reason loggas så du i
+      // ElevenLabs kan se om det är agent-config (turn/slut) eller nät.
+      console.warn("[voice] frånkopplad, reason:", details.reason);
+      setDropped(true);
+    },
+    onError: (message) => {
+      console.warn("[voice] fel:", message);
+      setDropped(true);
+    },
+  });
+
+  function clearWatchdog() {
+    if (watchdog.current) {
+      clearTimeout(watchdog.current);
+      watchdog.current = null;
+    }
+  }
+
+  async function connect() {
+    setMicDenied(false);
+    setDropped(false);
+    clearWatchdog();
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+      watchdog.current = setTimeout(() => setDropped(true), CONNECT_TIMEOUT_MS);
+    } catch {
+      setMicDenied(true);
+    }
+  }
+
+  // Starta vid mount, städa vid unmount.
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
         await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (!cancelled) startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+        if (cancelled) return;
+        startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+        watchdog.current = setTimeout(() => setDropped(true), CONNECT_TIMEOUT_MS);
       } catch {
         if (!cancelled) setMicDenied(true);
       }
     })();
     return () => {
       cancelled = true;
+      userClosing.current = true;
+      clearWatchdog();
       endSession();
     };
     // startSession/endSession är ref-stabila; kör bara vid mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const active = status === "connected";
+  // Uppkopplad igen: rensa watchdog och "dropped".
+  useEffect(() => {
+    if (status === "connected") {
+      clearWatchdog();
+      setDropped(false);
+    } else if (status === "error") {
+      clearWatchdog();
+      setDropped(true);
+    }
+  }, [status]);
+
+  const restartable = micDenied || dropped;
   const label = micDenied
-    ? "Mikrofon behövs för samtal"
-    : !active
-    ? "Ansluter…"
-    : isSpeaking
-    ? "Rådgivaren pratar…"
-    : "Lyssnar…";
+    ? "Mikrofon behövs, tryck för att försöka igen"
+    : dropped
+    ? "Samtalet avslutades, tryck för att fortsätta"
+    : status === "connected"
+    ? isSpeaking
+      ? "Rådgivaren pratar…"
+      : "Lyssnar…"
+    : "Ansluter…";
 
   const dotColor = micDenied
     ? "#ef4444"
-    : active
+    : dropped
+    ? "#f59e0b"
+    : status === "connected"
     ? isSpeaking
       ? "var(--color-primary)"
       : "#22c55e"
     : "#9ca3af";
 
   function handleClose() {
+    userClosing.current = true;
+    clearWatchdog();
     endSession();
     onClose();
   }
 
   return (
-    <div className="fixed bottom-24 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-3 rounded-full border border-gray-100 bg-white px-4 py-3 shadow-xl">
-      <span className="relative flex h-3 w-3">
-        {active && !micDenied && (
+    <div className="fixed bottom-24 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-3 shadow-xl">
+      <button
+        type="button"
+        onClick={restartable ? connect : undefined}
+        disabled={!restartable}
+        aria-label={restartable ? "Starta samtal igen" : "Samtalsstatus"}
+        className={`flex items-center gap-3 ${
+          restartable ? "cursor-pointer" : "cursor-default"
+        }`}
+      >
+        <span className="relative flex h-3 w-3 shrink-0">
+          {status === "connected" && (
+            <span
+              className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+              style={{ backgroundColor: dotColor }}
+            />
+          )}
           <span
-            className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+            className="relative inline-flex h-3 w-3 rounded-full"
             style={{ backgroundColor: dotColor }}
           />
-        )}
-        <span
-          className="relative inline-flex h-3 w-3 rounded-full"
-          style={{ backgroundColor: dotColor }}
-        />
-      </span>
-      <span className="text-sm font-medium text-gray-700">{label}</span>
+        </span>
+        <span className="text-sm font-medium text-gray-700">{label}</span>
+      </button>
       <button
         onClick={handleClose}
-        aria-label="Avsluta samtal"
+        aria-label="Stäng"
         className="ml-1 rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700"
       >
         <X size={18} />
