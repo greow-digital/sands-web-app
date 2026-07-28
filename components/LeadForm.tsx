@@ -4,6 +4,7 @@ import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { Phone } from "lucide-react";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { leadSourceFor } from "@/lib/lead-source";
 
 type FormData = {
   name: string;
@@ -137,6 +138,7 @@ export default function LeadForm({
           ...data,
           ...extraPayload,
           formId,
+          leadSource: leadSourceFor(formId),
           source:
             typeof window !== "undefined"
               ? window.location.pathname
@@ -169,6 +171,8 @@ export default function LeadForm({
           sessionStorage.setItem("sands_lead_source", window.location.pathname);
           sessionStorage.setItem("sands_lead_variant", variant);
           sessionStorage.setItem("sands_lead_formid", formId);
+          // Kanal-dimension, läses av /tack och skickas som lead_source till GA4.
+          sessionStorage.setItem("sands_lead_leadsource", leadSourceFor(formId));
           // Suppression: visa inte inaktivitets-popupen för någon som
           // redan skickat ett formulär (30 dagar).
           document.cookie =
