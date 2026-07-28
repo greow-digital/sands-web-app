@@ -63,7 +63,7 @@ async function submitLead(lead: Lead, transcript: string): Promise<boolean> {
         area: lead.area.trim() || undefined,
         roofType: lead.roofType.trim() || undefined,
         urgency: lead.urgency.trim() || undefined,
-        message: "Röstsamtal via Sanna (se transkript).",
+        message: "Röstsamtal via Andreas (se transkript).",
         transcript: transcript || undefined,
         formId: "voice",
         tag: "voice",
@@ -180,7 +180,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     const msgs = messagesRef.current;
     const userMsgs = msgs.filter((m) => m.role === "user");
     const transcript = msgs
-      .map((m) => `${m.role === "agent" ? "Sanna" : "Kund"}: ${m.text}`)
+      .map((m) => `${m.role === "agent" ? "Andreas" : "Kund"}: ${m.text}`)
       .join("\n");
     const { phone, email } = parseContact(transcript);
     // Bara en riktig konversation blir ett lead (inte "hej" + lägg på).
@@ -224,7 +224,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
         urgency: s(params.urgency),
       };
       const transcript = messagesRef.current
-        .map((m) => `${m.role === "agent" ? "Sanna" : "Kund"}: ${m.text}`)
+        .map((m) => `${m.role === "agent" ? "Andreas" : "Kund"}: ${m.text}`)
         .join("\n");
       const ok = await submitLead(lead, transcript);
       console.log("[voice] lead skickat till /api/lead:", ok);
@@ -297,7 +297,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     ? "Kunde inte starta"
     : status === "connected"
     ? isSpeaking
-      ? "Sanna pratar…"
+      ? "Andreas pratar…"
       : "Lyssnar…"
     : connectFailed
     ? "Samtalet avslutat"
@@ -324,20 +324,27 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     <div className="fixed bottom-24 right-4 z-40 flex w-[calc(100vw-2rem)] max-w-xs flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl sm:bottom-6 sm:right-6">
       {/* Rubrik */}
       <div className="flex items-center gap-2.5 px-4 py-3">
-        <span className="relative flex h-2.5 w-2.5 shrink-0">
-          {status === "connected" && (
+        <div className="relative shrink-0">
+          <img
+            src="/images/voice-avatar.jpg"
+            alt="Andreas, takrådgivare på Sands Entreprenad"
+            className="h-9 w-9 rounded-full object-cover"
+          />
+          <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
+            {status === "connected" && (
+              <span
+                className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-70"
+                style={{ backgroundColor: dotColor }}
+              />
+            )}
             <span
-              className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+              className="relative inline-flex h-3 w-3 rounded-full ring-2 ring-white"
               style={{ backgroundColor: dotColor }}
             />
-          )}
-          <span
-            className="relative inline-flex h-2.5 w-2.5 rounded-full"
-            style={{ backgroundColor: dotColor }}
-          />
-        </span>
+          </span>
+        </div>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold text-gray-800">Sanna</p>
+          <p className="text-sm font-semibold text-gray-800">Andreas</p>
           <p className="text-xs text-gray-500">{statusLabel}</p>
         </div>
         {connectFailed && (
