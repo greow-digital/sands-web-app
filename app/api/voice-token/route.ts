@@ -23,27 +23,27 @@ export async function GET() {
 
   try {
     const res = await fetch(
-      `https://api.elevenlabs.io/v1/convai/conversation/token?agent_id=${AGENT_ID}`,
+      `https://api.elevenlabs.io/v1/convai/conversation/get-signed-url?agent_id=${AGENT_ID}`,
       { headers: { "xi-api-key": apiKey }, cache: "no-store" }
     );
     if (!res.ok) {
       const detail = await res.text().catch(() => "");
-      console.error("Token-hämtning icke-OK:", res.status, detail);
+      console.error("Signed URL icke-OK:", res.status, detail);
       return NextResponse.json(
-        { error: "Kunde inte hämta röst-token" },
+        { error: "Kunde inte hämta röst-url" },
         { status: 502 }
       );
     }
-    const data = (await res.json()) as { token?: string };
-    if (!data.token) {
+    const data = (await res.json()) as { signed_url?: string };
+    if (!data.signed_url) {
       return NextResponse.json(
-        { error: "Ingen token i svaret" },
+        { error: "Ingen signed_url i svaret" },
         { status: 502 }
       );
     }
-    return NextResponse.json({ token: data.token });
+    return NextResponse.json({ signedUrl: data.signed_url });
   } catch (err) {
-    console.error("Token-fel:", err);
+    console.error("Signed URL-fel:", err);
     return NextResponse.json(
       { error: "Kunde inte hämta röst-token" },
       { status: 502 }
