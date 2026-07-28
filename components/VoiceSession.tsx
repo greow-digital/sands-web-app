@@ -8,8 +8,6 @@ import {
 } from "@elevenlabs/react";
 import { X } from "lucide-react";
 
-const AGENT_ID = "agent_6001kykxzdsqfhnafwc9hp5z535s";
-
 // ── Lead-pipeline ────────────────────────────────────────────────
 // capture_lead speglar exakt hur LeadForm och TaktestWidget skickar
 // leads: samma /api/lead-endpoint (Google Sheets + mejl) och samma
@@ -106,10 +104,8 @@ async function captureLead(params: LeadArgs): Promise<string> {
   }
 }
 
-// Ber om mik-tillstånd och SLÄPPER strömmen direkt. Annars håller vår probe
-// kvar mikrofonen, och SDK:ns egen getUserMedia (för LiveKit-publish-spåret)
-// får en upptagen enhet -> trackID undefined -> rummet kopplas ner precis
-// efter hälsningen. Konsolen bekräftade exakt det förloppet.
+// Ber om mik-tillstånd och SLÄPPER strömmen direkt, så SDK:n äger miken
+// ensam vid start (undviker att en hängande probe-ström blockerar den).
 async function acquireMic(): Promise<boolean> {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -117,6 +113,19 @@ async function acquireMic(): Promise<boolean> {
     return true;
   } catch {
     return false;
+  }
+}
+
+// Hämtar en server-genererad conversation-token. WebRTC-anslutningen kräver
+// den (agenten är autentiserad); API-nyckeln ligger server-side i /api/voice-token.
+async function fetchToken(): Promise<string | null> {
+  try {
+    const res = await fetch("/api/voice-token", { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { token?: string };
+    return data.token ?? null;
+  } catch {
+    return null;
   }
 }
 
@@ -132,34 +141,37 @@ export default function VoiceSession({ onClose }: { onClose: () => void }) {
 
 function VoiceInner({ onClose }: { onClose: () => void }) {
   const [micDenied, setMicDenied] = useState(false);
+  const [startError, setStartError] = useState(false);
   const [everConnected, setEverConnected] = useState(false);
 
   // Client tool: stabil modul-funktion, registreras en gång.
   useConversationClientTool("capture_lead", captureLead);
 
-  // Inga callbacks/options här med flit: inline-callbacks får ny identitet
-  // vid varje re-render (och agenten re-renderar när den pratar), vilket kan
-  // störa den live-anslutningen. Vi driver UI:t enbart från status.
+  // Inga inline-callbacks/options här med flit: de får ny identitet vid varje
+  // re-render (och agenten re-renderar när den pratar), vilket kan störa den
+  // live-anslutningen. UI:t drivs enbart av status.
   const { status, isSpeaking, startSession, endSession } = useConversation();
 
-  async function start() {
+  async function connect(shouldAbort?: () => boolean) {
     setMicDenied(false);
+    setStartError(false);
     if (!(await acquireMic())) {
-      setMicDenied(true);
+      if (!shouldAbort?.()) setMicDenied(true);
       return;
     }
-    startSession({ agentId: AGENT_ID, connectionType: "websocket" });
+    const token = await fetchToken();
+    if (shouldAbort?.()) return;
+    if (!token) {
+      setStartError(true);
+      return;
+    }
+    startSession({ conversationToken: token, connectionType: "webrtc" });
   }
 
   // Starta vid mount, avsluta vid unmount.
   useEffect(() => {
     let cancelled = false;
-    (async () => {
-      const ok = await acquireMic();
-      if (cancelled) return;
-      if (ok) startSession({ agentId: AGENT_ID, connectionType: "websocket" });
-      else setMicDenied(true);
-    })();
+    void connect(() => cancelled);
     return () => {
       cancelled = true;
       endSession();
@@ -172,15 +184,18 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     if (status === "connected") setEverConnected(true);
   }, [status]);
 
-  // "Slut" = ett fel, eller frånkopplad EFTER att vi en gång varit
-  // uppkopplade (så initiala "disconnected" innan start inte flaggas).
+  // "Slut" = fel, eller frånkopplad EFTER att vi en gång varit uppkopplade
+  // (så initiala "disconnected" innan start inte flaggas).
   const ended =
     !micDenied &&
+    !startError &&
     (status === "error" || (status === "disconnected" && everConnected));
-  const restartable = micDenied || ended;
+  const restartable = micDenied || startError || ended;
 
   const label = micDenied
     ? "Mikrofon behövs, tryck för att försöka igen"
+    : startError
+    ? "Kunde inte starta samtalet, tryck för att försöka igen"
     : ended
     ? "Samtalet avslutades, tryck för att prata igen"
     : status === "connected"
@@ -191,7 +206,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
 
   const dotColor = micDenied
     ? "#ef4444"
-    : ended
+    : startError || ended
     ? "#f59e0b"
     : status === "connected"
     ? isSpeaking
@@ -208,7 +223,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     <div className="fixed bottom-24 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-2 rounded-full border border-gray-100 bg-white px-4 py-3 shadow-xl">
       <button
         type="button"
-        onClick={restartable ? start : undefined}
+        onClick={restartable ? () => void connect() : undefined}
         disabled={!restartable}
         aria-label={restartable ? "Starta samtal igen" : "Samtalsstatus"}
         className={`flex items-center gap-3 ${
