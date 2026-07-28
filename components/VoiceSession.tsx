@@ -126,20 +126,6 @@ async function fetchSignedUrl(): Promise<string | null> {
   }
 }
 
-// Bästa-möjliga-uttag av telefon/e-post ur transkriptet. Rösttolkade nummer
-// blir inte alltid perfekta, men transkriptet skickas ändå med så en människa
-// kan läsa kontakten i klartext.
-function parseContact(text: string): { phone?: string; email?: string } {
-  const email = text
-    .match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/i)?.[0]
-    ?.toLowerCase();
-  const phone = text
-    .replace(/[^\d+\s-]/g, " ")
-    .match(/(?:\+46|0)[\d\s-]{7,13}\d/)?.[0]
-    .replace(/[\s-]/g, "");
-  return { phone, email };
-}
-
 // ── UI ───────────────────────────────────────────────────────────
 
 type Msg = { role: "agent" | "user"; text: string };
@@ -169,30 +155,8 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
-  // Skickas leadet bara en gång (capture_lead ELLER transkript-fallback).
+  // Skickas leadet bara en gång.
   const submittedRef = useRef(false);
-
-  // Skickar ett lead med hela transkriptet när samtalet avslutas, om inget
-  // redan skickats. Plockar ut telefon/e-post ur texten när det går. Detta
-  // gör lead-fångsten oberoende av att agenten anropar capture_lead.
-  const submitFromTranscript = useCallback(async () => {
-    if (submittedRef.current) return;
-    const msgs = messagesRef.current;
-    const userMsgs = msgs.filter((m) => m.role === "user");
-    const transcript = msgs
-      .map((m) => `${m.role === "agent" ? "Andreas" : "Kund"}: ${m.text}`)
-      .join("\n");
-    const { phone, email } = parseContact(transcript);
-    // Bara en riktig konversation blir ett lead (inte "hej" + lägg på).
-    if (userMsgs.length < 2 && !phone && !email) return;
-    submittedRef.current = true;
-    const ok = await submitLead(
-      { name: "", contact: phone || email || "", area: "", roofType: "", urgency: "" },
-      transcript
-    );
-    console.log("[voice] transkript-lead skickat:", ok);
-    setLeadStatus(ok ? "sent" : "error");
-  }, []);
 
   // Transkript: append varje meddelande (stabil callback).
   const onMessage = useCallback(
@@ -206,19 +170,25 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     []
   );
 
-  // capture_lead skickar leadet automatiskt (med transkript). Inget formulär.
+  // capture_lead skickar leadet automatiskt (med transkript). Enda vägen in,
+  // och bara om vi har minst namn OCH telefonnummer, annars ingen lead.
   useConversationClientTool(
     "capture_lead",
     useCallback(async (params: Record<string, unknown>) => {
       console.log("[voice] capture_lead anropad:", params);
+      const s = (v: unknown) => (typeof v === "string" ? v.trim() : "");
+      const name = s(params.name);
+      const phone = s(params.phone);
+      if (!name || !phone) {
+        return "Jag behöver både namn och telefonnummer innan jag kan registrera. Fråga kunden efter det som saknas.";
+      }
       if (submittedRef.current) {
         return "Uppgifterna är redan registrerade.";
       }
       submittedRef.current = true;
-      const s = (v: unknown) => (typeof v === "string" ? v.trim() : "");
       const lead: Lead = {
-        name: s(params.name),
-        contact: s(params.phone) || s(params.email),
+        name,
+        contact: phone,
         area: s(params.area),
         roofType: s(params.roofType),
         urgency: s(params.urgency),
@@ -275,10 +245,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     if (status === "connected") setEverConnected(true);
-    // Samtalet tog slut (agenten avslutade eller anslutningen bröts) efter
-    // att vi varit uppkopplade: skicka leadet från transkriptet.
-    if (status === "disconnected" && everConnected) void submitFromTranscript();
-  }, [status, everConnected, submitFromTranscript]);
+  }, [status]);
 
   useEffect(() => {
     const el = transcriptRef.current;
@@ -313,9 +280,6 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
       : "#9ca3af";
 
   function hangUp() {
-    // Skicka leadet från transkriptet innan vi stänger (fire-and-forget;
-    // fetch:en i submitLead lever vidare även om komponenten unmountas).
-    void submitFromTranscript();
     endSession();
     onClose();
   }
