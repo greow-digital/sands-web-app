@@ -173,6 +173,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
   useConversationClientTool(
     "capture_lead",
     useCallback(async (params: Record<string, unknown>) => {
+      console.log("[voice] capture_lead anropad:", params);
       const s = (v: unknown) => (typeof v === "string" ? v.trim() : "");
       const lead: Lead = {
         name: s(params.name),
@@ -185,6 +186,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
         .map((m) => `${m.role === "agent" ? "Sanna" : "Kund"}: ${m.text}`)
         .join("\n");
       const ok = await submitLead(lead, transcript);
+      console.log("[voice] lead skickat till /api/lead:", ok);
       setLeadStatus(ok ? "sent" : "error");
       return ok
         ? "Tack, jag har registrerat uppgifterna. En takläggare hör av sig inom kort."
@@ -192,8 +194,16 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     }, [])
   );
 
+  // Loggar om agenten försöker anropa ett verktyg som SDK:n inte har
+  // registrerat (t.ex. fel namn, eller att det ligger som server-tool). Då
+  // ser vi i konsolen att agenten VILLE anropa men att det inte matchade.
+  const onUnhandledTool = useCallback((p: unknown) => {
+    console.warn("[voice] oregistrerat tool-anrop från agenten:", p);
+  }, []);
+
   const { status, isSpeaking, startSession, endSession } = useConversation({
     onMessage,
+    onUnhandledClientToolCall: onUnhandledTool,
   });
 
   async function connect(shouldAbort?: () => boolean) {
