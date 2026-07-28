@@ -28,11 +28,21 @@ function parseGcl(name: string): string | undefined {
 function clickId(our: string, gtag: string): string | undefined {
   return getCookie(our) || parseGcl(gtag);
 }
-function fireGtag(name: string, params: object) {
+function fireGtag(name: string, params: object = {}) {
   if (typeof window === "undefined" || !("gtag" in window)) return;
   (
     window as unknown as { gtag: (e: string, n: string, p: object) => void }
   ).gtag("event", name, params);
+}
+
+// Voice-funnel-event till GA4: voice_initiated -> voice_conversation ->
+// voice_lead. form_source = sidan där rösten användes.
+function fireVoice(name: string) {
+  fireGtag(name, {
+    form_source:
+      typeof window !== "undefined" ? window.location.pathname : "",
+    lead_source: "voice",
+  });
 }
 
 let leadFired = false;
@@ -199,6 +209,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
       const ok = await submitLead(lead, transcript);
       console.log("[voice] lead skickat till /api/lead:", ok);
       setLeadStatus(ok ? "sent" : "error");
+      if (ok) fireVoice("voice_lead");
       return ok
         ? "Tack, jag har registrerat uppgifterna. En takläggare hör av sig inom kort."
         : "Jag kunde tyvärr inte spara uppgifterna just nu.";
@@ -235,6 +246,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     let cancelled = false;
+    fireVoice("voice_initiated");
     void connect(() => cancelled);
     return () => {
       cancelled = true;
@@ -244,8 +256,11 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
   }, []);
 
   useEffect(() => {
-    if (status === "connected") setEverConnected(true);
-  }, [status]);
+    if (status === "connected" && !everConnected) {
+      setEverConnected(true);
+      fireVoice("voice_conversation");
+    }
+  }, [status, everConnected]);
 
   useEffect(() => {
     const el = transcriptRef.current;
