@@ -57,7 +57,7 @@ export default function MobileCTA() {
           <Link
             href="/offert"
             onClick={() => fireStickyClick("form")}
-            className="flex-1 flex items-center justify-center py-3 rounded-full text-sm font-semibold text-white transition-colors"
+            className="flex-1 min-w-0 whitespace-nowrap flex items-center justify-center py-3 rounded-full text-sm font-semibold text-white transition-colors"
             style={{ backgroundColor: "var(--color-primary)" }}
           >
             Få gratis offert
@@ -70,14 +70,14 @@ export default function MobileCTA() {
               window.dispatchEvent(new Event("sands:open-voice"));
             }}
             aria-label="Prata med vår takrådgivare"
-            className="shrink-0 flex items-center gap-2 h-12 pl-1.5 pr-4 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
+            className="shrink-0 whitespace-nowrap flex items-center gap-2 h-12 pl-1.5 pr-4 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
           >
             <img
               src="/images/voice-avatar.jpg"
               alt=""
               className="h-9 w-9 rounded-full object-cover"
             />
-            Prata
+            Prata med oss
           </button>
         </div>
       </div>
