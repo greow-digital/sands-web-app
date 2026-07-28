@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 
-// Hämtar en kortlivad conversation-token för voice-agenten server-side, så att
-// ElevenLabs-API-nyckeln aldrig exponeras i klienten. WebRTC-transporten kräver
-// en sådan token (den publika, tokenlösa anslutningen stängs direkt). Klienten
-// (VoiceSession) hämtar token härifrån och startar sessionen med den.
+// Hämtar en autentiserad signed URL för voice-agenten server-side, så att
+// ElevenLabs-API-nyckeln aldrig exponeras i klienten. Vi använder websocket-
+// transporten (signed URL) istället för webrtc, eftersom WebRTC/LiveKit kräver
+// UDP som ofta blockeras i nätverksmiljöer (createOffer failar då). Klienten
+// (VoiceSession) hämtar url:en härifrån och startar websocket-sessionen med den.
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";

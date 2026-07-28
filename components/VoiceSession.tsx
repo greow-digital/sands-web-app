@@ -116,14 +116,15 @@ async function acquireMic(): Promise<boolean> {
   }
 }
 
-// Hämtar en server-genererad conversation-token. WebRTC-anslutningen kräver
-// den (agenten är autentiserad); API-nyckeln ligger server-side i /api/voice-token.
-async function fetchToken(): Promise<string | null> {
+// Hämtar en autentiserad signed URL server-side (API-nyckeln ligger i
+// /api/voice-token). Vi kör websocket-transporten med den, den funkar över
+// vanlig TCP/443 och undviker WebRTC/LiveKit som kräver UDP.
+async function fetchSignedUrl(): Promise<string | null> {
   try {
     const res = await fetch("/api/voice-token", { cache: "no-store" });
     if (!res.ok) return null;
-    const data = (await res.json()) as { token?: string };
-    return data.token ?? null;
+    const data = (await res.json()) as { signedUrl?: string };
+    return data.signedUrl ?? null;
   } catch {
     return null;
   }
@@ -159,13 +160,13 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
       if (!shouldAbort?.()) setMicDenied(true);
       return;
     }
-    const token = await fetchToken();
+    const signedUrl = await fetchSignedUrl();
     if (shouldAbort?.()) return;
-    if (!token) {
+    if (!signedUrl) {
       setStartError(true);
       return;
     }
-    startSession({ conversationToken: token, connectionType: "webrtc" });
+    startSession({ signedUrl, connectionType: "websocket" });
   }
 
   // Starta vid mount, avsluta vid unmount.
