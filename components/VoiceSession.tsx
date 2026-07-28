@@ -132,7 +132,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     setMicDenied(false);
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
-      startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+      startSession({ agentId: AGENT_ID, connectionType: "websocket" });
     } catch {
       setMicDenied(true);
     }
@@ -144,7 +144,7 @@ function VoiceInner({ onClose }: { onClose: () => void }) {
     (async () => {
       try {
         await navigator.mediaDevices.getUserMedia({ audio: true });
-        if (!cancelled) startSession({ agentId: AGENT_ID, connectionType: "webrtc" });
+        if (!cancelled) startSession({ agentId: AGENT_ID, connectionType: "websocket" });
       } catch {
         if (!cancelled) setMicDenied(true);
       }
