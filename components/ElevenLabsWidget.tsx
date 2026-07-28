@@ -12,6 +12,10 @@ const VoiceSession = dynamic(() => import("@/components/VoiceSession"), {
   ssr: false,
 });
 
+// Synlig versionsmarkör på voice-knappen. Bumpa vid varje deploy så det går
+// att se i produktion vilken build som faktiskt serveras.
+const BUILD = "v3";
+
 export default function ElevenLabsWidget() {
   const [open, setOpen] = useState(false);
 
@@ -25,7 +29,11 @@ export default function ElevenLabsWidget() {
       style={{ backgroundColor: "var(--color-primary)" }}
     >
       <Mic size={18} />
-      Prata med oss
+      Prata med Sanna
+      {/* Synlig build-markör för felsökning. Bumpas vid varje deploy. */}
+      <span className="ml-1 rounded bg-white/25 px-1.5 py-0.5 text-[10px] font-bold leading-none">
+        {BUILD}
+      </span>
     </button>
   );
 }
