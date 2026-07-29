@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/faq",
-  title: "Vanliga frågor om takbyte i Stockholm | Sands Entreprenad",
+  title: "Vanliga frågor om takbyte i Stockholm | Sands",
   description:
     "Vad kostar ett takbyte? Hur länge håller olika taktyper? ROT-avdrag, garantier, försäkring: svar på vanliga frågor om takbyte i Stockholm.",
 });

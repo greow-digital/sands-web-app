@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/integritetspolicy",
-  title: "Integritetspolicy | Sands Entreprenad Stockholm AB",
+  title: "Integritetspolicy | Sands Stockholm AB",
   description:
     "Så hanterar Sands Entreprenad Stockholm AB dina personuppgifter enligt GDPR. Vi delar aldrig dina uppgifter med tredje part.",
 });

@@ -30,10 +30,9 @@ import TaktestInlineCta from "@/components/TaktestInlineCta";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.sandsab.se/basta-taklaggare-stockholm" },
-  title:
-    "Bästa takläggare i Stockholm – så väljer du rätt takfirma | Sands Entreprenad",
+  title: "Bästa takläggare i Stockholm | så väljer du rätt | Sands",
   description:
-    "Hur hittar du en seriös takläggare i Stockholm? Checklista: F-skatt, försäkring, auktorisering och garantitid. Sands Entreprenad: 4,8★ BraByggare, Monier-certifierad, fast pris.",
+    "Hur hittar du en seriös takläggare i Stockholm? Checklista: F-skatt, försäkring, auktorisering och garantitid. Sands Entreprenad: 4,8★ BraByggare, fast pris.",
   openGraph: {
     title: "Bästa takläggare i Stockholm – så väljer du rätt takfirma",
     description:

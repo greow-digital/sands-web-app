@@ -24,7 +24,7 @@ const inter = Inter({
 const BASE_URL = "https://www.sandsab.se";
 
 const HOME_TITLE =
-  "Takläggare Stockholm – takbyte till fast pris | Sands Entreprenad";
+  "Takläggare Stockholm | takbyte till fast pris | Sands";
 const HOME_DESC =
   "Erfaren takläggare i Stockholm. Fast pris från 169 000 kr efter ROT, 30 års Monier-garanti. BraByggare 4,8 av 5 med 54 omdömen. Få prisförslag inom 24 h.";
 

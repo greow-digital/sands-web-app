@@ -16,7 +16,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/priser",
-  title: "Vad kostar takbyte? Priser & exempel 2026 | Sands Entreprenad",
+  title: "Vad kostar takbyte? Priser & exempel 2026 | Sands",
   description:
     "Priser för takbyte i Stockholm: betongtak från 1 200 kr/m², tegeltak från 1 500, plåttak från 1 800. Exempel: villa 140 m² från 169 000 kr efter ROT.",
 });

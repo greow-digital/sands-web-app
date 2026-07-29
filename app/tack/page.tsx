@@ -7,7 +7,7 @@ import { CheckCircle, Phone, Clock, FileText, HardHat, Star } from "lucide-react
 
 export const metadata: Metadata = {
   alternates: { canonical: "/tack" },
-  title: "Tack för din förfrågan | Sands Entreprenad",
+  title: "Tack för din förfrågan | Sands",
   description: "Vi har tagit emot din förfrågan och återkommer inom 24h.",
   robots: "noindex",
 };

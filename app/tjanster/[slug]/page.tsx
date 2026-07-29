@@ -33,32 +33,32 @@ const REVIEW_MATCH: Record<string, string[]> = {
 // template further down.
 const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   taklaggning: {
-    title: "Takläggning Stockholm | fast pris, 30 års garanti | Sands Entreprenad",
+    title: "Takläggning Stockholm | fast pris, 30 års garanti | Sands",
     description:
       "Professionell takläggning i Stockholm av certifierade takläggare. Plåttak, tegeltak, papptak. Fast pris från start, ROT-avdrag, kostnadsfri offert.",
   },
   tegeltak: {
-    title: "Tegeltak Stockholm | från 1 500 kr/m² | Sands Entreprenad",
+    title: "Tegeltak Stockholm | från 1 500 kr/m² | Sands",
     description:
       "Tegeltak i Stockholm från 1 500 kr/m². Tegelpannor med 30 års garanti, ROT-avdrag tillämpas. Certifierade takläggare, kostnadsfri offert inom 24 h.",
   },
   plattak: {
-    title: "Plåttak Stockholm | från 1 800 kr/m² | Sands Entreprenad",
+    title: "Plåttak Stockholm | från 1 800 kr/m² | Sands",
     description:
       "Plåttak i Stockholm från 1 800 kr/m². Bandtäckt, falsat eller klickfals. 30 års garanti, ROT-avdrag, certifierade takläggare i hela Stockholm.",
   },
   papptak: {
-    title: "Papptak Stockholm | från 800 kr/m² | Sands Entreprenad",
+    title: "Papptak Stockholm | från 800 kr/m² | Sands",
     description:
       "Papptak (takpapp) i Stockholm från 800 kr/m². Lång hållbarhet, fast pris och garanti på utförandet. ROT-avdrag tillämpas, offert inom 24 h.",
   },
   betongtak: {
-    title: "Betongtak Stockholm | betongpannor från 1 200 kr/m² | Sands Entreprenad",
+    title: "Betongtak Stockholm | från 1 200 kr/m² | Sands",
     description:
       "Betongtak och betongpannor i Stockholm från 1 200 kr/m². 30 års garanti, ROT-avdrag, BraByggare-certifierad takläggare. Få prisförslag idag.",
   },
   takfonsterkupor: {
-    title: "Takfönster & takkupor i Stockholm | Sands Entreprenad",
+    title: "Takfönster & takkupor i Stockholm | Sands",
     description:
       "Montering av takfönster och takkupor i Stockholm. Erfarna takläggare, kvalitetsmaterial, 30 års garanti, ROT-avdrag tillämpas.",
   },
@@ -79,7 +79,7 @@ export async function generateMetadata({
   const override = SEO_OVERRIDES[slug];
   return pageMeta({
     path: `/tjanster/${slug}`,
-    title: override?.title ?? `${t.title} i Stockholm | Sands Entreprenad`,
+    title: override?.title ?? `${t.title} i Stockholm | Sands`,
     description: override?.description ?? t.intro,
   });
 }

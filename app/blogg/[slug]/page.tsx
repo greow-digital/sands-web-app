@@ -23,10 +23,10 @@ export async function generateMetadata({
   if (!a) return {};
   return {
     alternates: { canonical: `/blogg/${slug}` },
-    title: `${a.titel} | Sands Entreprenad`,
+    title: `${a.titel} | Sands`,
     description: a.ingress,
     openGraph: {
-      title: `${a.titel} | Sands Entreprenad`,
+      title: `${a.titel} | Sands`,
       description: a.ingress,
       type: "article",
       publishedTime: a.datum,

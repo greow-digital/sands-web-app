@@ -61,10 +61,11 @@ export async function generateMetadata({
     slug,
   })) as ProjektDetail | null;
   if (!p) return {};
-  const displayTitle = [p.typ, p.ort].filter(Boolean).join(", ");
+  const titleBase =
+    [p.typ, p.ort].filter(Boolean).join(" i ") || "Takprojekt";
   return pageMeta({
     path: `/projekt/${slug}`,
-    title: `${displayTitle} | Sands Entreprenad`,
+    title: `${titleBase} | Sands`,
     description:
       p.beskrivning?.slice(0, 160) ??
       `Takprojekt i ${p.ort ?? "Stockholm"} utfört av Sands Entreprenad.`,

@@ -13,7 +13,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/tjanster",
-  title: "Takläggning, takbyte & renovering i Stockholm | Sands Entreprenad",
+  title: "Takläggning, takbyte & renovering i Stockholm | Sands",
   description:
     "Alla taktjänster i Stockholm: takbyte, takläggning, takrenovering. Plåttak, tegeltak, papptak. Fast pris, 30 års garanti, ROT-avdrag tillämpas.",
 });

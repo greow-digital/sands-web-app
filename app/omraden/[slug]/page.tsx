@@ -40,7 +40,7 @@ const OMRADE_CONFIG: Record<
     customTitle:
       "Takläggare i Hässelby – villaspecialist med 30 års garanti | Sands",
     customDesc:
-      "Takläggare i Hässelby villastad, gård och strand. Specialister på 50–60-talsvillor – fast pris, upp till 30 års garanti och ROT på fakturan. Boka kostnadsfri takkontroll.",
+      "Takläggare i Hässelby villastad, gård och strand. Specialist på 50-60-talsvillor, fast pris, upp till 30 års garanti och ROT på fakturan. Boka takkontroll.",
   },
   "upplands-vasby": { shortTitle: true },
   "upplands-bro": { shortTitle: true },
