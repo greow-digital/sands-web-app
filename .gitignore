@@ -47,3 +47,4 @@ scripts/cache/
 next-env.d.ts
 image.jpg
 hero-sands-construction.avif
+.claude/settings.local.json
