@@ -343,11 +343,14 @@ export default function PriserPage() {
                   ))}
                 </ul>
 
-                {/* Fördjupning. Ersätter /blogg/vad-kostar-takbyte, som slogs
-                    ihop hit (den sidan var i praktiken en dubblett av den här
-                    och låg kvar på position 41 med noll klick). Eternit saknas
-                    medvetet i pristabellen ovan eftersom saneringen inte går
-                    att prissätta per m² på förhand. */}
+                {/* Fördjupning. Den här sidan äger det transaktionella
+                    intentet ("takbyte pris Stockholm"): tabell, kalkylator,
+                    boka. Blogginlägget vad-kostar-takbyte äger det
+                    informationella ("hur byggs priset upp", "varför skiljer
+                    offerterna sig"). De ska länka till varandra, inte
+                    upprepa varandra. Eternit saknas medvetet i pristabellen
+                    ovan eftersom saneringen inte går att prissätta per m²
+                    på förhand. */}
                 <h3
                   className="text-xl font-bold mb-4"
                   style={{
@@ -358,6 +361,20 @@ export default function PriserPage() {
                   Fördjupning om kostnaden
                 </h3>
                 <ul className="space-y-2 mb-8">
+                  <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0 mt-1.5" />
+                    <span>
+                      Undrar du varför två offerter på samma tak kan skilja
+                      tiotusentals kronor? Vi bryter ner de fyra delarna i{" "}
+                      <Link
+                        href="/blogg/vad-kostar-takbyte"
+                        className="font-semibold text-[#2B74FC] hover:underline"
+                      >
+                        hur priset på ett takbyte byggs upp
+                      </Link>
+                      .
+                    </span>
+                  </li>
                   <li className="flex items-start gap-2 text-sm text-gray-600">
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0 mt-1.5" />
                     <span>

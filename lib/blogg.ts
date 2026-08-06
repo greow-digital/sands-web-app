@@ -16,6 +16,113 @@ export type Artikel = {
 
 export const artiklar: Artikel[] = [
   {
+    slug: "vad-kostar-takbyte",
+    titel: "Vad kostar ett takbyte? Så byggs priset upp",
+    ingress:
+      "En prislista säger vad taket kostar, inte varför. Här bryter vi ner de fyra delarna i ett takbyte, vilken del som är ROT-berättigad och varför två offerter på samma tak kan skilja 80 000 kr.",
+    datum: "2026-08-06",
+    kategori: "Priser",
+    lästid: "7 min",
+    image: "/images/blogg-vad-kostar-takbyte.jpg",
+    faq: [
+      {
+        q: "Vad kostar det att byta tak på 150 kvm?",
+        a: "Med betongpannor landar det från cirka 180 000 kr efter ROT-avdrag, med tegel från cirka 225 000 kr och med plåt från cirka 270 000 kr. Det förutsätter ett sadeltak utan större komplikationer och att underlaget är helt. Räkna på din egen takyta i Takräknaren, så får du en snävare siffra.",
+      },
+      {
+        q: "Hur stor del av ett takbyte är arbetskostnad?",
+        a: "Det varierar med material. Ju dyrare beläggning, desto större andel material. Den exakta uppdelningen ska stå specificerad i offerten, och du bör kräva det, eftersom ROT-avdraget bara gäller arbetskostnaden. En offert som bara visar en klumpsumma gör det omöjligt att kontrollera avdraget.",
+      },
+      {
+        q: "Vad kostar det att byta råspont?",
+        a: "Det går inte att sätta i förväg, eftersom skadan syns först när det gamla taket är rivet. Ofta rör det sig om enstaka partier kring skorsten, takfot och genomföringar snarare än hela taket. Seriösa entreprenörer prissätter kvadratmeterpriset för råspontsbyte redan i offerten, så att du vet vad ett tillägg skulle kosta innan arbetet börjar.",
+      },
+      {
+        q: "Varför skiljer sig två offerter på samma tak så mycket?",
+        a: "Nästan alltid för att de omfattar olika saker. Vanliga poster som saknas i den billigare offerten är ny underlagspapp, ny läkt, nytt regnvattensystem, taksäkerhet, ställning och bortforsling. Jämför alltid vad som ingår innan du jämför slutsumman.",
+      },
+      {
+        q: "Ingår ställning och bortforsling i priset?",
+        a: "Hos oss ja, det ligger i det fasta priset tillsammans med container och avfallshantering. Det är dock inte branschstandard, så kontrollera det specifikt. Etablering är en av de poster som oftast plockas bort för att få ner en offertsumma.",
+      },
+    ],
+    innehåll: `## Prislistan svarar på vad, inte varför
+
+De flesta som söker på vad ett takbyte kostar hittar snabbt ett kvadratmeterpris. Det är användbart, men det förklarar inte varför offerten du får hem landar där den gör, eller varför grannen betalade 80 000 kr mindre för ett till synes likadant tak.
+
+Den här artikeln bryter ner kostnaden i sina beståndsdelar. Vill du bara ha siffrorna finns de samlade på vår <a href="/priser" class="text-[#2B74FC] font-semibold">prissida för takbyte</a>.
+
+## De fyra delarna i ett takbyte
+
+Varje takoffert består av samma fyra block, oavsett vem som lämnar den.
+
+**1. Arbetskostnad.** Rivning, läggning av papp och läkt, montering av beläggning, plåtdetaljer och avslutande kontroll. Detta är den enda delen som är ROT-berättigad.
+
+**2. Materialkostnad.** Beläggning, underlagspapp, ströläkt och bärläkt, nock- och kantdetaljer, hängrännor och stuprör. Materialets andel växer kraftigt med valet av beläggning: plåt och tegel drar upp den, betong håller nere den.
+
+**3. Etablering.** Ställning, container, transporter och avfallshantering. Den här posten är i stort sett densamma oavsett vilket material du väljer, vilket betyder att den slår hårdare procentuellt på ett litet tak än på ett stort.
+
+**4. Tillkommande arbeten.** Det som upptäcks när det gamla taket är rivet. Rötskadad råspont, fuktskador kring skorsten, undermåliga genomföringar.
+
+Det är block 3 och 4 som förklarar de flesta överraskningar. Block 1 och 2 går att räkna på i förväg.
+
+## Vad du betalar per takstorlek
+
+Priserna nedan är efter 30 % ROT-avdrag och förutsätter sadeltak utan större genomföringar med helt underlag.
+
+| Takyta | Betongpannor | Tegelpannor | Plåt |
+|---|---|---|---|
+| 100 m² | från 120 000 kr | från 150 000 kr | från 180 000 kr |
+| 150 m² | från 180 000 kr | från 225 000 kr | från 270 000 kr |
+| 200 m² | från 240 000 kr | från 300 000 kr | från 360 000 kr |
+
+Lägg märke till att priset per kvadratmeter sjunker något på större tak, eftersom etableringen slås ut på fler kvadratmeter. Ett tak på 200 m² kostar alltså inte exakt dubbelt så mycket som ett på 100 m².
+
+Vill du ha en siffra för just din takyta och ditt material finns <a href="/priser#takraknare" class="text-[#2B74FC] font-semibold">Takräknaren på vår prissida</a>. Den räknar på samma underlag som vi använder när vi lämnar offert, inklusive ROT-avdrag och takbeloppet på 50 000 kr per person och år.
+
+## Bara arbetskostnaden är ROT-berättigad
+
+Det här missförstås ofta. ROT-avdraget ger 30 % tillbaka på **arbetskostnaden**, inte på hela fakturan. Material, deponiavgifter och containerhyra omfattas inte.
+
+Praktiskt betyder det två saker. För det första ska offerten specificera arbete och material var för sig, annars kan du inte kontrollera att avdraget är rätt beräknat. Kräv det. För det andra går taket för avdraget (50 000 kr per person och år) att fördela på två ägare om ni båda står på fastigheten, vilket i praktiken dubblar utrymmet.
+
+## Posterna som inte syns förrän taket är rivet
+
+Under beläggningen ligger underlagspapp, läkt och råspont. Deras skick går inte att bedöma helt uppifrån, och det är där tilläggen uppstår.
+
+- **Rötskadad råspont** kring skorsten, takfot och genomföringar, där fukt samlats längst.
+- **Uttjänt underlagspapp** som visar sig vara sprödare än väntat.
+- **Undermåliga genomföringar** från tidigare arbeten som behöver göras om.
+- **Vindskivor och vattbrädor** som ruttnat bakom plåten.
+
+En seriös entreprenör prissätter dessa poster **i offerten**, som ett kvadratmeterpris för råspontsbyte, så att du vet vad ett tillägg skulle kosta innan arbetet börjar. Saknas det ska du fråga efter det. Vi har gått igenom hela konstruktionen i artikeln om <a href="/blogg/under-takpannorna-underlagspapp-strolakt" class="text-[#2B74FC] font-semibold">vad som finns under takpannorna</a>.
+
+## Därför skiljer sig två offerter åt
+
+När två offerter på samma tak skiljer sig med tiotusentals kronor beror det nästan aldrig på att den ena firman är billigare. Det beror på att de räknat på olika saker.
+
+Kontrollera att båda offerterna innehåller:
+
+- Ny underlagspapp, inte bara nya pannor på befintligt underlag
+- Ny ströläkt och bärläkt
+- Nytt regnvattensystem, hängrännor och stuprör
+- Taksäkerhet enligt gällande krav
+- Ställning, container och bortforsling
+- Hantering av tillkommande arbeten, med pris angivet i förväg
+
+Faller en post bort försvinner ofta 20 000 till 60 000 kr ur summan, men arbetet behöver ändå göras, antingen nu eller om några år. En genomgång av vad du bör kontrollera hos firman finns i guiden om att anlita en <a href="/blogg/certifierad-taklaggare" class="text-[#2B74FC] font-semibold">certifierad takläggare</a>.
+
+## Omläggning kostar mindre än byte
+
+Är pannorna hela och frostbeständiga behöver du inte alltid ett komplett byte. Vid en omläggning återanvänds befintlig beläggning medan papp och läkt byts, vilket sänker kostnaden med ungefär 25 till 35 procent eftersom den nya beläggningen inte behöver köpas in.
+
+Vilket alternativ som gäller för ditt tak avgörs av pannornas skick, och det syns vid en genomgång på plats. Vi jämför alternativen på sidan om <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">takbyte och omläggning av tak</a>.
+
+## Så får du ett exakt pris
+
+Räkna först själv i <a href="/priser#takraknare" class="text-[#2B74FC] font-semibold">Takräknaren</a> för att få en realistisk ram. Boka sedan en kostnadsfri takkontroll, så går vi upp på taket, bedömer underlaget och lämnar ett fast pris som håller. Har du eternittak tillkommer asbestsanering, och den räknar vi på separat i guiden om att <a href="/blogg/byta-eternittak-kostnad" class="text-[#2B74FC] font-semibold">byta eternittak</a>.`,
+  },
+  {
     slug: "nar-byta-tak",
     titel: "Hur vet du om det är dags att byta tak?",
     ingress:
