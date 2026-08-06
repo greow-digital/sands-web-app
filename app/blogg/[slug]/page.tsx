@@ -43,8 +43,10 @@ export default async function ArtikelPage({
   const a = getArtikel(slug);
   if (!a) notFound();
 
-  const relaterade = artiklar
+  // Nyast först, annars visas alltid de äldsta inläggen som "Fler artiklar".
+  const relaterade = [...artiklar]
     .filter((x) => x.slug !== a.slug)
+    .sort((x, y) => y.datum.localeCompare(x.datum))
     .slice(0, 3);
 
   const blogPostingLd = {
