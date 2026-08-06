@@ -332,7 +332,7 @@ export default async function TaklaggningPage() {
                   desc: "Hela taket rivs och ersätts: nya pannor eller plåt, ny underlagspapp, ny läkt. När det är dags",
                   when: "Tak över 35 år, läckage på flera ställen, vittrade pannor.",
                   from: formatKr(priser.takbyte.betong140),
-                  fromLabel: "Från, 140 m² betong efter ROT",
+                  fromLabel: "140 m² betong efter ROT",
                 },
                 {
                   anchor: "takomlaggning",
@@ -340,14 +340,14 @@ export default async function TaklaggningPage() {
                   desc: "Befintliga pannor lyfts av, nytt undertak monteras (papp + läkt), pannorna läggs tillbaka.",
                   when: "Tak under 30 år, pannor i bra skick men undertaket slutkört.",
                   from: formatKr(priser.omlaggning.betong140),
-                  fromLabel: "Från, 140 m² betong efter ROT",
+                  fromLabel: "140 m² betong efter ROT",
                 },
                 {
                   anchor: "takrenovering",
                   title: "Takrenovering",
                   desc: "Riktade punktinsatser: laga läckage, byta enstaka pannor, nya hängrännor, plåtdetaljer.",
                   when: "Isolerade problem, taket annars i bra skick, säljförberedelse.",
-                  from: "Från ca 5 000 kr",
+                  from: "ca 5 000 kr",
                   fromLabel: "Beror helt på arbetets omfattning",
                 },
               ].map((opt) => (
@@ -379,7 +379,11 @@ export default async function TaklaggningPage() {
                         color: "var(--color-primary)",
                       }}
                     >
-                      {opt.from}
+                      {/* "Från" står på samma rad som priset. Tidigare låg det
+                          i den grå raden under, vilket gjorde att siffran läste
+                          som ett fast pris. SEO.md §4 kräver att prispunkter
+                          alltid prefixas med "från". */}
+                      Från {opt.from}
                     </p>
                     <p className="text-xs text-gray-400 mt-0.5">
                       {opt.fromLabel}
