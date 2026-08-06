@@ -312,7 +312,15 @@ export default async function TaklaggningPage() {
                 >
                   välja bästa takläggare i Stockholm
                 </Link>{" "}
-                går igenom vad du bör kolla först.
+                går igenom vad du bör kolla först, och vi listar de konkreta
+                kontrollerna i guiden om att anlita en{" "}
+                <Link
+                  href="/blogg/certifierad-taklaggare"
+                  className="font-semibold text-[#2B74FC] hover:underline"
+                >
+                  certifierad takläggare
+                </Link>
+                .
               </p>
             </div>
 
@@ -481,7 +489,21 @@ export default async function TaklaggningPage() {
                   >
                     tegel
                   </Link>
-                  , plåt eller papp. Som certifierad Monier
+                  ,{" "}
+                  <Link
+                    href="/tjanster/plattak"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    plåt
+                  </Link>{" "}
+                  eller{" "}
+                  <Link
+                    href="/tjanster/papptak"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    papp
+                  </Link>
+                  . Som certifierad Monier
                   Takpartner sedan 2016 ingår upp till 30 års tätt-tak-garanti
                   vid komplett byte med Moniers taksystem.
                 </p>
@@ -489,15 +511,22 @@ export default async function TaklaggningPage() {
                   Fast pris efter besiktning, inga tillägg under vägen. Sedan
                   1 december 2025 krävs inte längre bygglov för takbyte på en-
                   och tvåfamiljshus, även vid byte av taktyp. Hela arbetet
-                  regleras i ett ABT-06-kontrakt. Vi arbetar i hela Stockholms
-                  län, från innerstaden till{" "}
+                  regleras i ett ABT-06-kontrakt. Vi arbetar i första hand i
+                  Stockholms län, från innerstaden till{" "}
                   <Link
                     href="/omraden/norrtalje"
                     className="font-semibold text-[#2B74FC] hover:underline"
                   >
                     takbyte i Norrtälje
                   </Link>{" "}
-                  och Roslagen.
+                  och Roslagen. Se{" "}
+                  <Link
+                    href="/omraden"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    alla orter vi arbetar i
+                  </Link>
+                  .
                 </p>
 
                 <h3
@@ -624,14 +653,25 @@ export default async function TaklaggningPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
+                      {/* Varje material länkar till sin egen sida. Materialdjupet
+                          ska ligga där, inte här: den här sidan äger takbyte och
+                          omläggning, materialsidorna äger "tegeltak stockholm",
+                          "betongtak stockholm" osv. */}
                       {[
-                        ["Betongpannor", "40-60 år"],
-                        ["Tegelpannor", "50-100 år"],
-                        ["Plåttak (bandtäckt)", "40-70 år"],
-                        ["Papp / asfalt", "20-30 år"],
-                      ].map(([m, l]) => (
+                        ["Betongpannor", "40-60 år", "/tjanster/betongtak"],
+                        ["Tegelpannor", "50-100 år", "/tjanster/tegeltak"],
+                        ["Plåttak (bandtäckt)", "40-70 år", "/tjanster/plattak"],
+                        ["Papp / asfalt", "20-30 år", "/tjanster/papptak"],
+                      ].map(([m, l, href]) => (
                         <tr key={m}>
-                          <td className="px-4 py-3 text-gray-700">{m}</td>
+                          <td className="px-4 py-3">
+                            <Link
+                              href={href}
+                              className="font-medium text-[#2B74FC] hover:underline"
+                            >
+                              {m}
+                            </Link>
+                          </td>
                           <td className="px-4 py-3 text-gray-600 text-right tabular-nums">
                             {l}
                           </td>
@@ -642,7 +682,8 @@ export default async function TaklaggningPage() {
                 </div>
                 <p className="text-xs text-gray-500 mt-3">
                   Branschstandard. Faktisk livslängd beror på utförande, lutning
-                  och underhåll.
+                  och underhåll. Klicka på ett material för pris, för- och
+                  nackdelar och referensprojekt för just den taktypen.
                 </p>
               </div>
 
@@ -783,6 +824,14 @@ export default async function TaklaggningPage() {
                   Uppskattning, 25–35 % under motsvarande komplett takbyte.
                   Pannskick avgör i slutändan.
                 </p>
+                <p className="text-sm mt-3">
+                  <Link
+                    href="/priser"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    Se fullständig prislista för takbyte och omläggning →
+                  </Link>
+                </p>
               </div>
             </div>
           </div>
@@ -893,6 +942,16 @@ export default async function TaklaggningPage() {
                 </div>
                 <p className="text-xs text-gray-500 mt-3">
                   Uppskattningar efter ROT. Slutpriset sätts efter takkontroll.
+                </p>
+                <p className="text-sm mt-3">
+                  Vet du inte vad taket behöver? Börja med en{" "}
+                  <Link
+                    href="/tjanster/takbesiktning"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    kostnadsfri takkontroll
+                  </Link>{" "}
+                  , så får du besked och fast pris utan förbindelse.
                 </p>
               </div>
             </div>

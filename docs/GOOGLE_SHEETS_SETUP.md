@@ -45,6 +45,27 @@ Formulärsvar postas till en Google Apps Script som:
 2. Kontrollera att raden dyker upp i kalkylarket
 3. Kontrollera att mejlet kommer fram till `erik@greow.digital`
 
+## Dubblettskydd
+
+Scriptet hoppar över en lead som är **identisk med en nyss inkommen** (samma
+namn, telefon, e-post, taktyp, yta och meddelande) inom ett tidsfönster. Då
+skapas bara en rad och ett mejl, även om besökaren råkar skicka två gånger
+(dubbelklick, tillbaka-knapp eller nätverksretry). Besökaren ser alltid
+bekräftelsen som vanligt, så inget försämras i formuläret.
+
+- Fönstret styrs av `DEDUPE_WINDOW_SECONDS` högst upp i `docs/apps-script.gs`
+  (standard 120 sekunder = 2 minuter). Ändra värdet och redeploya för att
+  justera.
+- Skiljer sig innehållet (t.ex. ett annat meddelande) räknas det som en ny
+  lead och släpps igenom.
+- Leads helt utan namn, telefon och e-post deduplicras aldrig.
+
+> **Viktigt:** logiken körs i det deployade scriptet, inte i repot. Efter en
+> ändring i `docs/apps-script.gs` måste du klistra in koden på nytt i Apps
+> Script och göra en **ny distribution** (Steg 2 + 3) för att den ska gälla
+> live. Samma `/exec`-URL kan behållas om du väljer att uppdatera den
+> befintliga distributionen.
+
 ## Felsökning
 
 Om formulär misslyckas:

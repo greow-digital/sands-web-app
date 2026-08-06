@@ -303,7 +303,8 @@ export default async function BastaTaklaggareStockholm() {
                 <Link href="/tjanster/betongtak" className="text-[#2B74FC] hover:underline font-medium">betongtak</Link>.
                 Men vad alla seriösa{" "}
                 <Link href="/tjanster/taklaggning" className="text-[#2B74FC] hover:underline font-medium">takläggare i Stockholm</Link>{" "}
-                har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar.
+                har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar. Vi går igenom hur du kontrollerar varje punkt själv i guiden om att anlita en{" "}
+                <Link href="/blogg/certifierad-taklaggare" className="text-[#2B74FC] hover:underline font-medium">certifierad takläggare</Link>.
               </p>
               <p>
                 <strong>Sands Entreprenad Stockholm AB</strong> är certifierad Monier Takpartner med 4,8★ snittbetyg på BraByggare och 54 verifierade omdömen. Vi har levererat 2 500+ kompletta{" "}

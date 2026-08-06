@@ -11,9 +11,14 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/tjanster/takbesiktning",
-  title: "Takbesiktning Stockholm | kostnadsfri takkontroll | Sands",
+  // Titeln leder med "kostnadsfri takkontroll" eftersom GSC visar att sidan
+  // rankar 6,0 på den frasen och 4,6 på "kostnadsfri takkontroll vad ingår",
+  // men får noll klick. Tidigare title ledde med "Takbesiktning", vilket inte
+  // matchade det användaren faktiskt sökte på. Description besvarar "vad ingår"
+  // direkt i stället för att beskriva tjänsten allmänt.
+  title: "Kostnadsfri takkontroll Stockholm, vad ingår | Sands",
   description:
-    "Kostnadsfri takbesiktning i Stockholm av certifierad takläggare. Vi går upp på taket, bedömer skicket och ger fast pris om åtgärd behövs. Boka idag.",
+    "Vad ingår i en kostnadsfri takkontroll? Vi går upp på taket, dokumenterar skicket och lämnar fast pris vid behov. Utan förbindelse, i hela Stockholms län.",
 });
 
 const faq = [
@@ -112,8 +117,8 @@ export default function TakbesiktningPage() {
         />
 
         <PageHero
-          eyebrow="Takbesiktning"
-          title="Kostnadsfri takbesiktning i"
+          eyebrow="Takkontroll"
+          title="Kostnadsfri takkontroll i"
           titleAccent="Stockholm"
           description="Funderar du på att byta tak, ska köpa hus, eller är osäker på takets skick? Boka kostnadsfri takkontroll av certifierad takläggare. Vi går upp på taket och ger en ärlig bedömning."
           breadcrumbs={[

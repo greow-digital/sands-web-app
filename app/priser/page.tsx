@@ -343,6 +343,83 @@ export default function PriserPage() {
                   ))}
                 </ul>
 
+                {/* Fördjupning. Den här sidan äger det transaktionella
+                    intentet ("takbyte pris Stockholm"): tabell, kalkylator,
+                    boka. Blogginlägget vad-kostar-takbyte äger det
+                    informationella ("hur byggs priset upp", "varför skiljer
+                    offerterna sig"). De ska länka till varandra, inte
+                    upprepa varandra. Eternit saknas medvetet i pristabellen
+                    ovan eftersom saneringen inte går att prissätta per m²
+                    på förhand. */}
+                <h3
+                  className="text-xl font-bold mb-4"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Fördjupning om kostnaden
+                </h3>
+                <ul className="space-y-2 mb-8">
+                  <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0 mt-1.5" />
+                    <span>
+                      Undrar du varför två offerter på samma tak kan skilja
+                      tiotusentals kronor? Vi bryter ner de fyra delarna i{" "}
+                      <Link
+                        href="/blogg/vad-kostar-takbyte"
+                        className="font-semibold text-[#2B74FC] hover:underline"
+                      >
+                        hur priset på ett takbyte byggs upp
+                      </Link>
+                      .
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0 mt-1.5" />
+                    <span>
+                      Har du eternittak tillkommer asbestsanering utöver det nya
+                      taket. Vi har räknat på det i guiden om att{" "}
+                      <Link
+                        href="/blogg/byta-eternittak-kostnad"
+                        className="font-semibold text-[#2B74FC] hover:underline"
+                      >
+                        byta eternittak
+                      </Link>
+                      .
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0 mt-1.5" />
+                    <span>
+                      Underlagspapp, ströläkt och råspont är de poster som
+                      avgör om taket blir tätt, och de som oftast skiljer två
+                      offerter åt. Se{" "}
+                      <Link
+                        href="/blogg/under-takpannorna-underlagspapp-strolakt"
+                        className="font-semibold text-[#2B74FC] hover:underline"
+                      >
+                        vad som finns under takpannorna
+                      </Link>
+                      .
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2 text-sm text-gray-600">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-400 shrink-0 mt-1.5" />
+                    <span>
+                      Är pannorna hela räcker det ofta med omläggning i stället
+                      för komplett byte, vilket sänker priset. Läs mer om{" "}
+                      <Link
+                        href="/tjanster/taklaggning"
+                        className="font-semibold text-[#2B74FC] hover:underline"
+                      >
+                        takbyte och omläggning av tak
+                      </Link>
+                      .
+                    </span>
+                  </li>
+                </ul>
+
                 <p className="text-xs text-gray-500">
                   Föredrar du telefon? Ring{" "}
                   <a

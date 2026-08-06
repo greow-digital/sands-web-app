@@ -71,6 +71,19 @@ export default async function ArtikelPage({
     ...(a.image ? { image: `https://www.sandsab.se${a.image}` } : {}),
   };
 
+  // FAQPage speglar FAQ-sektionen 1:1 när artikeln har en (SEO.md §10).
+  const faqLd = a.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: a.faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }
+    : null;
+
   return (
     <>
       <Header />
@@ -79,6 +92,12 @@ export default async function ArtikelPage({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }}
         />
+        {faqLd && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+          />
+        )}
         {/* Header */}
         <section className="border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
@@ -254,6 +273,37 @@ export default async function ArtikelPage({
                     />
                   );
                 })}
+                {a.faq?.length ? (
+                  <section className="mt-12 not-prose">
+                    <h2
+                      className="text-[22px] lg:text-[26px] font-bold mb-5"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      Vanliga frågor
+                    </h2>
+                    <div className="divide-y divide-gray-200 border-t border-gray-200">
+                      {a.faq.map((f) => (
+                        <div key={f.q} className="py-5">
+                          <h3
+                            className="text-base font-bold mb-2"
+                            style={{
+                              fontFamily: "var(--font-heading)",
+                              color: "var(--color-dark)",
+                            }}
+                          >
+                            {f.q}
+                          </h3>
+                          <p className="text-[15px] text-gray-600 leading-[1.75]">
+                            {f.a}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
                 {slug === "nar-byta-tak" && (
                   <TaktestInlineCta
                     className="mt-8 not-prose"
@@ -323,7 +373,7 @@ export default async function ArtikelPage({
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få gratis offert <ArrowRight size={14} />
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
             </Link>
           </div>
         </section>
