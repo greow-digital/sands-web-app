@@ -132,6 +132,15 @@ const nextConfig: NextConfig = {
         destination: "/kontakt",
         permanent: true,
       },
+      // Sammanslagen content: /blogg/vad-kostar-takbyte var i praktiken en
+      // dubblett av /priser (samma materialpriser, samma "vad ingår", samma
+      // ROT-avsnitt) och låg kvar på position 41 med 1 632 visningar och noll
+      // klick. Innehållet bor nu på /priser, som rankar 18,0 på samma intent.
+      {
+        source: "/blogg/vad-kostar-takbyte",
+        destination: "/priser",
+        permanent: true,
+      },
       // Old sitemap URL
       {
         source: "/sitemap",
