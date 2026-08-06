@@ -31,7 +31,12 @@ export default function BloggPage() {
         <section className="py-20 lg:py-28">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {artiklar.map((a) => (
+              {/* Nyast först. Listan följde tidigare arrayordningen, vilket
+                  begravde nypublicerade artiklar längst ned under flera år
+                  gamla inlägg. */}
+              {[...artiklar]
+                .sort((a, b) => b.datum.localeCompare(a.datum))
+                .map((a) => (
                 <Link
                   key={a.slug}
                   href={`/blogg/${a.slug}`}
