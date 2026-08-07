@@ -32,11 +32,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.sandsab.se/basta-taklaggare-stockholm" },
   title: "Bästa takläggare i Stockholm | så väljer du rätt | Sands",
   description:
-    "Hur hittar du en seriös takläggare i Stockholm? Checklista: F-skatt, försäkring, auktorisering och garantitid. Sands Entreprenad: 4,8★ BraByggare, fast pris.",
+    "Hur hittar du en seriös takläggare i Stockholm? Checklista: F-skatt, försäkring, certifiering och garantitid. Fast pris och 4,8 på BraByggare.",
   openGraph: {
-    title: "Bästa takläggare i Stockholm – så väljer du rätt takfirma",
+    title: "Bästa takläggare i Stockholm, så väljer du rätt takfirma",
     description:
-      "Guide för att välja auktoriserad takläggare i Stockholm: checklista, vanliga misstag, FAQ och referensprojekt från Sands Entreprenad.",
+      "Guide för att välja certifierad takläggare i Stockholm: checklista, vanliga misstag, FAQ och referensprojekt från Sands Entreprenad.",
     url: "https://www.sandsab.se/basta-taklaggare-stockholm",
   },
 };
@@ -321,7 +321,7 @@ export default async function BastaTaklaggareStockholm() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Få gratis offert <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:08283888"

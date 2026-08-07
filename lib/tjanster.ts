@@ -83,7 +83,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Taktegel är ett rent naturmaterial som bara blir vackrare med åren. Vi lägger tegeltak från Monier med upp till 30 års garanti.",
     text:
-      "Tegeltak har en lång tradition i Sverige och är känt för sin hållbarhet och sitt klassiska utseende. Ett korrekt lagt tegeltak kan hålla i 50-100 år. Vi arbetar med Moniers tegelpannor som ger ett komplett taksystem med materialgaranti och montagegaranti.\n\nTegelpannor är tillverkade av naturligt lera och bränd i hög temperatur. De är frostbeständiga, formstabila och behåller sin kulör livet ut utan att behöva målas eller underhållas.",
+      "Tegeltak har en lång tradition i Sverige och är känt för sin hållbarhet och sitt klassiska utseende. Ett korrekt lagt tegeltak kan hålla i 50-100 år. Vi arbetar med Moniers tegelpannor som ger ett komplett taksystem med materialgaranti och montagegaranti.\n\nTegelpannor är tillverkade av naturligt lera och bränd i hög temperatur. De är frostbeständiga, formstabila och behåller sin kulör livet ut utan att behöva målas eller underhållas.\n\nSka du byta tak till tegel börjar vi med att inventera befintliga pannor. Är de hela och frostbeständiga räcker ofta en omläggning av tak, där pannorna läggs tillbaka medan underlagspapp och läkt byts. Är de vittrade eller spruckna är det bättre att lägga nytt tak direkt.",
     prisIntervall: "Från ca 1 500 kr/m² efter ROT-avdrag",
     prism2: "1 500",
     ingår: [
@@ -124,7 +124,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Betongpannor är ett robust och prisvärt val som tål det nordiska klimatet.",
     text:
-      "Betongtak är det vanligaste takmaterialet i Sverige. Pannorna finns i flera färger och profiler och ger ett snyggt och hållbart resultat. Vi arbetar med Moniers betongpannor, bland annat modellen Jönåker Elegant som kombinerar klassisk form med modern prestanda.\n\nBetongpannor är ett ekonomiskt alternativ som ger lång livslängd och lågt underhåll. De är tillgängliga i ett brett sortiment av kulörer och ytor, allt från naturgrå till glaserat.",
+      "Betongtak är det vanligaste takmaterialet i Sverige. Pannorna finns i flera färger och profiler och ger ett snyggt och hållbart resultat. Vi arbetar med Moniers betongpannor, bland annat modellen Jönåker Elegant som kombinerar klassisk form med modern prestanda.\n\nBetongpannor är ett ekonomiskt alternativ som ger lång livslängd och lågt underhåll. De är tillgängliga i ett brett sortiment av kulörer och ytor, allt från naturgrå till glaserat.\n\nDet vanligaste skälet att byta tak med betongpannor är att underlagspappen tjänat ut, inte pannorna. Håller de fortfarande går det att göra en omläggning av tak till lägre kostnad, annars lägger vi nytt tak med komplett taksystem från Monier.",
     prisIntervall: "Från ca 1 200 kr/m² efter ROT-avdrag",
     prism2: "1 200",
     ingår: [
@@ -165,7 +165,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Modernt och lättviktigt material med lång livslängd och minimalt underhåll.",
     text:
-      "Plåttak är ett populärt val för villor och moderna hus. Materialet är lättare än tegel och betong, vilket minskar belastningen på konstruktionen. Vi lägger bandtäckt och dubbelfalsat plåttak med hög precision.\n\nPlåt är ett extremt hållbart material, korrekt lagt håller det i 40-70 år. Det kräver minimalt underhåll och passar utmärkt för tak med flackare lutning eller för hus med en mer modern arkitektur.",
+      "Plåttak är ett populärt val för villor och moderna hus. Materialet är lättare än tegel och betong, vilket minskar belastningen på konstruktionen. Vi lägger bandtäckt och dubbelfalsat plåttak med hög precision.\n\nPlåt är ett extremt hållbart material, korrekt lagt håller det i 40-70 år. Det kräver minimalt underhåll och passar utmärkt för tak med flackare lutning eller för hus med en mer modern arkitektur.\n\nMånga väljer plåt när de ska byta tak från tunga betong- eller tegelpannor, eftersom vikten minskar kraftigt. Här går det sällan att göra en omläggning av tak, plåt kräver att man lägger nytt tak på ett nytt underlag.",
     prisIntervall: "Från ca 1 800 kr/m² efter ROT-avdrag",
     prism2: "1 800",
     ingår: [
@@ -205,7 +205,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Prisvärt alternativ för platta tak och enklare konstruktioner.",
     text:
-      "Papptak är en kostnadseffektiv taklösning som är hållbar om den läggs professionellt. Vi arbetar med Icopals pappsystem för bästa resultat.\n\nPapptäckning är den vanligaste lösningen för platta och flacka tak. Rätt utförd med ordentlig tätskiktsläggning och genomföringar ger papptak ett vattentätt och hållbart resultat i många år.",
+      "Papptak är en kostnadseffektiv taklösning som är hållbar om den läggs professionellt. Vi arbetar med Icopals pappsystem för bästa resultat.\n\nPapptäckning är den vanligaste lösningen för platta och flacka tak. Rätt utförd med ordentlig tätskiktsläggning och genomföringar ger papptak ett vattentätt och hållbart resultat i många år.\n\nPå papptak finns ingen beläggning att återanvända, så en omläggning av tak är sällan aktuell. Ska du byta tak river vi det gamla tätskiktet, kontrollerar underlaget och lägger nytt tak med Icopals system.",
     prisIntervall: "Från ca 800 kr/m² efter ROT-avdrag",
     prism2: "800",
     ingår: [
@@ -245,7 +245,7 @@ export const tjanster: Tjanst[] = [
     intro:
       "Eternittak innehåller asbest och kräver certifierad sanering innan nytt tak kan läggas.",
     text:
-      "Har du eternittak? Det är viktigt att hantera det korrekt. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen åt dig, från rivning och asbestsanering till nytt tak med garanti. Du behöver bara göra en kontakt, vi sköter resten.\n\nAsbest är ett hälsofarligt material som inte får hanteras av obehöriga. Vår partner är certifierad för asbestsanering och följer samtliga lagkrav och säkerhetsrutiner.",
+      "Har du eternittak? Det är viktigt att hantera det korrekt. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen åt dig, från rivning och asbestsanering till nytt tak med garanti. Du behöver bara göra en kontakt, vi sköter resten.\n\nAsbest är ett hälsofarligt material som inte får hanteras av obehöriga. Vår partner är certifierad för asbestsanering och följer samtliga lagkrav och säkerhetsrutiner.\n\nEternit går aldrig att spara, så en omläggning av tak är inte möjlig här. Ska du byta tak rivs plattorna varsamt av saneringspartnern, och därefter lägger vi nytt tak i det material du väljer.",
     prisIntervall: "Pris efter takkontroll (inkl. sanering)",
     prism2: "Kontakta oss",
     process: [

@@ -399,7 +399,7 @@ export default function LeadForm({
         >
           {isSubmitting
             ? "Skickar..."
-            : ctaText || "Få gratis offert"}
+            : ctaText || "Få prisförslag"}
         </button>
 
         {notBindingNote && (

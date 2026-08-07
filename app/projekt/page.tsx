@@ -20,9 +20,9 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/projekt",
-  title: "Slutförda takprojekt i Stockholm | bilder & referenser | Sands",
+  title: "Slutförda takprojekt i Stockholm | Sands",
   description:
-    "Se våra senaste takbyten i Stockholm – bilder från färdiga projekt i Vaxholm, Lidingö, Norrtälje, Täby, Bromma och fler. 2 500+ kunder sedan 2016.",
+    "Se våra senaste takbyten i Stockholm, bilder från färdiga projekt i Vaxholm, Lidingö, Norrtälje, Täby och Bromma. 2 500+ kunder sedan 2016.",
 });
 
 function imgSrc(img: SanityImageWithMeta, w: number, h: number) {
@@ -272,7 +272,7 @@ export default async function ProjektPage() {
               className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få gratis offert <ArrowRight size={14} />
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
             </Link>
           </div>
         </section>
