@@ -5,7 +5,7 @@ export type Tjanst = {
   intro: string;
   text: string;
   prisIntervall?: string;
-  prism2: string;
+  prism2?: string;
   image?: string;
   kategori: "tjanst" | "taktyp";
   ingår?: string[];
@@ -30,6 +30,8 @@ const bildKarta: Record<string, string> = {
   fasadrenovering: "/images/fasad-panelbyte-bromma.jpg",
   badrumsrenovering: "/images/badrum.png",
   koksrenovering: "/images/koksrenovering.jpg",
+  shingeltak: "/images/hero-sands-construction.jpg", // TODO: byt till riktig shingelbild
+  altantak: "/images/hero-sands-construction.jpg", // TODO: byt till riktig altantakbild
   ovriga: "/images/solna-uteplats-dag.jpg",
 };
 
@@ -73,7 +75,7 @@ export const tjanster: Tjanst[] = [
         a: "Ja. ROT-avdraget ger dig 30% tillbaka på arbetskostnaden direkt på fakturan. Vi hanterar ansökan åt dig.",
       },
     ],
-    relaterade: ["tegeltak", "betongtak", "plattak", "papptak"],
+    relaterade: ["tegeltak", "betongtak", "plattak", "papptak", "shingeltak"],
   },
   {
     slug: "tegeltak",
@@ -235,7 +237,7 @@ export const tjanster: Tjanst[] = [
         a: "Vi arbetar med Icopals system och ger garanti på utförandet. Exakta villkor specificeras i offerten.",
       },
     ],
-    relaterade: ["taklaggning", "betongtak", "hangrannorstupror"],
+    relaterade: ["taklaggning", "betongtak", "shingeltak"],
   },
   {
     slug: "eternittak",
@@ -285,6 +287,45 @@ export const tjanster: Tjanst[] = [
       },
     ],
     relaterade: ["taklaggning", "tegeltak", "betongtak"],
+  },
+  {
+    slug: "shingeltak",
+    kategori: "taktyp",
+    title: "Shingeltak",
+    h1: "Shingeltak i Stockholm",
+    intro:
+      "Lätt taktäckning av asfaltshingel som passar tak med många vinklar och konstruktioner som inte bär tunga pannor. Fast pris efter kostnadsfri takkontroll.",
+    text:
+      "Shingel är en taktäckning av asfaltimpregnerade skivor som spikas på ett heltäckande underlag av råspont. Den väger omkring 10 kg/m², mot 40 till 45 kg/m² för betong- och tegelpannor. Det gör shingel till ett av få alternativ när takstolarna inte bär ett tungt pannmaterial, till exempel på äldre hus, garage, uterum och tillbyggnader.\n\nEftersom skivorna är små och följsamma fungerar shingel bra på tak som är besvärliga att lägga med pannor: många ränndalar, takkupor, valmade ytor och brutna vinklar. Ränndalarna är den kritiska detaljen. Vi lägger dubbla eller trippla beläggningar där vattnet samlas, eftersom det är där ett shingeltak börjar läcka först om arbetet görs slarvigt.\n\nSka du byta tak till shingel river vi den gamla beläggningen och kontrollerar råsponten. Fuktskadade partier byts innan vi lägger nytt tak, annars spelar det ingen roll hur bra ytskiktet är. Till skillnad från tegel och betong går det inte att lägga om tak med shingel och återanvända materialet, en omläggning av tak innebär alltid ny beläggning.",
+    ingår: [
+      "Kostnadsfri takkontroll och bedömning",
+      "Rivning av befintlig beläggning",
+      "Kontroll och byte av fuktskadad råspont",
+      "Ny underlagspapp",
+      "Ny shingel med tätade ränndalar och anslutningar",
+      "Plåtdetaljer vid skorsten, genomföringar och vindskivor",
+      "Nytt regnvattensystem (hängrännor och stuprör)",
+      "Ställning, container och bortforsling",
+    ],
+    faq: [
+      {
+        q: "Vad kostar ett shingeltak?",
+        a: "Priset styrs av takets yta, hur många ränndalar och kupor det har, och om råsponten behöver bytas. Ett enkelt sadeltak blir betydligt billigare per kvadratmeter än ett brutet tak med flera vinklar. Vi lämnar fast pris efter kostnadsfri takkontroll, då vet du vad hela arbetet landar på.",
+      },
+      {
+        q: "Hur länge håller ett shingeltak?",
+        a: "Ett fackmässigt lagt shingeltak håller normalt 25 till 30 år. Livslängden avgörs mest av underlaget och av hur ränndalar och anslutningar är utförda, inte av skivorna i sig. Underlagspappen under shingeln är oftast den detalj som avgör när taket behöver bytas.",
+      },
+      {
+        q: "Vilken taklutning krävs för shingel?",
+        a: "De flesta fabrikat anger omkring 15 graders lutning som lägsta gräns, men exakt siffra skiljer sig mellan tillverkare. På flackare tak är papptak eller plåt en bättre lösning. Vi går igenom lutningen på plats vid takkontrollen.",
+      },
+      {
+        q: "Kan man byta från betongpannor till shingel?",
+        a: "Ofta ja, och det är ett av de vanligaste skälen att byta material. Shingel väger ungefär en fjärdedel av betongpannor och avlastar därmed takstolarna. Byter du från pannor krävs ett heltäckande underlag av råspont, vilket inte alltid finns under en läktad panntäckning. Det kontrollerar vi vid takkontrollen.",
+      },
+    ],
+    relaterade: ["taklaggning", "papptak", "takbesiktning"],
   },
   {
     slug: "takfonsterkupor",
@@ -350,7 +391,7 @@ export const tjanster: Tjanst[] = [
         a: "Ja, om taket i övrigt är i gott skick byter vi gärna enbart vindskivorna. Vi rekommenderar dock att kombinera med byte av hängrännor eftersom samma ställning kan användas.",
       },
     ],
-    relaterade: ["taklaggning", "papptak"],
+    relaterade: ["taklaggning", "papptak", "altantak"],
   },
   {
     slug: "taksakerhet",
@@ -468,6 +509,44 @@ export const tjanster: Tjanst[] = [
     relaterade: ["taklaggning", "taksakerhet"],
   },
   {
+    slug: "altantak",
+    kategori: "tjanst",
+    title: "Altantak",
+    h1: "Altantak i Stockholm",
+    intro:
+      "Tak över altan och uteplats, dimensionerat för snölast och tätat mot fasaden. Fast pris efter kostnadsfri kontroll på plats.",
+    text:
+      "Ett altantak gör uteplatsen användbar även när det regnar, och skyddar trall, möbler och fasad från väta. Vi bygger fasta tak i plåt, papp eller genomsiktlig polykarbonat, monterade mot husets fasad eller burna av egna stolpar.\n\nDet som avgör om ett altantak håller är anslutningen mot huset och avvattningen. Taket ska ha rätt fall, vara ordentligt tätat där det möter fasaden, och ledas in i ett regnvattensystem som klarar den extra takytan. Ett altantak som mynnar rakt ut på en befintlig hängränna överbelastar den ofta.\n\nKonstruktionen dimensioneras för snölast enligt gällande regler. I Stockholmsområdet är det snölasten och inte takets egenvikt som styr hur stolpar, balkar och infästningar ska utföras.",
+    ingår: [
+      "Kostnadsfri kontroll och bedömning på plats",
+      "Förslag på konstruktion och materialval",
+      "Stomme dimensionerad för snölast",
+      "Taktäckning i plåt, papp eller polykarbonat",
+      "Tätning och plåtbeslag mot fasaden",
+      "Anslutning till hängrännor och stuprör",
+      "Bortforsling och slutkontroll tillsammans med dig",
+    ],
+    faq: [
+      {
+        q: "Behöver jag bygglov för altantak?",
+        a: "För en- och tvåbostadshus är skärmtak över uteplats, altan, balkong eller entré bygglovsbefriat upp till 15 kvadratmeter sammanlagt, förutsatt att taket inte placeras närmare tomtgränsen än 4,5 meter. Ligger det närmare krävs grannens medgivande. Reglerna tolkas olika av olika kommuner, så kontrollera alltid med din byggnadsnämnd innan du beställer.",
+      },
+      {
+        q: "Vad kostar ett altantak?",
+        a: "Priset beror på ytan, om taket bärs av fasaden eller av egna stolpar, och vilket material du väljer. Genomsiktlig polykarbonat är oftast det billigaste alternativet, medan plåt har längst livslängd. Vi lämnar fast pris efter en kostnadsfri kontroll på plats.",
+      },
+      {
+        q: "Kan altantaket byggas samtidigt som takbytet?",
+        a: "Ja, och det är oftast det billigaste sättet. Ställningen står redan uppe, plåtarbetet mot fasaden kan göras i samma vända, och regnvattensystemet dimensioneras för hela takytan direkt. Ska du byta tak eller lägga om tak inom något år är det värt att ta altantaket samtidigt.",
+      },
+      {
+        q: "Klarar ett altantak snö?",
+        a: "Ja, om det är dimensionerat för det. Snölasten i Stockholms län är den styrande lasten för den här typen av konstruktion, inte takets egenvikt. Vi räknar på bärande delar och infästningar innan vi lämnar pris.",
+      },
+    ],
+    relaterade: ["taklaggning", "hangrannorstupror", "totalentreprenad"],
+  },
+  {
     slug: "totalentreprenad",
     kategori: "tjanst",
     title: "Totalentreprenad",
@@ -501,7 +580,7 @@ export const tjanster: Tjanst[] = [
         a: "Nej. Med totalentreprenad och fast pris är priset låst. Tilläggsarbeten som beställs separat prissätts i förväg.",
       },
     ],
-    relaterade: ["taklaggning", "tegeltak", "betongtak"],
+    relaterade: ["taklaggning", "altantak", "fasadrenovering"],
   },
   {
     slug: "fasadrenovering",
