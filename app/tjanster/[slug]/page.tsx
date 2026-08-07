@@ -26,6 +26,7 @@ const REVIEW_MATCH: Record<string, string[]> = {
   totalentreprenad: ["renovering", "entreprenad"],
   hangrannorstupror: ["hängränn", "stuprör", "vindskiv"],
   takfonsterkupor: ["fönster", "kupa"],
+  shingeltak: ["shingel"],
 };
 
 // Per-slug SEO overrides. Only listed slugs get the hand-tuned copy
@@ -61,6 +62,16 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
     title: "Taksäkerhet Stockholm | snörasskydd & gångbrygga | Sands",
     description:
       "Taksäkerhet enligt BBR i Stockholm: snörasskydd, gångbryggor, takstegar och räcken. Montering på befintligt tak eller i samband med takbyte.",
+  },
+  shingeltak: {
+    title: "Shingeltak Stockholm | lätt tak, fast pris | Sands",
+    description:
+      "Shingeltak i Stockholm. Lätt taktäckning för tak med många ränndalar och kupor. Fast pris efter kostnadsfri takkontroll, ROT-avdrag tillämpas.",
+  },
+  altantak: {
+    title: "Altantak Stockholm | bygglov, snölast och pris | Sands",
+    description:
+      "Altantak och skärmtak över uteplats i Stockholm. Dimensionerat för snölast, tätat mot fasaden. Bygglovsreglerna förklarade. Fast pris efter kontroll.",
   },
   takfonsterkupor: {
     title: "Takfönster & takkupor i Stockholm | Sands",
@@ -102,6 +113,13 @@ export default async function TjanstPage({
     ? tjanster.filter((x) => t.relaterade!.includes(x.slug))
     : [];
 
+  // Hero-rubriken renderas tvåfärgad: PageHero skriver ut `title` följt av
+  // `titleAccent`. Dela därför h1 på den geografiska svansen när den finns,
+  // annars renderas hela rubriken i en färg. Tidigare klipptes t.title bort
+  // ur h1 och lades tillbaka som accent, men den strängen finns sällan i h1
+  // och resultatet blev ett dubblerat ord ("Papptak i Stockholm Papptak").
+  const heroTitel = t.h1.match(/^(.+?)\s+(i Stockholm)$/);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -141,8 +159,8 @@ export default async function TjanstPage({
 
         <PageHero
           eyebrow={t.title}
-          title={t.h1.replace(` ${t.title}`, "")}
-          titleAccent={t.title}
+          title={heroTitel ? heroTitel[1] : t.h1}
+          titleAccent={heroTitel ? heroTitel[2] : undefined}
           description={t.intro}
           breadcrumbs={[
             { label: "Hem", href: "/" },
