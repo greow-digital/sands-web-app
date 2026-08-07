@@ -131,19 +131,23 @@ Kontrastfallet: `sands entreprenad` har QS 10 med `ABOVE_AVERAGE` på alla tre k
 Tre fel som gör att budgivningen optimerar mot fel signal. Dessa ska rättas innan något annat, eftersom allt annat mäts mot dem.
 
 **4.1 `Submit lead form (form_submit)` räknar `MANY_PER_CLICK`.**
-Värde 1 500 kr, primär målåtgärd. Med `MANY_PER_CLICK` räknas varje inskick från samma klick som en konvertering. Det är exakt samma dubblettproblem du redan sett i leadflödet, fast på budgivningssidan. Ska vara `ONE_PER_CLICK`. Detta hänger ihop med dubblettfixen i `docs/apps-script.gs` som ännu inte är driftsatt.
+Värde 1 500 kr, primär målåtgärd. Med `MANY_PER_CLICK` räknas varje inskick från samma klick som en konvertering. Det är exakt samma dubblettproblem du redan sett i leadflödet, fast på budgivningssidan.
+
+**Korrigerat 2026-08-07:** räknesättet går inte att ändra från Google Ads. API:t svarar `IMMUTABLE_FIELD`, eftersom Google härleder räknesättet från GA4 för importerade konverteringar. Den enda spaken sitter i GA4 Admin under Nyckelhändelser, där `form_submit` kan sättas från "En gång per händelse" till "En gång per session". Det gör att dubblettfixen i `docs/apps-script.gs` blir viktigare än först antaget, eftersom den är det andra av två möjliga skydd.
 
 **4.2 `Phone call lead (phone_click)` är inte primär målåtgärd.**
 9 telefonleads på 90 dagar syns i `all_conversions` men bidrar med 0 till `conversions`. Budgivningen vet alltså inte att de finns. 9 leads är 26 procent av all lead-volym från ads. Sätt den som primär, `ONE_PER_CLICK`, med ett rimligt värde (förslag 1 500 kr, samma som formulär).
 
 **4.3 `Local actions` (Directions, Other engagements, Website visits) är satta som primära.**
-De rapporterar 30 `all_conversions` på 90 dagar. De påverkar inte den här sökkampanjens budgivning idag (de rapporterar 0 i `conversions` här), men de ligger i den primära måluppsättningen och grumlar all rapportering på kontonivå. Flytta till sekundära.
+**Struken 2026-08-07.** Flaggan `primary_for_goal` på själva åtgärden är inte det som styr. Målnivån gör det, och där ligger PAGE_VIEW, GET_DIRECTIONS och ENGAGEMENT från GOOGLE_HOSTED redan som `biddable: false`. Därför rapporterar de 0 i konverteringskolumnen. Ingen åtgärd behövs. Åtgärderna är dessutom av typen GOOGLE_HOSTED och går inte att mutera alls (`MUTATE_NOT_ALLOWED`).
 
 **4.4 Attributionsfönster.**
 Formuläråtgärden har 30 dagars click-through-fönster. Ett takbyte har längre beslutscykel än så. Höj till 90 dagar. Den borttagna versionen av samma åtgärd hade redan 90.
 
 **4.5 `Calls from ads` (AD_CALL) är aktiv och primär men rapporterar noll.**
-Samtalstillägget finns på kontonivå (08-28 38 88) men genererar inga mätta samtal. Verifiera att samtalsrapportering är påslagen, annars är telefonspåret från annonserna helt osynligt.
+Samtalstillägget finns på kontonivå (08-28 38 88) men genererar inga mätta samtal.
+
+Det är två fel, inte ett. Utöver att inga samtal registreras ligger målet PHONE_CALL_LEAD med ursprung CALL_FROM_ADS som `biddable: false`, så även mätta samtal skulle inte räknas i konverteringskolumnen. Båda måste rättas i UI:t.
 
 Efter 4.1 och 4.2 går den mätta signalen från cirka 9 till cirka 12 konverteringar per månad, vilket är den nivå smart bidding behöver för att fungera.
 
@@ -308,7 +312,9 @@ Förslag på ny uppsättning, kampanj B:
 
 **Bilder:** 8 bildassets aktiva, bra.
 
-**Annonser:** Här finns ett direkt slöseri. Den annons som har `EXCELLENT` i annonsstyrka och pekar på `/tjanster/taklaggning` är **pausad** och har 0 impressions. Annonsen mot `/priser` är aktiv men har fått 0 konverteringar på 122 klick. Trafiken bärs av två annonser med `GOOD` och `AVERAGE` styrka som båda pekar på startsidan. Aktivera den starka annonsen när dess annonsgrupp finns.
+**Annonser:** Annonsen mot `/priser` är aktiv men har fått 0 konverteringar på 122 klick.
+
+**Korrigerat 2026-08-07:** i en tidigare version stod här att den pausade annonsen med `EXCELLENT` annonsstyrka mot `/tjanster/taklaggning` var bortkastad. Det stämmer inte. Den hann köra 1 138 visningar med 3,25 procents CTR och 0 konverteringar på 37 klick, mot 5,59 procent och 8 konverteringar för den aktiva annonsen mot startsidan. `EXCELLENT` är Googles omdöme om variationen i tillgångar, inte om prestanda. Annonsen ska inte återaktiveras i nuvarande struktur.
 
 **RSA-krav per ny annonsgrupp:** 15 rubriker, 4 beskrivningar, en rubrik fastnålad i position 1 med exakt sökordet (det är den enskilt största hävstången på ad relevance), minst en rubrik med pris, en med geo, en med kostnadsfri takkontroll.
 
@@ -409,6 +415,9 @@ Google Ads MCP-verktygen täcker en del av API:t, inte hela. Här är den faktis
 | Sätta geo till "Närvaro" på nya kampanjer | `create_campaign` sätter geo-ID men inte `geo_target_type_setting`. Nya kampanjer får Googles standard "Närvaro eller intresse", vilket ger trafik från folk som bara är intresserade av Stockholm. Måste ändras direkt efter att kampanjen skapats. |
 | Ta bort negativa keywords på annonsgruppsnivå | Bara kampanjnivå finns som borttagningsverktyg. |
 | Samtalsrapportering och Google-vidarekopplingsnummer | Kontoinställning utanför API-ytan. |
+| Enhetsbudmodifierare | `update_campaign_device_bid_modifier` är trasigt. Det skriver enumvärdet som heltal i en GAQL WHERE-sats, vilket Google avvisar med `BAD_ENUM_CONSTANT`. Verifierat på både MOBILE och DESKTOP 2026-08-07. |
+| Räknesätt på GA4-importerade konverteringar | `IMMUTABLE_FIELD`. Härleds från GA4 och ändras bara i GA4 Admin. |
+| Local actions-åtgärder | Typen GOOGLE_HOSTED går inte att mutera alls (`MUTATE_NOT_ALLOWED`). |
 
 **Praktisk konsekvens.** Att jag inte kan pausa keywords låter värre än det är. I den nya strukturen skapar jag rena annonsgrupper från grunden, och sedan pausar jag hela `Ad group 1` i ett anrop. De 743 gamla keywordsen behöver alltså aldrig städas en och en. Undantaget är steg 6 nedan, där `takläggare` bred matchning ska stängas innan resten är byggt.
 
@@ -565,3 +574,37 @@ Resten (struktur, assets, `/priser`) är riktigt arbete och bör tas som ett ege
 - Inga skrivningar mot Google Ads-kontot är gjorda ännu. Allt ovan är analys och förslag.
 - `/tack`-sidan och gtag-koden rörs inte alls, enligt projektreglerna.
 - Ändringar av konverteringsåtgärder (steg 1 till 3) påverkar historisk rapportering och bör göras medvetet, med datum noterat.
+
+---
+
+## 16. Genomförandelogg
+
+### 2026-08-07, kört via MCP
+
+| Åtgärd | Resultat |
+|---|---|
+| `form_submit` (`7624071599`) attributionsfönster 30 till 90 dagar | Klart |
+| `form_submit` räknesätt till en per klick | Gick inte, `IMMUTABLE_FIELD`. Flyttad till GA4 Admin, se 4.1 |
+| `phone_click` (`7605932601`) primär målåtgärd, värde 1 500 kr, fönster 90 dagar | Klart |
+| Local actions till sekundära | Behövdes inte, redan `biddable: false` på målnivå. Se 4.3 |
+| Kontroll av `takläggare` fras och exakt i `Ad group 1` | Fanns redan, båda aktiva med QS 3. Ingen ny post skapad |
+| Enhetsmodifierare dator plus 20 procent | Gick inte, verktyget är trasigt. Flyttad till UI |
+
+### Borttagna negativa keywords, kampanj 23643269229
+
+Tolv borttagna: `plåttak pris`, `falsat plåttak pris`, `bandtäckt plåttak pris`, `dubbelfalsat plåttak pris`, `plåttak bandtäckning pris`, `plåttak`, `tegeltak`, `betongtak`, `papptak`, `eternittak`, `lägga nytt tak på gammalt hus`, `räkna takyta`, `byta tak med solceller`.
+
+### Behållna, mot vad avsnitt 8.1 först föreslog
+
+Elva stannar blockerade. Avsnitt 8.1 var för brett. Dessa är rimliga spärrar:
+
+| Keyword | Skäl |
+|---|---|
+| `takpannor`, `tegelpannor`, `betongpannor`, `nockpannor`, `takpapp` | Produktköp, inte tjänsteköp |
+| `byta tak steg för steg` | Gör-det-själv |
+| `shingel` | Ingen shingeltjänst finns på sajten |
+| `plåtslagare`, `plåtslagare stockholm` | Angränsande yrke, mycket ventilation och fasad |
+| `byta altantak` | Ingen tjänstesida |
+| `besiktningsprotokoll tak` | Informationssökning |
+
+Öppen fråga till Sands: erbjuder ni shingeltak, altantak eller rent plåtslageri? Om ja bör de tre flyttas till borttagning.
