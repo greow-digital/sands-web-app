@@ -63,8 +63,8 @@ export const omraden: Ort[] = [
     name: "Nacka",
     region: "Söderort",
     beskrivning:
-      "Nacka är en attraktiv kommun öster om Stockholm med ett stort antal villor och radhus längs vattnet. Vi utför takomläggningar i Nacka, Saltsjöbaden, Boo och Gustavsberg.",
-    stadsdelar: "Nacka strand, Boo, Saltsjöbaden, Gustavsberg, Orminge",
+      "Nacka är en attraktiv kommun öster om Stockholm med ett stort antal villor och radhus längs vattnet. Vi utför takomläggningar i Nacka, Saltsjöbaden, Boo och Älta.",
+    stadsdelar: "Nacka strand, Boo, Saltsjöbaden, Älta, Orminge",
     grannar: [
       { slug: "stockholm", name: "Stockholm" },
       { slug: "varmdo", name: "Värmdö" },
@@ -77,7 +77,7 @@ export const omraden: Ort[] = [
     region: "Västerort",
     beskrivning:
       "Järfälla är en av Stockholms mest befolkade kranskommuner med många villaområden i Jakobsberg, Kallhäll och Barkarby. Vi är verksamma i Järfälla och utför alla typer av takomläggningar.",
-    stadsdelar: "Jakobsberg, Kallhäll, Barkarby, Viksjö, Bällsta",
+    stadsdelar: "Jakobsberg, Kallhäll, Barkarby, Viksjö, Stäket",
     unikText:
       "Kommunen har ett stort villabestånd som till stor del byggdes under 1960- och 1970-talen. Många av de taken har antingen bytts en gång, eller står nu inför sitt första byte.\n\nÄr taket original är underlagspappen med all sannolikhet förbrukad, oavsett hur pannorna ser ut. Då hjälper det inte att byta enstaka pannor. Vi går upp på taket, bedömer underlaget och lämnar fast pris efter kostnadsfri takkontroll.",
     stadsdelsTexter: [
@@ -485,8 +485,8 @@ export const omraden: Ort[] = [
     name: "Österåker",
     region: "Norrort",
     beskrivning:
-      "Österåker är en skärgårdskommun norr om Stockholm med ett varierat fastighetsbestånd. Vi utför takbyten i Åkersberga, Brottby och Ljusterö.",
-    stadsdelar: "Åkersberga, Brottby, Ljusterö, Rådmansö",
+      "Österåker är en skärgårdskommun norr om Stockholm med ett varierat fastighetsbestånd. Vi utför takbyten i Åkersberga, Österskär och Ljusterö.",
+    stadsdelar: "Åkersberga, Österskär, Ljusterö, Svinninge",
     grannar: [
       { slug: "taby", name: "Täby" },
       { slug: "vallentuna", name: "Vallentuna" },
