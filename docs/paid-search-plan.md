@@ -373,47 +373,195 @@ Vid 29 leads/månad från ads plus nuvarande organiska och GBP-flöde ligger tot
 
 ---
 
-## 12. Genomförandeordning
+## 12. Vad jag kan köra själv och vad som kräver dig i UI:t
 
-**Vecka 1: mätning och snabbfixar. Ingen strukturändring.**
-1. `form_submit` till `ONE_PER_CLICK`, lookback 90 dagar
-2. `phone_click` till primär målåtgärd, `ONE_PER_CLICK`, värde 1 500 kr
-3. `Local actions` till sekundära
-4. Verifiera `Calls from ads`-rapportering
-5. CPC-tak 25 kr på Maximize Clicks
-6. Tidsschema enligt avsnitt 10
-7. Enhetsmodifierare +20 procent dator
-8. Byt de två assets som bryter mot CTA-reglerna respektive påstår auktorisation
-9. Ta bort de felaktiga negativa keywords enligt 8.1 och 8.2
+Google Ads MCP-verktygen täcker en del av API:t, inte hela. Här är den faktiska gränsen, verifierad mot verktygens scheman.
 
-Punkt 1 till 4 påverkar mätningen retroaktivt på så sätt att jämförelser före och efter inte blir rena. Notera datumet.
+**Kan köras via MCP (jag gör det, du behöver inte röra något)**
 
-**Vecka 2 till 3: struktur.**
-10. Bygg kampanj A (varumärke) och flytta över varumärkeskeywords
-11. Bygg kampanj B med 11 annonsgrupper, en RSA per grupp, matchad landningssida
-12. Bygg delade negativlistor och koppla dem
-13. Pausa `Ad group 1` och `Search - Pris/Research Stockholm` när trafiken flyttat
-14. Sitelinks och structured snippets per kampanj
+| Område | Verktyg |
+|---|---|
+| Konverteringsåtgärder: räknesätt, primär/sekundär, attributionsfönster, värde, status | `update_conversion_action` |
+| Konverteringsmål biddable eller ej | `update_customer_conversion_goal` |
+| Kampanjbudget | `update_campaign_budget`, `create_campaign_budget` |
+| Budstrategityp (Max Clicks, Max Conversions, Target CPA) | `update_campaign_bidding_strategy` |
+| Enhetsbudmodifierare | `update_campaign_device_bid_modifier` |
+| Skapa kampanjer, annonsgrupper | `create_campaign`, `create_ad_group` |
+| Lägga till keywords med matchningstyp och bud | `add_keywords_to_ad_group` |
+| Lägga till negativa keywords | `add_negative_keywords_to_campaign` / `_to_ad_group` |
+| Ta bort negativa keywords på kampanjnivå | `remove_negative_keyword_from_campaign` |
+| Skapa RSA-annonser | `create_responsive_search_ad` |
+| Pausa och aktivera annonsgrupper och annonser | `update_ad_group_status`, `update_ad_status` |
+| Koppla befintliga assets till kampanj | `link_asset_to_campaign` |
+| All rapportering och uppföljning | `execute_gaql` |
 
-**Vecka 3 till 4: `/priser`.**
-15. Bygg om `/priser` för konvertering innan kampanj C skalas. Detta är webbarbete, inte Ads.
+**Kräver dig i UI:t (jag kan inte, och varför)**
 
-**Vecka 4: budstrategi.**
-16. Kampanj B till Maximize Conversions utan mål-CPA
-17. Ta bort tids- och enhetsmodifierare i kampanj B
+| Vad | Varför |
+|---|---|
+| CPC-tak på Maximize Clicks | `update_campaign_bidding_strategy` tar bara strategityp och tCPA/tROAS. Inget fält för bid ceiling. |
+| Pausa eller ta bort enskilda keywords | Det finns inget verktyg för keyword-status. Jag kan lägga till keywords, inte stänga av dem. Detta är den största begränsningen. |
+| Ändra eller ta bort befintligt tidsschema | `update_campaign_ad_schedule` skapar bara nya poster. Veckan är redan heltäckt 0 till 24 alla sju dagar med 35 poster, så varje ny post krockar. De gamla måste bort först. |
+| Skapa sitelinks, callouts, structured snippets, prisassets | `upload_asset` stöder bara TEXT, IMAGE och YOUTUBE_VIDEO. Sitelink och callout är egna assettyper som verktyget inte kan skapa. |
+| Ta bort eller koppla loss befintliga assets | Det finns `link_asset_to_campaign` men ingen unlink. |
+| Pinna rubriker i RSA | `create_responsive_search_ad` saknar pin-parameter. Jag kan skapa annonsen, du pinnar rubrik 1. |
+| Skapa delade negativlistor | Jag kan bara koppla en lista som redan finns, inte skapa den. |
+| Sätta geo till "Närvaro" på nya kampanjer | `create_campaign` sätter geo-ID men inte `geo_target_type_setting`. Nya kampanjer får Googles standard "Närvaro eller intresse", vilket ger trafik från folk som bara är intresserade av Stockholm. Måste ändras direkt efter att kampanjen skapats. |
+| Ta bort negativa keywords på annonsgruppsnivå | Bara kampanjnivå finns som borttagningsverktyg. |
+| Samtalsrapportering och Google-vidarekopplingsnummer | Kontoinställning utanför API-ytan. |
 
-**Vecka 6 till 8: kampanj C och geo.**
-18. Starta kampanj C mot den nya prissidan
-19. Lägg till geo-annonsgrupper mot områdessidorna med unik text
-
-**Vecka 10 till 12: skala.**
-20. Mål-CPA på kampanj B, 15 till 20 procent över faktisk
-21. Budget till 700 kr/dag när förlorad IS till budget överstiger 25 procent
+**Praktisk konsekvens.** Att jag inte kan pausa keywords låter värre än det är. I den nya strukturen skapar jag rena annonsgrupper från grunden, och sedan pausar jag hela `Ad group 1` i ett anrop. De 743 gamla keywordsen behöver alltså aldrig städas en och en. Undantaget är steg 6 nedan, där `takläggare` bred matchning ska stängas innan resten är byggt.
 
 ---
 
-## 13. Vad som inte ändras utan godkännande
+## 13. Sekventiell åtgärdslista
 
-- Inga skrivningar mot Google Ads-kontot är gjorda. Allt ovan är analys och förslag.
+Ordningen spelar roll. Varje steg är märkt med vem som gör det.
+
+### Mätning
+
+**1. [MCP] Rätta `form_submit` till en konvertering per klick.**
+Konverteringsåtgärd `7624071599`. Sätt `counting_type` till `ONE_CONVERSION` och `click_through_lookback_window_days` till 90. Detta stoppar att dubbla inskick räknas som två leads i budgivningen.
+
+**2. [MCP] Gör telefonleads biddbara.**
+Konverteringsåtgärd `7605932601` (`Phone call lead / phone_click`). Sätt `primary_for_goal` till true, `counting_type` till `ONE_CONVERSION`, `default_value` 1500, lookback 90. Detta tar den mätta signalen från cirka 9 till cirka 12 konverteringar per månad, vilket är förutsättningen för steg 19.
+
+**3. [MCP] Flytta Local actions till sekundära.**
+Konverteringsåtgärderna `7647712079` (Directions), `7665786211` (Other engagements), `7687692370` (Website visits). Sätt `primary_for_goal` till false.
+
+**4. [UI] Verifiera samtalsrapportering.**
+`Calls from ads` (`7605929746`) är aktiv och primär men har noll registrerade samtal på 90 dagar, trots att samtalstillägget med 08-28 38 88 ligger på kontonivå. Gå till Mål > Konverteringar > Inställningar och kontrollera att samtalsrapportering är påslagen och att numret använder Googles vidarekopplingsnummer. Jag kan läsa att åtgärden finns, men inte se eller ändra vidarekopplingsinställningen.
+
+**5. [DU] Driftsätt dubblettfixen i Apps Script.**
+`docs/apps-script.gs` ligger klar men är inte deployad. Steg 1 rättar dubbletter på Google-sidan, detta rättar dem i ditt eget leadflöde. De hör ihop.
+
+*Notera datumet när steg 1 till 3 körs. Jämförelser före och efter blir inte rena över den punkten.*
+
+### Blödningsstopp
+
+**6. [MCP] Ta bort 24 felaktiga negativa keywords** i kampanj `23643269229`. Criterion-ID:
+
+| Criterion ID | Keyword | Match |
+|---|---|---|
+| 328279332164 | plåttak | EXACT |
+| 7255353368 | plåttak pris | PHRASE |
+| 321072921027 | falsat plåttak pris | PHRASE |
+| 387921826686 | bandtäckt plåttak pris | EXACT |
+| 2338591781237 | dubbelfalsat plåttak pris | PHRASE |
+| 2273409892313 | plåttak bandtäckning pris | PHRASE |
+| 296974337019 | tegeltak | EXACT |
+| 300790603123 | betongtak | EXACT |
+| 304478413857 | papptak | EXACT |
+| 300374951439 | eternittak | EXACT |
+| 172073803 | takpannor | EXACT |
+| 7875549754 | tegelpannor | EXACT |
+| 260362882 | betongpannor | EXACT |
+| 300374952239 | nockpannor | EXACT |
+| 310714501673 | takpapp | EXACT |
+| 4768844728 | plåtslagare | PHRASE |
+| 7255354448 | plåtslagare stockholm | PHRASE |
+| 361151586877 | shingel | BROAD |
+| 1637808288909 | lägga nytt tak på gammalt hus | PHRASE |
+| 2485496289774 | räkna takyta | PHRASE |
+| 1637907506623 | byta tak med solceller | PHRASE |
+| 410610917026 | byta altantak | PHRASE |
+| 725173591090 | besiktningsprotokoll tak | PHRASE |
+| 422657752989 | byta tak steg för steg | EXACT |
+
+**7. [MCP] Lägg till `takläggare` som fras och exakt** i `Ad group 1` (`194744777192`), så att volymen finns kvar när bred matchning stängs i nästa steg.
+
+**8. [UI] Pausa tre keywords i `Ad group 1`.**
+`takläggare` bred matchning (14 293 kr på 90 dagar, 32 procent av kontots spend, QS 3), `takläggning` frasmatchning (QS 1), `takomläggning` bred matchning (QS 1). Sök upp dem under Sökord i kampanjen. Jag kan inte göra detta via MCP.
+
+**9. [UI] Sätt CPC-tak 25 kr** på kampanj `Takläggning Stockholm`. Inställningar > Budgivning > Ange ett max-CPC-budtak. Snitt-CPC är 20 kr, så taket biter bara i toppen.
+
+**10. [UI] Lägg om tidsschemat.**
+Ta bort de 35 befintliga posterna (Inställningar > Annonsschema) och lägg in:
+
+| Tid | Justering |
+|---|---|
+| 00 till 06 | -40 % |
+| 06 till 10 | -20 % |
+| 10 till 17 | +20 % |
+| 17 till 20 | 0 % |
+| 20 till 24 | -20 % |
+
+Alla sju dagar. Nuvarande schema är inverterat mot data: 10 till 17 ger 980 kr CPA men är nedjusterat över lunchen, 17 till 24 ger 3 398 kr CPA och är uppjusterat. Om du hellre vill att jag lägger in posterna: ta bara bort de 35 gamla, så kör jag in de 35 nya via MCP.
+
+**11. [MCP] Sätt enhetsmodifierare +20 procent på dator** i kampanj `23643269229`. Dator ger 1 247 kr CPA mot mobilens 1 784 kr men får bara 14 procent av trafiken.
+
+### Assets
+
+**12. [UI] Byt de två assets som inte får stå kvar.**
+- Sitelink `Gratis Takbesiktning` med beskrivning `Boka gratis hembesök`, och callout `Gratis takbesiktning`. Bryter mot CTA-reglerna. Ersätt med `Kostnadsfri takkontroll` och `Boka kostnadsfri takkontroll`.
+- Sitelink och callout `Auktoriserad takläggare`. Det finns ingen statlig auktorisation för takläggare i Sverige, vilket ni själva skriver i `/blogg/certifierad-taklaggare`. Ersätt med `Certifierad takläggare` eller de faktiska certifikaten.
+
+**13. [UI] Lägg till sitelinks och structured snippets** enligt avsnitt 9. Nuvarande sitelinks pekar nästan alla på startsidan. Nya ska peka på `/priser`, `/projekt`, `/var-process`, `/omdomen`, `/tjanster/takbesiktning`.
+
+**14. [MCP] Aktivera den starka annonsen.**
+Annons `811203375592` i `Ad group 1` har `EXCELLENT` i annonsstyrka och pekar på `/tjanster/taklaggning`, men är pausad med 0 impressions. Görs efter steg 8, annars konkurrerar den med de befintliga.
+
+### Struktur
+
+**15. [MCP] Skapa varumärkeskampanjen.**
+Ny sökkampanj, 25 kr/dag, Maximize Clicks, geo 21000 (Stockholms län), språk svenska, endast Google-sök. En annonsgrupp med `[sands entreprenad]`, `[sands entreprenad stockholm]`, `[sandsab]`, `"sands entreprenad"`, plus en RSA mot `/`.
+
+**16. [UI] Två inställningar direkt efter steg 15.**
+Sätt geo till **Närvaro** (kampanjen skapas med Googles standard "Närvaro eller intresse") och CPC-tak 8 kr. Båda ligger utanför MCP-verktygens fält.
+
+**17. [UI] Pausa varumärkeskeywords i `Ad group 1`** när varumärkeskampanjen är igång, annars konkurrerar de om samma sökningar.
+
+**18. [MCP] Bygg huvudkampanjen.**
+Ny sökkampanj `Takbyte Stockholm`, 350 kr/dag, Maximize Clicks tills vidare, geo 21000. Sedan 11 annonsgrupper enligt avsnitt 6, var och en med sina keywords (fras och exakt) och en RSA mot sin matchade landningssida. Det blir cirka 50 verktygsanrop, men det är helt mekaniskt och jag kör det i en sekvens.
+
+**19. [UI] Efter steg 18, tre saker.**
+- Geo till **Närvaro** på nya kampanjen
+- CPC-tak 25 kr
+- Pinna rubrik 1 i varje av de 11 RSA:erna till den rubrik som innehåller exakta sökordet. Det är den enskilt största hävstången på ad relevance, och `create_responsive_search_ad` har ingen pin-parameter.
+
+**20. [MCP] Koppla assets till nya kampanjerna.** Görs efter steg 12 och 13, eftersom jag bara kan koppla assets som redan finns.
+
+**21. [MCP] Pausa `Ad group 1` (`194744777192`)** när den nya strukturen levererar. Ett anrop, och alla 345 gamla keywords slutar servera. Pausa samtidigt den pausade pris- och researchkampanjen (`23866563102`), som fortfarande ligger kvar med egen budget.
+
+Budgetkontroll här: 25 + 350 = 375 kr/dag i nya kampanjer mot 500 i den gamla. Kör dem parallellt i några dagar, sedan ned med den gamla.
+
+### Webben
+
+**22. [JAG, i repot] Bygg om `/priser`.**
+112 betalda sessioner, noll konverteringar, 105 sekunders snittid. Sidan behöver ett konkret prisspann högt upp, Takräknaren ovanför mitten och ett formulär på sidan i stället för en länk vidare. Detta är förutsättningen för steg 23. Jag gör det som en PR på vanligt sätt, du granskar och mergar.
+
+### Pris, research och geo
+
+**23. [MCP] Starta pris- och researchkampanjen** enligt avsnitt 6, mot den ombyggda `/priser`. Detta är kontots största outnyttjade volym: cirka 12 000 kr på 90 dagar med CTR mellan 11 och 21 procent och nästan noll konverteringar.
+
+**24. [UI] Geo till Närvaro och CPC-tak** på den kampanjen.
+
+**25. [MCP] Lägg till geo-annonsgrupper** mot områdessidor med unik text. Norrtälje-sökorden har högst QS i hela icke-varumärkeskontot just för att de har en matchande sida.
+
+### Budstrategi och skalning
+
+**26. [MCP] Byt huvudkampanjen till Maximize Conversions** utan mål-CPA, tidigast tre till fyra veckor efter steg 1 till 3 och när 30-dagarsvolymen ligger över 12 konverteringar.
+
+**27. [MCP] Nollställ enhetsmodifieraren** i huvudkampanjen efter steg 26. Smart bidding ignorerar den ändå.
+
+**28. [UI] Ta bort tidsschemat** i huvudkampanjen efter steg 26. Samma skäl, och jag kan inte ta bort schemaposter.
+
+**29. [MCP] Lägg på mål-CPA** när 30-dagarsvolymen stabilt överstiger 15. Sätt 15 till 20 procent över faktisk CPA vid övergången, inte på önskad nivå, och sänk 10 procent varannan vecka.
+
+**30. [MCP] Höj budgeten till 700 kr/dag** när förlorad impression share till budget överstiger 25 procent. Inte innan, eftersom det som förloras idag beror på rank och inte på budget.
+
+---
+
+## 14. Det kortaste vettiga första steget
+
+Om du vill se effekt snabbt utan att bygga om något: steg 1, 2, 3, 6, 7, 11 kör jag på några minuter via MCP. Steg 8, 9, 10 är cirka en kvart för dig i UI:t och är där de största pengarna sitter, eftersom `takläggare` bred matchning ensam är 32 procent av spenden och tidsschemat är inverterat mot data.
+
+Resten (struktur, assets, `/priser`) är riktigt arbete och bör tas som ett eget block.
+
+---
+
+## 15. Vad som inte ändras utan godkännande
+
+- Inga skrivningar mot Google Ads-kontot är gjorda ännu. Allt ovan är analys och förslag.
 - `/tack`-sidan och gtag-koden rörs inte alls, enligt projektreglerna.
-- Ändringar av konverteringsåtgärder (avsnitt 4) påverkar historisk rapportering och bör göras medvetet, med datum noterat.
+- Ändringar av konverteringsåtgärder (steg 1 till 3) påverkar historisk rapportering och bör göras medvetet, med datum noterat.
