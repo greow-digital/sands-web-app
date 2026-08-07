@@ -57,6 +57,11 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
     description:
       "Betongtak och betongpannor i Stockholm från 1 200 kr/m². 30 års garanti, ROT-avdrag, BraByggare-certifierad takläggare. Få prisförslag idag.",
   },
+  taksakerhet: {
+    title: "Taksäkerhet Stockholm | snörasskydd & gångbrygga | Sands",
+    description:
+      "Taksäkerhet enligt BBR i Stockholm: snörasskydd, gångbryggor, takstegar och räcken. Montering på befintligt tak eller i samband med takbyte.",
+  },
   takfonsterkupor: {
     title: "Takfönster & takkupor i Stockholm | Sands",
     description:
@@ -418,7 +423,7 @@ export default async function TjanstPage({
                 className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full font-semibold text-white text-base transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Få gratis offert <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:08283888"

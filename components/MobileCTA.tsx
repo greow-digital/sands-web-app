@@ -60,7 +60,7 @@ export default function MobileCTA() {
             className="flex-1 min-w-0 whitespace-nowrap flex items-center justify-center py-3 rounded-full text-sm font-semibold text-white transition-colors"
             style={{ backgroundColor: "var(--color-primary)" }}
           >
-            Få gratis offert
+            Få prisförslag
           </Link>
           {/* Sekundär: prata med röstrådgivaren (öppnar voice-panelen) */}
           <button

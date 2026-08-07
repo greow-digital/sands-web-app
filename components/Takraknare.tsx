@@ -322,7 +322,7 @@ export default function Takraknare({
                   className="h-4 w-4 accent-[#2B74FC]"
                 />
                 <span className="text-sm font-medium text-gray-700">
-                  Vet ej takytan — räkna på husets boyta + 20%
+                  Vet ej takytan, räkna på husets boyta + 20%
                 </span>
               </label>
               {useBoyta && (
@@ -458,7 +458,7 @@ export default function Takraknare({
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02] hover:shadow-lg"
             style={{ backgroundColor: "var(--color-primary)" }}
           >
-            Få gratis offert <ArrowRight size={14} />
+            Få prisförslag <ArrowRight size={14} />
           </Link>
           <p className="text-xs text-gray-400 mt-4 max-w-md mx-auto">
             Priserna är uppskattningar och kan variera med takets skick och
@@ -491,7 +491,7 @@ export default function Takraknare({
               className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-white font-semibold text-xs sm:text-sm whitespace-nowrap transition-all hover:scale-[1.02] shadow-lg shrink-0"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få gratis offert <ArrowRight size={14} />
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
             </Link>
             <button
               type="button"

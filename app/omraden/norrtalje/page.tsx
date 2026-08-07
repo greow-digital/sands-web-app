@@ -12,9 +12,9 @@ import { pageMeta } from "@/lib/seo";
 export const metadata: Metadata = pageMeta({
   path: "/omraden/norrtalje",
   title:
-    "Takläggare i Norrtälje – fast pris & 30 års garanti | Sands",
+    "Takläggare i Norrtälje, fast pris & 30 års garanti | Sands",
   description:
-    "Auktoriserad takläggare i Norrtälje och hela Roslagen. Takbyte, takomläggning och takrenovering för villor och fritidshus. Fast pris, ROT-avdrag och upp till 30 års garanti. Boka kostnadsfri takkontroll.",
+    "Takläggare i Norrtälje och hela Roslagen. Takbyte och takomläggning för villor och fritidshus. Fast pris, ROT och 30 års garanti.",
 });
 
 // FAQ-texterna används både i den synliga FAQ-sektionen och i
@@ -160,7 +160,7 @@ export default function NorrtaljePage() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white text-sm transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Få gratis offert <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:08283888"
@@ -216,7 +216,7 @@ export default function NorrtaljePage() {
                   >
                     takläggare i Stockholm
                   </Link>
-                  {" "}med bas i Järfälla servar vi hela Stockholms län, inklusive
+                  {" "}servar vi hela Stockholms län, inklusive
                   hela Norrtälje kommun och Roslagen.
                 </p>
 
@@ -492,7 +492,7 @@ export default function NorrtaljePage() {
                 className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full font-semibold text-white text-base transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Få gratis offert <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:08283888"

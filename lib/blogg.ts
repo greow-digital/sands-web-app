@@ -19,7 +19,7 @@ export const artiklar: Artikel[] = [
     slug: "vad-kostar-takbyte",
     titel: "Vad kostar ett takbyte? Så byggs priset upp",
     ingress:
-      "En prislista säger vad taket kostar, inte varför. Här bryter vi ner de fyra delarna i ett takbyte, vilken del som är ROT-berättigad och varför två offerter på samma tak kan skilja 80 000 kr.",
+      "En prislista säger vad taket kostar, inte varför. Vi bryter ner de fyra delarna i ett takbyte och varför två offerter kan skilja 80 000 kr.",
     datum: "2026-08-06",
     kategori: "Priser",
     lästid: "7 min",
@@ -411,7 +411,7 @@ Oavsett val erbjuder vi totalentreprenad med fast pris och upp till 30 års Moni
     slug: "byta-eternittak-kostnad",
     titel: "Byta eternittak i Stockholm: kostnad och sanering",
     ingress:
-      "Ett eternittak kan inte rivas som ett vanligt tak. Här går vi igenom vad det kostar att byta eternittak, hur asbestsaneringen går till och vilka regler som styr arbetet.",
+      "Ett eternittak kan inte rivas som ett vanligt tak. Vad det kostar att byta eternittak, hur asbestsaneringen går till och vilka regler som gäller.",
     datum: "2026-08-06",
     kategori: "Priser",
     lästid: "7 min",
@@ -492,7 +492,7 @@ Vill du jämföra kostnader för olika takmaterial hittar du räkneexempel på v
     slug: "certifierad-taklaggare",
     titel: "Certifierad takläggare: så kontrollerar du firman",
     ingress:
-      "Det finns ingen statlig auktorisation för takläggare i Sverige. Här är de kontroller som faktiskt säger något om kvaliteten, och varningstecknen du bör reagera på.",
+      "Det finns ingen statlig auktorisation för takläggare i Sverige. Här är kontrollerna som säger något om kvaliteten, och varningstecknen.",
     datum: "2026-08-06",
     kategori: "Råd & tips",
     lästid: "6 min",
@@ -575,9 +575,9 @@ Letar du efter en jämförelse av takfirmor i Stockholmsområdet har vi samlat v
   },
   {
     slug: "under-takpannorna-underlagspapp-strolakt",
-    titel: "Under takpannorna: underlagspapp, ströläkt och råspont",
+    titel: "Under takpannorna: ströläkt och underlagspapp",
     ingress:
-      "Takpannorna är bara regnskyddet. Det som faktiskt håller huset torrt sitter under dem. Här är takets lager, hur länge de håller och varför det sällan räcker att byta pannor.",
+      "Takpannorna är bara regnskyddet. Det som håller huset torrt sitter under dem. Här är takets lager och varför det sällan räcker att byta pannor.",
     datum: "2026-08-06",
     kategori: "Råd & tips",
     lästid: "6 min",

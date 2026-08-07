@@ -37,10 +37,9 @@ const OMRADE_CONFIG: Record<
   { customTitle?: string; customDesc?: string; shortTitle?: boolean }
 > = {
   hasselby: {
-    customTitle:
-      "Takläggare i Hässelby – villaspecialist med 30 års garanti | Sands",
+    customTitle: "Takläggare i Hässelby, villaspecialist | Sands",
     customDesc:
-      "Takläggare i Hässelby villastad, gård och strand. Specialist på 50-60-talsvillor, fast pris, upp till 30 års garanti och ROT på fakturan. Boka takkontroll.",
+      "Takläggare i Hässelby villastad, gård och strand. Specialist på 50-60-talsvillor. Fast pris, 30 års garanti och ROT på fakturan.",
   },
   "upplands-vasby": { shortTitle: true },
   "upplands-bro": { shortTitle: true },
@@ -69,20 +68,23 @@ export async function generateMetadata({
 
   const cfg = OMRADE_CONFIG[slug] ?? {};
 
+  // Komma i stället för tankstreck: projektets skrivregler tillåter inte
+  // en-streck utanför sifferintervall.
   const title =
     cfg.customTitle ??
     (cfg.shortTitle
-      ? `Takläggare i ${ort.name} – fast pris & garanti | Sands`
-      : `Takläggare i ${ort.name} – fast pris & 30 års garanti | Sands`);
+      ? `Takläggare i ${ort.name}, fast pris & garanti | Sands`
+      : `Takläggare i ${ort.name}, fast pris & 30 års garanti | Sands`);
 
   const tail =
-    "Fast pris, upp till 30 års garanti och ROT-avdrag på fakturan. Boka kostnadsfri takkontroll.";
-  // Try 3 stadsdelar, fall back to 2, then none, to stay within ~160 chars.
+    "Fast pris, 30 års garanti och ROT på fakturan. Boka kostnadsfri takkontroll.";
+  // Try 3 stadsdelar, fall back to 2, then none, to stay within 155 chars
+  // (SEO.md §6 kräver meta description ≤155 tecken).
   const buildDesc = (): string => {
     for (const n of [3, 2]) {
       const hoods = joinStadsdelar(ort.stadsdelar, n);
-      const candidate = `Takläggare i ${ort.name} – ${hoods}. ${tail}`;
-      if (hoods && candidate.length <= 162) return candidate;
+      const candidate = `Takläggare i ${ort.name}, ${hoods}. ${tail}`;
+      if (hoods && candidate.length <= 155) return candidate;
     }
     return `Takläggare i ${ort.name}. ${tail}`;
   };
@@ -393,7 +395,7 @@ export default async function OmradesPage({
                 className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full font-semibold text-white text-base transition-all hover:scale-[1.02]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Få gratis offert <ArrowRight size={14} />
+                Boka kostnadsfri takkontroll <ArrowRight size={14} />
               </Link>
               <a
                 href="tel:08283888"

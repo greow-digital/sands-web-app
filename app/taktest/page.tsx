@@ -8,9 +8,9 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   path: "/taktest",
-  title: "Taktest – behöver ditt tak bytas? Testa på 1 minut | Sands",
+  title: "Taktest, behöver ditt tak bytas? Testa på 1 minut | Sands",
   description:
-    "Gör vårt kostnadsfria taktest på 1 minut. Några snabba frågor om ålder, material och skick ger dig en personlig bedömning av om taket behöver bytas. Boka gratis takkontroll.",
+    "Gör vårt kostnadsfria taktest på 1 minut. Frågor om ålder, material och skick ger en bedömning av om taket behöver bytas.",
 });
 
 const FAKTA = [

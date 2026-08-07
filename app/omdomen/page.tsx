@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMeta({
   path: "/omdomen",
   title: `Kundomdömen | ${TOTAL_REVIEWS} omdömen, ${AVG_RATING} av 5 | Sands`,
   description:
-    "Läs riktiga kundomdömen om Sands Entreprenad från BraByggare, Offerta och Servicefinder. 4,8 av 5 i snitt på takbyte, takomläggning och fasad i Stockholmsområdet.",
+    "Läs riktiga kundomdömen om Sands Entreprenad från BraByggare, Offerta och Servicefinder. 4,8 av 5 i snitt på takbyte och takomläggning.",
 });
 
 const omdömen = testimonials;
@@ -215,7 +215,7 @@ export default function OmdömenPage() {
               className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Få gratis offert <ArrowRight size={14} />
+              Boka kostnadsfri takkontroll <ArrowRight size={14} />
             </Link>
           </div>
         </section>
