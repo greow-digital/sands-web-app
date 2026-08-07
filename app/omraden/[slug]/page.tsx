@@ -161,16 +161,36 @@ export default async function OmradesPage({
                     color: "var(--color-dark)",
                   }}
                 >
-                  Vad vi erbjuder i {ort.name}
+                  Takbyte och takomläggning i {ort.name}
                 </h2>
+
+                {/* Tier A får unik brödtext. Övriga faller tillbaka på
+                    beskrivningen, som redan visas i heron. */}
+                {ort.unikText && (
+                  <div className="mb-8 space-y-4">
+                    {ort.unikText.split("\n\n").map((p, i) => (
+                      <p
+                        key={i}
+                        className="text-base text-gray-600 leading-relaxed"
+                      >
+                        {p}
+                      </p>
+                    ))}
+                  </div>
+                )}
+
+                {/* Listan är medvetet renodlat takrelaterad. Tidigare stod
+                    "Totalentreprenad enligt ABT-06" här, vilket drog in
+                    generella byggqueries (bygghissar, golvavjämning,
+                    byggstädning) som vi inte säljer. */}
                 <ul className="grid sm:grid-cols-2 gap-3 mb-8">
                   {[
-                    "Takomläggning med Monier-garanti",
+                    "Takbyte med upp till 30 års Monier-garanti",
+                    "Omläggning av tak med befintliga pannor",
                     "Betongtak, tegeltak, plåttak & papptak",
                     "Eternitsanering med certifierad partner",
-                    "Takfönster och takkupor",
+                    "Takfönster, takkupor och taksäkerhet",
                     "Hängrännor, stuprör och vindskivor",
-                    "Totalentreprenad enligt ABT-06",
                   ].map((item) => (
                     <li
                       key={item}
@@ -186,7 +206,37 @@ export default async function OmradesPage({
                   ))}
                 </ul>
 
-                {ort.stadsdelar && (
+                {/* Stadsdelarna renderas som eget innehåll när texter finns.
+                    Tidigare låg de bara som en kommaseparerad rad, vilket inte
+                    fångade svansen ("takfirma tumba", "tak djursholm"). */}
+                {ort.stadsdelsTexter?.length ? (
+                  <div className="mb-10">
+                    <h3
+                      className="text-xl font-bold mb-4"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      Takarbeten i {ort.name}s olika delar
+                    </h3>
+                    <div className="space-y-4">
+                      {ort.stadsdelsTexter.map((d) => (
+                        <div key={d.namn}>
+                          <h4
+                            className="text-base font-bold mb-1"
+                            style={{ color: "var(--color-dark)" }}
+                          >
+                            {d.namn}
+                          </h4>
+                          <p className="text-base text-gray-600 leading-relaxed">
+                            {d.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : ort.stadsdelar ? (
                   <div className="mb-10">
                     <h3
                       className="text-base font-bold mb-3"
@@ -195,10 +245,11 @@ export default async function OmradesPage({
                       Stadsdelar & orter vi täcker
                     </h3>
                     <p className="text-base text-gray-600 leading-relaxed">
-                      {ort.stadsdelar}
+                      Vi lägger tak i hela {ort.name}, bland annat i{" "}
+                      {ort.stadsdelar}.
                     </p>
                   </div>
-                )}
+                ) : null}
 
                 <div className="mb-10 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
                   <p className="text-sm text-gray-700 leading-relaxed">
