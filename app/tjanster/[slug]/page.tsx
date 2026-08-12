@@ -201,7 +201,7 @@ export default async function TjanstPage({
                       className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
                       style={{ color: "var(--color-primary)" }}
                     >
-                      Prisintervall
+                      Riktpris
                     </div>
                     <div
                       className="text-2xl font-extrabold mb-1"

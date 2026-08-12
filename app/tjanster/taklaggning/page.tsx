@@ -8,7 +8,12 @@ import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import OmradenInline from "@/components/OmradenInline";
-import { prisEfterRot, FLAGGSKEPP_PRIS } from "@/lib/material";
+import {
+  prisEfterRot,
+  omlaggningPrisEfterRot,
+  FLAGGSKEPP_PRIS,
+  RIKTPRIS_NOT,
+} from "@/lib/material";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
 import { client } from "@/sanity/lib/client";
@@ -43,12 +48,18 @@ function formatKr(n: number) {
   return rounded.toLocaleString("sv-SE") + " kr";
 }
 
+// SEO.md §4: prispunkter prefixas alltid med "från", aldrig ett naket belopp
+// som kan läsas som ett slutpris.
+function franKr(n: number) {
+  return `Från ${formatKr(n)}`;
+}
+
 // Sidan har en fokuserad introduktions-FAQ + de delade snippets för
 // regler/garantier (FAQ_ROT, FAQ_BYGGLOV, FAQ_MONIER, FAQ_SNORAS).
 const faqIntro = [
   {
     q: "Vad är skillnaden mellan takbyte, takomläggning och takrenovering?",
-    a: "Takbyte innebär att hela taket rivs och ersätts med nytt material (pannor, papp, läkt). Takomläggning innebär att vi behåller befintliga pannor men byter underlagspapp och läkt, du sparar 30-40 % mot fullt byte om pannorna är hela. Takrenovering är riktade punktinsatser (laga läckage, byta enstaka pannor, nya hängrännor) utan att hela taket görs om.",
+    a: "Takbyte innebär att hela taket rivs och ersätts med nytt material (pannor, papp, läkt). Takomläggning innebär att vi behåller befintliga pannor men byter underlagspapp och läkt, du sparar 25-35 % mot fullt byte om pannorna är hela. Takrenovering är riktade punktinsatser (laga läckage, byta enstaka pannor, nya hängrännor) utan att hela taket görs om.",
   },
   {
     q: "Hur vet jag vilket alternativ jag behöver?",
@@ -161,7 +172,9 @@ export default async function TaklaggningPage() {
 
   // Prismatris för jämförelsetabellen. Linjär modell från lib/material
   // (= /priser + kalkylatorn). Flaggskeppet (betong 140 m²) använder det
-  // kanoniska 169 000 så exemplet matchar resten av sajten.
+  // kanoniska 169 000 så exemplet matchar resten av sajten. Omläggnings-
+  // raderna går via omlaggningPrisEfterRot, alltså samma modell som takbyte
+  // med den gemensamma omläggningsfaktorn, inte en egen uträkning här.
   const priser = {
     takbyte: {
       betong140: FLAGGSKEPP_PRIS,
@@ -170,11 +183,10 @@ export default async function TaklaggningPage() {
       plat165: prisEfterRot("plat", 165),
     },
     omlaggning: {
-      // Omläggning behåller pannor → ca 70 % av motsvarande takbyte
-      betong140: FLAGGSKEPP_PRIS * 0.7,
-      betong120: prisEfterRot("betong", 120) * 0.7,
-      tegel140: prisEfterRot("tegel", 140) * 0.7,
-      betong165: prisEfterRot("betong", 165) * 0.7,
+      betong140: omlaggningPrisEfterRot("betong", 140),
+      betong120: omlaggningPrisEfterRot("betong", 120),
+      tegel140: omlaggningPrisEfterRot("tegel", 140),
+      betong165: omlaggningPrisEfterRot("betong", 165),
     },
   };
 
@@ -576,7 +588,7 @@ export default async function TaklaggningPage() {
                     color: "var(--color-dark)",
                   }}
                 >
-                  Prisexempel takbyte (efter ROT)
+                  Riktpriser takbyte (efter ROT)
                 </h3>
                 <div className="rounded-2xl border border-gray-100 bg-white overflow-hidden mb-4">
                   <table className="w-full text-sm">
@@ -600,14 +612,14 @@ export default async function TaklaggningPage() {
                           Betongpannor
                         </td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.takbyte.betong120)}
+                          {franKr(priser.takbyte.betong120)}
                         </td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 text-gray-700">140 m²</td>
                         <td className="px-4 py-3 text-gray-600">Tegelpannor</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.takbyte.tegel140)}
+                          {franKr(priser.takbyte.tegel140)}
                         </td>
                       </tr>
                       <tr>
@@ -616,15 +628,14 @@ export default async function TaklaggningPage() {
                           Plåttak (bandtäckt)
                         </td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.takbyte.plat165)}
+                          {franKr(priser.takbyte.plat165)}
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <p className="text-xs text-gray-500 mb-2">
-                  Uppskattningar för sadeltak utan större genomföringar.
-                  Exakt pris efter kostnadsfri takkontroll.
+                  {RIKTPRIS_NOT} Avser sadeltak utan större genomföringar.
                 </p>
                 <p className="text-sm mb-10">
                   <Link
@@ -782,7 +793,7 @@ export default async function TaklaggningPage() {
                     color: "var(--color-dark)",
                   }}
                 >
-                  Prisexempel omläggning (efter ROT)
+                  Riktpriser omläggning (efter ROT)
                 </h3>
                 <div className="rounded-2xl border border-gray-100 overflow-hidden">
                   <table className="w-full text-sm">
@@ -804,29 +815,29 @@ export default async function TaklaggningPage() {
                         <td className="px-4 py-3 text-gray-700">120 m²</td>
                         <td className="px-4 py-3 text-gray-600">Betong</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.omlaggning.betong120)}
+                          {franKr(priser.omlaggning.betong120)}
                         </td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 text-gray-700">140 m²</td>
                         <td className="px-4 py-3 text-gray-600">Tegel</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.omlaggning.tegel140)}
+                          {franKr(priser.omlaggning.tegel140)}
                         </td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 text-gray-700">165 m²</td>
                         <td className="px-4 py-3 text-gray-600">Betong</td>
                         <td className="px-4 py-3 text-gray-900 font-semibold text-right tabular-nums">
-                          {formatKr(priser.omlaggning.betong165)}
+                          {franKr(priser.omlaggning.betong165)}
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
                 <p className="text-xs text-gray-500 mt-3">
-                  Uppskattning, 25–35 % under motsvarande komplett takbyte.
-                  Pannskick avgör i slutändan.
+                  {RIKTPRIS_NOT} Ligger 25–35 % under motsvarande komplett
+                  takbyte, pannornas skick avgör i slutändan.
                 </p>
                 <p className="text-sm mt-3">
                   <Link
@@ -919,19 +930,19 @@ export default async function TaklaggningPage() {
                     color: "var(--color-dark)",
                   }}
                 >
-                  Prisexempel renovering
+                  Riktpriser renovering
                 </h3>
                 <div className="rounded-2xl border border-gray-100 bg-white overflow-hidden">
                   <table className="w-full text-sm">
                     <tbody className="divide-y divide-gray-100">
                       {[
-                        ["Byte av 20 trasiga betongpannor", "ca 8 000 kr"],
+                        ["Byte av 20 trasiga betongpannor", "Från ca 8 000 kr"],
                         ["Lokal lagning vid läckage", "5 000–15 000 kr"],
                         ["Nya hängrännor villa (45 lpm)", "25 000–40 000 kr"],
-                        ["Snörasskydd-installation", "från 12 000 kr"],
+                        ["Snörasskydd-installation", "Från 12 000 kr"],
                         [
                           "Byte av takfönster (standardstorlek)",
-                          "från 18 000 kr",
+                          "Från 18 000 kr",
                         ],
                       ].map(([what, price]) => (
                         <tr key={what}>
@@ -944,9 +955,7 @@ export default async function TaklaggningPage() {
                     </tbody>
                   </table>
                 </div>
-                <p className="text-xs text-gray-500 mt-3">
-                  Uppskattningar efter ROT. Slutpriset sätts efter takkontroll.
-                </p>
+                <p className="text-xs text-gray-500 mt-3">{RIKTPRIS_NOT}</p>
                 <p className="text-sm mt-3">
                   Vet du inte vad taket behöver? Börja med en{" "}
                   <Link

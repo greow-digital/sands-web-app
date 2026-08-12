@@ -30,7 +30,7 @@ export const metadata: Metadata = pageMeta({
 const FAQ: { q: string; a: string }[] = [
   {
     q: "Vad kostar ett takbyte i Norrtälje?",
-    a: "De flesta villatak på 120-160 m² landar mellan ca 150 000 och 250 000 kr beroende på material, före ROT-avdrag. Betongpannor från ca 1 200 kr/m², tegel från ca 1 500 kr/m². Du får ett bindande fast pris efter en kostnadsfri takkontroll.",
+    a: "De flesta villatak på 120-160 m² landar mellan ca 150 000 och 250 000 kr beroende på material, som riktpris efter 30 % ROT-avdrag. Betongpannor från ca 1 200 kr/m², tegel från ca 1 500 kr/m². Du får ett bindande fast pris efter en kostnadsfri takkontroll.",
   },
   {
     q: "Byter ni tak på fritidshus och sommarstugor?",
@@ -368,8 +368,9 @@ export default async function NorrtaljePage() {
                   ))}
                 </ul>
                 <p className="text-[15px] text-gray-600 leading-[1.75] mb-4">
-                  Priserna är före ROT-avdrag. Du får alltid ett bindande fast
-                  pris efter en kostnadsfri takkontroll, inga dolda tillägg.
+                  Riktpriser efter 30 % ROT-avdrag, samma prislista som i hela
+                  Stockholms län. Du får alltid ett bindande fast pris efter en
+                  kostnadsfri takkontroll, inga dolda tillägg.
                 </p>
                 <p className="text-[15px] text-gray-600 leading-[1.75] mb-10">
                   <Link

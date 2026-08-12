@@ -44,6 +44,27 @@ export function prisEfterRot(key: MaterialKey, kvm: number): number {
 export const KOMPLEX_MULTIPLIER = 1.3;
 
 /**
+ * Omläggning behåller befintliga pannor och landar därför under ett komplett
+ * takbyte. 0,7 motsvarar de "25-35 % billigare" som copyn utlovar. Låg den
+ * här, inte per sida, så omläggningspriserna följer med när kvadratmeter-
+ * priserna justeras.
+ */
+export const OMLAGGNING_FAKTOR = 0.7;
+
+/** Riktpris för omläggning efter ROT-avdrag, linjärt. */
+export function omlaggningPrisEfterRot(key: MaterialKey, kvm: number): number {
+  return prisEfterRot(key, kvm) * OMLAGGNING_FAKTOR;
+}
+
+/**
+ * Standardformulering under pristabeller. Samma löfte som /priser ger i
+ * heron: siffrorna är riktpriser, det bindande priset sätts vid takkontroll.
+ * Använd den överallt så att inga siffror kan läsas som en offert.
+ */
+export const RIKTPRIS_NOT =
+  "Riktpriser efter 30 % ROT-avdrag. Du får ett bindande fast pris efter kostnadsfri takkontroll.";
+
+/**
  * Kanoniskt flaggskeppsexempel som används i copy, meta och stat-block:
  * betongtakbyte på 140 m² från ca 169 000 kr efter ROT.
  */

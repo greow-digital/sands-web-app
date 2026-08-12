@@ -433,7 +433,7 @@ export default async function Home() {
                   Från ca 1 200 kr/m²
                 </p>
                 <p className="text-[13px] text-gray-400 mb-9">
-                  *Efter ROT-avdrag på 30%
+                  *Riktpris efter 30 % ROT-avdrag
                 </p>
 
                 {/* Trust-punkter */}

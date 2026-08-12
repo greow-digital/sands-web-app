@@ -286,7 +286,7 @@ export default async function OmradesPage({
                     className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
                     style={{ color: "var(--color-primary)" }}
                   >
-                    Prisexempel, {ort.name}
+                    Riktpris, {ort.name}
                   </div>
                   <div
                     className="text-2xl font-extrabold mb-1"
@@ -298,8 +298,8 @@ export default async function OmradesPage({
                     Från ca 1 200 kr/m²
                   </div>
                   <div className="text-sm text-gray-500">
-                    efter ROT-avdrag 30%. Fast pris efter kostnadsfri
-                    besiktning.
+                    Riktpris efter 30 % ROT-avdrag. Du får ett bindande fast
+                    pris efter kostnadsfri takkontroll.
                   </div>
                 </div>
               </div>

@@ -359,7 +359,7 @@ export default function Takraknare({
             style={{ backgroundColor: "var(--color-dark)" }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3 text-center">
-              Ditt uppskattade pris efter ROT-avdrag
+              Ditt riktpris efter ROT-avdrag
             </p>
             <div
               className="text-center text-[28px] lg:text-[40px] font-extrabold tracking-[-0.02em] text-white mb-3 tabular-nums"
@@ -461,8 +461,8 @@ export default function Takraknare({
             Få prisförslag <ArrowRight size={14} />
           </Link>
           <p className="text-xs text-gray-400 mt-4 max-w-md mx-auto">
-            Priserna är uppskattningar och kan variera med takets skick och
-            komplexitet. Exakt pris ges alltid vid kostnadsfri hembesiktning.
+            Riktpriser som kan variera med takets skick och komplexitet. Du får
+            ett bindande fast pris efter kostnadsfri takkontroll.
           </p>
         </div>
       </div>

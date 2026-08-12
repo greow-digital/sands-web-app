@@ -255,7 +255,8 @@ export default function PriserPage() {
               ))}
             </div>
             <p className="text-xs text-gray-400 mt-6">
-              * Exempelpris sadeltak 140 m² efter ROT-avdrag 30%.
+              * Riktpris sadeltak 140 m² efter 30 % ROT-avdrag. Bindande fast
+              pris får du efter kostnadsfri takkontroll.
             </p>
             <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mt-6">
               Priserna gäller en komplett{" "}

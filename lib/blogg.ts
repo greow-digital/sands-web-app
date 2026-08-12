@@ -323,11 +323,11 @@ Du behöver inte göra något extra, vi hanterar hela processen.
 
 ## Prisexempel med ROT
 
-Takbyte 140 m² med betongpannor:
-- Totalpris före ROT: **ca 241 000 kr**
-- Arbetskostnad: ca 140 000 kr
-- ROT-avdrag (30%): **−42 000 kr**
-- **Du betalar: ca 199 000 kr**
+Takbyte 140 m² med betongpannor, som riktpris:
+- Totalpris före ROT: **ca 206 000 kr**
+- Arbetskostnad: ca 122 000 kr
+- ROT-avdrag (30%): **−37 000 kr**
+- **Du betalar: ca 169 000 kr**
 
 Med två ägare som delar avdraget kan besparingen bli ännu större. Fler räkneexempel för olika taktyper hittar du på vår <a href="/priser" class="text-[#2B74FC] font-semibold">sida med aktuella takpriser</a>.
 
