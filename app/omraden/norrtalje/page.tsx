@@ -8,6 +8,14 @@ import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
 import { pageMeta } from "@/lib/seo";
+import { client } from "@/sanity/lib/client";
+import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
+import type { ProjektCard } from "@/sanity/lib/types";
+import {
+  matchProjektForOrt,
+  matchProjektForGrannar,
+} from "@/lib/projekt-matching";
+import RelateradeProjekt from "@/components/RelateradeProjekt";
 
 export const metadata: Metadata = pageMeta({
   path: "/omraden/norrtalje",
@@ -113,7 +121,13 @@ const GRANNAR = [
   { slug: "sigtuna", name: "Sigtuna" },
 ];
 
-export default function NorrtaljePage() {
+export default async function NorrtaljePage() {
+  const allaProjekt = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
+  const ortProjekt = matchProjektForOrt(allaProjekt, "norrtalje", "Norrtälje");
+  const grannProjekt = matchProjektForGrannar(allaProjekt, GRANNAR);
+  const visadeProjekt = ortProjekt.length > 0 ? ortProjekt : grannProjekt;
+  const referens = ortProjekt[0];
+
   return (
     <>
       <Header />
@@ -209,7 +223,7 @@ export default function NorrtaljePage() {
                   Vi utför takbyte och takomläggning med betongpannor, tegel,
                   plåt och papp, och tar hand om hela kedjan: besiktning,
                   materialval, ROT-avdrag, ställning, läggning och
-                  slutbesiktning enligt ABT-06. Som{" "}
+                  slutkontroll enligt ABT-06. Som{" "}
                   <Link
                     href="/"
                     className="font-semibold text-[#2B74FC] hover:underline"
@@ -377,10 +391,14 @@ export default function NorrtaljePage() {
                   <p className="text-sm text-gray-700 leading-relaxed">
                     Se exempel på vårt arbete:{" "}
                     <Link
-                      href="/projekt/volmvagen-jarfalla"
+                      href={
+                        referens?.slug
+                          ? `/projekt/${referens.slug}`
+                          : "/projekt"
+                      }
                       className="font-semibold text-[#2B74FC] hover:underline"
                     >
-                      Takbyte Volmvägen, Järfälla
+                      {referens?.title ?? "Alla våra takprojekt"}
                     </Link>
                   </p>
                 </div>
@@ -464,8 +482,23 @@ export default function NorrtaljePage() {
         </section>
 
         {/* ── OMDÖMEN ─────────────────────────── */}
+        <RelateradeProjekt
+          projekt={visadeProjekt}
+          heading={
+            ortProjekt.length > 0
+              ? "Projekt vi har utfört i Norrtälje"
+              : "Projekt vi har utfört nära Norrtälje"
+          }
+          limit={6}
+        />
+
         <OmdomenInline
           heading="Vad våra kunder säger"
+          ort="Norrtälje"
+          delomraden={OMRADEN.flatMap((o) =>
+            o.namn.split("&").map((n) => n.trim())
+          )}
+          narliggande={GRANNAR.map((g) => g.name)}
           match={["tak"]}
           background
         />

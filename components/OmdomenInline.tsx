@@ -13,6 +13,10 @@ interface OmdomenInlineProps {
   heading?: string;
   /** Prioritera omdömen från denna ort (delsträngsmatch) */
   ort?: string;
+  /** Stadsdelar/kommundelar som räknas som samma ort (t.ex. Tullinge i Botkyrka) */
+  delomraden?: string[];
+  /** Grannkommuner som får näst högst prioritet när lokala omdömen saknas */
+  narliggande?: string[];
   /** Prioritera omdömen vars text/tjänst innehåller något av dessa ord */
   match?: string[];
   /** Antal omdömen som visas (default 3) */
@@ -21,10 +25,32 @@ interface OmdomenInlineProps {
   background?: boolean;
 }
 
-function pickReviews(ort?: string, match?: string[], limit = 3): Testimonial[] {
+function pickReviews(
+  ort?: string,
+  match?: string[],
+  limit = 3,
+  delomraden: string[] = [],
+  narliggande: string[] = []
+): Testimonial[] {
+  const lokala = [ort, ...delomraden]
+    .filter((o): o is string => Boolean(o))
+    .map((o) => o.toLowerCase());
+  const grannar = narliggande.map((o) => o.toLowerCase());
+
   const score = (t: Testimonial) => {
     let s = 0;
-    if (ort && t.ort && t.ort.toLowerCase().includes(ort.toLowerCase())) s += 3;
+    const tOrt = t.ort?.toLowerCase();
+    if (ort) {
+      if (tOrt && lokala.some((o) => tOrt.includes(o))) {
+        s += 6;
+      } else if (tOrt && grannar.some((o) => tOrt.includes(o))) {
+        s += 3;
+      } else if (!tOrt) {
+        // Omdömen utan ort påstår aldrig fel ort på en ortssida, så de
+        // går före omdömen från en helt annan kommun.
+        s += 2;
+      }
+    }
     if (match) {
       const hay = `${t.tjanst} ${t.text}`.toLowerCase();
       if (match.some((m) => hay.includes(m.toLowerCase()))) s += 1;
@@ -42,11 +68,13 @@ function pickReviews(ort?: string, match?: string[], limit = 3): Testimonial[] {
 export default function OmdomenInline({
   heading = "Vad våra kunder säger",
   ort,
+  delomraden,
+  narliggande,
   match,
   limit = 3,
   background = false,
 }: OmdomenInlineProps) {
-  const reviews = pickReviews(ort, match, limit);
+  const reviews = pickReviews(ort, match, limit, delomraden, narliggande);
 
   return (
     <section

@@ -13,7 +13,10 @@ import { pageMeta } from "@/lib/seo";
 import { client } from "@/sanity/lib/client";
 import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import type { ProjektCard } from "@/sanity/lib/types";
-import { matchProjektForOrt } from "@/lib/projekt-matching";
+import {
+  matchProjektForOrt,
+  matchProjektForGrannar,
+} from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import OmdomenInline from "@/components/OmdomenInline";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
@@ -125,6 +128,12 @@ export default async function OmradesPage({
 
   const allaProjekt = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
   const ortProjekt = matchProjektForOrt(allaProjekt, slug, ort.name);
+  // Saknas projekt i orten visar vi grannkommunernas i stället, men med en
+  // rubrik som säger att de ligger i närheten, aldrig som "utfört i {ort}".
+  const grannProjekt = matchProjektForGrannar(allaProjekt, ort.grannar);
+  const visadeProjekt = ortProjekt.length > 0 ? ortProjekt : grannProjekt;
+  const delomraden =
+    ort.stadsdelar?.split(",").map((s) => s.trim()).filter(Boolean) ?? [];
 
   return (
     <>
@@ -378,8 +387,12 @@ export default async function OmradesPage({
 
         {/* ── PROJEKT I OMRÅDET ────────────────── */}
         <RelateradeProjekt
-          projekt={ortProjekt}
-          heading={`Projekt vi har utfört i ${ort.name}`}
+          projekt={visadeProjekt}
+          heading={
+            ortProjekt.length > 0
+              ? `Projekt vi har utfört i ${ort.name}`
+              : `Projekt vi har utfört nära ${ort.name}`
+          }
           limit={6}
         />
 
@@ -387,6 +400,8 @@ export default async function OmradesPage({
         <OmdomenInline
           heading="Vad våra kunder säger"
           ort={ort.name}
+          delomraden={delomraden}
+          narliggande={ort.grannar.map((g) => g.name)}
           match={["tak"]}
           background
         />

@@ -33,7 +33,7 @@ export const FAQ_BYGGLOV: FaqItem[] = [
 export const FAQ_MONIER: FaqItem[] = [
   {
     q: "Vad omfattar 30 års Monier-garantin?",
-    a: "Som certifierad Monier Takpartner sedan 2016 erbjuder vi Monier Tätt tak-systemgaranti i 30 år, den mest omfattande takgarantin på den svenska marknaden. Garantin täcker både takpannor, systemtillbehör och arbetskostnad för utbyte vid garantifall. För att garantin ska gälla krävs att hela systemet monteras enligt Moniers anvisningar (vilket vi alltid följer). Garantin registreras direkt hos Monier efter slutbesiktning.",
+    a: "Som certifierad Monier Takpartner sedan 2016 erbjuder vi Monier Tätt tak-systemgaranti i 30 år, den mest omfattande takgarantin på den svenska marknaden. Garantin täcker både takpannor, systemtillbehör och arbetskostnad för utbyte vid garantifall. För att garantin ska gälla krävs att hela systemet monteras enligt Moniers anvisningar (vilket vi alltid följer). Garantin registreras direkt hos Monier efter slutkontroll.",
   },
 ];
 

@@ -64,7 +64,7 @@ const faqIntro = [
   },
   {
     q: "Vad ingår i det fasta priset?",
-    a: "Rivning, bortforsling, ny underlagspapp, ströläkt och bärläkt, nya pannor eller plåt, hängrännor och stuprör, vindskivor, plåtdetaljer, ställning och container. Slutbesiktning ingår också. Inga dolda kostnader.",
+    a: "Rivning, bortforsling, ny underlagspapp, ströläkt och bärläkt, nya pannor eller plåt, hängrännor och stuprör, vindskivor, plåtdetaljer, ställning och container. Slutkontroll ingår också. Inga dolda kostnader.",
   },
   {
     q: "Vad kan tillkomma i pris?",
@@ -553,7 +553,7 @@ export default async function TaklaggningPage() {
                     "Vindskivor, nockplåt, ventilationshuvor",
                     "Plåtdetaljer kring skorsten",
                     "Ställning, container och bortforsling",
-                    "Slutbesiktning och dokumentation",
+                    "Slutkontroll och dokumentation",
                   ].map((item) => (
                     <li
                       key={item}
@@ -757,7 +757,7 @@ export default async function TaklaggningPage() {
                     "Hängrännor och stuprör vid behov",
                     "Plåtdetaljer kring skorsten och genomföringar",
                     "Ställning och container",
-                    "Slutbesiktning",
+                    "Slutkontroll",
                   ].map((item) => (
                     <li
                       key={item}
@@ -1044,7 +1044,7 @@ export default async function TaklaggningPage() {
                   color: "var(--color-dark)",
                 }}
               >
-                Från första kontakt till slutbesiktning
+                Från första kontakt till slutkontroll
               </h2>
               <p className="text-base text-gray-600 leading-relaxed">
                 Fyra tydliga steg. Inget rusas, inga överraskningar längs
@@ -1072,7 +1072,7 @@ export default async function TaklaggningPage() {
                 {
                   num: "04",
                   title: "Takkontroll",
-                  text: "Slutbesiktning tillsammans med dig. Du får garantibevis och dokumentation.",
+                  text: "Slutkontroll tillsammans med dig. Du får garantibevis och dokumentation.",
                 },
               ].map((step) => (
                 <div
