@@ -47,7 +47,9 @@ export default function ElevenLabsWidget() {
 
   if (open) return <VoiceSession onClose={() => setOpen(false)} />;
 
-  // Flytande knapp bara på desktop. På mobil öppnas rösten från sticky-baren.
+  // Flytande knapp bara på desktop. Röstknappen låg tidigare även i den
+  // mobila sticky-baren, men den togs bort för att inte konkurrera med
+  // prisförslaget. På mobil finns rösten alltså inte längre.
   return (
     <button
       onClick={() => setOpen(true)}

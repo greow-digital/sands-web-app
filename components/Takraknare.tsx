@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import {
   ChevronDown,
   CheckCircle,
@@ -42,6 +41,31 @@ const INGAR = [
   "Nytt takmaterial",
   "Nytt regnvattensystem (hängrännor och stuprör)",
   "Ställning, container och transport",
+];
+
+// Vad riktpriset förutsätter. Ett riktpris utan förutsättningar läses som
+// ett svar, och då finns ingen anledning att boka något. Namnger vi i
+// stället exakt vad vi inte kan veta på distans blir takkontrollen svaret
+// på en fråga sidan just ställt.
+const FORUTSATTER = [
+  "sadeltak utan kupor",
+  "frisk råspont under pannorna",
+  "normal ställningsåtkomst runt huset",
+];
+
+const OSAKERHET = [
+  {
+    rubrik: "Råsponten",
+    text: "Syns först när gamla taket är rivet. Är den rötskadad ska den bytas, och det märks på slutsumman.",
+  },
+  {
+    rubrik: "Takets form",
+    text: "Kupor, ränndalar, skorstenar och ventilationsgenomföringar kräver plåtarbete som ett rakt sadeltak inte har.",
+  },
+  {
+    rubrik: "Åtkomsten",
+    text: "Trång tomt, hög höjd eller närhet till grannfastighet påverkar ställningen. Enkel åtkomst drar åt andra hållet.",
+  },
 ];
 
 function calc(prisM2: number, kvm: number) {
@@ -85,6 +109,8 @@ export default function Takraknare({
   const [open, setOpen] = useState(false);
   const [useBoyta, setUseBoyta] = useState(false);
   const [boyta, setBoyta] = useState(120);
+  const [postnummer, setPostnummer] = useState("");
+  const postnummerFiredRef = useRef(false);
 
   const [stickyVisible, setStickyVisible] = useState(false);
   const engagedRef = useRef(false);
@@ -110,8 +136,15 @@ export default function Takraknare({
     if (!dismissed) setStickyVisible(true);
   }
 
-  function handleCtaClick() {
-    fireGtag("calc_cta_click", { material, area: kvm });
+  function handlePostnummer(value: string) {
+    // Bara siffror och ett mellanslag, i svensk form "176 71".
+    const rensat = value.replace(/[^\d\s]/g, "").slice(0, 6);
+    setPostnummer(rensat);
+    firstEngage();
+    if (rensat.replace(/\s/g, "").length === 5 && !postnummerFiredRef.current) {
+      postnummerFiredRef.current = true;
+      fireGtag("calc_step_complete", { step: 3, material });
+    }
   }
 
   function handleStickyClick() {
@@ -221,17 +254,34 @@ export default function Takraknare({
               Vad kostar ditt takbyte?
             </h2>
             <p className="text-sm text-gray-500">
-              Välj takmaterial och yta för en uppskattning, inkl. moms och efter
-              ROT-avdrag.
+              Alla priser inkl. moms och efter ROT-avdrag.
             </p>
           </div>
         )}
 
         <div className="rounded-3xl border border-gray-100 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
+          {/* Sätter förväntan innan räknaren börjar. Numreringen lovar fyra
+              steg men priset kommer redan efter två, och utan den här raden
+              läses steg 3 och 4 som en avgift för något användaren redan
+              har fått. Här blir de i stället ett erbjudande om något bättre. */}
+          <div className="px-6 pt-6 lg:px-8 lg:pt-8">
+            <p className="text-sm text-gray-600 leading-relaxed">
+              <span
+                className="font-semibold"
+                style={{ color: "var(--color-dark)" }}
+              >
+                Steg 1 och 2 ger ditt riktpris direkt.
+              </span>{" "}
+              Steg 3 och 4 ger dig ett fast pris. Du väljer själv hur långt du
+              går.
+            </p>
+          </div>
+
           {/* STEG 1 — Material */}
           <div className="p-6 lg:p-8 border-b border-gray-100">
             <h3 className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500 mb-4">
-              1. Vilket takmaterial?
+              <span style={{ color: "var(--color-primary)" }}>Steg 1 av 4</span>{" "}
+              · Vilket takmaterial?
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {MATERIAL.map((m) => {
@@ -273,7 +323,10 @@ export default function Takraknare({
           <div className="p-6 lg:p-8">
             <div className="flex items-baseline justify-between mb-4">
               <h3 className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500">
-                2. Hur stort är taket?
+                <span style={{ color: "var(--color-primary)" }}>
+                  Steg 2 av 4
+                </span>{" "}
+                · Hur stort är taket?
               </h3>
               <div
                 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em]"
@@ -353,7 +406,7 @@ export default function Takraknare({
             </div>
           </div>
 
-          {/* STEG 3 — Resultat */}
+          {/* RESULTAT — medvetet ofullständigt, se FORUTSATTER/OSAKERHET */}
           <div
             className="px-6 py-8 lg:px-8 lg:py-10"
             style={{ backgroundColor: "var(--color-dark)" }}
@@ -373,6 +426,36 @@ export default function Takraknare({
               Inkl. material, arbete, ställning och bortforsling. Inga dolda
               tillägg.
             </p>
+
+            <div className="mt-7 pt-6 border-t border-white/10">
+              <p className="text-sm text-gray-300 leading-relaxed">
+                <span className="font-semibold text-white">
+                  Det här är inte hela svaret.
+                </span>{" "}
+                Siffran förutsätter {FORUTSATTER[0]}, {FORUTSATTER[1]} och{" "}
+                {FORUTSATTER[2]}. Tre saker kan flytta priset i endera
+                riktningen, och ingen av dem går att se på avstånd:
+              </p>
+              <ul className="mt-4 grid sm:grid-cols-3 gap-3">
+                {OSAKERHET.map((o) => (
+                  <li
+                    key={o.rubrik}
+                    className="rounded-xl bg-white/5 border border-white/10 px-4 py-3"
+                  >
+                    <p className="text-xs font-bold text-white mb-1">
+                      {o.rubrik}
+                    </p>
+                    <p className="text-[11px] leading-relaxed text-gray-400">
+                      {o.text}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-xs text-gray-400 leading-relaxed">
+                Vi tittar på alla tre vid takkontrollen och sätter ett fast
+                pris. Fortsätt nedan så vet du var du står.
+              </p>
+            </div>
           </div>
 
           {/* Expanderbar: vad ingår */}
@@ -411,36 +494,64 @@ export default function Takraknare({
               </ul>
             </div>
           )}
-        </div>
 
-        {/* STEG 4 — Bron (lead-formulär, samma pipeline som /offert) */}
-        <div ref={bridgeRef} className="mt-8">
-          <div className="text-center mb-5 max-w-lg mx-auto">
-            <h3
-              className="text-[22px] lg:text-[28px] font-extrabold tracking-[-0.02em] mb-2"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-dark)",
-              }}
-            >
-              Få ditt exakta pris
+          {/* STEG 3 — Postnummer. Ligger inuti widgeten, inte i ett eget
+              formulär bredvid: den som redan valt material och dragit i
+              reglaget är mitt i ett flöde, och ett separat formulär läser
+              som en ny förhandling. */}
+          <div className="p-6 lg:p-8 border-t border-gray-100">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500 mb-4">
+              <span style={{ color: "var(--color-primary)" }}>Steg 3 av 4</span>{" "}
+              · Var ligger huset?
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed">
-              Vi gör en kostnadsfri takkontroll och lämnar ett bindande fast
-              prisförslag inom 24 h. Inte bindande för dig.
-            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <input
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                value={postnummer}
+                onChange={(e) => handlePostnummer(e.target.value)}
+                placeholder="176 71"
+                aria-label="Postnummer"
+                className="w-32 px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors tabular-nums"
+              />
+              <p className="text-xs text-gray-500 leading-relaxed flex-1 min-w-[220px]">
+                Ställning, etablering och transport prissätts utifrån var huset
+                ligger. Vi arbetar i hela Stockholms län.
+              </p>
+            </div>
           </div>
-          <div className="max-w-md mx-auto">
+
+          {/* STEG 4 — Kontaktuppgifter, samma lead-pipeline som /offert */}
+          <div
+            ref={bridgeRef}
+            id="kalkyl-kontakt"
+            className="p-6 lg:p-8 border-t border-gray-100 bg-gray-50/60 scroll-mt-24"
+          >
+            <h3 className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500 mb-2">
+              <span style={{ color: "var(--color-primary)" }}>Steg 4 av 4</span>{" "}
+              · Vart skickar vi svaret?
+            </h3>
+            <p className="text-sm text-gray-600 leading-relaxed mb-5">
+              Vi bokar en kostnadsfri takkontroll, tittar på de tre punkterna
+              ovan och lämnar ett bindande fast pris inom 24 h. Du binder dig
+              inte till något.
+            </p>
             <LeadForm
               variant="section"
               formId="calc_bridge"
               fields="minimal"
+              contact="phone-or-email"
+              flat
               hideHeader
-              ctaText="Få ditt pris"
-              confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²`}
+              ctaText="Få mitt fasta pris"
+              confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²${
+                postnummer.trim() ? `, ${postnummer.trim()}` : ""
+              }`}
               extraPayload={{
                 roofType: valtMaterial.namn,
                 area: `${kvm} m²`,
+                postnummer: postnummer.trim() || undefined,
               }}
               privacyNote
               onSubmitSuccess={() =>
@@ -450,21 +561,10 @@ export default function Takraknare({
           </div>
         </div>
 
-        {/* Statisk footer-CTA + prisreservation */}
-        <div className="text-center mt-10">
-          <Link
-            href="/offert"
-            onClick={handleCtaClick}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.02] hover:shadow-lg"
-            style={{ backgroundColor: "var(--color-primary)" }}
-          >
-            Få prisförslag <ArrowRight size={14} />
-          </Link>
-          <p className="text-xs text-gray-400 mt-4 max-w-md mx-auto">
-            Riktpriser som kan variera med takets skick och komplexitet. Du får
-            ett bindande fast pris efter kostnadsfri takkontroll.
-          </p>
-        </div>
+        <p className="text-xs text-gray-400 mt-4 max-w-md mx-auto text-center">
+          Riktpriser som kan variera med takets skick och komplexitet. Du får
+          ett bindande fast pris efter kostnadsfri takkontroll.
+        </p>
       </div>
 
       {/* Post-engagement sticky-bar (visas efter första interaktion) */}
@@ -485,14 +585,16 @@ export default function Takraknare({
                 Få ett bindande prisförslag samma vardag.
               </p>
             </div>
-            <Link
-              href="/offert"
+            {/* Scrollar till steg 4 i stället för att skicka iväg till
+                /offert: formuläret finns redan i widgeten. */}
+            <a
+              href="#kalkyl-kontakt"
               onClick={handleStickyClick}
               className="inline-flex items-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-white font-semibold text-xs sm:text-sm whitespace-nowrap transition-all hover:scale-[1.02] shadow-lg shrink-0"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
-              Boka kostnadsfri takkontroll <ArrowRight size={14} />
-            </Link>
+              Fortsätt till steg 4 <ArrowRight size={14} />
+            </a>
             <button
               type="button"
               onClick={handleStickyDismiss}

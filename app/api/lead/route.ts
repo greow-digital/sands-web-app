@@ -54,6 +54,17 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+  } else if (data.formId === "calc_bridge") {
+    // Kalkylatorns steg 4 frågar efter "telefon eller e-post" och låter
+    // användaren välja. Kräver därför namn + minst en kontaktväg, annars
+    // skulle en e-postlead avvisas av servern trots att formuläret
+    // godkände den.
+    if (!data.name || (!data.email && !data.phone)) {
+      return NextResponse.json(
+        { error: "Namn och telefon eller e-post krävs" },
+        { status: 400 }
+      );
+    }
   } else if (!data.name || !data.phone) {
     return NextResponse.json(
       { error: "Namn och telefon krävs" },

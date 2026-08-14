@@ -36,8 +36,21 @@ interface LeadFormProps {
   variant?: "hero" | "section";
   /** Identifierar formulärinstansen i GA4 (form_start/field/submit). */
   formId?: string;
-  /** "minimal" = endast Namn + Telefon (för kalkylator-bron). */
+  /** "minimal" = endast Namn + kontaktväg (för kalkylator-bron). */
   fields?: "full" | "minimal";
+  /**
+   * "phone-or-email" gör telefon frivilligt: användaren fyller i telefon
+   * ELLER e-post och väljer själv hur vi hör av oss. Den som researchar
+   * pris är sällan redo för ett säljsamtal, och krav på telefonnummer är
+   * den dyraste friktionen i formuläret.
+   */
+  contact?: "phone" | "phone-or-email";
+  /**
+   * Renderar formuläret utan egen kort-chrome (bakgrund, ram, skugga,
+   * padding). Används när det ligger inuti ett annat kort, t.ex. som steg
+   * 4 i Takräknaren.
+   */
+  flat?: boolean;
   /** Extra data som följer med i leadens payload, t.ex. taktyp + yta. */
   extraPayload?: Record<string, string | undefined>;
   /** Override för submit-knappens text. */
@@ -58,6 +71,8 @@ export default function LeadForm({
   variant = "hero",
   formId = "offert",
   fields = "full",
+  contact = "phone",
+  flat = false,
   extraPayload,
   ctaText,
   hideHeader = false,
@@ -69,9 +84,37 @@ export default function LeadForm({
   const {
     register,
     handleSubmit,
+    getValues,
+    trigger,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>();
+
+  const valfriKontakt = contact === "phone-or-email";
+
+  // Minst en kontaktväg måste vara ifylld, men användaren väljer vilken.
+  function harKontaktvag() {
+    const { phone, email } = getValues();
+    return Boolean(phone?.trim() || email?.trim());
+  }
+
+  const KONTAKT_KRAV = "Fyll i telefon eller e-post, du väljer själv";
+
+  const telefonRegler = valfriKontakt
+    ? {
+        validate: {
+          kontakt: () => harKontaktvag() || KONTAKT_KRAV,
+          format: (v?: string) =>
+            !v?.trim() || /^[0-9+\s-]{7,}$/.test(v) || "Ogiltigt nummer",
+        },
+      }
+    : {
+        required: "Ange telefonnummer",
+        pattern: {
+          value: /^[0-9+\s-]{7,}$/,
+          message: "Ogiltigt nummer",
+        },
+      };
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -229,9 +272,13 @@ export default function LeadForm({
 
   return (
     <div
-      className={`bg-white rounded-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] border border-gray-100 ${
-        variant === "hero" ? "p-7 lg:p-9" : "p-5 sm:p-7 lg:p-8"
-      }`}
+      className={
+        flat
+          ? ""
+          : `bg-white rounded-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.15)] border border-gray-100 ${
+              variant === "hero" ? "p-7 lg:p-9" : "p-5 sm:p-7 lg:p-8"
+            }`
+      }
     >
       {!hideHeader && (
         <div className="mb-6">
@@ -285,28 +332,70 @@ export default function LeadForm({
         </div>
 
         {fields === "minimal" ? (
-          /* Telefon (eget fält i minimal-läge) */
-          <div>
-            <label className={labelCls} style={labelStyle}>
-              Telefon *
-            </label>
-            <input
-              type="tel"
-              placeholder="070-000 00 00"
-              className={inputCls(Boolean(errors.phone))}
-              {...trackField(
-                "phone",
-                register("phone", {
-                  required: "Ange telefonnummer",
-                  pattern: {
-                    value: /^[0-9+\s\-]{7,}$/,
-                    message: "Ogiltigt nummer",
-                  },
-                })
+          <div className={valfriKontakt ? "grid grid-cols-2 gap-3" : ""}>
+            <div>
+              <label className={labelCls} style={labelStyle}>
+                Telefon {valfriKontakt ? "" : "*"}
+              </label>
+              <input
+                type="tel"
+                placeholder="070-000 00 00"
+                className={inputCls(Boolean(errors.phone))}
+                {...trackField(
+                  "phone",
+                  register("phone", {
+                    ...telefonRegler,
+                    onChange: () => {
+                      if (valfriKontakt && errors.email) trigger("email");
+                    },
+                  })
+                )}
+              />
+              {errors.phone && (
+                <p className="text-xs text-red-500 mt-1">
+                  {errors.phone.message}
+                </p>
               )}
-            />
-            {errors.phone && (
-              <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>
+            </div>
+            {valfriKontakt && (
+              <div>
+                <label className={labelCls} style={labelStyle}>
+                  E-post
+                </label>
+                <input
+                  type="email"
+                  placeholder="din@epost.se"
+                  className={inputCls(Boolean(errors.email))}
+                  {...trackField(
+                    "email",
+                    register("email", {
+                      validate: {
+                        kontakt: () => harKontaktvag() || KONTAKT_KRAV,
+                        format: (v?: string) =>
+                          !v?.trim() ||
+                          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ||
+                          "Ogiltig e-post",
+                      },
+                      onChange: () => {
+                        if (errors.phone) trigger("phone");
+                      },
+                    })
+                  )}
+                />
+                {/* Kravet på minst en kontaktväg visas bara en gång, under
+                    telefonfältet, annars står samma mening två gånger. */}
+                {errors.email && errors.email.type !== "kontakt" && (
+                  <p className="text-xs text-red-500 mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+            )}
+            {valfriKontakt && (
+              <p className="col-span-2 text-[11px] text-gray-500 -mt-1">
+                Fyll i det du föredrar. Vill du hellre ha ett mejl än ett
+                samtal går det lika bra.
+              </p>
             )}
           </div>
         ) : (
