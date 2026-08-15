@@ -12,7 +12,7 @@ Tre saker begränsar volymen, i den här ordningen:
 
 1. **Ad Rank, inte budget.** Impression share är 22 till 26 procent. Av det som förloras beror 56 till 63 procentenheter på rank och bara 11 till 20 på budget. Att höja budgeten idag köper fler av samma dyra klick.
 2. **Landningssidan.** 109 av 157 keywords med data har `BELOW_AVERAGE` på landing page experience. Samtliga annonser som får trafik pekar på startsidan, även prisrelaterade keywords. Det sänker både Quality Score och konverteringsgrad.
-3. **Struktur.** 743 keywords ligger i två aktiva annonsgrupper, varav en heter `Ad group 1`. En annonsgrupp kan inte vara relevant för både "byte av hängrännor" och "plåttak pris".
+3. **Struktur och koncentration.** 743 keywords ligger i två aktiva annonsgrupper, varav en heter `Ad group 1`. En annonsgrupp kan inte vara relevant för både "byte av hängrännor" och "plåttak pris". Djupanalysen 2026-08-15 visar dessutom att två sökord bär 55 procent av leaden till 1 174 kr CPA medan 398 sökord levererar resten till 2 951 kr. Se avsnitt 17.
 
 Räkneexempel på vad som står på spel, vid oförändrad budget på 15 000 kr/månad:
 
@@ -191,7 +191,25 @@ Mönstret är entydigt. Landningssidan är sämst, och den är sämst för att a
 
 Kontrastfallet: `sands entreprenad` har QS 10 med `ABOVE_AVERAGE` på alla tre komponenter, och 7 konverteringar till 103 kr CPA. Startsidan är alltså en bra landningssida för ett varumärkessök och en dålig för "plåttak pris".
 
-**Vad ett QS-lyft är värt.** Ad Rank är ungefär bud gånger QS. Att gå från QS 3 till QS 6 på de keywords som bär spenden halverar ungefär vad man behöver bjuda för samma position. Vid låst budget betyder det ungefär dubbelt så många klick. Det är samma effekt som att fördubbla budgeten, fast gratis.
+**Vad ett QS-lyft är värt. Rättat 2026-08-15.**
+
+Den ursprungliga texten här hävdade att QS 3 till 6 ungefär halverar budet och därmed fördubblar klicken, alltså "samma effekt som att fördubbla budgeten, fast gratis". Det är läroboksformeln Ad Rank = bud gånger kvalitet, inte kontots data.
+
+Viktad regression över 143 sökord med QS och minst tre klick ger **CPC = 25,61 minus 1,24 gånger QS, r = -0,78**. Observerad spännvidd i kontot:
+
+| QS | Sökord | Klick | CPC |
+|---|---|---|---|
+| 1 | 17 | 334 | 23,8 kr |
+| 3 | 35 | 1 565 | 23,0 kr |
+| 5 | 18 | 522 | 18,0 kr |
+| 6 | 9 | 147 | 15,4 kr |
+| 7 | 5 | 97 | 16,8 kr |
+
+Från QS 1 till QS 7 är skillnaden **29 procent, inte en halvering**. QS 3 till 6 motsvarar cirka 3,7 kr, alltså 16 procent.
+
+Och även det är en överskattning. Sambandet är sammanblandat med nischens konkurrens: kontots QS 6 och 7-sökord är prisfraser som är billiga auktioner i sig, medan QS 3 domineras av `takläggare`, en dyr generisk term. Regressionen är beskrivande, inte kausal. Behandla 29 procent som ett tak på vad QS-arbete kan ge på CPC.
+
+Skälet att ändå göra QS-arbetet är konverteringsgraden, inte klickpriset. Se avsnitt 17.
 
 ---
 
@@ -254,7 +272,20 @@ Syfte: skydda varumärket billigt och hålla det utanför icke-varumärkes-CPA.
 
 ### Kampanj B: Takbyte Stockholm (huvudkampanjen)
 Budget 350 kr/dag initialt, upp till 500 efter QS-lyftet.
-Annonsgrupper, en per tema, med egen matchad landningssida och egen RSA:
+
+**Reviderat 2026-08-15: elva annonsgrupper är för många.** Kontots spend är extremt koncentrerad. Ett sökord, `takläggare` bred, står för 30 procent av spenden och 13 av 40 konverteringar. Topp fem sökord är 42,5 procent av spenden och 26 av 40 konverteringar. Vid 25 klick om dagen ger elva grupper drygt två klick per grupp och dag, vilket varken ger inlärning eller utvärderingsbarhet.
+
+**Börja med tre annonsgrupper**, som tillsammans täcker cirka 80 procent av volymen:
+
+| Annonsgrupp | Andel av visningar | Landningssida |
+|---|---|---|
+| Takläggare och takbyte (inkl. `takläggare` bred) | 42 % | `/tjanster/taklaggning` |
+| Pris och kostnad | 28 % | `/priser` |
+| Plåttak | 10 % | `/tjanster/plattak` |
+
+Tabellen nedan är den ursprungliga målbilden och gäller först när budgeten bär den. Lägg till en grupp i taget, och bara när dess tema visar minst 300 visningar i månaden i söktermsrapporten.
+
+Ursprunglig målbild:
 
 | Annonsgrupp | Kärnkeywords | Landningssida |
 |---|---|---|
@@ -307,8 +338,13 @@ Samtliga keywords med QS 5 eller högre: `byta tak kostnad`, `lägga om tak kost
 
 De fyra första har redan spend som söktermer utan att vara egna keywords, vilket betyder att de matchas löst via andra keywords och saknar egen annons och egen sida.
 
-**Matchningstyp**
-Frasmatchning som grund, exakt matchning på de 20 termer som har konverterat eller har QS 6 eller högre. Bred matchning bara i en separat, budgetbegränsad annonsgrupp för upptäckt, med CPC-tak 15 kr, och bara efter att Maximize Conversions är på plats. Bred matchning utan smart bidding är den kombination som kostat 14 293 kr här.
+**Matchningstyp. Struken 2026-08-15.**
+
+Den ursprungliga rekommendationen var frasmatchning som grund och bred matchning bara i en budgetbegränsad upptäcktsgrupp. **Det finns inget stöd för den i kontots data.**
+
+Utan varumärkessökord: bred matchning 1,03 procents CVR mot fras och exakt 0,80 procent, **z = 0,70, p = 0,481**. Matchningstyp förklarar ingenting. Den skenbara fördelen för bred matchning i en första körning (1,61 mot 0,79 procent, p = 0,022) berodde helt på `sands entreprenad` som bred matchning, alltså varumärket.
+
+Rekommendationen kom från branschpraxis, inte från mätning. Se avsnitt 17.
 
 ---
 
@@ -677,3 +713,87 @@ Elva stannar blockerade. Avsnitt 8.1 var för brett. Dessa är rimliga spärrar:
 | `besiktningsprotokoll tak` | Informationssökning |
 
 Öppen fråga till Sands: erbjuder ni shingeltak, altantak eller rent plåtslageri? Om ja bör de tre flyttas till borttagning.
+
+---
+
+## 17. Djupanalys: sökord, matchningstyper och negativ (2026-08-15)
+
+Period 1 mars till 15 augusti 2026. Sökordsurvalet omfattar 78 953 kr av 78 955 och samtliga 40 konverteringar, alltså i praktiken hela kontot. Negativlistan lästes komplett, 604 poster.
+
+### 17.1 Koncentrationen är kontots dominerande drag
+
+| | Kostnad | Klick | Konv | CPA |
+|---|---|---|---|---|
+| `takläggare` (bred) + `sands entreprenad` | 25 829 kr (33 %) | 1 102 | **22 (55 %)** | **1 174 kr** |
+| Övriga 398 sökord | 53 124 kr (67 %) | 2 556 | 18 (45 %) | **2 951 kr** |
+
+**z = 3,45, p = 0,0006.** Den mest robusta siffran i hela materialet.
+
+Topp 1 sökord är 30 procent av spenden, topp 5 är 42,5 procent och 26 av 40 konverteringar, topp 20 är 64,5 procent. Samtidigt har **174 sökord visningar men noll klick** (800 visningar tillsammans).
+
+### 17.2 Matchningstyp förklarar ingenting
+
+Utan varumärkessökord:
+
+| Typ | Sökord | Klick | Kostnad | Konv | CTR | CPC | CVR |
+|---|---|---|---|---|---|---|---|
+| Bred | 12 | 1 250 | 30 426 kr | 13 | 4,5 % | 24,3 | 1,03 % |
+| Fras | 231 | 2 067 | 40 734 kr | 16 | 9,4 % | 19,7 | 0,80 % |
+| Exakt | 151 | 217 | 5 540 kr | 2 | 10,4 % | 25,5 | 0,77 % |
+
+Bred mot fras och exakt: **z = 0,70, p = 0,481.**
+
+En första körning gav 1,61 mot 0,79 procent, p = 0,022, vilket såg ut som ett starkt argument för bred matchning. Hela skillnaden var `sands entreprenad` som bred matchning, med 9 konverteringar på 105 klick. Kontrollen för varumärket var avgörande.
+
+### 17.3 `takläggare` bred är rehabiliterad
+
+| | 90 dagar (ursprunglig läsning) | Hela perioden |
+|---|---|---|
+| Konverteringar | 5 | **13** |
+| CPA | 2 859 kr | **1 861 kr** |
+
+Kontosnittet är 1 974 kr. Sökordet ligger under snittet. Den ursprungliga siffran kom av ett 90-dagarsfönster som råkade fånga en svag period, och ledde till rekommendationen att pausa sökordet. Den rekommendationen är felaktig och struken.
+
+Mot resten av icke-varumärke: 1,30 mot 0,71 procent, z = 1,70, p = 0,089. Suggestivt, inte bevisat, men definitivt inte sämre.
+
+De elva övriga breda sökorden har tillsammans noll konverteringar, och tio av dem är redan pausade.
+
+### 17.4 Geografi: verklig CTR-signal, men små volymer och fel orter valda
+
+`takläggare norrtälje` har CTR 10,1 procent mot 5,1 för `takläggare stockholm`. **z = 2,01, p = 0,044.**
+
+| Ort | Visningar | Klick | Kostnad | Egen annonsgrupp |
+|---|---|---|---|---|
+| Stockholm | 594 | 53 | 1 429 kr | nej |
+| Norrtälje | 230 | 35 | 886 kr | ja |
+| Haninge | 35 | 3 | 67 kr | nej |
+| Nacka | 29 | 2 | 58 kr | nej |
+| Södertälje | 25 | 7 | 164 kr | nej |
+| Järfälla | 13 | 1 | 17 kr | ja |
+| Ekerö | 10 | 4 | 95 kr | nej |
+| Bromma | 5 | 1 | 28 kr | ja |
+
+Haninge, Nacka och Södertälje har mer volym än Järfälla och Bromma tillsammans.
+
+**Reservation:** all geotrafik är 952 visningar, 108 klick, 2 785 kr och 2 konverteringar på 5,5 månader, alltså 3,5 procent av spenden. CVR-skillnaden mot icke-geo är p = 0,213 och alltså inte belagd. Geo är en relevansförbättring värd att göra billigt i en annonsgrupp, inte tio.
+
+### 17.5 Negativlistan
+
+604 poster: 305 fras, 196 breda, 103 exakta. 507 på den aktiva kampanjen, 97 på den pausade.
+
+**En verklig konflikt:** `glidskydd` (fras) blockerar det aktiva sökordet `montera glidskydd`. Konflikten infördes 2026-08-15 i samma omgång som produktfiltren. 15 kr och ett klick, och annonsgruppen är pausad, men den ska rättas när Taksäkerhet återaktiveras.
+
+**105 av 604 (17 procent) är helt inneslutna i ett annat negativ**, mest samma ord i tre matchningstyper (`jobb` som bred, fras och exakt). Ofarligt men underhållsskuld.
+
+**Ett brett negativ är för brett:** `befintligt plåttak` blockerar allt som innehåller båda orden i valfri ordning, till exempel "lägga nytt tak på befintligt plåttak", som är en köpfråga. Övriga tretton breda negativ med kärnord är jobb- eller konkurrentrelaterade och ofarliga.
+
+### 17.6 Vad analysen ändrar i planen
+
+| Avsnitt | Ursprunglig rekommendation | Status |
+|---|---|---|
+| 3 | QS 3 till 6 halverar budet | Rättad, 29 procent är taket |
+| 6 | Elva annonsgrupper | Reviderad till tre |
+| 7 | Frasmatchning som grund | Struken, p = 0,481 |
+| 13 punkt 8 | Pausa `takläggare` bred | Struken, den är kontots bästa icke-varumärkestillgång |
+
+Auditen utgick från att strukturen är problemet. Analysen pekar i stället på koncentrationen: ett sökord bär en tredjedel av spenden och gör det till under kontosnittets CPA, medan 398 sökord kostar 53 000 kr och levererar till 2 951 kr styck. Det talar för att skala det som fungerar och stänga svansen, inte för att bygga ut strukturen.
