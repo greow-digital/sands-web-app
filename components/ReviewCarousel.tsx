@@ -95,8 +95,6 @@ function ReviewCard({ review }: { review: Review }) {
 }
 
 export default function ReviewCarousel() {
-  const doubled = [...reviews, ...reviews];
-
   return (
     <section className="py-20 lg:py-28 bg-white border-t border-gray-100 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 flex flex-wrap items-end justify-between gap-4">
@@ -128,9 +126,18 @@ export default function ReviewCarousel() {
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent" />
 
+        {/* Marquee: andra uppsättningen är klonade noder som bara finns
+            för att loopen ska sluta sömlöst vid translateX(-50%). De är
+            aria-hidden så skärmläsare och innehållsextraktion ser varje
+            omdöme en gång, inte två. */}
         <div className="flex gap-5 animate-scroll">
-          {doubled.map((r, i) => (
-            <ReviewCard key={i} review={r} />
+          {reviews.map((r, i) => (
+            <ReviewCard key={`org-${i}`} review={r} />
+          ))}
+          {reviews.map((r, i) => (
+            <div key={`klon-${i}`} aria-hidden="true" className="contents">
+              <ReviewCard review={r} />
+            </div>
           ))}
         </div>
       </div>
