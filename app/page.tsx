@@ -67,6 +67,28 @@ const process = [
   },
 ];
 
+// Formuleringarna är hämtade från /tjanster/taklaggning så startsidan och
+// tjänstesidan beskriver alternativen likadant.
+const takalternativ = [
+  {
+    rubrik: "Komplett takbyte",
+    text: "Hela taket rivs och ersätts: nya pannor eller plåt, ny underlagspapp, ny läkt.",
+    passar:
+      "Passar tak över 35 år, läckage på flera ställen, vittrade pannor.",
+  },
+  {
+    rubrik: "Takomläggning",
+    text: "Befintliga pannor lyfts av, nytt undertak monteras (papp och läkt), pannorna läggs tillbaka. Du sparar 25 till 35 procent mot komplett takbyte och får ett tak som håller 25 till 30 år till.",
+    passar:
+      "Passar när pannorna är hela men underlagspappen är 25 år eller äldre.",
+  },
+  {
+    rubrik: "Riktad reparation",
+    text: "Punktinsats på det som faktiskt är trasigt. Vid kostnadsfri takkontroll rekommenderar vi det alternativ som löser problemet.",
+    passar: "Du betalar bara för det du behöver.",
+  },
+];
+
 const eternitFaq = [
   {
     q: "Jag vill lägga ett nytt tak men det innehåller eternit?",
@@ -322,6 +344,59 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── TAKBYTE, OMLÄGGNING ELLER REPARATION ──
+            Ordet "takomläggning" fanns tidigare bara i en FAQ-rubrik på
+            startsidan trots att det är ett av tre kärnbegrepp. Copyn är
+            hämtad från /tjanster/taklaggning, inte nyskriven, så sidorna
+            säger samma sak. */}
+        <section className="py-20 lg:py-28 bg-white border-t border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+              className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em] mb-12"
+              style={{
+                fontFamily: "var(--font-heading)",
+                color: "var(--color-dark)",
+              }}
+            >
+              Takbyte, takomläggning eller reparation?
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {takalternativ.map((a) => (
+                <div
+                  key={a.rubrik}
+                  className="rounded-2xl border border-gray-100 p-6 lg:p-7"
+                >
+                  <h3
+                    className="text-xl font-bold mb-3"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--color-dark)",
+                    }}
+                  >
+                    {a.rubrik}
+                  </h3>
+                  <p className="text-[15px] text-gray-600 leading-relaxed mb-4">
+                    {a.text}
+                  </p>
+                  <p className="text-[15px] text-gray-500 leading-relaxed">
+                    {a.passar}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-8">
+              <Link
+                href="/tjanster/taklaggning"
+                className="inline-flex items-center gap-1.5 text-base font-semibold text-[#2B74FC] hover:gap-2.5 transition-all"
+              >
+                Läs mer om takomläggning och takbyte <ArrowRight size={16} />
+              </Link>
+            </p>
           </div>
         </section>
 
