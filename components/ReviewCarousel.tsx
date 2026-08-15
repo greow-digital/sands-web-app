@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import {
-  testimonials,
+  startsidaTestimonials,
   SOURCE_LABEL,
   SOURCE_META,
   type ReviewSource,
@@ -19,8 +19,9 @@ type Review = {
   source: ReviewSource;
 };
 
-// Karusellen visar ett urval; hela samlingen finns på /omdomen.
-const reviews: Review[] = testimonials.slice(0, 12).map((t) => ({
+// Kurerat takurval, se startsidaTestimonials. Hela samlingen finns på
+// /omdomen.
+const reviews: Review[] = startsidaTestimonials.map((t) => ({
   text: t.text,
   name: t.name,
   service: `${t.tjanst}${t.kvm ? ` ${t.kvm} kvm` : ""}${

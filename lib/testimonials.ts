@@ -592,3 +592,40 @@ const rawTestimonials: Testimonial[] = [
 export const testimonials: Testimonial[] = [...rawTestimonials].sort((a, b) =>
   b.datumISO.localeCompare(a.datumISO)
 );
+
+/**
+ * Urvalet som visas på startsidan, i den ordning de ska stå.
+ *
+ * Alla sex handlar om tak. Startsidan ska vara entydigt relevant för
+ * taksökningar, och omdömen om golv, trappa, kolonistugemålning eller
+ * fasadrenovering späder ut den relevansen även när de är positiva. Hela
+ * samlingen ligger kvar på /omdomen.
+ *
+ * Nyckeln är namn + ort eftersom förnamn återkommer (det finns två
+ * Anders). Saknas ett omdöme fallerar bygget, hellre det än att
+ * startsidan tyst tappar ett kort.
+ */
+const STARTSIDA_URVAL: { name: string; ort?: string }[] = [
+  { name: "Pauli", ort: "Solna" },
+  { name: "Henrik", ort: "Tyresö" },
+  { name: "Daniel Nilsson" },
+  { name: "Joakim", ort: "Hässelby" },
+  { name: "Anders", ort: "Södertälje" },
+  { name: "Dominic", ort: "Spånga" },
+];
+
+export const startsidaTestimonials: Testimonial[] = STARTSIDA_URVAL.map(
+  (val) => {
+    const träff = testimonials.find(
+      (t) => t.name === val.name && (val.ort ? t.ort === val.ort : !t.ort)
+    );
+    if (!träff) {
+      throw new Error(
+        `startsidaTestimonials: hittar inget omdöme för ${val.name}${
+          val.ort ? ` i ${val.ort}` : ""
+        }`
+      );
+    }
+    return träff;
+  }
+);
