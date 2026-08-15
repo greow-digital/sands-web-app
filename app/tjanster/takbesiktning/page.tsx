@@ -54,6 +54,11 @@ const faq = [
     q: "Vad är skillnaden mot en offert?",
     a: "Ingen, i praktiken. Vid besiktning får du både skickbedömning och fast pris i samma besök. Är taket i bra skick får du veta det, behöver det åtgärdas får du offert direkt.",
   },
+  // Flyttad hit från startsidan: den här sidan äger frågan om akuta problem.
+  {
+    q: "Mitt tak läcker, vad gör jag?",
+    a: "Kontakta oss för en kostnadsfri takkontroll. Vi inspekterar taket, identifierar orsaken till läckaget och ger dig ett fast pris på åtgärd, ofta samma dag.",
+  },
 ];
 
 const faqLd = {

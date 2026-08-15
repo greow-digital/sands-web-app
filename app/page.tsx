@@ -89,82 +89,30 @@ const takalternativ = [
   },
 ];
 
-const eternitFaq = [
-  {
-    q: "Jag vill lägga ett nytt tak men det innehåller eternit?",
-    a: "Eternit innehåller asbest och kräver certifierad sanering innan nytt tak kan läggas. Vi tar hand om hela processen, från rivning och asbestsanering till nytt tak med upp till 30 års Monier-garanti. Du behöver bara göra en kontakt, vi sköter resten.",
-  },
-  {
-    q: "Vilka certifikat har Sands Entreprenad?",
-    a: "Vi är certifierad Monier Takpartner, har F-skattsedel, är fullförsäkrade med ansvars- och allriskförsäkring, och all personal är certifierad inom de moment vi utför.",
-  },
-  {
-    q: "Erbjuder ni kostnadsfri takkontroll?",
-    a: "Ja. Vi bokar ett kostnadsfritt hembesök där vi inspekterar taket och lämnar ett fast pris utan förbindelser.",
-  },
-  {
-    q: "Vad innebär totalentreprenad enligt ABT-06?",
-    a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt, från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
-  },
+// Fem konverteringsinvändningar, inte en kunskapsbank. De 20 frågor som
+// låg här genererade noll organiska klick och dubblerade /faq och
+// tjänstesidorna, som äger respektive fråga. FAQPage-schemat ligger
+// medvetet bara där, så sidorna inte konkurrerar om samma rich result.
+const startsidaFaq = [
   {
     q: "Vad kostar ett takbyte i Stockholm?",
     a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m², alla priser efter ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
-  },
-  {
-    q: "Hur lång tid tar ett takbyte?",
-    a: "För en normalvilla på 120–160 m² tar ett komplett takbyte vanligtvis 1–2 veckor, beroende på väder och takets skick.",
   },
   {
     q: "Kan jag använda ROT-avdrag?",
     a: "Ja. ROT-avdraget innebär att du får tillbaka 30 % av arbetskostnaden direkt på fakturan, max 50 000 kr per person och år (kombinerat med RUT max 75 000 kr). Endast arbetskostnaden ger avdrag, inte material. Vi sköter ansökan åt dig.",
   },
   {
-    q: "Behöver jag betala i förskott?",
-    a: "Nej. Vi fakturerar 100% av kostnaden när arbetet är slutfört och du har godkänt resultatet. Ingen förskottsbetalning eller delbetalning under byggtiden. Betalningstiden är 10 dagar netto.",
-  },
-  {
     q: "Behöver jag bygglov för takbyte?",
     a: "För en- och tvåfamiljshus krävs inte längre bygglov för takbyte sedan 1 december 2025, även om du byter taktyp eller färg. För flerbostadshus eller kulturhistoriskt skyddade byggnader kan bygglov fortfarande krävas. Vi kontrollerar alltid innan vi börjar.",
-  },
-  {
-    q: "Vad innebär Monier Tätt tak-garanti?",
-    a: "Med ett komplett Monier-taksystem omfattas ditt tak av Tätt tak-garanti i upp till 30 år, hela taksystemets funktion och täthet garanteras.",
   },
   {
     q: "Vad är Sands Entreprenads garantitid?",
     a: "Sands Entreprenad lämnar 15 års hantverksgaranti på utfört arbete. När vi lägger ett komplett Monier-taksystem tillkommer Moniers Tätt tak-garanti i upp till 30 år. Garantibeviset är registrerat digitalt och kan alltid tas fram med ditt offertnummer.",
   },
   {
-    q: "Vad kostar det att lägga om tak?",
-    a: "Att lägga om taket kostar från ca 1 200 kr/m² efter ROT-avdrag, beroende på material och takets förutsättningar. Boka en kostnadsfri takkontroll så ger vi dig ett fast pris.",
-  },
-  {
-    q: "Vad kostar det att byta tak?",
-    a: "Ett komplett takbyte kostar från ca 1 200 kr/m² efter ROT-avdrag. Priset varierar beroende på material, tegel, betong, plåt eller papp. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
-  },
-  {
-    q: "Vad kostar takbyte per kvadratmeter?",
-    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² och papptak från ca 800 kr/m². Alla priser efter ROT-avdrag och baseras på kostnadsfri takkontroll.",
-  },
-  {
-    q: "Hur mycket kostar det att byta takpannor?",
-    a: "Att byta takpannor kostar från ca 1 200 kr/m² efter ROT-avdrag vid komplett omläggning. Enstaka pannor kan bytas till lägre kostnad. Boka en kostnadsfri takkontroll för exakt pris.",
-  },
-  {
-    q: "Vad kostar det att byta plåttak?",
-    a: "Plåttak kostar från ca 1 800 kr/m² efter ROT-avdrag. Bandtäckt och dubbelfalsat plåt ger lång livslängd med minimalt underhåll. Vi ger fast pris efter kostnadsfri takkontroll.",
-  },
-  {
-    q: "Kan man få ROT-avdrag på takbyte?",
-    a: "Ja, du får tillbaka 30 % av arbetskostnaden som ROT-avdrag, direkt på fakturan. Vi hanterar ansökan åt dig. Maxbeloppet är 50 000 kr per person och år.",
-  },
-  {
-    q: "Mitt tak läcker, vad gör jag?",
-    a: "Kontakta oss för en kostnadsfri takkontroll. Vi inspekterar taket, identifierar orsaken till läckaget och ger dig ett fast pris på åtgärd, ofta samma dag.",
-  },
-  {
-    q: "Hur vet jag om taket behöver bytas?",
-    a: "Vanliga tecken är läckage, spruckna eller förskjutna pannor, fukt på vinden och rost på plåtdetaljer. Är taket över 25–40 år gammalt rekommenderar vi en kostnadsfri takkontroll.",
+    q: "Hur lång tid tar ett takbyte?",
+    a: "För en normalvilla på 120–160 m² tar ett komplett takbyte vanligtvis 1–2 veckor, beroende på väder och takets skick.",
   },
 ];
 
@@ -821,24 +769,13 @@ export default async function Home() {
               </h2>
             </div>
 
-            {/* JSON-LD */}
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "FAQPage",
-                  mainEntity: eternitFaq.map((f) => ({
-                    "@type": "Question",
-                    name: f.q,
-                    acceptedAnswer: { "@type": "Answer", text: f.a },
-                  })),
-                }),
-              }}
-            />
+            {/* Inget FAQPage-schema här. Samma frågor har schema på /faq och
+                på tjänstesidorna, och flera sidor med samma schema
+                konkurrerar om samma rich result. LocalBusiness-schemat i
+                layouten är orört. */}
 
             <div className="divide-y divide-gray-200">
-              {eternitFaq.map((f) => (
+              {startsidaFaq.map((f) => (
                 <div key={f.q} className="py-7">
                   <h3
                     className="text-lg lg:text-xl font-bold mb-2.5"

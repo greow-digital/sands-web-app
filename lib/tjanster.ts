@@ -156,6 +156,11 @@ export const tjanster: Tjanst[] = [
         q: "Kan jag välja färg?",
         a: "Ja, Monier erbjuder betongpannor i ett brett spektrum av kulörer, naturgrå, rödbrun, svart, glaserat med mera.",
       },
+      // Flyttad hit från startsidan, där prisfrågorna dubblerade /priser.
+      {
+        q: "Hur mycket kostar det att byta takpannor?",
+        a: "Att byta takpannor kostar från ca 1 200 kr/m² efter ROT-avdrag vid komplett omläggning. Enstaka pannor kan bytas till lägre kostnad. Boka en kostnadsfri takkontroll för exakt pris.",
+      },
     ],
     relaterade: ["tegeltak", "taklaggning", "papptak"],
   },
@@ -195,6 +200,11 @@ export const tjanster: Tjanst[] = [
       {
         q: "Är plåttak mer bullrigt?",
         a: "Med rätt underlag och isolering märks inget extra ljud från regn. Moderna plåtsystem är inte mer bullriga än andra material.",
+      },
+      // Flyttad hit från startsidan, där prisfrågorna dubblerade /priser.
+      {
+        q: "Vad kostar det att byta plåttak?",
+        a: "Plåttak kostar från ca 1 800 kr/m² efter ROT-avdrag. Bandtäckt och dubbelfalsat plåt ger lång livslängd med minimalt underhåll. Vi ger fast pris efter kostnadsfri takkontroll.",
       },
     ],
     relaterade: ["betongtak", "tegeltak", "totalentreprenad"],

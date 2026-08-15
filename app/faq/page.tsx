@@ -50,6 +50,11 @@ const kategorier = [
         q: "Vad är totalentreprenad?",
         a: "Totalentreprenad innebär att vi tar hela ansvaret för ditt projekt, från takkontroll till färdigt tak. Allt regleras i ett enda kontrakt med fast pris enligt ABT-06.",
       },
+      // Flyttad hit från startsidan: ingen annan sida ägde frågan.
+      {
+        q: "Behöver jag betala i förskott?",
+        a: "Nej. Vi fakturerar 100% av kostnaden när arbetet är slutfört och du har godkänt resultatet. Ingen förskottsbetalning eller delbetalning under byggtiden. Betalningstiden är 10 dagar netto.",
+      },
     ],
   },
   {
@@ -66,6 +71,11 @@ const kategorier = [
       {
         q: "Har ni försäkringar?",
         a: "Ja, vi är fullförsäkrade med ansvarsförsäkring och allriskförsäkring. Vi har F-skattsedel och all personal är certifierad.",
+      },
+      // Flyttad hit från startsidan: ingen annan sida ägde frågan.
+      {
+        q: "Vilka certifikat har Sands Entreprenad?",
+        a: "Vi är certifierad Monier Takpartner, har F-skattsedel, är fullförsäkrade med ansvars- och allriskförsäkring, och all personal är certifierad inom de moment vi utför.",
       },
     ],
   },
