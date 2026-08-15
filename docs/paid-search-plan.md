@@ -1,6 +1,6 @@
 # Paid search: audit och plan
 
-Konto `476-755-4827` (Sands Entreprenad). Data hämtad 2026-08-07, period 2026-05-08 till 2026-08-07 (90 dagar) om inget annat anges.
+Konto `476-755-4827` (Sands Entreprenad). Data hämtad 2026-08-07, period 2026-05-08 till 2026-08-07 (90 dagar) om inget annat anges. Avsnitt 2 är omskrivet 2026-08-15 och bygger på hela körperioden, 1 mars till 15 augusti 2026. Genomförandelogg och rättelser ligger i avsnitt 16.
 
 ---
 
@@ -74,37 +74,106 @@ Trenden är rätt: CPC ner från 27,5 kr i maj till 16,7 kr i augusti, konverter
 
 ## 2. Diagnos: var pengarna tar vägen
 
-92 procent av sökordskostnaden (15 430 av 16 712 kr bland de 200 dyraste söktermerna) gick till söktermer med noll konverteringar.
+Uppdaterad 2026-08-15 med hela körperioden, 1 mars till 15 augusti 2026. Den tidigare versionen av det här avsnittet drog en slutsats som inte höll, se rättelsen sist.
 
-**De sex söktermer som faktiskt konverterade, 90 dagar**
+### 2.1 Helheten
 
-| Sökterm | Kostnad | Klick | Konv | CPA |
+Kontot har gjort av med **78 955 kr på 40 konverteringar**, alltså 1 974 kr per lead.
+
+| Annonsgrupp | Kostnad | Klick | Konv | CPA | CTR |
+|---|---|---|---|---|---|
+| Pris-Research (huvudkampanjen) | 20 739 kr | 1 178 | 9 | 2 304 kr | 11,4 % |
+| Pris-Research (den pausade kampanjen) | 2 158 kr | 204 | 0 | - | 12,4 % |
+| **Pris totalt** | **22 897 kr** | **1 382** | **9** | **2 544 kr** | 11,6 % |
+| Takläggning | 55 281 kr | 2 237 | 31 | 1 783 kr | 5,6 % |
+| Taksäkerhet (pausad) | 574 kr | 23 | 0 | - | 10,6 % |
+| Brand | 184 kr | 15 | 0 | - | 31,9 % |
+| Områden (tre grupper) | 17 kr | 1 | 0 | - | - |
+
+Den separat uppsatta pris- och researchkampanjen körde maj och juni och gav **noll leads på 204 klick**, med kontots billigaste klick och näst högsta CTR.
+
+### 2.2 Efter sökordslydelse
+
+Prissökningar går även genom Takläggning-gruppen, så annonsgruppsindelningen räcker inte.
+
+| Kluster | Termer | Klick | Kostnad | Konv | CVR |
+|---|---|---|---|---|---|
+| Pris och research | 536 | 1 387 | 28 627 kr | 6 | **0,43 %** |
+| Icke-pris | 909 | 582 | 14 324 kr | 8 | **1,32 %** |
+| Varumärke | 6 | 94 | 1 573 kr | 7 | **7,45 %** |
+
+Pris mot icke-pris: **z = 2,16, tvåsidigt p = 0,031.** Skillnaden är verklig. Prisformulerade sökningar konverterar ungefär tre gånger sämre.
+
+Notera att prissökningar kostat 28 627 kr, mer än hela Pris-Research-gruppens 22 897 kr. Att pausa annonsgruppen löser bara halva problemet.
+
+**Täckning:** söktermsrapporten omfattar 44 524 kr av 78 955 (56 procent) och 21 av 40 konverteringar. Google döljer lågvolymtermer. Annonsgruppstabellen i 2.1 är komplett, tabellen ovan är ett stort urval.
+
+### 2.3 Inuti prisklustret finns inget mönster att hitta
+
+| Egenskap | Termer | Klick | Konv | CVR |
 |---|---|---|---|---|
-| sands entreprenad | 621 kr | 43 | 6 | 103 kr |
-| takläggare norrtälje | 268 kr | 9 | 1 | 268 kr |
-| byta hängrännor | 144 kr | 8 | 1 | 144 kr |
-| bandtäckt plåt pris | 94 kr | 5 | 1 | 94 kr |
-| kvadratmeterpris plåttak | 90 kr | 5 | 1 | 90 kr |
-| räkna på takbyte | 65 kr | 4 | 1 | 65 kr |
+| Har kvadratmetertal | 11 | 164 | 1 | 0,61 % |
+| Har enhet (per kvm, kvadratmeterpris) | 52 | 146 | 2 | 1,03 % |
+| Har material | 278 | 473 | 4 | 0,74 % |
+| Har handlingsverb (byta, lägga om) | 183 | 849 | 4 | 0,41 % |
+| Frågeform (vad kostar, hur mycket) | 76 | 200 | 0 | 0 % |
+| Kalkylator och räkna | 4 | 18 | 1 | 5,56 % |
+| **Alla pristermer** | **536** | **1 387** | **6** | **0,43 %** |
 
-Alla sex ligger under 300 kr CPA. Fem av dem är specifika, långa sökningar. Ingen av dem är en bred generisk term.
+Största kontrasten, enhet mot handlingsverb: **z = 1,30, p = 0,19.** Inte signifikant. Ordantal ger 1, 2, 2 och 2 konverteringar över fyra hinkar, alltså ingen lutning.
 
-**De sex dyraste söktermerna utan konvertering**
+**Styrkeberäkning vid 0,43 procents baslinje:**
 
-| Sökterm | Kostnad | Klick |
+| Skillnad att bevisa | Klick per arm | Vid 252 prisklick/mån |
 |---|---|---|
-| byta tak kostnad (två annonsgrupper) | 1 663 kr | 76 |
-| lägga om tak kostnad | 482 kr | 26 |
-| kostnad byta tak 150 kvm | 424 kr | 24 |
-| plåttak kostnad | 385 kr | 25 |
-| takbyte kostnad | 314 kr | 18 |
-| kostnad byta tak | 298 kr | 15 |
+| 3,5x | 1 299 | 10 månader |
+| 3x | 1 806 | 14 månader |
+| 2x | 5 433 | 43 månader |
 
-Det här är inte skräptrafik. Det är rätt målgrupp som landar på startsidan i stället för på en prissida som svarar på frågan. `/priser` fick 112 betalda sessioner och noll konverteringar, vilket betyder att sidan inte heller löser det idag.
+Ett enda test inom prisklustret tar över ett år. Datan kommer inte att avslöja vilka prisord som fungerar, och varje analys som påstår motsatsen beskriver brus.
 
-**Den enskilt största posten**
+### 2.4 Det som däremot har full statistisk kraft
 
-`takläggare` (bred matchning) kostade 14 293 kr på 90 dagar, alltså 32 procent av hela kontots spend. QS 3. CTR 4,65 procent. 5 konverteringar, CPA 2 859 kr. Bred matchning utan CPC-tak på en QS 3-term är kontots dyraste enskilda problem.
+CTR bygger på tusentals visningar.
+
+- **Specificitet driver CTR monotont:** 2 ord 13,4 %, 3 ord 15,4 %, 4 ord 17,1 %, 5+ ord 17,0 %. Handlingsverb 18,0 %, kalkylator 20,2 %.
+- **Prisjägare klickar inte:** termer med "billig" har 199 visningar och 7 klick, CTR 3,5 % mot 15,5 i snitt. Positioneringen mot fast pris och garanti stöter bort budgetköpare, vilket är avsiktligt och fungerar.
+- **CPC är platt, 19,2 till 20,8 kr i varje kategori.** Marknaden prissätter alla prissökningar lika. Ingen konkurrent har heller hittat mönstret. Det finns alltså inget att vinna på budgivning, skillnaden måste komma från landningssidan.
+
+### 2.5 Konfoundern, mätt
+
+| Landningssida för prisklick | Klick | Andel |
+|---|---|---|
+| Startsidan `/` | 1 232 | **89 %** |
+| `/priser` (gamla versionen) | 122 | 8,8 % |
+| offert-domänen | 28 | 2 % |
+
+Nio av tio prisklick har landat på en sida utan pris. Klustret har aldrig fått en rättvis prövning.
+
+Åt andra hållet: på samma startsida konverterar övrig icke-varumärkestrafik runt 1,0 procent mot prisstrafikens 0,43. Frågorna är alltså svagare även när sidan hålls konstant. Båda sakerna är sanna samtidigt.
+
+### 2.6 Vad som följer av det
+
+Sluta segmentera prisord. Testa landningssidan i stället, av statistiska skäl: den flyttar hela klustret på en gång, ett test med 1 387 klick per period i stället för åtta test med 170 klick styck.
+
+Målet är räknebart. Vid 20,6 kr CPC krävs:
+
+| För att | CVR som krävs | Från 0,43 % |
+|---|---|---|
+| Matcha icke-pris CPA (1 868 kr) | 1,10 % | 2,6x |
+| Matcha kontosnittet (1 974 kr) | 1,04 % | 2,4x |
+
+**Mät inte på konverteringar.** Klustret ger en konvertering i månaden, så ett före- och efterbeslut tar 5 till 10 månader. Mät `/priser` på avvisningsfrekvens, tid på sidan och andel som når formuläret. De har hundratals observationer i veckan.
+
+**Beslutsregel, satt i förväg:** om `/priser` inte får avvisningsfrekvensen under 40 procent och formulärstarterna över 10 procent inom 400 sessioner, skär klustret till enbart material- och kvadratmeterspecifika frågor och flytta budgeten till Takläggning.
+
+### 2.7 Rättelse av tidigare version
+
+Den första versionen av det här avsnittet listade sex konverterande söktermer och drog slutsatsen att "specifika, långa sökningar" konverterar medan "breda generiska" inte gör det. Den slutsatsen var cirkulär: termerna klassades efter utfall och egenskapen lästes sedan in i efterhand.
+
+Tydligaste exemplet: `kostnad byta tak 100 kvm` beskrevs som högintent och `kostnad byta tak 150 kvm` som generisk. De är samma frågeform. De elva termerna med kvadratmetertal delar 164 klick och 1 konvertering. Termen som fick den hade 23 procent av klicken, alltså exakt den andel slumpen förutsäger.
+
+Samma version kallade `takläggare` bred matchning "kontots dyraste enskilda problem" och föreslog att pausa den. Även det är reviderat, se avsnitt 13. Den bär 42 procent av visningarna och resten av kontot kan inte absorbera budgeten om den stängs.
 
 ---
 
