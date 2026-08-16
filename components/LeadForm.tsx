@@ -47,10 +47,12 @@ interface LeadFormProps {
   contact?: "phone" | "phone-or-email";
   /**
    * Renderar formuläret utan egen kort-chrome (bakgrund, ram, skugga,
-   * padding). Används när det ligger inuti ett annat kort, t.ex. som steg
-   * 4 i Takräknaren.
+   * padding). Används när det ligger inuti ett annat kort, t.ex. sista
+   * steget i Takräknaren.
    */
   flat?: boolean;
+  /** Visar fritextfältet även i minimal-läge. */
+  showMessage?: boolean;
   /** Extra data som följer med i leadens payload, t.ex. taktyp + yta. */
   extraPayload?: Record<string, string | undefined>;
   /** Override för submit-knappens text. */
@@ -73,6 +75,7 @@ export default function LeadForm({
   fields = "full",
   contact = "phone",
   flat = false,
+  showMessage = false,
   extraPayload,
   ctaText,
   hideHeader = false,
@@ -396,6 +399,25 @@ export default function LeadForm({
                 Fyll i det du föredrar. Vill du hellre ha ett mejl än ett
                 samtal går det lika bra.
               </p>
+            )}
+            {showMessage && (
+              <div className="col-span-2">
+                <label
+                  htmlFor="message-minimal"
+                  className={labelCls}
+                  style={labelStyle}
+                >
+                  Något vi bör veta{" "}
+                  <span className="text-gray-400 font-normal">(valfritt)</span>
+                </label>
+                <textarea
+                  id="message-minimal"
+                  rows={2}
+                  placeholder="Kupor, läckage, eternit, tillgänglighet eller annat"
+                  className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
+                  {...trackField("message", register("message"))}
+                />
+              </div>
             )}
           </div>
         ) : (

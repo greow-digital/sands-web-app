@@ -70,11 +70,15 @@ const OSAKERHET = [
   },
 ];
 
+const ANTAL_STEG = 3;
+
+// Postnummer låg tidigare som ett eget steg mellan ytan och kontakten. Det
+// togs bort: det påverkade inte uträkningen, och ett steg som ber om en
+// uppgift utan att svaret ändras lovar en precision det inte levererar.
 const STEG_ETIKETT: Record<number, string> = {
   1: "Vilket takmaterial?",
   2: "Hur stort är taket?",
-  3: "Var ligger huset?",
-  4: "Vart skickar vi svaret?",
+  3: "Vart skickar vi svaret?",
 };
 
 function calc(prisM2: number, kvm: number) {
@@ -109,17 +113,17 @@ function fireGtag(name: string, params: object) {
 }
 
 /**
- * Progressiv takräknare i fyra steg.
+ * Progressiv takräknare i tre steg.
  *
- * Steg 1 och 2 ger ett riktpris, steg 3 och 4 leder till ett fast pris.
+ * Steg 1 och 2 ger ett riktpris, sista steget leder till ett fast pris.
  * Priset visas först när steg 2 är klart: ett förvalt pris vid inladdning
  * gör att det inte finns något att förtjäna, och då bygger stegen ingen
  * commitment. Sidans materialkort svarar ändå på "vad kostar det" utan en
  * enda interaktion, så det är det personliga priset som är progressivt,
  * inte prisinformationen.
  *
- * När priset väl visats ligger det kvar över steg 3 och 4. Försvinner det
- * igen läses de sista stegen som en ny grind.
+ * När priset väl visats ligger det kvar över sista steget. Försvinner det
+ * igen läses kontaktsteget som en ny grind.
  */
 export default function Takraknare({
   embedded = false,
@@ -132,7 +136,6 @@ export default function Takraknare({
   const [open, setOpen] = useState(false);
   const [useBoyta, setUseBoyta] = useState(false);
   const [boyta, setBoyta] = useState(120);
-  const [postnummer, setPostnummer] = useState("");
 
   const [stickyVisible, setStickyVisible] = useState(false);
   const engagedRef = useRef(false);
@@ -184,29 +187,15 @@ export default function Takraknare({
   function handleYtaKlar() {
     fireGtag("calc_step_complete", { step: 2, material, area: kvm });
     firstEngage();
-    gaTillSteg(3);
-  }
-
-  function handlePostnummerKlar() {
-    fireGtag("calc_step_complete", {
-      step: 3,
-      material,
-      har_postnummer: postnummer.trim().length > 0,
-    });
     // calc_bridge_view fyrades tidigare när formuläret skrollade in i
-    // vyn. I det progressiva flödet finns formuläret bara på steg 4, så
-    // det är samma händelse. Namnet behålls för att historiken i GA4 ska
-    // hänga ihop över omskrivningen.
+    // vyn. I det progressiva flödet finns formuläret bara på sista steget,
+    // så det är samma händelse. Namnet behålls för att historiken i GA4
+    // ska hänga ihop.
     if (!bridgeViewedRef.current) {
       bridgeViewedRef.current = true;
       fireGtag("calc_bridge_view", { material, area: kvm });
     }
-    gaTillSteg(4);
-  }
-
-  function handlePostnummer(value: string) {
-    // Bara siffror och ett mellanslag, i svensk form "176 71".
-    setPostnummer(value.replace(/[^\d\s]/g, "").slice(0, 6));
+    gaTillSteg(3);
   }
 
   function handleStickyClick() {
@@ -288,7 +277,7 @@ export default function Takraknare({
           {/* Progressrad */}
           <div className="px-6 pt-6 lg:px-8 lg:pt-8">
             <div className="flex items-center gap-2 mb-3">
-              {[1, 2, 3, 4].map((n) => (
+              {[1, 2, 3].map((n) => (
                 <span
                   key={n}
                   className="h-1 flex-1 rounded-full transition-colors"
@@ -306,7 +295,7 @@ export default function Takraknare({
                 className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500 outline-none"
               >
                 <span style={{ color: "var(--color-primary)" }}>
-                  Steg {steg} av 4
+                  Steg {steg} av {ANTAL_STEG}
                 </span>{" "}
                 · {STEG_ETIKETT[steg]}
               </h3>
@@ -328,7 +317,7 @@ export default function Takraknare({
                 >
                   Steg 1 och 2 ger ditt riktpris.
                 </span>{" "}
-                Steg 3 och 4 ger dig ett fast pris. Du väljer själv hur långt
+                Sista steget ger dig ett fast pris. Du väljer själv hur långt
                 du går.
               </p>
             )}
@@ -491,7 +480,7 @@ export default function Takraknare({
                 className="mt-6 w-full inline-flex items-center justify-center gap-2 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.01]"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                Visa mitt riktpris <ArrowRight size={15} />
+                Fortsätt till prisförslag <ArrowRight size={15} />
               </button>
             </div>
           )}
@@ -596,38 +585,8 @@ export default function Takraknare({
             </>
           )}
 
-          {/* STEG 3 — Postnummer */}
-          {steg === 3 && (
-            <div className="p-6 lg:p-8 border-t border-gray-100">
-              <div className="flex flex-wrap items-center gap-3">
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={6}
-                  value={postnummer}
-                  onChange={(e) => handlePostnummer(e.target.value)}
-                  placeholder="176 71"
-                  aria-label="Postnummer"
-                  className="w-32 px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors tabular-nums"
-                />
-                <p className="text-xs text-gray-500 leading-relaxed flex-1 min-w-[220px]">
-                  Ställning, etablering och transport prissätts utifrån var
-                  huset ligger. Vi arbetar i hela Stockholms län.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={handlePostnummerKlar}
-                className="mt-6 w-full inline-flex items-center justify-center gap-2 py-4 rounded-full text-white font-semibold text-sm transition-all hover:scale-[1.01]"
-                style={{ backgroundColor: "var(--color-primary)" }}
-              >
-                Fortsätt till fast pris <ArrowRight size={15} />
-              </button>
-            </div>
-          )}
-
-          {/* STEG 4 — Kontaktuppgifter, samma lead-pipeline som /offert */}
-          {steg === 4 && valtMaterial && (
+          {/* STEG 3 — Kontaktuppgifter, samma lead-pipeline som /offert */}
+          {steg === 3 && valtMaterial && (
             <div
               id="kalkyl-kontakt"
               className="p-6 lg:p-8 border-t border-gray-100 bg-gray-50/60 scroll-mt-24"
@@ -644,14 +603,12 @@ export default function Takraknare({
                 contact="phone-or-email"
                 flat
                 hideHeader
-                ctaText="Få mitt fasta pris"
-                confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²${
-                  postnummer.trim() ? `, ${postnummer.trim()}` : ""
-                }`}
+                showMessage
+                ctaText="Få mitt prisförslag"
+                confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²`}
                 extraPayload={{
                   roofType: valtMaterial.namn,
                   area: `${kvm} m²`,
-                  postnummer: postnummer.trim() || undefined,
                 }}
                 privacyNote
                 onSubmitSuccess={() =>
