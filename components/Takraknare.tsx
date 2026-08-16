@@ -137,6 +137,7 @@ export default function Takraknare({
   const [stickyVisible, setStickyVisible] = useState(false);
   const engagedRef = useRef(false);
   const stickyFiredRef = useRef(false);
+  const bridgeViewedRef = useRef(false);
   const stegRubrikRef = useRef<HTMLHeadingElement>(null);
   const sedda = useRef(new Set<number>([1]));
 
@@ -192,6 +193,14 @@ export default function Takraknare({
       material,
       har_postnummer: postnummer.trim().length > 0,
     });
+    // calc_bridge_view fyrades tidigare när formuläret skrollade in i
+    // vyn. I det progressiva flödet finns formuläret bara på steg 4, så
+    // det är samma händelse. Namnet behålls för att historiken i GA4 ska
+    // hänga ihop över omskrivningen.
+    if (!bridgeViewedRef.current) {
+      bridgeViewedRef.current = true;
+      fireGtag("calc_bridge_view", { material, area: kvm });
+    }
     gaTillSteg(4);
   }
 
