@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 type GtagFn = (event: string, name: string, params: object) => void;
@@ -16,7 +17,8 @@ function fireStickyClick(type: "form") {
 
 export default function MobileCTA() {
   const pathname = usePathname();
-  const [visible, setVisible] = useState(true);
+  const [ovanforFooter, setOvanforFooter] = useState(true);
+  const [passeratHero, setPasseratHero] = useState(false);
   const [calcStickyActive, setCalcStickyActive] = useState(false);
 
   const hideOnPages = ["/offert", "/tack"];
@@ -27,12 +29,39 @@ export default function MobileCTA() {
     if (!footer) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setVisible(!entry.isIntersecting),
+      ([entry]) => setOvanforFooter(!entry.isIntersecting),
       { threshold: 0 }
     );
     observer.observe(footer);
     return () => observer.disconnect();
   }, []);
+
+  // Baren är hero-knappen som följer med när den skrollat ur bild. Så länge
+  // den riktiga knappen syns behövs ingen kopia i botten. Saknar sidan en
+  // hero-CTA (allt utom startsidan) faller vi tillbaka på en enkel
+  // skrolltröskel.
+  useEffect(() => {
+    const heroCta = document.querySelector("[data-hero-cta]");
+
+    if (!heroCta) {
+      const onScroll = () => setPasseratHero(window.scrollY > 600);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Bara när knappen lämnat uppåt, inte när man är ovanför den.
+        const passerad =
+          !entry.isIntersecting && entry.boundingClientRect.top < 0;
+        setPasseratHero(passerad);
+      },
+      { threshold: 0 }
+    );
+    observer.observe(heroCta);
+    return () => observer.disconnect();
+  }, [pathname]);
 
   // Bakåtkompatibel: om någon sektion dispatchar en egen sticky-bar
   // döljer vi denna så de inte staplas.
@@ -45,22 +74,27 @@ export default function MobileCTA() {
 
   if (shouldHide || calcStickyActive) return null;
 
+  const visible = ovanforFooter && passeratHero;
+
   return (
     <div
       className={`fixed bottom-0 left-0 right-0 z-40 md:hidden transition-transform duration-300 ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
+      aria-hidden={!visible}
     >
       <div className="bg-white border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-4 py-3">
-        {/* Bara huvud-CTA:n. Röstknappen låg här tidigare och konkurrerade
-            med prisförslaget om samma tumme. */}
+        {/* Samma knapp som hero-CTAn, både i ordval och utseende: baren är
+            den knappen som följt med ner. Headern behåller "Få prisförslag"
+            så de två ytorna svarar mot olika intent. Röstknappen låg här
+            tidigare och konkurrerade om samma tumme. */}
         <Link
           href="/offert"
           onClick={() => fireStickyClick("form")}
-          className="w-full whitespace-nowrap flex items-center justify-center py-3 rounded-full text-sm font-semibold text-white transition-colors"
+          className="w-full whitespace-nowrap inline-flex items-center justify-center gap-2 py-3.5 rounded-full text-base font-semibold text-white shadow-lg transition-all hover:scale-[1.01]"
           style={{ backgroundColor: "var(--color-primary)" }}
         >
-          Få prisförslag
+          Boka kostnadsfri takkontroll <ArrowRight size={16} />
         </Link>
       </div>
     </div>
