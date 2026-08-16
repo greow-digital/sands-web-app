@@ -331,7 +331,7 @@ export default function LeadForm({
 
         {fields === "minimal" ? (
           <div className={valfriKontakt ? "grid grid-cols-2 gap-3" : ""}>
-            <div>
+            <div className="min-w-0">
               <label className={labelCls} style={labelStyle}>
                 Telefon {valfriKontakt ? "" : "*"}
               </label>
@@ -356,7 +356,7 @@ export default function LeadForm({
               )}
             </div>
             {valfriKontakt && (
-              <div>
+              <div className="min-w-0">
                 <label className={labelCls} style={labelStyle}>
                   E-post
                 </label>
@@ -417,7 +417,7 @@ export default function LeadForm({
           <>
             {/* Telefon + E-post */}
             <div className="grid grid-cols-2 gap-3">
-              <div>
+              <div className="min-w-0">
                 <label className={labelCls} style={labelStyle}>
                   Telefon *
                 </label>
@@ -442,7 +442,7 @@ export default function LeadForm({
                   </p>
                 )}
               </div>
-              <div>
+              <div className="min-w-0">
                 <label className={labelCls} style={labelStyle}>
                   E-post{" "}
                   <span className="text-gray-400 font-normal">(valfritt)</span>
