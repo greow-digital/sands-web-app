@@ -227,7 +227,7 @@ export default async function Home() {
                 StatsRow låg här tidigare men upprepade sig själv: 2 500+ tak
                 står redan i trust-raden ovanför H1, och 30 år står i både
                 H1 och garantibadgen. */}
-            <div className="text-white max-w-3xl lg:col-start-1 lg:row-start-2">
+            <div className="text-white max-w-3xl mt-8 lg:mt-0 lg:col-start-1 lg:row-start-2">
               <TrustBadgesRow />
             </div>
           </div>
