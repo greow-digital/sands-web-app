@@ -3,9 +3,7 @@ import Image from "next/image";
 import { ArrowRight, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import StatsRow from "@/components/StatsRow";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
-import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
 import LatestProjekt from "@/components/LatestProjekt";
 import TaktestCta from "@/components/TaktestCta";
@@ -151,8 +149,8 @@ export default async function Home() {
                 till 5 juni och togs bort för att mäta hero-flöde mot
                 /offert-flöde. Det är tillbaka eftersom 96 procent av den
                 betalda trafiken aldrig nådde /offert. */}
-            <div className="grid lg:grid-cols-[1.1fr_400px] gap-10 lg:gap-14 items-start">
-            <div className="text-white max-w-3xl">
+            <div className="grid lg:grid-cols-[1.1fr_400px] gap-10 lg:gap-x-14 lg:gap-y-6 items-start">
+            <div className="text-white max-w-3xl lg:col-start-1 lg:row-start-1">
               <SeasonBanner />
 
               {/* Trust-rad ovanfor H1: stjarnor + recensions-snippet */}
@@ -194,37 +192,26 @@ export default async function Home() {
               {/* Prisrad ovanför vikningen: bred matchning på "takläggare"
                   drar in ett tjugotal prisvarianter, och första siffran låg
                   tidigare sju sektioner ner. */}
-              <p className="text-base text-gray-200 mb-9">
+              <p className="text-base text-gray-200">
                 <span className="font-bold text-white">
                   Från 1 200 kr/m² efter ROT.
                 </span>{" "}
                 Fast pris efter kostnadsfri takkontroll.
               </p>
 
-              {/* CTA + ring-lank */}
-              <div className="flex flex-wrap items-center gap-5 mb-10">
-                <Link
-                  href="/offert"
-                  data-hero-cta
-                  className="inline-flex items-center gap-2.5 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02] shadow-lg"
-                  style={{ backgroundColor: "var(--color-primary)" }}
-                >
-                  Boka kostnadsfri takkontroll <ArrowRight size={18} />
-                </Link>
-                <span className="text-base text-gray-300">
-                  Eller ring{" "}
-                  <a
-                    href="tel:08283888"
-                    className="font-bold underline underline-offset-4 text-white hover:text-[#2B74FC]"
-                  >
-                    08-28 38 88
-                  </a>
-                </span>
-              </div>
-
+              {/* Ingen CTA-knapp här: formuläret till höger ÄR handlingen,
+                  och två uppmaningar bredvid varandra delar bara
+                  uppmärksamheten. Utan knappen kommer stats och badges upp,
+                  och på mobil hamnar formuläret högre. */}
             </div>
 
-            <div className="lg:pt-16">
+            {/* data-hero-anchor: mobilbaren i botten tar över när det här
+                blocket skrollat ur bild. Tidigare satt ankaret på
+                CTA-knappen som nu är borttagen. */}
+            <div
+              className="lg:pt-16 lg:col-start-2 lg:row-start-1 lg:row-span-2"
+              data-hero-anchor
+            >
               <LeadForm
                 variant="hero"
                 formId="home_hero"
@@ -232,55 +219,16 @@ export default async function Home() {
                 contact="phone-or-email"
                 showMessage
                 ctaText="Få mitt prisförslag"
-                notBindingNote
-                privacyNote
               />
             </div>
             </div>
 
-            {/* Stats och badges under grinden, så formuläret kommer före dem
-                på mobil. Ordningen där är titel, CTA, formulär, stats. */}
-            <div className="text-white mt-10 lg:mt-14 max-w-3xl">
-              <StatsRow theme="light" className="mb-8" />
+            {/* Badges under grinden, så formuläret kommer före dem på mobil.
+                StatsRow låg här tidigare men upprepade sig själv: 2 500+ tak
+                står redan i trust-raden ovanför H1, och 30 år står i både
+                H1 och garantibadgen. */}
+            <div className="text-white max-w-3xl lg:col-start-1 lg:row-start-2">
               <TrustBadgesRow />
-            </div>
-          </div>
-        </section>
-
-        {/* ── OMRÅDESBEKRÄFTELSE ────────────────── */}
-        <section className="py-6 border-b border-gray-100 bg-white">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-gray-600">
-              <span className="font-semibold text-gray-700">
-                Vi servar hela Stockholms län:
-              </span>
-              {[
-                { name: "Stockholm", slug: "stockholm" },
-                { name: "Nacka", slug: "nacka" },
-                { name: "Täby", slug: "taby" },
-                { name: "Järfälla", slug: "jarfalla" },
-                { name: "Bromma", slug: "bromma" },
-                { name: "Huddinge", slug: "huddinge" },
-                { name: "Lidingö", slug: "lidingo" },
-                { name: "Sollentuna", slug: "sollentuna" },
-                { name: "Norrtälje", slug: "norrtalje" },
-              ].map((o) => (
-                <Link
-                  key={o.slug}
-                  href={`/omraden/${o.slug}`}
-                  className="inline-flex px-2.5 py-1 rounded-full border border-gray-200 hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors text-xs font-medium"
-                  style={{ color: "var(--color-dark)" }}
-                >
-                  {o.name}
-                </Link>
-              ))}
-              <Link
-                href="/omraden"
-                className="inline-flex items-center gap-1 ml-1 text-xs font-semibold hover:underline"
-                style={{ color: "var(--color-primary)" }}
-              >
-                + 22 områden <ArrowRight size={11} />
-              </Link>
             </div>
           </div>
         </section>
@@ -294,6 +242,9 @@ export default async function Home() {
           limit={3}
           background
         />
+
+        {/* ── SENASTE PROJEKT (dynamisk fr Sanity) ────── */}
+        <LatestProjekt />
 
         {/* ── TAKTYPER ───────────────────────────── */}
         <section className="py-20 lg:py-28 bg-white">
@@ -608,8 +559,12 @@ export default async function Home() {
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-center">
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200">
+            {/* Bilden till höger på desktop: sektionen ovanför har bild till
+                vänster, och två likadana uppställningar i rad blev statiskt.
+                order-klasser i stället för omkastad DOM, så mobil behåller
+                bild före text. */}
+            <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-16 items-center">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200 lg:order-2">
                 <Image
                   src="/images/bromma-tak-fore.jpg"
                   alt="Slitet tegeltak med urblekta och skadade pannor, sett ovanifrån"
@@ -618,7 +573,7 @@ export default async function Home() {
                   className="object-cover"
                 />
               </div>
-              <div>
+              <div className="lg:order-1">
                 <h2
                   className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.03em] mb-6"
                   style={{
@@ -635,7 +590,8 @@ export default async function Home() {
                   Stockholms län, ofta samma vecka.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed mb-9">
-                  Vi inspekterar taket på plats, identifierar problemet och ger
+                  Våra takläggare inspekterar taket på plats, identifierar
+                  problemet och ger
                   dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06,
                   du slipper samordna och får ett enda kontrakt.
                 </p>
@@ -658,12 +614,6 @@ export default async function Home() {
             </div>
           </div>
         </section>
-
-        {/* ── REVIEWS KARUSELL ─────────────────── */}
-        <ReviewCarousel />
-
-        {/* ── SENASTE PROJEKT (dynamisk fr Sanity) ────── */}
-        <LatestProjekt />
 
         {/* ── MID-PAGE CTA ──────────────────── */}
         <section className="py-20 lg:py-24 border-t border-gray-100 bg-white text-center">
@@ -692,7 +642,6 @@ export default async function Home() {
                 showMessage
                 hideHeader
                 ctaText="Få mitt prisförslag"
-                privacyNote
               />
             </div>
           </div>
@@ -880,7 +829,6 @@ export default async function Home() {
                 hideHeader
                 ctaText="Få mitt prisförslag"
                 notBindingNote
-                privacyNote
               />
             </div>
           </div>

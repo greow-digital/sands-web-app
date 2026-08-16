@@ -43,7 +43,12 @@ export default function MobileCTA() {
   // ligger baren framme direkt. Baren är global och ska se likadan ut
   // överallt, det enda som skiljer är om den har en knapp att avlösa.
   useEffect(() => {
-    const heroCta = document.querySelector("[data-hero-cta]");
+    // data-hero-anchor är det block baren ska avlösa (formuläret på
+    // startsidan). data-hero-cta finns kvar som fallback för sidor som
+    // fortfarande har en hero-knapp.
+    const heroCta = document.querySelector(
+      "[data-hero-anchor], [data-hero-cta]"
+    );
 
     if (!heroCta) {
       setPasseratHero(true);

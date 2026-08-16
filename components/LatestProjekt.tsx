@@ -36,7 +36,7 @@ export default async function LatestProjekt() {
         <div className="flex items-end justify-between mb-10">
           <div>
             <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">
-              Senaste arbeten
+              Utförda arbeten av våra takläggare
             </p>
             <h2
               className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em]"
