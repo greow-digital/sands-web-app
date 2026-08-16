@@ -4,6 +4,9 @@ import { ArrowRight, CheckCircle, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import TrustBadgesRow from "@/components/TrustBadgesRow";
+import OmdomenInline from "@/components/OmdomenInline";
+import { takTestimonials } from "@/lib/testimonials";
 import LeadForm from "@/components/LeadForm";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import OmradenInline from "@/components/OmradenInline";
@@ -133,6 +136,24 @@ export default function TakbesiktningPage() {
           ]}
           backgroundImage="/images/bromma-tak-hero.jpg"
           imageAlt="Takbesiktning utförd av certifierad takläggare"
+          aside={
+            <LeadForm
+              variant="hero"
+              formId="tjanst_hero"
+              fields="minimal"
+              contact="phone-or-email"
+              showMessage
+              ctaText="Få mitt prisförslag"
+            />
+          }
+          asideUnder={<TrustBadgesRow />}
+        />
+
+        <OmdomenInline
+          heading="Vad kunderna säger"
+          pool={takTestimonials}
+          match={["besiktning", "inspektion", "tak"]}
+          limit={3}
         />
 
         {/* ── HUVUDSEKTION: vad besiktning är + sticky form ── */}

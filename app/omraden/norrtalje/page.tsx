@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import OmdomenInline from "@/components/OmdomenInline";
 import { takTestimonials } from "@/lib/testimonials";
 import PageHero from "@/components/PageHero";
+import TrustBadgesRow from "@/components/TrustBadgesRow";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
 import { pageMeta } from "@/lib/seo";
@@ -154,6 +155,29 @@ export default async function NorrtaljePage() {
           ]}
           backgroundImage="/images/hero-sands-construction.jpg"
           imageAlt="Sands Entreprenads servicebilar vid ett pågående takbyte"
+          aside={
+            <LeadForm
+              variant="hero"
+              formId="omrade_hero"
+              fields="minimal"
+              contact="phone-or-email"
+              showMessage
+              ctaText="Få mitt prisförslag"
+            />
+          }
+          asideUnder={<TrustBadgesRow />}
+        />
+
+        <OmdomenInline
+          heading="Vad våra kunder säger"
+          pool={takTestimonials}
+          ort="Norrtälje"
+          delomraden={OMRADEN.flatMap((o) =>
+            o.namn.split("&").map((n) => n.trim())
+          )}
+          narliggande={GRANNAR.map((g) => g.name)}
+          match={["tak"]}
+          background
         />
 
         {/* ── HERO-CTA + TRUST ─────────────────── */}
@@ -494,17 +518,6 @@ export default async function NorrtaljePage() {
           limit={6}
         />
 
-        <OmdomenInline
-          heading="Vad våra kunder säger"
-          pool={takTestimonials}
-          ort="Norrtälje"
-          delomraden={OMRADEN.flatMap((o) =>
-            o.namn.split("&").map((n) => n.trim())
-          )}
-          narliggande={GRANNAR.map((g) => g.name)}
-          match={["tak"]}
-          background
-        />
 
         {/* ── BOTTOM CTA ───────────────────────── */}
         <section className="py-20 lg:py-28 border-t border-gray-100">

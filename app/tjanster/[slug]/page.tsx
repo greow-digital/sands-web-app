@@ -11,6 +11,7 @@ import { tjanster, getTjanst } from "@/lib/tjanster";
 import { pageMeta } from "@/lib/seo";
 import OmradenInline from "@/components/OmradenInline";
 import OmdomenInline from "@/components/OmdomenInline";
+import TrustBadgesRow from "@/components/TrustBadgesRow";
 import { takTestimonials } from "@/lib/testimonials";
 
 // Nyckelord per tjänst för att plocka relevanta omdömen.
@@ -181,6 +182,25 @@ export default async function TjanstPage({
           ]}
           backgroundImage={t.image}
           imageAlt={t.title}
+          aside={
+            <LeadForm
+              variant="hero"
+              formId="tjanst_hero"
+              fields="minimal"
+              contact="phone-or-email"
+              showMessage
+              ctaText="Få mitt prisförslag"
+            />
+          }
+          asideUnder={<TrustBadgesRow />}
+        />
+
+        {/* ── OMDÖMEN ─────────────────────────── */}
+        <OmdomenInline
+          heading={`Vad kunderna säger om ${t.title.toLowerCase()}`}
+          match={REVIEW_MATCH[slug] ?? ["tak"]}
+          pool={ICKE_TAK_SLUGS.has(slug) ? undefined : takTestimonials}
+          background
         />
 
         {/* ── BESKRIVNING + SIDEBAR FORM ─────────── */}
@@ -423,14 +443,6 @@ export default async function TjanstPage({
             </div>
           </section>
         )}
-
-        {/* ── OMDÖMEN ─────────────────────────── */}
-        <OmdomenInline
-          heading={`Vad kunderna säger om ${t.title.toLowerCase()}`}
-          match={REVIEW_MATCH[slug] ?? ["tak"]}
-          pool={ICKE_TAK_SLUGS.has(slug) ? undefined : takTestimonials}
-          background
-        />
 
         {/* ── BOTTOM CTA ────────────────────────── */}
         <section className="py-20 lg:py-28 border-t border-gray-100">

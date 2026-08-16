@@ -19,6 +19,7 @@ import {
 } from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import OmdomenInline from "@/components/OmdomenInline";
+import TrustBadgesRow from "@/components/TrustBadgesRow";
 import { takTestimonials } from "@/lib/testimonials";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
 
@@ -157,6 +158,28 @@ export default async function OmradesPage({
           ]}
           backgroundImage="/images/bromma-tak-hero.jpg"
           imageAlt={`Takläggning i ${ort.name}`}
+          aside={
+            <LeadForm
+              variant="hero"
+              formId="omrade_hero"
+              fields="minimal"
+              contact="phone-or-email"
+              showMessage
+              ctaText="Få mitt prisförslag"
+            />
+          }
+          asideUnder={<TrustBadgesRow />}
+        />
+
+        {/* ── OMDÖMEN ─────────────────────────── */}
+        <OmdomenInline
+          heading="Vad våra kunder säger"
+          pool={takTestimonials}
+          ort={ort.name}
+          delomraden={delomraden}
+          narliggande={ort.grannar.map((g) => g.name)}
+          match={["tak"]}
+          background
         />
 
         {/* ── TJÄNSTER + SIDEBAR ──────────────────── */}
@@ -395,17 +418,6 @@ export default async function OmradesPage({
               : `Projekt vi har utfört nära ${ort.name}`
           }
           limit={6}
-        />
-
-        {/* ── OMDÖMEN ─────────────────────────── */}
-        <OmdomenInline
-          heading="Vad våra kunder säger"
-          pool={takTestimonials}
-          ort={ort.name}
-          delomraden={delomraden}
-          narliggande={ort.grannar.map((g) => g.name)}
-          match={["tak"]}
-          background
         />
 
         {/* ── GRANNAR ───────────────────────────── */}
