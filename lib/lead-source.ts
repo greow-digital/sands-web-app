@@ -11,6 +11,9 @@ export function leadSourceFor(formId: string | undefined): string {
       return "taktest"; // taktest-quiz + chatt-widget
     case "calc_bridge":
       return "priskalkylator"; // priskalkylatorn
+    case "home_hero":
+    case "home_section":
+      return "startsida"; // formulären på startsidan
     case "popup":
       return "popup";
     case "offert":

@@ -7,11 +7,13 @@ import StatsRow from "@/components/StatsRow";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
 import ReviewCarousel from "@/components/ReviewCarousel";
 import SeasonBanner from "@/components/SeasonBanner";
-// import InstagramFeed from "@/components/InstagramFeed"; // avstangd, se nedan
 import LatestProjekt from "@/components/LatestProjekt";
 import TaktestCta from "@/components/TaktestCta";
 import HeroVideo from "@/components/HeroVideo";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
+import LeadForm from "@/components/LeadForm";
+import OmdomenInline from "@/components/OmdomenInline";
+import { startsidaTestimonials } from "@/lib/testimonials";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -144,8 +146,12 @@ export default async function Home() {
           />
 
           <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
-            {/* På mobil: titel → form → stats → badges (form högre upp för CRO).
-                På desktop: 2-kol-grid med form höger som spänner båda raderna. */}
+            {/* På mobil: titel → CTA → form → stats → badges. På desktop:
+                2-kol-grid med formuläret till höger. Formuläret låg här fram
+                till 5 juni och togs bort för att mäta hero-flöde mot
+                /offert-flöde. Det är tillbaka eftersom 96 procent av den
+                betalda trafiken aldrig nådde /offert. */}
+            <div className="grid lg:grid-cols-[1.1fr_400px] gap-10 lg:gap-14 items-start">
             <div className="text-white max-w-3xl">
               <SeasonBanner />
 
@@ -179,14 +185,24 @@ export default async function Home() {
                   30 års garanti
                 </span>
               </h1>
-              <p className="text-xl text-gray-200 leading-relaxed max-w-xl mb-10">
+              <p className="text-xl text-gray-200 leading-relaxed max-w-xl mb-5">
                 Auktoriserad takläggare i Stockholm. Takbyte, takomläggning
                 och renovering med transparent prissättning, ROT-avdrag
                 direkt på fakturan och svar samma vardag.
               </p>
 
+              {/* Prisrad ovanför vikningen: bred matchning på "takläggare"
+                  drar in ett tjugotal prisvarianter, och första siffran låg
+                  tidigare sju sektioner ner. */}
+              <p className="text-base text-gray-200 mb-9">
+                <span className="font-bold text-white">
+                  Från 1 200 kr/m² efter ROT.
+                </span>{" "}
+                Fast pris efter kostnadsfri takkontroll.
+              </p>
+
               {/* CTA + ring-lank */}
-              <div className="flex flex-wrap items-center gap-5 mb-12 lg:mb-16">
+              <div className="flex flex-wrap items-center gap-5 mb-10">
                 <Link
                   href="/offert"
                   data-hero-cta
@@ -206,6 +222,25 @@ export default async function Home() {
                 </span>
               </div>
 
+            </div>
+
+            <div className="lg:pt-16">
+              <LeadForm
+                variant="hero"
+                formId="home_hero"
+                fields="minimal"
+                contact="phone-or-email"
+                showMessage
+                ctaText="Få mitt prisförslag"
+                notBindingNote
+                privacyNote
+              />
+            </div>
+            </div>
+
+            {/* Stats och badges under grinden, så formuläret kommer före dem
+                på mobil. Ordningen där är titel, CTA, formulär, stats. */}
+            <div className="text-white mt-10 lg:mt-14 max-w-3xl">
               <StatsRow theme="light" className="mb-8" />
               <TrustBadgesRow />
             </div>
@@ -249,6 +284,16 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        {/* ── BEVISBAND ──────────────────────────────
+            Den som sökt "takläggare" väljer firma, inte taktyp. Beviset för
+            att vi går att lita på låg tidigare på plats 8 av 15. */}
+        <OmdomenInline
+          heading="Därför väljer villaägare oss som takläggare"
+          urval={startsidaTestimonials}
+          limit={3}
+          background
+        />
 
         {/* ── TAKTYPER ───────────────────────────── */}
         <section className="py-20 lg:py-28 bg-white">
@@ -347,79 +392,6 @@ export default async function Home() {
             </p>
           </div>
         </section>
-
-        {/* ── VÅR PROCESS ────────────────────────── */}
-        <section
-          className="py-16 lg:py-28"
-          style={{ backgroundColor: "#F8F9FB" }}
-        >
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-              {/* Vänster bild */}
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-200">
-                <Image
-                  src="/images/process-takomlaggning-bromma.jpg"
-                  alt="Nylagt tegeltak på villa i Bromma, sett från ovan med Sands Entreprenads ställningsbanderoll på fasaden"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Höger, steg */}
-              <div>
-                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
-                  Hur vi jobbar
-                </p>
-                <h2
-                  className="text-[36px] lg:text-[52px] font-extrabold tracking-[-0.035em] mb-12"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Vår Process
-                </h2>
-
-                <div className="space-y-9">
-                  {process.map((p) => (
-                    <div
-                      key={p.num}
-                      className="flex gap-6 pb-9 border-b border-gray-200 last:border-b-0 last:pb-0"
-                    >
-                      <div
-                        className="text-4xl font-extrabold shrink-0 w-14"
-                        style={{
-                          fontFamily: "var(--font-heading)",
-                          color: "var(--color-primary)",
-                        }}
-                      >
-                        {p.num}
-                      </div>
-                      <div>
-                        <h3
-                          className="text-xl font-bold mb-1.5"
-                          style={{
-                            fontFamily: "var(--font-heading)",
-                            color: "var(--color-dark)",
-                          }}
-                        >
-                          {p.title}
-                        </h3>
-                        <p className="text-[15px] text-gray-600 leading-relaxed">
-                          {p.text}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── TAKTEST-CTA ──────────────────────────── */}
-        <TaktestCta />
 
         {/* ── PRISSEKTION ──────────────────────────── */}
         <section className="py-20 lg:py-28 bg-white border-b border-gray-100">
@@ -560,6 +532,133 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ── VÅR PROCESS ────────────────────────── */}
+        <section
+          className="py-16 lg:py-28"
+          style={{ backgroundColor: "#F8F9FB" }}
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+              {/* Vänster bild */}
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-200">
+                <Image
+                  src="/images/process-takomlaggning-bromma.jpg"
+                  alt="Nylagt tegeltak på villa i Bromma, sett från ovan med Sands Entreprenads ställningsbanderoll på fasaden"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Höger, steg */}
+              <div>
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
+                  Hur vi jobbar
+                </p>
+                <h2
+                  className="text-[36px] lg:text-[52px] font-extrabold tracking-[-0.035em] mb-12"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Så jobbar din takläggare, steg för steg
+                </h2>
+
+                <div className="space-y-9">
+                  {process.map((p) => (
+                    <div
+                      key={p.num}
+                      className="flex gap-6 pb-9 border-b border-gray-200 last:border-b-0 last:pb-0"
+                    >
+                      <div
+                        className="text-4xl font-extrabold shrink-0 w-14"
+                        style={{
+                          fontFamily: "var(--font-heading)",
+                          color: "var(--color-primary)",
+                        }}
+                      >
+                        {p.num}
+                      </div>
+                      <div>
+                        <h3
+                          className="text-xl font-bold mb-1.5"
+                          style={{
+                            fontFamily: "var(--font-heading)",
+                            color: "var(--color-dark)",
+                          }}
+                        >
+                          {p.title}
+                        </h3>
+                        <p className="text-[15px] text-gray-600 leading-relaxed">
+                          {p.text}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── LÄCKAGE / SKADOR ──────────────────── */}
+        <section
+          className="py-20 lg:py-28 border-t border-gray-100"
+          style={{ backgroundColor: "#F8F9FB" }}
+        >
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-center">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200">
+                <Image
+                  src="/images/bromma-tak-fore.jpg"
+                  alt="Slitet tegeltak med urblekta och skadade pannor, sett ovanifrån"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <h2
+                  className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.03em] mb-6"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  Läcker taket? Fuktskador, ruttna läkt eller trasiga pannor?
+                </h2>
+                <p className="text-lg text-gray-600 leading-relaxed mb-5">
+                  Ett läckande tak kan snabbt leda till mögel, röta och dyra
+                  följdskador på konstruktionen. Ju längre du väntar, desto
+                  dyrare blir det. Vi erbjuder kostnadsfri takkontroll i hela
+                  Stockholms län, ofta samma vecka.
+                </p>
+                <p className="text-lg text-gray-600 leading-relaxed mb-9">
+                  Vi inspekterar taket på plats, identifierar problemet och ger
+                  dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06,
+                  du slipper samordna och får ett enda kontrakt.
+                </p>
+                <div className="flex flex-wrap items-center gap-5">
+                  <Link
+                    href="/offert"
+                    className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
+                    style={{ backgroundColor: "var(--color-primary)" }}
+                  >
+                    Boka kostnadsfri takkontroll <ArrowRight size={16} />
+                  </Link>
+                  <Link
+                    href="/taktest"
+                    className="inline-flex items-center gap-1.5 text-base font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    Osäker? Gör taktestet först <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* ── REVIEWS KARUSELL ─────────────────── */}
         <ReviewCarousel />
 
@@ -582,22 +681,22 @@ export default async function Home() {
               Kostnadsfri takkontroll, fast pris efter besiktning.
               Svarar samma vardag.
             </p>
-            <Link
-              href="/offert"
-              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
-              style={{ backgroundColor: "var(--color-primary)" }}
-            >
-              Boka kostnadsfri takkontroll <ArrowRight size={14} />
-            </Link>
+            {/* Formulär i stället för länk: den som skrollat hit ska slippa
+                ett sidbyte för att agera. */}
+            <div className="max-w-md mx-auto text-left">
+              <LeadForm
+                variant="section"
+                formId="home_section"
+                fields="minimal"
+                contact="phone-or-email"
+                showMessage
+                hideHeader
+                ctaText="Få mitt prisförslag"
+                privacyNote
+              />
+            </div>
           </div>
         </section>
-
-        {/* ── INSTAGRAM ──────────────────────────────
-            Avstangd: IG-bilderna holler for lag kvalitet och drar ner
-            intrycket. Komponenten finns kvar i components/InstagramFeed.tsx
-            (lazy-laddad via IntersectionObserver) sa den ar latt att sla
-            pa igen genom att avkommentera nedan. */}
-        {/* <InstagramFeed /> */}
 
         {/* ── OMRÅDEN ────────────────────────────── */}
         <section className="py-20 lg:py-28 bg-white">
@@ -614,7 +713,7 @@ export default async function Home() {
                     color: "var(--color-dark)",
                   }}
                 >
-                  Områden vi jobbar i
+                  Takläggare i hela Stockholms län
                 </h2>
               </div>
               <Link
@@ -694,63 +793,6 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── LÄCKAGE / SKADOR ──────────────────── */}
-        <section
-          className="py-20 lg:py-28 border-t border-gray-100"
-          style={{ backgroundColor: "#F8F9FB" }}
-        >
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_1.3fr] gap-12 lg:gap-16 items-center">
-              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-200">
-                <Image
-                  src="/images/bromma-tak-fore.jpg"
-                  alt="Slitet tegeltak med urblekta och skadade pannor, sett ovanifrån"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h2
-                  className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.03em] mb-6"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Läcker taket? Fuktskador, ruttna läkt eller trasiga pannor?
-                </h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-5">
-                  Ett läckande tak kan snabbt leda till mögel, röta och dyra
-                  följdskador på konstruktionen. Ju längre du väntar, desto
-                  dyrare blir det. Vi erbjuder kostnadsfri takkontroll i hela
-                  Stockholms län, ofta samma vecka.
-                </p>
-                <p className="text-lg text-gray-600 leading-relaxed mb-9">
-                  Vi inspekterar taket på plats, identifierar problemet och ger
-                  dig ett fast pris på åtgärd. Totalentreprenad enligt ABT 06,
-                  du slipper samordna och får ett enda kontrakt.
-                </p>
-                <div className="flex flex-wrap items-center gap-5">
-                  <Link
-                    href="/offert"
-                    className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
-                    style={{ backgroundColor: "var(--color-primary)" }}
-                  >
-                    Boka kostnadsfri takkontroll <ArrowRight size={16} />
-                  </Link>
-                  <Link
-                    href="/taktest"
-                    className="inline-flex items-center gap-1.5 text-base font-semibold text-[#2B74FC] hover:underline"
-                  >
-                    Osäker? Gör taktestet först <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ── FAQ "HAR DU ETERNITTAK?" ───────────── */}
         <section className="py-20 lg:py-28 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -803,6 +845,9 @@ export default async function Home() {
           </div>
         </section>
 
+        {/* ── TAKTEST-CTA ──────────────────────────── */}
+        <TaktestCta />
+
         {/* ── BOTTOM CTA ────────────────────── */}
         <section
           className="py-24 lg:py-32 border-t border-gray-100 text-center"
@@ -825,13 +870,19 @@ export default async function Home() {
               Vi inspekterar taket på plats och lämnar ett komplett fast
               pris inom 24 timmar. Helt utan förpliktelser.
             </p>
-            <Link
-              href="/offert"
-              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
-              style={{ backgroundColor: "var(--color-primary)" }}
-            >
-              Boka kostnadsfri takkontroll <ArrowRight size={14} />
-            </Link>
+            <div className="max-w-md mx-auto text-left">
+              <LeadForm
+                variant="section"
+                formId="home_section"
+                fields="minimal"
+                contact="phone-or-email"
+                showMessage
+                hideHeader
+                ctaText="Få mitt prisförslag"
+                notBindingNote
+                privacyNote
+              />
+            </div>
           </div>
         </section>
 

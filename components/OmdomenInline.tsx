@@ -11,6 +11,13 @@ import {
 interface OmdomenInlineProps {
   /** Rubrik ovanför omdömena */
   heading?: string;
+  /**
+   * Explicit urval. Sätts detta används listan rakt av, utan poängsättning.
+   * Använd när sidan kräver att omdömena handlar om rätt sak, t.ex. bara
+   * tak. Poängsättningen nedan väljer annars gärna ett välskrivet omdöme
+   * om fasadmålning framför ett kortare om tak.
+   */
+  urval?: Testimonial[];
   /** Prioritera omdömen från denna ort (delsträngsmatch) */
   ort?: string;
   /** Stadsdelar/kommundelar som räknas som samma ort (t.ex. Tullinge i Botkyrka) */
@@ -67,6 +74,7 @@ function pickReviews(
 
 export default function OmdomenInline({
   heading = "Vad våra kunder säger",
+  urval,
   ort,
   delomraden,
   narliggande,
@@ -74,7 +82,10 @@ export default function OmdomenInline({
   limit = 3,
   background = false,
 }: OmdomenInlineProps) {
-  const reviews = pickReviews(ort, match, limit, delomraden, narliggande);
+  const reviews =
+    urval && urval.length > 0
+      ? urval.slice(0, limit)
+      : pickReviews(ort, match, limit, delomraden, narliggande);
 
   return (
     <section
