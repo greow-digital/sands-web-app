@@ -12,9 +12,14 @@ interface TrustBadgesRowProps {
 export default function TrustBadgesRow({
   className = "",
 }: TrustBadgesRowProps) {
+  // Mobil: 2-kolumnsrutnät där garantibadgen spänner hela bredden. Med
+  // flex-wrap hamnade den tredje ensam kvar på rad två och såg ut som ett
+  // fel. Från sm och upp ligger de på rad som förut.
   return (
-    <div className={`flex items-center gap-4 flex-wrap ${className}`}>
-      <div className="flex items-center gap-2.5 bg-white rounded-full px-5 py-2.5 shadow-lg">
+    <div
+      className={`grid grid-cols-2 gap-2.5 sm:flex sm:items-center sm:gap-4 sm:flex-wrap ${className}`}
+    >
+      <div className="flex items-center justify-center gap-2.5 bg-white rounded-full px-4 sm:px-5 py-2.5 shadow-lg">
         <Image
           src="/images/brabyggare-badge.svg"
           alt="BraByggare 4.8 av 5, 54 omdömen"
@@ -23,7 +28,7 @@ export default function TrustBadgesRow({
           className="h-9 w-auto"
         />
       </div>
-      <div className="flex items-center gap-2.5 bg-white rounded-full px-3 py-1.5 shadow-lg">
+      <div className="flex items-center justify-center gap-2.5 bg-white rounded-full px-3 py-1.5 shadow-lg">
         <Image
           src="/images/kundfavorit-2025.png"
           alt="Offerta Kundfavorit 2025"
@@ -38,7 +43,7 @@ export default function TrustBadgesRow({
           Kundfavorit<br />2025
         </span>
       </div>
-      <div className="flex items-center gap-2 bg-white rounded-full px-3 py-1.5 shadow-lg">
+      <div className="col-span-2 sm:col-span-1 flex items-center justify-center sm:justify-start gap-2 bg-white rounded-full px-3 py-1.5 shadow-lg">
         <Image
           src="/images/monier-tatt-tak.jpg"
           alt="Monier Tätt tak-garanti"
