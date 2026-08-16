@@ -37,17 +37,17 @@ export default function MobileCTA() {
   }, []);
 
   // Baren är hero-knappen som följer med när den skrollat ur bild. Så länge
-  // den riktiga knappen syns behövs ingen kopia i botten. Saknar sidan en
-  // hero-CTA (allt utom startsidan) faller vi tillbaka på en enkel
-  // skrolltröskel.
+  // den riktiga knappen syns behövs ingen kopia i botten.
+  //
+  // Saknar sidan en hero-CTA finns ingen knapp att ta över efter, och då
+  // ligger baren framme direkt. Baren är global och ska se likadan ut
+  // överallt, det enda som skiljer är om den har en knapp att avlösa.
   useEffect(() => {
     const heroCta = document.querySelector("[data-hero-cta]");
 
     if (!heroCta) {
-      const onScroll = () => setPasseratHero(window.scrollY > 600);
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll);
+      setPasseratHero(true);
+      return;
     }
 
     const observer = new IntersectionObserver(
