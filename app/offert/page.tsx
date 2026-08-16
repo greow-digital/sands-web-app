@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import OmdomenInline from "@/components/OmdomenInline";
+import { takTestimonials } from "@/lib/testimonials";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
 import { CheckCircle, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -102,7 +103,6 @@ export default function OffertPage() {
                   variant="section"
                   formId="offert"
                   notBindingNote
-                  privacyNote
                 />
               </div>
             </div>
@@ -162,6 +162,7 @@ export default function OffertPage() {
         {/* ── OMDÖMEN ─────────────────────────── */}
         <OmdomenInline
           heading="Trygg från offert till färdigt"
+          pool={takTestimonials}
           match={[
             "offert",
             "tydlig",

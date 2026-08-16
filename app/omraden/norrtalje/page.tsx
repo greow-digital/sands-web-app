@@ -4,6 +4,7 @@ import { CheckCircle, ArrowRight, Phone, MapPin, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import OmdomenInline from "@/components/OmdomenInline";
+import { takTestimonials } from "@/lib/testimonials";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
@@ -495,6 +496,7 @@ export default async function NorrtaljePage() {
 
         <OmdomenInline
           heading="Vad våra kunder säger"
+          pool={takTestimonials}
           ort="Norrtälje"
           delomraden={OMRADEN.flatMap((o) =>
             o.namn.split("&").map((n) => n.trim())

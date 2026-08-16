@@ -18,6 +18,12 @@ interface OmdomenInlineProps {
    * om fasadmålning framför ett kortare om tak.
    */
   urval?: Testimonial[];
+  /**
+   * Begränsar vilka omdömen som får väljas, men behåller poängsättningen på
+   * ort och grannkommun. Skicka `takTestimonials` på taksidor så väljs rätt
+   * ort ur rätt ämne, i stället för ett välskrivet omdöme om fasadmålning.
+   */
+  pool?: Testimonial[];
   /** Prioritera omdömen från denna ort (delsträngsmatch) */
   ort?: string;
   /** Stadsdelar/kommundelar som räknas som samma ort (t.ex. Tullinge i Botkyrka) */
@@ -37,7 +43,8 @@ function pickReviews(
   match?: string[],
   limit = 3,
   delomraden: string[] = [],
-  narliggande: string[] = []
+  narliggande: string[] = [],
+  pool: Testimonial[] = testimonials
 ): Testimonial[] {
   const lokala = [ort, ...delomraden]
     .filter((o): o is string => Boolean(o))
@@ -65,7 +72,7 @@ function pickReviews(
     return s;
   };
   // Stabil sortering: högst poäng först, behåll annars ursprunglig ordning.
-  return testimonials
+  return pool
     .map((t, i) => ({ t, i, s: score(t) }))
     .sort((a, b) => b.s - a.s || a.i - b.i)
     .slice(0, limit)
@@ -75,6 +82,7 @@ function pickReviews(
 export default function OmdomenInline({
   heading = "Vad våra kunder säger",
   urval,
+  pool,
   ort,
   delomraden,
   narliggande,
@@ -85,7 +93,7 @@ export default function OmdomenInline({
   const reviews =
     urval && urval.length > 0
       ? urval.slice(0, limit)
-      : pickReviews(ort, match, limit, delomraden, narliggande);
+      : pickReviews(ort, match, limit, delomraden, narliggande, pool);
 
   return (
     <section

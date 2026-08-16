@@ -11,8 +11,20 @@ import { tjanster, getTjanst } from "@/lib/tjanster";
 import { pageMeta } from "@/lib/seo";
 import OmradenInline from "@/components/OmradenInline";
 import OmdomenInline from "@/components/OmdomenInline";
+import { takTestimonials } from "@/lib/testimonials";
 
 // Nyckelord per tjänst för att plocka relevanta omdömen.
+// Sidor som inte handlar om tak ska välja ur hela omdömesbanken. Övriga
+// begränsas till takTestimonials, annars kan ett välskrivet omdöme om
+// fasadmålning ta platsen från ett om tak.
+const ICKE_TAK_SLUGS = new Set([
+  "fasadrenovering",
+  "badrumsrenovering",
+  "koksrenovering",
+  "totalentreprenad",
+  "ovriga",
+]);
+
 const REVIEW_MATCH: Record<string, string[]> = {
   tegeltak: ["tegel"],
   betongtak: ["betong"],
@@ -416,6 +428,7 @@ export default async function TjanstPage({
         <OmdomenInline
           heading={`Vad kunderna säger om ${t.title.toLowerCase()}`}
           match={REVIEW_MATCH[slug] ?? ["tak"]}
+          pool={ICKE_TAK_SLUGS.has(slug) ? undefined : takTestimonials}
           background
         />
 

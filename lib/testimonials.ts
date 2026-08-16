@@ -629,3 +629,21 @@ export const startsidaTestimonials: Testimonial[] = STARTSIDA_URVAL.map(
     return träff;
   }
 );
+
+/**
+ * Bara takrelaterade omdömen.
+ *
+ * Poängsättningen i OmdomenInline väljer gärna ett välskrivet omdöme om
+ * golvläggning eller kolonistugemålning framför ett kortare om tak, för den
+ * viktar ort och längd men inte ämne. På en taksida späder det ut
+ * relevansen. Skicka den här som `pool` så väljs rätt ort ur rätt ämne.
+ *
+ * Klassificeringen görs på `tjanst`, alltså etiketten som faktiskt syns på
+ * kortet. Fasad- och inomhusjobb ligger kvar på /omdomen och på
+ * fasadsidan, som har egna ämnesord.
+ */
+const TAK_TJANST = /tak|panno|plåt|papp|tegel|betong|nock|vindskiv|hängränn|shingel/i;
+
+export const takTestimonials: Testimonial[] = testimonials.filter((t) =>
+  TAK_TJANST.test(t.tjanst)
+);

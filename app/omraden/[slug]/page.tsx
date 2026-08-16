@@ -19,6 +19,7 @@ import {
 } from "@/lib/projekt-matching";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import OmdomenInline from "@/components/OmdomenInline";
+import { takTestimonials } from "@/lib/testimonials";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
 
 export async function generateStaticParams() {
@@ -399,6 +400,7 @@ export default async function OmradesPage({
         {/* ── OMDÖMEN ─────────────────────────── */}
         <OmdomenInline
           heading="Vad våra kunder säger"
+          pool={takTestimonials}
           ort={ort.name}
           delomraden={delomraden}
           narliggande={ort.grannar.map((g) => g.name)}
