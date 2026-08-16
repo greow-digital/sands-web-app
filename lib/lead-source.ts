@@ -14,6 +14,9 @@ export function leadSourceFor(formId: string | undefined): string {
     case "home_hero":
     case "home_section":
       return "startsida"; // formulären på startsidan
+    case "taklaggning_hero":
+    case "taklaggning_section":
+      return "taklaggning"; // formulären på tjänstesidan
     case "popup":
       return "popup";
     case "offert":

@@ -11,6 +11,14 @@ interface PageHeroProps {
   breadcrumbs?: Crumb[];
   backgroundImage?: string;
   imageAlt?: string;
+  /**
+   * Valfri högerkolumn, i praktiken ett LeadForm. Sätts den blir heron en
+   * tvåkolumnsgrid på desktop, och på mobil hamnar innehållet efter texten.
+   * Opt-in per sida: övriga sidor ser ut precis som förut.
+   */
+  aside?: React.ReactNode;
+  /** Rad under textkolumnen, t.ex. trust-badges. Kräver `aside`. */
+  asideUnder?: React.ReactNode;
 }
 
 export default function PageHero({
@@ -21,6 +29,8 @@ export default function PageHero({
   breadcrumbs,
   backgroundImage,
   imageAlt,
+  aside,
+  asideUnder,
 }: PageHeroProps) {
   const hasImage = Boolean(backgroundImage);
 
@@ -69,7 +79,19 @@ export default function PageHero({
         />
       )}
 
-      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-28">
+      <div
+        className={`relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 ${
+          aside ? "lg:py-20" : "lg:py-28"
+        }`}
+      >
+        <div
+          className={
+            aside
+              ? "grid lg:grid-cols-[1.1fr_400px] gap-10 lg:gap-x-14 lg:gap-y-6 items-start"
+              : ""
+          }
+        >
+        <div className={aside ? "lg:col-start-1 lg:row-start-1" : ""}>
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             className={`flex items-center gap-2 text-xs mb-6 ${
@@ -139,6 +161,18 @@ export default function PageHero({
             {description}
           </p>
         )}
+        </div>
+
+        {aside && (
+          <div className="lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:pt-14">
+            {aside}
+          </div>
+        )}
+
+        {asideUnder && (
+          <div className="lg:col-start-1 lg:row-start-2">{asideUnder}</div>
+        )}
+        </div>
       </div>
     </section>
   );

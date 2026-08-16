@@ -57,7 +57,9 @@ export async function POST(req: Request) {
   } else if (
     data.formId === "calc_bridge" ||
     data.formId === "home_hero" ||
-    data.formId === "home_section"
+    data.formId === "home_section" ||
+    data.formId === "taklaggning_hero" ||
+    data.formId === "taklaggning_section"
   ) {
     // Formulär som frågar efter "telefon eller e-post" och låter
     // användaren välja. Kräver därför namn + minst en kontaktväg, annars

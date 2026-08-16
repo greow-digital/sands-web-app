@@ -5,8 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
+import OmdomenInline from "@/components/OmdomenInline";
+import { takTestimonials } from "@/lib/testimonials";
 import FormPromise from "@/components/FormPromise";
-import ReviewCarousel from "@/components/ReviewCarousel";
 import OmradenInline from "@/components/OmradenInline";
 import {
   prisEfterRot,
@@ -15,7 +16,7 @@ import {
   RIKTPRIS_NOT,
 } from "@/lib/material";
 import RelateradeProjekt from "@/components/RelateradeProjekt";
-import TaktestInlineCta from "@/components/TaktestInlineCta";
+import TaktestCta from "@/components/TaktestCta";
 import { client } from "@/sanity/lib/client";
 import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import type { ProjektCard } from "@/sanity/lib/types";
@@ -28,7 +29,6 @@ import {
   FAQ_SNORAS,
 } from "@/lib/faq-snippets";
 import SourcesFooter from "@/components/SourcesFooter";
-import StatsRow from "@/components/StatsRow";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
 import Image from "next/image";
 
@@ -215,87 +215,27 @@ export default async function TaklaggningPage() {
           ]}
           backgroundImage="/images/bromma-tak-hero.jpg"
           imageAlt="Villa i Stockholm med nylagt tak"
+          aside={
+            <LeadForm
+              variant="hero"
+              formId="taklaggning_hero"
+              fields="minimal"
+              contact="phone-or-email"
+              showMessage
+              ctaText="Få mitt prisförslag"
+            />
+          }
+          asideUnder={<TrustBadgesRow />}
         />
 
-        {/* ── STICKY JUMP-NAV ──────────────────── */}
-        <nav
-          className="sticky top-16 lg:top-20 z-30 bg-white/95 backdrop-blur border-b border-gray-100"
-          aria-label="Hoppa till sektion"
-        >
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <ul className="flex gap-1 sm:gap-2 overflow-x-auto py-3 -mx-1 sm:mx-0 text-sm">
-              {[
-                { href: "#takbyte", label: "Takbyte" },
-                { href: "#takomlaggning", label: "Takomläggning" },
-                { href: "#takrenovering", label: "Takrenovering" },
-                {
-                  href: "/tjanster/takbesiktning",
-                  label: "Takbesiktning",
-                  external: true,
-                },
-                {
-                  href: "/tjanster/taksakerhet",
-                  label: "Taksäkerhet",
-                  external: true,
-                },
-                { href: "#faq", label: "FAQ" },
-              ].map((item) => (
-                <li key={item.href} className="shrink-0">
-                  <a
-                    href={item.href}
-                    className="inline-flex items-center px-3 py-1.5 rounded-full text-gray-600 hover:text-[#2B74FC] hover:bg-blue-50 transition-colors font-medium"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
+        {/* ── BEVISBAND ──────────────────────────── */}
+        <OmdomenInline
+          heading="Vad kunderna säger om vår takläggning"
+          pool={takTestimonials}
+          match={["takläggning", "takbyte", "takomläggning"]}
+          limit={3}
+        />
 
-        {/* ── BYGGLOV-NYHET ────────────────────── */}
-        <section
-          className="py-8 border-b border-gray-100"
-          style={{ backgroundColor: "rgba(43,116,252,0.06)" }}
-        >
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex items-start gap-4">
-            <span className="text-2xl shrink-0">🎉</span>
-            <div>
-              <p
-                className="text-sm font-bold mb-1"
-                style={{ color: "var(--color-dark)" }}
-              >
-                Slipp vänta på bygglov
-              </p>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                Sedan 1 december 2025 krävs inte längre bygglov för takbyte på
-                en- och tvåfamiljshus, även om du byter taktyp eller färg. Det
-                betyder att vi kan starta så snart materialet är på plats.{" "}
-                <a
-                  href="#faq"
-                  className="font-semibold text-[#2B74FC] hover:underline"
-                >
-                  Läs villkoren →
-                </a>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* ── TAKTEST-CTA ─────────────────────── */}
-        <section className="py-10 lg:py-14 border-b border-gray-100 bg-white">
-          <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
-            <TaktestInlineCta />
-          </div>
-        </section>
-
-        {/* ── STATS + BADGES STRIP ─────────────── */}
-        <section className="py-10 lg:py-14 border-b border-gray-100">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-center justify-between gap-8 lg:gap-12">
-            <StatsRow theme="dark" />
-            <TrustBadgesRow />
-          </div>
-        </section>
 
         {/* ── BESLUTSHJÄLP ───────────────────────── */}
         <section className="py-20 lg:py-28 border-b border-gray-100">
@@ -314,8 +254,9 @@ export default async function TaklaggningPage() {
                 Tre vägar, en kontakt
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Vid kostnadsfri takkontroll går vi igenom takets skick och
-                rekommenderar det alternativ som faktiskt löser ditt problem.
+                Våra takläggare går igenom takets skick vid en kostnadsfri
+                takkontroll och rekommenderar det alternativ som faktiskt
+                löser ditt problem.
                 Du betalar bara för det du behöver. Osäker på vem du ska anlita?
                 Vår guide till att{" "}
                 <Link
@@ -366,7 +307,10 @@ export default async function TaklaggningPage() {
                 <a
                   key={opt.anchor}
                   href={`#${opt.anchor}`}
-                  className="group block p-6 lg:p-7 rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-all hover:shadow-[0_8px_30px_rgba(43,116,252,0.08)]"
+                  // Blå ton i stället för grått på vitt: korten låg tidigare
+                  // nästan osynliga mot bakgrunden, och tonen knyter ihop dem
+                  // med prissiffran och Läs mer-länken som redan är blå.
+                  className="group block p-6 lg:p-7 rounded-2xl border border-[rgba(43,116,252,0.18)] bg-[rgba(43,116,252,0.05)] hover:border-[#2B74FC] hover:bg-[rgba(43,116,252,0.09)] transition-all hover:shadow-[0_8px_30px_rgba(43,116,252,0.10)]"
                 >
                   <h3
                     className="text-xl font-bold mb-3 group-hover:text-[#2B74FC] transition-colors"
@@ -461,14 +405,16 @@ export default async function TaklaggningPage() {
 
         {/* ── DETALJER: TAKBYTE ─────────────────── */}
         <section
-          id="takbyte"
-          className="py-20 lg:py-28 scroll-mt-20"
+          className="py-20 lg:py-28"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
               <div>
-                <div className="relative aspect-[5/2] rounded-2xl overflow-hidden bg-gray-100 mb-6">
+                <div
+                  id="takbyte"
+                  className="relative aspect-[5/2] rounded-2xl overflow-hidden bg-gray-100 mb-6 scroll-mt-20 lg:scroll-mt-28"
+                >
                   <Image
                     src={serviceImages.takbyte.src}
                     alt={serviceImages.takbyte.alt}
@@ -646,6 +592,22 @@ export default async function TaklaggningPage() {
                   </Link>
                 </p>
 
+                {/* Handling direkt efter sektionen: tidigare slutade alla tre
+                    tjänsteblocken i en pristabell utan väg vidare, och det
+                    var 7 600 px till nästa konverteringspunkt. */}
+                <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
+                  <p className="text-sm text-gray-700 flex-1 min-w-[220px] leading-relaxed">
+                    "Vill du veta vad ett komplett takbyte kostar på just ditt tak?"
+                  </p>
+                  <Link
+                    href="/offert"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm whitespace-nowrap transition-all hover:scale-[1.02]"
+                    style={{ backgroundColor: "var(--color-primary)" }}
+                  >
+                    Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                  </Link>
+                </div>
+
                 <h3
                   className="text-lg font-bold mb-4"
                   style={{
@@ -714,11 +676,13 @@ export default async function TaklaggningPage() {
 
         {/* ── DETALJER: TAKOMLÄGGNING ───────────── */}
         <section
-          id="takomlaggning"
-          className="py-20 lg:py-28 border-t border-gray-100 scroll-mt-20"
+          className="py-20 lg:py-28 border-t border-gray-100"
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
+            <div
+              id="takomlaggning"
+              className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl scroll-mt-20 lg:scroll-mt-28"
+            >
               <Image
                 src={serviceImages.omlaggning.src}
                 alt={serviceImages.omlaggning.alt}
@@ -847,6 +811,22 @@ export default async function TaklaggningPage() {
                     Se fullständig prislista för takbyte och omläggning →
                   </Link>
                 </p>
+
+                {/* Handling direkt efter sektionen: tidigare slutade alla tre
+                    tjänsteblocken i en pristabell utan väg vidare, och det
+                    var 7 600 px till nästa konverteringspunkt. */}
+                <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
+                  <p className="text-sm text-gray-700 flex-1 min-w-[220px] leading-relaxed">
+                    "Osäker på om pannorna håller för en omläggning? Vi bedömer dem på plats."
+                  </p>
+                  <Link
+                    href="/offert"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm whitespace-nowrap transition-all hover:scale-[1.02]"
+                    style={{ backgroundColor: "var(--color-primary)" }}
+                  >
+                    Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -854,12 +834,14 @@ export default async function TaklaggningPage() {
 
         {/* ── DETALJER: TAKRENOVERING ───────────── */}
         <section
-          id="takrenovering"
-          className="py-20 lg:py-28 border-t border-gray-100 scroll-mt-20"
+          className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl">
+            <div
+              id="takrenovering"
+              className="relative aspect-[5/2] lg:aspect-[6/2] rounded-2xl overflow-hidden bg-gray-100 mb-8 max-w-3xl scroll-mt-20 lg:scroll-mt-28"
+            >
               <Image
                 src={serviceImages.renovering.src}
                 alt={serviceImages.renovering.alt}
@@ -966,72 +948,23 @@ export default async function TaklaggningPage() {
                   </Link>{" "}
                   , så får du besked och fast pris utan förbindelse.
                 </p>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* ── ANDRA TAKARBETEN (cards till dedikerade sidor) ── */}
-        <section className="py-20 lg:py-24 border-t border-gray-100">
-          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 max-w-2xl mx-auto">
-              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                Andra tjänster
-              </p>
-              <h2
-                className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.02em]"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  color: "var(--color-dark)",
-                }}
-              >
-                Vi tar hela taket, inte bara takpannorna
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
-              {[
-                {
-                  href: "/tjanster/takbesiktning",
-                  id: "takbesiktning",
-                  title: "Takbesiktning",
-                  desc: "Kostnadsfri inspektion av takets skick av certifierad takläggare. Vi går upp på taket, ger ärlig bedömning och fast pris om åtgärd behövs.",
-                  cta: "Läs om takbesiktning",
-                },
-                {
-                  href: "/tjanster/taksakerhet",
-                  id: "taksakerhet",
-                  title: "Taksäkerhet",
-                  desc: "Snörasskydd, takstegar, gångbryggor och säkerhetsräcken enligt BBR och SS 831335. Lagkrav vid taklutning över 1:3 eller fasadhöjd över 8 m.",
-                  cta: "Läs om taksäkerhet",
-                },
-              ].map((card) => (
-                <Link
-                  key={card.href}
-                  href={card.href}
-                  className="group block p-6 lg:p-7 rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-all hover:shadow-[0_8px_30px_rgba(43,116,252,0.08)] scroll-mt-32"
-                >
-                  <h3
-                    id={card.id}
-                    className="text-xl font-bold mb-3 group-hover:text-[#2B74FC] transition-colors scroll-mt-32"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      color: "var(--color-dark)",
-                    }}
-                  >
-                    {card.title}
-                  </h3>
-                  <p className="text-base text-gray-600 leading-relaxed mb-5">
-                    {card.desc}
+                {/* Handling direkt efter sektionen: tidigare slutade alla tre
+                    tjänsteblocken i en pristabell utan väg vidare, och det
+                    var 7 600 px till nästa konverteringspunkt. */}
+                <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
+                  <p className="text-sm text-gray-700 flex-1 min-w-[220px] leading-relaxed">
+                    "Vet du inte vilken åtgärd taket behöver? Börja med en takkontroll."
                   </p>
-                  <span
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold"
-                    style={{ color: "var(--color-primary)" }}
+                  <Link
+                    href="/offert"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold text-sm whitespace-nowrap transition-all hover:scale-[1.02]"
+                    style={{ backgroundColor: "var(--color-primary)" }}
                   >
-                    {card.cta} <ChevronRight size={14} />
-                  </span>
-                </Link>
-              ))}
+                    Boka kostnadsfri takkontroll <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1125,8 +1058,8 @@ export default async function TaklaggningPage() {
           </div>
         </section>
 
-        {/* ── KUNDOMDÖMEN ───────────────────────── */}
-        <ReviewCarousel />
+        {/* ── TAKTEST (samma block som startsidan) ─── */}
+        <TaktestCta />
 
         {/* ── FAQ ───────────────────────────────── */}
         <section
@@ -1185,6 +1118,71 @@ export default async function TaklaggningPage() {
           limit={6}
         />
 
+        {/* ── ANDRA TAKARBETEN (cards till dedikerade sidor) ── */}
+        <section className="py-20 lg:py-24 border-t border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 max-w-2xl mx-auto">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
+                Andra tjänster
+              </p>
+              <h2
+                className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.02em]"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  color: "var(--color-dark)",
+                }}
+              >
+                Vi tar hela taket, inte bara takpannorna
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-5 lg:gap-6">
+              {[
+                {
+                  href: "/tjanster/takbesiktning",
+                  id: "takbesiktning",
+                  title: "Takbesiktning",
+                  desc: "Kostnadsfri inspektion av takets skick av certifierad takläggare. Vi går upp på taket, ger ärlig bedömning och fast pris om åtgärd behövs.",
+                  cta: "Läs om takbesiktning",
+                },
+                {
+                  href: "/tjanster/taksakerhet",
+                  id: "taksakerhet",
+                  title: "Taksäkerhet",
+                  desc: "Snörasskydd, takstegar, gångbryggor och säkerhetsräcken enligt BBR och SS 831335. Lagkrav vid taklutning över 1:3 eller fasadhöjd över 8 m.",
+                  cta: "Läs om taksäkerhet",
+                },
+              ].map((card) => (
+                <Link
+                  key={card.href}
+                  href={card.href}
+                  className="group block p-6 lg:p-7 rounded-2xl border border-gray-100 hover:border-[#2B74FC] transition-all hover:shadow-[0_8px_30px_rgba(43,116,252,0.08)] scroll-mt-32"
+                >
+                  <h3
+                    id={card.id}
+                    className="text-xl font-bold mb-3 group-hover:text-[#2B74FC] transition-colors scroll-mt-32"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--color-dark)",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p className="text-base text-gray-600 leading-relaxed mb-5">
+                    {card.desc}
+                  </p>
+                  <span
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold"
+                    style={{ color: "var(--color-primary)" }}
+                  >
+                    {card.cta} <ChevronRight size={14} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ── OMRADEN INLINE ────────────────────── */}
         <OmradenInline heading="Vi lägger om tak i hela Stockholmsregionen" />
 
@@ -1204,13 +1202,18 @@ export default async function TaklaggningPage() {
               Boka kostnadsfri takkontroll så går vi tillsammans igenom vad just
               ditt tak behöver. Fast pris inom 24 timmar.
             </p>
-            <Link
-              href="/offert"
-              className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
-              style={{ backgroundColor: "var(--color-primary)" }}
-            >
-              Boka kostnadsfri takkontroll <ArrowRight size={14} />
-            </Link>
+            <div className="max-w-md mx-auto text-left">
+              <LeadForm
+                variant="section"
+                formId="taklaggning_section"
+                fields="minimal"
+                contact="phone-or-email"
+                showMessage
+                hideHeader
+                ctaText="Få mitt prisförslag"
+                notBindingNote
+              />
+            </div>
           </div>
         </section>
 
