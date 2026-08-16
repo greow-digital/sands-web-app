@@ -1,8 +1,6 @@
 "use client";
 
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
-import { Phone } from "lucide-react";
-import Link from "next/link";
 import { useRef, useState } from "react";
 import { leadSourceFor } from "@/lib/lead-source";
 
@@ -63,8 +61,6 @@ interface LeadFormProps {
   confirmation?: string;
   /** "Prisförslaget är kostnadsfritt och inte bindande." under knappen. */
   notBindingNote?: boolean;
-  /** GDPR-rad med länk till integritetspolicy. */
-  privacyNote?: boolean;
   /** Körs efter lyckad submit, innan redirect (t.ex. för calc_bridge_submit). */
   onSubmitSuccess?: () => void;
 }
@@ -81,7 +77,6 @@ export default function LeadForm({
   hideHeader = false,
   confirmation,
   notBindingNote = false,
-  privacyNote = false,
   onSubmitSuccess,
 }: LeadFormProps) {
   const {
@@ -394,12 +389,10 @@ export default function LeadForm({
                 )}
               </div>
             )}
-            {valfriKontakt && (
-              <p className="col-span-2 text-[11px] text-gray-500 -mt-1">
-                Fyll i det du föredrar. Vill du hellre ha ett mejl än ett
-                samtal går det lika bra.
-              </p>
-            )}
+            {/* Ingen hjälptext under fälten. Att telefon och e-post saknar
+                asterisk säger redan att de är valfria, och den som lämnar
+                båda tomma får kravet som felmeddelande precis när det
+                behövs. */}
             {showMessage && (
               <div className="col-span-2">
                 <label
@@ -413,7 +406,7 @@ export default function LeadForm({
                 <textarea
                   id="message-minimal"
                   rows={2}
-                  placeholder="Kupor, läckage, eternit, tillgänglighet eller annat"
+                  placeholder="Kupor, läckage, eternit eller annat"
                   className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
                   {...trackField("message", register("message"))}
                 />
@@ -519,27 +512,10 @@ export default function LeadForm({
           </p>
         )}
 
-        {privacyNote && (
-          <p className="text-[11px] leading-relaxed text-gray-400 text-center">
-            Vi hanterar dina uppgifter enligt GDPR och delar dem aldrig med
-            tredje part.{" "}
-            <Link href="/integritetspolicy" className="underline hover:text-gray-600">
-              Integritetspolicy
-            </Link>
-          </p>
-        )}
-
-        {/* Telefon som diskret sekundär fallback */}
-        <div className="flex items-center justify-center gap-1.5 pt-1">
-          <span className="text-xs text-gray-500">Eller ring oss:</span>
-          <a
-            href="tel:08283888"
-            className="inline-flex items-center gap-1 text-xs font-medium text-gray-600 hover:text-[#2B74FC]"
-          >
-            <Phone size={12} />
-            08-28 38 88
-          </a>
-        </div>
+        {/* Ingen GDPR-rad och ingen "Eller ring oss" under formulären.
+            Integritetspolicyn nås från footern på varje sida, och
+            telefonnumret står i headern. Två rader smått under varje
+            knapp gjorde formulären plottriga utan att tillföra något. */}
       </form>
     </div>
   );

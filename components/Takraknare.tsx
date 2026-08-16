@@ -610,7 +610,6 @@ export default function Takraknare({
                   roofType: valtMaterial.namn,
                   area: `${kvm} m²`,
                 }}
-                privacyNote
                 onSubmitSuccess={() =>
                   fireGtag("calc_bridge_submit", { material, area: kvm })
                 }

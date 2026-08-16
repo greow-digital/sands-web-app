@@ -787,7 +787,6 @@ function ResultView({
           confirmation={`Ditt resultat: ${niva.label}`}
           hideHeader
           notBindingNote
-          privacyNote
         />
       </div>
 
