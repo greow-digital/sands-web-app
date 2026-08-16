@@ -9,9 +9,11 @@ import FormPromise from "@/components/FormPromise";
 import Takraknare from "@/components/Takraknare";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
 import OmdomenInline from "@/components/OmdomenInline";
+import { takTestimonials } from "@/lib/testimonials";
 import OmradenInline from "@/components/OmradenInline";
 import SourcesFooter from "@/components/SourcesFooter";
 import SeasonBanner from "@/components/SeasonBanner";
+import TrustBadgesRow from "@/components/TrustBadgesRow";
 import Referensprojekt from "@/components/Referensprojekt";
 
 import { pageMeta } from "@/lib/seo";
@@ -173,29 +175,11 @@ export default async function PriserPage() {
               efter 30 % ROT-avdrag, fast pris efter kostnadsfri takkontroll och
               inga dolda avgifter.
             </p>
-            <div className="flex flex-wrap items-center justify-start lg:justify-center gap-x-6 gap-y-3 mt-7 text-sm text-gray-100">
-              <span className="flex items-center gap-2">
-                <Star
-                  size={16}
-                  className="fill-current"
-                  style={{ color: "var(--color-primary)" }}
-                />
-                4,8 av 5 på BraByggare
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle
-                  size={16}
-                  style={{ color: "var(--color-primary)" }}
-                />
-                Fast pris
-              </span>
-              <span className="flex items-center gap-2">
-                <CheckCircle
-                  size={16}
-                  style={{ color: "var(--color-primary)" }}
-                />
-                Upp till 30 års garanti
-              </span>
+            {/* Badges i stället för textrad: samma tre budskap, men
+                BraByggare-betyget och Monier-garantin syns som verifierbara
+                märken i stället för påståenden i löptext. */}
+            <div className="mt-7 flex justify-start lg:justify-center">
+              <TrustBadgesRow />
             </div>
           </div>
         </section>
@@ -220,6 +204,7 @@ export default async function PriserPage() {
 
         <OmdomenInline
           heading="Nöjda kunder om pris och offert"
+          pool={takTestimonials}
           match={["offert", "faktura", "pris", "överenskomm", "konkurrensmässig"]}
           background
         />
