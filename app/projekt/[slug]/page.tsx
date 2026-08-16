@@ -14,10 +14,17 @@ import {
 } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import type { ProjektCard, ProjektDetail } from "@/sanity/lib/types";
+import { getTjanst } from "@/lib/tjanster";
 import { pageMeta } from "@/lib/seo";
 import { PROJEKT_VIDEOS } from "@/lib/projekt-videos";
 
 const BASE_URL = "https://www.sandsab.se";
+
+// Utförda tjänster, från Sanity-fältet `tjanster`. Etiketten hämtas ur
+// lib/tjanster så taggen och sidan den länkar till aldrig säger olika.
+function tjanstEtikett(slug: string): string {
+  return getTjanst(slug)?.title ?? slug;
+}
 
 const TYP_TO_TJANST: Record<string, { slug: string; label: string }> = {
   Tegeltak: { slug: "tegeltak", label: "tegeltak" },
@@ -62,7 +69,7 @@ export async function generateMetadata({
   })) as ProjektDetail | null;
   if (!p) return {};
   const titleBase =
-    [p.typ, p.ort].filter(Boolean).join(" i ") || "Takprojekt";
+    [p.typ, p.ort].filter(Boolean).join(" i ") || "Projekt";
   return pageMeta({
     path: `/projekt/${slug}`,
     title: `${titleBase} | Sands`,
@@ -86,8 +93,25 @@ export default async function ProjektDetailPage({
   const ortProjekt = (await client.fetch(PROJEKT_BY_ORT_QUERY, {
     ort: p.ort ?? "",
   })) as ProjektCard[];
+  const tjanster = (p.tjanster ?? []).filter(Boolean);
+  const primarTjanst = tjanster[0];
+  // Rubrik: taktyp om projektet rör tak, annars primär tjänst, annars
+  // titelns första led. Poolbygge och markarbete har varken taktyp eller
+  // tjänstesida, och ska inte kallas "Projekt".
+  const rubrik =
+    p.typ ??
+    (primarTjanst
+      ? tjanstEtikett(primarTjanst)
+      : (p.title ?? "").split(",")[0].trim() || "Projekt");
+
   const relaterade = ortProjekt
-    .filter((x) => x.slug !== p.slug && x.typ === p.typ)
+    .filter(
+      (x) =>
+        x.slug !== p.slug &&
+        (p.typ
+          ? x.typ === p.typ
+          : Boolean(primarTjanst) && (x.tjanster ?? []).includes(primarTjanst))
+    )
     .slice(0, 3);
 
   const heroHuvudbild = urlFor(p.huvudbild)
@@ -98,7 +122,7 @@ export default async function ProjektDetailPage({
 
   const tjanst = p.typ ? TYP_TO_TJANST[p.typ] : undefined;
   const omradeSlug = p.ort ? ORT_TO_OMRADE[p.ort] : undefined;
-  const displayTitle = [p.typ, p.ort].filter(Boolean).join(", ");
+  const displayTitle = [rubrik, p.ort].filter(Boolean).join(", ");
 
   return (
     <>
@@ -155,9 +179,9 @@ export default async function ProjektDetailPage({
 
               {/* Text */}
               <div className="lg:order-first">
-                {p.typ && (
+                {(p.typ || primarTjanst) && (
                   <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    {p.typ}
+                    {rubrik}
                   </p>
                 )}
                 <h1
@@ -167,7 +191,7 @@ export default async function ProjektDetailPage({
                     color: "var(--color-dark)",
                   }}
                 >
-                  {p.typ ?? "Takbyte"}
+                  {rubrik}
                   {p.ort && (
                     <>
                       ,{" "}
@@ -180,6 +204,38 @@ export default async function ProjektDetailPage({
                 <p className="text-base lg:text-lg text-gray-600 leading-relaxed mb-6">
                   {p.beskrivning}
                 </p>
+
+                {/* Utförda tjänster som länkade taggar. Ger besökaren vägen
+                    vidare till rätt tjänstesida, och projektsidorna blir de
+                    kontextuella inlänkar tjänstesidorna saknat. */}
+                {tjanster.length > 0 && (
+                  <div className="mb-7">
+                    <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2.5">
+                      Utfört i projektet
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {tjanster.map((slug, i) => (
+                        <Link
+                          key={slug}
+                          href={`/tjanster/${slug}`}
+                          className={
+                            i === 0
+                              ? "inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-[1.03]"
+                              : "inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3.5 py-1.5 text-sm font-medium text-gray-700 hover:border-[#2B74FC] hover:text-[#2B74FC] transition-colors"
+                          }
+                          style={
+                            i === 0
+                              ? { backgroundColor: "var(--color-primary)" }
+                              : undefined
+                          }
+                        >
+                          {tjanstEtikett(slug)}
+                          <ChevronRight size={13} />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 <div className="flex flex-wrap gap-5 text-sm text-gray-500 mb-7">
                   <span className="flex items-center gap-2">

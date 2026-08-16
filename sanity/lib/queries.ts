@@ -6,6 +6,7 @@ const PROJEKT_CARD_FIELDS = /* groq */ `
   "slug": slug.current,
   ort,
   typ,
+  tjanster,
   kvm,
   ar,
   huvudbild {
@@ -33,6 +34,7 @@ const PROJEKT_DETAIL_FIELDS = /* groq */ `
   "slug": slug.current,
   ort,
   typ,
+  tjanster,
   kvm,
   ar,
   material,

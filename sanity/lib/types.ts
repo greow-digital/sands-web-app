@@ -19,6 +19,7 @@ export type ProjektCard = {
   slug: string | null;
   ort: string | null;
   typ: string | null;
+  tjanster?: string[] | null;
   kvm: number | null;
   ar: number | null;
   huvudbild: SanityImageWithMeta | null;
@@ -38,6 +39,7 @@ export type ProjektLatest = {
   slug: string | null;
   ort: string | null;
   typ: string | null;
+  tjanster?: string[] | null;
   ar: number | null;
   huvudbild: SanityImageWithMeta | null;
   efterImage: SanityImageWithMeta | null;
@@ -49,6 +51,7 @@ export type ProjektReferens = {
   slug: string | null;
   ort: string | null;
   typ: string | null;
+  tjanster?: string[] | null;
   kvm: number | null;
   beskrivning: string | null;
   huvudbild: SanityImageWithMeta | null;

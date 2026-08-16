@@ -1,6 +1,27 @@
 import { defineType, defineField } from "sanity";
 import { ImagesIcon } from "@sanity/icons";
 
+// Tjänsterna motsvarar sidorna i lib/tjanster.ts. Värdet är sidans slug,
+// så projektsidan kan länka dit utan någon översättningstabell.
+const TJANSTER = [
+  { title: "Takläggning (takbyte/omläggning)", value: "taklaggning" },
+  { title: "Tegeltak", value: "tegeltak" },
+  { title: "Betongtak", value: "betongtak" },
+  { title: "Plåttak", value: "plattak" },
+  { title: "Papptak", value: "papptak" },
+  { title: "Shingeltak", value: "shingeltak" },
+  { title: "Eternittak", value: "eternittak" },
+  { title: "Takfönster & takkupor", value: "takfonsterkupor" },
+  { title: "Hängrännor & stuprör", value: "hangrannorstupror" },
+  { title: "Taksäkerhet", value: "taksakerhet" },
+  { title: "Takbesiktning", value: "takbesiktning" },
+  { title: "Fasadrenovering", value: "fasadrenovering" },
+  { title: "Badrumsrenovering", value: "badrumsrenovering" },
+  { title: "Köksrenovering", value: "koksrenovering" },
+  { title: "Totalentreprenad", value: "totalentreprenad" },
+  { title: "Altantak", value: "altantak" },
+] as const;
+
 const TAK_TYPER = [
   { title: "Betongtak", value: "Betongtak" },
   { title: "Tegeltak", value: "Tegeltak" },
@@ -91,12 +112,24 @@ export const projekt = defineType({
     defineField({
       name: "typ",
       title: "Taktyp",
+      description:
+        "Endast takets material. Lämna tomt för projekt som inte rör tak, använd Utförda tjänster i stället. Fältet har tidigare använts som projektkategori, vilket gjorde det opålitligt.",
       type: "string",
       options: {
         list: TAK_TYPER as unknown as { title: string; value: string }[],
         layout: "radio",
       },
-      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "tjanster",
+      title: "Utförda tjänster",
+      description:
+        "Vilka tjänster projektet omfattade. Första valet visas som huvudtagg på projektsidan och länkar till tjänstesidan. Lämna tomt om ingen tjänstesida passar, t.ex. markarbete eller poolbygge.",
+      type: "array",
+      of: [{ type: "string" }],
+      options: {
+        list: TJANSTER as unknown as { title: string; value: string }[],
+      },
     }),
     defineField({
       name: "kvm",
