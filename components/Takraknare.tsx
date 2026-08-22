@@ -229,31 +229,52 @@ export default function Takraknare({
         )}
 
         <div className="rounded-3xl border border-gray-100 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
-          {/* Progressrad */}
-          <div className="px-6 pt-6 lg:px-8 lg:pt-8">
+          {/* Progressrad. Sista steget saknar stegrubrik: där är priset
+              rubriken, och en stegräknare ovanför en summa användaren just
+              räknat fram stjäl första skärmen från det enda som betyder
+              något. Frågan flyttas i stället ner till formuläret. */}
+          <div className="px-6 pt-6 pb-5 lg:px-8 lg:pt-8">
             <div className="flex items-center gap-2 mb-3">
               {[1, 2, 3].map((n) => (
                 <span
                   key={n}
                   className="h-1 flex-1 rounded-full transition-colors"
                   style={{
+                    // Klara steg fylls helt, det pågående tonas. Helfylld rad
+                    // på sista steget läses som "klart" fast formuläret
+                    // fortfarande väntar på svar.
                     backgroundColor:
-                      n <= steg ? "var(--color-primary)" : "#E6E9EF",
+                      n < steg
+                        ? "var(--color-primary)"
+                        : n === steg
+                          ? "rgba(43,116,252,0.45)"
+                          : "#E6E9EF",
                   }}
                 />
               ))}
             </div>
-            <div className="flex items-baseline justify-between gap-3">
-              <h3
-                ref={stegRubrikRef}
-                tabIndex={-1}
-                className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500 outline-none"
-              >
-                <span style={{ color: "var(--color-primary)" }}>
-                  Steg {steg} av {ANTAL_STEG}
-                </span>{" "}
-                · {STEG_ETIKETT[steg]}
-              </h3>
+            <div
+              className={`flex items-start gap-3 ${
+                steg === ANTAL_STEG ? "justify-end" : "justify-between"
+              }`}
+            >
+              {steg < ANTAL_STEG && (
+                <h3
+                  ref={stegRubrikRef}
+                  tabIndex={-1}
+                  className="text-sm font-semibold uppercase tracking-[0.1em] text-gray-500 outline-none"
+                >
+                  {/* Stegräknaren står bara för skärmläsare. Progressraden
+                      direkt ovanför säger samma sak visuellt, och "Steg 2 av 3
+                      · " tog fjorton tecken av de dryga tjugofyra som ryms
+                      bredvid Tillbaka-länken. Följden blev en tvåradig rubrik
+                      med ett hål till höger om andra raden. */}
+                  <span className="sr-only">
+                    Steg {steg} av {ANTAL_STEG}:{" "}
+                  </span>
+                  {STEG_ETIKETT[steg]}
+                </h3>
+              )}
               {steg > 1 && (
                 <button
                   type="button"
@@ -439,36 +460,94 @@ export default function Takraknare({
                 Inkl. material, arbete, ställning och bortforsling. Inga dolda
                 tillägg.
               </p>
+            </div>
+          )}
 
-              <div className="mt-7 pt-6 border-t border-white/10">
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  <span className="font-semibold text-white">
-                    Det här är inte hela svaret.
-                  </span>{" "}
-                  Siffran förutsätter {FORUTSATTER[0]}, {FORUTSATTER[1]} och{" "}
-                  {FORUTSATTER[2]}. Tre saker kan flytta priset i endera
-                  riktningen, och ingen av dem går att se på avstånd:
-                </p>
-                <ul className="mt-4 grid sm:grid-cols-3 gap-3">
-                  {OSAKERHET.map((o) => (
-                    <li
-                      key={o.rubrik}
-                      className="rounded-xl bg-white/5 border border-white/10 px-4 py-3"
+          {/* STEG 3 — Kontaktuppgifter, samma lead-pipeline som /offert */}
+          {steg === 3 && valtMaterial && (
+            <div
+              id="kalkyl-kontakt"
+              className="p-6 lg:p-8 bg-white scroll-mt-24"
+            >
+              <h3
+                ref={stegRubrikRef}
+                tabIndex={-1}
+                className="text-xl lg:text-2xl font-extrabold leading-tight tracking-[-0.02em] outline-none mb-2"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  color: "var(--color-dark)",
+                }}
+              >
+                {STEG_ETIKETT[ANTAL_STEG]}
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-5">
+                Vi bokar en kostnadsfri takkontroll, tittar på de tre punkterna
+                nedan och lämnar ett bindande fast pris inom 24 h. Du binder dig
+                inte till något.
+              </p>
+              <LeadForm
+                variant="section"
+                formId="calc_bridge"
+                fields="minimal"
+                contact="phone-or-email"
+                flat
+                hideHeader
+                showMessage
+                ctaText="Få mitt prisförslag"
+                confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²`}
+                extraPayload={{
+                  roofType: valtMaterial.namn,
+                  area: `${kvm} m²`,
+                }}
+                onSubmitSuccess={() =>
+                  fireGtag("calc_bridge_submit", { material, area: kvm })
+                }
+              />
+            </div>
+          )}
+
+          {/* Förbehållen ligger under formuläret, inte över det. De finns för
+              att göra takkontrollen nödvändig, och det argumentet håller, men
+              ovanför fälten blev de en vägg: 538 px som sköt ner första
+              inmatningsfältet 505 px under vikningen på mobil. Under fälten
+              svarar de i stället på tvekan hos någon som redan sett frågan.
+              Priset visas som ett spann på 50 000 kr, och spannet bär självt
+              beskedet att siffran inte är färdig. */}
+          {prisSynligt && (
+            <div className="px-6 py-8 lg:px-8 lg:py-10 border-t border-gray-200 bg-gray-50">
+              <p className="text-sm text-gray-600 leading-relaxed">
+                <span
+                  className="font-semibold"
+                  style={{ color: "var(--color-dark)" }}
+                >
+                  Riktpriset är inte hela svaret.
+                </span>{" "}
+                Siffran förutsätter {FORUTSATTER[0]}, {FORUTSATTER[1]} och{" "}
+                {FORUTSATTER[2]}. Tre saker kan flytta priset i endera
+                riktningen, och ingen av dem går att se på avstånd:
+              </p>
+              <ul className="mt-4 grid sm:grid-cols-3 gap-3">
+                {OSAKERHET.map((o) => (
+                  <li
+                    key={o.rubrik}
+                    className="rounded-xl bg-white border border-gray-200 px-4 py-3"
+                  >
+                    <p
+                      className="text-xs font-bold mb-1"
+                      style={{ color: "var(--color-dark)" }}
                     >
-                      <p className="text-xs font-bold text-white mb-1">
-                        {o.rubrik}
-                      </p>
-                      <p className="text-[11px] leading-relaxed text-gray-400">
-                        {o.text}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-4 text-xs text-gray-400 leading-relaxed">
-                  Vi tittar på alla tre vid takkontrollen och sätter ett fast
-                  pris.
-                </p>
-              </div>
+                      {o.rubrik}
+                    </p>
+                    <p className="text-[11px] leading-relaxed text-gray-500">
+                      {o.text}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-xs text-gray-500 leading-relaxed">
+                Vi tittar på alla tre vid takkontrollen och sätter ett fast
+                pris.
+              </p>
             </div>
           )}
 
@@ -514,38 +593,6 @@ export default function Takraknare({
                 </div>
               )}
             </>
-          )}
-
-          {/* STEG 3 — Kontaktuppgifter, samma lead-pipeline som /offert */}
-          {steg === 3 && valtMaterial && (
-            <div
-              id="kalkyl-kontakt"
-              className="p-6 lg:p-8 border-t border-gray-200 bg-white scroll-mt-24"
-            >
-              <p className="text-sm text-gray-600 leading-relaxed mb-5">
-                Vi bokar en kostnadsfri takkontroll, tittar på de tre punkterna
-                ovan och lämnar ett bindande fast pris inom 24 h. Du binder dig
-                inte till något.
-              </p>
-              <LeadForm
-                variant="section"
-                formId="calc_bridge"
-                fields="minimal"
-                contact="phone-or-email"
-                flat
-                hideHeader
-                showMessage
-                ctaText="Få mitt prisförslag"
-                confirmation={`Gäller: ${valtMaterial.namn.toLowerCase()}, ca ${kvm} m²`}
-                extraPayload={{
-                  roofType: valtMaterial.namn,
-                  area: `${kvm} m²`,
-                }}
-                onSubmitSuccess={() =>
-                  fireGtag("calc_bridge_submit", { material, area: kvm })
-                }
-              />
-            </div>
           )}
         </div>
 
