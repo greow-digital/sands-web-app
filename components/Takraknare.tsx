@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   ChevronDown,
   CheckCircle,
@@ -139,21 +139,6 @@ export default function Takraknare({
   const stegRubrikRef = useRef<HTMLHeadingElement>(null);
   const sektionRef = useRef<HTMLElement>(null);
   const sedda = useRef(new Set<number>([1]));
-
-  // Den globala mobilbaren pekar på /offert. På kontaktsteget ligger den
-  // över formulärets nederkant och är en konkurrerande CTA precis när
-  // användaren fyller i fälten, så vi tystar den där. MobileCTA lyssnar
-  // redan på det här eventet.
-  useEffect(() => {
-    const skicka = (visible: boolean) =>
-      window.dispatchEvent(
-        new CustomEvent("sands:calc-sticky", { detail: { visible } })
-      );
-    skicka(steg === ANTAL_STEG);
-    return () => {
-      skicka(false);
-    };
-  }, [steg]);
 
   const valtMaterial = material
     ? MATERIAL.find((m) => m.key === material)!
