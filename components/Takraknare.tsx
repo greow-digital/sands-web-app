@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ChevronDown,
   CheckCircle,
@@ -137,7 +137,23 @@ export default function Takraknare({
   const engagedRef = useRef(false);
   const bridgeViewedRef = useRef(false);
   const stegRubrikRef = useRef<HTMLHeadingElement>(null);
+  const sektionRef = useRef<HTMLElement>(null);
   const sedda = useRef(new Set<number>([1]));
+
+  // Den globala mobilbaren pekar på /offert. På kontaktsteget ligger den
+  // över formulärets nederkant och är en konkurrerande CTA precis när
+  // användaren fyller i fälten, så vi tystar den där. MobileCTA lyssnar
+  // redan på det här eventet.
+  useEffect(() => {
+    const skicka = (visible: boolean) =>
+      window.dispatchEvent(
+        new CustomEvent("sands:calc-sticky", { detail: { visible } })
+      );
+    skicka(steg === ANTAL_STEG);
+    return () => {
+      skicka(false);
+    };
+  }, [steg]);
 
   const valtMaterial = material
     ? MATERIAL.find((m) => m.key === material)!
@@ -159,9 +175,15 @@ export default function Takraknare({
       sedda.current.add(nasta);
       fireGtag("calc_step_view", { step: nasta, material });
     }
-    // Flytta fokus till den nya stegrubriken, annars står fokus kvar på en
-    // knapp som just försvann.
-    requestAnimationFrame(() => stegRubrikRef.current?.focus());
+    requestAnimationFrame(() => {
+      // Skrolla kortet till toppen. Utan det ligger 201 px hero kvar över
+      // kortet på mobil vid kontaktsteget, alltså en fjärdedel av skärmen
+      // i det ögonblick priset landar. Fokus flyttas till den nya
+      // stegrubriken, annars står det kvar på en knapp som just försvann,
+      // men utan egen skroll så de två inte drar åt olika håll.
+      sektionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      stegRubrikRef.current?.focus({ preventScroll: true });
+    });
   }
 
   function handleMaterial(next: MaterialKey) {
@@ -189,9 +211,22 @@ export default function Takraknare({
 
 
   const sliderProgress = ((kvm - 60) / (300 - 60)) * 100;
+  const sisteSteget = steg === ANTAL_STEG;
+
+  const tillbakaKnapp =
+    steg > 1 ? (
+      <button
+        type="button"
+        onClick={() => gaTillSteg(steg - 1)}
+        className="shrink-0 inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-[#2B74FC] transition-colors"
+      >
+        <ArrowLeft size={13} /> Tillbaka
+      </button>
+    ) : null;
 
   return (
     <section
+      ref={sektionRef}
       id="takraknare"
       className={
         embedded
@@ -233,32 +268,42 @@ export default function Takraknare({
               rubriken, och en stegräknare ovanför en summa användaren just
               räknat fram stjäl första skärmen från det enda som betyder
               något. Frågan flyttas i stället ner till formuläret. */}
-          <div className="px-6 pt-6 pb-5 lg:px-8 lg:pt-8">
-            <div className="flex items-center gap-2 mb-3">
-              {[1, 2, 3].map((n) => (
-                <span
-                  key={n}
-                  className="h-1 flex-1 rounded-full transition-colors"
-                  style={{
-                    // Klara steg fylls helt, det pågående tonas. Helfylld rad
-                    // på sista steget läses som "klart" fast formuläret
-                    // fortfarande väntar på svar.
-                    backgroundColor:
-                      n < steg
-                        ? "var(--color-primary)"
-                        : n === steg
-                          ? "rgba(43,116,252,0.45)"
-                          : "#E6E9EF",
-                  }}
-                />
-              ))}
-            </div>
+          <div
+            className={
+              sisteSteget
+                ? "px-6 pt-4 pb-3 lg:px-8"
+                : "px-6 pt-6 pb-5 lg:px-8 lg:pt-8"
+            }
+          >
+            {/* På sista steget delar progressraden och Tillbaka en rad. Utan
+                stegrubrik står bandet annars och tar 77 px för en 4 px
+                stapel och en länk. */}
             <div
-              className={`flex items-start gap-3 ${
-                steg === ANTAL_STEG ? "justify-end" : "justify-between"
-              }`}
+              className={`flex items-center gap-3 ${sisteSteget ? "" : "mb-3"}`}
             >
-              {steg < ANTAL_STEG && (
+              <div className="flex flex-1 items-center gap-2">
+                {[1, 2, 3].map((n) => (
+                  <span
+                    key={n}
+                    className="h-1 flex-1 rounded-full transition-colors"
+                    style={{
+                      // Klara steg fylls helt, det pågående tonas. Helfylld rad
+                      // på sista steget läses som "klart" fast formuläret
+                      // fortfarande väntar på svar.
+                      backgroundColor:
+                        n < steg
+                          ? "var(--color-primary)"
+                          : n === steg
+                            ? "rgba(43,116,252,0.45)"
+                            : "#E6E9EF",
+                    }}
+                  />
+                ))}
+              </div>
+              {sisteSteget && tillbakaKnapp}
+            </div>
+            {!sisteSteget && (
+              <div className="flex items-start justify-between gap-3">
                 <h3
                   ref={stegRubrikRef}
                   tabIndex={-1}
@@ -274,17 +319,9 @@ export default function Takraknare({
                   </span>
                   {STEG_ETIKETT[steg]}
                 </h3>
-              )}
-              {steg > 1 && (
-                <button
-                  type="button"
-                  onClick={() => gaTillSteg(steg - 1)}
-                  className="inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-[#2B74FC] transition-colors"
-                >
-                  <ArrowLeft size={13} /> Tillbaka
-                </button>
-              )}
-            </div>
+                {tillbakaKnapp}
+              </div>
+            )}
             {steg === 1 && (
               <p className="text-sm text-gray-600 leading-relaxed mt-3">
                 <span

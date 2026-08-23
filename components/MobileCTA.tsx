@@ -19,7 +19,7 @@ export default function MobileCTA() {
   const pathname = usePathname();
   const [ovanforFooter, setOvanforFooter] = useState(true);
   const [passeratHero, setPasseratHero] = useState(false);
-  const [calcStickyActive, setCalcStickyActive] = useState(false);
+  const [tystadAvSektion, setTystadAvSektion] = useState(false);
 
   const hideOnPages = ["/offert", "/tack"];
   const shouldHide = hideOnPages.includes(pathname);
@@ -68,16 +68,19 @@ export default function MobileCTA() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  // Bakåtkompatibel: om någon sektion dispatchar en egen sticky-bar
-  // döljer vi denna så de inte staplas.
+  // En sektion kan begära att baren tystas. Ursprungligen för att den inte
+  // skulle staplas på kalkylatorns egen sticky-bar, som numera är borta.
+  // Kvarvarande användning: takräknarens kontaktsteg, där baren ligger över
+  // formulärets nederkant och pekar på /offert, alltså en konkurrerande CTA
+  // precis när användaren fyller i fälten.
   useEffect(() => {
     const handler = (e: Event) =>
-      setCalcStickyActive(!!(e as CustomEvent).detail?.visible);
+      setTystadAvSektion(!!(e as CustomEvent).detail?.visible);
     window.addEventListener("sands:calc-sticky", handler);
     return () => window.removeEventListener("sands:calc-sticky", handler);
   }, []);
 
-  if (shouldHide || calcStickyActive) return null;
+  if (shouldHide || tystadAvSektion) return null;
 
   const visible = ovanforFooter && passeratHero;
 
