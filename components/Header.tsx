@@ -102,8 +102,21 @@ export default function Header() {
               <button className="flex items-center gap-1 py-2 text-gray-700 hover:text-[#2B74FC] transition-colors font-medium">
                 Tjänster <ChevronDown size={14} />
               </button>
-              {tjänsterOpen && (
-                <div className="absolute top-full left-0 w-[440px] bg-white shadow-xl rounded-2xl py-4 border border-gray-100">
+              {/* Alltid monterad, dold med visibility i stället för
+                  villkorsrendering. Googlebot kör JavaScript men hovrar
+                  inte, så en dropdown bakom `tjänsterOpen &&` finns aldrig
+                  i den renderade sidan. Sex tjänstesidor med tillsammans
+                  917 visningar på fyra veckor saknade därmed intern länk
+                  från sajtens alla undersidor. `invisible` tar dem också
+                  ur tabbordningen och tillgänglighetsträdet när menyn är
+                  stängd, vilket `hidden` via opacity inte gör. */}
+              <div
+                className={`absolute top-full left-0 w-[440px] bg-white shadow-xl rounded-2xl py-4 border border-gray-100 transition-opacity duration-150 ${
+                  tjänsterOpen
+                    ? "visible opacity-100"
+                    : "invisible opacity-0 pointer-events-none"
+                }`}
+              >
                   <div className="grid grid-cols-2 gap-x-2 px-2">
                     <div>
                       <p className="px-3 pb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-gray-400">
@@ -140,8 +153,7 @@ export default function Header() {
                   >
                     Se alla tjänster →
                   </Link>
-                </div>
-              )}
+              </div>
             </div>
 
             <div
@@ -152,25 +164,32 @@ export default function Header() {
               <button className="flex items-center gap-1 py-2 text-gray-700 hover:text-[#2B74FC] transition-colors font-medium">
                 Områden <ChevronDown size={14} />
               </button>
-              {områdenOpen && (
-                <div className="absolute top-full left-0 w-52 bg-white shadow-xl rounded-2xl py-3 border border-gray-100">
-                  {områden.map((o) => (
-                    <Link
-                      key={o.href}
-                      href={o.href}
-                      className="block px-5 py-2 text-sm text-gray-700 hover:text-[#2B74FC] transition-colors"
-                    >
-                      {o.label}
-                    </Link>
-                  ))}
+              {/* Samma skäl som takmenyn ovan. Vinsten är mindre här,
+                  footern länkar redan tio orter, men beteendet ska vara
+                  konsekvent mellan de två menyerna. */}
+              <div
+                className={`absolute top-full left-0 w-52 bg-white shadow-xl rounded-2xl py-3 border border-gray-100 transition-opacity duration-150 ${
+                  områdenOpen
+                    ? "visible opacity-100"
+                    : "invisible opacity-0 pointer-events-none"
+                }`}
+              >
+                {områden.map((o) => (
                   <Link
-                    href="/omraden"
-                    className="block px-5 py-2 text-sm font-semibold text-[#2B74FC] border-t border-gray-100 mt-1 pt-3"
+                    key={o.href}
+                    href={o.href}
+                    className="block px-5 py-2 text-sm text-gray-700 hover:text-[#2B74FC] transition-colors"
                   >
-                    Alla områden →
+                    {o.label}
                   </Link>
-                </div>
-              )}
+                ))}
+                <Link
+                  href="/omraden"
+                  className="block px-5 py-2 text-sm font-semibold text-[#2B74FC] border-t border-gray-100 mt-1 pt-3"
+                >
+                  Alla områden →
+                </Link>
+              </div>
             </div>
 
             <Link
