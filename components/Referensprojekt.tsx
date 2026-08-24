@@ -10,6 +10,19 @@ function formatKr(n: number) {
 }
 
 /**
+ * AVSTÄNGD I PRODUKTION. Sätt VISA till true för att slå på sektionen igen.
+ *
+ * Sektionen visar faktiska slutpriser ur riktiga offerter. Dolda på begäran
+ * i väntan på att beloppen i lib/referensprojekt.ts dubbelkollas mot
+ * offerterna. Publicerade slutpriser är bindande på ett annat sätt än
+ * riktpriser med "från", så de ska inte ligga ute overifierade.
+ *
+ * Ingenting är borttaget: komponenten, datan i lib/referensprojekt.ts och
+ * anropet i app/priser/page.tsx är orörda. Enda spärren är flaggan nedan.
+ */
+const VISA = false;
+
+/**
  * Tre verkliga jobb med faktisk yta och faktiskt slutpris ur offerten.
  *
  * Ett reglage går att räkna färdigt och lämna. Tre riktiga tak går inte
@@ -21,6 +34,8 @@ export default function Referensprojekt({
 }: {
   projekt: ProjektCard[];
 }) {
+  if (!VISA) return null;
+
   const kort = REFERENSPROJEKT.map((ref) => ({
     ref,
     sanity: projekt.find((p) => p.slug === ref.slug),
