@@ -5,14 +5,32 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 
+// Speglar kategori-fältet i lib/tjanster.ts, men hålls hårdkodat här.
+// Header är en klientkomponent och lib/tjanster.ts är 40 kB prosa som
+// annars hade följt med i klientbundlen på varje sida. Ändras taxonomin
+// där ska den speglas här.
+//
+// Taktyperna saknades tidigare helt i navigationen trots att de är de
+// mest besökta tjänstesidorna på sajten. Shingeltak utelämnas tills
+// sidan har en riktig hjältebild, se TODO i lib/tjanster.ts.
+const taktyper = [
+  { href: "/tjanster/tegeltak", label: "Tegeltak" },
+  { href: "/tjanster/betongtak", label: "Betongtak" },
+  { href: "/tjanster/plattak", label: "Plåttak" },
+  { href: "/tjanster/papptak", label: "Papptak" },
+  { href: "/tjanster/eternittak", label: "Eternittak" },
+];
+
+// Fasad-, badrums- och köksrenovering ligger under
+// /tjanster/totalentreprenad i stället för i takmenyn. De tog tre av
+// åtta platser här och hade 16 sidvisningar på fyra veckor tillsammans.
 const tjänster = [
   { href: "/tjanster/taklaggning", label: "Takläggning" },
-  { href: "/tjanster/fasadrenovering", label: "Fasadrenovering" },
+  { href: "/tjanster/takbesiktning", label: "Takbesiktning" },
   { href: "/tjanster/takfonsterkupor", label: "Takfönster & takkupor" },
-  { href: "/tjanster/hangrannorstupror", label: "Hängrännor & Vindskivor" },
+  { href: "/tjanster/hangrannorstupror", label: "Hängrännor & vindskivor" },
   { href: "/tjanster/taksakerhet", label: "Taksäkerhet" },
-  { href: "/tjanster/badrumsrenovering", label: "Badrumsrenovering" },
-  { href: "/tjanster/koksrenovering", label: "Köksrenovering" },
+  { href: "/tjanster/altantak", label: "Altantak" },
   { href: "/tjanster/totalentreprenad", label: "Totalentreprenad" },
 ];
 
@@ -84,25 +102,58 @@ export default function Header() {
               <button className="flex items-center gap-1 py-2 text-gray-700 hover:text-[#2B74FC] transition-colors font-medium">
                 Tjänster <ChevronDown size={14} />
               </button>
-              {tjänsterOpen && (
-                <div className="absolute top-full left-0 w-60 bg-white shadow-xl rounded-2xl py-3 border border-gray-100">
-                  {tjänster.map((t) => (
-                    <Link
-                      key={t.href}
-                      href={t.href}
-                      className="block px-5 py-2 text-sm text-gray-700 hover:text-[#2B74FC] transition-colors"
-                    >
-                      {t.label}
-                    </Link>
-                  ))}
+              {/* Alltid monterad, dold med visibility i stället för
+                  villkorsrendering. Googlebot kör JavaScript men hovrar
+                  inte, så en dropdown bakom `tjänsterOpen &&` finns aldrig
+                  i den renderade sidan. Sex tjänstesidor med tillsammans
+                  917 visningar på fyra veckor saknade därmed intern länk
+                  från sajtens alla undersidor. `invisible` tar dem också
+                  ur tabbordningen och tillgänglighetsträdet när menyn är
+                  stängd, vilket `hidden` via opacity inte gör. */}
+              <div
+                className={`absolute top-full left-0 w-[440px] bg-white shadow-xl rounded-2xl py-4 border border-gray-100 transition-opacity duration-150 ${
+                  tjänsterOpen
+                    ? "visible opacity-100"
+                    : "invisible opacity-0 pointer-events-none"
+                }`}
+              >
+                  <div className="grid grid-cols-2 gap-x-2 px-2">
+                    <div>
+                      <p className="px-3 pb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-gray-400">
+                        Taktyper
+                      </p>
+                      {taktyper.map((t) => (
+                        <Link
+                          key={t.href}
+                          href={t.href}
+                          className="block px-3 py-2 text-sm text-gray-700 hover:text-[#2B74FC] transition-colors"
+                        >
+                          {t.label}
+                        </Link>
+                      ))}
+                    </div>
+                    <div>
+                      <p className="px-3 pb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-gray-400">
+                        Tjänster
+                      </p>
+                      {tjänster.map((t) => (
+                        <Link
+                          key={t.href}
+                          href={t.href}
+                          className="block px-3 py-2 text-sm text-gray-700 hover:text-[#2B74FC] transition-colors"
+                        >
+                          {t.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                   <Link
                     href="/tjanster"
-                    className="block px-5 py-2 text-sm font-semibold text-[#2B74FC] border-t border-gray-100 mt-1 pt-3"
+                    className="block mx-5 mt-2 pt-3 text-sm font-semibold text-[#2B74FC] border-t border-gray-100"
                   >
                     Se alla tjänster →
                   </Link>
-                </div>
-              )}
+              </div>
             </div>
 
             <div
@@ -113,25 +164,32 @@ export default function Header() {
               <button className="flex items-center gap-1 py-2 text-gray-700 hover:text-[#2B74FC] transition-colors font-medium">
                 Områden <ChevronDown size={14} />
               </button>
-              {områdenOpen && (
-                <div className="absolute top-full left-0 w-52 bg-white shadow-xl rounded-2xl py-3 border border-gray-100">
-                  {områden.map((o) => (
-                    <Link
-                      key={o.href}
-                      href={o.href}
-                      className="block px-5 py-2 text-sm text-gray-700 hover:text-[#2B74FC] transition-colors"
-                    >
-                      {o.label}
-                    </Link>
-                  ))}
+              {/* Samma skäl som takmenyn ovan. Vinsten är mindre här,
+                  footern länkar redan tio orter, men beteendet ska vara
+                  konsekvent mellan de två menyerna. */}
+              <div
+                className={`absolute top-full left-0 w-52 bg-white shadow-xl rounded-2xl py-3 border border-gray-100 transition-opacity duration-150 ${
+                  områdenOpen
+                    ? "visible opacity-100"
+                    : "invisible opacity-0 pointer-events-none"
+                }`}
+              >
+                {områden.map((o) => (
                   <Link
-                    href="/omraden"
-                    className="block px-5 py-2 text-sm font-semibold text-[#2B74FC] border-t border-gray-100 mt-1 pt-3"
+                    key={o.href}
+                    href={o.href}
+                    className="block px-5 py-2 text-sm text-gray-700 hover:text-[#2B74FC] transition-colors"
                   >
-                    Alla områden →
+                    {o.label}
                   </Link>
-                </div>
-              )}
+                ))}
+                <Link
+                  href="/omraden"
+                  className="block px-5 py-2 text-sm font-semibold text-[#2B74FC] border-t border-gray-100 mt-1 pt-3"
+                >
+                  Alla områden →
+                </Link>
+              </div>
             </div>
 
             <Link
@@ -229,6 +287,22 @@ export default function Header() {
               </button>
               {tjänsterOpen && (
                 <div className="pl-4 space-y-1">
+                  <p className="px-3 pt-2 pb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-gray-400">
+                    Taktyper
+                  </p>
+                  {taktyper.map((t) => (
+                    <Link
+                      key={t.href}
+                      href={t.href}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-[#2B74FC]"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {t.label}
+                    </Link>
+                  ))}
+                  <p className="px-3 pt-3 pb-1 text-[11px] font-bold uppercase tracking-[0.12em] text-gray-400">
+                    Tjänster
+                  </p>
                   {tjänster.map((t) => (
                     <Link
                       key={t.href}
@@ -239,6 +313,13 @@ export default function Header() {
                       {t.label}
                     </Link>
                   ))}
+                  <Link
+                    href="/tjanster"
+                    className="block px-3 py-2 text-sm font-semibold text-[#2B74FC]"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Se alla tjänster →
+                  </Link>
                 </div>
               )}
             </div>

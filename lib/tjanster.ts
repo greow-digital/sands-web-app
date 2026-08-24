@@ -590,7 +590,16 @@ export const tjanster: Tjanst[] = [
         a: "Nej. Med totalentreprenad och fast pris är priset låst. Tilläggsarbeten som beställs separat prissätts i förväg.",
       },
     ],
-    relaterade: ["taklaggning", "altantak", "fasadrenovering"],
+    // Fasad-, badrums- och köksrenovering togs ur huvudnavigationen och
+    // nås i stället härifrån. Totalentreprenaden är den naturliga
+    // ingången till dem: det är under ett helhetsåtagande de utförs.
+    relaterade: [
+      "fasadrenovering",
+      "badrumsrenovering",
+      "koksrenovering",
+      "taklaggning",
+      "altantak",
+    ],
   },
   {
     slug: "fasadrenovering",
