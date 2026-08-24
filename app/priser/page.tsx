@@ -23,9 +23,9 @@ import type { ProjektCard } from "@/sanity/lib/types";
 
 export const metadata: Metadata = pageMeta({
   path: "/priser",
-  title: "Vad kostar takbyte? Priser & exempel 2026 | Sands",
+  title: "Vad kostar takbyte i Stockholm? Pris per m² 2026 | Sands",
   description:
-    "Priser för takbyte i Stockholm: betongtak från 1 200 kr/m², tegeltak från 1 500, plåttak från 1 800. Exempel: villa 140 m² från 169 000 kr efter ROT.",
+    "Räkna på takbyte i Stockholm: pris per kvadratmeter för betongtak från 1 200 kr/m², tegeltak 1 500, plåttak 1 800. Villa 140 m² från 169 000 kr efter ROT.",
 });
 
 const priser = [
@@ -170,10 +170,14 @@ export default async function PriserPage() {
               Vad kostar takbyte i{" "}
               <span style={{ color: "var(--color-primary)" }}>Stockholm?</span>
             </h1>
+            {/* Synonymklustret enligt SEO.md §3 vävs in här: takbyte, byta
+                tak, lägga om tak och pris per kvadratmeter. "Räkna" är med
+                avsiktligt, sidan rankar redan på "räkna på takbyte" men sa
+                aldrig ordet i synlig copy. */}
             <p className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl mx-auto mt-5">
-              Dra i reglaget för en direkt prisuppskattning. Alla riktpriser är
-              efter 30 % ROT-avdrag, fast pris efter kostnadsfri takkontroll och
-              inga dolda avgifter.
+              Räkna ut vad det kostar att byta tak eller lägga om taket. Dra i
+              reglaget för riktpris per kvadratmeter, efter 30 % ROT-avdrag och
+              fast pris efter kostnadsfri takkontroll.
             </p>
             {/* Badges i stället för textrad: samma tre budskap, men
                 BraByggare-betyget och Monier-garantin syns som verifierbara
