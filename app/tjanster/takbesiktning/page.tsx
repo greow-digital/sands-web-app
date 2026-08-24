@@ -184,6 +184,19 @@ export default function TakbesiktningPage() {
                   bra skick får du veta det. Ingen säljpitch i efterhand, ingen
                   förbindelse att välja oss.
                 </p>
+                {/* Takbesiktning har egen sida och missar därför uppåtlänken
+                    i [slug]-mallen. Samma länk läggs här. */}
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  Visar kontrollen att taket är uttjänt går vi vidare till ett{" "}
+                  <Link
+                    href="/tjanster/taklaggning"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    takbyte
+                  </Link>
+                  , där vi går igenom hela arbetet från rivning och ny
+                  underlagspapp till färdigt tak.
+                </p>
 
                 <div className="mb-8 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
                   <p className="text-sm text-gray-700 flex-1">

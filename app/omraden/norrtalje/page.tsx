@@ -397,13 +397,26 @@ export default async function NorrtaljePage() {
                   Stockholms län. Du får alltid ett bindande fast pris efter en
                   kostnadsfri takkontroll, inga dolda tillägg.
                 </p>
-                <p className="text-[15px] text-gray-600 leading-[1.75] mb-10">
+                <p className="text-[15px] text-gray-600 leading-[1.75] mb-4">
                   <Link
                     href="/priser"
                     className="font-semibold text-[#2B74FC] hover:underline"
                   >
                     Se fullständiga prisexempel och räkna på ditt tak
                   </Link>
+                </p>
+                {/* Norrtälje har egen sida och missar därför länken som
+                    ligger i [slug]-mallen. Samma uppåtlänk läggs här. */}
+                <p className="text-[15px] text-gray-600 leading-[1.75] mb-10">
+                  Läs hur ett{" "}
+                  <Link
+                    href="/tjanster/taklaggning"
+                    className="font-semibold text-[#2B74FC] hover:underline"
+                  >
+                    takbyte
+                  </Link>{" "}
+                  går till steg för steg, från rivning och ny underlagspapp till
+                  färdigt tak.
                 </p>
 
                 {/* Sektion 6: DOLD CASE-MALL (publiceras EJ) */}

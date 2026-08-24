@@ -226,6 +226,29 @@ export default async function TjanstPage({
                   </p>
                 ))}
 
+                {/* Uppåtlänk till huvudtjänsten. Materialsidorna är
+                    delmängder av ett takbyte, men skickade tidigare ingen
+                    intern signal dit. /tjanster/taklaggning ligger på
+                    position 18 för "takbyte" och 19 för "takomläggning"
+                    med 400 visningar i veckan och noll klick, alltså strax
+                    utanför sida ett på sina två största sökord. */}
+                {t.slug !== "taklaggning" && (
+                  <div className="mt-8 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      {t.title} läggs oftast i samband med ett{" "}
+                      <Link
+                        href="/tjanster/taklaggning"
+                        className="font-semibold text-[#2B74FC] hover:underline"
+                      >
+                        takbyte
+                      </Link>
+                      . Där går vi igenom hela arbetet, från rivning och ny
+                      underlagspapp till valet mellan komplett omläggning och
+                      riktade punktinsatser.
+                    </p>
+                  </div>
+                )}
+
                 {/* Pris */}
                 {t.prisIntervall && (
                   <div className="mt-8 p-6 rounded-2xl border border-gray-100 bg-[#F8F9FB]">

@@ -293,12 +293,19 @@ export default async function OmradesPage({
                     >
                       takläggare i Stockholm
                     </Link>
-                    {" "}med verksamhet i {ort.name}?{" "}
+                    {" "}med verksamhet i {ort.name}? Läs hur ett{" "}
+                    <Link
+                      href="/tjanster/taklaggning"
+                      className="font-semibold text-[#2B74FC] hover:underline"
+                    >
+                      takbyte
+                    </Link>
+                    {" "}går till steg för steg, eller ta{" "}
                     <Link
                       href="/basta-taklaggare-stockholm"
                       className="font-semibold text-[#2B74FC] hover:underline"
                     >
-                      Läs vår köpguide
+                      köpguiden
                     </Link>
                     : sju kriterier att gå igenom, fem saker att vara extra noga med och tio frågor som är bra att ställa innan du skriver kontrakt.
                   </p>
