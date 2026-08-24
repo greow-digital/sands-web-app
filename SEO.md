@@ -8,11 +8,11 @@ Dokumentet är beskrivet som **regler + bakgrund**. Reglerna är obligatoriska. 
 
 ## 1. Affärskontext (bakgrund)
 
-**Kund:** Sands Entreprenad Stockholm AB. Verksamhet: takläggning och takbyten i Stockholms län. Affärsmodellen är **totalentreprenad enligt ABT 06** med fast pris efter kostnadsfri besiktning. Primär geografisk målgrupp: villaägare i Stockholm + närförorter (Täby, Solna, Sollentuna, Nacka, Lidingö, Danderyd, Huddinge, Norrtälje).
+**Kund:** Sands Entreprenad Stockholm AB. Verksamhet: takläggning och takbyten i Stockholms län. Affärsmodellen är **totalentreprenad enligt ABT 06** med fast pris efter kostnadsfri takkontroll. Primär geografisk målgrupp: villaägare i Stockholm + närförorter (Täby, Solna, Sollentuna, Nacka, Lidingö, Danderyd, Huddinge, Norrtälje).
 
 **Konkurrentlandskap:** Vesivek, Villatakexperten m.fl. leder med **besiktning/konsultation** som primär CTA, inte "offertförfrågan". De använder **Reco** för verifierade recensioner. Sands positioneras i samma riktning.
 
-**Primär CTA överallt:** `Boka kostnadsfri takbesiktning`. Konverteringsdestination: `/tack`. Conversion-event fyrar via gtag på `/tack` — rör aldrig den filen utan explicit godkännande.
+**Primär CTA:** två kanoniska strängar, kontexten avgör vilken. Se §4. Konverteringsdestination: `/tack`. Conversion-event fyrar via gtag på `/tack`, rör aldrig den filen utan explicit godkännande.
 
 **Teknisk verklighet påverkar SEO lika mycket som copy:** Core Web Vitals är ett Google-rankingkriterium och ingår i Google Ads Quality Score som "landing page experience". Se §11 för aktuell baslinje och mål — kort version: mobil LCP är idag 4,4 s i fältdata, vilket är "Poor" och bromsar både organisk ranking och ad cost.
 
@@ -67,9 +67,12 @@ Väv in naturligt — det får aldrig kännas som keyword-stuffing. En enda väl
 
 ## 4. Copy-regler – alltid
 
-- **Primär CTA:** `Boka kostnadsfri takbesiktning`. Samma wording överallt.
-- **Prispunkter:** alltid prefixerade med `från` eller följda av `efter kostnadsfri besiktning`. Aldrig som garanterat slutpris.
-- **Trust-triad:** fast pris · kostnadsfri besiktning · 30 års garanti. Minst två av tre på varje service-sida.
+- **Primär CTA:** två kanoniska strängar, aldrig någon annan formulering. Kontexten avgör vilken:
+  - **Persistent UI** (header, sticky mobil-footer, form-submit): `Få prisförslag`
+  - **In-page primary** (hero, slutet av sektioner, mellan content): `Boka kostnadsfri takkontroll`
+  - Ordet är **takkontroll**, inte takbesiktning. `takbesiktning` är namnet på tjänsten och sidan `/tjanster/takbesiktning`, och används som tjänstenamn men aldrig i en CTA.
+- **Prispunkter:** alltid prefixerade med `från` eller följda av `efter kostnadsfri takkontroll`. Aldrig som garanterat slutpris.
+- **Trust-triad:** fast pris · kostnadsfri takkontroll · 30 års garanti. Minst två av tre på varje service-sida.
 - **ROT-avdrag:** nämn där det är relevant (arbetskostnad 30 %). Viktigt för konvertering, inte för ranking.
 - **Totalentreprenad / ABT 06:** behåll som trovärdighetssignal. Är inte sökord, men signalerar seriositet.
 - **Telefonnummer:** synligt i header som `tel:`-länk. Konkurrentanalys visar att det höjer CTR.
@@ -80,7 +83,7 @@ Väv in naturligt — det får aldrig kännas som keyword-stuffing. En enda väl
 - Aldrig **"familjeföretag"**.
 - Aldrig **"Järfälla"** (kunden är Stockholm-fokuserad i positionering).
 - Aldrig byt CTA till **"Få gratis offert"**, **"Kontakta oss"** eller liknande. Besiktnings-framingen är en medveten differentiering mot konkurrenter.
-- Aldrig garantera slutpris utan besiktning.
+- Aldrig garantera slutpris utan takkontroll.
 - Aldrig syntetiska/uppdiktade recensioner, kundcitat eller case. Om en sektion behöver social proof och vi inte har källa — flagga och stanna.
 - Aldrig hårdkoda priset `1 200 kr/m²` på flera ställen. Centralisera i en konstant eller content-fil så det kan uppdateras på ett ställe.
 - Aldrig använd ABT 06 / totalentreprenad som H1-rubrik. Kontraktuell signal, inte hero-copy.
@@ -97,7 +100,7 @@ Varje service-sida (takbyte, plåttak, tegeltak, papptak, eternittak, skada/läc
    - OpenGraph + Twitter cards speglar title/description
 2. **H1** som upprepar primär sökterm + geografi
 3. **Hero-subhead** med synonymkluster (§3) invävt naturligt
-4. **Primär CTA** `Boka kostnadsfri takbesiktning`
+4. **Primär CTA** `Boka kostnadsfri takkontroll` (in-page primary, se §4)
 5. **Prissektion** (H2: `Vad kostar det att [verb]?`) med prispunkter, trust-triad, ROT-referens, CTA-repris
 6. **Material-/tjänst-sektion(er)** med H2/H3 som innehåller pris eller kostnad
 7. **Skada/läckage-sektion** om sidan passar (för akut-intention)
@@ -114,7 +117,7 @@ Avsteg från mallen ska vara motiverat. Dokumentera motiveringen i PR:n.
 
 ```
 Title:       Takbyte Stockholm – Fast pris på att lägga om tak | Sands
-Description: Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takbesiktning och 30 års garanti. Tegel, plåt, papp, betong, eternit.
+Description: Lägga om tak eller byta tak i Stockholm? Fast pris från 1 200 kr/m², kostnadsfri takkontroll och 30 års garanti. Tegel, plåt, papp, betong, eternit.
 H1:          Takbyte i Stockholm – fast pris när du ska lägga om taket
 ```
 
@@ -147,10 +150,10 @@ Varianter per sida:
 - Hur länge håller ett nytt tak?
 - Hur lång tid tar ett takbyte?
 - Måste jag flytta ut under takbytet?
-- Vad ingår i en kostnadsfri takbesiktning?
+- Vad ingår i en kostnadsfri takkontroll?
 - Vilket takmaterial är bäst?
 
-Svar ska vara 2–4 meningar, konkreta, och sluta med en mjuk hänvisning till besiktningen som nästa steg.
+Svar ska vara 2–4 meningar, konkreta, och sluta med en mjuk hänvisning till takkontrollen som nästa steg.
 
 ---
 
@@ -337,7 +340,7 @@ Svara på dessa frågor i PR-beskrivningen:
 1. **Primär sökintention?** (En mening, med exempel på sökfras.)
 2. **Synonymkluster täckt?** (Lista de synonymer som finns i copy.)
 3. **Pris-information above the fold?** (Ja/nej + hänvisning.)
-4. **Primär CTA korrekt?** (`Boka kostnadsfri takbesiktning`, ja/nej.)
+4. **Primär CTA korrekt?** (Rätt av de två kanoniska strängarna för kontexten, se §4. Ja/nej.)
 5. **Strukturerad data?** (Vilka schema-typer används.)
 6. **Intern länkning?** (Från vilka sidor, till vilka sidor.)
 7. **Kannibalisering?** (Finns det en existerande sida som konkurrerar? Hur differentieras de?)
