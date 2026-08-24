@@ -268,7 +268,15 @@ export default function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-gray-100 bg-white">
+        // Headern är `fixed`, så panelen ligger fast mot vyporten och det
+        // som hamnar under skärmkanten går inte att nå. Med taktyperna
+        // tillagda växte Tjänster-sektionen från 8 till 15 rader och
+        // menyn slutade rymmas. Höjdtaket plus egen skroll löser det.
+        // `dvh` i stället för `vh` eftersom Safari på iOS räknar `vh` mot
+        // vyporten utan adressfältet, vilket ger ett tak som är för högt.
+        // `overscroll-contain` hindrar att sidan bakom börjar skrolla när
+        // man når slutet av menyn.
+        <div className="lg:hidden border-t border-gray-100 bg-white max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain">
           <div className="max-w-[1200px] mx-auto px-4 pb-6 pt-4 space-y-1">
             <a
               href="tel:08283888"
