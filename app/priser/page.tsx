@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { CheckCircle, Star } from "lucide-react";
+import { CheckCircle, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
@@ -28,34 +28,76 @@ export const metadata: Metadata = pageMeta({
     "Räkna på takbyte i Stockholm: pris per kvadratmeter för betongtak från 1 200 kr/m², tegeltak 1 500, plåttak 1 800. Villa 140 m² från 169 000 kr efter ROT.",
 });
 
+/** Formaterar heltal med tusentalsmellanrum: 120000 -> "120 000". */
+const kr = (n: number) => n.toLocaleString("sv-SE").replace(/ /g, " ");
+
+/* krPerM2 är den enda platsen kvadratmeterpriset finns (SEO.md §5). Både
+   priskorten och FAQ-svaren räknas ut härifrån. ex140 står kvar som text
+   eftersom betongtakets 140 m²-exempel är avrundat uppåt till 169 000. */
 const priser = [
   {
     typ: "Betongtak",
-    m2: "Från 1 200 kr/m²",
+    krPerM2: 1200,
     ex140: "Från 169 000 kr",
     text: "Det vanligaste alternativet i Sverige. Robust, prisvärt och brett sortiment av kulörer.",
     slug: "betongtak",
   },
   {
     typ: "Tegeltak",
-    m2: "Från 1 500 kr/m²",
+    krPerM2: 1500,
     ex140: "Från 210 000 kr",
     text: "Klassiskt naturmaterial med upp till 50 års livslängd. Håller sin kulör livet ut.",
     slug: "tegeltak",
   },
   {
     typ: "Plåttak",
-    m2: "Från 1 800 kr/m²",
+    krPerM2: 1800,
     ex140: "Från 252 000 kr",
     text: "Modernt och lättviktigt. Passar villor med flacka tak eller modern arkitektur.",
     slug: "plattak",
   },
   {
     typ: "Papptak",
-    m2: "Från 800 kr/m²",
+    krPerM2: 800,
     ex140: "Från 112 000 kr",
     text: "Prisvärt val för platta tak och enklare konstruktioner med professionellt resultat.",
     slug: "papptak",
+  },
+];
+
+const pris = (slug: string) =>
+  priser.find((p) => p.slug === slug)!.krPerM2;
+
+/** Riktpris för en yta och ett material, härlett ur krPerM2. */
+const yta = (slug: string, m2: number) => kr(pris(slug) * m2);
+
+/* FAQ:n täcker kvm-klustret som i dag ligger på position 40 till 70 i
+   Search Console: "kostnad byta tak 100 kvm" (77 visningar), 180 kvm och
+   "takbyte pris kvm" (94 visningar). Frågorna är medvetet valda så att de
+   inte dubblerar blogginläggets FAQ, som redan äger 150 kvm, råspont,
+   offertskillnader och ställning/bortforsling.
+
+   Vi stannar vid 180 m² med flit. Beloppen räknas linjärt ur krPerM2, och
+   på riktigt stora tak sjunker kvadratmeterpriset eftersom etablering och
+   ställning slås ut på fler kvadratmeter. Ett 250 m²-svar hade därför
+   angett ett för högt riktpris på sidans största belopp. Lägg till fler
+   ytor först när den faktiska rabattkurvan för stora tak är känd. */
+const faq = [
+  {
+    q: "Vad kostar det att byta tak på 100 kvm?",
+    a: `Med betongpannor landar ett tak på 100 m² från ${yta("betongtak", 100)} kr, med tegel från ${yta("tegeltak", 100)} kr och med plåt från ${yta("plattak", 100)} kr. Alla siffror är efter 30 % ROT-avdrag och förutsätter ett sadeltak utan större komplikationer och ett helt underlag. Bindande fast pris får du efter kostnadsfri takkontroll.`,
+  },
+  {
+    q: "Vad kostar det att byta tak på 180 kvm?",
+    a: `På 180 m² blir riktpriset från ${yta("betongtak", 180)} kr med betongpannor, från ${yta("tegeltak", 180)} kr med tegel och från ${yta("plattak", 180)} kr med plåt, efter ROT-avdrag. Större tak ger ofta något lägre kvadratmeterpris eftersom etablering och ställning slås ut på fler kvadratmeter. Räkna på din egen takyta i kalkylatorn högre upp på sidan.`,
+  },
+  {
+    q: "Vad kostar takbyte per kvadratmeter?",
+    a: `Priset per kvadratmeter beror på beläggningen: betongtak från ${kr(pris("betongtak"))} kr/m², tegeltak från ${kr(pris("tegeltak"))} kr/m², plåttak från ${kr(pris("plattak"))} kr/m² och papptak från ${kr(pris("papptak"))} kr/m². Priserna är efter ROT-avdrag och gäller en komplett omläggning med rivning, nytt underlag, plåt och taksäkerhet. Vad just ditt tak hamnar på beror på lutning, form och underlagets skick.`,
+  },
+  {
+    q: "Hur mycket sjunker priset med ROT-avdraget?",
+    a: "ROT-avdraget ger 30 % rabatt på arbetskostnaden, inte på materialet, och taket är 50 000 kr per person och år. Alla priser vi visar på den här sidan är redan efter avdraget, så du behöver inte räkna om dem. Vi sköter ansökan åt dig och drar avdraget direkt på fakturan.",
   },
 ];
 
@@ -90,9 +132,15 @@ export default async function PriserPage() {
         name: "Vad kostar takbyte i Stockholm?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Priset beror på material. Betongtak kostar från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m² och papptak från ca 800 kr/m², alla priser efter ROT-avdrag.",
+          text: `Priset beror på material. Betongtak kostar från ca ${kr(pris("betongtak"))} kr/m², tegeltak från ca ${kr(pris("tegeltak"))} kr/m², plåttak från ca ${kr(pris("plattak"))} kr/m² och papptak från ca ${kr(pris("papptak"))} kr/m², alla priser efter ROT-avdrag.`,
         },
       },
+      // Speglar FAQ-sektionen 1:1 enligt SEO.md §10.
+      ...faq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
     ],
   };
 
@@ -239,7 +287,7 @@ export default async function PriserPage() {
                       color: "var(--color-primary)",
                     }}
                   >
-                    {p.m2}
+                    Från {kr(p.krPerM2)} kr/m²
                   </div>
                   <div className="text-xs text-gray-500 mb-4">
                     140 m²: {p.ex140}*
@@ -440,6 +488,57 @@ export default async function PriserPage() {
         <Referensprojekt projekt={allaProjekt} />
 
         <OmradenInline />
+
+        {/* ── FAQ ─────────────────────────────────
+            Öppen som default enligt SEO.md §6 punkt 9, till skillnad från
+            accordion-mönstret på tjänstesidorna. Innehållet är sidans
+            SEO-nyttolast mot kvm-klustret och ska synas utan klick. */}
+        <section className="py-20 lg:py-28 border-t border-gray-100">
+          <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
+                Vanliga frågor
+              </p>
+              <h2
+                className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em]"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  color: "var(--color-dark)",
+                }}
+              >
+                Vad kostar det för just ditt tak?
+              </h2>
+            </div>
+            <div className="space-y-3">
+              {faq.map((f, i) => (
+                <details
+                  key={i}
+                  open
+                  className="group rounded-2xl border border-gray-100 bg-white"
+                >
+                  <summary className="flex items-start justify-between gap-3 p-5 cursor-pointer list-none">
+                    <h3
+                      className="text-base font-bold pr-2"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      {f.q}
+                    </h3>
+                    <ChevronRight
+                      size={18}
+                      className="shrink-0 mt-1 text-gray-400 transition-transform group-open:rotate-90"
+                    />
+                  </summary>
+                  <div className="px-5 pb-5 -mt-1 text-base text-gray-600 leading-relaxed">
+                    {f.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Taktest-CTA:n låg tidigare direkt under kalkylatorn och sådde
             tvivel i det ögonblick intentionen var som högst. Den som kommit
