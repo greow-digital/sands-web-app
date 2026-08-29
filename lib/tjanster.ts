@@ -259,7 +259,7 @@ export const tjanster: Tjanst[] = [
     text:
       "Har du eternittak? Det är viktigt att hantera det korrekt. Vi samarbetar med certifierade saneringsföretag och hanterar hela processen åt dig, från rivning och asbestsanering till nytt tak med garanti. Du behöver bara göra en kontakt, vi sköter resten.\n\nAsbest är ett hälsofarligt material som inte får hanteras av obehöriga. Vår partner är certifierad för asbestsanering och följer samtliga lagkrav och säkerhetsrutiner.\n\nEternit går aldrig att spara, så en omläggning av tak är inte möjlig här. Ska du byta tak rivs plattorna varsamt av saneringspartnern, och därefter lägger vi nytt tak i det material du väljer.",
     prisIntervall: "Pris efter takkontroll (inkl. sanering)",
-    prism2: "Kontakta oss",
+    prism2: "Pris efter takkontroll",
     process: [
       {
         step: "Inspektion",
@@ -347,7 +347,7 @@ export const tjanster: Tjanst[] = [
     text:
       "En takkupa är ett effektivt sätt att få in ljus och skapa rymd på övervåningen eller vinden. Takfönster höjer värdet på huset och gör att boytan känns större.\n\nVi installerar takfönster från ledande leverantörer och bygger takkupor i olika utföranden. Arbetet utförs alltid i samband med takomläggning för effektivare utförande och bästa resultat.",
     prisIntervall: "Pris efter takkontroll och val av fönster",
-    prism2: "Kontakta oss",
+    prism2: "Pris efter takkontroll",
     faq: [
       {
         q: "Kan man sätta in takfönster utan att lägga om hela taket?",
@@ -374,7 +374,7 @@ export const tjanster: Tjanst[] = [
     text:
       "Hängrännor, stuprör och vindskivor utgör takets ytterhölje och skyddar både fasad och grund. När de börjar läcka, rosta eller ruttna är det dags att byta. Annars riskerar du följdskador på trä, isolering och murverk.\n\nVi monterar plåthängrännor av hög kvalitet (halvrunda eller fyrkantiga) tillsammans med matchande stuprör. Allt ingår alltid när vi gör en komplett takomläggning, men vi byter också enbart hängrännor och stuprör om resten av taket är i gott skick.\n\nVindskivorna är minst lika viktiga. Det är brädorna eller plåten längs takets gavlar som skyddar takets kant från vind och slagregn och döljer takkonstruktionens undersida. När vindskivorna ruttnar eller färgen flagar är det ett tecken på att fukt börjat tränga in. Vi byter både träbaserade och plåtklädda vindskivor, ofta i samma vända som hängrännor och stuprör för bästa resultat och pris.",
     prisIntervall: "Ingår vid komplett takbyte. Separat: pris efter takkontroll",
-    prism2: "Kontakta oss",
+    prism2: "Pris efter takkontroll",
     faq: [
       {
         q: "Ingår hängrännor i ett komplett takbyte?",
@@ -611,7 +611,7 @@ export const tjanster: Tjanst[] = [
     text:
       "En fasadrenovering ger huset nytt liv och höjer fastighetsvärdet. Vi erbjuder putsning, målning och renovering av fasader i hela Stockholms län. Ofta kombinerar våra kunder fasadrenovering med takbyte, det sparar ställningskostnad och ger ett helhetsmässigt resultat.\n\nVi arbetar med professionella material och metoder som ger lång livslängd. Oavsett om du har puts, trä eller tegelfasad kan vi hjälpa dig med rätt lösning.",
     prisIntervall: "Pris efter takkontroll",
-    prism2: "Kontakta oss",
+    prism2: "Pris efter takkontroll",
     ingår: [
       "Kostnadsfri takkontroll och bedömning",
       "Tvättning och förbehandling av fasad",
@@ -647,7 +647,7 @@ export const tjanster: Tjanst[] = [
     text:
       "Sands Entreprenad erbjuder badrumsrenoveringar med samma noggrannhet och kvalitet som våra takprojekt. Vi hanterar hela processen genom totalentreprenad, ett kontrakt, ett fast pris.\n\nOavsett om det gäller ett komplett badrumsbytte med nytt tätskikt, kakel och porslin eller en uppfräschning av ett befintligt badrum kan vi hjälpa dig. Vi samarbetar med certifierade VVS-montörer och elektriker.",
     prisIntervall: "Pris efter takkontroll",
-    prism2: "Kontakta oss",
+    prism2: "Pris efter takkontroll",
     ingår: [
       "Kostnadsfri takkontroll och bedömning",
       "Rivning av befintligt badrum",
@@ -683,7 +683,7 @@ export const tjanster: Tjanst[] = [
     text:
       "Vi erbjuder kompletta köksrenoveringar i hela Stockholms län. Oavsett om du vill byta hela köket eller renovera det befintliga tar vi hand om hela processen, rivning, el, VVS, montering av köksluckor, bänkskivor och vitvaror.\n\nPrecis som med våra takprojekt arbetar vi genom totalentreprenad med fast pris. Du får en kontaktperson genom hela projektet och slipper samordna olika hantverkare.",
     prisIntervall: "Pris efter takkontroll",
-    prism2: "Kontakta oss",
+    prism2: "Pris efter takkontroll",
     ingår: [
       "Kostnadsfri takkontroll och planering",
       "Rivning av befintligt kök",
