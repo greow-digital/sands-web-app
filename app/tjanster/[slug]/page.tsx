@@ -76,6 +76,17 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
     description:
       "Taksäkerhet enligt BBR i Stockholm: snörasskydd, gångbryggor, takstegar och räcken. Montering på befintligt tak eller i samband med takbyte.",
   },
+  // GSC 30 jul till 26 aug 2026: sidan rankar 5,7 på "kostnadsfri
+  // takkontroll", 7,7 på "takkontroll" och 8,4 på "takkontroll stockholm",
+  // men ordet takkontroll saknades i både title och description. Mallen gav
+  // "Takbesiktning i Stockholm | Sands". 112 visningar på position 5 till 8
+  // gav noll klick. SEO.md §4 slår dessutom fast att ordet är takkontroll,
+  // takbesiktning används bara som tjänstenamn.
+  takbesiktning: {
+    title: "Takkontroll Stockholm, kostnadsfri takbesiktning | Sands",
+    description:
+      "Kostnadsfri takkontroll i Stockholm. Vi inspekterar taket, bedömer skicket och lämnar fast pris om åtgärd behövs. Takbesiktning utan förbindelse.",
+  },
   shingeltak: {
     title: "Shingeltak Stockholm | lätt tak, fast pris | Sands",
     description:

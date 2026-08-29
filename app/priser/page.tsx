@@ -21,9 +21,16 @@ import { client } from "@/sanity/lib/client";
 import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
 import type { ProjektCard } from "@/sanity/lib/types";
 
+/* GSC 30 jul till 26 aug 2026: sidans i särklass största sökning är
+   "räkna på takbyte", 72 visningar på position 10,3 med noll klick. Sidan
+   har en kalkylator, så avsikten matchar exakt, men ordet räkna fanns bara
+   i description och inte i title. "Vad kostar takbyte" plockas bort ur
+   titeln eftersom sidan ändå inte rankar på den frasen, /blogg/vad-kostar-
+   takbyte tar den (1 110 visningar, position 42). Frasen finns kvar i H1
+   och i sidans innehåll. */
 export const metadata: Metadata = pageMeta({
   path: "/priser",
-  title: "Vad kostar takbyte i Stockholm? Pris per m² 2026 | Sands",
+  title: "Räkna på takbyte: pris per m² i Stockholm 2026 | Sands",
   description:
     "Räkna på takbyte i Stockholm: pris per kvadratmeter för betongtak från 1 200 kr/m², tegeltak 1 500, plåttak 1 800. Villa 140 m² från 169 000 kr efter ROT.",
 });
