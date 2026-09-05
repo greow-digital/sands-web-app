@@ -11,6 +11,20 @@ export type Tjanst = {
   ingår?: string[];
   process?: { step: string; text: string }[];
   komponenter?: { name: string; description: string; image: string }[];
+  /**
+   * Utvald produkt på taktypssidan, t.ex. en specifik takpannemodell.
+   * Valfri, så sidor utan en given modell ser ut som förut. `text` delas
+   * på \n\n till stycken, precis som `text` på tjänsten.
+   */
+  produkt?: {
+    namn: string;
+    text: string;
+    bild: string;
+    bildAlt: string;
+    thumb?: string;
+    thumbAlt?: string;
+    lank?: { href: string; text: string };
+  };
   faq: { q: string; a: string }[];
   relaterade?: string[];
 };
@@ -139,6 +153,19 @@ export const tjanster: Tjanst[] = [
       "Nytt regnvattensystem",
       "Ställning, container och bortforsling",
     ],
+    produkt: {
+      namn: "Aerlox 2.0",
+      text:
+        "Mossa växer inte på betongen i sig, utan i fukten som blir kvar i den. En panna som suger åt sig vatten står fuktig i timmar efter ett regn, och det är den tiden påväxten lever av. Aerlox 2.0 är gjuten i en tätare betong som tar upp mindre vatten, vilket kortar den fuktiga perioden och gör taket mindre attraktivt för mossa och alger. Kulörsättningen är vald för samma ändamål.\n\nMonier har provkört pannan i sin testanläggning i Heusenstamm utanför Frankfurt, där tak utsätts för storm, slagregn, frost och belastning under kontrollerade former innan de släpps på marknaden.\n\nFör oss som lägger taket märks skillnaden mest i hanteringen. En lättare panna med genomtänkt form går snabbare att bära upp och lägga rätt, och färre tunga lyft per kvadratmeter är en arbetsmiljöfråga lika mycket som en tidsfråga.\n\nAerlox 2.0 ingår i Moniers taksystem och omfattas därmed av Tätt tak-garantin i upp till 30 år vid komplett omläggning.",
+      bild: "/images/aerlox-2-tak.jpg",
+      bildAlt: "Villatak lagt med Monier Aerlox 2.0 betongtakpannor",
+      thumb: "/images/aerlox-2-panna.jpg",
+      thumbAlt: "Monier Aerlox 2.0 betongtakpanna",
+      lank: {
+        href: "/projekt/takomlaggning-flen",
+        text: "Se ett betongtak vi lagt med Monier Aerlox",
+      },
+    },
     faq: [
       {
         q: "Hur länge håller ett betongtak?",
@@ -150,7 +177,7 @@ export const tjanster: Tjanst[] = [
       },
       {
         q: "Vilken modell använder ni?",
-        a: "Vi arbetar med hela Moniers betongpannasortiment. Jönåker Elegant är en populär modell för villa.",
+        a: "Vi arbetar med hela Moniers betongpannesortiment. Jönåker Elegant är en klassiker för villa, och Aerlox 2.0 är det nyare valet för dig som vill ha mindre mosspåväxt. Vilken som passar ditt tak går vi igenom vid takkontrollen.",
       },
       {
         q: "Kan jag välja färg?",

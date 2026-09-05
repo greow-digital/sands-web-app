@@ -349,6 +349,68 @@ export default async function TjanstPage({
                   </div>
                 )}
 
+                {t.produkt && (
+                  <div className="mt-10 rounded-2xl border border-gray-100 overflow-hidden">
+                    {/* Bannern är 870x200, alltså redan ett brett format.
+                        Aspekten här ligger nära originalet så bilden inte
+                        beskärs sönder. */}
+                    <div className="relative aspect-[870/200] bg-gray-50">
+                      <Image
+                        src={t.produkt.bild}
+                        alt={t.produkt.bildAlt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 700px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="p-5 sm:p-6">
+                      <div className="flex items-start gap-4 mb-3">
+                        {t.produkt.thumb && (
+                          // Produktbilden är liten i original (173 px bred),
+                          // så den visas i småformat och skalas aldrig upp.
+                          <Image
+                            src={t.produkt.thumb}
+                            alt={t.produkt.thumbAlt ?? t.produkt.namn}
+                            width={173}
+                            height={203}
+                            className="hidden sm:block w-[86px] h-auto shrink-0 rounded-lg"
+                          />
+                        )}
+                        <div>
+                          <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-1.5">
+                            Utvald panna
+                          </p>
+                          <h3
+                            className="text-xl font-bold"
+                            style={{
+                              fontFamily: "var(--font-heading)",
+                              color: "var(--color-dark)",
+                            }}
+                          >
+                            {t.produkt.namn}
+                          </h3>
+                        </div>
+                      </div>
+                      {t.produkt.text.split("\n\n").map((para, i) => (
+                        <p
+                          key={i}
+                          className="text-base text-gray-600 leading-relaxed mb-3 last:mb-0"
+                        >
+                          {para}
+                        </p>
+                      ))}
+                      {t.produkt.lank && (
+                        <Link
+                          href={t.produkt.lank.href}
+                          className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-[#2B74FC] hover:underline"
+                        >
+                          {t.produkt.lank.text} <ArrowRight size={14} />
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {t.process && (
                   <div className="mt-10">
                     <h3
