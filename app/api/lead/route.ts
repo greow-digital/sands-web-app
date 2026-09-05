@@ -1,6 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
+import { render } from "@react-email/render";
+import { Resend } from "resend";
+import LeadConfirmation from "@/emails/lead-confirmation";
 
-export const runtime = "edge";
+// Resend-klienten och @react-email/render kräver Node, inte Edge.
+export const runtime = "nodejs";
 
 type LeadPayload = {
   name?: string;
@@ -25,6 +29,62 @@ type LeadPayload = {
   // Voice-agentens transkript (skickas med när formId === "voice")
   transcript?: string;
 };
+
+const EPOST_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+/**
+ * Bekräftelsemejl till kunden. Sands notifieras separat av Apps Script
+ * när raden skrivs till kalkylbladet, så här skickas INGET internmejl.
+ * Lägger man till ett får Sands dubbla larm på varje lead.
+ *
+ * Körs i after(), alltså efter att svaret gått iväg. Ett fel här får
+ * aldrig påverka besökaren: leadet är redan levererat via kalkylbladet
+ * och formuläret ska inte visa ett felmeddelande för att mejlet strular.
+ */
+async function skickaBekraftelse(data: LeadPayload) {
+  const epost = data.email?.trim().toLowerCase();
+  if (!epost || !EPOST_RE.test(epost)) return;
+
+  const nyckel = process.env.RESEND_API_KEY;
+  if (!nyckel) {
+    console.warn("RESEND_API_KEY saknas, hoppar över bekräftelsemejl");
+    return;
+  }
+
+  const from =
+    process.env.LEAD_FROM_EMAIL || "Sands Entreprenad <no-reply@sandsab.se>";
+  const replyTo = process.env.LEAD_REPLY_TO || "info@sandsab.se";
+
+  try {
+    const element = LeadConfirmation({
+      name: data.name?.trim() || "",
+      email: epost,
+      phone: data.phone?.trim() || undefined,
+      roofType: data.roofType?.trim() || undefined,
+      area: data.area?.trim() || undefined,
+      message: data.message?.trim() || undefined,
+    });
+
+    const [html, text] = await Promise.all([
+      render(element),
+      render(element, { plainText: true }),
+    ]);
+
+    const { error } = await new Resend(nyckel).emails.send({
+      from,
+      to: epost,
+      replyTo,
+      subject: "Tack för din förfrågan, så här går det till",
+      html,
+      text,
+      tags: [{ name: "type", value: "lead_confirmation" }],
+    });
+
+    if (error) console.error("Resend-fel:", error.message);
+  } catch (err) {
+    console.error("Bekräftelsemejl misslyckades:", err);
+  }
+}
 
 export async function POST(req: Request) {
   let data: LeadPayload;
@@ -112,6 +172,10 @@ export async function POST(req: Request) {
         { status: 502 }
       );
     }
+
+    // Först när leadet ligger i kalkylbladet är det levererat till Sands.
+    // Bekräftelsen till kunden skickas efter svaret, aldrig före.
+    after(() => skickaBekraftelse(data));
 
     return NextResponse.json({ ok: true });
   } catch (err) {
