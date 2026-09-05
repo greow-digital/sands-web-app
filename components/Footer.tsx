@@ -1,14 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { tjanster } from "@/lib/tjanster";
 
+// Footern hade tidigare en enda "Tjänster"-kolumn där takläggning låg
+// blandad med fem taktyper. Kolumnerna byggs nu ur `kategori` i
+// lib/tjanster.ts, så uppdelningen inte kan glida isär från datan och
+// nya sidor hamnar rätt automatiskt.
+const linkFor = (kategori: "taktyp" | "tjanst") =>
+  tjanster
+    .filter((t) => t.kategori === kategori)
+    .map((t) => ({ href: `/tjanster/${t.slug}`, label: t.title }));
+
+const taktyperLinks = linkFor("taktyp");
 const tjänsterLinks = [
-  { href: "/tjanster/taklaggning", label: "Takläggning" },
-  { href: "/tjanster/tegeltak", label: "Tegeltak" },
-  { href: "/tjanster/betongtak", label: "Betongtak" },
-  { href: "/tjanster/plattak", label: "Plåttak" },
-  { href: "/tjanster/papptak", label: "Papptak" },
-  { href: "/tjanster/eternittak", label: "Eternittak" },
+  ...linkFor("tjanst"),
+  { href: "/tjanster", label: "Alla tjänster →" },
 ];
 
 const områdenLinks = [
@@ -118,7 +125,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] gap-10 mb-12">
           {/* Kolumn 1: Logo + kontakt */}
           <div>
             <Link href="/" className="inline-block mb-5" aria-label="Sands Entreprenad, startsida">
@@ -162,7 +169,29 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Kolumn 2: Tjänster */}
+          {/* Kolumn 2: Taktyper */}
+          <div>
+            <h3
+              className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Taktyper
+            </h3>
+            <ul className="space-y-2">
+              {taktyperLinks.map((t) => (
+                <li key={t.href}>
+                  <Link
+                    href={t.href}
+                    className="text-sm text-gray-300 hover:text-white transition-colors"
+                  >
+                    {t.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Kolumn 3: Tjänster */}
           <div>
             <h3
               className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4"
@@ -184,7 +213,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Kolumn 3: Områden */}
+          {/* Kolumn 4: Områden */}
           <div>
             <h3
               className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4"
@@ -206,7 +235,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Kolumn 4: Om oss */}
+          {/* Kolumn 5: Om oss */}
           <div>
             <h3
               className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4"
