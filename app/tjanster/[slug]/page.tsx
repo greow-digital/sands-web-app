@@ -349,68 +349,6 @@ export default async function TjanstPage({
                   </div>
                 )}
 
-                {t.produkt && (
-                  <div className="mt-10 rounded-2xl border border-gray-100 overflow-hidden">
-                    {/* Bannern är 870x200, alltså redan ett brett format.
-                        Aspekten här ligger nära originalet så bilden inte
-                        beskärs sönder. */}
-                    <div className="relative aspect-[870/200] bg-gray-50">
-                      <Image
-                        src={t.produkt.bild}
-                        alt={t.produkt.bildAlt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 700px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="p-5 sm:p-6">
-                      <div className="flex items-start gap-4 mb-3">
-                        {t.produkt.thumb && (
-                          // Produktbilden är liten i original (173 px bred),
-                          // så den visas i småformat och skalas aldrig upp.
-                          <Image
-                            src={t.produkt.thumb}
-                            alt={t.produkt.thumbAlt ?? t.produkt.namn}
-                            width={173}
-                            height={203}
-                            className="hidden sm:block w-[86px] h-auto shrink-0 rounded-lg"
-                          />
-                        )}
-                        <div>
-                          <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-1.5">
-                            Utvald panna
-                          </p>
-                          <h3
-                            className="text-xl font-bold"
-                            style={{
-                              fontFamily: "var(--font-heading)",
-                              color: "var(--color-dark)",
-                            }}
-                          >
-                            {t.produkt.namn}
-                          </h3>
-                        </div>
-                      </div>
-                      {t.produkt.text.split("\n\n").map((para, i) => (
-                        <p
-                          key={i}
-                          className="text-base text-gray-600 leading-relaxed mb-3 last:mb-0"
-                        >
-                          {para}
-                        </p>
-                      ))}
-                      {t.produkt.lank && (
-                        <Link
-                          href={t.produkt.lank.href}
-                          className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-[#2B74FC] hover:underline"
-                        >
-                          {t.produkt.lank.text} <ArrowRight size={14} />
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                )}
-
                 {t.process && (
                   <div className="mt-10">
                     <h3
@@ -459,6 +397,74 @@ export default async function TjanstPage({
             </div>
           </div>
         </section>
+
+        {/* ── UTVALD PRODUKT ─────────────────────── */}
+        {t.produkt && (
+          <section className="py-20 lg:py-28 border-t border-gray-100">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-10">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
+                  Utvald panna
+                </p>
+                <h2
+                  className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.03em]"
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    color: "var(--color-dark)",
+                  }}
+                >
+                  {t.produkt.namn}
+                </h2>
+              </div>
+
+              {/* Bannern är 870x200 i original. Aspekten här är densamma,
+                  så den fyller sektionsbredden utan att beskäras sönder. */}
+              <div className="relative aspect-[870/200] rounded-2xl overflow-hidden bg-gray-50 mb-10">
+                <Image
+                  src={t.produkt.bild}
+                  alt={t.produkt.bildAlt}
+                  fill
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="max-w-[980px] mx-auto grid sm:grid-cols-[150px_1fr] gap-8 sm:gap-10">
+                {t.produkt.thumb ? (
+                  // Produktbilden är liten i original (173 px bred), så den
+                  // visas som mest i 150 px och skalas aldrig upp.
+                  <Image
+                    src={t.produkt.thumb}
+                    alt={t.produkt.thumbAlt ?? t.produkt.namn}
+                    width={173}
+                    height={203}
+                    className="w-[120px] sm:w-[150px] h-auto rounded-xl"
+                  />
+                ) : (
+                  <div className="hidden sm:block" />
+                )}
+                <div>
+                  {t.produkt.text.split("\n\n").map((para, i) => (
+                    <p
+                      key={i}
+                      className="text-base text-gray-600 leading-relaxed mb-4 last:mb-0"
+                    >
+                      {para}
+                    </p>
+                  ))}
+                  {t.produkt.lank && (
+                    <Link
+                      href={t.produkt.lank.href}
+                      className="inline-flex items-center gap-1.5 mt-5 text-sm font-semibold text-[#2B74FC] hover:underline"
+                    >
+                      {t.produkt.lank.text} <ArrowRight size={14} />
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ── FAQ ───────────────────────────────── */}
         <section
