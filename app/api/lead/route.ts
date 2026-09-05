@@ -74,7 +74,14 @@ async function skickaBekraftelse(data: LeadPayload) {
       from,
       to: epost,
       replyTo,
-      subject: "Tack för din förfrågan, så här går det till",
+      // Första meningen är allt som säkert syns på mobil, så bekräftelsen
+      // ligger först och löftet fyller ut i förhandsvisningen.
+      //
+      // "Senast" sätter ett tak i stället för en tidpunkt. Det håller även
+      // för en förfrågan som kommer in en lördagkväll, och det underpresterar
+      // inte när Sands ringer inom en timme. Byt inte till en exakt tid utan
+      // att först veta om Sands svarar på helger.
+      subject: "Tack för din förfrågan. Vi hör av oss senast nästa vardag.",
       html,
       text,
       tags: [{ name: "type", value: "lead_confirmation" }],
