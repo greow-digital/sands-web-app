@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
+import PartnerLink from "@/components/PartnerLink";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
@@ -61,6 +63,11 @@ const faq = [
   {
     q: "Mitt tak läcker, vad gör jag?",
     a: "Kontakta oss för en kostnadsfri takkontroll. Vi inspekterar taket, identifierar orsaken till läckaget och ger dig ett fast pris på åtgärd, ofta samma dag.",
+  },
+  // Ligger sist och lämnar över till avsnittet om oberoende besiktning nedanför.
+  {
+    q: "Vad är skillnaden på er kostnadsfria takkontroll och en oberoende takbesiktning?",
+    a: "Vår takkontroll är en kostnadsfri besiktning som ligger till grund för din offert. Den utförs av våra takläggare och du får en bedömning av takets skick samt fast pris på eventuella åtgärder. En oberoende takbesiktning utförs av en besiktningsman som inte säljer tak. Du betalar för den och får ett skriftligt protokoll som du kan använda för att jämföra offerter, vid husförsäljning eller som beställarens underlag i en entreprenad. De två utesluter inte varandra, många kombinerar dem.",
   },
 ];
 
@@ -365,6 +372,180 @@ export default function TakbesiktningPage() {
                 </details>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── OBEROENDE BESIKTNING ───────────── */}
+        {/* Medvetet nedtonat: ingen egen bakgrundsfärg och mindre rubrik än
+            sidans övriga H2:or, så avsnittet inte konkurrerar med hero eller
+            avslutande CTA. Syftet är att fånga upp den som söker ett opartiskt
+            utlåtande, inte att sälja besiktning. */}
+        <section className="py-16 lg:py-20 border-t border-gray-100">
+          <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
+            <h2
+              className="text-[26px] lg:text-[32px] font-extrabold tracking-[-0.02em] mb-4"
+              style={{
+                fontFamily: "var(--font-heading)",
+                color: "var(--color-dark)",
+              }}
+            >
+              Vill du ha en oberoende bedömning?
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-8">
+              Vår takkontroll är kostnadsfri och utförs av oss som också skulle
+              lägga taket. Den ligger till grund för din offert. Vill du
+              istället ha ett opartiskt utlåtande från någon som inte säljer
+              tak, rekommenderar vi en oberoende besiktning. Vi tar gärna emot
+              ett besiktningsprotokoll som underlag när vi räknar på ditt tak.
+            </p>
+
+            {/* Jämförelsen scrollar i sin egen container på smala skärmar, så
+                sidan aldrig blir bredare än viewporten. */}
+            <div className="overflow-x-auto rounded-2xl border border-gray-100 mb-10">
+              <table className="w-full min-w-[600px] text-sm border-collapse">
+                <thead>
+                  <tr className="bg-[#F8F9FB]">
+                    <th className="w-[22%] text-left font-semibold text-gray-500 px-5 py-3.5">
+                      <span className="sr-only">Jämförelse</span>
+                    </th>
+                    <th
+                      className="text-left font-bold px-5 py-3.5"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      Kostnadsfri takkontroll
+                    </th>
+                    <th
+                      className="text-left font-bold px-5 py-3.5"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      Oberoende besiktning
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      label: "Pris",
+                      sands: "0 kr",
+                      oberoende: "Enligt besiktningsbolagets prislista",
+                    },
+                    {
+                      label: "Utförs av",
+                      sands: "Sands takläggare",
+                      oberoende: "Oberoende besiktningsman",
+                    },
+                    {
+                      label: "Syfte",
+                      sands: "Underlag för offert",
+                      oberoende: "Opartiskt utlåtande",
+                    },
+                    {
+                      label: "Du får",
+                      sands: "Skickbedömning och fast pris på plats",
+                      oberoende:
+                        "Skriftligt protokoll med bilder och åtgärdslista",
+                    },
+                    {
+                      label: "Passar när",
+                      sands: "Du vill veta vad ett takbyte kostar",
+                      oberoende:
+                        "Du vill ha ett andra utlåtande, ska sälja huset eller upphandlar en entreprenad",
+                    },
+                  ].map((row) => (
+                    <tr
+                      key={row.label}
+                      className="border-t border-gray-100 align-top"
+                    >
+                      <th
+                        scope="row"
+                        className="text-left font-semibold text-gray-500 px-5 py-3.5"
+                      >
+                        {row.label}
+                      </th>
+                      <td className="text-gray-700 px-5 py-3.5">{row.sands}</td>
+                      <td className="text-gray-700 px-5 py-3.5">
+                        {row.oberoende}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              {[
+                {
+                  namn: "Svensk Takinspektion",
+                  text: "Oberoende takbesiktning för villa, BRF och företag. Du får en skriftlig rapport med bilder, skickbedömning och prioriterad åtgärdslista. Passar dig som vill veta takets skick innan du begär offerter.",
+                  href: "https://svensktakinspektion.se/",
+                  lankText: "Till svensktakinspektion.se",
+                  partner: "svensk_takinspektion",
+                  logo: "/images/partner-svensk-takinspektion.webp",
+                  logoBredd: 640,
+                  logoHojd: 334,
+                },
+                {
+                  namn: "Norrorts Besiktning",
+                  text: "SBR-godkänd besiktningsman specialiserad på yttertak. Utför förbesiktning, slutbesiktning, efterbesiktning och garantibesiktning enligt AB04 och ABT06. Passar BRF och fastighetsägare som upphandlar en entreprenad.",
+                  href: "https://www.norrortsbesiktning.se/",
+                  lankText: "Till norrortsbesiktning.se",
+                  partner: "norrorts_besiktning",
+                  logo: "/images/partner-norrorts-besiktning.png",
+                  logoBredd: 512,
+                  logoHojd: 512,
+                },
+              ].map((p) => (
+                <div
+                  key={p.namn}
+                  className="flex flex-col rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5"
+                >
+                  {/* Båda logotyperna är vita på transparent botten och syns
+                      inte mot kortets ljusa yta, därför den mörka plattan. */}
+                  <div
+                    className="inline-flex items-center h-14 w-fit rounded-xl px-3 mb-4"
+                    style={{ backgroundColor: "var(--color-dark)" }}
+                  >
+                    <Image
+                      src={p.logo}
+                      alt={`${p.namn} logotyp`}
+                      width={p.logoBredd}
+                      height={p.logoHojd}
+                      className="h-9 w-auto"
+                    />
+                  </div>
+                  <h3
+                    className="text-lg font-bold mb-2"
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      color: "var(--color-dark)",
+                    }}
+                  >
+                    {p.namn}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed mb-4 flex-1">
+                    {p.text}
+                  </p>
+                  <PartnerLink
+                    href={p.href}
+                    partner={p.partner}
+                    location="takbesiktning_page"
+                  >
+                    {p.lankText}
+                  </PartnerLink>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-sm text-gray-500 leading-relaxed">
+              Ett tak som är korrekt lagt tål att besiktas. Vi ställer gärna
+              vårt arbete under granskning av tredje part.
+            </p>
           </div>
         </section>
 
