@@ -45,6 +45,7 @@ export const ortCoords: Record<string, { lat: number; lng: number }> = {
   Strängnäs: { lat: 59.378, lng: 17.038 },
   Enköping: { lat: 59.636, lng: 17.077 },
   Gnesta: { lat: 59.046, lng: 17.314 },
+  Flen: { lat: 59.058, lng: 16.588 },
   Håbo: { lat: 59.625, lng: 17.46 },
   Uttran: { lat: 59.213, lng: 17.776 },
 };

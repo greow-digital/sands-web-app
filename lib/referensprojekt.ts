@@ -45,6 +45,18 @@ export const REFERENSPROJEKT: Referensprojekt[] = [
       "Komplett omläggning: rivning, ny underlagspapp, läkt förberedd för solpaneler, plåtdetaljer och taksäkerhet.",
   },
   {
+    slug: "takomlaggning-flen",
+    plats: "Flen",
+    kvm: 160,
+    material: "Betongpannor, Monier Aerlox",
+    ar: 2026,
+    prisEfterRot: 263655,
+    rotProcent: 30,
+    offert: "D4440",
+    omfattning:
+      "Komplett omläggning: rivning, ny råspont, underlagspapp, läkt förberedd för solpaneler, nytt regnvattensystem och taksäkerhet.",
+  },
+  {
     slug: "aladdinvagen-bromma",
     plats: "Bromma",
     kvm: 150,
