@@ -14,12 +14,8 @@ import OmradenInline from "@/components/OmradenInline";
 import SourcesFooter from "@/components/SourcesFooter";
 import SeasonBanner from "@/components/SeasonBanner";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
-import Referensprojekt from "@/components/Referensprojekt";
 
 import { pageMeta } from "@/lib/seo";
-import { client } from "@/sanity/lib/client";
-import { ALL_PROJEKT_QUERY } from "@/sanity/lib/queries";
-import type { ProjektCard } from "@/sanity/lib/types";
 
 export const metadata: Metadata = pageMeta({
   path: "/priser",
@@ -120,9 +116,7 @@ const påverkar = [
   "Tillgänglighet (ställningsbehov)",
 ];
 
-export default async function PriserPage() {
-  const allaProjekt = (await client.fetch(ALL_PROJEKT_QUERY)) as ProjektCard[];
-
+export default function PriserPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -485,7 +479,9 @@ export default async function PriserPage() {
           </div>
         </section>
 
-        <Referensprojekt projekt={allaProjekt} />
+        {/* Referensprojekten är medvetet avstängda på prissidan. Komponenten
+            och datan i lib/referensprojekt.ts ligger kvar för framtida bruk,
+            men sidan ska inte bero på att en slug-matchning lyckas. */}
 
         <OmradenInline />
 
