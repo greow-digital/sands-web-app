@@ -14,7 +14,14 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-import { company, garanti, nap, telefon } from "../lib/company";
+import {
+  company,
+  garanti,
+  granskning,
+  kontaktperson,
+  nap,
+  telefon,
+} from "../lib/company";
 
 /**
  * Bekräftelsemejl till kunden efter inskickat formulär.
@@ -167,13 +174,50 @@ const s = {
     margin: "0 0 3px",
   },
   link: { color: brand.primary, textDecoration: "underline" },
+  hej: {
+    color: brand.dark,
+    fontSize: "17px",
+    lineHeight: "26px",
+    fontWeight: 700,
+    margin: "0 0 10px",
+  },
+  // Outlook på Windows ignorerar border-radius och visar bilden fyrkantig.
+  // Det är acceptabelt, ett porträtt fungerar i båda formerna.
+  foto: {
+    borderRadius: "50%",
+    display: "block",
+    border: 0,
+  },
+  signatur: {
+    color: brand.body,
+    fontSize: "14px",
+    lineHeight: "22px",
+    margin: "0 0 2px",
+  },
+  granskning: {
+    color: brand.muted,
+    fontSize: "13px",
+    lineHeight: "21px",
+    margin: "14px 0 0",
+  },
 };
 
-/** Så här går det till, speglar processen och löftet på sajten. */
+/**
+ * Den personliga hälsningen. Säger inte att förfrågan är besvarad, den
+ * går ut några sekunder efter inskicket och då har ingen sett den ännu.
+ * "Tagit emot" är både sant och lika varmt.
+ */
+const HALSNING = `Tack för din förfrågan om ditt tak. Jag heter ${kontaktperson.fornamn} och det är jag som tar hand om den. Jag hör av mig inom kort för att boka in ett kostnadsfritt hembesök, då går jag upp på taket och tittar på skicket innan vi pratar pris.`;
+
+/**
+ * Så här går det till, speglar processen och löftet på sajten. Steg 1 är
+ * skrivet i Simons röst eftersom det är han som står som avsändare, byts
+ * personen ut måste texten skrivas om.
+ */
 const STEG = [
   {
-    titel: "Vi hör av oss",
-    text: "En av våra takläggare ringer eller mejlar dig, oftast samma vardag. Vi ställer några frågor om taket så vi vet vad vi ska titta efter.",
+    titel: "Jag hör av mig",
+    text: "Jag ringer eller mejlar dig, oftast samma vardag, och ställer några frågor om taket så jag vet vad jag ska titta efter.",
   },
   {
     titel: "Kostnadsfri takkontroll på plats",
@@ -218,7 +262,7 @@ export default function LeadConfirmation({
     <Html lang="sv">
       <Head />
       <Preview>
-        Tack för din förfrågan. Så här går det till härnäst.
+        {`${kontaktperson.fornamn} hör av sig inom kort för att boka in ett kostnadsfritt hembesök.`}
       </Preview>
       <Body style={s.body}>
         <Container style={s.container}>
@@ -234,13 +278,33 @@ export default function LeadConfirmation({
 
           <Section style={s.content}>
             <Heading style={s.h1}>
-              Tack för din förfrågan{fornamn ? `, ${fornamn}` : ""}
+              Hej{fornamn ? ` ${fornamn}` : ""}
             </Heading>
 
-            <Text style={s.p}>
-              Vi har tagit emot den och hör av oss inom kort. Här är vad som
-              händer nu, och vad du kan förvänta dig av oss.
-            </Text>
+            {/*
+              Hälsningen är personlig och står i jag-form eftersom mejlet
+              skickas i Simons namn. Fotot visas bara om kontaktperson.fotoUrl
+              är satt, annars ligger texten i full bredd. Det är avsiktligt:
+              hellre ingen bild än en trasig bildruta hos mottagaren.
+            */}
+            {kontaktperson.fotoUrl ? (
+              <Row style={{ margin: "0 0 20px" }}>
+                <Column width={84} valign="top">
+                  <Img
+                    src={kontaktperson.fotoUrl}
+                    width={68}
+                    height={68}
+                    alt={kontaktperson.namn}
+                    style={s.foto}
+                  />
+                </Column>
+                <Column valign="top">
+                  <Text style={{ ...s.p, margin: 0 }}>{HALSNING}</Text>
+                </Column>
+              </Row>
+            ) : (
+              <Text style={s.p}>{HALSNING}</Text>
+            )}
 
             {harSammanfattning && (
               <Section style={s.summary}>
@@ -277,12 +341,12 @@ export default function LeadConfirmation({
                 Har du bråttom?
               </Text>
               <Text style={{ ...s.stepText, margin: 0 }}>
-                Ring oss på{" "}
-                <Link href={telefon.href} style={s.link}>
-                  {telefon.display}
+                Ring mig direkt på{" "}
+                <Link href={kontaktperson.telefonHref} style={s.link}>
+                  {kontaktperson.telefonDisplay}
                 </Link>{" "}
-                så hjälper vi dig direkt. Du kan också svara på det här mejlet,
-                det går till en inkorg vi läser.
+                så tar vi det på en gång. Du kan också svara på det här mejlet,
+                det landar hos oss på kontoret och når mig samma dag.
               </Text>
             </Section>
 
@@ -294,6 +358,44 @@ export default function LeadConfirmation({
                 {rad}
               </Text>
             ))}
+
+            {/*
+              Länkad text, aldrig råa URL:er. En lista med fullängdsadresser
+              är en tydlig spamsignal, och allabolag-länken är närmare 90
+              tecken lång.
+            */}
+            <Text style={s.granskning}>
+              Kontrollera oss gärna hos{" "}
+              <Link href={granskning.brabyggare} style={s.link}>
+                BraByggare
+              </Link>{" "}
+              och{" "}
+              <Link href={granskning.allabolag} style={s.link}>
+                Allabolag
+              </Link>
+              .
+            </Text>
+
+            <Hr style={{ borderColor: brand.line, margin: "26px 0 22px" }} />
+
+            <Text style={{ ...s.signatur, margin: "0 0 10px" }}>
+              Med vänlig hälsning,
+            </Text>
+            <Text
+              style={{ ...s.signatur, color: brand.dark, fontWeight: 700 }}
+            >
+              {kontaktperson.namn}
+            </Text>
+            <Text style={s.signatur}>{company.namn}</Text>
+            <Text style={s.signatur}>
+              <Link href={kontaktperson.telefonHref} style={s.link}>
+                {kontaktperson.telefonDisplay}
+              </Link>{" "}
+              ·{" "}
+              <Link href={`mailto:${kontaktperson.email}`} style={s.link}>
+                {kontaktperson.email}
+              </Link>
+            </Text>
           </Section>
 
           <Section style={s.footer}>
