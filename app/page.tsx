@@ -7,7 +7,6 @@ import TrustBadgesRow from "@/components/TrustBadgesRow";
 import SeasonBanner from "@/components/SeasonBanner";
 import LatestProjekt from "@/components/LatestProjekt";
 import TaktestCta from "@/components/TaktestCta";
-import HeroVideo from "@/components/HeroVideo";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
 import LeadForm from "@/components/LeadForm";
 import OmdomenInline from "@/components/OmdomenInline";
@@ -127,23 +126,62 @@ export default async function Home() {
       <HeroCtaTracker />
       <main className="pt-16 lg:pt-20 bg-white">
         {/* ── HERO ─────────────────────────────────── */}
-        <section className="relative overflow-hidden min-h-[700px] lg:min-h-[820px] flex items-center">
-          {/* Bakgrund: bild som LCP + video som tonas in efter page load */}
-          <HeroVideo
-            posterSrc="/images/hero-house.jpg"
-            videoSrc="/videos/hero.mp4"
-            alt="Takbyte i Stockholm, villa med nytt tak"
+        {/*
+          Lägre min-höjd än tidigare, så innehållet styr heron i stället för
+          att centreras i en box som är högre än det. Med 820 px låg
+          innehållet 18 px från mitten och luften mellan menyn och
+          säsongspillret blev 114 px. Nu styr paddingen ensam.
+        */}
+        <section className="relative overflow-hidden min-h-[560px] lg:min-h-[640px] flex items-center">
+          {/*
+            Stillbild i stället för video sedan 16 sep. Videon laddade 4,4 MB
+            efter page load på desktop utan att tillföra något mätbart, och
+            hoppades ändå över helt på mobil, som är 77 procent av den
+            betalda trafiken.
+
+            object-top, inte den centrering object-cover använder som
+            standard. Bilden är 1440x1086 och heron är mycket bredare i
+            proportion, så en centrerad beskärning lägger texten över
+            fasaden där den blir svårläst. Toppbeskärningen ger i stället
+            himmel och tak bakom rubriken. På mobil är höjden den
+            begränsande dimensionen, så object-top saknar effekt där.
+          */}
+          <Image
+            src="/images/hero-dannemora.jpg"
+            alt="Stuga i Dannemora med nylagt tegeltak i tegelröd kulör"
+            fill
+            priority
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover object-top"
           />
-          {/* Gradient overlay: 70% mörk vänster → 20% höger */}
+          {/*
+            Två separata overlays, inte en gemensam med ett tillägg ovanpå.
+            Staplade gradienter multiplicerar: 0,82 plus 0,55 ger 0,92 i
+            vänsterkanten, vilket blir nästan svart. Därför byts de ut mot
+            varandra vid breakpointen i stället.
+
+            Mobil får vertikal mörkläggning eftersom texten spänner över hela
+            bredden där, medan den horisontella gradienten bara mörkar
+            vänsterkanten och lämnar rubrikens slut på oskyddad bildyta.
+          */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 md:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(6,6,7,0.50) 0%, rgba(6,6,7,0.66) 38%, rgba(6,6,7,0.72) 100%)",
+            }}
+          />
+          {/* Desktop: mörk vänster där texten ligger, ljus höger bakom formuläret */}
+          <div
+            className="absolute inset-0 hidden md:block"
             style={{
               background:
                 "linear-gradient(90deg, rgba(6,6,7,0.82) 0%, rgba(6,6,7,0.70) 25%, rgba(6,6,7,0.45) 55%, rgba(6,6,7,0.20) 100%)",
             }}
           />
 
-          <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
+          <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-14 w-full">
             {/* På mobil: titel → CTA → form → stats → badges. På desktop:
                 2-kol-grid med formuläret till höger. Formuläret låg här fram
                 till 5 juni och togs bort för att mäta hero-flöde mot
@@ -179,6 +217,15 @@ export default async function Home() {
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Din takläggare i Stockholm, med fast pris och{" "}
+                {/*
+                  Medvetet den starka varumärkesblå, inte en ljusare ton.
+                  Mätt mot den renderade heron hamnar den under WCAG-kravet
+                  3,0:1 för stor text, eftersom den ligger mot ett tegelrött
+                  tak. Valet är taget med den kunskapen: färgen väger tyngre
+                  än marginalen här. Byts hero-bilden mot ett mörkare motiv
+                  klarar den sig bättre, eftersom blå är ljusare än
+                  bakgrunden och kontrasten alltså ökar när ytan mörknar.
+                */}
                 <span style={{ color: "var(--color-primary)" }}>
                   30 års garanti
                 </span>
