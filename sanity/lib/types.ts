@@ -31,6 +31,13 @@ export type ProjektDetail = ProjektCard & {
   beskrivning: string | null;
   taggar: string[] | null;
   bilder: SanityImageWithMeta[] | null;
+  /**
+   * Före och efter visas som ett par på projektsidan, och bara när båda
+   * finns. En ensam förebild utan efterbild säger ingenting, och en ensam
+   * efterbild täcks redan av huvudbilden.
+   */
+  foreImage: SanityImageWithMeta | null;
+  efterImage: SanityImageWithMeta | null;
 };
 
 export type ProjektLatest = {

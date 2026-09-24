@@ -48,6 +48,22 @@ const PROJEKT_DETAIL_FIELDS = /* groq */ `
       metadata { lqip, dimensions { width, height } }
     }
   },
+  foreImage {
+    ...,
+    asset->{
+      _id,
+      url,
+      metadata { lqip, dimensions { width, height } }
+    }
+  },
+  efterImage {
+    ...,
+    asset->{
+      _id,
+      url,
+      metadata { lqip, dimensions { width, height } }
+    }
+  },
   bilder[] {
     ...,
     _key,

@@ -26,6 +26,29 @@ function tjanstEtikett(slug: string): string {
   return getTjanst(slug)?.title ?? slug;
 }
 
+/**
+ * Vad projektet ska kallas. Används både i rubriken på sidan och i
+ * sidtiteln, så de två aldrig kan glida isär.
+ *
+ * Fallordningen finns för att `typ` bara beskriver taktyp och därför är
+ * tom på alla projekt som inte är takprojekt. Tidigare byggde metadata
+ * titeln som [typ, ort], vilket gav "Stockholm | Sands" på tre olika
+ * sidor när typ rensades från renoverings- och fasadprojekten.
+ */
+function projektRubrik(p: {
+  typ?: string | null;
+  tjanster?: string[] | null;
+  title?: string | null;
+}): string {
+  const primar = (p.tjanster ?? [])[0];
+  return (
+    p.typ ??
+    (primar
+      ? tjanstEtikett(primar)
+      : (p.title ?? "").split(",")[0].trim() || "Projekt")
+  );
+}
+
 const TYP_TO_TJANST: Record<string, { slug: string; label: string }> = {
   Tegeltak: { slug: "tegeltak", label: "tegeltak" },
   Betongtak: { slug: "betongtak", label: "betongtak" },
@@ -69,7 +92,7 @@ export async function generateMetadata({
   })) as ProjektDetail | null;
   if (!p) return {};
   const titleBase =
-    [p.typ, p.ort].filter(Boolean).join(" i ") || "Projekt";
+    [projektRubrik(p), p.ort].filter(Boolean).join(" i ") || "Projekt";
   return pageMeta({
     path: `/projekt/${slug}`,
     title: `${titleBase} | Sands`,
@@ -98,11 +121,7 @@ export default async function ProjektDetailPage({
   // Rubrik: taktyp om projektet rör tak, annars primär tjänst, annars
   // titelns första led. Poolbygge och markarbete har varken taktyp eller
   // tjänstesida, och ska inte kallas "Projekt".
-  const rubrik =
-    p.typ ??
-    (primarTjanst
-      ? tjanstEtikett(primarTjanst)
-      : (p.title ?? "").split(",")[0].trim() || "Projekt");
+  const rubrik = projektRubrik(p);
 
   const relaterade = ortProjekt
     .filter(
@@ -278,6 +297,62 @@ export default async function ProjektDetailPage({
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-start">
               <div>
+                {/*
+                  Före och efter renderas bara när båda finns. En ensam
+                  förebild säger ingenting utan sin motsvarighet, och en
+                  ensam efterbild täcks redan av huvudbilden.
+
+                  Fälten har funnits i Sanity-schemat sedan tidigare men
+                  hämtades aldrig i GROQ och visades aldrig. Nio projekt
+                  hade redan en förebild inlagd som aldrig nått sajten.
+                */}
+                {p.foreImage?.asset && p.efterImage?.asset && (
+                  <div className="mb-8">
+                    <h2
+                      className="text-xl font-bold mb-4"
+                      style={{
+                        fontFamily: "var(--font-heading)",
+                        color: "var(--color-dark)",
+                      }}
+                    >
+                      Före och efter
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {(
+                        [
+                          ["Före", p.foreImage],
+                          ["Efter", p.efterImage],
+                        ] as const
+                      ).map(([etikett, img]) => (
+                        <figure key={etikett} className="m-0">
+                          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100">
+                            <Image
+                              src={urlFor(img)
+                                .width(900)
+                                .height(675)
+                                .fit("crop")
+                                .url()}
+                              alt={
+                                img.alt || `${p.title}, ${etikett.toLowerCase()}`
+                              }
+                              fill
+                              sizes="(max-width: 640px) 100vw, 50vw"
+                              className="object-cover"
+                              placeholder={
+                                img.asset?.metadata?.lqip ? "blur" : "empty"
+                              }
+                              blurDataURL={img.asset?.metadata?.lqip ?? undefined}
+                            />
+                            <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-white/95 text-gray-900">
+                              {etikett}
+                            </span>
+                          </div>
+                        </figure>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {p.bilder && p.bilder.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
                     {p.bilder.map((img, idx) => {
