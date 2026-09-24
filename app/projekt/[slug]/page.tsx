@@ -198,11 +198,16 @@ export default async function ProjektDetailPage({
 
               {/* Text */}
               <div className="lg:order-first">
-                {(p.typ || primarTjanst) && (
-                  <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                    {rubrik}
-                  </p>
-                )}
+                {/*
+                  Ingen villkoring. Etiketten hängde tidigare på att typ
+                  eller en tjänst fanns, vilket dolde den helt på de fem
+                  projekt som saknar båda. projektRubrik() faller alltid
+                  tillbaka på titelns första del och i sista hand "Projekt",
+                  så värdet kan inte bli tomt.
+                */}
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
+                  {rubrik}
+                </p>
                 <h1
                   className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.03em] leading-[1.05] mb-5"
                   style={{
