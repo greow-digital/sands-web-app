@@ -1,3 +1,17 @@
+import {
+  FLAGGSKEPP_KVM,
+  FLAGGSKEPP_PRIS,
+  MATERIAL,
+  prisEfterRot,
+} from "./material";
+
+/* Nya artiklar hämtar pris och livslängd ur lib/material.ts i stället för
+   att skriva in siffrorna, så att de följer med vid nästa prisjustering
+   (SEO.md §5). Betong på 140 m² använder FLAGGSKEPP_PRIS, som är avrundat
+   uppåt till 169 000 kr, för att stämma med /priser. */
+const kr = (n: number) => n.toLocaleString("sv-SE");
+const tegel140 = prisEfterRot("tegel", FLAGGSKEPP_KVM);
+
 export type Artikel = {
   slug: string;
   titel: string;
@@ -6,6 +20,8 @@ export type Artikel = {
   kategori: string;
   lästid: string;
   image?: string;
+  /** Beskriver bilden. Utan den används titeln som alt-text. */
+  imageAlt?: string;
   innehåll: string;
   /**
    * Valfri FAQ. När den finns renderas den öppen (inte accordion) sist i
@@ -15,6 +31,183 @@ export type Artikel = {
 };
 
 export const artiklar: Artikel[] = [
+  /* GSC 9 jul till 6 okt 2026: 614 visningar på 35 läckagesökningar,
+     snittposition 37, noll klick och ingen sida om ämnet. Riktar sig mot
+     "vad gör jag nu"-sökningarna (takläckage, taket läcker, läcka i taket).
+     "takreparation stockholm" lämnas åt en eventuell tjänstesida.
+     Beskriver bara det Sands erbjuder: svar samma vardag, kostnadsfri
+     takkontroll och fast pris på åtgärden. Ingen utlovad inställelsetid,
+     inget lagningspris och ingen akut tätning, enligt besked 9 okt 2026.
+     Orden innertak, gipstak och vävspänt undviks medvetet, eftersom "tak"
+     annars drar in sökningar om innertak. */
+  {
+    slug: "taket-lacker",
+    titel: "Taket läcker? Så gör du direkt i Stockholm",
+    ingress:
+      "Vatten in genom taket? Så skyddar du huset de första timmarna, hittar troliga orsaker och avgör om lagning räcker eller om taket behöver bytas.",
+    datum: "2026-10-09",
+    kategori: "Råd & tips",
+    lästid: "5 min",
+    // Eget projekt, Hakevägen i Djursholm, före takomläggningen.
+    image: "/images/blogg-taket-lacker.webp",
+    imageAlt:
+      "Närbild på ett gammalt tegeltak i Djursholm med lav på pannorna och en glipa under nockpannorna, en typisk plats där vatten tränger in",
+    faq: [
+      {
+        q: "Mitt tak läcker, vad gör jag först?",
+        a: "Skydda det som finns under läckan med hinkar och handdukar, och stäng av strömmen till rummet om vattnet kommer nära lampor eller uttag. Fotografera skadan och anteckna när det läcker och i vilket väder. Gå inte upp på taket själv när det är blött. Boka sedan en kostnadsfri takkontroll så att orsaken hittas innan skadan växer.",
+      },
+      {
+        q: "Täcker försäkringen ett läckande tak?",
+        a: "Det beror på orsaken och på ditt bolags villkor. Många villaförsäkringar ersätter plötsliga skador, till exempel efter en storm, men sällan läckage som beror på att taket är gammalt eller dåligt underhållet. Kontakta försäkringsbolaget tidigt och spara bilder och anteckningar. Orsaken avgör ofta ärendet, och den hittar vi vid en kostnadsfri takkontroll.",
+      },
+      {
+        q: "Kan man laga ett läckande tak, eller måste hela taket bytas?",
+        a: "Ett enstaka läckage på ett tak i gott skick kan oftast åtgärdas med en riktad reparation, till exempel runt en genomföring eller en trasig panna. Läcker det på flera ställen, eller är underlagspappen 25 år eller äldre, löser en lagning sällan problemet på sikt. Då är omläggning eller takbyte det hållbara alternativet. Vid kostnadsfri takkontroll får du en bedömning och fast pris på det som faktiskt löser problemet.",
+      },
+      {
+        q: "Varför läcker taket bara när det blåser eller regnar kraftigt?",
+        a: "Då pressas vatten in där taket redan har en svag punkt, oftast vid plåtarbeten runt skorsten och genomföringar, i ränndalar eller under pannor som har flyttat sig. Vid vanligt regn rinner vattnet förbi, men slagregn från ett visst håll hittar vägen in. Anteckna vindriktningen när det läcker, det hjälper oss att hitta stället vid takkontrollen.",
+      },
+      {
+        q: "Kan det vara kondens och inte läckage?",
+        a: "Ja, särskilt under kalla perioder. Fuktig inomhusluft som tar sig upp på vinden kan kondensera på takets kalla undersida och droppa ner, vilket ser ut som ett läckage. Det kräver en helt annan åtgärd, oftast bättre ventilation eller tätning mot vinden. Därför är det värt att få orsaken fastställd vid en takkontroll innan något lagas.",
+      },
+    ],
+    innehåll: `## Gör det här de första timmarna
+
+Ett läckande tak är akut, men inte för att taket försämras snabbt. Det är vattnet som gör skadan: det tar sig in i isolering, virke och ytskikt, och skadan växer för varje regn. Det mesta du behöver göra direkt är enkelt och går att göra inifrån huset.
+
+- **Skydda det som finns under läckan.** Ställ ut hinkar, lägg handdukar och flytta möbler och elektronik.
+- **Stäng av strömmen till rummet** om vattnet kommer nära lampor, uttag eller dosor, och kontakta en elektriker.
+- **Fotografera skadan** inomhus och på vinden om du kommer åt. Anteckna datum, tid och väder.
+- **Gå inte upp på taket själv.** Ett blött tak är halt, och arbete på taket kräver fallskydd.
+- **Kontakta ditt försäkringsbolag tidigt,** innan något åtgärdas, så att du vet vad de vill ha dokumenterat.
+
+## Titta på vinden om du kan
+
+Har du en vind som går att nå säkert ger den ofta svaret snabbare än något annat. Leta efter fuktfläckar på råsponten, blöt isolering och spår av rinnande vatten.
+
+Vattnet kommer sällan in precis där det droppar ner. Det rinner längs virket först, ibland flera meter. Följ spåret uppåt så kommer du närmare själva läckan.
+
+## När läcker det? Det säger mycket om varför
+
+Lägg märke till i vilket väder det läcker. Det är en av de mest användbara uppgifterna när orsaken ska hittas.
+
+- **Bara vid kraftigt regn eller blåst från ett visst håll.** Typiskt för en svag punkt vid plåtarbeten runt skorsten och genomföringar, i ränndalar eller under pannor som har flyttat sig.
+- **Vid snösmältning och töväder.** Is i takfoten eller i hängrännan kan dämma upp smältvattnet så att det tränger in under pannorna.
+- **Även när det är torrt ute.** Då är det sannolikt inte taket. Kondens från fuktig inomhusluft eller en rörläcka är troligare.
+
+## Vanliga orsaker till takläckage
+
+De flesta läckor uppstår i övergångarna, inte mitt på takytan.
+
+- **Genomföringar** för ventilation och avluftning, där tätningen åldras.
+- **Skorstensbeslaget,** plåten mellan skorsten och tak.
+- **Ränndalar,** där två takfall möts och mycket vatten samlas.
+- **Trasiga eller förskjutna pannor** efter storm, snölast eller tidigare arbeten.
+- **Igensatta hängrännor** som svämmar över mot takfoten.
+- **Uttjänt underlagspapp.** Pappen under pannorna är det som gör taket tätt, och när den har spruckit hjälper det inte att pannorna är hela. Läs mer om <a href="/blogg/under-takpannorna-underlagspapp-strolakt" class="text-[#2B74FC] font-semibold">vad som finns under takpannorna</a>.
+
+## Lagning, omläggning eller nytt tak?
+
+Här ligger det verkliga beslutet, och svaret beror mer på takets ålder och skick än på hur stort läckaget är.
+
+- **Riktad reparation** räcker när taket i övrigt är i gott skick och läckaget har en tydlig, avgränsad orsak, till exempel en trasig panna eller en otät genomföring.
+- **Takomläggning** passar när pannorna är hela men underlagspappen är 25 år eller äldre. Pannorna lyfts av, nytt undertak läggs och pannorna läggs tillbaka.
+- **Komplett takbyte** är det hållbara valet när taket är över 35 år, läcker på flera ställen eller när pannorna har vittrat.
+
+Ett tydligt tecken på att lagning inte räcker är att det läcker igen på ett nytt ställe kort efter förra lagningen. Hur du bedömer takets skick i övrigt går vi igenom i guiden <a href="/blogg/nar-byta-tak" class="text-[#2B74FC] font-semibold">hur vet du om det är dags att byta tak</a>.
+
+Blir det ett takbyte kostar det från ${kr(MATERIAL.betong.prisM2)} kr/m² efter ROT-avdrag med betongpannor, och en villa på ${FLAGGSKEPP_KVM} m² från ${kr(FLAGGSKEPP_PRIS)} kr. Fler räkneexempel finns på vår <a href="/priser" class="text-[#2B74FC] font-semibold">prissida för takbyte</a>.
+
+## Så går det till när du hör av dig
+
+Vi svarar samma vardag och bokar in en <a href="/tjanster/takbesiktning" class="text-[#2B74FC] font-semibold">kostnadsfri takkontroll</a>. Vid besöket hittar vi orsaken till läckaget och bedömer skicket på resten av taket.
+
+Du får sedan ett fast pris på den åtgärd som faktiskt löser problemet, oavsett om det är en riktad reparation, en <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">omläggning eller ett nytt tak</a>. Själva åtgärden är ett separat uppdrag, och du bestämmer själv om du vill gå vidare.`,
+  },
+  /* GSC 9 jul till 6 okt 2026: noll visningar på jämförelsen betong mot
+     tegel, och 42 visningar på snittposition 44 för livslängdsfrågor.
+     /blogg/platttak-eller-tegeltag nämner inte betongpannor. Pris och
+     livslängd kommer ur lib/material.ts. Vikt per m² och produktnamn
+     utelämnas enligt besked 9 okt 2026, eftersom de inte finns i repot. */
+  {
+    slug: "betongpannor-eller-tegelpannor",
+    titel: "Betongpannor eller tegelpannor? Pris och livslängd",
+    ingress:
+      "Betongpannor kostar mindre, tegelpannor håller längre och behåller sin kulör. Så skiljer de sig i pris per m², livslängd och vad som passar ditt hus.",
+    datum: "2026-10-09",
+    kategori: "Material",
+    lästid: "4 min",
+    // Egna projekt: betongpannor i Farsta, tvåkupigt lertegel i Älvsjö.
+    image: "/images/blogg-betong-eller-tegel.webp",
+    imageAlt:
+      "Till vänster svarta betongpannor på ett tak i Farsta, till höger tvåkupigt lertegel vid en skorsten i Älvsjö. Båda taken är lagda av Sands.",
+    faq: [
+      {
+        q: "Vad kostar tegelpannor jämfört med betongpannor?",
+        a: `Betongpannor kostar från ${kr(MATERIAL.betong.prisM2)} kr/m² och tegelpannor från ${kr(MATERIAL.tegel.prisM2)} kr/m², båda efter ROT-avdrag och för ett komplett takbyte. För en villa på ${FLAGGSKEPP_KVM} m² blir det från ${kr(FLAGGSKEPP_PRIS)} kr med betong och från ${kr(tegel140)} kr med tegel. Ett bindande fast pris får du efter kostnadsfri takkontroll.`,
+      },
+      {
+        q: "Hur länge håller betongpannor?",
+        a: `Betongpannor håller normalt ${MATERIAL.betong.livslangd}, förutsatt att underlaget är i gott skick. Det är oftare underlagspappen än pannorna som avgör när taket behöver göras om. Vid en kostnadsfri takkontroll bedömer vi hur mycket livslängd ditt tak har kvar.`,
+      },
+      {
+        q: "Hur länge håller tegelpannor?",
+        a: `Tegelpannor håller normalt ${MATERIAL.tegel.livslangd} och behåller sin kulör. Underlagspappen under pannorna håller inte lika länge, så ett tegeltak läggs ofta om med samma pannor när pappen är uttjänt. Vid takkontrollen ser vi om dina pannor går att återanvända.`,
+      },
+      {
+        q: "Kan jag byta från betongpannor till tegelpannor?",
+        a: "Ja, vid ett takbyte väljer du fritt ny beläggning. Sedan 1 december 2025 krävs inte bygglov för takbyte på en- och tvåfamiljshus, även om du byter taktyp eller färg. För kulturhistoriskt skyddade byggnader kan bygglov fortfarande krävas. Det och takstolarnas bärförmåga kontrollerar vi vid takkontrollen.",
+      },
+    ],
+    innehåll: `## Det korta svaret
+
+Betongpannor är det mest prisvärda valet och det vanligaste i Sverige. Tegelpannor kostar mer, men håller längre och behåller sin kulör livet ut. Båda ger ett tätt och hållbart tak om underlaget görs rätt, och det är oftare underlaget än pannan som avgör hur länge taket håller.
+
+| Jämförelse | Betongpannor | Tegelpannor |
+| --- | --- | --- |
+| Pris per m² efter ROT | från ${kr(MATERIAL.betong.prisM2)}\u00a0kr | från ${kr(MATERIAL.tegel.prisM2)}\u00a0kr |
+| Villa ${FLAGGSKEPP_KVM} m² efter ROT | från ${kr(FLAGGSKEPP_PRIS)}\u00a0kr | från ${kr(tegel140)}\u00a0kr |
+| Livslängd | ${MATERIAL.betong.livslangd} | ${MATERIAL.tegel.livslangd} |
+| Material | Gjuten betong | Bränd lera |
+| Kulör | Brett sortiment | Behåller kulören livet ut |
+
+## Pris: betong är billigare per kvadratmeter
+
+Betongpannor kostar från ${kr(MATERIAL.betong.prisM2)} kr/m² och tegelpannor från ${kr(MATERIAL.tegel.prisM2)} kr/m², båda efter 30 procents ROT-avdrag. På en villa med ${FLAGGSKEPP_KVM} m² tak blir skillnaden omkring ${kr(tegel140 - FLAGGSKEPP_PRIS)} kr.
+
+Priserna gäller ett komplett takbyte, inklusive rivning, nytt underlag, plåt och taksäkerhet. Vad just ditt tak landar på beror på lutning, form och underlagets skick. Räkna på din egen takyta på vår <a href="/priser" class="text-[#2B74FC] font-semibold">prissida för takbyte</a>.
+
+## Livslängd: tegel håller längst
+
+Tegelpannor håller normalt ${MATERIAL.tegel.livslangd} och betongpannor ${MATERIAL.betong.livslangd}. Siffrorna gäller pannorna. Underlagspappen under dem behöver normalt göras om tidigare, ofta när den är 25 år eller äldre, och det är när pappen är uttjänt som taket börjar läcka.
+
+Det är därför många tegeltak läggs om med samma pannor: pannorna lyfts av, nytt undertak läggs och pannorna läggs tillbaka. Det sänker kostnaden jämfört med ett komplett byte. Läs mer om <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">takbyte och takomläggning</a>, eller om <a href="/blogg/under-takpannorna-underlagspapp-strolakt" class="text-[#2B74FC] font-semibold">vad som finns under takpannorna</a>.
+
+## Utseende och kulör
+
+Tegel är ett klassiskt naturmaterial som behåller sin kulör livet ut. Betongpannor finns i ett brett sortiment av kulörer och former, vilket gör det lätt att matcha husets stil till ett lägre pris.
+
+## Vikt, lutning och takstolar
+
+Både betong- och tegelpannor är tunga jämfört med plåt och papp. Byter du från ett lättare material, till exempel plåt, papp eller eternit, behöver takstolarnas bärförmåga kontrolleras. Vikten skiljer också mellan olika pannmodeller, så vi kontrollerar bärförmågan även när du byter mellan betong och tegel.
+
+Båda sorterna kräver en viss minsta taklutning, och den varierar mellan modeller. Har du ett flackt tak kan <a href="/tjanster/plattak" class="text-[#2B74FC] font-semibold">plåttak</a> vara ett bättre val. Hur plåt står sig mot tegel jämför vi i guiden <a href="/blogg/platttak-eller-tegeltag" class="text-[#2B74FC] font-semibold">plåttak eller tegeltak</a>.
+
+## Vilken passar ditt hus?
+
+- **Välj betongpannor** om priset väger tyngst och du vill ha ett robust tak med brett val av kulörer. Läs mer om <a href="/tjanster/betongtak" class="text-[#2B74FC] font-semibold">betongtak</a>.
+- **Välj tegelpannor** om du vill ha längsta möjliga livslängd, ett naturmaterial och en kulör som håller. Läs mer om <a href="/tjanster/tegeltak" class="text-[#2B74FC] font-semibold">tegeltak</a>.
+- **Är taket flackt,** jämför med plåt innan du bestämmer dig.
+
+Med ett komplett Monier-taksystem gäller Moniers Tätt tak-garanti i upp till 30 år. Vad den omfattar går vi igenom i guiden om <a href="/blogg/monier-garanti" class="text-[#2B74FC] font-semibold">Moniers garanti</a>.
+
+## Osäker på vilket du ska välja?
+
+Vid en kostnadsfri takkontroll går vi igenom takets lutning, bärförmåga och underlag. Du får råd om vilket material som passar ditt hus och fast pris på det alternativ du väljer.`,
+  },
   {
     slug: "vad-kostar-takbyte",
     titel: "Vad kostar ett takbyte? Så byggs priset upp",

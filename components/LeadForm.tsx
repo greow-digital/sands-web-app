@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { leadSourceFor } from "@/lib/lead-source";
 
 type FormData = {
@@ -87,6 +87,13 @@ export default function LeadForm({
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>();
+
+  // LeadForm renderas flera gånger på samma sida (hero + sektion), så id:n
+  // måste vara unika per instans. Utan det pekar två label htmlFor på samma
+  // id och webbläsaren kopplar fel fält, vilket både bryter etiketten och
+  // försvagar autofyllens gissning.
+  const uid = useId();
+  const fid = (namn: string) => `${uid}-${namn}`;
 
   const valfriKontakt = contact === "phone-or-email";
 
@@ -312,11 +319,13 @@ export default function LeadForm({
       >
         {/* Namn */}
         <div>
-          <label className={labelCls} style={labelStyle}>
+          <label htmlFor={fid("name")} className={labelCls} style={labelStyle}>
             Namn *
           </label>
           <input
+            id={fid("name")}
             type="text"
+            autoComplete="name"
             placeholder="Ditt namn"
             className={inputCls(Boolean(errors.name))}
             {...trackField(
@@ -332,11 +341,17 @@ export default function LeadForm({
         {fields === "minimal" ? (
           <div className={valfriKontakt ? "grid grid-cols-2 gap-3" : ""}>
             <div className="min-w-0">
-              <label className={labelCls} style={labelStyle}>
+              <label
+                htmlFor={fid("phone")}
+                className={labelCls}
+                style={labelStyle}
+              >
                 Telefon {valfriKontakt ? "" : "*"}
               </label>
               <input
+                id={fid("phone")}
                 type="tel"
+                autoComplete="tel"
                 placeholder="070-000 00 00"
                 className={inputCls(Boolean(errors.phone))}
                 {...trackField(
@@ -357,11 +372,19 @@ export default function LeadForm({
             </div>
             {valfriKontakt && (
               <div className="min-w-0">
-                <label className={labelCls} style={labelStyle}>
+                <label
+                  htmlFor={fid("email")}
+                  className={labelCls}
+                  style={labelStyle}
+                >
                   E-post
                 </label>
                 <input
+                  id={fid("email")}
                   type="email"
+                  autoComplete="email"
+                  autoCapitalize="none"
+                  spellCheck={false}
                   placeholder="din@epost.se"
                   className={inputCls(Boolean(errors.email))}
                   {...trackField(
@@ -396,7 +419,7 @@ export default function LeadForm({
             {showMessage && (
               <div className="col-span-2">
                 <label
-                  htmlFor="message-minimal"
+                  htmlFor={fid("message")}
                   className={labelCls}
                   style={labelStyle}
                 >
@@ -404,7 +427,7 @@ export default function LeadForm({
                   <span className="text-gray-400 font-normal">(valfritt)</span>
                 </label>
                 <textarea
-                  id="message-minimal"
+                  id={fid("message")}
                   rows={2}
                   placeholder="Kupor, läckage, eternit eller annat"
                   className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
@@ -418,11 +441,17 @@ export default function LeadForm({
             {/* Telefon + E-post */}
             <div className="grid grid-cols-2 gap-3">
               <div className="min-w-0">
-                <label className={labelCls} style={labelStyle}>
+                <label
+                  htmlFor={fid("phone")}
+                  className={labelCls}
+                  style={labelStyle}
+                >
                   Telefon *
                 </label>
                 <input
+                  id={fid("phone")}
                   type="tel"
+                  autoComplete="tel"
                   placeholder="070-000 00 00"
                   className={inputCls(Boolean(errors.phone))}
                   {...trackField(
@@ -443,12 +472,20 @@ export default function LeadForm({
                 )}
               </div>
               <div className="min-w-0">
-                <label className={labelCls} style={labelStyle}>
+                <label
+                  htmlFor={fid("email")}
+                  className={labelCls}
+                  style={labelStyle}
+                >
                   E-post{" "}
                   <span className="text-gray-400 font-normal">(valfritt)</span>
                 </label>
                 <input
+                  id={fid("email")}
                   type="email"
+                  autoComplete="email"
+                  autoCapitalize="none"
+                  spellCheck={false}
                   placeholder="din@epost.se"
                   className={inputCls(Boolean(errors.email))}
                   {...trackField(
@@ -471,12 +508,16 @@ export default function LeadForm({
 
             {/* Detaljer (valfritt) */}
             <div>
-              <label htmlFor="message" className={labelCls} style={labelStyle}>
+              <label
+                htmlFor={fid("message")}
+                className={labelCls}
+                style={labelStyle}
+              >
                 Detaljer{" "}
                 <span className="text-gray-400 font-normal">(valfritt)</span>
               </label>
               <textarea
-                id="message"
+                id={fid("message")}
                 rows={2}
                 placeholder="Ange taktyp, kvm eller annat"
                 className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
