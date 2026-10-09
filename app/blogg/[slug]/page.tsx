@@ -188,6 +188,37 @@ export default async function ArtikelPage({
                       </h2>
                     );
                   }
+                  // Bild i texten: ![alt](/sökväg BREDDxHÖJD "bildtext").
+                  // Måtten är bildens egna och reserverar platsen så att
+                  // texten inte hoppar när bilden laddas (CLS, SEO.md §11.4).
+                  // Bildtexten är valfri.
+                  const bild = block.match(
+                    /^!\[([^\]]+)\]\((\S+) (\d+)x(\d+)(?: "([^"]+)")?\)$/
+                  );
+                  if (bild) {
+                    const [, alt, src, w, h, bildtext] = bild;
+                    return (
+                      <figure
+                        key={i}
+                        className="my-8"
+                        style={{ maxWidth: Number(w) }}
+                      >
+                        <Image
+                          src={src}
+                          alt={alt}
+                          width={Number(w)}
+                          height={Number(h)}
+                          sizes={`(max-width: 640px) 100vw, ${w}px`}
+                          className="w-full h-auto rounded-2xl bg-gray-100"
+                        />
+                        {bildtext && (
+                          <figcaption className="text-sm text-gray-500 leading-relaxed mt-3">
+                            {bildtext}
+                          </figcaption>
+                        )}
+                      </figure>
+                    );
+                  }
                   if (block.startsWith("| ")) {
                     const rows = block.split("\n").filter((r) => r.trim());
                     const header = rows[0]
