@@ -46,7 +46,7 @@ export default function BloggPage() {
                     <div className="relative aspect-[16/9] bg-gray-100">
                       <Image
                         src={a.image}
-                        alt={a.titel}
+                        alt={a.imageAlt ?? a.titel}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"

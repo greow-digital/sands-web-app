@@ -157,7 +157,7 @@ export default async function ArtikelPage({
             <div className="relative aspect-[21/9] rounded-2xl overflow-hidden bg-gray-100">
               <Image
                 src={a.image}
-                alt={a.titel}
+                alt={a.imageAlt ?? a.titel}
                 fill
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 className="object-cover"

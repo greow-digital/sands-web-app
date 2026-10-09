@@ -20,6 +20,8 @@ export type Artikel = {
   kategori: string;
   lästid: string;
   image?: string;
+  /** Beskriver bilden. Utan den används titeln som alt-text. */
+  imageAlt?: string;
   innehåll: string;
   /**
    * Valfri FAQ. När den finns renderas den öppen (inte accordion) sist i
@@ -46,6 +48,10 @@ export const artiklar: Artikel[] = [
     datum: "2026-10-09",
     kategori: "Råd & tips",
     lästid: "5 min",
+    // Eget projekt, Hakevägen i Djursholm, före takomläggningen.
+    image: "/images/blogg-taket-lacker.webp",
+    imageAlt:
+      "Närbild på ett gammalt tegeltak i Djursholm med lav på pannorna och en glipa under nockpannorna, en typisk plats där vatten tränger in",
     faq: [
       {
         q: "Mitt tak läcker, vad gör jag först?",
@@ -134,6 +140,10 @@ Du får sedan ett fast pris på den åtgärd som faktiskt löser problemet, oavs
     datum: "2026-10-09",
     kategori: "Material",
     lästid: "4 min",
+    // Egna projekt: betongpannor i Farsta, tvåkupigt lertegel i Älvsjö.
+    image: "/images/blogg-betong-eller-tegel.webp",
+    imageAlt:
+      "Till vänster svarta betongpannor på ett tak i Farsta, till höger tvåkupigt lertegel vid en skorsten i Älvsjö. Båda taken är lagda av Sands.",
     faq: [
       {
         q: "Vad kostar tegelpannor jämfört med betongpannor?",
