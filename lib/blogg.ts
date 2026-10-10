@@ -22,6 +22,11 @@ export type Artikel = {
   image?: string;
   /** Beskriver bilden. Utan den används titeln som alt-text. */
   imageAlt?: string;
+  /**
+   * Block separeras med tom rad. "## " ger h2, "- " lista, "| " tabell och
+   * ![alt](/sökväg BREDDxHÖJD "bildtext") en bild med valfri bildtext.
+   * Allt annat blir stycken.
+   */
   innehåll: string;
   /**
    * Valfri FAQ. När den finns renderas den öppen (inte accordion) sist i
@@ -31,6 +36,101 @@ export type Artikel = {
 };
 
 export const artiklar: Artikel[] = [
+  /* Säsongsartikel inför vintern. Riktar sig mot frågorna kring snörasskydd
+     (krav, ansvar, befintligt tak) och inte mot "montera snörasskydd
+     stockholm", som hör till /tjanster/taksakerhet och länkas dit. Reglerna
+     återger bara det som redan står på taksäkerhetssidan (BBR 8:24,
+     obligatoriskt över entréer, gångbanor, uteplatser och allmän mark,
+     fastighetsägarens ansvar). Inget pris, eftersom taksäkerhet prissätts
+     efter takkontroll. Artikeln säger inte att Sands skottar tak. */
+  {
+    slug: "snorasskydd-krav-ansvar",
+    titel: "Snörasskydd: krav, ansvar och snösäkert tak",
+    ingress:
+      "Snörasskydd är krav där människor går under taket, och ansvaret ligger på fastighetsägaren. Så gör du taket snösäkert innan vintern i Stockholm.",
+    datum: "2026-10-09",
+    kategori: "Råd & tips",
+    lästid: "5 min",
+    // Eget projekt en frostig vintermorgon, samma foto som taksäkerhetssidan.
+    image: "/images/blogg-snorasskydd.webp",
+    imageAlt:
+      "En frostig vintermorgon vid ett takbygge där nya takstolar reser sig över huset och Sands bilar står parkerade på gatan",
+    faq: [
+      {
+        q: "Är snörasskydd obligatoriskt?",
+        a: "Ja, över entréer, gångbanor, uteplatser och allmän mark där människor rör sig. Kravet kommer från Boverkets byggregler, och för en villa betyder det i praktiken att ytterdörren och gången fram till den ska skyddas. Är du osäker på vad ditt tak behöver ser vi det vid en kostnadsfri takkontroll.",
+      },
+      {
+        q: "Vem ansvarar om snö eller is rasar från taket?",
+        a: "Fastighetsägaren. Skadas någon av snö eller is från ditt tak är det du som bär ansvaret, och detsamma kan gälla skador på egendom, till exempel en bil. Snörasskydd över de ytor där människor går är det enklaste sättet att minska risken.",
+      },
+      {
+        q: "Kan man montera snörasskydd på ett befintligt tak?",
+        a: "Ja. Snörasskydd kan monteras i efterhand utan att taket läggs om. Vi kontrollerar först bärigheten och pannornas skick, eftersom snörasskyddet ska bära snön som samlas bakom det. Bedömningen görs vid en kostnadsfri takkontroll.",
+      },
+      {
+        q: "Vad kostar snörasskydd?",
+        a: "Det beror på takmaterial, taklutning och hur lång sträcka som ska skyddas. Därför lämnar vi pris efter kostnadsfri takkontroll. Vid en takomläggning offereras snörasskydd och övrig taksäkerhet som en separat post utifrån vad taket kräver.",
+      },
+      {
+        q: "Ska jag skotta taket själv?",
+        a: "Helst inte. Ett tak med snö och is är halt, och arbete på taket kräver fallskydd. Ett tak i gott skick klarar normalt den snö som faller i Stockholm. Ser du tecken på att taket tar stryk, eller hänger det stora mängder snö över en gång, spärra av under taket och anlita någon som skottar med rätt säkerhetsutrustning.",
+      },
+    ],
+    innehåll: `## Därför är snö på taket en risk
+
+Snön i sig är sällan ett problem för ett tak i gott skick. Det är när den börjar röra sig som det blir farligt. Tre saker är värda att hålla koll på under en Stockholmsvinter.
+
+- **Snöras.** När det blir töväder, eller när solen värmer taket, kan snö och is släppa och glida ner i ett stycke. Släta tak som plåttak släpper snön lättast, men det händer på alla takmaterial.
+- **Istappar.** Värme från huset smälter snön på taket, och vattnet fryser igen vid den kalla takfoten. Istapparna växer ut över hängrännan och kan falla utan förvarning.
+- **Is i takfoten.** Samma smältvatten kan frysa till en vall av is längst ner på taket. Vattnet bakom vallen kan då tränga in under pannorna, och det är en vanlig förklaring när <a href="/blogg/taket-lacker" class="text-[#2B74FC] font-semibold">taket läcker</a> mitt i vintern.
+
+## Vad säger reglerna om snörasskydd?
+
+Taksäkerhet regleras i Boverkets byggregler, BBR 8:24. Där finns kraven på fasta anordningar för att kunna ta sig upp och röra sig säkert på taket, och kravet på skydd mot snöras.
+
+**Snörasskydd är obligatoriskt över entréer, gångbanor, uteplatser och allmän mark där människor rör sig.** För en villa är det i första hand ytterdörren och gången fram till den som räknas, men även en uteplats under takfoten eller en trottoar längs huset.
+
+Boverket beskriver reglerna på sin sida om <a href="https://www.boverket.se/sv/PBL-kunskapsbanken/regler-om-byggande/boverkets-byggregler/sakerhet-vid-anvandning/taksakerhet/" class="text-[#2B74FC] font-semibold" target="_blank" rel="noopener">taksäkerhet</a>.
+
+## Vem ansvarar om snön rasar?
+
+Fastighetsägaren. Skadas någon av snö eller is som rasar från ditt tak är det du som bär ansvaret, och detsamma kan gälla skador på egendom, till exempel en bil som står parkerad under takfoten.
+
+Saknas taksäkerhet på taket kan dessutom sotaren vägra att utföra sitt arbete tills bristerna är åtgärdade. Snörasskydd, takstege och gångbrygga hör ihop, och det är ofta vid en sotning eller en besiktning inför husköp som bristerna upptäcks.
+
+## Så fungerar ett snörasskydd
+
+Ett snörasskydd är ett galler eller ett par rör som monteras en bit upp från takfoten. Det håller kvar snön på taket så att den smälter av på plats eller glider ner i små mängder, i stället för att rasa i ett stycke.
+
+![Snörasskydd monterat med konsoler på ett tak med röda takpannor](/images/taksakerhet/snorasskydd.jpg 530x470 "Snörasskydd på ett tak med takpannor. Det håller kvar snön så att den inte rasar ner över entré och gångväg.")
+
+Det finns varianter för betongpannor, tegelpannor och plåttak. Fästena skiljer sig åt mellan takmaterialen, så rätt modell beror på vad taket är lagt med och hur brant det är. Snörasskyddet ska bära snön som samlas bakom det, och därför måste det sitta fast i takets konstruktion och inte bara i pannorna.
+
+Ska du ändå lägga om tak eller byta tak inom några år kan det vara värt att vänta och ta snörasskyddet i samma veva. Vid en takomläggning offereras taksäkerheten som en separat post, och den monteras när taket ändå är öppet.
+
+## Checklista inför vintern
+
+Det mesta går att kontrollera från marken en klar höstdag.
+
+- **Finns snörasskydd** över ytterdörren, gången, uteplatsen och andra ytor där någon går under takfoten?
+- **Sitter det fast?** Böjda konsoler, lösa rör eller ett galler som lutar är tecken på att det har fått bära mer än det klarar.
+- **Kommer sotaren fram?** Takstege och gångbrygga ska vara hela och fastsatta hela vägen till skorstenen.
+- **Rensa hängrännorna.** Löv och skräp gör att smältvattnet blir stående och fryser, vilket ger mer is i takfoten.
+- **Titta på vinden** efter fuktfläckar eller frost på undersidan av taket under kalla perioder. Det kan tyda på läckage eller dålig ventilation.
+
+## När det har kommit mycket snö
+
+Ett tak i normalt skick är byggt för att klara den snö som faller i Stockholm. Risken ökar när snön ligger länge, blir blöt och tung, eller när den blåser ihop till drivor vid skorstenar och i vinklar mellan takfall.
+
+Gå inte upp på taket själv. Ett snötäckt tak är halt, och utan fallskydd är det farligt även på ett lågt hus. Spärra av under takfoten där det hänger snö eller istappar, och anlita någon med rätt säkerhetsutrustning om taket behöver skottas.
+
+## Osäker på vad ditt tak behöver?
+
+Vi monterar snörasskydd både på befintliga tak och i samband med takbyte, och tar även uppdrag på enbart komplettering, till exempel efter en anmärkning från sotaren, en besiktning inför husköp eller ett krav från försäkringsbolaget. Läs mer om hur vi arbetar med <a href="/tjanster/taksakerhet" class="text-[#2B74FC] font-semibold">snörasskydd och övrig taksäkerhet</a>.
+
+Vid en <a href="/tjanster/takbesiktning" class="text-[#2B74FC] font-semibold">kostnadsfri takkontroll</a> går vi igenom taket, befintligt snörasskydd och taksäkerheten i övrigt. Du får veta vad som behövs och ett fast pris på åtgärden.`,
+  },
   /* GSC 9 jul till 6 okt 2026: 614 visningar på 35 läckagesökningar,
      snittposition 37, noll klick och ingen sida om ämnet. Riktar sig mot
      "vad gör jag nu"-sökningarna (takläckage, taket läcker, läcka i taket).
