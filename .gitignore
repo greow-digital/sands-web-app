@@ -52,3 +52,6 @@ hero-sands-construction.avif
 # Renderad e-postförhandsvisning, genereras av scripts/render-email.ts
 .email-preview/
 .react-email/
+
+# Growthship: lokal datafil med opportunities/launchpad/analysis-körningar.
+.data/

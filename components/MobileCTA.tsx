@@ -25,8 +25,10 @@ export default function MobileCTA() {
   // takräknaren slutar i ett formulär: baren pekar på /offert och kastar
   // därmed bort taktypen och ytan användaren just matat in. Den fick 2 klick
   // på 82 dagar mot 586 sidvisningar, så den bar inte sin plats heller.
+  // /growthship är det interna verktyget, inte en säljyta.
   const hideOnPages = ["/offert", "/priser", "/tack"];
-  const shouldHide = hideOnPages.includes(pathname);
+  const shouldHide =
+    hideOnPages.includes(pathname) || pathname.startsWith("/growthship");
 
   useEffect(() => {
     const footer = document.querySelector("footer");

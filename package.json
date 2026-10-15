@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "growthship:seed": "tsx scripts/growthship-seed.ts"
   },
   "dependencies": {
     "@elevenlabs/react": "^1.11.0",

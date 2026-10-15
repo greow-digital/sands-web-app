@@ -177,6 +177,13 @@ const nextConfig: NextConfig = {
         source: "/projekt-sanity-poc",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
+      // The Growthship: internal tool, never indexable. Also set via
+      // metadata in app/growthship/layout.tsx; the header covers API
+      // routes and non-HTML responses metadata can't reach.
+      {
+        source: "/growthship/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };
