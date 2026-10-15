@@ -38,6 +38,15 @@ export default async function RadarPage({
         <p className="gs-page-desc">Hitta vad som förtjänar uppmärksamhet.</p>
       </header>
 
+      <div style={{ display: "flex", gap: 6, marginBottom: 20 }}>
+        <Link href="/growthship/radar" className="gs-btn" data-variant="primary">
+          Möjligheter
+        </Link>
+        <Link href="/growthship/radar/report" className="gs-btn" data-variant="ghost">
+          Rapport
+        </Link>
+      </div>
+
       <div style={{ display: "flex", gap: 6, marginBottom: 24 }}>
         {TABS.map((tab) => (
           <Link

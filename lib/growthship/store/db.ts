@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile, rename } from "fs/promises";
 import { dirname, join } from "path";
 import type { AnalysisRun, LaunchpadItem, Opportunity } from "../types";
 import type { CognyBundle } from "../cogny/types";
+import type { MarketingReport } from "../reporting/types";
 
 // Server-only. The app has no existing database (Sanity is a CMS for
 // marketing content, not a fit for records whose status changes often),
@@ -15,6 +16,7 @@ interface Shape {
   launchpadItems: LaunchpadItem[];
   analysisRuns: AnalysisRun[];
   latestBundle: CognyBundle | null;
+  report: MarketingReport | null;
 }
 
 const DATA_DIR = join(process.cwd(), ".data");
@@ -25,6 +27,7 @@ const EMPTY: Shape = {
   launchpadItems: [],
   analysisRuns: [],
   latestBundle: null,
+  report: null,
 };
 
 // Next.js can run several requests concurrently in one process; chain
@@ -40,6 +43,7 @@ async function readShape(): Promise<Shape> {
       launchpadItems: parsed.launchpadItems ?? [],
       analysisRuns: parsed.analysisRuns ?? [],
       latestBundle: parsed.latestBundle ?? null,
+      report: parsed.report ?? null,
     };
   } catch (err) {
     if ((err as NodeJS.ErrnoException).code === "ENOENT") return { ...EMPTY };
@@ -171,5 +175,15 @@ export async function getLatestBundle(): Promise<CognyBundle | null> {
 export async function setLatestBundle(bundle: CognyBundle): Promise<void> {
   await withQueue((shape) => {
     shape.latestBundle = bundle;
+  });
+}
+
+export async function getReport(): Promise<MarketingReport | null> {
+  return (await readShape()).report;
+}
+
+export async function setReport(report: MarketingReport): Promise<void> {
+  await withQueue((shape) => {
+    shape.report = report;
   });
 }
