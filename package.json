@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "growthship:seed": "tsx scripts/growthship-seed.ts",
-    "growthship:seed-report": "tsx scripts/growthship-report-seed.ts"
+    "growthship:seed-report": "tsx scripts/growthship-report-seed.ts",
+    "growthship:snapshot": "cp .data/growthship.json lib/growthship/store/snapshot.json"
   },
   "dependencies": {
     "@elevenlabs/react": "^1.11.0",

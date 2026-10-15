@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile, rename } from "fs/promises";
+import { tmpdir } from "os";
 import { dirname, join } from "path";
 import {
   LAUNCHPAD_STATUSES,
@@ -9,6 +10,7 @@ import {
 } from "../types";
 import type { CognyBundle } from "../cogny/types";
 import type { MarketingReport } from "../reporting/types";
+import snapshot from "./snapshot.json";
 
 // Server-only. The app has no existing database (Sanity is a CMS for
 // marketing content, not a fit for records whose status changes often),
@@ -25,16 +27,13 @@ interface Shape {
   report: MarketingReport | null;
 }
 
-const DATA_DIR = join(process.cwd(), ".data");
-const DATA_FILE = join(DATA_DIR, "growthship.json");
-
-const EMPTY: Shape = {
-  opportunities: [],
-  launchpadItems: [],
-  analysisRuns: [],
-  latestBundle: null,
-  report: null,
-};
+// Vercel's deployment filesystem is read-only, so there the only writable
+// place is the instance's /tmp. That file starts from the checked-in
+// snapshot and lives as long as the instance, which is enough for a shared
+// preview but not real persistence (see the note at the top of this file).
+const DATA_FILE = process.env.VERCEL
+  ? join(tmpdir(), "growthship.json")
+  : join(process.cwd(), ".data", "growthship.json");
 
 // Next.js can run several requests concurrently in one process; chain
 // writes through this promise so two writers never interleave.
@@ -62,18 +61,25 @@ function normalizeLaunchpadItem(raw: LaunchpadItem): LaunchpadItem {
 async function readShape(): Promise<Shape> {
   try {
     const raw = await readFile(DATA_FILE, "utf-8");
-    const parsed = JSON.parse(raw) as Partial<Shape>;
-    return {
-      opportunities: parsed.opportunities ?? [],
-      launchpadItems: (parsed.launchpadItems ?? []).map(normalizeLaunchpadItem),
-      analysisRuns: parsed.analysisRuns ?? [],
-      latestBundle: parsed.latestBundle ?? null,
-      report: parsed.report ?? null,
-    };
+    return toShape(JSON.parse(raw) as Partial<Shape>);
   } catch (err) {
-    if ((err as NodeJS.ErrnoException).code === "ENOENT") return { ...EMPTY };
+    // No data file yet (fresh checkout, new Vercel instance): start from
+    // the snapshot that `npm run growthship:snapshot` checks in.
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") {
+      return toShape(snapshot as unknown as Partial<Shape>);
+    }
     throw err;
   }
+}
+
+function toShape(parsed: Partial<Shape>): Shape {
+  return {
+    opportunities: parsed.opportunities ?? [],
+    launchpadItems: (parsed.launchpadItems ?? []).map(normalizeLaunchpadItem),
+    analysisRuns: parsed.analysisRuns ?? [],
+    latestBundle: parsed.latestBundle ?? null,
+    report: parsed.report ?? null,
+  };
 }
 
 async function writeShape(shape: Shape): Promise<void> {

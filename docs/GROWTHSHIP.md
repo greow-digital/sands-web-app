@@ -36,7 +36,12 @@ credential yet, so it reports that honestly instead of inventing data.
 - `lib/growthship/types.ts`: Opportunity, LaunchpadItem, AnalysisRun.
 - `lib/growthship/store/db.ts`: persistence. A single JSON file at
   `.data/growthship.json` (gitignored), because there is no existing app
-  database and this is an MVP for one user. Swap for Postgres/Turso behind
+  database and this is an MVP for one user. When that file is missing (fresh
+  checkout, Vercel), it starts from the checked-in
+  `lib/growthship/store/snapshot.json`; refresh that with
+  `npm run growthship:snapshot` after seeding. On Vercel the writable copy
+  lives in the instance's `/tmp`, so changes made on a preview are
+  temporary. Swap for Postgres/Turso behind
   this same module if it ever needs to survive a serverless/multi-instance
   deploy.
 - `lib/growthship/cogny/`: the Cogny-shaped domain types Growthship

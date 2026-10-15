@@ -1,0 +1,4324 @@
+{
+  "opportunities": [
+    {
+      "title": "Låg klickfrekvens på \"bästa takläggare stockholm\"",
+      "description": "Frasen får många visningar men ovanligt låg andel klick jämfört med hur högt den syns, vilket pekar på en svag snippet.",
+      "category": "SEO",
+      "evidence": "168 visningar, CTR 1.19%, position 12.1.",
+      "recommendation": "Testa en mer konkret titel (pris, tidsram eller plats) för sidan som rankar på frasen.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Search Console",
+      "dedupeKey": "seo:low-ctr:bästa takläggare stockholm",
+      "id": "7dfbbab7-8e18-4990-8259-e98ddf94a2d3",
+      "status": "Accepted",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T11:10:35.185Z",
+      "score": 4
+    },
+    {
+      "title": "Låg klickfrekvens på \"eternittak\"",
+      "description": "Frasen får många visningar men ovanligt låg andel klick jämfört med hur högt den syns, vilket pekar på en svag snippet.",
+      "category": "SEO",
+      "evidence": "121 visningar, CTR 0.83%, position 21.3.",
+      "recommendation": "Testa en mer konkret titel (pris, tidsram eller plats) för sidan som rankar på frasen.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Search Console",
+      "dedupeKey": "seo:low-ctr:eternittak",
+      "id": "f2459342-d938-4a6c-a423-7efb5930759b",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 4
+    },
+    {
+      "title": "Låg klickfrekvens på \"takbesiktning stockholm\"",
+      "description": "Frasen får många visningar men ovanligt låg andel klick jämfört med hur högt den syns, vilket pekar på en svag snippet.",
+      "category": "SEO",
+      "evidence": "150 visningar, CTR 0.67%, position 44.4.",
+      "recommendation": "Testa en mer konkret titel (pris, tidsram eller plats) för sidan som rankar på frasen.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Search Console",
+      "dedupeKey": "seo:low-ctr:takbesiktning stockholm",
+      "id": "bf0013bd-6bf1-4a57-897c-96fb1256eb8e",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 4
+    },
+    {
+      "title": "Låg klickfrekvens på \"takbyte\"",
+      "description": "Frasen får många visningar men ovanligt låg andel klick jämfört med hur högt den syns, vilket pekar på en svag snippet.",
+      "category": "SEO",
+      "evidence": "309 visningar, CTR 0.32%, position 25.8.",
+      "recommendation": "Testa en mer konkret titel (pris, tidsram eller plats) för sidan som rankar på frasen.",
+      "impact": "High",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Search Console",
+      "dedupeKey": "seo:low-ctr:takbyte",
+      "id": "6d352297-c7a4-46ff-b05e-f3a4773ffa21",
+      "status": "Accepted",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T11:10:35.134Z",
+      "score": 6
+    },
+    {
+      "title": "\"auktoriserad takläggare\" rankar nära förstasidan men får inga klick",
+      "description": "Sökordet syns ofta i Google men ingen klickar sig vidare, vilket oftast beror på titel eller snippet snarare än ranking.",
+      "category": "SEO",
+      "evidence": "101 visningar, position 7, 0 klick (CTR 0%).",
+      "recommendation": "Skriv om titel och metabeskrivning för sidan som rankar på frasen, och lägg in frasen tydligare i H1 eller intro.",
+      "impact": "Medium",
+      "confidence": "High",
+      "effort": "Low",
+      "source": "Google Search Console",
+      "dedupeKey": "seo:zero-click:auktoriserad takläggare",
+      "id": "5826003d-a909-4605-8f09-1180127dbceb",
+      "status": "Accepted",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T11:10:35.159Z",
+      "score": 6
+    },
+    {
+      "title": "\"asbest tak\" rankar nära förstasidan men får inga klick",
+      "description": "Sökordet syns ofta i Google men ingen klickar sig vidare, vilket oftast beror på titel eller snippet snarare än ranking.",
+      "category": "SEO",
+      "evidence": "68 visningar, position 7.8, 0 klick (CTR 0%).",
+      "recommendation": "Skriv om titel och metabeskrivning för sidan som rankar på frasen, och lägg in frasen tydligare i H1 eller intro.",
+      "impact": "Low",
+      "confidence": "High",
+      "effort": "Low",
+      "source": "Google Search Console",
+      "dedupeKey": "seo:zero-click:asbest tak",
+      "id": "21950e09-8a1d-4505-bee8-f30b9905abfa",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 3
+    },
+    {
+      "title": "Paid Search accelererar",
+      "description": "Sessioner från Paid Search växer tydligt mot föregående period.",
+      "category": "Acquisition",
+      "evidence": "893 sessioner nu mot 724 föregående period (+23.3%).",
+      "recommendation": "Överväg att öka investeringen i Paid Search medan kanalen presterar över snittet.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Analytics 4",
+      "dedupeKey": "channel:growth:Paid Search",
+      "id": "cd8e1082-48f4-4582-88ff-c59f8945c87c",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 4
+    },
+    {
+      "title": "Direct accelererar",
+      "description": "Sessioner från Direct växer tydligt mot föregående period.",
+      "category": "Acquisition",
+      "evidence": "257 sessioner nu mot 193 föregående period (+33.2%).",
+      "recommendation": "Överväg att öka investeringen i Direct medan kanalen presterar över snittet.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Analytics 4",
+      "dedupeKey": "channel:growth:Direct",
+      "id": "3bf4198e-06b7-4123-a4fc-1c6deffb00cd",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 4
+    },
+    {
+      "title": "Organic Search accelererar",
+      "description": "Sessioner från Organic Search växer tydligt mot föregående period.",
+      "category": "Acquisition",
+      "evidence": "233 sessioner nu mot 147 föregående period (+58.5%).",
+      "recommendation": "Överväg att öka investeringen i Organic Search medan kanalen presterar över snittet.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Analytics 4",
+      "dedupeKey": "channel:growth:Organic Search",
+      "id": "695f4d86-f42d-481e-b39d-30f45bea102a",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 4
+    },
+    {
+      "title": "Stor skillnad i kostnad per konvertering mellan kampanjer",
+      "description": "\"Takläggning Stockholm\" kostar betydligt mer per konvertering än \"Search — Pris/Research Stockholm\".",
+      "category": "Paid",
+      "evidence": "Takläggning Stockholm: 2026.7 kr/konvertering. Search — Pris/Research Stockholm: 1488.2 kr/konvertering.",
+      "recommendation": "Flytta budget från \"Takläggning Stockholm\" till \"Search — Pris/Research Stockholm\" och följ om konverteringsvolymen håller.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Low",
+      "source": "Google Ads",
+      "dedupeKey": "paid:cpa-gap:Takläggning Stockholm:Search — Pris/Research Stockholm",
+      "id": "91443ba2-2af0-4cec-a43c-fffaad4fdafd",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 4
+    },
+    {
+      "title": "\"Kvalificerad\" registrerar inga händelser",
+      "description": "Ett steg längre ner i tratten är helt tomt trots trafik och leads tidigare i tratten, vilket oftast betyder att spårningen saknas snarare än att inget händer.",
+      "category": "Technical",
+      "evidence": "GA4-händelse: qualify_lead: 0 registrerade händelser den senaste perioden.",
+      "recommendation": "Verifiera att händelsen faktiskt triggas i produkten eller CRM:et, och att den skickas till GA4.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Medium",
+      "source": "Google Analytics 4",
+      "dedupeKey": "funnel:empty-stage:Kvalificerad",
+      "id": "aa748725-481f-48dd-bc49-34c011c9f324",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 2
+    },
+    {
+      "title": "\"Kund\" registrerar inga händelser",
+      "description": "Ett steg längre ner i tratten är helt tomt trots trafik och leads tidigare i tratten, vilket oftast betyder att spårningen saknas snarare än att inget händer.",
+      "category": "Technical",
+      "evidence": "GA4-händelse: close_convert_lead: 0 registrerade händelser den senaste perioden.",
+      "recommendation": "Verifiera att händelsen faktiskt triggas i produkten eller CRM:et, och att den skickas till GA4.",
+      "impact": "Medium",
+      "confidence": "Medium",
+      "effort": "Medium",
+      "source": "Google Analytics 4",
+      "dedupeKey": "funnel:empty-stage:Kund",
+      "id": "253c0824-f44d-4153-87c1-8506b0c12d38",
+      "status": "New",
+      "detectedAt": "2026-10-15T09:34:37.362Z",
+      "createdAt": "2026-10-15T09:34:37.362Z",
+      "updatedAt": "2026-10-15T09:34:37.362Z",
+      "score": 2
+    }
+  ],
+  "launchpadItems": [
+    {
+      "id": "76f6aadc-1630-4390-b5b1-e4297f0193b6",
+      "opportunityId": "6d352297-c7a4-46ff-b05e-f3a4773ffa21",
+      "title": "Låg klickfrekvens på \"takbyte\"",
+      "hypothesis": "Testa en mer konkret titel (pris, tidsram eller plats) för sidan som rankar på frasen.",
+      "expectedImpact": "High",
+      "effort": "Low",
+      "status": "Building",
+      "brief": "Skriv om title och meta description på /tjanster/takbyte med pris (från-format) och Stockholm. Verifiera med next build.",
+      "implementation": null,
+      "result": null,
+      "learning": null,
+      "createdAt": "2026-10-15T11:10:35.136Z",
+      "updatedAt": "2026-10-15T11:11:13.800Z"
+    },
+    {
+      "id": "8b4400b9-2b70-4e4f-8e17-ef508ba2de3a",
+      "opportunityId": "5826003d-a909-4605-8f09-1180127dbceb",
+      "title": "\"auktoriserad takläggare\" rankar nära förstasidan men får inga klick",
+      "hypothesis": "Skriv om titel och metabeskrivning för sidan som rankar på frasen, och lägg in frasen tydligare i H1 eller intro.",
+      "expectedImpact": "Medium",
+      "effort": "Low",
+      "status": "Backlog",
+      "brief": null,
+      "implementation": null,
+      "result": null,
+      "learning": null,
+      "createdAt": "2026-10-15T11:10:35.161Z",
+      "updatedAt": "2026-10-15T11:10:35.161Z"
+    },
+    {
+      "id": "bf19f520-d7ba-4c64-b54d-5ddcfccfb43d",
+      "opportunityId": "7dfbbab7-8e18-4990-8259-e98ddf94a2d3",
+      "title": "Låg klickfrekvens på \"bästa takläggare stockholm\"",
+      "hypothesis": "Testa en mer konkret titel (pris, tidsram eller plats) för sidan som rankar på frasen.",
+      "expectedImpact": "Medium",
+      "effort": "Low",
+      "status": "Backlog",
+      "brief": null,
+      "implementation": null,
+      "result": null,
+      "learning": null,
+      "createdAt": "2026-10-15T11:10:35.186Z",
+      "updatedAt": "2026-10-15T11:10:35.186Z"
+    }
+  ],
+  "analysisRuns": [
+    {
+      "id": "39858714-54c0-4572-970f-04e06ae0949b",
+      "type": "Weekly Growth Analysis",
+      "startedAt": "2026-10-15T09:34:37.361Z",
+      "completedAt": "2026-10-15T09:34:37.364Z",
+      "summary": "12 nya möjligheter, 0 uppdaterade, av 12 signaler totalt.",
+      "numberOfOpportunitiesGenerated": 12,
+      "numberOfOpportunitiesUpdated": 0
+    }
+  ],
+  "latestBundle": {
+    "snapshot": {
+      "period": "30d",
+      "generatedAt": "2026-10-15T09:34:37.360Z",
+      "totalSessions": {
+        "current": 1413,
+        "previous": 1117,
+        "changeRatio": 0.26499552372426144
+      },
+      "totalConversions": {
+        "current": 32,
+        "previous": 21,
+        "changeRatio": 0.5238095238095238
+      },
+      "channels": [
+        {
+          "channel": "Paid Search",
+          "sessions": {
+            "current": 893,
+            "previous": 724,
+            "changeRatio": 0.23342541436464087
+          },
+          "conversions": {
+            "current": 15,
+            "previous": 9,
+            "changeRatio": 0.6666666666666666
+          },
+          "engagementRate": 0.5969
+        },
+        {
+          "channel": "Direct",
+          "sessions": {
+            "current": 257,
+            "previous": 193,
+            "changeRatio": 0.3316062176165803
+          },
+          "conversions": {
+            "current": 6,
+            "previous": 0,
+            "changeRatio": null
+          },
+          "engagementRate": 0.2685
+        },
+        {
+          "channel": "Organic Search",
+          "sessions": {
+            "current": 233,
+            "previous": 147,
+            "changeRatio": 0.5850340136054422
+          },
+          "conversions": {
+            "current": 9,
+            "previous": 8,
+            "changeRatio": 0.125
+          },
+          "engagementRate": 0.5622
+        },
+        {
+          "channel": "AI Assistant",
+          "sessions": {
+            "current": 16,
+            "previous": 15,
+            "changeRatio": 0.06666666666666667
+          },
+          "conversions": {
+            "current": 2,
+            "previous": 3,
+            "changeRatio": -0.3333333333333333
+          },
+          "engagementRate": 0.8125
+        },
+        {
+          "channel": "Cross-network",
+          "sessions": {
+            "current": 12,
+            "previous": 18,
+            "changeRatio": -0.3333333333333333
+          },
+          "conversions": {
+            "current": 0,
+            "previous": 0,
+            "changeRatio": null
+          },
+          "engagementRate": 0.75
+        },
+        {
+          "channel": "Referral",
+          "sessions": {
+            "current": 1,
+            "previous": 5,
+            "changeRatio": -0.8
+          },
+          "conversions": {
+            "current": 0,
+            "previous": 0,
+            "changeRatio": null
+          },
+          "engagementRate": 1
+        },
+        {
+          "channel": "Organic Social",
+          "sessions": {
+            "current": 1,
+            "previous": 1,
+            "changeRatio": 0
+          },
+          "conversions": {
+            "current": 0,
+            "previous": 0,
+            "changeRatio": null
+          },
+          "engagementRate": 1
+        },
+        {
+          "channel": "Unassigned",
+          "sessions": {
+            "current": 0,
+            "previous": 14,
+            "changeRatio": -1
+          },
+          "conversions": {
+            "current": 0,
+            "previous": 1,
+            "changeRatio": -1
+          },
+          "engagementRate": 0
+        }
+      ],
+      "currency": "SEK"
+    },
+    "searchQueries": [
+      {
+        "query": "sands entreprenad stockholm ab",
+        "clicks": 7,
+        "impressions": 25,
+        "ctr": 0.28,
+        "position": 1.08
+      },
+      {
+        "query": "sands entreprenad",
+        "clicks": 6,
+        "impressions": 44,
+        "ctr": 0.1364,
+        "position": 1.05
+      },
+      {
+        "query": "byta eternittak kostnad",
+        "clicks": 2,
+        "impressions": 40,
+        "ctr": 0.05,
+        "position": 5.8
+      },
+      {
+        "query": "bästa takläggare stockholm",
+        "clicks": 2,
+        "impressions": 168,
+        "ctr": 0.0119,
+        "position": 12.11
+      },
+      {
+        "query": "byta tak tyresö",
+        "clicks": 1,
+        "impressions": 22,
+        "ctr": 0.0455,
+        "position": 18.45
+      },
+      {
+        "query": "eternittak",
+        "clicks": 1,
+        "impressions": 121,
+        "ctr": 0.0083,
+        "position": 21.25
+      },
+      {
+        "query": "takbesiktning stockholm",
+        "clicks": 1,
+        "impressions": 150,
+        "ctr": 0.0067,
+        "position": 44.38
+      },
+      {
+        "query": "takbyte",
+        "clicks": 1,
+        "impressions": 309,
+        "ctr": 0.0032,
+        "position": 25.76
+      },
+      {
+        "query": "takläggare ekerö",
+        "clicks": 1,
+        "impressions": 64,
+        "ctr": 0.0156,
+        "position": 18.63
+      },
+      {
+        "query": "takläggning norrtälje",
+        "clicks": 1,
+        "impressions": 48,
+        "ctr": 0.0208,
+        "position": 27.19
+      },
+      {
+        "query": "takomläggning",
+        "clicks": 1,
+        "impressions": 83,
+        "ctr": 0.012,
+        "position": 25.25
+      },
+      {
+        "query": "auktoriserad takläggare",
+        "clicks": 0,
+        "impressions": 101,
+        "ctr": 0,
+        "position": 7.03
+      },
+      {
+        "query": "asbest tak",
+        "clicks": 0,
+        "impressions": 68,
+        "ctr": 0,
+        "position": 7.78
+      },
+      {
+        "query": "asbest innertak",
+        "clicks": 0,
+        "impressions": 17,
+        "ctr": 0,
+        "position": 9.94
+      },
+      {
+        "query": "besikta tak pris",
+        "clicks": 0,
+        "impressions": 12,
+        "ctr": 0,
+        "position": 34.67
+      }
+    ],
+    "adCampaigns": [
+      {
+        "campaign": "Takläggning Stockholm",
+        "impressions": 11109,
+        "clicks": 453,
+        "costSek": 12160.13,
+        "conversions": 6,
+        "conversionValueSek": 9000
+      },
+      {
+        "campaign": "Search — Pris/Research Stockholm",
+        "impressions": 3494,
+        "clicks": 361,
+        "costSek": 2976.48,
+        "conversions": 2,
+        "conversionValueSek": 3000
+      }
+    ],
+    "funnel": [
+      {
+        "label": "Sessioner",
+        "value": 1413,
+        "source": "GA4 sessions"
+      },
+      {
+        "label": "Leads",
+        "value": 32,
+        "source": "GA4-händelser: form_submit + phone_click"
+      },
+      {
+        "label": "Kvalificerad",
+        "value": 0,
+        "source": "GA4-händelse: qualify_lead"
+      },
+      {
+        "label": "Kund",
+        "value": 0,
+        "source": "GA4-händelse: close_convert_lead"
+      }
+    ],
+    "unavailable": [
+      "Meta Ads och LinkedIn Ads är inte anslutna i Cogny ännu.",
+      "Kostnad per kund går inte att räkna ut: Google Ads konverteringsvärde är ett standardvärde per lead, inte verkligt kontraktsvärde."
+    ]
+  },
+  "report": {
+    "generatedAt": "2026-10-15T09:34:37.693Z",
+    "windowNote": "Last 28 days vs the 28 days before. Search Console data runs about three days behind, so its windows end earlier.",
+    "kpis": [
+      {
+        "metric": "leads",
+        "current": 21,
+        "previous": 31,
+        "change": -0.32258064516129037
+      },
+      {
+        "metric": "sessions",
+        "current": 1021,
+        "previous": 1279,
+        "change": -0.20172009382329947
+      },
+      {
+        "metric": "ads_cost",
+        "current": 13952.28,
+        "previous": 14321.081801999999,
+        "change": -0.025752370323622764
+      },
+      {
+        "metric": "ads_conversions",
+        "current": 8,
+        "previous": 16,
+        "change": -0.5
+      },
+      {
+        "metric": "ads_cpa",
+        "current": 1744.035,
+        "previous": 895.0676126249999,
+        "change": 0.9484952593527545
+      },
+      {
+        "metric": "ads_clicks",
+        "current": 757,
+        "previous": 857,
+        "change": -0.11668611435239207
+      },
+      {
+        "metric": "ads_cpc",
+        "current": 18.43101717305152,
+        "previous": 16.710713887981328,
+        "change": 0.10294612765212063
+      },
+      {
+        "metric": "organic_clicks",
+        "current": 96,
+        "previous": 125,
+        "change": -0.23199999999999998
+      },
+      {
+        "metric": "organic_impressions",
+        "current": 28266,
+        "previous": 35016,
+        "change": -0.19276901987662787
+      },
+      {
+        "metric": "organic_ctr",
+        "current": 0.003396306516663129,
+        "previous": 0.003569796664381997,
+        "change": -0.04859944810019112
+      },
+      {
+        "metric": "organic_position",
+        "current": 27.873841364183118,
+        "previous": 23.895476353666893,
+        "change": 0.16649029932001014
+      }
+    ],
+    "dailyChannelSessions": [
+      {
+        "date": "2026-08-10",
+        "channel": "Paid Search",
+        "sessions": 40
+      },
+      {
+        "date": "2026-09-12",
+        "channel": "Paid Search",
+        "sessions": 39
+      },
+      {
+        "date": "2026-08-03",
+        "channel": "Paid Search",
+        "sessions": 37
+      },
+      {
+        "date": "2026-08-18",
+        "channel": "Paid Search",
+        "sessions": 37
+      },
+      {
+        "date": "2026-09-03",
+        "channel": "Paid Search",
+        "sessions": 37
+      },
+      {
+        "date": "2026-09-06",
+        "channel": "Paid Search",
+        "sessions": 37
+      },
+      {
+        "date": "2026-08-23",
+        "channel": "Paid Search",
+        "sessions": 35
+      },
+      {
+        "date": "2026-08-11",
+        "channel": "Paid Search",
+        "sessions": 34
+      },
+      {
+        "date": "2026-09-08",
+        "channel": "Paid Search",
+        "sessions": 34
+      },
+      {
+        "date": "2026-07-27",
+        "channel": "Paid Search",
+        "sessions": 33
+      },
+      {
+        "date": "2026-08-16",
+        "channel": "Paid Search",
+        "sessions": 33
+      },
+      {
+        "date": "2026-07-30",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-08-07",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-08-09",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-08-25",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-08-26",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-08-30",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-09-01",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-09-13",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-09-17",
+        "channel": "Paid Search",
+        "sessions": 32
+      },
+      {
+        "date": "2026-08-14",
+        "channel": "Paid Search",
+        "sessions": 31
+      },
+      {
+        "date": "2026-08-19",
+        "channel": "Paid Search",
+        "sessions": 31
+      },
+      {
+        "date": "2026-09-10",
+        "channel": "Paid Search",
+        "sessions": 31
+      },
+      {
+        "date": "2026-09-14",
+        "channel": "Paid Search",
+        "sessions": 31
+      },
+      {
+        "date": "2026-09-24",
+        "channel": "Paid Search",
+        "sessions": 31
+      },
+      {
+        "date": "2026-08-12",
+        "channel": "Paid Search",
+        "sessions": 30
+      },
+      {
+        "date": "2026-08-21",
+        "channel": "Paid Search",
+        "sessions": 30
+      },
+      {
+        "date": "2026-08-29",
+        "channel": "Paid Search",
+        "sessions": 30
+      },
+      {
+        "date": "2026-09-05",
+        "channel": "Paid Search",
+        "sessions": 30
+      },
+      {
+        "date": "2026-09-07",
+        "channel": "Paid Search",
+        "sessions": 30
+      },
+      {
+        "date": "2026-10-12",
+        "channel": "Paid Search",
+        "sessions": 30
+      },
+      {
+        "date": "2026-07-23",
+        "channel": "Paid Search",
+        "sessions": 29
+      },
+      {
+        "date": "2026-08-04",
+        "channel": "Paid Search",
+        "sessions": 29
+      },
+      {
+        "date": "2026-08-05",
+        "channel": "Paid Search",
+        "sessions": 29
+      },
+      {
+        "date": "2026-08-13",
+        "channel": "Paid Search",
+        "sessions": 29
+      },
+      {
+        "date": "2026-09-09",
+        "channel": "Paid Search",
+        "sessions": 29
+      },
+      {
+        "date": "2026-10-04",
+        "channel": "Paid Search",
+        "sessions": 29
+      },
+      {
+        "date": "2026-10-06",
+        "channel": "Paid Search",
+        "sessions": 29
+      },
+      {
+        "date": "2026-07-28",
+        "channel": "Paid Search",
+        "sessions": 28
+      },
+      {
+        "date": "2026-08-08",
+        "channel": "Paid Search",
+        "sessions": 28
+      },
+      {
+        "date": "2026-09-16",
+        "channel": "Paid Search",
+        "sessions": 28
+      },
+      {
+        "date": "2026-09-27",
+        "channel": "Paid Search",
+        "sessions": 28
+      },
+      {
+        "date": "2026-07-29",
+        "channel": "Paid Search",
+        "sessions": 27
+      },
+      {
+        "date": "2026-08-06",
+        "channel": "Paid Search",
+        "sessions": 27
+      },
+      {
+        "date": "2026-08-22",
+        "channel": "Paid Search",
+        "sessions": 27
+      },
+      {
+        "date": "2026-10-08",
+        "channel": "Paid Search",
+        "sessions": 27
+      },
+      {
+        "date": "2026-09-04",
+        "channel": "Paid Search",
+        "sessions": 26
+      },
+      {
+        "date": "2026-10-05",
+        "channel": "Paid Search",
+        "sessions": 26
+      },
+      {
+        "date": "2026-10-11",
+        "channel": "Paid Search",
+        "sessions": 26
+      },
+      {
+        "date": "2026-10-13",
+        "channel": "Paid Search",
+        "sessions": 26
+      },
+      {
+        "date": "2026-08-20",
+        "channel": "Paid Search",
+        "sessions": 25
+      },
+      {
+        "date": "2026-09-15",
+        "channel": "Paid Search",
+        "sessions": 25
+      },
+      {
+        "date": "2026-09-18",
+        "channel": "Paid Search",
+        "sessions": 25
+      },
+      {
+        "date": "2026-10-01",
+        "channel": "Paid Search",
+        "sessions": 25
+      },
+      {
+        "date": "2026-10-09",
+        "channel": "Paid Search",
+        "sessions": 25
+      },
+      {
+        "date": "2026-08-28",
+        "channel": "Paid Search",
+        "sessions": 24
+      },
+      {
+        "date": "2026-08-31",
+        "channel": "Paid Search",
+        "sessions": 24
+      },
+      {
+        "date": "2026-09-02",
+        "channel": "Paid Search",
+        "sessions": 24
+      },
+      {
+        "date": "2026-09-28",
+        "channel": "Paid Search",
+        "sessions": 24
+      },
+      {
+        "date": "2026-09-29",
+        "channel": "Paid Search",
+        "sessions": 24
+      },
+      {
+        "date": "2026-07-26",
+        "channel": "Paid Search",
+        "sessions": 23
+      },
+      {
+        "date": "2026-08-27",
+        "channel": "Paid Search",
+        "sessions": 23
+      },
+      {
+        "date": "2026-09-11",
+        "channel": "Paid Search",
+        "sessions": 23
+      },
+      {
+        "date": "2026-09-22",
+        "channel": "Paid Search",
+        "sessions": 23
+      },
+      {
+        "date": "2026-09-26",
+        "channel": "Paid Search",
+        "sessions": 23
+      },
+      {
+        "date": "2026-08-15",
+        "channel": "Paid Search",
+        "sessions": 22
+      },
+      {
+        "date": "2026-08-17",
+        "channel": "Paid Search",
+        "sessions": 22
+      },
+      {
+        "date": "2026-09-23",
+        "channel": "Paid Search",
+        "sessions": 22
+      },
+      {
+        "date": "2026-10-03",
+        "channel": "Paid Search",
+        "sessions": 22
+      },
+      {
+        "date": "2026-10-07",
+        "channel": "Paid Search",
+        "sessions": 22
+      },
+      {
+        "date": "2026-07-31",
+        "channel": "Paid Search",
+        "sessions": 21
+      },
+      {
+        "date": "2026-08-24",
+        "channel": "Paid Search",
+        "sessions": 21
+      },
+      {
+        "date": "2026-09-19",
+        "channel": "Paid Search",
+        "sessions": 21
+      },
+      {
+        "date": "2026-08-02",
+        "channel": "Paid Search",
+        "sessions": 20
+      },
+      {
+        "date": "2026-09-21",
+        "channel": "Paid Search",
+        "sessions": 20
+      },
+      {
+        "date": "2026-09-30",
+        "channel": "Paid Search",
+        "sessions": 20
+      },
+      {
+        "date": "2026-10-10",
+        "channel": "Paid Search",
+        "sessions": 20
+      },
+      {
+        "date": "2026-08-01",
+        "channel": "Paid Search",
+        "sessions": 19
+      },
+      {
+        "date": "2026-09-20",
+        "channel": "Paid Search",
+        "sessions": 19
+      },
+      {
+        "date": "2026-10-02",
+        "channel": "Paid Search",
+        "sessions": 19
+      },
+      {
+        "date": "2026-09-25",
+        "channel": "Paid Search",
+        "sessions": 18
+      },
+      {
+        "date": "2026-08-16",
+        "channel": "Direct",
+        "sessions": 17
+      },
+      {
+        "date": "2026-08-17",
+        "channel": "Direct",
+        "sessions": 17
+      },
+      {
+        "date": "2026-07-24",
+        "channel": "Paid Search",
+        "sessions": 16
+      },
+      {
+        "date": "2026-08-17",
+        "channel": "Organic Search",
+        "sessions": 15
+      },
+      {
+        "date": "2026-08-29",
+        "channel": "Direct",
+        "sessions": 15
+      },
+      {
+        "date": "2026-07-31",
+        "channel": "Direct",
+        "sessions": 14
+      },
+      {
+        "date": "2026-08-19",
+        "channel": "Direct",
+        "sessions": 14
+      },
+      {
+        "date": "2026-10-14",
+        "channel": "Paid Search",
+        "sessions": 14
+      },
+      {
+        "date": "2026-07-28",
+        "channel": "Direct",
+        "sessions": 13
+      },
+      {
+        "date": "2026-08-04",
+        "channel": "Direct",
+        "sessions": 13
+      },
+      {
+        "date": "2026-08-12",
+        "channel": "Direct",
+        "sessions": 13
+      },
+      {
+        "date": "2026-08-13",
+        "channel": "Direct",
+        "sessions": 13
+      },
+      {
+        "date": "2026-08-28",
+        "channel": "Organic Search",
+        "sessions": 13
+      },
+      {
+        "date": "2026-07-25",
+        "channel": "Paid Search",
+        "sessions": 12
+      },
+      {
+        "date": "2026-08-03",
+        "channel": "Direct",
+        "sessions": 12
+      },
+      {
+        "date": "2026-08-10",
+        "channel": "Organic Search",
+        "sessions": 12
+      },
+      {
+        "date": "2026-08-26",
+        "channel": "Organic Search",
+        "sessions": 12
+      },
+      {
+        "date": "2026-09-01",
+        "channel": "Direct",
+        "sessions": 12
+      },
+      {
+        "date": "2026-09-01",
+        "channel": "Organic Search",
+        "sessions": 12
+      },
+      {
+        "date": "2026-09-06",
+        "channel": "Direct",
+        "sessions": 12
+      },
+      {
+        "date": "2026-09-07",
+        "channel": "Organic Search",
+        "sessions": 12
+      },
+      {
+        "date": "2026-09-16",
+        "channel": "Direct",
+        "sessions": 12
+      },
+      {
+        "date": "2026-08-15",
+        "channel": "Direct",
+        "sessions": 11
+      },
+      {
+        "date": "2026-08-18",
+        "channel": "Direct",
+        "sessions": 11
+      },
+      {
+        "date": "2026-08-20",
+        "channel": "Organic Search",
+        "sessions": 11
+      },
+      {
+        "date": "2026-08-21",
+        "channel": "Direct",
+        "sessions": 11
+      },
+      {
+        "date": "2026-08-24",
+        "channel": "Direct",
+        "sessions": 11
+      },
+      {
+        "date": "2026-08-25",
+        "channel": "Direct",
+        "sessions": 11
+      },
+      {
+        "date": "2026-09-25",
+        "channel": "Direct",
+        "sessions": 11
+      },
+      {
+        "date": "2026-09-29",
+        "channel": "Organic Search",
+        "sessions": 11
+      },
+      {
+        "date": "2026-08-11",
+        "channel": "Direct",
+        "sessions": 10
+      },
+      {
+        "date": "2026-08-11",
+        "channel": "Organic Search",
+        "sessions": 10
+      },
+      {
+        "date": "2026-08-14",
+        "channel": "Direct",
+        "sessions": 10
+      },
+      {
+        "date": "2026-08-14",
+        "channel": "Organic Search",
+        "sessions": 10
+      },
+      {
+        "date": "2026-08-20",
+        "channel": "Direct",
+        "sessions": 10
+      },
+      {
+        "date": "2026-09-19",
+        "channel": "Direct",
+        "sessions": 10
+      },
+      {
+        "date": "2026-10-09",
+        "channel": "Direct",
+        "sessions": 10
+      },
+      {
+        "date": "2026-10-14",
+        "channel": "Unassigned",
+        "sessions": 10
+      },
+      {
+        "date": "2026-07-28",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-05",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-15",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-16",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-18",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-21",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-23",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-24",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-26",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-08-27",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-02",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-02",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-04",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-09",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-14",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-16",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-22",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-09-30",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-10-03",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-10-12",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-10-12",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-10-13",
+        "channel": "Organic Search",
+        "sessions": 9
+      },
+      {
+        "date": "2026-10-14",
+        "channel": "Direct",
+        "sessions": 9
+      },
+      {
+        "date": "2026-07-23",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-07-27",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-08-02",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-08-06",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-08-10",
+        "channel": "Direct",
+        "sessions": 8
+      },
+      {
+        "date": "2026-08-23",
+        "channel": "Direct",
+        "sessions": 8
+      },
+      {
+        "date": "2026-08-31",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-09-08",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-09-10",
+        "channel": "Direct",
+        "sessions": 8
+      },
+      {
+        "date": "2026-09-15",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-09-21",
+        "channel": "Direct",
+        "sessions": 8
+      },
+      {
+        "date": "2026-09-24",
+        "channel": "Direct",
+        "sessions": 8
+      },
+      {
+        "date": "2026-10-02",
+        "channel": "Organic Search",
+        "sessions": 8
+      },
+      {
+        "date": "2026-10-14",
+        "channel": "Cross-network",
+        "sessions": 8
+      },
+      {
+        "date": "2026-07-24",
+        "channel": "Organic Search",
+        "sessions": 7
+      },
+      {
+        "date": "2026-07-30",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-07-31",
+        "channel": "Organic Search",
+        "sessions": 7
+      },
+      {
+        "date": "2026-08-02",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-08-04",
+        "channel": "Organic Search",
+        "sessions": 7
+      },
+      {
+        "date": "2026-08-06",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-08-07",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-08-31",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-09-03",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-09-04",
+        "channel": "Organic Search",
+        "sessions": 7
+      },
+      {
+        "date": "2026-09-08",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-09-11",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-09-20",
+        "channel": "Organic Search",
+        "sessions": 7
+      },
+      {
+        "date": "2026-09-21",
+        "channel": "Organic Search",
+        "sessions": 7
+      },
+      {
+        "date": "2026-09-22",
+        "channel": "Organic Search",
+        "sessions": 7
+      },
+      {
+        "date": "2026-10-08",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-10-11",
+        "channel": "Direct",
+        "sessions": 7
+      },
+      {
+        "date": "2026-07-25",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-07-27",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-07-29",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-07-30",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-08-05",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-08-09",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-08-19",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-08-22",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-07",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-10",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-12",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-15",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-17",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-18",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-23",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-26",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-09-29",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-10-01",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-10-04",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-10-07",
+        "channel": "Direct",
+        "sessions": 6
+      },
+      {
+        "date": "2026-10-11",
+        "channel": "Organic Search",
+        "sessions": 6
+      },
+      {
+        "date": "2026-07-25",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-08-01",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-08-08",
+        "channel": "Direct",
+        "sessions": 5
+      },
+      {
+        "date": "2026-08-12",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-08-13",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-08-27",
+        "channel": "Direct",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-05",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-11",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-13",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-14",
+        "channel": "Direct",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-17",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-19",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-23",
+        "channel": "Direct",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-28",
+        "channel": "Direct",
+        "sessions": 5
+      },
+      {
+        "date": "2026-09-30",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-10-06",
+        "channel": "Organic Search",
+        "sessions": 5
+      },
+      {
+        "date": "2026-07-24",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-08-03",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-08-09",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-08-27",
+        "channel": "AI Assistant",
+        "sessions": 4
+      },
+      {
+        "date": "2026-08-28",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-08-29",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-08-30",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-03",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-05",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-06",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-09",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-12",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-13",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-27",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-09-28",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-10-07",
+        "channel": "AI Assistant",
+        "sessions": 4
+      },
+      {
+        "date": "2026-10-09",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-10-10",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-10-13",
+        "channel": "Direct",
+        "sessions": 4
+      },
+      {
+        "date": "2026-10-14",
+        "channel": "Organic Search",
+        "sessions": 4
+      },
+      {
+        "date": "2026-07-28",
+        "channel": "Referral",
+        "sessions": 3
+      },
+      {
+        "date": "2026-07-29",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-08-22",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-08-25",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-08-30",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-09-04",
+        "channel": "Cross-network",
+        "sessions": 3
+      },
+      {
+        "date": "2026-09-18",
+        "channel": "Direct",
+        "sessions": 3
+      },
+      {
+        "date": "2026-09-25",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-09-26",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-10-01",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-10-02",
+        "channel": "Direct",
+        "sessions": 3
+      },
+      {
+        "date": "2026-10-06",
+        "channel": "AI Assistant",
+        "sessions": 3
+      },
+      {
+        "date": "2026-10-07",
+        "channel": "Organic Search",
+        "sessions": 3
+      },
+      {
+        "date": "2026-07-24",
+        "channel": "Organic Social",
+        "sessions": 2
+      },
+      {
+        "date": "2026-07-26",
+        "channel": "Direct",
+        "sessions": 2
+      },
+      {
+        "date": "2026-07-26",
+        "channel": "Organic Search",
+        "sessions": 2
+      },
+      {
+        "date": "2026-08-01",
+        "channel": "Direct",
+        "sessions": 2
+      },
+      {
+        "date": "2026-08-07",
+        "channel": "Cross-network",
+        "sessions": 2
+      },
+      {
+        "date": "2026-08-07",
+        "channel": "Organic Search",
+        "sessions": 2
+      },
+      {
+        "date": "2026-08-11",
+        "channel": "Cross-network",
+        "sessions": 2
+      },
+      {
+        "date": "2026-08-13",
+        "channel": "Unassigned",
+        "sessions": 2
+      },
+      {
+        "date": "2026-09-09",
+        "channel": "AI Assistant",
+        "sessions": 2
+      },
+      {
+        "date": "2026-09-14",
+        "channel": "AI Assistant",
+        "sessions": 2
+      },
+      {
+        "date": "2026-09-20",
+        "channel": "Cross-network",
+        "sessions": 2
+      },
+      {
+        "date": "2026-09-20",
+        "channel": "Direct",
+        "sessions": 2
+      },
+      {
+        "date": "2026-09-24",
+        "channel": "Organic Search",
+        "sessions": 2
+      },
+      {
+        "date": "2026-09-27",
+        "channel": "Organic Search",
+        "sessions": 2
+      },
+      {
+        "date": "2026-10-02",
+        "channel": "AI Assistant",
+        "sessions": 2
+      },
+      {
+        "date": "2026-10-05",
+        "channel": "Organic Search",
+        "sessions": 2
+      },
+      {
+        "date": "2026-10-06",
+        "channel": "Direct",
+        "sessions": 2
+      },
+      {
+        "date": "2026-10-12",
+        "channel": "AI Assistant",
+        "sessions": 2
+      },
+      {
+        "date": "2026-07-23",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-07-23",
+        "channel": "Direct",
+        "sessions": 1
+      },
+      {
+        "date": "2026-07-27",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-07-28",
+        "channel": "Unassigned",
+        "sessions": 1
+      },
+      {
+        "date": "2026-07-31",
+        "channel": "Organic Social",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-01",
+        "channel": "Organic Social",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-03",
+        "channel": "Organic Social",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-03",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-05",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-08",
+        "channel": "Organic Search",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-10",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-12",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-17",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-19",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-19",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-23",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-24",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-26",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-29",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-29",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-30",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-31",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-08-31",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-02",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-02",
+        "channel": "Organic Social",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-03",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-07",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-08",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-09",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-10",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-12",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-22",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-22",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-24",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-25",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-25",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-25",
+        "channel": "Organic Social",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-28",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-28",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-28",
+        "channel": "Unassigned",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-29",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-09-30",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-01",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-01",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-03",
+        "channel": "Organic Search",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-03",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-04",
+        "channel": "Organic Search",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-05",
+        "channel": "Direct",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-07",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-08",
+        "channel": "Organic Search",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-09",
+        "channel": "AI Assistant",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-10",
+        "channel": "Organic Search",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-11",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-11",
+        "channel": "Referral",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-11",
+        "channel": "Unassigned",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-12",
+        "channel": "Unassigned",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-13",
+        "channel": "Cross-network",
+        "sessions": 1
+      },
+      {
+        "date": "2026-10-13",
+        "channel": "Unassigned",
+        "sessions": 1
+      }
+    ],
+    "dailyLeads": [
+      {
+        "date": "2026-07-24",
+        "formSubmit": 0,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-07-26",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-07-27",
+        "formSubmit": 0,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-07-28",
+        "formSubmit": 6,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-07-29",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-07-30",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-07-31",
+        "formSubmit": 2,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-01",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-03",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-04",
+        "formSubmit": 2,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-05",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-07",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-10",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-12",
+        "formSubmit": 0,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-08-13",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-15",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-08-16",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-21",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-23",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-25",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-08-26",
+        "formSubmit": 2,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-27",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-08-28",
+        "formSubmit": 2,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-08-29",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-01",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-09-02",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-09-03",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-04",
+        "formSubmit": 1,
+        "phoneClick": 3
+      },
+      {
+        "date": "2026-09-05",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-06",
+        "formSubmit": 3,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-07",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-08",
+        "formSubmit": 2,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-09",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-10",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-12",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-14",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-17",
+        "formSubmit": 0,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-09-19",
+        "formSubmit": 3,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-20",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-22",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-23",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-24",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-29",
+        "formSubmit": 3,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-09-30",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-10-06",
+        "formSubmit": 2,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-10-07",
+        "formSubmit": 1,
+        "phoneClick": 0
+      },
+      {
+        "date": "2026-10-12",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-10-13",
+        "formSubmit": 1,
+        "phoneClick": 1
+      },
+      {
+        "date": "2026-10-14",
+        "formSubmit": 1,
+        "phoneClick": 0
+      }
+    ],
+    "channels": [
+      {
+        "channel": "Paid Search",
+        "sessions": 671,
+        "prevSessions": 823,
+        "change": -0.1846901579586877,
+        "engagementRate": 0.5678092399403875,
+        "leads": 9
+      },
+      {
+        "channel": "Direct",
+        "sessions": 175,
+        "prevSessions": 216,
+        "change": -0.18981481481481477,
+        "engagementRate": 0.2914285714285714,
+        "leads": 0
+      },
+      {
+        "channel": "Organic Search",
+        "sessions": 130,
+        "prevSessions": 211,
+        "change": -0.3838862559241706,
+        "engagementRate": 0.7230769230769231,
+        "leads": 8
+      },
+      {
+        "channel": "Cross-network",
+        "sessions": 18,
+        "prevSessions": 10,
+        "change": 0.8,
+        "engagementRate": 0.6111111111111112,
+        "leads": 0
+      },
+      {
+        "channel": "AI Assistant",
+        "sessions": 15,
+        "prevSessions": 15,
+        "change": 0,
+        "engagementRate": 0.4,
+        "leads": 3
+      },
+      {
+        "channel": "Unassigned",
+        "sessions": 14,
+        "prevSessions": 0,
+        "change": null,
+        "engagementRate": 0,
+        "leads": 1
+      },
+      {
+        "channel": "Referral",
+        "sessions": 5,
+        "prevSessions": 1,
+        "change": 4,
+        "engagementRate": 0.4,
+        "leads": 0
+      },
+      {
+        "channel": "Organic Social",
+        "sessions": 1,
+        "prevSessions": 1,
+        "change": 0,
+        "engagementRate": 0,
+        "leads": 0
+      }
+    ],
+    "landingPages": [
+      {
+        "page": "/priser",
+        "sessions": 373,
+        "engagementRate": 0.6487935656836461,
+        "leads": 2
+      },
+      {
+        "page": "/",
+        "sessions": 347,
+        "engagementRate": 0.5072046109510087,
+        "leads": 5
+      },
+      {
+        "page": "/tjanster/taklaggning",
+        "sessions": 50,
+        "engagementRate": 0.46,
+        "leads": 3
+      },
+      {
+        "page": "(not set)",
+        "sessions": 36,
+        "engagementRate": 0.05555555555555555,
+        "leads": 0
+      },
+      {
+        "page": "/omraden",
+        "sessions": 35,
+        "engagementRate": 0.5142857142857142,
+        "leads": 2
+      },
+      {
+        "page": "/offert",
+        "sessions": 28,
+        "engagementRate": 0.03571428571428571,
+        "leads": 0
+      },
+      {
+        "page": "/blogg/under-takpannorna-underlagspapp-strolakt",
+        "sessions": 19,
+        "engagementRate": 0.631578947368421,
+        "leads": 0
+      },
+      {
+        "page": "/tjanster/taksakerhet",
+        "sessions": 17,
+        "engagementRate": 0.29411764705882354,
+        "leads": 1
+      },
+      {
+        "page": "/blogg/eternittak-asbest",
+        "sessions": 16,
+        "engagementRate": 0.75,
+        "leads": 0
+      },
+      {
+        "page": "/omraden/norrtalje",
+        "sessions": 12,
+        "engagementRate": 0.75,
+        "leads": 3
+      },
+      {
+        "page": "/blogg/byta-eternittak-kostnad",
+        "sessions": 9,
+        "engagementRate": 0.8888888888888888,
+        "leads": 0
+      },
+      {
+        "page": "",
+        "sessions": 8,
+        "engagementRate": 0,
+        "leads": 0
+      },
+      {
+        "page": "/basta-taklaggare-stockholm",
+        "sessions": 7,
+        "engagementRate": 0.7142857142857143,
+        "leads": 1
+      },
+      {
+        "page": "/projekt",
+        "sessions": 7,
+        "engagementRate": 0.5714285714285714,
+        "leads": 0
+      },
+      {
+        "page": "/om-oss",
+        "sessions": 6,
+        "engagementRate": 0.16666666666666666,
+        "leads": 0
+      }
+    ],
+    "dailyAds": [
+      {
+        "date": "2026-07-23",
+        "costSek": 532.546127,
+        "clicks": 33,
+        "impressions": 386,
+        "conversions": 0
+      },
+      {
+        "date": "2026-07-24",
+        "costSek": 347.79,
+        "clicks": 22,
+        "impressions": 247,
+        "conversions": 0
+      },
+      {
+        "date": "2026-07-25",
+        "costSek": 236.49,
+        "clicks": 15,
+        "impressions": 268,
+        "conversions": 0
+      },
+      {
+        "date": "2026-07-26",
+        "costSek": 370.78,
+        "clicks": 23,
+        "impressions": 302,
+        "conversions": 1
+      },
+      {
+        "date": "2026-07-27",
+        "costSek": 739.41,
+        "clicks": 31,
+        "impressions": 639,
+        "conversions": 0
+      },
+      {
+        "date": "2026-07-28",
+        "costSek": 679.71,
+        "clicks": 37,
+        "impressions": 335,
+        "conversions": 1
+      },
+      {
+        "date": "2026-07-29",
+        "costSek": 493.128411,
+        "clicks": 27,
+        "impressions": 235,
+        "conversions": 0
+      },
+      {
+        "date": "2026-07-30",
+        "costSek": 479.86,
+        "clicks": 32,
+        "impressions": 299,
+        "conversions": 1
+      },
+      {
+        "date": "2026-07-31",
+        "costSek": 305.390265,
+        "clicks": 22,
+        "impressions": 251,
+        "conversions": 2
+      },
+      {
+        "date": "2026-08-01",
+        "costSek": 287.454828,
+        "clicks": 21,
+        "impressions": 213,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-02",
+        "costSek": 430.869072,
+        "clicks": 25,
+        "impressions": 378,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-03",
+        "costSek": 857.156006,
+        "clicks": 40,
+        "impressions": 410,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-04",
+        "costSek": 535.346209,
+        "clicks": 34,
+        "impressions": 301,
+        "conversions": 2
+      },
+      {
+        "date": "2026-08-05",
+        "costSek": 556.807684,
+        "clicks": 36,
+        "impressions": 347,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-06",
+        "costSek": 403.69,
+        "clicks": 28,
+        "impressions": 400,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-07",
+        "costSek": 524.214815,
+        "clicks": 33,
+        "impressions": 419,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-08",
+        "costSek": 546.72,
+        "clicks": 34,
+        "impressions": 518,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-09",
+        "costSek": 646.267408,
+        "clicks": 33,
+        "impressions": 419,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-10",
+        "costSek": 656.05721,
+        "clicks": 38,
+        "impressions": 480,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-11",
+        "costSek": 599.650257,
+        "clicks": 37,
+        "impressions": 418,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-12",
+        "costSek": 556.517476,
+        "clicks": 37,
+        "impressions": 419,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-13",
+        "costSek": 407.206352,
+        "clicks": 28,
+        "impressions": 398,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-14",
+        "costSek": 503.334361,
+        "clicks": 33,
+        "impressions": 451,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-15",
+        "costSek": 446.787673,
+        "clicks": 27,
+        "impressions": 393,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-16",
+        "costSek": 707.24036,
+        "clicks": 43,
+        "impressions": 474,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-17",
+        "costSek": 517.12,
+        "clicks": 36,
+        "impressions": 431,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-18",
+        "costSek": 564.43,
+        "clicks": 37,
+        "impressions": 376,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-19",
+        "costSek": 534.77,
+        "clicks": 38,
+        "impressions": 343,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-20",
+        "costSek": 440.79,
+        "clicks": 32,
+        "impressions": 406,
+        "conversions": 2
+      },
+      {
+        "date": "2026-08-21",
+        "costSek": 543.94,
+        "clicks": 37,
+        "impressions": 301,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-22",
+        "costSek": 444.29,
+        "clicks": 29,
+        "impressions": 312,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-23",
+        "costSek": 482.33,
+        "clicks": 32,
+        "impressions": 309,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-24",
+        "costSek": 300.49429,
+        "clicks": 23,
+        "impressions": 358,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-25",
+        "costSek": 465.01,
+        "clicks": 28,
+        "impressions": 489,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-26",
+        "costSek": 832.322482,
+        "clicks": 34,
+        "impressions": 539,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-27",
+        "costSek": 548.29,
+        "clicks": 27,
+        "impressions": 393,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-28",
+        "costSek": 481.06,
+        "clicks": 26,
+        "impressions": 460,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-29",
+        "costSek": 405.11,
+        "clicks": 30,
+        "impressions": 303,
+        "conversions": 1
+      },
+      {
+        "date": "2026-08-30",
+        "costSek": 533.71,
+        "clicks": 36,
+        "impressions": 440,
+        "conversions": 0
+      },
+      {
+        "date": "2026-08-31",
+        "costSek": 430.93,
+        "clicks": 33,
+        "impressions": 458,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-01",
+        "costSek": 364.01,
+        "clicks": 29,
+        "impressions": 340,
+        "conversions": 2
+      },
+      {
+        "date": "2026-09-02",
+        "costSek": 317.59,
+        "clicks": 22,
+        "impressions": 340,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-03",
+        "costSek": 852.82,
+        "clicks": 40,
+        "impressions": 620,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-04",
+        "costSek": 503.69,
+        "clicks": 28,
+        "impressions": 325,
+        "conversions": 4
+      },
+      {
+        "date": "2026-09-05",
+        "costSek": 503.37,
+        "clicks": 31,
+        "impressions": 291,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-06",
+        "costSek": 447.390679,
+        "clicks": 30,
+        "impressions": 462,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-07",
+        "costSek": 718.04,
+        "clicks": 36,
+        "impressions": 356,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-08",
+        "costSek": 526.71,
+        "clicks": 32,
+        "impressions": 323,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-09",
+        "costSek": 457.285241,
+        "clicks": 31,
+        "impressions": 380,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-10",
+        "costSek": 365.39,
+        "clicks": 29,
+        "impressions": 422,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-11",
+        "costSek": 506.94911,
+        "clicks": 25,
+        "impressions": 520,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-12",
+        "costSek": 547.4,
+        "clicks": 34,
+        "impressions": 265,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-13",
+        "costSek": 635.8,
+        "clicks": 34,
+        "impressions": 348,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-14",
+        "costSek": 482.03,
+        "clicks": 32,
+        "impressions": 552,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-15",
+        "costSek": 598.19,
+        "clicks": 28,
+        "impressions": 486,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-16",
+        "costSek": 586.14,
+        "clicks": 29,
+        "impressions": 652,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-17",
+        "costSek": 578.41,
+        "clicks": 32,
+        "impressions": 470,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-18",
+        "costSek": 550.45,
+        "clicks": 27,
+        "impressions": 516,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-19",
+        "costSek": 407.92,
+        "clicks": 24,
+        "impressions": 359,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-20",
+        "costSek": 547.5,
+        "clicks": 33,
+        "impressions": 457,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-21",
+        "costSek": 490.29,
+        "clicks": 28,
+        "impressions": 390,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-22",
+        "costSek": 404.35,
+        "clicks": 25,
+        "impressions": 432,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-23",
+        "costSek": 483.89,
+        "clicks": 28,
+        "impressions": 533,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-24",
+        "costSek": 554.26,
+        "clicks": 32,
+        "impressions": 346,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-25",
+        "costSek": 229.83,
+        "clicks": 19,
+        "impressions": 144,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-26",
+        "costSek": 615.83,
+        "clicks": 23,
+        "impressions": 187,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-27",
+        "costSek": 485.13,
+        "clicks": 25,
+        "impressions": 270,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-28",
+        "costSek": 553.06,
+        "clicks": 24,
+        "impressions": 561,
+        "conversions": 0
+      },
+      {
+        "date": "2026-09-29",
+        "costSek": 470.64,
+        "clicks": 29,
+        "impressions": 456,
+        "conversions": 1
+      },
+      {
+        "date": "2026-09-30",
+        "costSek": 391.73,
+        "clicks": 22,
+        "impressions": 470,
+        "conversions": 1
+      },
+      {
+        "date": "2026-10-01",
+        "costSek": 513.03,
+        "clicks": 28,
+        "impressions": 672,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-02",
+        "costSek": 467.42,
+        "clicks": 27,
+        "impressions": 334,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-03",
+        "costSek": 448.33,
+        "clicks": 24,
+        "impressions": 650,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-04",
+        "costSek": 602.17,
+        "clicks": 29,
+        "impressions": 767,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-05",
+        "costSek": 569.69,
+        "clicks": 28,
+        "impressions": 643,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-06",
+        "costSek": 478.05,
+        "clicks": 28,
+        "impressions": 641,
+        "conversions": 1
+      },
+      {
+        "date": "2026-10-07",
+        "costSek": 590.3,
+        "clicks": 22,
+        "impressions": 788,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-08",
+        "costSek": 702.97,
+        "clicks": 32,
+        "impressions": 577,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-09",
+        "costSek": 447.05,
+        "clicks": 24,
+        "impressions": 504,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-10",
+        "costSek": 398.08,
+        "clicks": 22,
+        "impressions": 320,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-11",
+        "costSek": 436.04,
+        "clicks": 26,
+        "impressions": 441,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-12",
+        "costSek": 544.37,
+        "clicks": 32,
+        "impressions": 687,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-13",
+        "costSek": 534.67,
+        "clicks": 32,
+        "impressions": 444,
+        "conversions": 0
+      },
+      {
+        "date": "2026-10-14",
+        "costSek": 456.82,
+        "clicks": 32,
+        "impressions": 406,
+        "conversions": 1
+      }
+    ],
+    "campaigns": [
+      {
+        "campaign": "Takläggning Stockholm",
+        "status": "ENABLED",
+        "bidding": "Maximize clicks",
+        "costSek": 11155.41,
+        "clicks": 422,
+        "impressions": 10220,
+        "ctr": 0.04129158512720157,
+        "conversions": 6,
+        "cpaSek": 1859.235
+      },
+      {
+        "campaign": "Search — Pris/Research Stockholm",
+        "status": "ENABLED",
+        "bidding": "Maximize clicks",
+        "costSek": 2796.87,
+        "clicks": 335,
+        "impressions": 3245,
+        "ctr": 0.10323574730354391,
+        "conversions": 2,
+        "cpaSek": 1398.435
+      }
+    ],
+    "searchTerms": [
+      {
+        "term": "sands entreprenad",
+        "costSek": 320.24,
+        "clicks": 23,
+        "impressions": 74,
+        "cpcSek": 13.923478260869565,
+        "conversions": 1
+      },
+      {
+        "term": "montera snörasskydd betongpannor",
+        "costSek": 233.58,
+        "clicks": 7,
+        "impressions": 30,
+        "cpcSek": 33.36857142857143,
+        "conversions": 0
+      },
+      {
+        "term": "takläggning",
+        "costSek": 202.32,
+        "clicks": 6,
+        "impressions": 45,
+        "cpcSek": 33.72,
+        "conversions": 0
+      },
+      {
+        "term": "sands entreprenad stockholm ab",
+        "costSek": 182.27,
+        "clicks": 9,
+        "impressions": 40,
+        "cpcSek": 20.252222222222223,
+        "conversions": 1
+      },
+      {
+        "term": "kostnad byta tak 150 kvm",
+        "costSek": 161.42,
+        "clicks": 19,
+        "impressions": 78,
+        "cpcSek": 8.49578947368421,
+        "conversions": 0
+      },
+      {
+        "term": "snörasskydd betongpannor",
+        "costSek": 151.86,
+        "clicks": 6,
+        "impressions": 81,
+        "cpcSek": 25.310000000000002,
+        "conversions": 0
+      },
+      {
+        "term": "takläggare",
+        "costSek": 128.12,
+        "clicks": 4,
+        "impressions": 82,
+        "cpcSek": 32.03,
+        "conversions": 0
+      },
+      {
+        "term": "klick plåttak",
+        "costSek": 120.29,
+        "clicks": 4,
+        "impressions": 12,
+        "cpcSek": 30.0725,
+        "conversions": 0
+      },
+      {
+        "term": "vad kostar det att byta tak",
+        "costSek": 105.37,
+        "clicks": 13,
+        "impressions": 91,
+        "cpcSek": 8.105384615384615,
+        "conversions": 0
+      },
+      {
+        "term": "montera snörasskydd plåttak",
+        "costSek": 89.97,
+        "clicks": 3,
+        "impressions": 28,
+        "cpcSek": 29.99,
+        "conversions": 0
+      },
+      {
+        "term": "takläggare rättvik",
+        "costSek": 85.47,
+        "clicks": 3,
+        "impressions": 3,
+        "cpcSek": 28.49,
+        "conversions": 0
+      },
+      {
+        "term": "montering snörasskydd",
+        "costSek": 83.55,
+        "clicks": 3,
+        "impressions": 6,
+        "cpcSek": 27.849999999999998,
+        "conversions": 0
+      },
+      {
+        "term": "betongpannor tak",
+        "costSek": 82.78,
+        "clicks": 3,
+        "impressions": 16,
+        "cpcSek": 27.593333333333334,
+        "conversions": 0
+      },
+      {
+        "term": "montera snörasskydd tegeltak",
+        "costSek": 81.96,
+        "clicks": 2,
+        "impressions": 4,
+        "cpcSek": 40.98,
+        "conversions": 0
+      },
+      {
+        "term": "takbyte",
+        "costSek": 80.99,
+        "clicks": 2,
+        "impressions": 11,
+        "cpcSek": 40.495,
+        "conversions": 0
+      },
+      {
+        "term": "oberoende takbesiktning",
+        "costSek": 77.44,
+        "clicks": 2,
+        "impressions": 3,
+        "cpcSek": 38.72,
+        "conversions": 0
+      },
+      {
+        "term": "byggfirma stockholm",
+        "costSek": 69.34,
+        "clicks": 3,
+        "impressions": 48,
+        "cpcSek": 23.113333333333333,
+        "conversions": 0
+      },
+      {
+        "term": "takbesiktning",
+        "costSek": 65.78,
+        "clicks": 2,
+        "impressions": 11,
+        "cpcSek": 32.89,
+        "conversions": 0
+      },
+      {
+        "term": "takpannor betong",
+        "costSek": 64,
+        "clicks": 2,
+        "impressions": 78,
+        "cpcSek": 32,
+        "conversions": 0
+      },
+      {
+        "term": "takfotsplåt hängränna",
+        "costSek": 61.76,
+        "clicks": 2,
+        "impressions": 2,
+        "cpcSek": 30.88,
+        "conversions": 0
+      },
+      {
+        "term": "nytt tak",
+        "costSek": 59.46,
+        "clicks": 2,
+        "impressions": 5,
+        "cpcSek": 29.73,
+        "conversions": 0
+      },
+      {
+        "term": "kostnad byta tak 100 kvm",
+        "costSek": 58.8,
+        "clicks": 8,
+        "impressions": 62,
+        "cpcSek": 7.35,
+        "conversions": 1
+      },
+      {
+        "term": "kvadratmeterpris takbyte",
+        "costSek": 58.18,
+        "clicks": 2,
+        "impressions": 2,
+        "cpcSek": 29.09,
+        "conversions": 0
+      },
+      {
+        "term": "kostnad byta tak",
+        "costSek": 55.77,
+        "clicks": 7,
+        "impressions": 29,
+        "cpcSek": 7.967142857142858,
+        "conversions": 0
+      },
+      {
+        "term": "gh johansson",
+        "costSek": 55.36,
+        "clicks": 2,
+        "impressions": 3,
+        "cpcSek": 27.68,
+        "conversions": 0
+      }
+    ],
+    "dailySearch": [
+      {
+        "date": "2026-07-21",
+        "clicks": 2,
+        "impressions": 989,
+        "ctr": 0.0020222446916076846,
+        "position": 25.433771486349848
+      },
+      {
+        "date": "2026-07-22",
+        "clicks": 4,
+        "impressions": 923,
+        "ctr": 0.004333694474539545,
+        "position": 24.834236186348864
+      },
+      {
+        "date": "2026-07-23",
+        "clicks": 5,
+        "impressions": 1017,
+        "ctr": 0.004916420845624385,
+        "position": 26.136676499508358
+      },
+      {
+        "date": "2026-07-24",
+        "clicks": 4,
+        "impressions": 900,
+        "ctr": 0.0044444444444444444,
+        "position": 23.90111111111111
+      },
+      {
+        "date": "2026-07-25",
+        "clicks": 3,
+        "impressions": 823,
+        "ctr": 0.0036452004860267314,
+        "position": 25.174969623329282
+      },
+      {
+        "date": "2026-07-26",
+        "clicks": 0,
+        "impressions": 854,
+        "ctr": 0,
+        "position": 24.60889929742389
+      },
+      {
+        "date": "2026-07-27",
+        "clicks": 2,
+        "impressions": 1007,
+        "ctr": 0.0019860973187686196,
+        "position": 26.07149950347567
+      },
+      {
+        "date": "2026-07-28",
+        "clicks": 4,
+        "impressions": 1097,
+        "ctr": 0.0036463081130355514,
+        "position": 26.4102096627165
+      },
+      {
+        "date": "2026-07-29",
+        "clicks": 2,
+        "impressions": 1008,
+        "ctr": 0.001984126984126984,
+        "position": 26.047619047619047
+      },
+      {
+        "date": "2026-07-30",
+        "clicks": 4,
+        "impressions": 1110,
+        "ctr": 0.0036036036036036037,
+        "position": 25.8018018018018
+      },
+      {
+        "date": "2026-07-31",
+        "clicks": 8,
+        "impressions": 1101,
+        "ctr": 0.007266121707538601,
+        "position": 25.649409627611263
+      },
+      {
+        "date": "2026-08-01",
+        "clicks": 2,
+        "impressions": 1135,
+        "ctr": 0.001762114537444934,
+        "position": 26.262555066079294
+      },
+      {
+        "date": "2026-08-02",
+        "clicks": 3,
+        "impressions": 974,
+        "ctr": 0.003080082135523614,
+        "position": 25.743326488706366
+      },
+      {
+        "date": "2026-08-03",
+        "clicks": 5,
+        "impressions": 998,
+        "ctr": 0.00501002004008016,
+        "position": 26.647294589178358
+      },
+      {
+        "date": "2026-08-04",
+        "clicks": 5,
+        "impressions": 1077,
+        "ctr": 0.004642525533890436,
+        "position": 27.541318477251625
+      },
+      {
+        "date": "2026-08-05",
+        "clicks": 5,
+        "impressions": 1136,
+        "ctr": 0.0044014084507042256,
+        "position": 26.544014084507044
+      },
+      {
+        "date": "2026-08-06",
+        "clicks": 2,
+        "impressions": 1253,
+        "ctr": 0.0015961691939345571,
+        "position": 26.851556264964085
+      },
+      {
+        "date": "2026-08-07",
+        "clicks": 2,
+        "impressions": 1058,
+        "ctr": 0.001890359168241966,
+        "position": 26.44234404536862
+      },
+      {
+        "date": "2026-08-08",
+        "clicks": 2,
+        "impressions": 997,
+        "ctr": 0.0020060180541624875,
+        "position": 27.27382146439318
+      },
+      {
+        "date": "2026-08-09",
+        "clicks": 3,
+        "impressions": 928,
+        "ctr": 0.003232758620689655,
+        "position": 26.56573275862069
+      },
+      {
+        "date": "2026-08-10",
+        "clicks": 5,
+        "impressions": 1044,
+        "ctr": 0.004789272030651341,
+        "position": 25.14272030651341
+      },
+      {
+        "date": "2026-08-11",
+        "clicks": 5,
+        "impressions": 1112,
+        "ctr": 0.0044964028776978415,
+        "position": 25.947841726618705
+      },
+      {
+        "date": "2026-08-12",
+        "clicks": 3,
+        "impressions": 1100,
+        "ctr": 0.0027272727272727275,
+        "position": 25.42818181818182
+      },
+      {
+        "date": "2026-08-13",
+        "clicks": 5,
+        "impressions": 1112,
+        "ctr": 0.0044964028776978415,
+        "position": 24.89838129496403
+      },
+      {
+        "date": "2026-08-14",
+        "clicks": 9,
+        "impressions": 1186,
+        "ctr": 0.007588532883642495,
+        "position": 23.93929173693086
+      },
+      {
+        "date": "2026-08-15",
+        "clicks": 0,
+        "impressions": 1028,
+        "ctr": 0,
+        "position": 23.788910505836576
+      },
+      {
+        "date": "2026-08-16",
+        "clicks": 4,
+        "impressions": 1076,
+        "ctr": 0.0037174721189591076,
+        "position": 22.79182156133829
+      },
+      {
+        "date": "2026-08-17",
+        "clicks": 10,
+        "impressions": 1069,
+        "ctr": 0.009354536950420954,
+        "position": 22.28531337698784
+      },
+      {
+        "date": "2026-08-18",
+        "clicks": 3,
+        "impressions": 1238,
+        "ctr": 0.0024232633279483036,
+        "position": 23.47011308562197
+      },
+      {
+        "date": "2026-08-19",
+        "clicks": 5,
+        "impressions": 1248,
+        "ctr": 0.004006410256410256,
+        "position": 24.69150641025641
+      },
+      {
+        "date": "2026-08-20",
+        "clicks": 8,
+        "impressions": 1447,
+        "ctr": 0.0055286800276434,
+        "position": 24.59087767795439
+      },
+      {
+        "date": "2026-08-21",
+        "clicks": 4,
+        "impressions": 1071,
+        "ctr": 0.003734827264239029,
+        "position": 24.131652661064425
+      },
+      {
+        "date": "2026-08-22",
+        "clicks": 0,
+        "impressions": 1085,
+        "ctr": 0,
+        "position": 25.123502304147465
+      },
+      {
+        "date": "2026-08-23",
+        "clicks": 6,
+        "impressions": 1090,
+        "ctr": 0.005504587155963303,
+        "position": 24.03119266055046
+      },
+      {
+        "date": "2026-08-24",
+        "clicks": 3,
+        "impressions": 1253,
+        "ctr": 0.0023942537909018356,
+        "position": 24.605746209098164
+      },
+      {
+        "date": "2026-08-25",
+        "clicks": 4,
+        "impressions": 1341,
+        "ctr": 0.002982848620432513,
+        "position": 23.254287844891874
+      },
+      {
+        "date": "2026-08-26",
+        "clicks": 7,
+        "impressions": 1430,
+        "ctr": 0.0048951048951048955,
+        "position": 24.213986013986013
+      },
+      {
+        "date": "2026-08-27",
+        "clicks": 2,
+        "impressions": 1385,
+        "ctr": 0.001444043321299639,
+        "position": 23.3884476534296
+      },
+      {
+        "date": "2026-08-28",
+        "clicks": 3,
+        "impressions": 1160,
+        "ctr": 0.002586206896551724,
+        "position": 23.666379310344826
+      },
+      {
+        "date": "2026-08-29",
+        "clicks": 3,
+        "impressions": 1171,
+        "ctr": 0.0025619128949615714,
+        "position": 23.60204953031597
+      },
+      {
+        "date": "2026-08-30",
+        "clicks": 3,
+        "impressions": 1163,
+        "ctr": 0.0025795356835769563,
+        "position": 23.23731728288908
+      },
+      {
+        "date": "2026-08-31",
+        "clicks": 4,
+        "impressions": 1287,
+        "ctr": 0.003108003108003108,
+        "position": 21.630924630924632
+      },
+      {
+        "date": "2026-09-01",
+        "clicks": 8,
+        "impressions": 1565,
+        "ctr": 0.005111821086261981,
+        "position": 22.468370607028753
+      },
+      {
+        "date": "2026-09-02",
+        "clicks": 5,
+        "impressions": 1473,
+        "ctr": 0.0033944331296673455,
+        "position": 24.873048200950443
+      },
+      {
+        "date": "2026-09-03",
+        "clicks": 4,
+        "impressions": 2159,
+        "ctr": 0.0018527095877721167,
+        "position": 24.834182491894396
+      },
+      {
+        "date": "2026-09-04",
+        "clicks": 7,
+        "impressions": 1262,
+        "ctr": 0.005546751188589541,
+        "position": 23.729793977812996
+      },
+      {
+        "date": "2026-09-05",
+        "clicks": 3,
+        "impressions": 1101,
+        "ctr": 0.0027247956403269754,
+        "position": 24.444141689373296
+      },
+      {
+        "date": "2026-09-06",
+        "clicks": 2,
+        "impressions": 1231,
+        "ctr": 0.0016246953696181965,
+        "position": 24.41429731925264
+      },
+      {
+        "date": "2026-09-07",
+        "clicks": 11,
+        "impressions": 1425,
+        "ctr": 0.0077192982456140355,
+        "position": 24.145263157894735
+      },
+      {
+        "date": "2026-09-08",
+        "clicks": 7,
+        "impressions": 1215,
+        "ctr": 0.005761316872427984,
+        "position": 23.893827160493828
+      },
+      {
+        "date": "2026-09-09",
+        "clicks": 5,
+        "impressions": 1158,
+        "ctr": 0.004317789291882556,
+        "position": 23.683937823834196
+      },
+      {
+        "date": "2026-09-10",
+        "clicks": 2,
+        "impressions": 1190,
+        "ctr": 0.0016806722689075631,
+        "position": 23.383193277310923
+      },
+      {
+        "date": "2026-09-11",
+        "clicks": 3,
+        "impressions": 855,
+        "ctr": 0.0035087719298245615,
+        "position": 23.72748538011696
+      },
+      {
+        "date": "2026-09-12",
+        "clicks": 4,
+        "impressions": 997,
+        "ctr": 0.004012036108324975,
+        "position": 24.899699097291876
+      },
+      {
+        "date": "2026-09-13",
+        "clicks": 2,
+        "impressions": 890,
+        "ctr": 0.0022471910112359553,
+        "position": 23.49438202247191
+      },
+      {
+        "date": "2026-09-14",
+        "clicks": 7,
+        "impressions": 1126,
+        "ctr": 0.006216696269982238,
+        "position": 23.036412078152754
+      },
+      {
+        "date": "2026-09-15",
+        "clicks": 4,
+        "impressions": 1140,
+        "ctr": 0.0035087719298245615,
+        "position": 21.82280701754386
+      },
+      {
+        "date": "2026-09-16",
+        "clicks": 8,
+        "impressions": 1006,
+        "ctr": 0.007952286282306162,
+        "position": 25.19980119284294
+      },
+      {
+        "date": "2026-09-17",
+        "clicks": 4,
+        "impressions": 1163,
+        "ctr": 0.0034393809114359416,
+        "position": 25.48323301805675
+      },
+      {
+        "date": "2026-09-18",
+        "clicks": 6,
+        "impressions": 887,
+        "ctr": 0.006764374295377677,
+        "position": 25.798196166854567
+      },
+      {
+        "date": "2026-09-19",
+        "clicks": 4,
+        "impressions": 853,
+        "ctr": 0.004689331770222743,
+        "position": 26.25791324736225
+      },
+      {
+        "date": "2026-09-20",
+        "clicks": 5,
+        "impressions": 914,
+        "ctr": 0.005470459518599562,
+        "position": 25.51969365426696
+      },
+      {
+        "date": "2026-09-21",
+        "clicks": 7,
+        "impressions": 907,
+        "ctr": 0.007717750826901874,
+        "position": 25.771775082690187
+      },
+      {
+        "date": "2026-09-22",
+        "clicks": 5,
+        "impressions": 1044,
+        "ctr": 0.004789272030651341,
+        "position": 28.07758620689655
+      },
+      {
+        "date": "2026-09-23",
+        "clicks": 2,
+        "impressions": 995,
+        "ctr": 0.0020100502512562816,
+        "position": 27.717587939698493
+      },
+      {
+        "date": "2026-09-24",
+        "clicks": 1,
+        "impressions": 1363,
+        "ctr": 0.0007336757153338225,
+        "position": 29.11518708730741
+      },
+      {
+        "date": "2026-09-25",
+        "clicks": 1,
+        "impressions": 931,
+        "ctr": 0.0010741138560687433,
+        "position": 31.987110633727173
+      },
+      {
+        "date": "2026-09-26",
+        "clicks": 0,
+        "impressions": 825,
+        "ctr": 0,
+        "position": 34.55030303030303
+      },
+      {
+        "date": "2026-09-27",
+        "clicks": 2,
+        "impressions": 868,
+        "ctr": 0.002304147465437788,
+        "position": 32.49884792626728
+      },
+      {
+        "date": "2026-09-28",
+        "clicks": 3,
+        "impressions": 931,
+        "ctr": 0.00322234156820623,
+        "position": 31.92158968850698
+      },
+      {
+        "date": "2026-09-29",
+        "clicks": 5,
+        "impressions": 1035,
+        "ctr": 0.004830917874396135,
+        "position": 33.86086956521739
+      },
+      {
+        "date": "2026-09-30",
+        "clicks": 7,
+        "impressions": 1073,
+        "ctr": 0.0065237651444548,
+        "position": 32.817334575955265
+      },
+      {
+        "date": "2026-10-01",
+        "clicks": 1,
+        "impressions": 1514,
+        "ctr": 0.0006605019815059445,
+        "position": 27.33223249669749
+      },
+      {
+        "date": "2026-10-02",
+        "clicks": 3,
+        "impressions": 736,
+        "ctr": 0.004076086956521739,
+        "position": 23.883152173913043
+      },
+      {
+        "date": "2026-10-03",
+        "clicks": 1,
+        "impressions": 729,
+        "ctr": 0.0013717421124828531,
+        "position": 23.722908093278463
+      },
+      {
+        "date": "2026-10-04",
+        "clicks": 1,
+        "impressions": 746,
+        "ctr": 0.0013404825737265416,
+        "position": 23.664879356568363
+      },
+      {
+        "date": "2026-10-05",
+        "clicks": 2,
+        "impressions": 959,
+        "ctr": 0.0020855057351407717,
+        "position": 25.059436913451513
+      },
+      {
+        "date": "2026-10-06",
+        "clicks": 4,
+        "impressions": 913,
+        "ctr": 0.004381161007667032,
+        "position": 24.176341730558597
+      },
+      {
+        "date": "2026-10-07",
+        "clicks": 0,
+        "impressions": 871,
+        "ctr": 0,
+        "position": 23.93340987370838
+      },
+      {
+        "date": "2026-10-08",
+        "clicks": 1,
+        "impressions": 1454,
+        "ctr": 0.000687757909215956,
+        "position": 25.4181568088033
+      },
+      {
+        "date": "2026-10-09",
+        "clicks": 4,
+        "impressions": 1105,
+        "ctr": 0.0036199095022624436,
+        "position": 30.479638009049772
+      },
+      {
+        "date": "2026-10-10",
+        "clicks": 2,
+        "impressions": 953,
+        "ctr": 0.002098635886673662,
+        "position": 32.40503672612802
+      },
+      {
+        "date": "2026-10-11",
+        "clicks": 5,
+        "impressions": 1121,
+        "ctr": 0.0044603033006244425,
+        "position": 31.35057983942908
+      },
+      {
+        "date": "2026-10-12",
+        "clicks": 8,
+        "impressions": 1230,
+        "ctr": 0.0065040650406504065,
+        "position": 28.834146341463416
+      }
+    ],
+    "queries": [
+      {
+        "query": "sands entreprenad stockholm ab",
+        "clicks": 7,
+        "impressions": 25,
+        "ctr": 0.28,
+        "position": 1.08
+      },
+      {
+        "query": "sands entreprenad",
+        "clicks": 6,
+        "impressions": 44,
+        "ctr": 0.13636363636363635,
+        "position": 1.0454545454545454
+      },
+      {
+        "query": "byta eternittak kostnad",
+        "clicks": 2,
+        "impressions": 40,
+        "ctr": 0.05,
+        "position": 5.8
+      },
+      {
+        "query": "bästa takläggare stockholm",
+        "clicks": 2,
+        "impressions": 168,
+        "ctr": 0.011904761904761904,
+        "position": 12.107142857142858
+      },
+      {
+        "query": "bild",
+        "clicks": 1,
+        "impressions": 2,
+        "ctr": 0.5,
+        "position": 1
+      },
+      {
+        "query": "byta tak tyresö",
+        "clicks": 1,
+        "impressions": 22,
+        "ctr": 0.045454545454545456,
+        "position": 18.454545454545453
+      },
+      {
+        "query": "eternittak",
+        "clicks": 1,
+        "impressions": 121,
+        "ctr": 0.008264462809917356,
+        "position": 21.24793388429752
+      },
+      {
+        "query": "sandhs entreprenad",
+        "clicks": 1,
+        "impressions": 4,
+        "ctr": 0.25,
+        "position": 4.75
+      },
+      {
+        "query": "svinninge",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1,
+        "position": 1
+      },
+      {
+        "query": "takbesiktning stockholm",
+        "clicks": 1,
+        "impressions": 150,
+        "ctr": 0.006666666666666667,
+        "position": 44.38
+      },
+      {
+        "query": "takbyte",
+        "clicks": 1,
+        "impressions": 309,
+        "ctr": 0.003236245954692557,
+        "position": 25.76051779935275
+      },
+      {
+        "query": "takläggare ekerö",
+        "clicks": 1,
+        "impressions": 64,
+        "ctr": 0.015625,
+        "position": 18.625
+      },
+      {
+        "query": "takläggning norrtälje",
+        "clicks": 1,
+        "impressions": 48,
+        "ctr": 0.020833333333333332,
+        "position": 27.1875
+      },
+      {
+        "query": "takomläggning",
+        "clicks": 1,
+        "impressions": 83,
+        "ctr": 0.012048192771084338,
+        "position": 25.253012048192772
+      },
+      {
+        "query": "altan hässelby",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 18
+      },
+      {
+        "query": "altanbygge",
+        "clicks": 0,
+        "impressions": 54,
+        "ctr": 0,
+        "position": 38.388888888888886
+      },
+      {
+        "query": "altanbygge borlänge",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 84
+      },
+      {
+        "query": "altanbygge falun",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 58.5
+      },
+      {
+        "query": "altanbygge hedemora",
+        "clicks": 0,
+        "impressions": 1,
+        "ctr": 0,
+        "position": 79
+      },
+      {
+        "query": "altanbygge hofors",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 86
+      },
+      {
+        "query": "altanbygge leksand",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 62.666666666666664
+      },
+      {
+        "query": "altanbygge ludvika",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 68
+      },
+      {
+        "query": "altanbygge stockholm",
+        "clicks": 0,
+        "impressions": 3,
+        "ctr": 0,
+        "position": 34.333333333333336
+      },
+      {
+        "query": "altantak",
+        "clicks": 0,
+        "impressions": 2,
+        "ctr": 0,
+        "position": 58
+      },
+      {
+        "query": "anlita takfirma",
+        "clicks": 0,
+        "impressions": 4,
+        "ctr": 0,
+        "position": 25
+      }
+    ],
+    "pages": [
+      {
+        "page": "/",
+        "clicks": 25,
+        "impressions": 1320,
+        "ctr": 0.01893939393939394,
+        "position": 7.662121212121212
+      },
+      {
+        "page": "/blogg/byta-eternittak-kostnad",
+        "clicks": 10,
+        "impressions": 1076,
+        "ctr": 0.00929368029739777,
+        "position": 11.132899628252789
+      },
+      {
+        "page": "/blogg/eternittak-asbest",
+        "clicks": 10,
+        "impressions": 1547,
+        "ctr": 0.006464124111182934,
+        "position": 9.95475113122172
+      },
+      {
+        "page": "/basta-taklaggare-stockholm",
+        "clicks": 8,
+        "impressions": 2335,
+        "ctr": 0.003426124197002141,
+        "position": 23.07665952890792
+      },
+      {
+        "page": "/blogg/under-takpannorna-underlagspapp-strolakt",
+        "clicks": 8,
+        "impressions": 783,
+        "ctr": 0.010217113665389528,
+        "position": 10.099616858237548
+      },
+      {
+        "page": "/omdomen",
+        "clicks": 4,
+        "impressions": 64,
+        "ctr": 0.0625,
+        "position": 16.1875
+      },
+      {
+        "page": "/omraden/norrtalje",
+        "clicks": 4,
+        "impressions": 563,
+        "ctr": 0.007104795737122558,
+        "position": 19.635879218472468
+      },
+      {
+        "page": "/omraden/tyreso",
+        "clicks": 3,
+        "impressions": 206,
+        "ctr": 0.014563106796116505,
+        "position": 26.45145631067961
+      },
+      {
+        "page": "/omraden/sollentuna",
+        "clicks": 2,
+        "impressions": 856,
+        "ctr": 0.002336448598130841,
+        "position": 23.26985981308411
+      },
+      {
+        "page": "/omraden/upplands-vasby",
+        "clicks": 2,
+        "impressions": 290,
+        "ctr": 0.006896551724137931,
+        "position": 22.21034482758621
+      },
+      {
+        "page": "/tjanster/takbesiktning",
+        "clicks": 2,
+        "impressions": 425,
+        "ctr": 0.004705882352941176,
+        "position": 31.16
+      },
+      {
+        "page": "/tjanster/taklaggning",
+        "clicks": 2,
+        "impressions": 3045,
+        "ctr": 0.0006568144499178982,
+        "position": 32.995073891625616
+      },
+      {
+        "page": "/blogg/betongpannor-eller-tegelpannor",
+        "clicks": 1,
+        "impressions": 51,
+        "ctr": 0.0196078431372549,
+        "position": 30.235294117647058
+      },
+      {
+        "page": "/blogg/certifierad-taklaggare",
+        "clicks": 1,
+        "impressions": 415,
+        "ctr": 0.0024096385542168677,
+        "position": 9.655421686746989
+      },
+      {
+        "page": "/blogg/under-takpannan-underlagstak",
+        "clicks": 1,
+        "impressions": 1,
+        "ctr": 1,
+        "position": 1
+      }
+    ]
+  }
+}
