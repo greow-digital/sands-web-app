@@ -21,7 +21,7 @@ export default async function OverviewPage() {
     .sort((a, b) => b.score - a.score)
     .slice(0, 5);
   const activeWork = launchpadItems.filter(
-    (i) => i.status === "Planned" || i.status === "In progress"
+    (i) => i.status === "Ready" || i.status === "Building" || i.status === "Review"
   );
 
   return (

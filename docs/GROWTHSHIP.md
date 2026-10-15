@@ -49,6 +49,71 @@ credential yet, so it reports that honestly instead of inventing data.
 - `app/growthship/`: the UI. `proxy.ts` (Next 16's renamed middleware)
   gates everything under `/growthship` and `/api/growthship`.
 
+## The Launchpad board
+
+A kanban board at `/growthship/launchpad`. Cards are dragged between columns
+(native HTML5 drag and drop) or moved from the card's detail dialog.
+
+| Column | Status | Meaning |
+| --- | --- | --- |
+| Backlog | `Backlog` | Sent here from The Radar. |
+| Redo att bygga | `Ready` | Has a brief a coding agent could execute. |
+| Bygger | `Building` | Being implemented on a branch. |
+| Granskning | `Review` | PR and preview wait for a human. |
+| Live | `Shipped` | Merged to main. |
+| Utvärderad | `Measured` | Result and learning written down. |
+
+A card cannot leave Backlog without a `brief` (enforced in
+`PATCH /api/growthship/launchpad`). The brief is the contract with the
+future agent: which pages or files, what changes, how to verify. The three
+middle columns are drawn with a dashed border because they are the stretch
+an agent would own. Old statuses (`Planned`, `In progress`, `Completed`)
+are mapped on read in `store/db.ts`.
+
+## Launchpad to Claude Code (not built yet)
+
+The shape the board is built for: "Starta med Claude Code" on a Ready card
+kicks off an agent that implements the brief and lands it on main. The
+button is rendered but disabled. `LaunchpadItem.implementation` is the
+record a runner would fill in.
+
+1. **Start.** `POST /api/growthship/launchpad/:id/implement` sets
+   `implementation.state = "queued"`, moves the card to Building and fires a
+   GitHub `workflow_dispatch` on this repo with the card id.
+2. **Run.** A GitHub Actions workflow using `anthropics/claude-code-action`
+   checks out the repo, builds the prompt (brief + hypothesis + the
+   opportunity's evidence), lets Claude Code implement it on
+   `growthship/<card-id>`, runs `npm run build` and `npm run lint`, and opens
+   a PR. Claude Code reads `CLAUDE.md` itself, so the copy rules and the
+   "never touch /tack or gtag" rule still apply. Alternative: the Claude
+   Agent SDK in a Vercel Sandbox, which gives more control but means owning
+   the infrastructure. Actions is the smaller step.
+3. **Report back.** `POST /api/growthship/webhooks/github` (HMAC-verified,
+   exempt from the password gate in `proxy.ts`) maps GitHub events onto the
+   card: PR opened moves it to Review with `pullRequestUrl`, Vercel's
+   `deployment_status` sets `previewUrl`, a failed workflow sets
+   `state = "failed"` and moves it back to Ready.
+4. **Land on main.** Recommended: the agent never pushes to main directly.
+   Review holds a "Godkänn och merga" button that merges the PR through the
+   GitHub API, which moves the card to Shipped with `commitSha`. Auto-merge
+   for low-risk cards is possible later, behind branch protection with
+   required checks.
+5. **Measure.** After a set window, an analysis run compares the affected
+   pages before and after and pre-fills `result` for Measured.
+
+What it takes:
+
+- **A real database.** `.data/growthship.json` does not survive on Vercel
+  (read-only, per-instance filesystem), and webhooks need durable writes.
+  Swap `store/db.ts` for Postgres (Neon) or Turso via the Vercel Marketplace.
+- **Secrets.** `ANTHROPIC_API_KEY` as a GitHub Actions secret; a GitHub App
+  or fine-grained token on the server (actions, pull requests and contents
+  write); `GITHUB_WEBHOOK_SECRET`.
+- **`GROWTHSHIP_PASSWORD` set in production**, since the board can then
+  change the live site.
+- **Guardrails** in the workflow: max turns, allowed tools, one run per
+  card at a time, and a path deny-list (`app/tack`, analytics code).
+
 ## What's intentionally not here
 
 Teams, roles, billing, a connector-management UI, notifications,

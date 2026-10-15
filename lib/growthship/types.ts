@@ -22,12 +22,40 @@ export type OpportunityStatus =
   | "Dismissed"
   | "Shipped";
 
-export type LaunchpadStatus =
-  | "Backlog"
-  | "Planned"
-  | "In progress"
-  | "Shipped"
-  | "Completed";
+/**
+ * Kanban columns, in board order. The middle of the board is shaped for a
+ * future automation (see docs/GROWTHSHIP.md, "Launchpad till Claude Code"):
+ * an item in "Ready" has a brief a coding agent can execute, "Building"
+ * means an agent is working on a branch, "Review" means a PR or preview
+ * waits for a human, and "Shipped" means merged to main.
+ */
+export const LAUNCHPAD_STATUSES = [
+  "Backlog",
+  "Ready",
+  "Building",
+  "Review",
+  "Shipped",
+  "Measured",
+] as const;
+
+export type LaunchpadStatus = (typeof LAUNCHPAD_STATUSES)[number];
+
+/**
+ * Where an item's implementation run stands. Nothing writes this yet; it is
+ * the record a Claude Code runner would fill in (session, branch, PR, the
+ * commit that landed on main) so the board can show live progress.
+ */
+export interface LaunchpadImplementation {
+  state: "queued" | "running" | "awaiting_review" | "merged" | "failed";
+  agentSessionId: string | null;
+  branch: string | null;
+  pullRequestUrl: string | null;
+  previewUrl: string | null;
+  commitSha: string | null;
+  error: string | null;
+  startedAt: string;
+  finishedAt: string | null;
+}
 
 export interface Opportunity {
   id: string;
@@ -60,6 +88,13 @@ export interface LaunchpadItem {
   expectedImpact: Rating;
   effort: Rating;
   status: LaunchpadStatus;
+  /**
+   * What to build, written so a coding agent can execute it without more
+   * context: pages/files affected, the change, and how to verify it.
+   * Required before an item can leave Backlog.
+   */
+  brief: string | null;
+  implementation: LaunchpadImplementation | null;
   result: string | null;
   learning: string | null;
   createdAt: string;

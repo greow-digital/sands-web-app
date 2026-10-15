@@ -285,3 +285,200 @@
 }
 
 .gs-table tr:last-child td { border-bottom: none; }
+
+/* The Launchpad kanban. Six columns don't fit the 1120px reading width the
+   other pages use, so the board's page drops the cap and scrolls sideways. */
+.gs-main:has(.gs-kanban) { max-width: none; }
+
+.gs-kanban {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  align-items: start;
+}
+
+.gs-kanban-col {
+  background: var(--gs-surface);
+  border: 1px solid var(--gs-border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 320px;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+/* The stretch a Claude Code runner would own: marked, not yet automated. */
+.gs-kanban-col[data-automated="true"] {
+  border-style: dashed;
+  border-top: 2px solid var(--gs-accent);
+}
+
+.gs-kanban-col[data-over="true"] {
+  border-color: var(--gs-accent);
+  background: var(--gs-surface-hover);
+}
+
+.gs-kanban-col-head { padding: 2px 4px; }
+
+.gs-kanban-col-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.gs-kanban-count {
+  font-size: 11.5px;
+  color: var(--gs-text-faint);
+  background: var(--gs-surface-hover);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+.gs-kanban-col-hint {
+  font-size: 12px;
+  color: var(--gs-text-faint);
+  margin-top: 2px;
+}
+
+.gs-kanban-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.gs-kanban-card {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--gs-bg);
+  border: 1px solid var(--gs-border);
+  cursor: grab;
+  transition: border-color 0.12s ease, opacity 0.12s ease;
+}
+
+.gs-kanban-card:hover { border-color: var(--gs-text-faint); }
+.gs-kanban-card:focus-visible { outline: 2px solid var(--gs-accent); outline-offset: 2px; }
+.gs-kanban-card[data-dragging="true"] { opacity: 0.4; }
+
+.gs-kanban-card-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.gs-kanban-card-desc {
+  font-size: 12.5px;
+  color: var(--gs-text-muted);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gs-kanban-empty {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  min-height: 80px;
+  border: 1px dashed var(--gs-border);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--gs-text-faint);
+}
+
+.gs-dialog {
+  width: min(640px, calc(100vw - 32px));
+  max-height: calc(100vh - 64px);
+  padding: 0;
+  border: 1px solid var(--gs-border);
+  border-radius: 14px;
+  background: var(--gs-surface);
+  color: var(--gs-text);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+.gs-dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+
+.gs-dialog-head,
+.gs-dialog-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.gs-dialog-head { border-bottom: 1px solid var(--gs-border); align-items: flex-start; }
+.gs-dialog-foot { border-top: 1px solid var(--gs-border); }
+
+.gs-dialog-title { font-size: 17px; margin-top: 2px; }
+
+.gs-dialog-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.gs-dialog-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gs-text-muted);
+  margin-bottom: 6px;
+}
+
+.gs-dialog-help {
+  font-size: 12.5px;
+  color: var(--gs-text-faint);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.gs-dialog-agent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border: 1px dashed var(--gs-accent);
+  border-radius: 10px;
+  background: var(--gs-accent-soft);
+}
+
+.gs-dialog-agent .gs-btn { flex-shrink: 0; }
+
+.gs-dialog-error {
+  font-size: 13px;
+  color: var(--gs-danger);
+  background: var(--gs-danger-soft);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.gs-dialog-move {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--gs-text-muted);
+}
+
+.gs-dialog-move .gs-input { width: auto; }
+
+.gs-link { color: var(--gs-accent); font-size: 12.5px; }

@@ -1,6 +1,12 @@
 import { mkdir, readFile, writeFile, rename } from "fs/promises";
 import { dirname, join } from "path";
-import type { AnalysisRun, LaunchpadItem, Opportunity } from "../types";
+import {
+  LAUNCHPAD_STATUSES,
+  type AnalysisRun,
+  type LaunchpadItem,
+  type LaunchpadStatus,
+  type Opportunity,
+} from "../types";
 import type { CognyBundle } from "../cogny/types";
 import type { MarketingReport } from "../reporting/types";
 
@@ -34,13 +40,32 @@ const EMPTY: Shape = {
 // writes through this promise so two writers never interleave.
 let queue: Promise<unknown> = Promise.resolve();
 
+// Statuses from before The Launchpad became a kanban board.
+const LEGACY_STATUS: Record<string, LaunchpadStatus> = {
+  Planned: "Ready",
+  "In progress": "Building",
+  Completed: "Measured",
+};
+
+function normalizeLaunchpadItem(raw: LaunchpadItem): LaunchpadItem {
+  const status = (LAUNCHPAD_STATUSES as readonly string[]).includes(raw.status)
+    ? raw.status
+    : (LEGACY_STATUS[raw.status] ?? "Backlog");
+  return {
+    ...raw,
+    status,
+    brief: raw.brief ?? null,
+    implementation: raw.implementation ?? null,
+  };
+}
+
 async function readShape(): Promise<Shape> {
   try {
     const raw = await readFile(DATA_FILE, "utf-8");
     const parsed = JSON.parse(raw) as Partial<Shape>;
     return {
       opportunities: parsed.opportunities ?? [],
-      launchpadItems: parsed.launchpadItems ?? [],
+      launchpadItems: (parsed.launchpadItems ?? []).map(normalizeLaunchpadItem),
       analysisRuns: parsed.analysisRuns ?? [],
       latestBundle: parsed.latestBundle ?? null,
       report: parsed.report ?? null,
@@ -129,6 +154,11 @@ export async function listLaunchpadItems(): Promise<LaunchpadItem[]> {
   return (await readShape()).launchpadItems;
 }
 
+export async function getLaunchpadItem(id: string): Promise<LaunchpadItem | null> {
+  const found = (await readShape()).launchpadItems.find((i) => i.id === id);
+  return found ?? null;
+}
+
 export async function createLaunchpadItem(
   item: LaunchpadItem
 ): Promise<LaunchpadItem> {
@@ -141,7 +171,10 @@ export async function createLaunchpadItem(
 export async function updateLaunchpadItem(
   id: string,
   patch: Partial<
-    Pick<LaunchpadItem, "status" | "result" | "learning" | "hypothesis">
+    Pick<
+      LaunchpadItem,
+      "status" | "result" | "learning" | "hypothesis" | "brief" | "implementation"
+    >
   >
 ): Promise<LaunchpadItem | null> {
   return withQueue((shape) => {
