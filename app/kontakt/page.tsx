@@ -6,6 +6,7 @@ import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import { telefonFel } from "@/lib/telefon";
 
 type FormData = {
   name: string;
@@ -18,6 +19,7 @@ function KontaktForm() {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>();
@@ -93,8 +95,22 @@ function KontaktForm() {
           <input
             type="tel"
             className={`w-full px-4 py-3 rounded-[5px] text-sm outline-none border transition-colors ${errors.phone ? "border-red-400 bg-red-50" : "border-transparent bg-[#F1F4F7] focus:border-[#2B74FC]"}`}
-            {...register("phone", { required: true })}
+            {...register("phone", {
+              required: true,
+              validate: (v) => telefonFel(v) ?? true,
+              // Samma beteende som LeadForm: kontroll när fältet lämnas
+              // med ett värde, och om igen vid ändring när fel visas.
+              onBlur: (e) => {
+                if (e.target.value.trim()) trigger("phone");
+              },
+              onChange: () => {
+                if (errors.phone) trigger("phone");
+              },
+            })}
           />
+          {errors.phone?.message && (
+            <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>
+          )}
         </div>
       </div>
 
