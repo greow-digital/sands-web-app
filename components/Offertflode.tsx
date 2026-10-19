@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -35,8 +35,9 @@ import type { MaterialKey } from "@/lib/material";
   bara introtexten och vilket formId leaden får, så att kanalen i arket och
   i GA4 fortfarande skiljer priskalkylator från taktest.
 
-  Ordningen bygger commitment innan något efterfrågas: sex knappval, sedan
-  pris och skick, sist offerten. Frågan om när kunden vill byta ligger i
+  Ordningen bygger commitment innan något efterfrågas: knappval, sedan pris
+  (och skick via taktestet), sist offerten. /priser har fyra steg och
+  /taktest sex, se STEG_FOR. Frågan om när kunden vill byta ligger i
   offertdelen i stället för som ett sjunde steg: den kvalificerar leaden
   utan att förlänga vägen till priset. Priset gömmer sig inte bakom formuläret,
   det är formuläret som erbjuder det priset inte kan ge: ett fast pris.
@@ -57,7 +58,15 @@ const STEG = [
   { id: "tecken", fraga: "Ser du något av det här?" },
 ] as const;
 
-const RESULTAT = STEG.length;
+type StegId = (typeof STEG)[number]["id"];
+
+// Ålder och synliga skador finns till för skicksbedömningen, som bara
+// visas via taktestet. På /priser hoppas de över, så vägen till priset är
+// fyra steg i stället för sex.
+const STEG_FOR: Record<Ingang, readonly (typeof STEG)[number][]> = {
+  taktest: STEG,
+  priser: STEG.filter((s) => s.id !== "alder" && s.id !== "tecken"),
+};
 
 const INGAR = [
   "Rivning och bortforsling av gammalt tak",
@@ -69,7 +78,7 @@ const INGAR = [
 
 const INTRO: Record<Ingang, string> = {
   priser:
-    "Sex snabba knappval, under en minut. Du får ditt riktpris och en bedömning av takets skick direkt på skärmen.",
+    "Fyra snabba knappval, under en minut. Du får ditt riktpris direkt på skärmen.",
   taktest:
     "Sex snabba knappval, under en minut. Du får en bedömning av takets skick och vad ett takbyte skulle kosta.",
 };
@@ -134,6 +143,8 @@ function ValLista({
 
 export default function Offertflode({ ingang }: { ingang: Ingang }) {
   const [steg, setSteg] = useState(0);
+  const stegLista = STEG_FOR[ingang];
+  const RESULTAT = stegLista.length;
   const [svar, setSvar] = useState<Svar>({ kvm: 140, detaljer: [], tecken: [] });
   const [boyta, setBoyta] = useState<number | null>(null);
   const [visaIngar, setVisaIngar] = useState(false);
@@ -152,17 +163,52 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
     });
   }
 
+  /*
+    Spårning. Varje steg har ett eget händelsenamn (offert_step_1 till
+    offert_step_6, sedan offert_result och offert_submit), så att tappet per
+    steg syns i GA4 utan anpassade dimensioner. Svaren skickas som
+    parametrar (question, answer) och blir läsbara när dimensionerna är
+    registrerade i GA4. ingang följer med alla händelser via ga().
+    Konverteringen är oförändrad: form_submit på /tack.
+  */
+
+  // Flödet räknas som visat när minst 40 % av kortet syns, inte vid
+  // sidladdning. Annars blandas de som aldrig skrollade dit in i tappet.
+  useEffect(() => {
+    const el = sektionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        ga("offert_view");
+        ga("offert_step_1", { step: 1 });
+        sedda.current.add(0);
+        obs.disconnect();
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+    // ga är stabil i praktiken, den läser bara ingang.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function gaTill(nasta: number) {
     setSteg(nasta);
     if (!sedda.current.has(nasta)) {
       sedda.current.add(nasta);
       if (nasta === RESULTAT) {
-        ga("offert_result_view", { material: svar.material, area: svar.kvm });
+        ga("offert_result", {
+          material: svar.material,
+          area: svar.kvm,
+          skick: ingang === "taktest" ? skick(svar).key : "ej_bedomt",
+          lage: Math.round(lageISpannet(svar).lage * 100),
+        });
         // Samma händelse som kalkylatorn hade, så att historiken i GA4
         // hänger ihop för /priser.
         if (ingang === "priser") ga("calc_bridge_view", { material: svar.material, area: svar.kvm });
       } else {
-        ga("offert_step_view", { step: nasta + 1 });
+        ga(`offert_step_${nasta + 1}`, { step: nasta + 1 });
       }
     }
     requestAnimationFrame(() => {
@@ -186,6 +232,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
   // valet syns.
   function valj<K extends keyof Svar>(nyckel: K, varde: Svar[K]) {
     starta();
+    ga("offert_answer", { question: nyckel, answer: String(varde) });
     setSvar((s) => ({ ...s, [nyckel]: varde }));
     setTimeout(() => gaTill(steg + 1), 180);
   }
@@ -210,6 +257,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
   const lage = lageISpannet(svar);
   const niva = skick(svar);
   const forklaringar = insikter(svar);
+  // Skicksbedömningen visas bara via taktestet. På /priser har besökaren
+  // ofta redan bestämt sig, och "Verkar i skick" blir då ett skäl att låta
+  // bli. Bedömningen följer ändå med leaden till Sands.
+  const visaSkick = ingang === "taktest";
   const materialNamn =
     TAKMATERIAL.find((m) => m.key === svar.material)?.namn ?? "";
 
@@ -217,7 +268,13 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
     <button
       type="button"
       disabled={!aktiv}
-      onClick={() => gaTill(steg + 1)}
+      onClick={() => {
+        if (aktuellt === "yta")
+          ga("offert_answer", { question: "kvm", answer: String(svar.kvm), boyta: boyta !== null });
+        if (aktuellt === "detaljer") ga("offert_answer", { question: "detaljer", answer: svar.detaljer.join(",") });
+        if (aktuellt === "tecken") ga("offert_answer", { question: "tecken", answer: svar.tecken.join(",") });
+        gaTill(steg + 1);
+      }}
       className="mt-6 w-full inline-flex items-center justify-center gap-2 py-4 rounded-full text-white font-semibold text-sm transition-all enabled:hover:scale-[1.01] disabled:opacity-40"
       style={{ backgroundColor: "var(--color-primary)" }}
     >
@@ -226,6 +283,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
   );
 
   const pagaende = steg < RESULTAT;
+  const aktuellt: StegId | undefined = stegLista[steg]?.id;
 
   return (
     <section ref={sektionRef} id="offertflode" className="scroll-mt-24">
@@ -235,7 +293,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
             {/* Progress: klara steg fyllda, pågående tonat */}
             <div className="flex items-center gap-3 mb-5">
               <div className="flex flex-1 items-center gap-1.5">
-                {STEG.map((s, i) => (
+                {stegLista.map((s, i) => (
                   <span
                     key={s.id}
                     className="h-1 flex-1 rounded-full transition-colors"
@@ -253,7 +311,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               {steg > 0 && (
                 <button
                   type="button"
-                  onClick={() => gaTill(steg - 1)}
+                  onClick={() => {
+                    ga("offert_back", { step: steg + 1 });
+                    gaTill(steg - 1);
+                  }}
                   className="shrink-0 inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-[#2B74FC]"
                 >
                   <ArrowLeft size={13} /> Tillbaka
@@ -269,10 +330,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               className="text-xl lg:text-2xl font-extrabold tracking-[-0.02em] outline-none mb-5"
               style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
             >
-              {STEG[steg].fraga}
+              {stegLista[steg].fraga}
             </h2>
 
-            {steg === 0 && (
+            {aktuellt === "material" && (
               <>
                 {/* Bara från sm: på mobil sköt texten ner materialknapparna
                     halvvägs under vikningen, och heron säger redan samma sak. */}
@@ -287,7 +348,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               </>
             )}
 
-            {steg === 1 && (
+            {aktuellt === "yta" && (
               <div>
                 <div className="flex items-baseline justify-between mb-4">
                   <span className="text-sm text-gray-500">Takyta</span>
@@ -357,7 +418,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               </div>
             )}
 
-            {steg === 2 && (
+            {aktuellt === "takform" && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {TAKFORM.map((t) => {
                   const aktiv = svar.takform === t.value;
@@ -380,17 +441,17 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               </div>
             )}
 
-            {steg === 3 && (
+            {aktuellt === "detaljer" && (
               <>
                 <ValLista lista={DETALJER} valda={svar.detaljer} onVal={(v) => vaxla("detaljer", v)} />
                 {fortsatt(svar.detaljer.length > 0)}
               </>
             )}
 
-            {steg === 4 &&
+            {aktuellt === "alder" &&
               <ValLista lista={ALDER} valda={[svar.alder]} onVal={(v) => valj("alder", v)} />}
 
-            {steg === 5 && (
+            {aktuellt === "tecken" && (
               <>
                 <p className="text-sm text-gray-500 -mt-2 mb-4">Välj allt som stämmer.</p>
                 <ValLista lista={TECKEN} valda={svar.tecken} onVal={(v) => vaxla("tecken", v)} />
@@ -413,12 +474,14 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400">
                   Ditt riktpris efter ROT
                 </p>
-                <span
-                  className="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full"
-                  style={{ color: niva.color, backgroundColor: "#fff" }}
-                >
-                  {niva.label}
-                </span>
+                {visaSkick && (
+                  <span
+                    className="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full"
+                    style={{ color: niva.color, backgroundColor: "#fff" }}
+                  >
+                    {niva.label}
+                  </span>
+                )}
               </div>
               <p
                 className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] text-white tabular-nums leading-tight mt-1"
@@ -466,9 +529,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                       key={t.value}
                       type="button"
                       aria-pressed={aktiv}
-                      onClick={() =>
-                        setSvar((s) => ({ ...s, tidsplan: aktiv ? undefined : t.value }))
-                      }
+                      onClick={() => {
+                        if (!aktiv) ga("offert_timeline", { tidsplan: t.value });
+                        setSvar((s) => ({ ...s, tidsplan: aktiv ? undefined : t.value }));
+                      }}
                       className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
                         aktiv
                           ? "border-[#2B74FC] bg-[#2B74FC] text-white"
@@ -494,10 +558,15 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                   extraPayload={{
                     roofType: materialNamn,
                     area: `${svar.kvm} m²`,
-                    message: sammanfattning(svar, prisText, niva),
+                    message: sammanfattning(svar, prisText, visaSkick ? niva : undefined),
                   }}
                   onSubmitSuccess={() => {
-                    ga("offert_submit", { material: svar.material, tidsplan: svar.tidsplan });
+                    ga("offert_submit", {
+                      material: svar.material,
+                      area: svar.kvm,
+                      tidsplan: svar.tidsplan ?? "ej angiven",
+                      skick: visaSkick ? niva.key : "ej_bedomt",
+                    });
                     if (ingang === "priser")
                       ga("calc_bridge_submit", { material: svar.material, area: svar.kvm });
                   }}
@@ -540,7 +609,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 </ol>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className={visaSkick ? "grid gap-4 sm:grid-cols-2" : ""}>
                 <div className="rounded-2xl border border-gray-100 p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-400 mb-2">
                     Ditt pris
@@ -550,6 +619,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                     Före ROT: {kr(pris.undreForeRot)} – {kr(pris.ovreForeRot)}
                   </p>
                 </div>
+                {visaSkick && (
                 <div className="rounded-2xl border border-gray-100 p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-400 mb-2">
                     Takets skick
@@ -574,12 +644,16 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                     </ul>
                   )}
                 </div>
+                )}
               </div>
             </div>
 
             <button
               type="button"
-              onClick={() => setVisaIngar(!visaIngar)}
+              onClick={() => {
+                if (!visaIngar) ga("offert_details_open");
+                setVisaIngar(!visaIngar);
+              }}
               aria-expanded={visaIngar}
               className="w-full flex items-center justify-between px-5 py-4 lg:px-8 border-t border-gray-100 hover:bg-gray-50"
             >
@@ -614,6 +688,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               <button
                 type="button"
                 onClick={() => {
+                  ga("offert_restart");
                   setSvar({ kvm: 140, detaljer: [], tecken: [] });
                   setBoyta(null);
                   gaTill(0);

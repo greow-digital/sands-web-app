@@ -167,7 +167,8 @@ export function insikter(s: Svar): string[] {
  * Sammanfattning som följer med leaden som meddelande, så att Sands ser
  * allt kunden svarat utan att behöva ringa och fråga.
  */
-export function sammanfattning(s: Svar, prisText: string, niva: Niva) {
+/** niva utelämnas när skicket inte efterfrågats (ingången /priser). */
+export function sammanfattning(s: Svar, prisText: string, niva?: Niva) {
   const delar = [
     `Från offertflödet: ${materialNamn(s.material)}, ${label(TAKFORM, s.takform).toLowerCase()}, ca ${s.kvm} m².`,
     s.detaljer.length && !s.detaljer.includes("inget")
@@ -178,7 +179,8 @@ export function sammanfattning(s: Svar, prisText: string, niva: Niva) {
       ? `Ser: ${s.tecken.map((t) => label(TECKEN, t).toLowerCase()).join(", ")}.`
       : "",
     s.tidsplan ? `Vill byta: ${label(TIDSPLAN, s.tidsplan).toLowerCase()}.` : "",
-    `Riktpris: ${prisText}. Skick: ${niva.label.toLowerCase()}.`,
+    `Riktpris: ${prisText}.`,
+    niva ? `Skick: ${niva.label.toLowerCase()}.` : "",
   ];
   return delar.filter(Boolean).join(" ");
 }
