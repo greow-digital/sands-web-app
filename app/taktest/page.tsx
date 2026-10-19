@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Taktest from "@/components/Taktest";
+import Offertflode from "@/components/Offertflode";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -42,8 +42,25 @@ export default function TaktestPage() {
     <>
       <Header />
       <main className="bg-white pt-16 lg:pt-20">
-        {/* Immersivt taktest */}
-        <Taktest />
+        {/* Taktestet är samma flöde som priskalkylatorn på /priser sedan
+            19 okt 2026, med en annan ingång. Båda slutar i pris, skick och
+            en gratis offert. */}
+        <section className="bg-gray-50 border-b border-gray-100">
+          <div className="max-w-[880px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-10 lg:pt-14 lg:pb-16">
+            <h1
+              className="text-[30px] sm:text-[38px] lg:text-[46px] font-extrabold tracking-[-0.03em] leading-[1.08] mb-3"
+              style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
+            >
+              Är det dags för takbyte?
+            </h1>
+            <p className="text-gray-600 leading-relaxed max-w-xl mb-6">
+              Gör taktestet på en minut. Du får en bedömning av takets skick
+              och ett riktpris, och kan sedan begära en gratis offert utan
+              förpliktelser.
+            </p>
+            <Offertflode ingang="taktest" />
+          </div>
+        </section>
 
         {/* ── SÅ FUNGERAR DET ─────────────────── */}
         <section className="py-20 lg:py-28">

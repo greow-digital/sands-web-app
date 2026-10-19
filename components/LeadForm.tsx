@@ -54,6 +54,11 @@ interface LeadFormProps {
    * steget i Takräknaren.
    */
   flat?: boolean;
+  /**
+   * Telefon och e-post på var sin rad under sm. Två kolumner på en
+   * mobilskärm klipper exempeltexten i telefonfältet.
+   */
+  stapla?: boolean;
   /** Visar fritextfältet även i minimal-läge. */
   showMessage?: boolean;
   /** Extra data som följer med i leadens payload, t.ex. taktyp + yta. */
@@ -81,6 +86,7 @@ export default function LeadForm({
   contact = "phone",
   flat = false,
   showMessage = false,
+  stapla = false,
   extraPayload,
   ctaText,
   hideHeader = false,
@@ -358,7 +364,15 @@ export default function LeadForm({
         </div>
 
         {fields === "minimal" ? (
-          <div className={valfriKontakt ? "grid grid-cols-2 gap-3" : ""}>
+          <div
+            className={
+              valfriKontakt
+                ? stapla
+                  ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
+                  : "grid grid-cols-2 gap-3"
+                : ""
+            }
+          >
             <div className="min-w-0">
               <label
                 htmlFor={fid("phone")}
