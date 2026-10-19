@@ -1,8 +1,13 @@
 "use client";
 
-import { useForm, type UseFormRegisterReturn } from "react-hook-form";
+import {
+  useForm,
+  type RegisterOptions,
+  type UseFormRegisterReturn,
+} from "react-hook-form";
 import { useId, useRef, useState } from "react";
 import { leadSourceFor } from "@/lib/lead-source";
+import { telefonFel } from "@/lib/telefon";
 
 type FormData = {
   name: string;
@@ -105,20 +110,30 @@ export default function LeadForm({
 
   const KONTAKT_KRAV = "Fyll i telefon eller e-post, du väljer själv";
 
-  const telefonRegler = valfriKontakt
+  const telefonFormat = (v?: string) => telefonFel(v) ?? true;
+
+  // Numret kontrolleras redan när fältet lämnas, inte först vid submit, så
+  // att ett nummer med en siffra för lite syns medan användaren är kvar i
+  // formuläret. Tomt fält lämnas i fred tills submit, annars får den som
+  // hoppar förbi telefon för att fylla i e-post ett fel i onödan. När ett
+  // fel väl visas kontrolleras fältet om vid varje ändring, så att
+  // meddelandet försvinner så fort numret är rätt.
+  const telefonLive = {
+    onBlur: (e: React.FocusEvent<HTMLInputElement>) => {
+      if (e.target.value.trim()) trigger("phone");
+    },
+  };
+
+  const telefonRegler: RegisterOptions<FormData, "phone"> = valfriKontakt
     ? {
         validate: {
           kontakt: () => harKontaktvag() || KONTAKT_KRAV,
-          format: (v?: string) =>
-            !v?.trim() || /^[0-9+\s-]{7,}$/.test(v) || "Ogiltigt nummer",
+          format: telefonFormat,
         },
       }
     : {
         required: "Ange telefonnummer",
-        pattern: {
-          value: /^[0-9+\s-]{7,}$/,
-          message: "Ogiltigt nummer",
-        },
+        validate: { format: telefonFormat },
       };
 
   const [submitted, setSubmitted] = useState(false);
@@ -358,7 +373,9 @@ export default function LeadForm({
                   "phone",
                   register("phone", {
                     ...telefonRegler,
+                    ...telefonLive,
                     onChange: () => {
+                      if (errors.phone) trigger("phone");
                       if (valfriKontakt && errors.email) trigger("email");
                     },
                   })
@@ -458,9 +475,10 @@ export default function LeadForm({
                     "phone",
                     register("phone", {
                       required: "Ange telefonnummer",
-                      pattern: {
-                        value: /^[0-9+\s\-]{7,}$/,
-                        message: "Ogiltigt nummer",
+                      validate: { format: telefonFormat },
+                      ...telefonLive,
+                      onChange: () => {
+                        if (errors.phone) trigger("phone");
                       },
                     })
                   )}
