@@ -426,7 +426,7 @@ export default async function Home() {
 
         {/* ── GARANTI ─────────────────────────────────
             Ersätter Monier-stycket i prisrutans fotnot. */}
-        <Garantiband bred className="pb-16 lg:pb-28 bg-white" />
+        <Garantiband id="monier" bred className="pb-16 lg:pb-28 bg-white" />
 
         {/* ── VÅR PROCESS ────────────────────────── */}
         <section
