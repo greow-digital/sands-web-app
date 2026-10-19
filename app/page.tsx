@@ -4,13 +4,13 @@ import { ArrowRight, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
-import SeasonBanner from "@/components/SeasonBanner";
 import LatestProjekt from "@/components/LatestProjekt";
 import TaktestCta from "@/components/TaktestCta";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
 import LeadForm from "@/components/LeadForm";
 import OmdomenInline from "@/components/OmdomenInline";
 import { startsidaTestimonials } from "@/lib/testimonials";
+import { MATERIAL } from "@/lib/material";
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -181,39 +181,16 @@ export default async function Home() {
             }}
           />
 
-          <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-14 w-full">
-            {/* På mobil: titel → CTA → form → stats → badges. På desktop:
+          <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12 lg:py-14 w-full">
+            {/* På mobil: titel → betyg → prisrad → form → badges. På desktop:
                 2-kol-grid med formuläret till höger. Formuläret låg här fram
                 till 5 juni och togs bort för att mäta hero-flöde mot
                 /offert-flöde. Det är tillbaka eftersom 96 procent av den
                 betalda trafiken aldrig nådde /offert. */}
-            <div className="grid lg:grid-cols-[1.1fr_400px] gap-10 lg:gap-x-14 lg:gap-y-6 items-start">
+            <div className="grid lg:grid-cols-[1.1fr_400px] gap-6 lg:gap-x-14 lg:gap-y-6 items-start">
             <div className="text-white max-w-3xl lg:col-start-1 lg:row-start-1">
-              <SeasonBanner />
-
-              {/* Trust-rad ovanfor H1: stjarnor + recensions-snippet */}
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-5 text-sm">
-                <div className="flex items-center gap-1.5">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        className="fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="font-semibold">4,8</span>
-                  <span className="text-gray-300">BraByggare</span>
-                </div>
-                <span className="text-gray-400">·</span>
-                <span className="font-medium">
-                  2 500+ utförda tak sedan 2016
-                </span>
-              </div>
-
               <h1
-                className="text-[40px] sm:text-[52px] lg:text-[66px] font-extrabold leading-[1.03] tracking-[-0.035em] mb-6"
+                className="text-[34px] sm:text-[52px] lg:text-[66px] font-extrabold leading-[1.05] tracking-[-0.035em] mb-4"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Din takläggare i Stockholm, med fast pris och{" "}
@@ -230,18 +207,40 @@ export default async function Home() {
                   30 års garanti
                 </span>
               </h1>
-              <p className="text-xl text-gray-200 leading-relaxed max-w-xl mb-5">
-                Auktoriserad takläggare i Stockholm. Takbyte, takomläggning
-                och renovering med transparent prissättning, ROT-avdrag
-                direkt på fakturan och svar inom 24 timmar.
-              </p>
+              {/* Betyget under H1 och säsongspillret borttaget (19 okt 2026).
+                  På mobil låg formulärets första fält 857 px ner mot en
+                  synlig yta på ca 664 px. Rubriken ska läsas först, betyget
+                  bekräftar den. */}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4 text-sm">
+                <div className="flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={14}
+                        className="fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+                  </div>
+                  <span className="font-semibold">4,8</span>
+                  <span className="text-gray-300">BraByggare</span>
+                </div>
+                {/* Raden bryts på mobil, och då blev pricken hängande sist. */}
+                <span className="hidden sm:inline text-gray-400">·</span>
+                <span className="font-medium">
+                  2 500+ utförda tak sedan 2016
+                </span>
+              </div>
 
-              {/* Prisrad ovanför vikningen: bred matchning på "takläggare"
-                  drar in ett tjugotal prisvarianter, och första siffran låg
-                  tidigare sju sektioner ner. */}
-              <p className="text-base text-gray-200">
+              {/* En rad i stället för brödtext plus prisrad, som tog sex
+                  rader på mobil. Priset ligger kvar ovanför vikningen: broad
+                  match på "takläggare" drar in ett tjugotal prisvarianter,
+                  och SEO.md kräver pris i heron. Takbyte och takomläggning
+                  bär synonymerna som brödtexten hade. */}
+              <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-xl">
+                Takbyte och takomläggning{" "}
                 <span className="font-bold text-white">
-                  Från 1 200 kr/m² efter ROT.
+                  från {MATERIAL.betong.prisM2.toLocaleString("sv-SE")} kr/m² efter ROT.
                 </span>{" "}
                 Fast pris efter kostnadsfri takkontroll.
               </p>
@@ -266,6 +265,7 @@ export default async function Home() {
                 contact="phone-or-email"
                 showMessage
                 ctaText="Få mitt prisförslag"
+                hideHeader="mobile"
               />
             </div>
             </div>
