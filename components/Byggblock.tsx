@@ -201,9 +201,18 @@ export function Priskort({
 }
 
 /** Mörkt band med de två garantierna. Siffrorna följer lib/company.ts: "upp till 30 år". */
-export function Garantiband({ bred = false, className = "" }: { bred?: boolean; className?: string }) {
+export function Garantiband({
+  bred = false,
+  className = "",
+  id,
+}: {
+  bred?: boolean;
+  className?: string;
+  /** Ankare för länkar hit, t.ex. Ads-länktillägget "30 års garanti" (/#monier). */
+  id?: string;
+}) {
   return (
-    <section className={`px-4 sm:px-6 lg:px-8 ${className}`}>
+    <section id={id} className={`px-4 sm:px-6 lg:px-8 scroll-mt-24 ${className}`}>
       <div
         className={`${bred ? "max-w-[1200px]" : "max-w-[1120px]"} mx-auto rounded-[32px] bg-[#07090D] text-white p-7 lg:p-14 relative overflow-hidden`}
       >
