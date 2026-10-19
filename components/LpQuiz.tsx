@@ -81,6 +81,13 @@ export default function LpQuiz({
   const ref = useRef<HTMLDivElement>(null);
   const rubrikRef = useRef<HTMLParagraphElement>(null);
   const visad = useRef(false);
+  // Sökordet som annonsen skickade med (?kw=), följer med leaden och i
+  // spårningen så att Sands och vi ser vilket sökord leaden kom från.
+  // Läses bara i webbläsaren och renderas aldrig, så servern och klienten
+  // ger samma HTML.
+  const [annonsSokord] = useState<string | null>(() =>
+    typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("kw")
+  );
 
   const prisSpar = arende === "byta" || arende === "lagga-om";
   const antalSteg = prisSpar ? 4 : 2;
@@ -176,6 +183,7 @@ export default function LpQuiz({
     boyta ? `boyta ${STORLEKAR.find((s) => s.value === storlek)?.label.toLowerCase()}` : "",
     pris ? `riktpris ${kr(pris.undre)} – ${kr(pris.ovre)}` : "",
     `sökord: ${sokord}`,
+    annonsSokord ? `annonssökord: ${annonsSokord}` : "",
   ]
     .filter(Boolean)
     .join(", ");
@@ -388,14 +396,24 @@ export default function LpQuiz({
             stapla
             flat
             hideHeader
-            showMessage={!prisSpar}
+            // Fritext på alla vägar, inte bara läckage (beslut 19 okt 2026):
+            // många leads vill skriva något själva, och svaren från flödet
+            // slås ihop med texten i LeadForm.
+            showMessage
             ctaText="Få gratis offert"
             extraPayload={{
               roofType: taktyp ? taktypLabel : undefined,
               area: kvm ? `${kvm} m²` : undefined,
               message: meddelande,
             }}
-            onSubmitSuccess={() => ga("lp_submit", { arende, taktyp: taktyp ?? "ej angiven", storlek: storlek ?? "ej angiven" })}
+            onSubmitSuccess={() =>
+              ga("lp_submit", {
+                arende,
+                taktyp: taktyp ?? "ej angiven",
+                storlek: storlek ?? "ej angiven",
+                annonssokord: annonsSokord ?? "saknas",
+              })
+            }
           />
           <p className="text-[11px] text-gray-500 text-center mt-3">
             Kostnadsfritt · Utan förpliktelser · Svar inom 24 timmar
