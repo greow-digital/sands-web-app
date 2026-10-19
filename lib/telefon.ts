@@ -8,9 +8,13 @@
   e-post fortfarande går att nå även om numret är fel.
 */
 
-/** Tar bort mellanslag, bindestreck, punkter, snedstreck och parenteser. */
+/**
+ * Tar bort mellanslag, bindestreck, punkter, snedstreck och parenteser.
+ * \u2010-\u2015 är de typografiska strecken som följer med när ett nummer
+ * klistras in från ett mejl eller en hemsida.
+ */
 function siffrorOchPlus(v: string) {
-  return v.replace(/[\s\-./()]/g, "");
+  return v.replace(/[\s\-\u2010-\u2015./()]/g, "");
 }
 
 /**
