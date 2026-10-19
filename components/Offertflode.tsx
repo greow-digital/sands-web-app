@@ -246,6 +246,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
   const lage = lageISpannet(svar);
   const niva = skick(svar);
   const forklaringar = insikter(svar);
+  // Skicksbedömningen visas bara via taktestet. På /priser har besökaren
+  // ofta redan bestämt sig, och "Verkar i skick" blir då ett skäl att låta
+  // bli. Bedömningen följer ändå med leaden till Sands.
+  const visaSkick = ingang === "taktest";
   const materialNamn =
     TAKMATERIAL.find((m) => m.key === svar.material)?.namn ?? "";
 
@@ -458,12 +462,14 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400">
                   Ditt riktpris efter ROT
                 </p>
-                <span
-                  className="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full"
-                  style={{ color: niva.color, backgroundColor: "#fff" }}
-                >
-                  {niva.label}
-                </span>
+                {visaSkick && (
+                  <span
+                    className="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full"
+                    style={{ color: niva.color, backgroundColor: "#fff" }}
+                  >
+                    {niva.label}
+                  </span>
+                )}
               </div>
               <p
                 className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] text-white tabular-nums leading-tight mt-1"
@@ -591,7 +597,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 </ol>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className={visaSkick ? "grid gap-4 sm:grid-cols-2" : ""}>
                 <div className="rounded-2xl border border-gray-100 p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-400 mb-2">
                     Ditt pris
@@ -601,6 +607,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                     Före ROT: {kr(pris.undreForeRot)} – {kr(pris.ovreForeRot)}
                   </p>
                 </div>
+                {visaSkick && (
                 <div className="rounded-2xl border border-gray-100 p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-400 mb-2">
                     Takets skick
@@ -625,6 +632,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                     </ul>
                   )}
                 </div>
+                )}
               </div>
             </div>
 
