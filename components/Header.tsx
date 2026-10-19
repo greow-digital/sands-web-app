@@ -74,21 +74,16 @@ export default function Header() {
             className="flex items-center shrink-0"
             aria-label="Sands Entreprenad, startsida"
           >
-            <Image
-              src="/images/logo-sandsentreprenad-icon.svg"
-              alt="Sands Entreprenad"
-              width={64}
-              height={64}
-              priority
-              className="h-8 w-8 sm:hidden"
-            />
+            {/* Hela loggan även på mobil (beslut 19 okt 2026), i stället för
+                bara ikonen. Något lägre där, så att den ryms bredvid
+                knappen och menyn på en 375 px skärm. */}
             <Image
               src="/images/logo-sandsentreprenad.svg"
               alt="Sands Entreprenad"
               width={337}
               height={44}
               priority
-              className="hidden sm:block h-6 lg:h-7 w-auto"
+              className="h-5 sm:h-6 lg:h-7 w-auto"
             />
           </Link>
 
