@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -152,17 +152,52 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
     });
   }
 
+  /*
+    Spårning. Varje steg har ett eget händelsenamn (offert_step_1 till
+    offert_step_6, sedan offert_result och offert_submit), så att tappet per
+    steg syns i GA4 utan anpassade dimensioner. Svaren skickas som
+    parametrar (question, answer) och blir läsbara när dimensionerna är
+    registrerade i GA4. ingang följer med alla händelser via ga().
+    Konverteringen är oförändrad: form_submit på /tack.
+  */
+
+  // Flödet räknas som visat när minst 40 % av kortet syns, inte vid
+  // sidladdning. Annars blandas de som aldrig skrollade dit in i tappet.
+  useEffect(() => {
+    const el = sektionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        ga("offert_view");
+        ga("offert_step_1", { step: 1 });
+        sedda.current.add(0);
+        obs.disconnect();
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+    // ga är stabil i praktiken, den läser bara ingang.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function gaTill(nasta: number) {
     setSteg(nasta);
     if (!sedda.current.has(nasta)) {
       sedda.current.add(nasta);
       if (nasta === RESULTAT) {
-        ga("offert_result_view", { material: svar.material, area: svar.kvm });
+        ga("offert_result", {
+          material: svar.material,
+          area: svar.kvm,
+          skick: skick(svar).key,
+          lage: Math.round(lageISpannet(svar).lage * 100),
+        });
         // Samma händelse som kalkylatorn hade, så att historiken i GA4
         // hänger ihop för /priser.
         if (ingang === "priser") ga("calc_bridge_view", { material: svar.material, area: svar.kvm });
       } else {
-        ga("offert_step_view", { step: nasta + 1 });
+        ga(`offert_step_${nasta + 1}`, { step: nasta + 1 });
       }
     }
     requestAnimationFrame(() => {
@@ -186,6 +221,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
   // valet syns.
   function valj<K extends keyof Svar>(nyckel: K, varde: Svar[K]) {
     starta();
+    ga("offert_answer", { question: nyckel, answer: String(varde) });
     setSvar((s) => ({ ...s, [nyckel]: varde }));
     setTimeout(() => gaTill(steg + 1), 180);
   }
@@ -217,7 +253,13 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
     <button
       type="button"
       disabled={!aktiv}
-      onClick={() => gaTill(steg + 1)}
+      onClick={() => {
+        if (steg === 1)
+          ga("offert_answer", { question: "kvm", answer: String(svar.kvm), boyta: boyta !== null });
+        if (steg === 3) ga("offert_answer", { question: "detaljer", answer: svar.detaljer.join(",") });
+        if (steg === 5) ga("offert_answer", { question: "tecken", answer: svar.tecken.join(",") });
+        gaTill(steg + 1);
+      }}
       className="mt-6 w-full inline-flex items-center justify-center gap-2 py-4 rounded-full text-white font-semibold text-sm transition-all enabled:hover:scale-[1.01] disabled:opacity-40"
       style={{ backgroundColor: "var(--color-primary)" }}
     >
@@ -253,7 +295,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               {steg > 0 && (
                 <button
                   type="button"
-                  onClick={() => gaTill(steg - 1)}
+                  onClick={() => {
+                    ga("offert_back", { step: steg + 1 });
+                    gaTill(steg - 1);
+                  }}
                   className="shrink-0 inline-flex items-center gap-1 text-xs font-medium text-gray-500 hover:text-[#2B74FC]"
                 >
                   <ArrowLeft size={13} /> Tillbaka
@@ -466,9 +511,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                       key={t.value}
                       type="button"
                       aria-pressed={aktiv}
-                      onClick={() =>
-                        setSvar((s) => ({ ...s, tidsplan: aktiv ? undefined : t.value }))
-                      }
+                      onClick={() => {
+                        if (!aktiv) ga("offert_timeline", { tidsplan: t.value });
+                        setSvar((s) => ({ ...s, tidsplan: aktiv ? undefined : t.value }));
+                      }}
                       className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
                         aktiv
                           ? "border-[#2B74FC] bg-[#2B74FC] text-white"
@@ -497,7 +543,12 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                     message: sammanfattning(svar, prisText, niva),
                   }}
                   onSubmitSuccess={() => {
-                    ga("offert_submit", { material: svar.material, tidsplan: svar.tidsplan });
+                    ga("offert_submit", {
+                      material: svar.material,
+                      area: svar.kvm,
+                      tidsplan: svar.tidsplan ?? "ej angiven",
+                      skick: niva.key,
+                    });
                     if (ingang === "priser")
                       ga("calc_bridge_submit", { material: svar.material, area: svar.kvm });
                   }}
@@ -579,7 +630,10 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
 
             <button
               type="button"
-              onClick={() => setVisaIngar(!visaIngar)}
+              onClick={() => {
+                if (!visaIngar) ga("offert_details_open");
+                setVisaIngar(!visaIngar);
+              }}
               aria-expanded={visaIngar}
               className="w-full flex items-center justify-between px-5 py-4 lg:px-8 border-t border-gray-100 hover:bg-gray-50"
             >
@@ -614,6 +668,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               <button
                 type="button"
                 onClick={() => {
+                  ga("offert_restart");
                   setSvar({ kvm: 140, detaljer: [], tecken: [] });
                   setBoyta(null);
                   gaTill(0);
