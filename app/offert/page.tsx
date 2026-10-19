@@ -13,13 +13,13 @@ export const metadata: Metadata = pageMeta({
   path: "/offert",
   title: "Få prisförslag på takbyte | svar inom 24 h | Sands",
   description:
-    "Begär kostnadsfri offert på ditt takbyte. Hembesök, fast pris från 169 000 kr efter ROT, 30 års garanti. Svarar samma vardag.",
+    "Begär kostnadsfri offert på ditt takbyte. Hembesök, fast pris från 169 000 kr efter ROT, 30 års garanti. Svar inom 24 timmar.",
 });
 
 const TRUST_BULLETS = [
   "Kostnadsfritt",
   "Utan förpliktelser",
-  "Svarar samma vardag",
+  "Svar inom 24 h",
   "2 500+ kunder",
   "BraByggare 4,8",
   "30 års Monier-garanti",
@@ -29,7 +29,7 @@ const STEPS = [
   {
     num: "01",
     title: "Vi hör av oss",
-    text: "Vi ringer eller mailar dig samma vardag för att boka tid för takkontroll.",
+    text: "Vi ringer eller mailar dig inom 24 timmar för att boka tid för takkontroll.",
   },
   {
     num: "02",

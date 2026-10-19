@@ -233,7 +233,7 @@ export default async function Home() {
               <p className="text-xl text-gray-200 leading-relaxed max-w-xl mb-5">
                 Auktoriserad takläggare i Stockholm. Takbyte, takomläggning
                 och renovering med transparent prissättning, ROT-avdrag
-                direkt på fakturan och svar samma vardag.
+                direkt på fakturan och svar inom 24 timmar.
               </p>
 
               {/* Prisrad ovanför vikningen: bred matchning på "takläggare"
@@ -676,7 +676,7 @@ export default async function Home() {
             </h2>
             <p className="text-gray-600 mb-8 text-lg leading-relaxed">
               Kostnadsfri takkontroll, fast pris efter besiktning.
-              Svarar samma vardag.
+              Svar inom 24 timmar.
             </p>
             {/* Formulär i stället för länk: den som skrollat hit ska slippa
                 ett sidbyte för att agera. */}

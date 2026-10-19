@@ -78,7 +78,7 @@ export default function TaktestPage() {
                 {
                   num: "03",
                   titel: "Boka takkontroll",
-                  text: "Vill du ha säkert besked bokar du en kostnadsfri takkontroll på plats. Vi hör av oss samma vardag.",
+                  text: "Vill du ha säkert besked bokar du en kostnadsfri takkontroll på plats. Vi hör av oss inom 24 timmar.",
                 },
               ].map((s) => (
                 <div

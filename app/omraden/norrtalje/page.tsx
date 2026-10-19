@@ -48,7 +48,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Hur snabbt kan ni göra en takkontroll i Norrtälje?",
-    a: "Hör av dig så återkommer vi samma vardag och bokar in en kostnadsfri takkontroll. Efter kontrollen får du ett fast prisförslag inom 24 timmar.",
+    a: "Hör av dig så återkommer vi inom 24 timmar och bokar in en kostnadsfri takkontroll. Efter kontrollen får du ett fast prisförslag inom 24 timmar.",
   },
   {
     q: "Vilka garantier lämnar ni?",
@@ -546,7 +546,7 @@ export default async function NorrtaljePage() {
             </h2>
             <p className="text-gray-600 mb-8">
               Vi inspekterar ditt tak kostnadsfritt och ger dig ett fast pris
-              utan förbindelser. Svar samma vardag, fast prisförslag inom 24 h.
+              utan förbindelser. Svar inom 24 h, fast prisförslag inom 24 h efter kontrollen.
             </p>
             <div className="flex flex-col items-center gap-4">
               <Link

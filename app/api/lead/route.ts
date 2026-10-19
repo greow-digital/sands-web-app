@@ -77,11 +77,10 @@ async function skickaBekraftelse(data: LeadPayload) {
       // Första meningen är allt som säkert syns på mobil, så bekräftelsen
       // ligger först och löftet fyller ut i förhandsvisningen.
       //
-      // "Senast" sätter ett tak i stället för en tidpunkt. Det håller även
-      // för en förfrågan som kommer in en lördagkväll, och det underpresterar
-      // inte när Sands ringer inom en timme. Byt inte till en exakt tid utan
-      // att först veta om Sands svarar på helger.
-      subject: "Tack för din förfrågan. Jag hör av mig senast nästa vardag.",
+      // Samma löfte som på sajten, "inom 24 timmar" (beslut 19 okt 2026).
+      // Det gäller även helger, så en förfrågan en lördagkväll ska besvaras
+      // senast söndag kväll.
+      subject: "Tack för din förfrågan. Jag hör av mig inom 24 timmar.",
       html,
       text,
       tags: [{ name: "type", value: "lead_confirmation" }],
