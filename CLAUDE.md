@@ -12,7 +12,7 @@ Kort sammanfattning av det viktigaste:
   - **Persistent UI** (header, sticky mobil-footer, form-submit): "Få prisförslag"
   - **In-page primary** (hero, slutet av sektioner, mellan content): "Boka kostnadsfri takkontroll"
   - **Aldrig:** "Få gratis offert", "Kontakta oss", "Få offert", eller "Boka takkontroll" utan "kostnadsfri" (förutom som rubrik/eyebrow)
-  - **Undantag (beslut 19 okt 2026):** offertflödet på /priser och /taktest (`components/Offertflode.tsx`) har knappen "Få gratis offert", eftersom det ligger närmast intentionen när priset står på skärmen. Gäller bara där.
+  - **Undantag (beslut 19 okt 2026):** offertflödet på /priser och /taktest (`components/Offertflode.tsx`) och annonslandningssidorna under /lp (`components/LpQuiz.tsx`) har knappen "Få gratis offert", eftersom det ligger närmast intentionen. Gäller bara där.
 - **Priser:** alltid med "från" eller "efter kostnadsfri takkontroll"
 - **Förbjudet:** "familjeföretag", "Järfälla", syntetiska recensioner
 - **Synonymer:** varje service-sida måste väva in minst 3 av: takbyte, byta tak, lägga om tak, lägga nytt tak, omläggning av tak

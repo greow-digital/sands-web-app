@@ -127,7 +127,9 @@ export async function POST(req: Request) {
     data.formId === "taklaggning_hero" ||
     data.formId === "taklaggning_section" ||
     data.formId === "tjanst_hero" ||
-    data.formId === "omrade_hero"
+    data.formId === "omrade_hero" ||
+    data.formId === "lp_hero" ||
+    data.formId === "lp_bottom"
   ) {
     // Formulär som frågar efter "telefon eller e-post" och låter
     // användaren välja. Kräver därför namn + minst en kontaktväg, annars
