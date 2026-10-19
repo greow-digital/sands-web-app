@@ -35,7 +35,7 @@ export default function FormPromise({
         >
           <span className="inline-flex items-center gap-1.5">
             <Clock size={14} className={iconCls} />
-            Svarar samma vardag
+            Svar inom 24 h
           </span>
           <span className={dotCls}>·</span>
           <span className="inline-flex items-center gap-1.5">
@@ -72,7 +72,7 @@ export default function FormPromise({
         {[
           "Kostnadsfri takkontroll på plats",
           "Helt utan förpliktelser",
-          "Svarar samma vardag",
+          "Svar inom 24 h",
         ].map((item) => (
           <li
             key={item}

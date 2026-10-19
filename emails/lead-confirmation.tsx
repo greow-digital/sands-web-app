@@ -217,7 +217,7 @@ const HALSNING = `Tack för din förfrågan om ditt tak. Jag heter ${kontaktpers
 const STEG = [
   {
     titel: "Jag hör av mig",
-    text: "Jag ringer eller mejlar dig, oftast samma vardag, och ställer några frågor om taket så jag vet vad jag ska titta efter.",
+    text: "Jag ringer eller mejlar dig inom 24 timmar och ställer några frågor om taket så jag vet vad jag ska titta efter.",
   },
   {
     titel: "Kostnadsfri takkontroll på plats",

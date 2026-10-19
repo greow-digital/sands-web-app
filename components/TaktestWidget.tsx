@@ -560,7 +560,7 @@ export default function TaktestWidget() {
               <>
                 <Bot>
                   Lämna dina uppgifter så bokar vi en kostnadsfri takkontroll, vi
-                  återkommer inom 24 h på vardagar.
+                  återkommer inom 24 timmar.
                 </Bot>
                 <WidgetForm
                   answers={answers}
@@ -580,8 +580,8 @@ export default function TaktestWidget() {
               <>
                 <UserBubble>Uppgifter skickade</UserBubble>
                 <Bot>
-                  Tack! Vi har tagit emot dina uppgifter och hör av oss inom 24 h
-                  på vardagar för att boka din kostnadsfria takkontroll.
+                  Tack! Vi har tagit emot dina uppgifter och hör av oss inom 24
+                  timmar för att boka din kostnadsfria takkontroll.
                 </Bot>
                 <button
                   onClick={restart}

@@ -135,7 +135,7 @@ Vid en <a href="/tjanster/takbesiktning" class="text-[#2B74FC] font-semibold">ko
      snittposition 37, noll klick och ingen sida om ämnet. Riktar sig mot
      "vad gör jag nu"-sökningarna (takläckage, taket läcker, läcka i taket).
      "takreparation stockholm" lämnas åt en eventuell tjänstesida.
-     Beskriver bara det Sands erbjuder: svar samma vardag, kostnadsfri
+     Beskriver bara det Sands erbjuder: svar inom 24 timmar, kostnadsfri
      takkontroll och fast pris på åtgärden. Ingen utlovad inställelsetid,
      inget lagningspris och ingen akut tätning, enligt besked 9 okt 2026.
      Orden innertak, gipstak och vävspänt undviks medvetet, eftersom "tak"
@@ -223,7 +223,7 @@ Blir det ett takbyte kostar det från ${kr(MATERIAL.betong.prisM2)} kr/m² efter
 
 ## Så går det till när du hör av dig
 
-Vi svarar samma vardag och bokar in en <a href="/tjanster/takbesiktning" class="text-[#2B74FC] font-semibold">kostnadsfri takkontroll</a>. Vid besöket hittar vi orsaken till läckaget och bedömer skicket på resten av taket.
+Vi svarar inom 24 timmar och bokar in en <a href="/tjanster/takbesiktning" class="text-[#2B74FC] font-semibold">kostnadsfri takkontroll</a>. Vid besöket hittar vi orsaken till läckaget och bedömer skicket på resten av taket.
 
 Du får sedan ett fast pris på den åtgärd som faktiskt löser problemet, oavsett om det är en riktad reparation, en <a href="/tjanster/taklaggning" class="text-[#2B74FC] font-semibold">omläggning eller ett nytt tak</a>. Själva åtgärden är ett separat uppdrag, och du bestämmer själv om du vill gå vidare.`,
   },

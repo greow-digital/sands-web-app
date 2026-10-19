@@ -60,8 +60,12 @@ interface LeadFormProps {
   extraPayload?: Record<string, string | undefined>;
   /** Override för submit-knappens text. */
   ctaText?: string;
-  /** Dölj formulärets egen rubrik (när omslaget redan har en). */
-  hideHeader?: boolean;
+  /**
+   * Dölj formulärets egen rubrik (när omslaget redan har en). "mobile"
+   * döljer den bara under lg, där heron annars trycker ner första fältet
+   * under vikningen och sidans H1 redan säger vad formuläret gäller.
+   */
+  hideHeader?: boolean | "mobile";
   /** Liten bekräftelserad ovanför fälten, t.ex. "Gäller: betongpannor, ca 150 m²". */
   confirmation?: string;
   /** "Prisförslaget är kostnadsfritt och inte bindande." under knappen. */
@@ -300,8 +304,8 @@ export default function LeadForm({
             }`
       }
     >
-      {!hideHeader && (
-        <div className="mb-6">
+      {hideHeader !== true && (
+        <div className={hideHeader === "mobile" ? "hidden lg:block mb-6" : "mb-6"}>
           <p
             className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
             style={{ color: "var(--color-primary)" }}

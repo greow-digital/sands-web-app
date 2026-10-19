@@ -56,7 +56,7 @@ export const garanti = {
   label: "Monier-garanti (upp till)",
 } as const;
 
-export const svarslofte = "Svar samma vardag, fast prisförslag inom 24 h";
+export const svarslofte = "Svar inom 24 h, fast prisförslag inom 24 h efter takkontrollen";
 
 /**
  * Personen som skriver under bekräftelsemejlet till kunden.
