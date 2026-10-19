@@ -26,7 +26,8 @@ import { FLAGGSKEPP_KVM, FLAGGSKEPP_PRIS, MATERIAL } from "@/lib/material";
   3. Kan jag lita på dem? Betyg i första skärmen, sedan före och efter,
      omdömen, pris och garantier.
   4. Hur går det till? Tidslinje och FAQ om det som brukar oroa.
-  En enda konverteringspunkt, frågeflödet i heron. Allt längre ner leder
+  En enda konverteringspunkt, frågeflödet i heron. Enda länken ut är
+  loggan (till startsidan) och integritetspolicyn. Allt längre ner leder
   tillbaka dit, och den fasta knappen på mobil minns var besökaren var.
 */
 
@@ -177,15 +178,19 @@ export default async function Landningssida({
           />
 
           <div className="relative max-w-[1120px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-10 lg:pt-6 lg:pb-20">
-            {/* Ingen meny och inga länkar ut: logga och betyg */}
+            {/* Ingen meny: logga och betyg. Loggan länkar till startsidan
+                (beslut 19 okt 2026), så att den som vill kontrollera vem
+                som står bakom sidan kan göra det. */}
             <div className="flex items-center justify-between mb-5 lg:mb-14">
-              <Image
-                src="/images/logo-sandsentreprenad.svg"
-                alt="Sands Entreprenad"
-                width={180}
-                height={32}
-                className="h-6 lg:h-7 w-auto brightness-0 invert"
-              />
+              <Link href="/" aria-label="Sands Entreprenad, till startsidan">
+                <Image
+                  src="/images/logo-sandsentreprenad.svg"
+                  alt="Sands Entreprenad"
+                  width={180}
+                  height={32}
+                  className="h-6 lg:h-7 w-auto brightness-0 invert"
+                />
+              </Link>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white ring-1 ring-white/15">
                 <Star size={12} className="fill-yellow-400 text-yellow-400" />
                 <span className="font-bold">{AVG_RATING}</span>
