@@ -210,6 +210,12 @@ export default function LeadForm({
         body: JSON.stringify({
           ...data,
           ...extraPayload,
+          // Ett meddelande från omslaget (t.ex. frågeflödets svar) och det
+          // kunden själv skrivit slås ihop. Annars skrev det ena över det andra.
+          message:
+            [extraPayload?.message, data.message?.trim()]
+              .filter(Boolean)
+              .join("\n\n") || undefined,
           formId,
           leadSource: leadSourceFor(formId),
           source:
@@ -452,7 +458,7 @@ export default function LeadForm({
                 båda tomma får kravet som felmeddelande precis när det
                 behövs. */}
             {showMessage && (
-              <div className="col-span-2">
+              <div className="col-span-full">
                 <label
                   htmlFor={fid("message")}
                   className={labelCls}
