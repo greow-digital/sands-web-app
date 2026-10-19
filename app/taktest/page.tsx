@@ -54,8 +54,9 @@ export default function TaktestPage() {
               Är det dags för takbyte?
             </h1>
             <p className="text-gray-600 leading-relaxed max-w-xl mb-6">
-              Gör taktestet på en minut. Du får en bedömning av takets skick,
-              ett riktpris och kan få en gratis offert direkt.
+              Gör taktestet på en minut. Du får en bedömning av takets skick
+              och ett riktpris, och kan sedan begära en gratis offert utan
+              förpliktelser.
             </p>
             <Offertflode ingang="taktest" />
           </div>

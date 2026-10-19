@@ -217,7 +217,8 @@ export default function PriserPage() {
                 aldrig ordet i synlig copy. */}
             <p className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl mx-auto mt-5">
               Räkna ut vad det kostar att byta tak eller lägga om taket, efter
-              30 % ROT-avdrag. Sedan får du en gratis offert med fast pris.
+              30 % ROT-avdrag. Vill du ha ett fast pris kan du sedan begära en
+              gratis offert, utan förpliktelser.
             </p>
             {/* Badges i stället för textrad: samma tre budskap, men
                 BraByggare-betyget och Monier-garantin syns som verifierbara
