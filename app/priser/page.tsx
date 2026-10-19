@@ -4,10 +4,7 @@ import Image from "next/image";
 import { CheckCircle, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import LeadForm from "@/components/LeadForm";
-import FormPromise from "@/components/FormPromise";
 import Offertflode from "@/components/Offertflode";
-import TaktestInlineCta from "@/components/TaktestInlineCta";
 import OmdomenInline from "@/components/OmdomenInline";
 import { takTestimonials } from "@/lib/testimonials";
 import OmradenInline from "@/components/OmradenInline";
@@ -237,27 +234,10 @@ export default function PriserPage() {
           <Offertflode ingang="priser" />
         </div>
 
-        {/* ROT-info under heron */}
-        <section className="py-8 border-b border-gray-100 bg-gray-50/60">
-          <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p className="text-sm text-gray-700 leading-relaxed">
-              Du betalar bara 70 % av arbetskostnaden, Skatteverket står för
-              resterande 30 % via ROT-avdraget (max 50 000 kr per person och
-              år, kombinerat med RUT max 75 000 kr). Endast arbetskostnad
-              kvalificerar för avdrag, inte material. Vi sköter ansökan åt dig.
-            </p>
-          </div>
-        </section>
-
-        <OmdomenInline
-          heading="Nöjda kunder om pris och offert"
-          pool={takTestimonials}
-          match={["offert", "faktura", "pris", "överenskomm", "konkurrensmässig"]}
-          background
-        />
-
-        {/* Prisintervall */}
-        <section className="py-20 lg:py-28">
+        {/* Prisintervall direkt under offertflödet: svarar på "vad kostar
+            det" för den som inte vill klicka sig igenom flödet. ROT-sektionen
+            som låg här är nu en rad i fotnoten. */}
+        <section className="py-14 lg:py-20">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {priser.map((p) => (
@@ -292,8 +272,10 @@ export default function PriserPage() {
               ))}
             </div>
             <p className="text-xs text-gray-400 mt-6">
-              * Riktpris sadeltak 140 m² efter 30 % ROT-avdrag. Bindande fast
-              pris får du efter kostnadsfri takkontroll.
+              * Riktpris sadeltak 140 m² efter 30 % ROT-avdrag. ROT-avdraget
+              gäller arbetskostnaden, högst 50 000 kr per person och år, och vi
+              sköter ansökan. Bindande fast pris får du efter kostnadsfri
+              takkontroll.
             </p>
             <p className="text-sm text-gray-600 leading-relaxed max-w-2xl mt-6">
               Priserna gäller en komplett{" "}
@@ -316,13 +298,21 @@ export default function PriserPage() {
           </div>
         </section>
 
-        {/* Sands takpaket + LeadForm sticky aside */}
+        <OmdomenInline
+          heading="Nöjda kunder om pris och offert"
+          pool={takTestimonials}
+          match={["offert", "faktura", "pris", "överenskomm", "konkurrensmässig"]}
+          background
+        />
+
+        {/* Sands takpaket. Formuläret som låg bredvid är borttaget: det
+            konkurrerade med offertflödet, som ger Sands bättre leads. */}
         <section
           className="py-20 lg:py-28 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16">
+            <div className="max-w-3xl">
               <div>
                 <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
                   Takpaket från Sands
@@ -458,6 +448,14 @@ export default function PriserPage() {
                   </li>
                 </ul>
 
+                <a
+                  href="#offertflode"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-white font-semibold text-sm mb-6"
+                  style={{ backgroundColor: "var(--color-primary)" }}
+                >
+                  Få gratis offert
+                </a>
+
                 <p className="text-xs text-gray-500">
                   Föredrar du telefon? Ring{" "}
                   <a
@@ -470,12 +468,6 @@ export default function PriserPage() {
                 </p>
               </div>
 
-              <aside className="lg:sticky lg:top-28 h-fit">
-                <LeadForm variant="section" />
-                <div className="mt-4">
-                  <FormPromise variant="checklist" />
-                </div>
-              </aside>
             </div>
           </div>
         </section>
@@ -543,10 +535,6 @@ export default function PriserPage() {
             fråga. Nere här fångar den i stället den som skrollat förbi allt
             utan att höra av sig. */}
         <div className="max-w-[880px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <TaktestInlineCta
-            heading="Vet du inte om taket behöver bytas än?"
-            text="Gör vårt kostnadsfria taktest på en minut, så får du en personlig bedömning av takets skick innan du bokar takkontroll."
-          />
         </div>
 
         <SourcesFooter show={["rot", "bygglov"]} />

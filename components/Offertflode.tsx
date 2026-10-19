@@ -8,6 +8,7 @@ import {
   CheckCircle,
   ChevronDown,
   RotateCcw,
+  Star,
 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
 import RoofSvg from "@/components/RoofSvg";
@@ -34,8 +35,10 @@ import type { MaterialKey } from "@/lib/material";
   bara introtexten och vilket formId leaden får, så att kanalen i arket och
   i GA4 fortfarande skiljer priskalkylator från taktest.
 
-  Ordningen bygger commitment innan något efterfrågas: sju knappval, sedan
-  pris och skick, sist offerten. Priset gömmer sig inte bakom formuläret,
+  Ordningen bygger commitment innan något efterfrågas: sex knappval, sedan
+  pris och skick, sist offerten. Frågan om när kunden vill byta ligger i
+  offertdelen i stället för som ett sjunde steg: den kvalificerar leaden
+  utan att förlänga vägen till priset. Priset gömmer sig inte bakom formuläret,
   det är formuläret som erbjuder det priset inte kan ge: ett fast pris.
 
   Knappen säger "Få gratis offert", ett medvetet undantag från CTA-regeln i
@@ -52,7 +55,6 @@ const STEG = [
   { id: "detaljer", fraga: "Finns något av det här på taket?" },
   { id: "alder", fraga: "Hur gammalt är taket?" },
   { id: "tecken", fraga: "Ser du något av det här?" },
-  { id: "tidsplan", fraga: "När vill du byta tak?" },
 ] as const;
 
 const RESULTAT = STEG.length;
@@ -67,9 +69,9 @@ const INGAR = [
 
 const INTRO: Record<Ingang, string> = {
   priser:
-    "Sju snabba knappval, ungefär en minut. Du får ditt riktpris och en bedömning av takets skick direkt på skärmen.",
+    "Sex snabba knappval, under en minut. Du får ditt riktpris och en bedömning av takets skick direkt på skärmen.",
   taktest:
-    "Sju snabba knappval, ungefär en minut. Du får en bedömning av takets skick och vad ett takbyte skulle kosta.",
+    "Sex snabba knappval, under en minut. Du får en bedömning av takets skick och vad ett takbyte skulle kosta.",
 };
 
 const FORM_ID: Record<Ingang, string> = {
@@ -259,9 +261,8 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               )}
             </div>
 
-            <p className="text-xs font-semibold text-gray-400 mb-1">
-              Fråga {steg + 1} av {STEG.length}
-            </p>
+            {/* Ingen räknare ("Fråga 1 av 7"). Progressraden visar läget,
+                och en siffra framhäver bara hur många frågor som är kvar. */}
             <h2
               ref={rubrikRef}
               tabIndex={-1}
@@ -273,7 +274,9 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
 
             {steg === 0 && (
               <>
-                <p className="text-sm text-gray-600 leading-relaxed -mt-2 mb-5">
+                {/* Bara från sm: på mobil sköt texten ner materialknapparna
+                    halvvägs under vikningen, och heron säger redan samma sak. */}
+                <p className="hidden sm:block text-sm text-gray-600 leading-relaxed -mt-2 mb-5">
                   {INTRO[ingang]}
                 </p>
                 <ValLista
@@ -395,118 +398,99 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               </>
             )}
 
-            {steg === 6 &&
-              <ValLista lista={TIDSPLAN} valda={[svar.tidsplan]} onVal={(v) => valj("tidsplan", v)} />}
           </div>
         )}
 
         {!pagaende && pris && (
           <div>
-            {/* Pris och skick */}
-            <div className="grid sm:grid-cols-2">
-              <div className="p-6 lg:p-8" style={{ backgroundColor: "var(--color-dark)" }}>
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-2">
+            {/* Resultatet är byggt för att namnfältet ska synas utan scroll
+                på mobil när det visas: kompakt pris med skicket som etikett,
+                sedan direkt offerten. Förklaringar och "så går det till"
+                ligger under knappen, där de svarar på tvekan i stället för
+                att skjuta ner formuläret. */}
+            <div className="p-5 lg:p-8" style={{ backgroundColor: "var(--color-dark)" }}>
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400">
                   Ditt riktpris efter ROT
                 </p>
-                <p
-                  className="text-[26px] lg:text-[30px] font-extrabold tracking-[-0.02em] text-white tabular-nums leading-tight"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  {prisText}
-                </p>
-                <p className="text-xs text-gray-400 mt-2">
-                  {materialNamn}, {svar.kvm} m². Före ROT: {kr(pris.undreForeRot)} – {kr(pris.ovreForeRot)}
-                </p>
-
-                {/* Var i spannet just det här taket troligen hamnar */}
-                <div className="mt-6" aria-hidden="true">
-                  <div className="relative h-2 rounded-full bg-gradient-to-r from-[#2B74FC]/40 to-[#2B74FC]">
-                    <span
-                      className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-5 w-5 rounded-full bg-white border-4 border-[#2B74FC] shadow"
-                      style={{ left: `${lage.lage * 100}%` }}
-                    />
-                  </div>
-                  <div className="flex justify-between text-[11px] text-gray-400 mt-2">
-                    <span>Enkelt tak</span>
-                    <span>Komplext tak</span>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-300 leading-relaxed mt-4">{lage.text}</p>
-              </div>
-
-              <div className="p-6 lg:p-8 border-b sm:border-b-0 sm:border-l border-gray-100">
-                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400 mb-3">
-                  Takets skick
-                </p>
                 <span
-                  className="inline-block text-xs font-bold px-3 py-1 rounded-full mb-3"
-                  style={{ color: niva.color, backgroundColor: niva.bg }}
+                  className="shrink-0 text-[11px] font-bold px-2.5 py-1 rounded-full"
+                  style={{ color: niva.color, backgroundColor: "#fff" }}
                 >
                   {niva.label}
                 </span>
-                <p className="text-base font-bold leading-snug" style={{ color: "var(--color-dark)" }}>
-                  {niva.rubrik}
-                </p>
-                {forklaringar.length > 0 && (
-                  <ul className="mt-3 space-y-2">
-                    {forklaringar.map((f) => (
-                      <li key={f} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
-                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              </div>
+              <p
+                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] text-white tabular-nums leading-tight mt-1"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {prisText}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">
+                {materialNamn}, {svar.kvm} m², inklusive material, arbete och ställning
+              </p>
+              <div className="mt-4" aria-hidden="true">
+                <div className="relative h-1.5 rounded-full bg-gradient-to-r from-white/25 to-[#2B74FC]">
+                  <span
+                    className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-white border-[3px] border-[#2B74FC]"
+                    style={{ left: `${lage.lage * 100}%` }}
+                  />
+                </div>
+                <div className="flex justify-between text-[11px] text-gray-400 mt-1.5">
+                  <span>Enkelt tak</span>
+                  <span>Komplext tak</span>
+                </div>
               </div>
             </div>
 
-            {/* Gratis offert */}
-            <div className="p-6 lg:p-8 border-t border-gray-100" style={{ backgroundColor: "#F5F8FF" }}>
-              <p
-                className="text-xs font-semibold uppercase tracking-[0.15em] mb-2"
-                style={{ color: "var(--color-primary)" }}
-              >
-                Gratis offert
-              </p>
+            <div className="p-5 lg:p-8" style={{ backgroundColor: "#F5F8FF" }}>
               <h3
-                className="text-[24px] lg:text-[28px] font-extrabold tracking-[-0.02em] leading-tight"
+                className="text-[22px] lg:text-[28px] font-extrabold tracking-[-0.02em] leading-tight"
                 style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
               >
                 Få en gratis offert på ditt tak
               </h3>
-              <p className="text-sm text-gray-600 mt-2 mb-5">
-                Helt utan förpliktelser. Riktpriset är en uppskattning, offerten
-                är ett fast pris som gäller.
+              <p className="text-sm text-gray-600 mt-1 mb-4">
+                Helt utan förpliktelser. Offerten är ett fast pris som gäller.
               </p>
 
-              <ol className="grid gap-3 sm:grid-cols-3 mb-6">
-                {[
-                  "Fyll i namn och telefon eller e\u2011post. Det tar 30 sekunder.",
-                  "Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll.",
-                  "Du får ett fast pris. Säg ja eller nej, det kostar ingenting.",
-                ].map((t, i) => (
-                  <li key={t} className="flex gap-3 items-start">
-                    <span
-                      className="h-7 w-7 shrink-0 rounded-full text-white text-xs font-bold flex items-center justify-center"
-                      style={{ backgroundColor: "var(--color-primary)" }}
+              {/* Frivilligt. Ger Sands tidsplanen utan ett eget steg. */}
+              <p className="text-xs font-semibold mb-2" style={{ color: "var(--color-primary)" }}>
+                När vill du byta tak? <span className="text-gray-400 font-normal">(valfritt)</span>
+              </p>
+              <div className="flex gap-2 overflow-x-auto pb-1 mb-4 -mx-1 px-1">
+                {TIDSPLAN.map((t) => {
+                  const aktiv = svar.tidsplan === t.value;
+                  return (
+                    <button
+                      key={t.value}
+                      type="button"
+                      aria-pressed={aktiv}
+                      onClick={() =>
+                        setSvar((s) => ({ ...s, tidsplan: aktiv ? undefined : t.value }))
+                      }
+                      className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
+                        aktiv
+                          ? "border-[#2B74FC] bg-[#2B74FC] text-white"
+                          : "border-gray-200 bg-white text-gray-700"
+                      }`}
                     >
-                      {i + 1}
-                    </span>
-                    <span className="text-sm text-gray-700 leading-snug pt-1">{t}</span>
-                  </li>
-                ))}
-              </ol>
+                      {t.label}
+                    </button>
+                  );
+                })}
+              </div>
 
-              <div className="rounded-2xl bg-white border border-gray-100 p-5 lg:p-6">
+              <div className="rounded-2xl bg-white border border-gray-100 p-4 lg:p-6">
                 <LeadForm
                   variant="section"
                   formId={FORM_ID[ingang]}
                   fields="minimal"
                   contact="phone-or-email"
+                  stapla
                   flat
                   hideHeader
                   ctaText="Få gratis offert"
-                  confirmation={`Gäller: ${materialNamn.toLowerCase()}, ca ${svar.kvm} m²`}
                   extraPayload={{
                     roofType: materialNamn,
                     area: `${svar.kvm} m²`,
@@ -518,15 +502,86 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                       ga("calc_bridge_submit", { material: svar.material, area: svar.kvm });
                   }}
                 />
+                <p className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] text-gray-500">
+                  <span className="inline-flex items-center gap-1">
+                    <Star size={11} className="fill-yellow-400 text-yellow-400" />
+                    4,8 på BraByggare
+                  </span>
+                  <span aria-hidden="true">·</span>
+                  <span>Upp till 30 års garanti</span>
+                  <span aria-hidden="true">·</span>
+                  <span>Svar inom 24 timmar</span>
+                </p>
               </div>
             </div>
 
-            {/* Vad ingår, och vad riktpriset förutsätter */}
+            {/* Under knappen: det som svarar på tvekan */}
+            <div className="p-5 lg:p-8 space-y-6">
+              <div>
+                <p className="text-sm font-bold mb-3" style={{ color: "var(--color-dark)" }}>
+                  Så går det till
+                </p>
+                <ol className="grid gap-3 sm:grid-cols-3">
+                  {[
+                    "Fyll i namn och telefon eller e\u2011post. Det tar 30 sekunder.",
+                    "Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll.",
+                    "Du får ett fast pris. Säg ja eller nej, det kostar ingenting.",
+                  ].map((t, i) => (
+                    <li key={t} className="flex gap-3 items-start">
+                      <span
+                        className="h-6 w-6 shrink-0 rounded-full text-white text-[11px] font-bold flex items-center justify-center"
+                        style={{ backgroundColor: "var(--color-primary)" }}
+                      >
+                        {i + 1}
+                      </span>
+                      <span className="text-sm text-gray-700 leading-snug">{t}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-gray-100 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-400 mb-2">
+                    Ditt pris
+                  </p>
+                  <p className="text-sm text-gray-700 leading-relaxed">{lage.text}</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Före ROT: {kr(pris.undreForeRot)} – {kr(pris.ovreForeRot)}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-gray-100 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gray-400 mb-2">
+                    Takets skick
+                  </p>
+                  <span
+                    className="inline-block text-xs font-bold px-2.5 py-0.5 rounded-full mb-2"
+                    style={{ color: niva.color, backgroundColor: niva.bg }}
+                  >
+                    {niva.label}
+                  </span>
+                  <p className="text-sm font-semibold leading-snug" style={{ color: "var(--color-dark)" }}>
+                    {niva.rubrik}
+                  </p>
+                  {forklaringar.length > 0 && (
+                    <ul className="mt-2 space-y-1.5">
+                      {forklaringar.map((f) => (
+                        <li key={f} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gray-300" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            </div>
+
             <button
               type="button"
               onClick={() => setVisaIngar(!visaIngar)}
               aria-expanded={visaIngar}
-              className="w-full flex items-center justify-between px-6 py-5 lg:px-8 border-t border-gray-100 hover:bg-gray-50"
+              className="w-full flex items-center justify-between px-5 py-4 lg:px-8 border-t border-gray-100 hover:bg-gray-50"
             >
               <span className="text-sm font-bold" style={{ color: "var(--color-dark)" }}>
                 Vad ingår i priset?
@@ -537,7 +592,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
               />
             </button>
             {visaIngar && (
-              <div className="px-6 pb-6 lg:px-8">
+              <div className="px-5 pb-6 lg:px-8">
                 <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-2">
                   {INGAR.map((t) => (
                     <li key={t} className="flex items-start gap-2 text-sm text-gray-700">
@@ -549,12 +604,13 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 <p className="text-xs text-gray-500 leading-relaxed mt-4">
                   Riktpriset förutsätter frisk råspont och normal åtkomst för
                   ställning. Båda kontrolleras vid takkontrollen innan du får
-                  ditt fasta pris.
+                  ditt fasta pris. ROT-avdraget är 30 % av arbetskostnaden,
+                  högst 50 000 kr per person och år, och vi sköter ansökan.
                 </p>
               </div>
             )}
 
-            <div className="px-6 pb-6 lg:px-8 border-t border-gray-100 pt-4">
+            <div className="px-5 pb-5 lg:px-8 border-t border-gray-100 pt-4">
               <button
                 type="button"
                 onClick={() => {
