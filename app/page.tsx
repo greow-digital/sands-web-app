@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
@@ -8,9 +8,21 @@ import LatestProjekt from "@/components/LatestProjekt";
 import TaktestCta from "@/components/TaktestCta";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
 import LeadForm from "@/components/LeadForm";
-import OmdomenInline from "@/components/OmdomenInline";
-import { startsidaTestimonials } from "@/lib/testimonials";
-import { MATERIAL } from "@/lib/material";
+import {
+  Etikett,
+  Fragor,
+  Garantiband,
+  Omdomen,
+  Priskort,
+  Rubrik2,
+  Stjarnor,
+  Tidslinje,
+} from "@/components/Byggblock";
+import { AVG_RATING, TOTAL_REVIEWS, startsidaTestimonials } from "@/lib/testimonials";
+import { company, stats } from "@/lib/company";
+import { FLAGGSKEPP_KVM, MATERIAL } from "@/lib/material";
+
+const kr = (n: number) => n.toLocaleString("sv-SE");
 
 // ──────────────────────────────────────────────────────────
 // Data
@@ -45,25 +57,34 @@ const taktyper = [
 
 const process = [
   {
-    num: "01",
-    title: "Hembesök",
+    rubrik: "Hembesök",
     text: "Vi bokar ett kostnadsfritt hembesök där din personliga projektledare inspekterar taket och går igenom dina behov.",
   },
   {
-    num: "02",
-    title: "Offert",
+    rubrik: "Offert",
     text: "Du får en detaljerad offert med fast pris enligt totalentreprenad (ABT-06). Allt i ett kontrakt, inga dolda avgifter.",
   },
   {
-    num: "03",
-    title: "Utförande",
+    rubrik: "Utförande",
     text: "Vårt erfarna team utför arbetet effektivt, säkert och noggrant med fokus på kvalitet i varje detalj.",
   },
   {
-    num: "04",
-    title: "Slutkontroll",
+    rubrik: "Slutkontroll",
     text: "Vi avslutar med en noggrann takkontroll tillsammans med dig för att säkerställa att allt är i perfekt skick.",
   },
+];
+
+const takpaket = [
+  "Upp till 30 års tätt tak-garanti genom Moniers taksystem",
+  "Ny underlagspapp (Icopal Flexilight Prima)",
+  "Ny strö- och bärläkt (25×48 mm)",
+  "Nya takpannor från Monier",
+  "Nytt regnvattensystem (hängrännor och stuprör)",
+  "Ställning, container och bortforsling ingår",
+  "Takkontroll tillsammans med dig",
+  "Reservpannor (ca 8 st) lämnas kvar för framtida reparationer",
+  "Läktsystem förberett för eventuella solpaneler",
+  "Taket täcks med presseningar vid regn under byggtiden",
 ];
 
 // Formuleringarna är hämtade från /tjanster/taklaggning så startsidan och
@@ -95,7 +116,7 @@ const takalternativ = [
 const startsidaFaq = [
   {
     q: "Vad kostar ett takbyte i Stockholm?",
-    a: "Betongtak från ca 1 200 kr/m², tegeltak från ca 1 500 kr/m², plåttak från ca 1 800 kr/m², alla priser efter ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll.",
+    a: `Betongtak från ca ${kr(MATERIAL.betong.prisM2)} kr/m², tegeltak från ca ${kr(MATERIAL.tegel.prisM2)} kr/m², plåttak från ca ${kr(MATERIAL.plat.prisM2)} kr/m², alla priser efter ROT-avdrag. Vi ger alltid fast pris efter kostnadsfri takkontroll.`,
   },
   {
     q: "Kan jag använda ROT-avdrag?",
@@ -188,23 +209,17 @@ export default async function Home() {
                   synlig yta på ca 664 px. Rubriken ska läsas först, betyget
                   bekräftar den. */}
               <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-4 text-sm">
+                {/* Samlat betyg från alla tre plattformarna, som på
+                    landningssidan, i stället för bara BraByggare. */}
                 <div className="flex items-center gap-1.5">
-                  <div className="flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        size={14}
-                        className="fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="font-semibold">4,8</span>
-                  <span className="text-gray-300">BraByggare</span>
+                  <Stjarnor />
+                  <span className="font-semibold">{AVG_RATING}</span>
+                  <span className="text-gray-300">· {TOTAL_REVIEWS} omdömen</span>
                 </div>
                 {/* Raden bryts på mobil, och då blev pricken hängande sist. */}
                 <span className="hidden sm:inline text-gray-400">·</span>
                 <span className="font-medium">
-                  2 500+ utförda tak sedan 2016
+                  {stats.tak} utförda tak sedan {company.grundades}
                 </span>
               </div>
 
@@ -258,12 +273,13 @@ export default async function Home() {
 
         {/* ── BEVISBAND ──────────────────────────────
             Den som sökt "takläggare" väljer firma, inte taktyp. Beviset för
-            att vi går att lita på låg tidigare på plats 8 av 15. */}
-        <OmdomenInline
-          heading="Därför väljer villaägare oss som takläggare"
+            att vi går att lita på låg tidigare på plats 8 av 15. Alla sex
+            omdömen i en svepbar rad på mobil, som på landningssidan. */}
+        <Omdomen
           urval={startsidaTestimonials}
-          limit={3}
-          background
+          rubrik="Därför väljer villaägare oss som takläggare"
+          lank
+          bred
         />
 
         {/* ── SENASTE PROJEKT (dynamisk fr Sanity) ────── */}
@@ -272,15 +288,9 @@ export default async function Home() {
         {/* ── TAKTYPER ───────────────────────────── */}
         <section className="py-20 lg:py-28 bg-white">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-              className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em] mb-12"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-dark)",
-              }}
-            >
-              Taktyper vi jobbar med
-            </h2>
+            <div className="mb-12">
+              <Rubrik2>Taktyper vi jobbar med</Rubrik2>
+            </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {taktyper.map((t) => (
@@ -321,15 +331,9 @@ export default async function Home() {
             säger samma sak. */}
         <section className="py-20 lg:py-28 bg-white border-t border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-              className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em] mb-12"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-dark)",
-              }}
-            >
-              Takbyte, takomläggning eller reparation?
-            </h2>
+            <div className="mb-12">
+              <Rubrik2>Takbyte, takomläggning eller reparation?</Rubrik2>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               {takalternativ.map((a) => (
@@ -367,128 +371,42 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ── PRISSEKTION ──────────────────────────── */}
-        <section className="py-20 lg:py-28 bg-white border-b border-gray-100">
+        {/* ── PRISSEKTION ──────────────────────────────
+            Samma priskort som landningssidan (19 okt 2026). Siffrorna kommer
+            från lib/material.ts, så de följer med vid nästa prisjustering.
+            Trust-punkterna som låg här står nu i kortets fotnot och i
+            garantibandet under. */}
+        <section className="py-16 lg:py-28 bg-white border-t border-gray-100">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 items-start">
-              {/* Vänster, pris + trust */}
-              <div>
-                <h2
-                  className="text-[34px] lg:text-[46px] font-extrabold tracking-[-0.035em] mb-3"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Vad kostar det att byta tak?
-                </h2>
-                <p className="text-[13px] text-gray-500 uppercase tracking-widest mb-7">
-                  Exempelpris · sadeltak 140 m²
-                </p>
-
-                <div className="flex items-baseline gap-3 mb-1">
-                  <span
-                    className="text-[52px] lg:text-[68px] font-extrabold tracking-[-0.035em]"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      color: "var(--color-dark)",
-                    }}
-                  >
-                    från 169 000 kr
-                  </span>
-                  <span className="text-lg text-gray-400 font-bold">*</span>
-                </div>
-                <p className="text-base text-gray-600 mb-1">
-                  Från ca 1 200 kr/m²
-                </p>
-                <p className="text-[13px] text-gray-400 mb-9">
-                  *Riktpris efter 30 % ROT-avdrag
-                </p>
-
-                {/* Trust-punkter */}
-                <ul className="space-y-3 text-base text-gray-700 mb-9">
-                  {[
-                    "Fast pris efter kostnadsfri takkontroll",
-                    "ROT-avdrag 30% på arbetskostnad",
-                    "Upp till 30 års Monier-garanti",
-                    "Kostnadsfri takkontroll: 0 kr",
-                    "Betalning efter avslutat arbete",
-                  ].map((t) => (
-                    <li key={t} className="flex items-center gap-2">
-                      <span style={{ color: "var(--color-primary)" }}>✓</span>
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href="/offert"
-                  className="inline-flex items-center gap-2.5 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
-                  style={{ backgroundColor: "var(--color-primary)" }}
-                >
-                  Boka kostnadsfri takkontroll <ArrowRight size={16} />
-                </Link>
-                <div className="mt-5">
+            <Priskort
+              rubrik={<Rubrik2>Vad kostar det att byta tak?</Rubrik2>}
+              cta={
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
                   <Link
-                    href="/priser#takraknare"
-                    className="inline-flex items-center gap-1.5 text-base font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
+                    href="/offert"
+                    className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-white font-semibold text-[15px] transition-all hover:scale-[1.02]"
+                    style={{ backgroundColor: "var(--color-primary)" }}
+                  >
+                    Boka kostnadsfri takkontroll <ArrowRight size={16} />
+                  </Link>
+                  <Link
+                    href="/priser#offertflode"
+                    className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-gray-500 hover:text-[#2B74FC] transition-colors"
                   >
                     Räkna på ditt eget tak <ArrowRight size={14} />
                   </Link>
                 </div>
-              </div>
-
-              {/* Höger, vad ingår + detaljer */}
-              <div className="rounded-3xl border border-gray-100 bg-[#F8F9FB] p-7 lg:p-10">
-                <h3
-                  className="text-xl font-bold mb-6"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Detta ingår i takpaketet:
-                </h3>
-                <ul className="space-y-3 mb-7">
-                  {[
-                    "Upp till 30 års tätt tak-garanti genom Moniers taksystem",
-                    "Ny underlagspapp (Icopal Flexilight Prima)",
-                    "Ny strö- och bärläkt (25×48 mm)",
-                    "Nya takpannor från Monier",
-                    "Nytt regnvattensystem (hängrännor och stuprör)",
-                    "Ställning, container och bortforsling ingår",
-                    "Takkontroll tillsammans med dig",
-                    "Reservpannor (ca 8 st) lämnas kvar för framtida reparationer",
-                    "Läktsystem förberett för eventuella solpaneler",
-                    "Taket täcks med presseningar vid regn under byggtiden",
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 text-[15px] text-gray-700"
-                    >
-                      <span
-                        className="text-lg leading-none mt-0.5"
-                        style={{ color: "var(--color-primary)" }}
-                      >
-                        ✓
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="space-y-4 text-sm text-gray-500 leading-relaxed border-t border-gray-200 pt-6">
+              }
+              ingarRubrik="Detta ingår i takpaketet"
+              ingar={takpaket}
+              tvaKolumner={false}
+              tillagg={
+                <div className="space-y-3 text-sm text-gray-500 leading-relaxed border-t border-gray-200 pt-6 mt-7">
                   <p>
                     <strong className="text-gray-700">Om prisexemplet:</strong>{" "}
-                    Baseras på standardtak (sadeltak) 140 m² utan större
+                    Baseras på standardtak (sadeltak) {FLAGGSKEPP_KVM} m² utan större
                     genomföringar. Slutpriset varierar beroende på materialval
                     och takets förutsättningar.
-                  </p>
-                  <p>
-                    <strong className="text-gray-700">Monier-garanti:</strong>{" "}
-                    Med komplett Monier-taksystem omfattas taket av Tätt
-                    tak-garanti i upp till 30 år, funktion och täthet
-                    garanteras.
                   </p>
                   <p>
                     <strong className="text-gray-700">ROT-avdrag:</strong>{" "}
@@ -501,10 +419,14 @@ export default async function Home() {
                     Ingen förskottsbetalning. Betalningstid 10 dagar.
                   </p>
                 </div>
-              </div>
-            </div>
+              }
+            />
           </div>
         </section>
+
+        {/* ── GARANTI ─────────────────────────────────
+            Ersätter Monier-stycket i prisrutans fotnot. */}
+        <Garantiband bred className="pb-16 lg:pb-28 bg-white" />
 
         {/* ── VÅR PROCESS ────────────────────────── */}
         <section
@@ -512,9 +434,10 @@ export default async function Home() {
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-              {/* Vänster bild */}
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-200">
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+              {/* Bilden är liggande på mobil, så stegen kommer upp snabbare.
+                  Stående 4:5 tog en hel skärm innan första steget syntes. */}
+              <div className="relative aspect-[4/3] lg:aspect-[4/5] rounded-3xl overflow-hidden bg-gray-200">
                 <Image
                   src="/images/process-takomlaggning-bromma.jpg"
                   alt="Nylagt tegeltak på villa i Bromma, sett från ovan med Sands Entreprenads ställningsbanderoll på fasaden"
@@ -524,53 +447,13 @@ export default async function Home() {
                 />
               </div>
 
-              {/* Höger, steg */}
+              {/* Höger, steg som tidslinje (samma som landningssidan) */}
               <div>
-                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
-                  Hur vi jobbar
-                </p>
-                <h2
-                  className="text-[36px] lg:text-[52px] font-extrabold tracking-[-0.035em] mb-12"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Så jobbar din takläggare, steg för steg
-                </h2>
-
-                <div className="space-y-9">
-                  {process.map((p) => (
-                    <div
-                      key={p.num}
-                      className="flex gap-6 pb-9 border-b border-gray-200 last:border-b-0 last:pb-0"
-                    >
-                      <div
-                        className="text-4xl font-extrabold shrink-0 w-14"
-                        style={{
-                          fontFamily: "var(--font-heading)",
-                          color: "var(--color-primary)",
-                        }}
-                      >
-                        {p.num}
-                      </div>
-                      <div>
-                        <h3
-                          className="text-xl font-bold mb-1.5"
-                          style={{
-                            fontFamily: "var(--font-heading)",
-                            color: "var(--color-dark)",
-                          }}
-                        >
-                          {p.title}
-                        </h3>
-                        <p className="text-[15px] text-gray-600 leading-relaxed">
-                          {p.text}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                <Etikett>Hur vi jobbar</Etikett>
+                <div className="mb-9">
+                  <Rubrik2>Så jobbar din takläggare, steg för steg</Rubrik2>
                 </div>
+                <Tidslinje steg={process} />
               </div>
             </div>
           </div>
@@ -597,15 +480,9 @@ export default async function Home() {
                 />
               </div>
               <div className="lg:order-1">
-                <h2
-                  className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.03em] mb-6"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Läcker taket? Fuktskador, ruttna läkt eller trasiga pannor?
-                </h2>
+                <div className="mb-6">
+                  <Rubrik2>Läcker taket? Fuktskador, ruttna läkt eller trasiga pannor?</Rubrik2>
+                </div>
                 <p className="text-lg text-gray-600 leading-relaxed mb-5">
                   Ett läckande tak kan snabbt leda till mögel, röta och dyra
                   följdskador på konstruktionen. Ju längre du väntar, desto
@@ -641,15 +518,9 @@ export default async function Home() {
         {/* ── MID-PAGE CTA ──────────────────── */}
         <section className="py-20 lg:py-24 border-t border-gray-100 bg-white text-center">
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-              className="text-[32px] lg:text-[44px] font-extrabold tracking-[-0.03em] mb-4"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-dark)",
-              }}
-            >
-              Redo att få ditt prisförslag?
-            </h2>
+            <div className="mb-4">
+              <Rubrik2>Redo att få ditt prisförslag?</Rubrik2>
+            </div>
             <p className="text-gray-600 mb-8 text-lg leading-relaxed">
               Kostnadsfri takkontroll, fast pris efter besiktning.
               Svar inom 24 timmar.
@@ -675,18 +546,8 @@ export default async function Home() {
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between mb-10">
               <div>
-                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                  Stockholms län
-                </p>
-                <h2
-                  className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em]"
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    color: "var(--color-dark)",
-                  }}
-                >
-                  Takläggare i hela Stockholms län
-                </h2>
+                <Etikett>Stockholms län</Etikett>
+                <Rubrik2>Takläggare i hela Stockholms län</Rubrik2>
               </div>
               <Link
                 href="/omraden"
@@ -769,18 +630,8 @@ export default async function Home() {
         <section className="py-20 lg:py-28 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
-              <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">
-                Vanliga frågor
-              </p>
-              <h2
-                className="text-[34px] lg:text-[48px] font-extrabold tracking-[-0.035em]"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  color: "var(--color-dark)",
-                }}
-              >
-                Vanliga frågor om takomläggning
-              </h2>
+              <Etikett>Vanliga frågor</Etikett>
+              <Rubrik2>Vanliga frågor om takomläggning</Rubrik2>
             </div>
 
             {/* Inget FAQPage-schema här. Samma frågor har schema på /faq och
@@ -788,22 +639,9 @@ export default async function Home() {
                 konkurrerar om samma rich result. LocalBusiness-schemat i
                 layouten är orört. */}
 
-            <div className="divide-y divide-gray-200">
-              {startsidaFaq.map((f) => (
-                <div key={f.q} className="py-7">
-                  <h3
-                    className="text-lg lg:text-xl font-bold mb-2.5"
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      color: "var(--color-dark)",
-                    }}
-                  >
-                    {f.q}
-                  </h3>
-                  <p className="text-base text-gray-600 leading-relaxed">{f.a}</p>
-                </div>
-              ))}
-            </div>
+            {/* Kort som på landningssidan, men öppna: SEO.md kräver att
+                svaren syns utan klick på indexerade sidor. */}
+            <Fragor fragor={startsidaFaq} oppen />
 
             <div className="text-center mt-12">
               <Link
@@ -826,18 +664,10 @@ export default async function Home() {
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">
-              Sista steget
-            </p>
-            <h2
-              className="text-[36px] lg:text-[52px] font-extrabold tracking-[-0.035em] mb-5"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--color-dark)",
-              }}
-            >
-              Boka kostnadsfri takkontroll
-            </h2>
+            <Etikett>Sista steget</Etikett>
+            <div className="mb-5">
+              <Rubrik2>Boka kostnadsfri takkontroll</Rubrik2>
+            </div>
             <p className="text-lg text-gray-600 mb-9 leading-relaxed">
               Vi inspekterar taket på plats och lämnar ett komplett fast
               pris inom 24 timmar. Helt utan förpliktelser.
