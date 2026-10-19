@@ -396,7 +396,10 @@ export default function LpQuiz({
             stapla
             flat
             hideHeader
-            showMessage={!prisSpar}
+            // Fritext på alla vägar, inte bara läckage (beslut 19 okt 2026):
+            // många leads vill skriva något själva, och svaren från flödet
+            // slås ihop med texten i LeadForm.
+            showMessage
             ctaText="Få gratis offert"
             extraPayload={{
               roofType: taktyp ? taktypLabel : undefined,
