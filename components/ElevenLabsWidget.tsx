@@ -13,7 +13,8 @@ const VoiceSession = dynamic(() => import("@/components/VoiceSession"), {
 
 // Sidor där röst-widgeten inte ska visas: offertformuläret, tack-sidan samt
 // Studio/POC-sidor.
-const HIDDEN_PREFIXES = ["/offert", "/tack", "/studio", "/projekt-sanity-poc"];
+// /lp är annonslandningssidor med ett enda mål, formuläret.
+const HIDDEN_PREFIXES = ["/offert", "/tack", "/studio", "/projekt-sanity-poc", "/lp"];
 
 export default function ElevenLabsWidget() {
   const pathname = usePathname();

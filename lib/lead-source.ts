@@ -22,6 +22,9 @@ export function leadSourceFor(formId: string | undefined): string {
       return "omradessida"; // formulären i heron på ortssidorna
     case "popup":
       return "popup";
+    case "lp_hero":
+    case "lp_bottom":
+      return "landningssida"; // annonslandningssidan /lp/takbyte
     case "offert":
     default:
       return "offertformular"; // vanliga offertformuläret

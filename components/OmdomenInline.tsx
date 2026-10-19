@@ -36,6 +36,8 @@ interface OmdomenInlineProps {
   limit?: number;
   /** Mörk bakgrund (för sektioner med grå/mörk yta runt) */
   background?: boolean;
+  /** Döljer länken till /omdomen, t.ex. på annonslandningssidor utan utgångar. */
+  utanLank?: boolean;
 }
 
 function pickReviews(
@@ -89,6 +91,7 @@ export default function OmdomenInline({
   match,
   limit = 3,
   background = false,
+  utanLank = false,
 }: OmdomenInlineProps) {
   const reviews =
     urval && urval.length > 0
@@ -112,12 +115,14 @@ export default function OmdomenInline({
           >
             {heading}
           </h2>
-          <Link
-            href="/omdomen"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B74FC] hover:gap-2.5 transition-all"
-          >
-            Se alla omdömen <ArrowRight size={15} />
-          </Link>
+          {!utanLank && (
+            <Link
+              href="/omdomen"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B74FC] hover:gap-2.5 transition-all"
+            >
+              Se alla omdömen <ArrowRight size={15} />
+            </Link>
+          )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">

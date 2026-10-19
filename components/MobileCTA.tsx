@@ -27,7 +27,8 @@ export default function MobileCTA() {
   // på 82 dagar mot 586 sidvisningar, så den bar inte sin plats heller.
   // /taktest har samma offertflöde som /priser sedan 19 okt 2026.
   const hideOnPages = ["/offert", "/priser", "/taktest", "/tack"];
-  const shouldHide = hideOnPages.includes(pathname);
+  // Landningssidorna under /lp har en egen fast knapp mot sitt formulär.
+  const shouldHide = hideOnPages.includes(pathname) || pathname.startsWith("/lp/");
 
   useEffect(() => {
     const footer = document.querySelector("footer");
