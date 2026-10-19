@@ -82,7 +82,7 @@ Väv in naturligt — det får aldrig kännas som keyword-stuffing. En enda väl
 
 - Aldrig **"familjeföretag"**.
 - Aldrig **"Järfälla"** (kunden är Stockholm-fokuserad i positionering).
-- Aldrig byt CTA till **"Få gratis offert"**, **"Kontakta oss"** eller liknande. Besiktnings-framingen är en medveten differentiering mot konkurrenter.
+- Aldrig byt CTA till **"Få gratis offert"**, **"Kontakta oss"** eller liknande. Besiktnings-framingen är en medveten differentiering mot konkurrenter. Enda undantaget är offertflödet på /priser och /taktest (`components/Offertflode.tsx`), där knappen säger "Få gratis offert" efter att besökaren sett sitt riktpris (beslut 19 okt 2026).
 - Aldrig garantera slutpris utan takkontroll.
 - Aldrig syntetiska/uppdiktade recensioner, kundcitat eller case. Om en sektion behöver social proof och vi inte har källa — flagga och stanna.
 - Aldrig hårdkoda priset `1 200 kr/m²` på flera ställen. Centralisera i en konstant eller content-fil så det kan uppdateras på ett ställe.

@@ -25,7 +25,8 @@ export default function MobileCTA() {
   // takräknaren slutar i ett formulär: baren pekar på /offert och kastar
   // därmed bort taktypen och ytan användaren just matat in. Den fick 2 klick
   // på 82 dagar mot 586 sidvisningar, så den bar inte sin plats heller.
-  const hideOnPages = ["/offert", "/priser", "/tack"];
+  // /taktest har samma offertflöde som /priser sedan 19 okt 2026.
+  const hideOnPages = ["/offert", "/priser", "/taktest", "/tack"];
   const shouldHide = hideOnPages.includes(pathname);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import FormPromise from "@/components/FormPromise";
-import Takraknare from "@/components/Takraknare";
+import Offertflode from "@/components/Offertflode";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
 import OmdomenInline from "@/components/OmdomenInline";
 import { takTestimonials } from "@/lib/testimonials";
@@ -197,8 +197,10 @@ export default function PriserPage() {
             </nav>
 
             {/* Säsongsargumentet är den enda tidsdrivna anledningen att agera,
-                och prissidan är den sida där den gör mest nytta. */}
-            <div className="flex lg:justify-center">
+                och prissidan är den sida där den gör mest nytta. Bara på
+                desktop: på mobil sköt pillret och badgesen ner kalkylatorn
+                till 647 px, under den synliga ytan. */}
+            <div className="hidden lg:flex lg:justify-center">
               <SeasonBanner />
             </div>
 
@@ -217,14 +219,13 @@ export default function PriserPage() {
                 avsiktligt, sidan rankar redan på "räkna på takbyte" men sa
                 aldrig ordet i synlig copy. */}
             <p className="text-base lg:text-lg text-gray-200 leading-relaxed max-w-2xl mx-auto mt-5">
-              Räkna ut vad det kostar att byta tak eller lägga om taket. Dra i
-              reglaget för riktpris per kvadratmeter, efter 30 % ROT-avdrag och
-              fast pris efter kostnadsfri takkontroll.
+              Räkna ut vad det kostar att byta tak eller lägga om taket, efter
+              30 % ROT-avdrag. Sedan får du en gratis offert med fast pris.
             </p>
             {/* Badges i stället för textrad: samma tre budskap, men
                 BraByggare-betyget och Monier-garantin syns som verifierbara
                 märken i stället för påståenden i löptext. */}
-            <div className="mt-7 flex justify-start lg:justify-center">
+            <div className="hidden lg:flex mt-7 lg:justify-center">
               <TrustBadgesRow />
             </div>
           </div>
@@ -233,7 +234,7 @@ export default function PriserPage() {
         {/* Mobil: staplad direkt under heron (ingen overlap, som Erik gillar).
             Desktop: bred, mittställd, overlappar upp i heron. */}
         <div className="relative z-10 mt-6 lg:-mt-28 mb-4 lg:mb-8 max-w-[880px] mx-auto px-4 sm:px-6 lg:px-8">
-          <Takraknare embedded />
+          <Offertflode ingang="priser" />
         </div>
 
         {/* ROT-info under heron */}
