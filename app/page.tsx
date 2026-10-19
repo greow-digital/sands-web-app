@@ -132,52 +132,34 @@ export default async function Home() {
           innehållet 18 px från mitten och luften mellan menyn och
           säsongspillret blev 114 px. Nu styr paddingen ensam.
         */}
-        <section className="relative overflow-hidden min-h-[560px] lg:min-h-[640px] flex items-center">
+        <section className="relative overflow-hidden min-h-[560px] lg:min-h-[640px] flex items-center bg-[#07090D]">
           {/*
             Stillbild i stället för video sedan 16 sep. Videon laddade 4,4 MB
             efter page load på desktop utan att tillföra något mätbart, och
             hoppades ändå över helt på mobil, som är 77 procent av den
             betalda trafiken.
-
-            object-top, inte den centrering object-cover använder som
-            standard. Bilden är 1440x1086 och heron är mycket bredare i
-            proportion, så en centrerad beskärning lägger texten över
-            fasaden där den blir svårläst. Toppbeskärningen ger i stället
-            himmel och tak bakom rubriken. På mobil är höjden den
-            begränsande dimensionen, så object-top saknar effekt där.
+          */}
+          {/*
+            Samma behandling som annonslandningssidan (19 okt 2026): mörk
+            botten, bilden nedtonad och lätt oskarp, en blå glöd i hörnet.
+            Det röda tegeltaket med skorstenen hamnade annars rakt bakom
+            rubriken på mobil, och den blå accenten syntes dåligt mot rött.
+            Bilden är 61 KB i stället för 275 KB, vilket också hjälper LCP.
           */}
           <Image
-            src="/images/hero-dannemora.jpg"
-            alt="Stuga i Dannemora med nylagt tegeltak i tegelröd kulör"
+            src="/images/hero-start.webp"
+            alt=""
             fill
             priority
             fetchPriority="high"
             sizes="100vw"
-            className="object-cover object-top"
+            className="object-cover opacity-45"
           />
-          {/*
-            Två separata overlays, inte en gemensam med ett tillägg ovanpå.
-            Staplade gradienter multiplicerar: 0,82 plus 0,55 ger 0,92 i
-            vänsterkanten, vilket blir nästan svart. Därför byts de ut mot
-            varandra vid breakpointen i stället.
-
-            Mobil får vertikal mörkläggning eftersom texten spänner över hela
-            bredden där, medan den horisontella gradienten bara mörkar
-            vänsterkanten och lämnar rubrikens slut på oskyddad bildyta.
-          */}
           <div
-            className="absolute inset-0 md:hidden"
+            className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(180deg, rgba(6,6,7,0.50) 0%, rgba(6,6,7,0.66) 38%, rgba(6,6,7,0.72) 100%)",
-            }}
-          />
-          {/* Desktop: mörk vänster där texten ligger, ljus höger bakom formuläret */}
-          <div
-            className="absolute inset-0 hidden md:block"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(6,6,7,0.82) 0%, rgba(6,6,7,0.70) 25%, rgba(6,6,7,0.45) 55%, rgba(6,6,7,0.20) 100%)",
+                "radial-gradient(120% 70% at 85% 0%, rgba(43,116,252,0.35) 0%, rgba(7,9,13,0) 55%), linear-gradient(180deg, rgba(7,9,13,0.55) 0%, rgba(7,9,13,0.85) 70%, #07090D 100%)",
             }}
           />
 
@@ -194,16 +176,10 @@ export default async function Home() {
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Din takläggare i Stockholm, med fast pris och{" "}
-                {/*
-                  Medvetet den starka varumärkesblå, inte en ljusare ton.
-                  Mätt mot den renderade heron hamnar den under WCAG-kravet
-                  3,0:1 för stor text, eftersom den ligger mot ett tegelrött
-                  tak. Valet är taget med den kunskapen: färgen väger tyngre
-                  än marginalen här. Byts hero-bilden mot ett mörkare motiv
-                  klarar den sig bättre, eftersom blå är ljusare än
-                  bakgrunden och kontrasten alltså ökar när ytan mörknar.
-                */}
-                <span style={{ color: "var(--color-primary)" }}>
+                {/* Ljusblå toning mot mörk botten, samma som landningssidan.
+                    Den läses tydligt, till skillnad från varumärkesblått mot
+                    det röda taket som låg under kontrastkravet. */}
+                <span className="bg-gradient-to-r from-[#7AA9FF] to-[#2B74FC] bg-clip-text text-transparent">
                   30 års garanti
                 </span>
               </h1>
