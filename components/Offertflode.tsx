@@ -28,6 +28,7 @@ import {
   type Val,
 } from "@/lib/takkoll";
 import type { MaterialKey } from "@/lib/material";
+import { AVG_RATING, TOTAL_REVIEWS } from "@/lib/testimonials";
 
 /*
   Offertflödet: priskalkylatorn och taktestet i ett (beslut 19 okt 2026).
@@ -468,11 +469,16 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 på mobil när det visas: kompakt pris med skicket som etikett,
                 sedan direkt offerten. Förklaringar och "så går det till"
                 ligger under knappen, där de svarar på tvekan i stället för
-                att skjuta ner formuläret. */}
-            <div className="p-5 lg:p-8" style={{ backgroundColor: "var(--color-dark)" }}>
+                att skjuta ner formuläret.
+
+                Mjukare sedan 20 okt 2026: spannet presenteras som en första
+                uppskattning och offerten som det exakta priset, så att det
+                fortfarande finns ett skäl att skicka in efter att ha sett
+                spannet. Mindre siffra, ingen prisskala. */}
+            <div className="p-5 lg:p-7" style={{ backgroundColor: "var(--color-dark)" }}>
               <div className="flex items-start justify-between gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-400">
-                  Ditt riktpris efter ROT
+                  Ungefärligt pris efter ROT
                 </p>
                 {visaSkick && (
                   <span
@@ -484,26 +490,16 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 )}
               </div>
               <p
-                className="text-[26px] lg:text-[34px] font-extrabold tracking-[-0.02em] text-white tabular-nums leading-tight mt-1"
+                className="text-[22px] lg:text-[28px] font-extrabold tracking-[-0.02em] text-white tabular-nums leading-tight mt-1"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 {prisText}
               </p>
-              <p className="text-xs text-gray-400 mt-1">
-                {materialNamn}, {svar.kvm} m², inklusive material, arbete och ställning
+              <p className="text-xs text-gray-400 mt-1.5 leading-relaxed">
+                En första uppskattning för {materialNamn.toLowerCase()} på {svar.kvm} m².
+                Var i spannet ditt tak hamnar avgörs av underlaget, och det
+                syns först på plats.
               </p>
-              <div className="mt-4" aria-hidden="true">
-                <div className="relative h-1.5 rounded-full bg-gradient-to-r from-white/25 to-[#2B74FC]">
-                  <span
-                    className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 h-4 w-4 rounded-full bg-white border-[3px] border-[#2B74FC]"
-                    style={{ left: `${lage.lage * 100}%` }}
-                  />
-                </div>
-                <div className="flex justify-between text-[11px] text-gray-400 mt-1.5">
-                  <span>Enkelt tak</span>
-                  <span>Komplext tak</span>
-                </div>
-              </div>
             </div>
 
             <div className="p-5 lg:p-8" style={{ backgroundColor: "#F5F8FF" }}>
@@ -511,11 +507,24 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 className="text-[22px] lg:text-[28px] font-extrabold tracking-[-0.02em] leading-tight"
                 style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
               >
-                Få en gratis offert på ditt tak
+                Få ditt exakta pris, gratis
               </h3>
-              <p className="text-sm text-gray-600 mt-1 mb-4">
-                Helt utan förpliktelser. Offerten är ett fast pris som gäller.
+              <p className="text-sm text-gray-600 mt-1">
+                Offerten är ett fast pris för just ditt tak, med ROT-avdraget
+                inräknat. Det är det priset som gäller.
               </p>
+              <ul className="mt-3 mb-4 space-y-1.5">
+                {[
+                  "Kostnadsfri takkontroll på plats",
+                  "Skriftlig offert med fast pris",
+                  "Säger du nej kostar det ingenting",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2 text-[13px] text-gray-700">
+                    <CheckCircle size={15} className="shrink-0 mt-0.5" style={{ color: "var(--color-primary)" }} />
+                    {t}
+                  </li>
+                ))}
+              </ul>
 
               {/* Frivilligt. Ger Sands tidsplanen utan ett eget steg. */}
               <p className="text-xs font-semibold mb-2" style={{ color: "var(--color-primary)" }}>
@@ -574,7 +583,7 @@ export default function Offertflode({ ingang }: { ingang: Ingang }) {
                 <p className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] text-gray-500">
                   <span className="inline-flex items-center gap-1">
                     <Star size={11} className="fill-yellow-400 text-yellow-400" />
-                    4,8 på BraByggare
+                    {AVG_RATING} av 5 i {TOTAL_REVIEWS} omdömen
                   </span>
                   <span aria-hidden="true">·</span>
                   <span>Upp till 30 års garanti</span>

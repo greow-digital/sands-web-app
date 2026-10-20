@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUp, CheckCircle, Clock, ShieldCheck, Star, Wallet } from "lucide-react";
-import { Etikett, Fragor, Garantiband, Omdomen, Priskort, Rubrik2, Tidslinje } from "@/components/Byggblock";
+import { Etikett, Fragor, Garantiband, Omdomen, Rubrik2, Tidslinje } from "@/components/Byggblock";
 import LpQuiz, { type Arende } from "@/components/LpQuiz";
 import LpStickyCta from "@/components/LpStickyCta";
 import ForeEfter from "@/components/ForeEfter";
@@ -22,9 +22,11 @@ import { company, nap, stats, telefon } from "@/lib/company";
 
   Struktur, i den ordning besökarens frågor kommer:
   1. Är jag på rätt ställe? Rubriken speglar sökordet (varianten i URL:en).
-  2. Vad kostar det? Frågeflödet ger ett riktpris efter tre knapptryck.
+  2. Hur får jag ett pris? Tre frågor, sedan en gratis offert med fast pris.
+     Inget riktpris på sidan (beslut 20 okt 2026): ett spann besvarar det
+     offerten ska besvara och tar bort skälet att skicka in.
   3. Kan jag lita på dem? Betyg i första skärmen, sedan före och efter,
-     omdömen, pris och garantier.
+     omdömen och garantier.
   4. Hur går det till? Tidslinje och FAQ om det som brukar oroa.
   En enda konverteringspunkt, frågeflödet i heron. Enda länken ut är
   loggan (till startsidan) och integritetspolicyn. Allt längre ner leder
@@ -59,7 +61,7 @@ export async function generateMetadata({
   return {
     title: { absolute: `${v.h1} | Gratis offert | Sands` },
     description:
-      "Byta tak eller lägga om tak i Stockholm. Se ditt riktpris direkt, fast pris efter kostnadsfri takkontroll och upp till 30 års garanti.",
+      "Byta tak eller lägga om tak i Stockholm. Gratis offert med fast pris efter kostnadsfri takkontroll och upp till 30 års garanti.",
     robots: { index: false, follow: false },
   };
 }
@@ -71,23 +73,14 @@ const TIDSLINJE = [
   { rubrik: "Nytt tak på 1–2 veckor", text: "För en normalvilla, beroende på väder och takets skick." },
 ];
 
-const INGAR = [
-  "Rivning och bortforsling",
-  "Ny underlagspapp och läkt",
-  "Nya takpannor eller plåt",
-  "Hängrännor och stuprör",
-  "Ställning och container",
-  "ROT-ansökan",
-];
-
 const FAQ = [
   {
     q: "Kostar offerten eller takkontrollen något?",
     a: "Nej. Både offerten och takkontrollen är kostnadsfria och utan förpliktelser. Du bestämmer dig först när du har det fasta priset framför dig.",
   },
   {
-    q: "Hur stämmer riktpriset med det slutliga priset?",
-    a: "Riktpriset bygger på takmaterial och husets storlek. Takets form, kupor och skicket på underlaget kan flytta det åt båda hållen, och det ser vi vid takkontrollen. Offerten du får efter kontrollen är ett fast pris.",
+    q: "Vad händer när jag har skickat in?",
+    a: "Vi hör av oss inom 24 timmar och bokar en tid för en kostnadsfri takkontroll. Vi går upp på taket och ser skicket på underlaget, sedan får du en skriftlig offert med fast pris där ROT-avdraget är inräknat.",
   },
   {
     q: "Kan jag använda ROT-avdrag?",
@@ -180,8 +173,8 @@ export default async function Landningssida({
                   </span>
                 </h1>
                 <p className="text-[15px] sm:text-lg text-gray-300 mt-3 lg:mt-5 leading-relaxed max-w-xl">
-                  Se ditt riktpris på 30 sekunder. Sedan kan du begära en gratis
-                  offert, helt utan förpliktelser.
+                  Svara på tre frågor och få en gratis offert med fast pris,
+                  helt utan förpliktelser.
                 </p>
 
                 <ul className="hidden lg:grid grid-cols-2 gap-x-6 gap-y-3 mt-8 max-w-xl">
@@ -255,19 +248,8 @@ export default async function Landningssida({
         {/* ── OMDÖMEN ─────────────────────────────────── */}
         <Omdomen urval={startsidaTestimonials} />
 
-        {/* ── PRIS ─────────────────────────────────── */}
-        <section className="py-14 lg:py-24">
-          <div className="max-w-[1120px] mx-auto px-4 sm:px-6 lg:px-8">
-            <Priskort
-              rubrik={<Etikett>Vad kostar det?</Etikett>}
-              cta={<TillFlodet text="Räkna på ditt tak" />}
-              ingar={INGAR}
-            />
-          </div>
-        </section>
-
         {/* ── GARANTI ─────────────────────────────────── */}
-        <Garantiband />
+        <Garantiband className="pt-14 lg:pt-24" />
 
         {/* ── SÅ GÅR DET TILL ─────────────────────────── */}
         <section className="py-14 lg:py-24">
@@ -296,10 +278,10 @@ export default async function Landningssida({
             className="max-w-[1120px] mx-auto rounded-[32px] p-8 lg:p-14 text-center"
             style={{ background: "linear-gradient(135deg, #2B74FC 0%, #1A4FCC 100%)" }}
           >
-            <Rubrik2 ljus>Se vad ditt tak kostar</Rubrik2>
+            <Rubrik2 ljus>Få din gratis offert</Rubrik2>
             <p className="text-white/80 mt-3 max-w-md mx-auto">
-              Tre frågor, 30 sekunder. Sedan kan du begära en gratis offert,
-              utan förpliktelser.
+              Tre frågor, 30 sekunder. Fast pris efter kostnadsfri
+              takkontroll, helt utan förpliktelser.
             </p>
             <div className="mt-7">
               <TillFlodet text="Starta här" ljus />

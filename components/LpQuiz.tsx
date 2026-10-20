@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
+  CheckCircle,
   ChevronRight,
   Droplets,
   Hammer,
@@ -10,26 +11,17 @@ import {
   RefreshCw,
 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
-import {
-  KOMPLEX_MULTIPLIER,
-  MATERIAL,
-  omlaggningPrisEfterRot,
-  prisEfterRot,
-  type MaterialKey,
-} from "@/lib/material";
+import type { MaterialKey } from "@/lib/material";
 
 /*
-  Frågeflödet på annonslandningssidan /lp. Tre knapptryck ger ett
-  personligt riktpris, och först därefter efterfrågas kontaktuppgifter.
-  Priset är belöningen för stegen och anledningen att fylla i: det fasta
-  priset kommer efter takkontrollen.
+  Frågeflödet på annonslandningssidan /lp. Tre knapptryck, sedan
+  kontaktuppgifter. Inget riktpris (beslut 20 okt 2026): ett prisspann
+  besvarar frågan som offerten ska besvara och tar bort skälet att skicka
+  in. Svaren följer med leaden, så Sands vet vad det gäller.
 
   - Varianten i URL:en kan förvälja första svaret (/lp/takbyte börjar på
     steg 2), så den som sökt något specifikt slipper ett steg.
-  - Läckage och annat takarbete går direkt till kontakt med fritext, utan
-    pris. Där finns inget meningsfullt riktpris.
-  - Priserna kommer ur lib/material.ts. Eternit får inget pris, saneringen
-    går inte att prissätta på distans.
+  - Läckage och annat takarbete går direkt till kontakt med fritext.
   - Steget meddelas till den fasta knappen via "lp:steg", så att den kan
     säga "Fortsätt där du var".
 
@@ -62,10 +54,14 @@ const STORLEKAR = [
   { value: "225", label: "Över 200 m²", boyta: 225 },
 ];
 
-type GtagFn = (event: string, name: string, params: object) => void;
+// Det offerten innehåller, samma punkter som "Det här ingår" hade på sidan.
+const I_OFFERTEN = [
+  "Kostnadsfri takkontroll på plats",
+  "Fast pris för hela jobbet, ROT-avdraget inräknat",
+  "Rivning, material, ställning och bortforsling",
+];
 
-const avrunda = (n: number) => Math.round(n / 1000) * 1000;
-const kr = (n: number) => avrunda(n).toLocaleString("sv-SE") + " kr";
+type GtagFn = (event: string, name: string, params: object) => void;
 
 export default function LpQuiz({
   sokord,
@@ -89,9 +85,11 @@ export default function LpQuiz({
     typeof window === "undefined" ? null : new URLSearchParams(window.location.search).get("kw")
   );
 
-  const prisSpar = arende === "byta" || arende === "lagga-om";
-  const antalSteg = prisSpar ? 4 : 2;
-  const kontaktSteg = prisSpar ? 4 : 2;
+  const offertSpar = arende === "byta" || arende === "lagga-om";
+  // Innan ärendet är valt visas den längre vägen, annars hoppar raden från
+  // två till fyra steg efter första svaret.
+  const antalSteg = offertSpar || !arende ? 4 : 2;
+  const kontaktSteg = offertSpar ? 4 : 2;
 
   function ga(namn: string, params: object = {}) {
     if (typeof window === "undefined" || !("gtag" in window)) return;
@@ -157,22 +155,13 @@ export default function LpQuiz({
     ga("lp_answer", { question: "storlek", answer: s });
     setTimeout(() => {
       till(4);
-      ga("lp_price_view", { arende, taktyp, storlek: s });
+      ga("lp_form_view", { arende, taktyp, storlek: s });
     }, 170);
   }
 
-  // Riktpris för pris-spåret.
+  const storlekLabel = STORLEKAR.find((s) => s.value === storlek)?.label;
   const boyta = STORLEKAR.find((s) => s.value === storlek)?.boyta;
   const kvm = boyta ? Math.round((boyta * 1.2) / 5) * 5 : undefined;
-  const material: MaterialKey | undefined =
-    taktyp === "vet-ej" ? "betong" : taktyp && taktyp !== "eternit" ? (taktyp as MaterialKey) : undefined;
-  const undre =
-    material && kvm
-      ? arende === "lagga-om"
-        ? omlaggningPrisEfterRot(material, kvm)
-        : prisEfterRot(material, kvm)
-      : undefined;
-  const pris = undre ? { undre, ovre: undre * KOMPLEX_MULTIPLIER } : undefined;
 
   const arendeLabel = ARENDEN.find((a) => a.value === arende)?.label ?? "";
   const taktypLabel = TAKTYPER.find((t) => t.value === taktyp)?.label ?? "";
@@ -180,8 +169,7 @@ export default function LpQuiz({
   const meddelande = [
     `Från landningssidan: ${arendeLabel.toLowerCase()}`,
     taktyp ? `tak idag: ${taktypLabel.toLowerCase()}` : "",
-    boyta ? `boyta ${STORLEKAR.find((s) => s.value === storlek)?.label.toLowerCase()}` : "",
-    pris ? `riktpris ${kr(pris.undre)} – ${kr(pris.ovre)}` : "",
+    storlekLabel ? `boyta ${storlekLabel.toLowerCase()}` : "",
     `sökord: ${sokord}`,
     annonsSokord ? `annonssökord: ${annonsSokord}` : "",
   ]
@@ -190,7 +178,7 @@ export default function LpQuiz({
 
   const tillbaka = () => {
     ga("lp_back", { step: steg });
-    if (steg === kontaktSteg && !prisSpar) return till(1);
+    if (steg === kontaktSteg && !offertSpar) return till(1);
     till(Math.max(1, steg - 1));
   };
 
@@ -248,7 +236,7 @@ export default function LpQuiz({
           >
             Vad behöver du hjälp med?
           </p>
-          <p className="text-sm text-gray-500 mt-1 mb-4">Tre snabba frågor, sedan ser du ditt riktpris.</p>
+          <p className="text-sm text-gray-500 mt-1 mb-4">Tre snabba frågor, sedan får du en gratis offert.</p>
           <div className="space-y-2.5">
             {ARENDEN.map((a) => {
               const Ikon = a.icon;
@@ -275,7 +263,7 @@ export default function LpQuiz({
         </>
       )}
 
-      {steg === 2 && prisSpar && (
+      {steg === 2 && offertSpar && (
         <>
           {forval && (
             <p className="text-xs font-semibold mb-1" style={{ color: "var(--color-primary)" }}>
@@ -316,7 +304,7 @@ export default function LpQuiz({
         </>
       )}
 
-      {steg === 3 && prisSpar && (
+      {steg === 3 && offertSpar && (
         <>
           <p
             ref={rubrikRef}
@@ -346,47 +334,51 @@ export default function LpQuiz({
 
       {steg === kontaktSteg && (
         <>
-          {prisSpar && (
-            <div className="rounded-2xl p-4 mb-4" style={{ backgroundColor: "var(--color-dark)" }}>
-              {pris ? (
-                <>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400">
-                    Ditt riktpris efter ROT
-                  </p>
-                  <p
-                    className="text-[24px] font-extrabold tracking-[-0.02em] text-white tabular-nums leading-tight mt-0.5"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {kr(pris.undre)} – {kr(pris.ovre)}
-                  </p>
-                  <p className="text-xs text-gray-400 mt-1">
-                    {arendeLabel}, {material ? MATERIAL[material].namn.toLowerCase() : ""}
-                    {taktyp === "vet-ej" ? " (räknat på betong)" : ""}, ca {kvm} m² tak
-                  </p>
-                </>
-              ) : (
-                <p className="text-sm text-gray-200 leading-relaxed">
-                  Eternit kräver sanering innan det nya taket läggs, och den går
-                  inte att prissätta på distans. Du får ett fast pris för båda
-                  delarna efter den kostnadsfria takkontrollen.
-                </p>
-              )}
-            </div>
-          )}
-
           <p
             ref={rubrikRef}
             tabIndex={-1}
             className="text-[22px] font-extrabold tracking-[-0.02em] leading-tight outline-none"
             style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
           >
-            {prisSpar ? "Få ett fast pris, gratis" : "Vart når vi dig?"}
+            {offertSpar ? "Få din gratis offert med fast pris" : "Vart når vi dig?"}
           </p>
           <p className="text-sm text-gray-600 mt-1 mb-4">
-            {prisSpar
-              ? "Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll. Sedan får du en offert med fast pris."
+            {offertSpar
+              ? "Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll. Sedan får du ett fast pris för just ditt tak."
               : "Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll."}
           </p>
+
+          {/* Svaren som en bekräftelse i stället för ett pris: besökaren ser
+              att förfrågan redan är halvvägs ifylld, och vad offerten ger. */}
+          {offertSpar && (
+            <div className="rounded-2xl bg-[#F5F8FF] p-4 mb-4">
+              <div className="flex flex-wrap gap-1.5">
+                {[arendeLabel, taktypLabel, storlekLabel].filter(Boolean).map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold ring-1 ring-gray-200"
+                    style={{ color: "var(--color-dark)" }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+              <ul className="mt-3 space-y-1.5">
+                {I_OFFERTEN.map((t) => (
+                  <li key={t} className="flex items-start gap-2 text-[13px] text-gray-700">
+                    <CheckCircle size={15} className="shrink-0 mt-0.5" style={{ color: "var(--color-primary)" }} />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              {taktyp === "eternit" && (
+                <p className="text-xs text-gray-500 leading-relaxed mt-3">
+                  Eternit saneras innan det nya taket läggs. Du får ett fast pris
+                  för båda delarna efter takkontrollen.
+                </p>
+              )}
+            </div>
+          )}
 
           <LeadForm
             variant="hero"
