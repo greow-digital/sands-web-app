@@ -129,12 +129,16 @@ export default function LpQuiz({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function till(nasta: number, params: object = {}) {
+  // tillFormular: formulärsteget är högre än frågorna, och på mobil hamnade
+  // fälten och knappen under vikningen medan heron låg kvar ovanför kortet.
+  // Ingen av de första sju som nådde formuläret tryckte i ett fält (22 okt
+  // 2026). Därför flyttas kortet alltid upp när formuläret visas.
+  function till(nasta: number, params: object = {}, tillFormular = false) {
     setSteg(nasta);
     ga(`lp_step_${nasta}`, params);
     requestAnimationFrame(() => {
       const topp = ref.current?.getBoundingClientRect().top ?? 0;
-      if (topp < 0) ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (topp < 0 || tillFormular) ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
       rubrikRef.current?.focus({ preventScroll: true });
     });
   }
@@ -143,7 +147,8 @@ export default function LpQuiz({
   function valjArende(a: Arende) {
     setArende(a);
     ga("lp_answer", { question: "arende", answer: a });
-    setTimeout(() => till(2, { arende: a }), 170);
+    const direktKontakt = a === "lackage" || a === "annat";
+    setTimeout(() => till(2, { arende: a }, direktKontakt), 170);
   }
   function valjTaktyp(t: string) {
     setTaktyp(t);
@@ -154,7 +159,7 @@ export default function LpQuiz({
     setStorlek(s);
     ga("lp_answer", { question: "storlek", answer: s });
     setTimeout(() => {
-      till(4);
+      till(4, {}, true);
       ga("lp_form_view", { arende, taktyp, storlek: s });
     }, 170);
   }
@@ -342,41 +347,25 @@ export default function LpQuiz({
           >
             {offertSpar ? "Få din gratis offert med fast pris" : "Vart når vi dig?"}
           </p>
-          <p className="text-sm text-gray-600 mt-1 mb-4">
-            {offertSpar
-              ? "Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll. Sedan får du ett fast pris för just ditt tak."
-              : "Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll."}
+          <p className="text-sm text-gray-600 mt-1 mb-3">
+            Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll.
           </p>
 
-          {/* Svaren som en bekräftelse i stället för ett pris: besökaren ser
-              att förfrågan redan är halvvägs ifylld, och vad offerten ger. */}
+          {/* Svaren som en kort bekräftelse: förfrågan är redan halvvägs
+              ifylld. Vad offerten innehåller står under knappen, så att
+              fälten kommer upp direkt. */}
           {offertSpar && (
-            <div className="rounded-2xl bg-[#F5F8FF] p-4 mb-4">
-              <div className="flex flex-wrap gap-1.5">
-                {[arendeLabel, taktypLabel, storlekLabel].filter(Boolean).map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold ring-1 ring-gray-200"
-                    style={{ color: "var(--color-dark)" }}
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-              <ul className="mt-3 space-y-1.5">
-                {I_OFFERTEN.map((t) => (
-                  <li key={t} className="flex items-start gap-2 text-[13px] text-gray-700">
-                    <CheckCircle size={15} className="shrink-0 mt-0.5" style={{ color: "var(--color-primary)" }} />
-                    {t}
-                  </li>
-                ))}
-              </ul>
-              {taktyp === "eternit" && (
-                <p className="text-xs text-gray-500 leading-relaxed mt-3">
-                  Eternit saneras innan det nya taket läggs. Du får ett fast pris
-                  för båda delarna efter takkontrollen.
-                </p>
-              )}
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {[arendeLabel, taktypLabel, storlekLabel].filter(Boolean).map((t) => (
+                <span
+                  key={t}
+                  className="inline-flex items-center gap-1 rounded-full bg-[#F5F8FF] px-2.5 py-1 text-xs font-semibold"
+                  style={{ color: "var(--color-dark)" }}
+                >
+                  <CheckCircle size={12} style={{ color: "var(--color-primary)" }} />
+                  {t}
+                </span>
+              ))}
             </div>
           )}
 
@@ -410,6 +399,28 @@ export default function LpQuiz({
           <p className="text-[11px] text-gray-500 text-center mt-3">
             Kostnadsfritt · Utan förpliktelser · Svar inom 24 timmar
           </p>
+
+          {offertSpar && (
+            <div className="mt-5 pt-4 border-t border-gray-100">
+              <p className="text-xs font-bold mb-2" style={{ color: "var(--color-dark)" }}>
+                Det här ingår i offerten
+              </p>
+              <ul className="space-y-1.5">
+                {I_OFFERTEN.map((t) => (
+                  <li key={t} className="flex items-start gap-2 text-[13px] text-gray-700">
+                    <CheckCircle size={15} className="shrink-0 mt-0.5" style={{ color: "var(--color-primary)" }} />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              {taktyp === "eternit" && (
+                <p className="text-xs text-gray-500 leading-relaxed mt-3">
+                  Eternit saneras innan det nya taket läggs. Du får ett fast pris
+                  för båda delarna efter takkontrollen.
+                </p>
+              )}
+            </div>
+          )}
         </>
       )}
     </div>
