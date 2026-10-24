@@ -597,7 +597,7 @@ export default async function TaklaggningPage() {
                     var 7 600 px till nästa konverteringspunkt. */}
                 <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
                   <p className="text-sm text-gray-700 flex-1 min-w-[220px] leading-relaxed">
-                    "Vill du veta vad ett komplett takbyte kostar på just ditt tak?"
+                    &quot;Vill du veta vad ett komplett takbyte kostar på just ditt tak?&quot;
                   </p>
                   <Link
                     href="/offert"
@@ -817,7 +817,7 @@ export default async function TaklaggningPage() {
                     var 7 600 px till nästa konverteringspunkt. */}
                 <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
                   <p className="text-sm text-gray-700 flex-1 min-w-[220px] leading-relaxed">
-                    "Osäker på om pannorna håller för en omläggning? Vi bedömer dem på plats."
+                    &quot;Osäker på om pannorna håller för en omläggning? Vi bedömer dem på plats.&quot;
                   </p>
                   <Link
                     href="/offert"
@@ -864,7 +864,14 @@ export default async function TaklaggningPage() {
             </h2>
             <p className="text-gray-600 mb-8 leading-relaxed max-w-2xl">
               Inte hela taket behöver göras om. Ibland räcker det med riktade
-              insatser, en lokal lagning vid läckage, byte av enstaka pannor,
+              insatser, en{" "}
+              <Link
+                href="/blogg/taket-lacker"
+                className="font-semibold text-[#2B74FC] hover:underline"
+              >
+                lokal lagning när taket läcker
+              </Link>
+              , byte av enstaka pannor,
               nya hängrännor eller plåtdetaljer. Vi gör en kostnadsfri
               takkontroll, ger fast pris på det som behövs och du betalar bara
               för det vi faktiskt utför.
@@ -954,7 +961,7 @@ export default async function TaklaggningPage() {
                     var 7 600 px till nästa konverteringspunkt. */}
                 <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-gray-100 bg-[#F8F9FB] p-5">
                   <p className="text-sm text-gray-700 flex-1 min-w-[220px] leading-relaxed">
-                    "Vet du inte vilken åtgärd taket behöver? Börja med en takkontroll."
+                    &quot;Vet du inte vilken åtgärd taket behöver? Börja med en takkontroll.&quot;
                   </p>
                   <Link
                     href="/offert"

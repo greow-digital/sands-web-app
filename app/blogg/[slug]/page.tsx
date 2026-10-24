@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LeadForm from "@/components/LeadForm";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
+import TakkontrollInlineCta from "@/components/TakkontrollInlineCta";
 import { artiklar, getArtikel } from "@/lib/blogg";
 
 export async function generateStaticParams() {
@@ -188,6 +189,22 @@ export default async function ArtikelPage({
                       </h2>
                     );
                   }
+                  // Uppmaning mitt i texten: [[takkontroll]] eller
+                  // [[takkontroll|rubrik|text]]. Knappen leder till
+                  // formuläret i sidospalten (#formular).
+                  const cta = block.match(
+                    /^\[\[takkontroll(?:\|([^|\]]+)\|([^\]]+))?\]\]$/
+                  );
+                  if (cta) {
+                    return (
+                      <TakkontrollInlineCta
+                        key={i}
+                        className="my-8 not-prose"
+                        heading={cta[1]}
+                        text={cta[2]}
+                      />
+                    );
+                  }
                   // Bild i texten: ![alt](/sökväg BREDDxHÖJD "bildtext").
                   // Måtten är bildens egna och reserverar platsen så att
                   // texten inte hoppar när bilden laddas (CLS, SEO.md §11.4).
@@ -348,7 +365,11 @@ export default async function ArtikelPage({
 
               {/* Sidebar */}
               <aside className="lg:sticky lg:top-28 space-y-8">
-                <LeadForm variant="section" />
+                {/* Egen formId så att leads från bloggen syns som egen
+                    kanal i arket och i GA4 (lib/lead-source.ts). */}
+                <div id="formular" className="scroll-mt-24">
+                  <LeadForm variant="section" formId="blogg" />
+                </div>
 
                 {/* Relaterade artiklar */}
                 <div>
