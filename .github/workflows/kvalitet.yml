@@ -1,0 +1,70 @@
+# Kvalitetskontroll på varje pull request mot main.
+#
+# 1. Regelkontroll: projektreglerna i CLAUDE.md och SEO.md (CTA-texter,
+#    förbjudna ord, streck, hårdkodade priser, /tack och konverteringskoden).
+# 2. Lint på de filer som ändrats i PR:en (äldre filer har kända fel).
+# 3. Typkontroll och produktionsbygge.
+# 4. Flödestester i Playwright: landningssidan, /priser och startsidan.
+#    All trafik utanför localhost stoppas, så inga riktiga leads eller
+#    konverteringar skickas.
+name: Kvalitet
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: kvalitet-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  kvalitet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: 3do82whm
+      NEXT_PUBLIC_SANITY_DATASET: production
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Regelkontroll
+        run: node scripts/regelkoll.mjs --bas origin/${{ github.base_ref }}
+
+      - name: Lint (ändrade filer)
+        run: |
+          filer=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.ts' '*.tsx' '*.mjs' '*.js')
+          if [ -z "$filer" ]; then echo "Inga kodfiler ändrade"; exit 0; fi
+          echo "$filer"
+          npx eslint $filer
+
+      - name: Typkontroll
+        run: npx tsc --noEmit
+
+      - name: Bygge
+        run: npm run build
+
+      - name: Installera Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Flödestester
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-rapport
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
