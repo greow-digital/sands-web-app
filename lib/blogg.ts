@@ -184,6 +184,8 @@ Ett läckande tak är akut, men inte för att taket försämras snabbt. Det är 
 - **Gå inte upp på taket själv.** Ett blött tak är halt, och arbete på taket kräver fallskydd.
 - **Kontakta ditt försäkringsbolag tidigt,** innan något åtgärdas, så att du vet vad de vill ha dokumenterat.
 
+[[takkontroll|Läcker taket redan nu?|Vi svarar inom 24 timmar och bokar en kostnadsfri takkontroll. Vid besöket hittar vi orsaken till läckaget, och du får fast pris på det som löser problemet.]]
+
 ## Titta på vinden om du kan
 
 Har du en vind som går att nå säkert ger den ofta svaret snabbare än något annat. Leta efter fuktfläckar på råsponten, blöt isolering och spår av rinnande vatten.

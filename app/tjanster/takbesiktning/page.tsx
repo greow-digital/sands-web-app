@@ -274,6 +274,10 @@ export default function TakbesiktningPage() {
                     {
                       h: "Du har sett tecken på problem",
                       p: "Fuktfläckar i innertaket, lösa pannor eller stopp i hängrännorna är värt att låta proffs kolla innan det blir dyrare.",
+                      lank: {
+                        href: "/blogg/taket-lacker",
+                        text: "Taket läcker? Så gör du de första timmarna",
+                      },
                     },
                     {
                       h: "Det är 25+ år sedan senaste besiktningen",
@@ -293,6 +297,14 @@ export default function TakbesiktningPage() {
                       <p className="text-gray-600 leading-relaxed">
                         {reason.p}
                       </p>
+                      {reason.lank && (
+                        <Link
+                          href={reason.lank.href}
+                          className="inline-block mt-1 font-semibold text-[#2B74FC] hover:underline"
+                        >
+                          {reason.lank.text}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
