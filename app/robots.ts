@@ -11,9 +11,8 @@ export default function robots(): MetadataRoute.Robots {
       disallow: [
       "/tack",
       "/api/",
-      // Block Next.js static assets (fonts, hashed bundles) from wasting
-      // crawl budget — these are never indexable content.
-      "/_next/static/",
+      // /_next/static/ (CSS, JS, typsnitt) får inte blockeras: Google
+      // behöver filerna för att rendera sidan och bedöma mobilvänlighet.
       // Block favicon URL variants with hashed query strings that leak
       // into Google's index (e.g. /favicon.ico?favicon.09haxzz3xr7d8.ico).
       "/favicon.ico",

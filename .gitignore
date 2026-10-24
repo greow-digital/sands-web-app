@@ -52,3 +52,9 @@ hero-sands-construction.avif
 # Renderad e-postförhandsvisning, genereras av scripts/render-email.ts
 .email-preview/
 .react-email/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
