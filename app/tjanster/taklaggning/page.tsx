@@ -36,7 +36,7 @@ export const metadata: Metadata = pageMeta({
   path: "/tjanster/taklaggning",
   title: "Takbyte & takomläggning Stockholm | fast pris | Sands",
   description:
-    "Erfaren takläggare i Stockholm. Takbyte och takomläggning med fast pris och 30 års Monier-garanti. Slipp bygglov sedan dec 2025. Prisförslag inom 24 h.",
+    "Takbyte och takomläggning i Stockholm med fast pris och upp till 30 års Monier-garanti. Slipp bygglov sedan dec 2025. Prisförslag inom 24 h.",
 });
 
 // Pris-formel matchar Takräknaren (inkl 25 % moms, ROT-cap 50 000 kr).

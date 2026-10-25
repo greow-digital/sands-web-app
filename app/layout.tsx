@@ -5,6 +5,8 @@ import ElevenLabsWidget from "@/components/ElevenLabsWidget";
 import PhoneClickTracker from "@/components/PhoneClickTracker";
 import ClickIdCapture from "@/components/ClickIdCapture";
 import ThirdPartyScripts from "@/components/ThirdPartyScripts";
+import { FLAGGSKEPP_PRIS } from "@/lib/material";
+import { AVG_RATING } from "@/lib/testimonials";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -25,8 +27,9 @@ const BASE_URL = "https://www.sandsab.se";
 
 const HOME_TITLE =
   "Takläggare Stockholm | takbyte till fast pris | Sands";
-const HOME_DESC =
-  "Erfaren takläggare i Stockholm. Fast pris från 169 000 kr efter ROT, 30 års Monier-garanti. BraByggare 4,8 av 5 med 54 omdömen. Få prisförslag inom 24 h.";
+// Pris och betyg hämtas ur datan, så att beskrivningen inte blir inaktuell
+// när priset eller antalet omdömen ändras (förut stod "54 omdömen" här).
+const HOME_DESC = `Takläggare i Stockholm med fast pris efter kostnadsfri takkontroll. Takbyte från ${FLAGGSKEPP_PRIS.toLocaleString("sv-SE")} kr efter ROT, upp till 30 års Monier-garanti. Snitt ${AVG_RATING} av 5.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -104,6 +107,8 @@ export default function RootLayout({
                 name: "Stockholms län",
               },
               sameAs: [
+                // Google-företagsprofilen (kategori Takläggare).
+                "https://maps.app.goo.gl/Wa7bNenJ19weXEac9",
                 "https://www.instagram.com/sandsentreprenad/",
                 "https://www.facebook.com/profile.php?id=100063582700739",
                 "https://www.brabyggare.se/hantverkare/25532/",

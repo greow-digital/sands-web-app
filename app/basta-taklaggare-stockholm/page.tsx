@@ -30,11 +30,11 @@ import TaktestInlineCta from "@/components/TaktestInlineCta";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://www.sandsab.se/basta-taklaggare-stockholm" },
-  title: "Bästa takläggare i Stockholm | så väljer du rätt | Sands",
+  title: "Bästa takläggare i Stockholm 2026: 7 krav att ställa | Sands",
   description:
     "Hur hittar du en seriös takläggare i Stockholm? Checklista: F-skatt, försäkring, certifiering och garantitid. Fast pris och 4,8 på BraByggare.",
   openGraph: {
-    title: "Bästa takläggare i Stockholm, så väljer du rätt takfirma",
+    title: "Bästa takläggare i Stockholm 2026: 7 krav att ställa",
     description:
       "Guide för att välja certifierad takläggare i Stockholm: checklista, vanliga misstag, FAQ och referensprojekt från Sands Entreprenad.",
     url: "https://www.sandsab.se/basta-taklaggare-stockholm",
@@ -239,8 +239,8 @@ export default async function BastaTaklaggareStockholm() {
         />
 
         <PageHero
-          eyebrow="Köpguide Stockholm 2026"
-          title="Bästa takläggare i Stockholm –"
+          eyebrow="Köpguide Stockholm · Senast uppdaterad oktober 2026"
+          title="Bästa takläggare i Stockholm:"
           titleAccent="så väljer du rätt takfirma"
           description="Att välja takläggare är ett av de största enskilda inköp en villaägare gör. Här är de sju kriterier som skiljer ett seriöst takbyte från en kostsam felinvestering, plus hur du själv kan kontrollera varje punkt innan du skriver kontrakt."
           breadcrumbs={[
@@ -302,7 +302,7 @@ export default async function BastaTaklaggareStockholm() {
                 eller{" "}
                 <Link href="/tjanster/betongtak" className="text-[#2B74FC] hover:underline font-medium">betongtak</Link>.
                 Men vad alla seriösa{" "}
-                <Link href="/tjanster/taklaggning" className="text-[#2B74FC] hover:underline font-medium">takläggare i Stockholm</Link>{" "}
+                <Link href="/" className="text-[#2B74FC] hover:underline font-medium">takläggare i Stockholm</Link>{" "}
                 har gemensamt är att de uppfyller samma sju grundkriterier: dokumenterad ekonomi, rätt försäkringar, lång garantitid, externa certifieringar, fast pris i kontrakt, verifierbara omdömen och korrekt arbetsmiljöansvar. Vi går igenom hur du kontrollerar varje punkt själv i guiden om att anlita en{" "}
                 <Link href="/blogg/certifierad-taklaggare" className="text-[#2B74FC] hover:underline font-medium">certifierad takläggare</Link>.
               </p>

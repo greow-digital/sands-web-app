@@ -92,7 +92,7 @@ const FAQ = [
   },
   {
     q: "Vilken garanti får jag?",
-    a: "Vi lämnar 15 års hantverksgaranti på utfört arbete. Med ett komplett Monier-taksystem tillkommer Moniers Tätt tak-garanti i upp till 30 år.",
+    a: "Med ett komplett Monier-taksystem får du Moniers Tätt tak-garanti i upp till 30 år. Garantibeviset registreras digitalt och kan alltid tas fram med ditt offertnummer.",
   },
 ];
 
