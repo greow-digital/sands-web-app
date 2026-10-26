@@ -66,6 +66,7 @@ const BO_ADS = {
 
 function installera() {
   const blad = bladet_();
+  const sistaFore = blad.getLastRow();
   const rubriker = rubriker_(blad);
   BO_NYA_KOLUMNER.forEach(function (namn) {
     if (rubriker.indexOf(namn) !== -1) return;
@@ -81,6 +82,19 @@ function installera() {
     }
   });
   tilldelaId_(blad);
+  // Webhooken lägger nya leads efter getLastRow(). Flyttas den har något
+  // skrivits under sista leaden, och då skulle nästa lead hamna fel.
+  const sistaEfter = blad.getLastRow();
+  if (sistaEfter !== sistaFore) {
+    throw new Error("Sista raden flyttades från " + sistaFore + " till " + sistaEfter + ". Återställ arket och hör av dig.");
+  }
+  Logger.log("Klart. Sista raden med innehåll är fortfarande " + sistaEfter + ".");
+}
+
+/** Visar var webhooken kommer att lägga nästa lead. Ändrar ingenting. */
+function kontroll() {
+  const blad = bladet_();
+  Logger.log("Sista raden med innehåll: " + blad.getLastRow() + ". Rader i fliken: " + blad.getMaxRows() + ".");
 }
 
 function doPost(e) {
