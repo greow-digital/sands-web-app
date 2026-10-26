@@ -4,10 +4,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { hamtaLead, uppdateraLead } from "@/lib/backoffice/ark";
 import { flode, LOGG } from "@/lib/backoffice/floden";
-import { KRYSSRUTOR, SKRIVBARA, loggRad, type SkrivbartFalt } from "@/lib/backoffice/lead";
+import { KRYSSRUTOR, SKRIVBARA, loggRad, stockholmTid, type SkrivbartFalt } from "@/lib/backoffice/lead";
 import { flytt, type Steg } from "@/lib/backoffice/crm";
 import { avslutaSession, kontrollera, kravInloggning, skapaSession } from "@/lib/backoffice/session";
 import { korDagligt } from "@/lib/backoffice/dagligt";
+import { DAGAR_FRAM, boka, dagText, klockslag, ledigaTider } from "@/lib/backoffice/kalender";
 import { skickaFlode } from "@/lib/backoffice/utskick";
 
 export type Resultat = { ok?: string; fel?: string } | null;
@@ -127,6 +128,60 @@ export async function sattPaminnelse(id: string, datum: string): Promise<Resulta
   }
   revalidatePath("/admin", "layout");
   return { ok: datum ? `Påminnelse ${datum}` : "Påminnelse borttagen" };
+}
+
+export type LedigDag = { dag: string; rubrik: string; tider: { start: string; tid: string }[] };
+
+/** Lediga pass för bokningsväljaren i leadvyn, grupperade per dag. */
+export async function hamtaLedigaTider(): Promise<{ dagar?: LedigDag[]; fel?: string }> {
+  await kravInloggning();
+  const nu = new Date();
+  try {
+    const pass = await ledigaTider(nu, new Date(nu.getTime() + DAGAR_FRAM * 864e5));
+    const dagar: LedigDag[] = [];
+    for (const p of pass) {
+      const rubrik = dagText(p.start);
+      if (dagar.at(-1)?.rubrik !== rubrik) dagar.push({ dag: stockholmTid(new Date(p.start)).slice(0, 10), rubrik, tider: [] });
+      dagar.at(-1)!.tider.push({ start: p.start, tid: klockslag(p.start) });
+    }
+    return { dagar };
+  } catch (err) {
+    return { fel: err instanceof Error ? err.message : "Kunde inte läsa kalendern" };
+  }
+}
+
+/**
+ * Bokar en takkontroll: händelse i kalendern med lead-ID:t, kryssrutan
+ * Bokad och en loggrad som börjar med "Takkontroll bokad".
+ */
+export async function bokaTid(id: string, start: string): Promise<Resultat> {
+  const vem = await kravInloggning();
+  const lead = await hamtaLead(id);
+  if (!lead) return { fel: "Hittar inte leaden" };
+  const fran = new Date(start);
+  if (Number.isNaN(fran.getTime())) return { fel: "Ogiltig tid" };
+
+  let mote;
+  try {
+    // Någon kan ha bokat tiden sedan väljaren öppnades, så kolla igen.
+    const ledig = (await ledigaTider(new Date(fran.getTime() - 1), new Date(fran.getTime() + 2 * 3600_000))).find(
+      (p) => Date.parse(p.start) === fran.getTime()
+    );
+    if (!ledig) return { fel: "Tiden är inte ledig längre, välj en annan" };
+    mote = await boka({ lead, start: fran, slut: new Date(ledig.slut) });
+  } catch (err) {
+    return { fel: err instanceof Error ? err.message : "Kunde inte boka i kalendern" };
+  }
+
+  const text = `${LOGG.bokad} ${stockholmTid(fran)}`;
+  try {
+    await uppdateraLead(id, lead.bokad ? {} : { bokad: true }, loggRad(vem, text));
+  } catch (err) {
+    // Mötet finns i kalendern även om arket inte gick att skriva.
+    return { fel: `Bokad i kalendern, men arket gick inte att uppdatera: ${err instanceof Error ? err.message : err}` };
+  }
+  revalidatePath("/admin", "layout");
+  return { ok: `Bokad ${dagText(mote.start)} ${klockslag(mote.start)}` };
 }
 
 export async function skickaUtskick(id: string, flodeId: string): Promise<Resultat> {

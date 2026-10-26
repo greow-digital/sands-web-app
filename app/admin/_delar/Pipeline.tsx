@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useOptimistic, useState, useTransition } from "react";
-import { BellRing, ChevronRight, GripVertical, Phone } from "lucide-react";
+import { BellRing, CalendarCheck, ChevronRight, GripVertical, Phone } from "lucide-react";
 import { PIPELINE, STEG_KORT, datum, kronor, type Steg } from "@/lib/backoffice/crm";
 import { telHref } from "@/lib/backoffice/lead";
 import { flyttaSteg } from "../actions";
@@ -18,6 +18,8 @@ export type PipelineKort = {
   telefon: string;
   paminnelse: string;
   flagga: string;
+  /** Nästa bokade takkontroll från kalendern, i klartext. */
+  mote: string;
 };
 
 const KOLUMNER: Steg[] = [...PIPELINE, "forlorad", "avslutad"];
@@ -102,6 +104,11 @@ export default function Pipeline({ kort }: { kort: PipelineKort[] }) {
                       </div>
                       {k.varde > 0 && <span className="shrink-0 text-xs font-semibold tabular-nums text-slate-900">{kronor(k.varde)}</span>}
                     </div>
+                    {k.steg === "bokad" && k.mote && (
+                      <p className="mt-2 flex items-center gap-1.5 truncate rounded-md bg-indigo-50 px-1.5 py-0.5 text-[11px] font-semibold text-indigo-700">
+                        <CalendarCheck className="size-3 shrink-0" /> {k.mote}
+                      </p>
+                    )}
                     {k.flagga && <p className="mt-2 truncate rounded-md bg-orange-50 px-1.5 py-0.5 text-[11px] font-semibold text-orange-700">{k.flagga}</p>}
                     <div className="mt-2 flex items-center gap-2 text-[11px] text-slate-400">
                       <span>{k.inkom}</span>
