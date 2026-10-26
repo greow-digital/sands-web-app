@@ -16,6 +16,13 @@ test.describe("Landningssidan /lp", () => {
     // Inget riktpris på landningssidan (beslut 20 okt 2026).
     await expect(formular.getByText(/riktpris/i)).toHaveCount(0);
 
+    // Två synliga fält (26 okt 2026): e-post och fritext ligger bakom länkar,
+    // och betyg plus ett kundcitat står ovanför knappen.
+    await expect(formular.locator('input[type="email"]')).toHaveCount(0);
+    await expect(formular.locator("textarea")).toHaveCount(0);
+    await expect(formular.getByText(/av 5 · \d+ omdömen/)).toBeVisible();
+    await expect(formular.getByText("Bo, Spånga")).toBeVisible();
+
     // Formulärfixen 22 okt 2026: namnfältet och knappen syns direkt.
     await page.waitForTimeout(900);
     await synsUtanScroll(page, formular.locator('input[type="text"]').first());
@@ -44,6 +51,30 @@ test.describe("Landningssidan /lp", () => {
     await forbered(page);
     await page.goto("/lp/taklaggare?kw=takoml%C3%A4ggning");
     await expect(page.locator("h1")).toContainText("Takomläggning i Stockholm");
+  });
+
+  test("den som hellre vill bli mejlad kan skicka utan telefonnummer", async ({ page }) => {
+    const leads = await forbered(page);
+    await page.goto("/lp/takbyte");
+    await knapp(page, "Betongpannor").click();
+    await knapp(page, "Under 100 m²").click();
+    const formular = page.locator("#formular");
+    await formular.locator('input[type="text"]').first().fill("Test Testsson");
+
+    // Utan telefon pekar felet mot e-postlänken.
+    await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
+    await expect(formular.getByText("Ange telefonnummer, eller välj e-post nedan")).toBeVisible();
+
+    await formular.getByRole("button", { name: "Hellre e-post?" }).click();
+    await formular.locator('input[type="email"]').fill("test@example.com");
+    await formular.getByRole("button", { name: "+ Lägg till ett meddelande (valfritt)" }).click();
+    await formular.locator("textarea").fill("Kupor på baksidan");
+    await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
+    await page.waitForURL("**/tack");
+    expect(leads).toHaveLength(1);
+    expect(leads[0]).toMatchObject({ email: "test@example.com", formId: "lp_hero" });
+    expect(leads[0].phone ?? "").toBe("");
+    expect(leads[0].message).toContain("Kupor på baksidan");
   });
 
   test("felaktigt mobilnummer stoppas innan det skickas", async ({ page }) => {

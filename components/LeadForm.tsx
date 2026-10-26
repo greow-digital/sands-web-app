@@ -77,6 +77,16 @@ interface LeadFormProps {
   notBindingNote?: boolean;
   /** Körs efter lyckad submit, innan redirect (t.ex. för calc_bridge_submit). */
   onSubmitSuccess?: () => void;
+  /**
+   * Med contact="phone-or-email": visa bara telefon och lägg e-post bakom
+   * länken "Hellre e-post?". Formuläret ser ut som två fält, men ingen
+   * tvingas lämna sitt nummer.
+   */
+  epostSomLank?: boolean;
+  /** Med showMessage: fritexten ligger bakom en länk i stället för öppen. */
+  meddelandeSomLank?: boolean;
+  /** Innehåll direkt ovanför knappen, t.ex. betyg och ett kundcitat. */
+  ovanforKnapp?: React.ReactNode;
 }
 
 export default function LeadForm({
@@ -93,6 +103,9 @@ export default function LeadForm({
   confirmation,
   notBindingNote = false,
   onSubmitSuccess,
+  epostSomLank = false,
+  meddelandeSomLank = false,
+  ovanforKnapp,
 }: LeadFormProps) {
   const {
     register,
@@ -111,6 +124,10 @@ export default function LeadForm({
   const fid = (namn: string) => `${uid}-${namn}`;
 
   const valfriKontakt = contact === "phone-or-email";
+  const [visaEpost, setVisaEpost] = useState(!epostSomLank);
+  const [visaMeddelande, setVisaMeddelande] = useState(!meddelandeSomLank);
+  // Läses i valideringen, som inte ser renderingens state.
+  const epostSynlig = useRef(!epostSomLank);
 
   // Minst en kontaktväg måste vara ifylld, men användaren väljer vilken.
   function harKontaktvag() {
@@ -119,6 +136,9 @@ export default function LeadForm({
   }
 
   const KONTAKT_KRAV = "Fyll i telefon eller e-post, du väljer själv";
+  // När e-post ligger bakom länken pekar felet dit i stället.
+  const kontaktKrav = () =>
+    epostSynlig.current ? KONTAKT_KRAV : "Ange telefonnummer, eller välj e-post nedan";
 
   const telefonFormat = (v?: string) => telefonFel(v) ?? true;
 
@@ -137,7 +157,7 @@ export default function LeadForm({
   const telefonRegler: RegisterOptions<FormData, "phone"> = valfriKontakt
     ? {
         validate: {
-          kontakt: () => harKontaktvag() || KONTAKT_KRAV,
+          kontakt: () => harKontaktvag() || kontaktKrav(),
           format: telefonFormat,
         },
       }
@@ -372,7 +392,7 @@ export default function LeadForm({
         {fields === "minimal" ? (
           <div
             className={
-              valfriKontakt
+              valfriKontakt && visaEpost
                 ? stapla
                   ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
                   : "grid grid-cols-2 gap-3"
@@ -410,8 +430,22 @@ export default function LeadForm({
                   {errors.phone.message}
                 </p>
               )}
+              {valfriKontakt && !visaEpost && (
+                <button
+                  type="button"
+                  className="mt-2 text-xs font-semibold text-[#2B74FC] hover:underline"
+                  onClick={() => {
+                    epostSynlig.current = true;
+                    setVisaEpost(true);
+                    // Fokus flyttas till e-postfältet när det har renderats.
+                    setTimeout(() => document.getElementById(fid("email"))?.focus(), 0);
+                  }}
+                >
+                  Hellre e-post?
+                </button>
+              )}
             </div>
-            {valfriKontakt && (
+            {valfriKontakt && visaEpost && (
               <div className="min-w-0">
                 <label
                   htmlFor={fid("email")}
@@ -457,7 +491,21 @@ export default function LeadForm({
                 asterisk säger redan att de är valfria, och den som lämnar
                 båda tomma får kravet som felmeddelande precis när det
                 behövs. */}
-            {showMessage && (
+            {showMessage && !visaMeddelande && (
+              <div className="col-span-full">
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-[#2B74FC] hover:underline"
+                  onClick={() => {
+                    setVisaMeddelande(true);
+                    setTimeout(() => document.getElementById(fid("message"))?.focus(), 0);
+                  }}
+                >
+                  + Lägg till ett meddelande (valfritt)
+                </button>
+              </div>
+            )}
+            {showMessage && visaMeddelande && (
               <div className="col-span-full">
                 <label
                   htmlFor={fid("message")}
@@ -568,6 +616,8 @@ export default function LeadForm({
             </div>
           </>
         )}
+
+        {ovanforKnapp}
 
         {/* Submit */}
         <button
