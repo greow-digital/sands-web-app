@@ -232,14 +232,21 @@ function tilldelaId_(blad) {
     const idn = omr.getValues();
     const tidKol = rubriker.indexOf("Tidpunkt") + 1 || 1;
     const tider = blad.getRange(2, tidKol, sista - 1, 1).getValues();
-    var andrat = false;
+    const nya = [];
     for (var i = 0; i < idn.length; i++) {
       if (!idn[i][0] && tider[i][0] !== "") {
         idn[i][0] = Utilities.getUuid().slice(0, 8);
-        andrat = true;
+        nya.push(i + 2);
       }
     }
-    if (andrat) omr.setValues(idn);
+    if (!nya.length) return;
+    omr.setValues(idn);
+    // Nya leads får sina kryssrutor här. Raden har redan innehåll, så sista
+    // raden i arket flyttas inte.
+    BO_KRYSSRUTOR.forEach(function (namn) {
+      const kol = rubriker.indexOf(namn) + 1;
+      if (kol) nya.forEach(function (rad) { blad.getRange(rad, kol).insertCheckboxes(); });
+    });
   } finally {
     lock.releaseLock();
   }
