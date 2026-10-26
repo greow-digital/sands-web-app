@@ -128,11 +128,16 @@ const startsidaFaq = [
   },
   {
     q: "Vad är Sands Entreprenads garantitid?",
-    a: "Sands Entreprenad lämnar 15 års hantverksgaranti på utfört arbete. När vi lägger ett komplett Monier-taksystem tillkommer Moniers Tätt tak-garanti i upp till 30 år. Garantibeviset är registrerat digitalt och kan alltid tas fram med ditt offertnummer.",
+    a: "När vi lägger ett komplett Monier-taksystem får du Moniers Tätt tak-garanti i upp till 30 år. Garantibeviset är registrerat digitalt och kan alltid tas fram med ditt offertnummer.",
   },
   {
     q: "Hur lång tid tar ett takbyte?",
     a: "För en normalvilla på 120–160 m² tar ett komplett takbyte vanligtvis 1–2 veckor, beroende på väder och takets skick.",
+  },
+  {
+    q: "Arbetar ni i hela Stockholm?",
+    a: "Ja. Vi tar uppdrag i hela Stockholms län, från Norrtälje i norr till Södertälje och Nykvarn i söder. På områdessidorna ser du projekt och omdömen från ditt område.",
+    lank: { href: "/omraden", text: "Se alla områden" },
   },
 ];
 
@@ -548,6 +553,14 @@ export default async function Home() {
               <div>
                 <Etikett>Stockholms län</Etikett>
                 <Rubrik2>Takläggare i hela Stockholms län</Rubrik2>
+                {/* Enda stället på startsidan som nämner stadsdelarna, så att
+                    sidan kopplas till Stockholms stad och inte bara länet. */}
+                <p className="text-gray-600 leading-relaxed mt-3 max-w-2xl">
+                  Vi lägger tak i hela Stockholms stad, från Bromma och
+                  Hässelby i väster till Enskede och Farsta i söder, och i alla
+                  kranskommuner runt om. Välj ditt område för priser, projekt
+                  och omdömen nära dig.
+                </p>
               </div>
               <Link
                 href="/omraden"
@@ -631,7 +644,7 @@ export default async function Home() {
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
               <Etikett>Vanliga frågor</Etikett>
-              <Rubrik2>Vanliga frågor om takomläggning</Rubrik2>
+              <Rubrik2>Vanliga frågor om takläggare i Stockholm</Rubrik2>
             </div>
 
             {/* Inget FAQPage-schema här. Samma frågor har schema på /faq och

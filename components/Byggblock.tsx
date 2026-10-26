@@ -220,7 +220,7 @@ export function Garantiband({
           className="absolute inset-0 pointer-events-none"
           style={{ background: "radial-gradient(60% 80% at 100% 0%, rgba(43,116,252,0.35), transparent 60%)" }}
         />
-        <div className="relative grid lg:grid-cols-[1fr_auto_auto] gap-8 lg:gap-14 items-center">
+        <div className="relative grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-14 items-center">
           <div>
             <Etikett ljus>Trygghet</Etikett>
             <Rubrik2 ljus>Garantier som håller lika länge som taket</Rubrik2>
@@ -229,19 +229,13 @@ export function Garantiband({
               digitalt och kan alltid tas fram med ditt offertnummer.
             </p>
           </div>
-          <div className="grid grid-cols-2 lg:contents gap-6">
-            <div>
-              <p className="text-[52px] lg:text-[72px] font-extrabold leading-none tracking-[-0.04em]" style={{ fontFamily: "var(--font-heading)" }}>
-                15 år
-              </p>
-              <p className="text-sm text-gray-400 mt-1">hantverksgaranti</p>
-            </div>
-            <div>
-              <p className="text-[52px] lg:text-[72px] font-extrabold leading-none tracking-[-0.04em] text-[#7AA9FF]" style={{ fontFamily: "var(--font-heading)" }}>
-                30 år
-              </p>
-              <p className="text-sm text-gray-400 mt-1">upp till, Monier Tätt tak</p>
-            </div>
+          {/* Bara Moniers garanti. Sands lämnar ingen egen hantverksgaranti,
+              så "15 år hantverksgaranti" som stod här är borttaget. */}
+          <div>
+            <p className="text-[52px] lg:text-[72px] font-extrabold leading-none tracking-[-0.04em] text-[#7AA9FF]" style={{ fontFamily: "var(--font-heading)" }}>
+              30 år
+            </p>
+            <p className="text-sm text-gray-400 mt-1">upp till, Monier Tätt tak</p>
           </div>
         </div>
       </div>
@@ -279,7 +273,22 @@ export function Tidslinje({ steg }: { steg: { rubrik: string; text: string }[] }
  * indexerade sidor. Landningssidorna är noindex och fäller ihop svaren för
  * att hålla sidan kort på mobil.
  */
-export function Fragor({ fragor, oppen = false }: { fragor: { q: string; a: string }[]; oppen?: boolean }) {
+export type Fraga = { q: string; a: string; lank?: { href: string; text: string } };
+
+/** Valfri länk visas under svaret. FAQPage-schema byggs på `a`, aldrig på länken. */
+function FragaLank({ lank }: { lank?: Fraga["lank"] }) {
+  if (!lank) return null;
+  return (
+    <Link
+      href={lank.href}
+      className="inline-flex items-center gap-1 mt-2 text-[15px] font-semibold text-[#2B74FC] hover:underline"
+    >
+      {lank.text} <ArrowRight size={14} />
+    </Link>
+  );
+}
+
+export function Fragor({ fragor, oppen = false }: { fragor: Fraga[]; oppen?: boolean }) {
   if (oppen) {
     return (
       <div className="space-y-3">
@@ -292,6 +301,7 @@ export function Fragor({ fragor, oppen = false }: { fragor: { q: string; a: stri
               {f.q}
             </h3>
             <p className="text-[15px] text-gray-600 leading-relaxed mt-2">{f.a}</p>
+            <FragaLank lank={f.lank} />
           </div>
         ))}
       </div>
@@ -312,6 +322,7 @@ export function Fragor({ fragor, oppen = false }: { fragor: { q: string; a: stri
             <span className="text-xl leading-none text-gray-400 transition-transform group-open:rotate-45">+</span>
           </summary>
           <p className="text-[15px] text-gray-600 leading-relaxed mt-3">{f.a}</p>
+          <FragaLank lank={f.lank} />
         </details>
       ))}
     </div>
