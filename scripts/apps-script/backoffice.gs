@@ -73,12 +73,12 @@ function installera() {
     const kol = blad.getLastColumn() + 1;
     blad.getRange(1, kol).setValue(namn);
     rubriker.push(namn);
-    if (BO_KRYSSRUTOR.indexOf(namn) !== -1 && blad.getMaxRows() > 1) {
-      // Bara validering, inga värden. insertCheckboxes() skriver FALSE i
-      // varje cell, och då flyttar getLastRow() till arkets sista rad så att
-      // webhooken lägger nya leads längst ner. En tom cell visas som urkryssad.
-      const regel = SpreadsheetApp.newDataValidation().requireCheckbox().build();
-      blad.getRange(2, kol, blad.getMaxRows() - 1, 1).setDataValidation(regel);
+    // Kryssrutor bara på rader som redan har en lead. En kryssruta räknas
+    // som innehåll, och läggs den på tomma rader flyttar getLastRow() till
+    // flikens sista rad, så att webhooken lägger nya leads längst ner. Nya
+    // rader får sin kryssruta när backofficet skriver till dem.
+    if (BO_KRYSSRUTOR.indexOf(namn) !== -1 && sistaFore > 1) {
+      blad.getRange(2, kol, sistaFore - 1, 1).insertCheckboxes();
     }
   });
   tilldelaId_(blad);
@@ -89,6 +89,30 @@ function installera() {
     throw new Error("Sista raden flyttades från " + sistaFore + " till " + sistaEfter + ". Återställ arket och hör av dig.");
   }
   Logger.log("Klart. Sista raden med innehåll är fortfarande " + sistaEfter + ".");
+}
+
+/**
+ * Tar bort det backofficets kolumner har lämnat under sista leaden (sista
+ * raden med en Tidpunkt), så att webhooken åter lägger nya leads direkt under.
+ * Rör bara kolumnerna ID, Anteckning, Påminnelse, Logg och Arkiverad.
+ */
+function stada() {
+  const blad = bladet_();
+  const rubriker = rubriker_(blad);
+  const tider = blad.getRange(1, (rubriker.indexOf("Tidpunkt") + 1) || 1, blad.getMaxRows(), 1).getValues();
+  var sistaLead = 1;
+  for (var i = tider.length - 1; i > 0; i--) {
+    if (tider[i][0] !== "") { sistaLead = i + 1; break; }
+  }
+  const under = blad.getMaxRows() - sistaLead;
+  if (under > 0) {
+    BO_NYA_KOLUMNER.forEach(function (namn) {
+      const kol = rubriker.indexOf(namn) + 1;
+      if (kol) blad.getRange(sistaLead + 1, kol, under, 1).clearDataValidations().clearContent();
+    });
+  }
+  SpreadsheetApp.flush();
+  Logger.log("Sista leaden ligger på rad " + sistaLead + ". Sista raden med innehåll är nu " + blad.getLastRow() + ".");
 }
 
 /** Visar var webhooken kommer att lägga nästa lead. Ändrar ingenting. */
@@ -164,7 +188,10 @@ function uppdatera_(data) {
       if (namn === "Påminnelse" && /^\d{4}-\d{2}-\d{2}$/.test(String(v))) {
         v = Utilities.parseDate(v, BO_TIDSZON, "yyyy-MM-dd");
       }
-      blad.getRange(radNr, kol).setValue(v);
+      const cell = blad.getRange(radNr, kol);
+      // Rader som kommit in efter installera() saknar kryssrutan.
+      if (BO_KRYSSRUTOR.indexOf(namn) !== -1 && !cell.getDataValidation()) cell.insertCheckboxes();
+      cell.setValue(v);
     });
 
     if (data.logg) {
