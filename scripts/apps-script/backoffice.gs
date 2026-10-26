@@ -73,7 +73,11 @@ function installera() {
     blad.getRange(1, kol).setValue(namn);
     rubriker.push(namn);
     if (BO_KRYSSRUTOR.indexOf(namn) !== -1 && blad.getMaxRows() > 1) {
-      blad.getRange(2, kol, blad.getMaxRows() - 1, 1).insertCheckboxes();
+      // Bara validering, inga värden. insertCheckboxes() skriver FALSE i
+      // varje cell, och då flyttar getLastRow() till arkets sista rad så att
+      // webhooken lägger nya leads längst ner. En tom cell visas som urkryssad.
+      const regel = SpreadsheetApp.newDataValidation().requireCheckbox().build();
+      blad.getRange(2, kol, blad.getMaxRows() - 1, 1).setDataValidation(regel);
     }
   });
   tilldelaId_(blad);
