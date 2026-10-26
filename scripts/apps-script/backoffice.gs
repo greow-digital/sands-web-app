@@ -93,6 +93,7 @@ function installera() {
     }
   });
   tilldelaId_(blad);
+  installeraTimer_();
   // Webhooken lägger nya leads efter getLastRow(). Flyttas den har något
   // skrivits under sista leaden, och då skulle nästa lead hamna fel.
   const sistaEfter = blad.getLastRow();
@@ -124,6 +125,22 @@ function stada() {
   }
   SpreadsheetApp.flush();
   Logger.log("Sista leaden ligger på rad " + sistaLead + ". Sista raden med innehåll är nu " + blad.getLastRow() + ".");
+}
+
+/**
+ * Varje minut: nya leads får ID och kryssrutor, även när ingen har
+ * backofficet öppet. Webhooken utlöser inget själv (skriptändringar startar
+ * inga utlösare), därför en tidsstyrd utlösare. Skapas bara en gång.
+ */
+function installeraTimer_() {
+  const finns = ScriptApp.getProjectTriggers().some(function (t) {
+    return t.getHandlerFunction() === "varjeMinut";
+  });
+  if (!finns) ScriptApp.newTrigger("varjeMinut").timeBased().everyMinutes(1).create();
+}
+
+function varjeMinut() {
+  tilldelaId_(bladet_());
 }
 
 /** Visar var webhooken kommer att lägga nästa lead. Ändrar ingenting. */

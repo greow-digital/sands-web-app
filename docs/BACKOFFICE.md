@@ -55,7 +55,10 @@ först:
    `scripts/apps-script/backoffice.gs`. Det är ett eget, fristående projekt.
    Sätt projektets tidszon till Europe/Stockholm (Projektinställningar).
    `installera()` lägger till kolumnerna ID, Anteckning, Påminnelse, Logg och
-   Arkiverad längst till höger och ger alla rader ett ID.
+   Arkiverad längst till höger, ger alla rader ett ID och startar en utlösare
+   som varje minut ger nya leads ID och kryssrutor (Bokad till Arkiverad).
+   Den går att köra igen utan risk, och den stoppar om sista raden i arket
+   skulle flyttas. `kontroll()` visar var nästa lead hamnar.
 2. **Miljövariabler i Vercel** (Production):
 
    | Namn | Värde |
