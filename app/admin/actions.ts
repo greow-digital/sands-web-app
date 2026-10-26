@@ -1,0 +1,116 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { hamtaLead, uppdateraLead } from "@/lib/backoffice/ark";
+import { flode, LOGG } from "@/lib/backoffice/floden";
+import { KRYSSRUTOR, SKRIVBARA, loggRad, type SkrivbartFalt } from "@/lib/backoffice/lead";
+import { avslutaSession, kontrollera, kravInloggning, skapaSession } from "@/lib/backoffice/session";
+import { korDagligt } from "@/lib/backoffice/dagligt";
+import { skickaFlode } from "@/lib/backoffice/utskick";
+
+export type Resultat = { ok?: string; fel?: string } | null;
+
+export async function loggaIn(_: Resultat, form: FormData): Promise<Resultat> {
+  const namn = kontrollera(String(form.get("losen") ?? ""));
+  if (!namn) {
+    // Bromsar gissningar utan att behöva lagra försök någonstans.
+    await new Promise((r) => setTimeout(r, 800));
+    return { fel: "Fel lösenord" };
+  }
+  await skapaSession(namn);
+  redirect("/admin");
+}
+
+export async function loggaUt() {
+  await avslutaSession();
+  redirect("/admin/logga-in");
+}
+
+// Kryssrutor som ger en egen rad i loggen när de kryssas i. Datumet i
+// loggen är det flödena räknar dagar från.
+const LOGG_VID_KRYSS: Partial<Record<SkrivbartFalt, string>> = {
+  bokad: LOGG.bokad,
+  offertSkickad: LOGG.offert,
+  offertAccepterad: LOGG.accepterad,
+  offertNekad: LOGG.nekad,
+  projektAvslutat: LOGG.avslutat,
+  arkiverad: LOGG.arkiverad,
+};
+
+/**
+ * Formuläret skickar med varje fälts ursprungsvärde ("fore:<fält>"). Bara
+ * fält som ändrats skrivs till arket, så en ändring som någon gjort direkt
+ * i arket under tiden skrivs inte över.
+ */
+export async function sparaLead(_: Resultat, form: FormData): Promise<Resultat> {
+  const vem = await kravInloggning();
+  const id = String(form.get("id"));
+  const andrat: Partial<Record<SkrivbartFalt, string | boolean>> = {};
+  const handelser: string[] = [];
+
+  for (const falt of SKRIVBARA) {
+    if (!form.has(`fore:${falt}`)) continue;
+    const fore = String(form.get(`fore:${falt}`));
+    if ((KRYSSRUTOR as readonly string[]).includes(falt)) {
+      const nu = form.get(falt) === "on";
+      if (String(nu) === fore) continue;
+      andrat[falt] = nu;
+      const h = LOGG_VID_KRYSS[falt];
+      if (h) handelser.push(nu ? h : `${h} (ångrat)`);
+    } else {
+      const nu = String(form.get(falt) ?? "").trim();
+      if (nu === fore) continue;
+      andrat[falt] = nu;
+      if (falt === "paminnelse") handelser.push(nu ? `Påminnelse ${nu}` : "Påminnelse borttagen");
+    }
+  }
+
+  const notering = String(form.get("notering") ?? "").trim();
+  if (notering) handelser.push(notering);
+
+  if (!Object.keys(andrat).length && !handelser.length) return { ok: "Inget att spara" };
+
+  try {
+    await uppdateraLead(id, andrat, handelser.length ? loggRad(vem, handelser.join(". ")) : undefined);
+  } catch (err) {
+    return { fel: err instanceof Error ? err.message : "Kunde inte spara" };
+  }
+  revalidatePath("/admin", "layout");
+  return { ok: "Sparat i arket" };
+}
+
+/** Snabbknapparna i leadvyn ("Ringt, inget svar" och liknande). */
+export async function snabbLogg(id: string, text: string, falt?: Partial<Record<SkrivbartFalt, boolean>>) {
+  const vem = await kravInloggning();
+  await uppdateraLead(id, falt ?? {}, loggRad(vem, text));
+  revalidatePath("/admin", "layout");
+}
+
+export async function skickaUtskick(id: string, flodeId: string): Promise<Resultat> {
+  const vem = await kravInloggning();
+  const f = flode(flodeId);
+  const lead = await hamtaLead(id);
+  if (!f || !lead) return { fel: "Hittar inte leaden eller flödet" };
+  try {
+    await skickaFlode(lead, f, vem);
+  } catch (err) {
+    return { fel: err instanceof Error ? err.message : "Utskicket misslyckades" };
+  }
+  revalidatePath("/admin", "layout");
+  return { ok: `Skickat till ${lead.epost}` };
+}
+
+export async function korDagligtNu(): Promise<Resultat> {
+  await kravInloggning();
+  try {
+    const r = await korDagligt();
+    revalidatePath("/admin", "layout");
+    return {
+      ok: `Klart. ${r.skickade} uppföljningar skickade, ${r.forslag} föreslagna. ${r.sammanfattning ? "Sammanfattningen är skickad." : "Ingen sammanfattning skickad."}`,
+      fel: r.misslyckade.length ? r.misslyckade.join("; ") : undefined,
+    };
+  } catch (err) {
+    return { fel: err instanceof Error ? err.message : "Jobbet misslyckades" };
+  }
+}

@@ -24,10 +24,12 @@ type IdleWindow = Window & {
  * data som inte paverkar sessions-/konverteringsdata.
  */
 export default function ThirdPartyScripts() {
-  // Datahygien: ladda inga marknads-/analysskript i Sanity Studio eller
-  // POC-sidor. De är interna och ska inte spåras eller smutsa ner GA4/Ads.
+  // Datahygien: ladda inga marknads-/analysskript i Sanity Studio, POC-sidor
+  // eller backofficet. De är interna och ska inte spåras eller smutsa ner
+  // GA4/Ads. I backofficet syns dessutom kunduppgifter, som Hotjar annars
+  // skulle spela in.
   const pathname = usePathname();
-  const excluded = /^\/(studio|projekt-sanity-poc)(\/|$)/.test(pathname);
+  const excluded = /^\/(studio|projekt-sanity-poc|admin)(\/|$)/.test(pathname);
 
   // gtag: efter load + idle.
   useEffect(() => {
