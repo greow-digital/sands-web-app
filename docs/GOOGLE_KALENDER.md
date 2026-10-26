@@ -5,6 +5,8 @@ Bokningen blir en händelse i en Google-kalender, och backofficet läser
 mötena därifrån: kortet "Kommande takkontroller" på översikten, nästa möte i
 leadvyns sidhuvud och mötestiden på pipelinekortet i kolumnen Takkontroll.
 
+- Sidan **Kalender** i menyn visar hela kalendern en vecka i taget, även
+  händelser som inte är takkontroller. Takkontroller länkar till leaden.
 - Lediga tider räknas från kalenderns freebusy: vardagar, pass om en timme
   mellan 08 och 17 (Stockholmstid), de närmaste 14 dagarna.
 - Händelsen får titeln `Takkontroll: <namn>, <adress>`, telefonnummer och
