@@ -42,6 +42,15 @@ arkets redigeringsutlösare (se `scripts/apps-script/ads-offline-import.gs`).
 
 ## Installation
 
+Flödet från sajten till arket får inte påverkas. Testa därför mot en kopia
+först:
+
+0. **Testa mot en kopia.** Arkiv > Gör en kopia av lead-arket och sätt
+   `ARK_ID` till kopians ID i steg 1. Prova backofficet där. När det fungerar:
+   notera arkets versionshistorik så att ni kan backa, byt `ARK_ID` till det
+   riktiga arket och kör `installera()` igen. Skicka direkt ett testlead från
+   sajten och kontrollera att raden hamnar precis under den senaste och att
+   notismejlet kommer som vanligt.
 1. **Apps Script-bryggan.** Följ stegen överst i
    `scripts/apps-script/backoffice.gs`. Det är ett eget, fristående projekt.
    Sätt projektets tidszon till Europe/Stockholm (Projektinställningar).
