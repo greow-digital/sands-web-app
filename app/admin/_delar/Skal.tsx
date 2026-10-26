@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { LayoutDashboard, LogOut, Mail, Search, SquareKanban, Users } from "lucide-react";
+import { CalendarDays, LayoutDashboard, LogOut, Mail, Search, SquareKanban, Users } from "lucide-react";
 import { loggaUt } from "../actions";
 
 type Antal = { attGora: number; utskick: number };
@@ -12,6 +12,7 @@ const MENY = [
   { href: "/admin", text: "Översikt", ikon: LayoutDashboard, antal: null },
   { href: "/admin/leads", text: "Leads", ikon: Users, antal: "attGora" },
   { href: "/admin/pipeline", text: "Pipeline", ikon: SquareKanban, antal: null },
+  { href: "/admin/kalender", text: "Kalender", ikon: CalendarDays, antal: null },
   { href: "/admin/utskick", text: "Utskick", ikon: Mail, antal: "utskick" },
 ] as const;
 
@@ -127,7 +128,7 @@ export default function Skal({ namn, demo, antal, children }: { namn: string; de
       </div>
 
       {/* Bottenmeny, mobil. Säljaren är ofta ute på tak. */}
-      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-5 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
         {MENY.map(({ href, text, ikon: Ikon, antal: nyckel }) => {
           const a = aktiv(path, href);
           const n = nyckel ? antal[nyckel] : 0;

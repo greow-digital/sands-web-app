@@ -30,6 +30,21 @@ export type Mote = {
   lank?: string;
 };
 
+/** Vilken händelse som helst i kalendern, för kalendervyn. */
+export type Handelse = {
+  id: string;
+  titel: string;
+  /** ISO-tid, eller "yyyy-MM-dd" för heldagshändelser. */
+  start: string;
+  /** Heldag: dagen efter sista dagen, som i Google Kalender. */
+  slut: string;
+  heldag: boolean;
+  /** Satt om händelsen är en takkontroll bokad från backofficet. */
+  leadId?: string;
+  plats?: string;
+  lank?: string;
+};
+
 export type Pass = { start: string; slut: string };
 
 type Upptagen = { start: number; slut: number };
@@ -38,6 +53,7 @@ interface Kalender {
   upptaget(fran: Date, till: Date): Promise<Upptagen[]>;
   skapa(h: { leadId: string; titel: string; beskrivning: string; plats: string; start: Date; slut: Date }): Promise<Mote>;
   lista(fran: Date, till: Date, leadId?: string): Promise<Mote[]>;
+  alla(fran: Date, till: Date): Promise<Handelse[]>;
 }
 
 /* Arbetstider för takkontroller. Pass om en timme, vardagar. */
@@ -99,6 +115,7 @@ type GoogleHandelse = {
   summary?: string;
   htmlLink?: string;
   status?: string;
+  location?: string;
   start?: { dateTime?: string; date?: string };
   end?: { dateTime?: string; date?: string };
   extendedProperties?: { private?: Record<string, string> };
@@ -109,6 +126,23 @@ function franGoogle(h: GoogleHandelse): Mote | null {
   const start = h.start?.dateTime;
   if (!leadId || !start || h.status === "cancelled") return null;
   return { id: h.id, leadId, titel: h.summary ?? "", start, slut: h.end?.dateTime ?? start, lank: h.htmlLink };
+}
+
+function handelseFranGoogle(h: GoogleHandelse): Handelse | null {
+  if (h.status === "cancelled") return null;
+  const heldag = !h.start?.dateTime;
+  const start = h.start?.dateTime ?? h.start?.date;
+  if (!start) return null;
+  return {
+    id: h.id,
+    titel: h.summary ?? "(utan titel)",
+    start,
+    slut: h.end?.dateTime ?? h.end?.date ?? start,
+    heldag,
+    leadId: h.extendedProperties?.private?.leadId,
+    plats: h.location,
+    lank: h.htmlLink,
+  };
 }
 
 function googleKalender(): Kalender {
@@ -141,34 +175,38 @@ function googleKalender(): Kalender {
       return mote;
     },
     async lista(fran, till, leadId) {
-      const moten: Mote[] = [];
-      let sida: string | undefined;
-      do {
-        const query: Record<string, string> = {
-          timeMin: fran.toISOString(),
-          timeMax: till.toISOString(),
-          singleEvents: "true",
-          orderBy: "startTime",
-          maxResults: "250",
-        };
-        // Utan lead-ID hämtas alla händelser och de utan leadId sorteras bort.
-        if (leadId) query.privateExtendedProperty = `leadId=${leadId}`;
-        if (sida) query.pageToken = sida;
-        const svar = await google<{ items?: GoogleHandelse[]; nextPageToken?: string }>(sokvag, { query });
-        for (const h of svar.items ?? []) {
-          const m = franGoogle(h);
-          if (m) moten.push(m);
-        }
-        sida = svar.nextPageToken;
-      } while (sida);
-      return moten;
+      return (await hamta(fran, till, leadId)).map(franGoogle).filter((m): m is Mote => m !== null);
+    },
+    async alla(fran, till) {
+      return (await hamta(fran, till)).map(handelseFranGoogle).filter((h): h is Handelse => h !== null);
     },
   };
+
+  async function hamta(fran: Date, till: Date, leadId?: string): Promise<GoogleHandelse[]> {
+    const handelser: GoogleHandelse[] = [];
+    let sida: string | undefined;
+    do {
+      const query: Record<string, string> = {
+        timeMin: fran.toISOString(),
+        timeMax: till.toISOString(),
+        singleEvents: "true",
+        orderBy: "startTime",
+        maxResults: "250",
+      };
+      // Utan lead-ID hämtas alla händelser. lista() sorterar bort de utan leadId.
+      if (leadId) query.privateExtendedProperty = `leadId=${leadId}`;
+      if (sida) query.pageToken = sida;
+      const svar = await google<{ items?: GoogleHandelse[]; nextPageToken?: string }>(sokvag, { query });
+      handelser.push(...(svar.items ?? []));
+      sida = svar.nextPageToken;
+    } while (sida);
+    return handelser;
+  }
 }
 
 /* Minneskalender för demoläget */
 
-let demoData: { moten: Mote[]; upptaget: (Upptagen & { titel: string })[] } | null = null;
+let demoData: { moten: Mote[]; upptaget: (Upptagen & { titel: string })[]; heldag: Handelse[] } | null = null;
 
 /** Klockslag i Stockholm, "yyyy-MM-dd" och timme, som Date. */
 export function stockholm(dag: string, timme: number, minut = 0): Date {
@@ -199,7 +237,8 @@ function demo() {
   const moten: Mote[] = [
     { id: "demo-mote-1", leadId: "demo0005", titel: "Takkontroll: Testperson Fem", start: stockholm(d3, 16).toISOString(), slut: stockholm(d3, 17).toISOString() },
   ];
-  demoData = { moten, upptaget };
+  const heldag: Handelse[] = [{ id: "demo-heldag-1", titel: "Materialleverans Bromma", start: d2, slut: vardagar(d2, 2)[1], heldag: true }];
+  demoData = { moten, upptaget, heldag };
   return demoData;
 }
 
@@ -222,6 +261,15 @@ function minneskalender(): Kalender {
         .filter((m) => !leadId || m.leadId === leadId)
         .sort((a, b) => a.start.localeCompare(b.start))
         .map((m) => ({ ...m }));
+    },
+    async alla(fran, till) {
+      const { moten, upptaget, heldag } = demo();
+      const iso = (t: number) => new Date(t).toISOString();
+      return [
+        ...upptaget.map((u, i) => ({ id: `demo-upptaget-${i}`, titel: u.titel, start: iso(u.start), slut: iso(u.slut), heldag: false })),
+        ...moten.map((m) => ({ ...m, heldag: false })),
+        ...heldag,
+      ].filter((h) => h.slut > (h.heldag ? idag(fran) : fran.toISOString()) && h.start < (h.heldag ? idag(till) : till.toISOString()));
     },
   };
 }
@@ -310,6 +358,11 @@ export const kommandeSakert = cache(async function kommandeSakert(
     return { moten: [], fel: err instanceof Error ? err.message : String(err), installd: true };
   }
 });
+
+/** Alla händelser i kalendern mellan fran och till, för kalendervyn. */
+export async function allaHandelser(fran: Date, till: Date): Promise<Handelse[]> {
+  return kravKalender().alla(fran, till);
+}
 
 /** Möten som börjar inom så många dagar. */
 export function inomDagar(moten: Mote[], dagar: number, nu = new Date()): Mote[] {
