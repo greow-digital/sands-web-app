@@ -39,6 +39,17 @@ const BO_TIDSZON = "Europe/Stockholm";
 const BO_NYA_KOLUMNER = ["ID", "Anteckning", "Påminnelse", "Logg", "Arkiverad"];
 const BO_KRYSSRUTOR = ["Arkiverad"];
 
+// Kryssrutor som varje ny lead ska ha. Webhooken skriver dem inte, så
+// bryggan lägger in dem när raden får sitt ID.
+const BO_RADENS_KRYSSRUTOR = [
+  "Bokad",
+  "Offert skickad",
+  "Offet accepterad",
+  "Offert nekad",
+  "Projekt avslutat",
+  "Arkiverad",
+];
+
 // Kolumner som får skrivas från backofficet. Allt annat (tidpunkt, källa,
 // klick-id, transkript) är läsbart men låst.
 const BO_SKRIVBARA = [
@@ -190,7 +201,7 @@ function uppdatera_(data) {
       }
       const cell = blad.getRange(radNr, kol);
       // Rader som kommit in efter installera() saknar kryssrutan.
-      if (BO_KRYSSRUTOR.indexOf(namn) !== -1 && !cell.getDataValidation()) cell.insertCheckboxes();
+      if (BO_RADENS_KRYSSRUTOR.indexOf(namn) !== -1 && !cell.getDataValidation()) cell.insertCheckboxes();
       cell.setValue(v);
     });
 
@@ -242,10 +253,16 @@ function tilldelaId_(blad) {
     if (!nya.length) return;
     omr.setValues(idn);
     // Nya leads får sina kryssrutor här. Raden har redan innehåll, så sista
-    // raden i arket flyttas inte.
-    BO_KRYSSRUTOR.forEach(function (namn) {
+    // raden i arket flyttas inte. Bara tomma celler utan kryssruta röras:
+    // insertCheckboxes() sätter cellen till urkryssad, och en bock som redan
+    // finns får aldrig försvinna.
+    BO_RADENS_KRYSSRUTOR.forEach(function (namn) {
       const kol = rubriker.indexOf(namn) + 1;
-      if (kol) nya.forEach(function (rad) { blad.getRange(rad, kol).insertCheckboxes(); });
+      if (!kol) return;
+      nya.forEach(function (rad) {
+        const cell = blad.getRange(rad, kol);
+        if (cell.getValue() === "" && !cell.getDataValidation()) cell.insertCheckboxes();
+      });
     });
   } finally {
     lock.releaseLock();
