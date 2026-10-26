@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { hamtaLead, uppdateraLead } from "@/lib/backoffice/ark";
 import { flode, LOGG } from "@/lib/backoffice/floden";
 import { KRYSSRUTOR, SKRIVBARA, loggRad, type SkrivbartFalt } from "@/lib/backoffice/lead";
+import { flytt, type Steg } from "@/lib/backoffice/crm";
 import { avslutaSession, kontrollera, kravInloggning, skapaSession } from "@/lib/backoffice/session";
 import { korDagligt } from "@/lib/backoffice/dagligt";
 import { skickaFlode } from "@/lib/backoffice/utskick";
@@ -85,6 +86,47 @@ export async function snabbLogg(id: string, text: string, falt?: Partial<Record<
   const vem = await kravInloggning();
   await uppdateraLead(id, falt ?? {}, loggRad(vem, text));
   revalidatePath("/admin", "layout");
+}
+
+/**
+ * Pipelinen och stegväljaren. Loggraden börjar med det högsta steget, så
+ * att flödena (som letar efter "Offert skickad" först på raden) ser det.
+ */
+export async function flyttaSteg(id: string, till: Exclude<Steg, "ny">): Promise<Resultat> {
+  const vem = await kravInloggning();
+  const lead = await hamtaLead(id);
+  if (!lead) return { fel: "Hittar inte leaden" };
+  const andrat = flytt(lead, till);
+  const handelser = Object.entries(andrat)
+    .reverse()
+    .map(([falt, nu]) => {
+      const h = LOGG_VID_KRYSS[falt as SkrivbartFalt]!;
+      return nu ? h : `${h} (ångrat)`;
+    });
+  if (!handelser.length) {
+    // Från Ny till Kontaktad ändras ingen kryssruta, det är loggraden som gör det.
+    if (till !== "kontaktad" || lead.logg.length) return { ok: "Redan i det steget" };
+    handelser.push("Kontaktad");
+  }
+  try {
+    await uppdateraLead(id, andrat, loggRad(vem, handelser.join(". ")));
+  } catch (err) {
+    return { fel: err instanceof Error ? err.message : "Kunde inte spara" };
+  }
+  revalidatePath("/admin", "layout");
+  return { ok: "Flyttad" };
+}
+
+export async function sattPaminnelse(id: string, datum: string): Promise<Resultat> {
+  const vem = await kravInloggning();
+  if (datum && !/^\d{4}-\d{2}-\d{2}$/.test(datum)) return { fel: "Ogiltigt datum" };
+  try {
+    await uppdateraLead(id, { paminnelse: datum }, loggRad(vem, datum ? `Påminnelse ${datum}` : "Påminnelse borttagen"));
+  } catch (err) {
+    return { fel: err instanceof Error ? err.message : "Kunde inte spara" };
+  }
+  revalidatePath("/admin", "layout");
+  return { ok: datum ? `Påminnelse ${datum}` : "Påminnelse borttagen" };
 }
 
 export async function skickaUtskick(id: string, flodeId: string): Promise<Resultat> {

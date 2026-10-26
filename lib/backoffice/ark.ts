@@ -7,6 +7,7 @@
   utveckling och flödestester. Det är avstängt i produktion och när
   BACKOFFICE_SCRIPT_URL finns.
 */
+import { cache } from "react";
 import { RUBRIK, franRad, type Lead, type SkrivbartFalt } from "./lead";
 import { demoLista, demoUppdatera } from "./demo";
 
@@ -37,8 +38,8 @@ async function anropa<T>(body: Record<string, unknown>): Promise<T> {
   return data as T;
 }
 
-/** Alla leads, nyast först. */
-export async function hamtaLeads(): Promise<Lead[]> {
+/** Alla leads, nyast först. Läses en gång per sidvisning (sidomenyn och sidan delar). */
+export const hamtaLeads = cache(async function hamtaLeads(): Promise<Lead[]> {
   const rader = demolage()
     ? demoLista()
     : (await anropa<{ leads: Record<string, unknown>[] }>({ action: "lista" })).leads;
@@ -46,7 +47,7 @@ export async function hamtaLeads(): Promise<Lead[]> {
     .map(franRad)
     .filter((l) => l.id)
     .sort((a, b) => b.tidpunkt.localeCompare(a.tidpunkt));
-}
+});
 
 export async function hamtaLead(id: string): Promise<Lead | undefined> {
   return (await hamtaLeads()).find((l) => l.id === id);
