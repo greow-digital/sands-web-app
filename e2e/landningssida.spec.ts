@@ -16,12 +16,12 @@ test.describe("Landningssidan /lp", () => {
     // Inget riktpris på landningssidan (beslut 20 okt 2026).
     await expect(formular.getByText(/riktpris/i)).toHaveCount(0);
 
-    // Två synliga fält (26 okt 2026): e-post och fritext ligger bakom länkar,
-    // och betyg plus ett kundcitat står ovanför knappen.
-    await expect(formular.locator('input[type="email"]')).toHaveCount(0);
+    // Namn, telefon och e-post syns, fritexten ligger bakom en länk, och
+    // betyg plus ett kundcitat står ovanför knappen (26 okt 2026).
+    await expect(formular.locator('input[type="email"]')).toBeVisible();
     await expect(formular.locator("textarea")).toHaveCount(0);
     await expect(formular.getByText(/av 5 · \d+ omdömen/)).toBeVisible();
-    await expect(formular.getByText("Bo, Spånga")).toBeVisible();
+    await expect(formular.getByText("Hasse, Sollentuna")).toBeVisible();
 
     // Formulärfixen 22 okt 2026: namnfältet och knappen syns direkt.
     await page.waitForTimeout(900);
@@ -61,11 +61,10 @@ test.describe("Landningssidan /lp", () => {
     const formular = page.locator("#formular");
     await formular.locator('input[type="text"]').first().fill("Test Testsson");
 
-    // Utan telefon pekar felet mot e-postlänken.
+    // Utan telefon och e-post stoppas formuläret.
     await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
-    await expect(formular.getByText("Ange telefonnummer, eller välj e-post nedan")).toBeVisible();
+    await expect(formular.getByText("Fyll i telefon eller e-post, du väljer själv")).toBeVisible();
 
-    await formular.getByRole("button", { name: "Hellre e-post?" }).click();
     await formular.locator('input[type="email"]').fill("test@example.com");
     await formular.getByRole("button", { name: "+ Lägg till ett meddelande (valfritt)" }).click();
     await formular.locator("textarea").fill("Kupor på baksidan");

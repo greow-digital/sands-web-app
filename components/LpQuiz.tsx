@@ -395,9 +395,8 @@ export default function LpQuiz({
             // många leads vill skriva något själva, och svaren från flödet
             // slås ihop med texten i LeadForm.
             showMessage
-            // Två synliga fält i stället för fyra (namn och telefon). E-post
-            // och fritext finns kvar bakom länkar.
-            epostSomLank
+            // Namn, telefon och e-post syns (Sands vill ha e-post, 26 okt
+            // 2026). Fritexten ligger bakom en länk.
             meddelandeSomLank
             ovanforKnapp={
               fortroende && (

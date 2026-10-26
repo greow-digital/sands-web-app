@@ -491,20 +491,6 @@ export default function LeadForm({
                 asterisk säger redan att de är valfria, och den som lämnar
                 båda tomma får kravet som felmeddelande precis när det
                 behövs. */}
-            {showMessage && !visaMeddelande && (
-              <div className="col-span-full">
-                <button
-                  type="button"
-                  className="text-xs font-semibold text-[#2B74FC] hover:underline"
-                  onClick={() => {
-                    setVisaMeddelande(true);
-                    setTimeout(() => document.getElementById(fid("message"))?.focus(), 0);
-                  }}
-                >
-                  + Lägg till ett meddelande (valfritt)
-                </button>
-              </div>
-            )}
             {showMessage && visaMeddelande && (
               <div className="col-span-full">
                 <label
@@ -638,6 +624,21 @@ export default function LeadForm({
             ? "Skickar..."
             : ctaText || "Få prisförslag"}
         </button>
+
+        {/* Länken ligger under knappen, så att knappen hamnar högre upp på
+            mobil. Fältet öppnas ovanför knappen när man trycker. */}
+        {showMessage && !visaMeddelande && (
+          <button
+            type="button"
+            className="block mx-auto text-xs font-semibold text-[#2B74FC] hover:underline"
+            onClick={() => {
+              setVisaMeddelande(true);
+              setTimeout(() => document.getElementById(fid("message"))?.focus(), 0);
+            }}
+          >
+            + Lägg till ett meddelande (valfritt)
+          </button>
+        )}
 
         {notBindingNote && (
           <p className="text-xs text-gray-500 text-center">
