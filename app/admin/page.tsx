@@ -8,10 +8,10 @@ import StatusMarke from "./_delar/StatusMarke";
 export const dynamic = "force-dynamic";
 
 const VYER = {
+  alla: "Alla",
   "att-gora": "Att göra",
   aktiva: "Pågående",
   vunna: "Accepterade",
-  alla: "Alla",
   arkiv: "Arkiv",
 } as const;
 
@@ -42,7 +42,7 @@ function sok(leads: Lead[], q: string) {
 export default async function Leads({ searchParams }: { searchParams: Promise<{ vy?: string; q?: string }> }) {
   await kravInloggning();
   const { vy: vyParam, q = "" } = await searchParams;
-  const vy: Vy = vyParam && vyParam in VYER ? (vyParam as Vy) : "att-gora";
+  const vy: Vy = vyParam && vyParam in VYER ? (vyParam as Vy) : "alla";
 
   let leads: Lead[];
   try {
