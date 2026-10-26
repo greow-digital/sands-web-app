@@ -21,6 +21,13 @@ function hemlighet(): string {
   throw new Error("BACKOFFICE_SESSION_SECRET saknas eller är kortare än 32 tecken");
 }
 
+const DEMO_LOSEN = "demo-losen";
+
+/** Lösenordet i demoläget, eller null när demoläget är av eller riktiga användare finns. */
+export function demoLosen(): string | null {
+  return demolage() && anvandare()[0]?.losen === DEMO_LOSEN ? DEMO_LOSEN : null;
+}
+
 function anvandare(): { namn: string; losen: string }[] {
   const lista = (process.env.BACKOFFICE_ANVANDARE ?? "")
     .split(",")
@@ -31,7 +38,7 @@ function anvandare(): { namn: string; losen: string }[] {
       return { namn: p.slice(0, i).trim(), losen: p.slice(i + 1) };
     })
     .filter((a) => a.namn && a.losen.length >= 8);
-  if (!lista.length && demolage()) return [{ namn: "Demo", losen: "demo-losen" }];
+  if (!lista.length && demolage()) return [{ namn: "Demo", losen: DEMO_LOSEN }];
   return lista;
 }
 
