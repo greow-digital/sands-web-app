@@ -75,17 +75,25 @@ export function flytt(lead: Lead, till: Exclude<Steg, "ny">): Partial<Record<Skr
   return andrat;
 }
 
-/* Belopp. Offertvärdet är fritext i arket ("180 000", "180000 kr"). */
+/*
+  Belopp. Offertvärdet är fritext i arket: tal, "180 000", "192 799,00",
+  "180 000 kr" och ibland en kommentar ("inget svar"), som räknas som 0.
+*/
 
 export function varde(lead: Lead): number {
-  const n = Number(lead.offertvarde.replace(/[^\d]/g, ""));
-  return Number.isFinite(n) ? n : 0;
+  const s = lead.offertvarde
+    .toLowerCase()
+    .replace(/\s|kr|sek|:-/g, "")
+    // Ören bort ("192799,00"). Tre siffror efter skiljetecknet är tusental ("180.000").
+    .replace(/[.,]\d{1,2}$/, "")
+    .replace(/[.,]/g, "");
+  return /^\d+$/.test(s) ? Number(s) : 0;
 }
 
 const KR = new Intl.NumberFormat("sv-SE", { maximumFractionDigits: 0 });
 
 export function kronor(n: number): string {
-  if (n >= 1e6) return `${(n / 1e6).toLocaleString("sv-SE", { maximumFractionDigits: 1 })} mkr`;
+  if (n >= 1e7) return `${(n / 1e6).toLocaleString("sv-SE", { maximumFractionDigits: 1 })} mkr`;
   return `${KR.format(n)} kr`;
 }
 
@@ -171,6 +179,30 @@ export function nyckeltal(leads: Lead[], nu = new Date()) {
     svarstidMinuter: median,
     perDag,
   };
+}
+
+/*
+  Konverteringstratten. Ett steg räknas som nått om det eller något senare
+  steg är ikryssat, eftersom arket ibland bara har den sista rutan ikryssad.
+  Arkiverade leads som aldrig blev bokade är skräp och räknas inte.
+*/
+
+export type TrattSteg = { namn: string; antal: number; andel: number | null };
+
+export function tratt(leads: Lead[], dagar?: number, nu = new Date()): TrattSteg[] {
+  const accepterad = (l: Lead) => l.offertAccepterad || l.projektAvslutat;
+  const offert = (l: Lead) => l.offertSkickad || l.offertNekad || accepterad(l);
+  const bokad = (l: Lead) => l.bokad || offert(l);
+  const urval = leads.filter((l) => (!l.arkiverad || bokad(l)) && (dagar == null || dagarSedan(l.tidpunkt, nu) < dagar));
+
+  const antal = [urval.length, urval.filter(bokad).length, urval.filter(offert).length, urval.filter(accepterad).length];
+  const namn = ["Leads", "Takkontroll bokad", "Offert skickad", "Offert accepterad"];
+  return antal.map((n, i) => ({
+    namn: namn[i],
+    antal: n,
+    // Andel av föregående steg, i procent.
+    andel: i === 0 ? null : antal[i - 1] ? Math.round((100 * n) / antal[i - 1]) : null,
+  }));
 }
 
 /** Fördelning per källa (sidan leaden kom från), senaste 30 dagarna. */

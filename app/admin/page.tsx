@@ -2,12 +2,13 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { ArrowUpRight, Clock, FileText, TrendingDown, TrendingUp, Trophy, Users } from "lucide-react";
 import { hamtaLeads } from "@/lib/backoffice/ark";
-import { PIPELINE, STEG_KORT, attGora, kallor, kronor, nyckeltal, prioritet, relativ, varde, visningsnamn } from "@/lib/backoffice/crm";
+import { PIPELINE, STEG_KORT, attGora, kallor, kronor, nyckeltal, prioritet, relativ, tratt, varde, visningsnamn } from "@/lib/backoffice/crm";
 import { status, stockholmTid, type Lead } from "@/lib/backoffice/lead";
 import { kravInloggning } from "@/lib/backoffice/session";
 import Avatar from "./_delar/Avatar";
 import FokusRad from "./_delar/FokusRad";
 import StatusMarke, { STATUS_FARG } from "./_delar/StatusMarke";
+import Tratt from "./_delar/Tratt";
 import { ArkFel, Kort, KortRubrik, RingKnapp, Sidrubrik, Tom } from "./_delar/Ui";
 
 export const dynamic = "force-dynamic";
@@ -179,6 +180,10 @@ export default async function Oversikt({ searchParams }: { searchParams: Promise
         </div>
 
         <div className="min-w-0 space-y-6">
+          <Kort>
+            <Tratt totalt={tratt(leads)} manad={tratt(leads, 30)} />
+          </Kort>
+
           <Kort>
             <KortRubrik titel="Pipeline" under="Antal och offertvärde per steg" />
             <ul className="space-y-3 px-5 py-4">
