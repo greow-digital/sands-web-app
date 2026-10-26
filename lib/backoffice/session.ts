@@ -78,6 +78,8 @@ export async function avslutaSession() {
 
 /** Inloggad användares namn, eller null. */
 export async function inloggad(): Promise<string | null> {
+  // Demoläget visar bara påhittad data, så där behövs ingen inloggning.
+  if (demoLosen()) return "Demo";
   const varde = (await cookies()).get(KAKA)?.value;
   if (!varde) return null;
   const [data, sig] = varde.split(".");

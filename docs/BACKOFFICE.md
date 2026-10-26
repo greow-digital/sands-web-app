@@ -78,7 +78,7 @@ först:
 BACKOFFICE_DEMO=1 npm run dev
 ```
 
-Öppna `/admin` och logga in med `demo-losen`. Demoläget använder påhittade
+Öppna `/admin`, i demoläget behövs ingen inloggning. Det använder påhittade
 leads i minnet, skriver inget till arket och skickar inga mejl. Det går inte
 att slå på i Vercel Production.
 

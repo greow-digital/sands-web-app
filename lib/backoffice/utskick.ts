@@ -22,14 +22,13 @@ export function renderaUtskick(lead: Lead, f: Flode, plainText = false) {
 }
 
 async function skicka(opts: { to: string[]; subject: string; html: string; text: string; tagg: string }) {
-  const nyckel = process.env.RESEND_API_KEY;
-  if (!nyckel) {
-    if (demolage()) {
-      console.info(`[demo] mejl till ${opts.to.join(", ")}: ${opts.subject}`);
-      return;
-    }
-    throw new Error("RESEND_API_KEY saknas");
+  // Demoläget skickar aldrig, även om Preview har en Resend-nyckel.
+  if (demolage()) {
+    console.info(`[demo] mejl till ${opts.to.join(", ")}: ${opts.subject}`);
+    return;
   }
+  const nyckel = process.env.RESEND_API_KEY;
+  if (!nyckel) throw new Error("RESEND_API_KEY saknas");
   const { error } = await new Resend(nyckel).emails.send({
     from: FRAN(),
     to: opts.to,
