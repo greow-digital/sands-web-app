@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CheckCircle, Phone, Clock, FileText, HardHat, Star } from "lucide-react";
 import { kontaktperson } from "@/lib/company";
+import BokaTakkontroll from "@/components/BokaTakkontroll";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/tack" },
@@ -30,8 +31,22 @@ export default function TackPage() {
           }}
         />
 
+        {/* Bokningsläget efter offertflödet på landningssidorna: med en
+            biljett från /api/lead är sidan en bokningssida, och tackdelen
+            nedan döljs. Skriptet sätter data-bokning på omslaget innan
+            sidan ritas, så att tacksidan inte blinkar förbi. Därav
+            suppressHydrationWarning, som bara gäller omslaget självt.
+            Konverteringen ovan påverkas inte. */}
+        <div className="tack-sida" suppressHydrationWarning>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('sands_lead_bokning'))document.currentScript.parentElement.setAttribute('data-bokning','')}catch(e){}`,
+          }}
+        />
+        <BokaTakkontroll />
+
         {/* Hero */}
-        <section className="py-20 lg:py-28">
+        <section className="tack-vanlig py-20 lg:py-28">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div
               className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
@@ -73,7 +88,7 @@ export default function TackPage() {
 
         {/* Vad händer nu? */}
         <section
-          className="py-20 lg:py-24 border-t border-gray-100"
+          className="tack-vanlig py-20 lg:py-24 border-t border-gray-100"
           style={{ backgroundColor: "#F8F9FB" }}
         >
           <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -201,6 +216,7 @@ export default function TackPage() {
             </div>
           </div>
         </section>
+        </div>
       </main>
       <Footer />
     </>

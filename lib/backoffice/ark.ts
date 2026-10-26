@@ -38,8 +38,8 @@ async function anropa<T>(body: Record<string, unknown>): Promise<T> {
   return data as T;
 }
 
-/** Alla leads, nyast först. Läses en gång per sidvisning (sidomenyn och sidan delar). */
-export const hamtaLeads = cache(async function hamtaLeads(): Promise<Lead[]> {
+/** Alla leads, nyast först, direkt från arket varje gång. */
+export async function lasLeads(): Promise<Lead[]> {
   const rader = demolage()
     ? demoLista()
     : (await anropa<{ leads: Record<string, unknown>[] }>({ action: "lista" })).leads;
@@ -47,7 +47,10 @@ export const hamtaLeads = cache(async function hamtaLeads(): Promise<Lead[]> {
     .map(franRad)
     .filter((l) => l.id)
     .sort((a, b) => b.tidpunkt.localeCompare(a.tidpunkt));
-});
+}
+
+/** Som lasLeads, men en gång per sidvisning (sidomenyn och sidan delar). */
+export const hamtaLeads = cache(lasLeads);
 
 export async function hamtaLead(id: string): Promise<Lead | undefined> {
   return (await hamtaLeads()).find((l) => l.id === id);

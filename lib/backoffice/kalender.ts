@@ -168,7 +168,9 @@ function googleKalender(): Kalender {
 
 /* Minneskalender för demoläget */
 
-let demoData: { moten: Mote[]; upptaget: (Upptagen & { titel: string })[] } | null = null;
+type DemoData = { moten: Mote[]; upptaget: (Upptagen & { titel: string })[] };
+// På globalThis av samma skäl som raderna i demo.ts.
+const delat = globalThis as unknown as { __sandsDemoKalender?: DemoData };
 
 /** Klockslag i Stockholm, "yyyy-MM-dd" och timme, som Date. */
 export function stockholm(dag: string, timme: number, minut = 0): Date {
@@ -188,7 +190,7 @@ function vardagar(fran: string, antal: number): string[] {
 }
 
 function demo() {
-  if (demoData) return demoData;
+  if (delat.__sandsDemoKalender) return delat.__sandsDemoKalender;
   // Några upptagna tider så att väljaren visar luckor, och ett bokat möte
   // för Testperson Fem (som är bokad i demo.ts).
   const [d1, d2, d3] = vardagar(idag(new Date(Date.now() + 864e5)), 3);
@@ -199,8 +201,7 @@ function demo() {
   const moten: Mote[] = [
     { id: "demo-mote-1", leadId: "demo0005", titel: "Takkontroll: Testperson Fem", start: stockholm(d3, 16).toISOString(), slut: stockholm(d3, 17).toISOString() },
   ];
-  demoData = { moten, upptaget };
-  return demoData;
+  return (delat.__sandsDemoKalender = { moten, upptaget });
 }
 
 function minneskalender(): Kalender {
@@ -286,6 +287,19 @@ export async function boka({ lead, start, slut }: { lead: Lead; start: Date; slu
     start,
     slut,
   });
+}
+
+export type LedigDag = { dag: string; rubrik: string; tider: { start: string; tid: string }[] };
+
+/** Passen grupperade per dag, för tidsväljarna i backofficet och på /tack. */
+export function perDag(pass: Pass[]): LedigDag[] {
+  const dagar: LedigDag[] = [];
+  for (const p of pass) {
+    const rubrik = dagText(p.start);
+    if (dagar.at(-1)?.rubrik !== rubrik) dagar.push({ dag: stockholmTid(new Date(p.start)).slice(0, 10), rubrik, tider: [] });
+    dagar.at(-1)!.tider.push({ start: p.start, tid: klockslag(p.start) });
+  }
+  return dagar;
 }
 
 /** Bokade takkontroller mellan fran och till, tidigast först. Med leadId bara den leadens. */

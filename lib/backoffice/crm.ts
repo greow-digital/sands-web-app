@@ -4,7 +4,7 @@
   räknar likadant.
 */
 import { foreslagna, orörda, paminnelserIdag, type Flode } from "./floden";
-import { dagarSedan, idag, status, stockholmTid, type Lead, type SkrivbartFalt, type Status } from "./lead";
+import { dagarSedan, idag, sandsLogg, status, stockholmTid, type Lead, type SkrivbartFalt, type Status } from "./lead";
 
 /* Att göra. Samma urval som i sammanfattningsmejlet, plus nya från i dag. */
 
@@ -158,8 +158,9 @@ export function nyckeltal(leads: Lead[], nu = new Date()) {
 
   // Svarstid: från att leaden kom in till första raden i loggen, senaste 30 dagarna.
   const svar = aktiva
-    .filter((l) => inom(l, 0, 30) && l.logg[0]?.tid)
-    .map((l) => minuter(l.logg[0].tid) - minuter(l.tidpunkt))
+    .map((l) => ({ l, forsta: sandsLogg(l)[0]?.tid }))
+    .filter(({ l, forsta }) => inom(l, 0, 30) && forsta)
+    .map(({ l, forsta }) => minuter(forsta!) - minuter(l.tidpunkt))
     .filter((m) => m >= 0)
     .sort((a, b) => a - b);
   const median = svar.length ? svar[Math.floor(svar.length / 2)] : null;
