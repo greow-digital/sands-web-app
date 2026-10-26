@@ -4,13 +4,20 @@
   aldrig hamna i klientkoden.
 
   BACKOFFICE_DEMO=1 kör mot exempeldata i minnet i stället, för lokal
-  utveckling och flödestester. Det är avstängt i produktion.
+  utveckling och flödestester. Det är avstängt i produktion och när
+  BACKOFFICE_SCRIPT_URL finns.
 */
 import { RUBRIK, franRad, type Lead, type SkrivbartFalt } from "./lead";
 import { demoLista, demoUppdatera } from "./demo";
 
 export function demolage(): boolean {
-  return process.env.BACKOFFICE_DEMO === "1" && process.env.VERCEL_ENV !== "production";
+  // Finns en riktig brygga inställd vinner den, även om BACKOFFICE_DEMO
+  // ligger kvar. Annars är det lätt att tro att man testar mot arket.
+  return (
+    process.env.BACKOFFICE_DEMO === "1" &&
+    process.env.VERCEL_ENV !== "production" &&
+    !process.env.BACKOFFICE_SCRIPT_URL
+  );
 }
 
 async function anropa<T>(body: Record<string, unknown>): Promise<T> {
