@@ -29,13 +29,17 @@ export function demoLosen(): string | null {
 }
 
 function anvandare(): { namn: string; losen: string }[] {
+  // Citattecken runt hela värdet och mellanslag runt kolon följer lätt med
+  // när värdet klistras in i Vercel. De tas bort så att inloggningen ändå går.
   const lista = (process.env.BACKOFFICE_ANVANDARE ?? "")
+    .trim()
+    .replace(/^["']|["']$/g, "")
     .split(",")
     .map((p) => p.trim())
     .filter(Boolean)
     .map((p) => {
       const i = p.indexOf(":");
-      return { namn: p.slice(0, i).trim(), losen: p.slice(i + 1) };
+      return { namn: p.slice(0, i).trim(), losen: p.slice(i + 1).trim() };
     })
     .filter((a) => a.namn && a.losen.length >= 8);
   if (!lista.length && demolage()) return [{ namn: "Demo", losen: DEMO_LOSEN }];
@@ -52,8 +56,14 @@ function signera(data: string) {
   return createHmac("sha256", hemlighet()).update(data).digest("base64url");
 }
 
+/** Visas på inloggningssidan när ingen kan logga in alls. */
+export function saknarAnvandare(): boolean {
+  return anvandare().length === 0;
+}
+
 /** Namnet på användaren om lösenordet stämmer. */
 export function kontrollera(losen: string): string | null {
+  losen = losen.trim();
   // Jämför mot alla så att svarstiden inte avslöjar något.
   let traff: string | null = null;
   for (const a of anvandare()) if (lika(losen, a.losen)) traff = a.namn;
