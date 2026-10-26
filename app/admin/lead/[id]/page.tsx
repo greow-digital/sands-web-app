@@ -18,10 +18,12 @@ import {
 import { hamtaLead, hamtaLeads } from "@/lib/backoffice/ark";
 import { attGora, kallaNamn, kronor, relativ, varde, visningsnamn } from "@/lib/backoffice/crm";
 import { FLODEN, LOGG, redanSkickat } from "@/lib/backoffice/floden";
+import { kommandeSakert, moteText } from "@/lib/backoffice/kalender";
 import { status, type LoggRad } from "@/lib/backoffice/lead";
 import { kravInloggning } from "@/lib/backoffice/session";
 import { kontaktperson, nap } from "@/lib/company";
 import Avatar from "../../_delar/Avatar";
+import BokaTid from "../../_delar/BokaTid";
 import LeadFormular from "../../_delar/LeadFormular";
 import Notering from "../../_delar/Notering";
 import PaminnelseVal from "../../_delar/PaminnelseVal";
@@ -67,6 +69,8 @@ export default async function LeadSida({ params }: { params: Promise<{ id: strin
   const s = status(lead);
   const orsaker = attGora(await hamtaLeads()).get(lead.id) ?? [];
   const v = varde(lead);
+  const kal = await kommandeSakert();
+  const nasta = kal.moten.find((m) => m.leadId === lead.id);
 
   return (
     <div className="space-y-6">
@@ -91,6 +95,19 @@ export default async function LeadSida({ params }: { params: Promise<{ id: strin
                 .filter(Boolean)
                 .join(" · ")}
             </p>
+            {nasta && (
+              <p className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-700">
+                <CalendarCheck className="size-3.5" />
+                {nasta.lank ? (
+                  <a href={nasta.lank} target="_blank" rel="noreferrer" className="hover:underline">
+                    Takkontroll {moteText(nasta)}
+                  </a>
+                ) : (
+                  <>Takkontroll {moteText(nasta)}</>
+                )}
+              </p>
+            )}
+            {kal.fel && <p className="mt-2 text-xs text-slate-400">Kalendern gick inte att läsa: {kal.fel}</p>}
             {orsaker.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-1.5">
                 {orsaker.map((o, i) => (
@@ -103,6 +120,7 @@ export default async function LeadSida({ params }: { params: Promise<{ id: strin
           </div>
           <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
             <RingKnapp telefon={lead.telefon} text />
+            <BokaTid id={lead.id} installd={kal.installd} />
             {lead.epost && (
               <a
                 href={`mailto:${lead.epost}`}

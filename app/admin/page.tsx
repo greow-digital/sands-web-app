@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowUpRight, Clock, FileText, TrendingDown, TrendingUp, Trophy, Users } from "lucide-react";
+import { ArrowUpRight, CalendarCheck, Clock, FileText, TrendingDown, TrendingUp, Trophy, Users } from "lucide-react";
 import { hamtaLeads } from "@/lib/backoffice/ark";
 import { PIPELINE, STEG_KORT, attGora, kallor, kronor, nyckeltal, prioritet, relativ, tratt, varde, visningsnamn } from "@/lib/backoffice/crm";
+import { dagText, inomDagar, klockslag, kommandeSakert } from "@/lib/backoffice/kalender";
 import { status, stockholmTid, type Lead } from "@/lib/backoffice/lead";
 import { kravInloggning } from "@/lib/backoffice/session";
 import Avatar from "./_delar/Avatar";
@@ -71,6 +72,9 @@ export default async function Oversikt({ searchParams }: { searchParams: Promise
   const kalla = kallor(leads).slice(0, 5);
   const kallaMax = Math.max(1, ...kalla.map((k) => k.antal));
   const senaste = leads.filter((l) => !l.arkiverad).slice(0, 5);
+  const kal = await kommandeSakert();
+  const perId = new Map(leads.map((l) => [l.id, l]));
+  const moten = inomDagar(kal.moten, 14);
 
   return (
     <div className="space-y-6">
@@ -180,6 +184,43 @@ export default async function Oversikt({ searchParams }: { searchParams: Promise
         </div>
 
         <div className="min-w-0 space-y-6">
+          <Kort>
+            <KortRubrik titel="Kommande takkontroller" under={kal.fel ? `Kalendern gick inte att läsa: ${kal.fel}` : "Närmaste två veckorna, från kalendern"} />
+            {moten.length ? (
+              <ul className="divide-y divide-slate-100">
+                {moten.slice(0, 6).map((m) => {
+                  const l = perId.get(m.leadId);
+                  return (
+                    <li key={m.id} className="relative flex items-center gap-3 px-5 py-3 hover:bg-slate-50/70">
+                      <span className="grid w-12 shrink-0 place-items-center rounded-lg bg-indigo-50 py-1 text-indigo-700">
+                        <span className="text-sm font-bold tabular-nums">{klockslag(m.start)}</span>
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <Link href={`/admin/lead/${m.leadId}`} className="block truncate text-sm font-semibold after:absolute after:inset-0">
+                          {l ? visningsnamn(l) : m.titel.replace(/^Takkontroll: /, "")}
+                        </Link>
+                        <p className="truncate text-xs text-slate-500 first-letter:uppercase">
+                          {[dagText(m.start), l?.adress].filter(Boolean).join(" · ")}
+                        </p>
+                      </div>
+                      {l && (
+                        <span className="relative z-10">
+                          <RingKnapp telefon={l.telefon} />
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className="flex items-center gap-3 px-5 py-4 text-sm text-slate-500">
+                <CalendarCheck className="size-4 text-slate-400" />
+                {kal.installd ? "Inga bokade takkontroller." : "Kalendern är inte inställd."}
+              </div>
+            )}
+            {moten.length > 6 && <p className="border-t border-slate-100 px-5 py-2 text-center text-xs text-slate-500">{moten.length - 6} till</p>}
+          </Kort>
+
           <Kort>
             <Tratt totalt={tratt(leads)} manad={tratt(leads, 30)} />
           </Kort>

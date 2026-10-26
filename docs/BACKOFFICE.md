@@ -23,6 +23,9 @@ som förut.
   som i arket), offertvärde, startdatum, adress, anteckning, påminnelsedatum,
   fri notering. Snabbknappar: "Ringt, fick svar", "Ringt, inget svar",
   "Takkontroll bokad" och "Skräp, arkivera".
+- **Kalender**: "Boka tid" i leadvyn bokar en takkontroll i Google Kalender
+  bland lediga tider, kryssar i Bokad och loggar tiden. Mötena syns på
+  översikten, i leadvyn och i pipelinen. Se `docs/GOOGLE_KALENDER.md`.
 - **Historik**: varje ändring från backofficet skrivs i kolumnen Logg med tid
   och namn. Flödena räknar dagar från loggen.
 - **Uppföljningsmejl** (`lib/backoffice/floden.ts`):
@@ -70,6 +73,7 @@ först:
    | `CRON_SECRET` | slumpad sträng, Vercel skickar den till det dagliga jobbet |
    | `BACKOFFICE_SAMMANFATTNING_TILL` | t.ex. `simon@sandsab.se` (valfri, kommaseparerad) |
    | `BACKOFFICE_AUTOUTSKICK` | `1` för automatiska kundmejl, annars utelämna |
+   | `GOOGLE_CALENDAR_CLIENT_ID`, `GOOGLE_CALENDAR_CLIENT_SECRET`, `GOOGLE_CALENDAR_REFRESH_TOKEN`, `GOOGLE_CALENDAR_ID` | kalendern, se `docs/GOOGLE_KALENDER.md` (valfria) |
 
    `RESEND_API_KEY`, `LEAD_FROM_EMAIL` och `LEAD_REPLY_TO` finns redan och
    används även här.

@@ -1,5 +1,6 @@
 import { hamtaLeads } from "@/lib/backoffice/ark";
 import { attGora, relativ, varde, visningsnamn, type Steg } from "@/lib/backoffice/crm";
+import { kommandeSakert, moteText, nastaPerLead } from "@/lib/backoffice/kalender";
 import { dagarSedan, status, type Lead } from "@/lib/backoffice/lead";
 import { kravInloggning } from "@/lib/backoffice/session";
 import Pipeline, { type PipelineKort } from "../_delar/Pipeline";
@@ -17,6 +18,7 @@ export default async function PipelineSida() {
   }
 
   const orsaker = attGora(leads);
+  const moten = nastaPerLead((await kommandeSakert()).moten);
   const kort: PipelineKort[] = leads
     .filter((l) => !l.arkiverad)
     // Avslutade och nekade äldre än 60 dagar är historik och tar bara plats.
@@ -31,6 +33,7 @@ export default async function PipelineSida() {
       telefon: l.telefon,
       paminnelse: l.paminnelse,
       flagga: orsaker.get(l.id)?.[0]?.text ?? "",
+      mote: moten.has(l.id) ? moteText(moten.get(l.id)!) : "",
     }));
 
   return (
