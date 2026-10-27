@@ -355,7 +355,7 @@ export default function LpQuiz({
             className="text-[22px] font-extrabold tracking-[-0.02em] leading-tight outline-none"
             style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
           >
-            {offertSpar ? "Få din gratis offert med fast pris" : "Vart når vi dig?"}
+            {offertSpar ? "Få din offert med fast pris" : "Vart når vi dig?"}
           </p>
           {/* 13 av 16 som nådde formuläret 19–25 okt rörde aldrig ett fält.
               Texten säger vad som händer efter knappen, så att ett

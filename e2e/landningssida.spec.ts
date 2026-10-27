@@ -12,7 +12,7 @@ test.describe("Landningssidan /lp", () => {
     await knapp(page, "100–150 m²").click();
 
     const formular = page.locator("#formular");
-    await expect(formular.getByText("Få din gratis offert med fast pris")).toBeVisible();
+    await expect(formular.getByText("Få din offert med fast pris")).toBeVisible();
     // Inget riktpris på landningssidan (beslut 20 okt 2026).
     await expect(formular.getByText(/riktpris/i)).toHaveCount(0);
 
