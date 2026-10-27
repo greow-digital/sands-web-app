@@ -79,6 +79,14 @@ först:
    används även här.
 3. Redeploya och logga in på `https://www.sandsab.se/admin`.
 
+## Prova i Preview utan inloggning
+
+Sätt `BACKOFFICE_UTAN_INLOGGNING` till ett namn (t.ex. `Erik`) för Preview i
+Vercel. Då släpps alla in utan lösenord och namnet står i loggen. Flaggan
+gäller aldrig i Production. Previewn skyddas då bara av Vercels egen
+inloggning, så dela inte en publik länk till den när den läser ett ark med
+riktiga kunduppgifter.
+
 ## Lokalt
 
 ```
