@@ -34,10 +34,12 @@ export async function synsUtanScroll(page: Page, el: Locator) {
   expect(ruta!.y + ruta!.height, "elementet ligger under vikningen").toBeLessThanOrEqual(hojd);
 }
 
-/** Fyller i namn och telefon i formuläret inom `omrade` och skickar. */
+/** Fyller i namn, telefon och (om fältet finns) e-post inom `omrade` och skickar. */
 export async function skicka(page: Page, omrade: Locator, knapptext: string) {
   await omrade.locator('input[type="text"]').first().fill("Test Testsson");
   await omrade.locator('input[type="tel"]').first().fill("070-123 45 67");
+  const epost = omrade.locator('input[type="email"]');
+  if (await epost.count()) await epost.first().fill("test@example.com");
   await omrade.getByRole("button", { name: knapptext, exact: true }).click();
   await page.waitForURL("**/tack");
 }

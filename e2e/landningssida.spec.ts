@@ -53,26 +53,38 @@ test.describe("Landningssidan /lp", () => {
     await expect(page.locator("h1")).toContainText("Takomläggning i Stockholm");
   });
 
-  test("den som hellre vill bli mejlad kan skicka utan telefonnummer", async ({ page }) => {
+  test("telefon och e-post krävs båda, och fälten är märkta för autofyll", async ({ page }) => {
     const leads = await forbered(page);
     await page.goto("/lp/takbyte");
     await knapp(page, "Betongpannor").click();
     await knapp(page, "Under 100 m²").click();
     const formular = page.locator("#formular");
-    await formular.locator('input[type="text"]').first().fill("Test Testsson");
 
-    // Utan telefon och e-post stoppas formuläret.
+    // Samma autofyllattribut som huvudformuläret, inuti ett <form>.
+    const namn = formular.locator('form input[type="text"]').first();
+    const tel = formular.locator('form input[type="tel"]');
+    const epost = formular.locator('form input[type="email"]');
+    await expect(namn).toHaveAttribute("autocomplete", "name");
+    await expect(tel).toHaveAttribute("autocomplete", "tel");
+    await expect(epost).toHaveAttribute("autocomplete", "email");
+    await expect(namn).toHaveAttribute("name", "name");
+    await expect(tel).toHaveAttribute("name", "phone");
+    await expect(epost).toHaveAttribute("name", "email");
+
+    // Utan e-post stoppas formuläret.
+    await namn.fill("Test Testsson");
+    await tel.fill("070-123 45 67");
     await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
-    await expect(formular.getByText("Fyll i telefon eller e-post, du väljer själv")).toBeVisible();
+    await expect(formular.getByText("Ange din e-post")).toBeVisible();
+    expect(leads).toHaveLength(0);
 
-    await formular.locator('input[type="email"]').fill("test@example.com");
+    await epost.fill("test@example.com");
     await formular.getByRole("button", { name: "+ Lägg till ett meddelande (valfritt)" }).click();
     await formular.locator("textarea").fill("Kupor på baksidan");
     await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
     await page.waitForURL("**/tack");
     expect(leads).toHaveLength(1);
-    expect(leads[0]).toMatchObject({ email: "test@example.com", formId: "lp_hero" });
-    expect(leads[0].phone ?? "").toBe("");
+    expect(leads[0]).toMatchObject({ email: "test@example.com", phone: "070-123 45 67", formId: "lp_hero" });
     expect(leads[0].message).toContain("Kupor på baksidan");
   });
 

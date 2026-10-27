@@ -47,7 +47,7 @@ interface LeadFormProps {
    * pris är sällan redo för ett säljsamtal, och krav på telefonnummer är
    * den dyraste friktionen i formuläret.
    */
-  contact?: "phone" | "phone-or-email";
+  contact?: "phone" | "phone-or-email" | "phone-and-email";
   /**
    * Renderar formuläret utan egen kort-chrome (bakgrund, ram, skugga,
    * padding). Används när det ligger inuti ett annat kort, t.ex. sista
@@ -77,12 +77,6 @@ interface LeadFormProps {
   notBindingNote?: boolean;
   /** Körs efter lyckad submit, innan redirect (t.ex. för calc_bridge_submit). */
   onSubmitSuccess?: () => void;
-  /**
-   * Med contact="phone-or-email": visa bara telefon och lägg e-post bakom
-   * länken "Hellre e-post?". Formuläret ser ut som två fält, men ingen
-   * tvingas lämna sitt nummer.
-   */
-  epostSomLank?: boolean;
   /** Med showMessage: fritexten ligger bakom en länk i stället för öppen. */
   meddelandeSomLank?: boolean;
   /** Innehåll direkt ovanför knappen, t.ex. betyg och ett kundcitat. */
@@ -103,7 +97,6 @@ export default function LeadForm({
   confirmation,
   notBindingNote = false,
   onSubmitSuccess,
-  epostSomLank = false,
   meddelandeSomLank = false,
   ovanforKnapp,
 }: LeadFormProps) {
@@ -124,10 +117,10 @@ export default function LeadForm({
   const fid = (namn: string) => `${uid}-${namn}`;
 
   const valfriKontakt = contact === "phone-or-email";
-  const [visaEpost, setVisaEpost] = useState(!epostSomLank);
+  // "phone-and-email": båda krävs (annonslandningssidan, beslut 27 okt 2026).
+  const bådaKrav = contact === "phone-and-email";
+  const visaEpostFalt = valfriKontakt || bådaKrav;
   const [visaMeddelande, setVisaMeddelande] = useState(!meddelandeSomLank);
-  // Läses i valideringen, som inte ser renderingens state.
-  const epostSynlig = useRef(!epostSomLank);
 
   // Minst en kontaktväg måste vara ifylld, men användaren väljer vilken.
   function harKontaktvag() {
@@ -136,9 +129,6 @@ export default function LeadForm({
   }
 
   const KONTAKT_KRAV = "Fyll i telefon eller e-post, du väljer själv";
-  // När e-post ligger bakom länken pekar felet dit i stället.
-  const kontaktKrav = () =>
-    epostSynlig.current ? KONTAKT_KRAV : "Ange telefonnummer, eller välj e-post nedan";
 
   const telefonFormat = (v?: string) => telefonFel(v) ?? true;
 
@@ -157,7 +147,7 @@ export default function LeadForm({
   const telefonRegler: RegisterOptions<FormData, "phone"> = valfriKontakt
     ? {
         validate: {
-          kontakt: () => harKontaktvag() || kontaktKrav(),
+          kontakt: () => harKontaktvag() || KONTAKT_KRAV,
           format: telefonFormat,
         },
       }
@@ -392,7 +382,7 @@ export default function LeadForm({
         {fields === "minimal" ? (
           <div
             className={
-              valfriKontakt && visaEpost
+              visaEpostFalt
                 ? stapla
                   ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
                   : "grid grid-cols-2 gap-3"
@@ -430,29 +420,15 @@ export default function LeadForm({
                   {errors.phone.message}
                 </p>
               )}
-              {valfriKontakt && !visaEpost && (
-                <button
-                  type="button"
-                  className="mt-2 text-xs font-semibold text-[#2B74FC] hover:underline"
-                  onClick={() => {
-                    epostSynlig.current = true;
-                    setVisaEpost(true);
-                    // Fokus flyttas till e-postfältet när det har renderats.
-                    setTimeout(() => document.getElementById(fid("email"))?.focus(), 0);
-                  }}
-                >
-                  Hellre e-post?
-                </button>
-              )}
             </div>
-            {valfriKontakt && visaEpost && (
+            {visaEpostFalt && (
               <div className="min-w-0">
                 <label
                   htmlFor={fid("email")}
                   className={labelCls}
                   style={labelStyle}
                 >
-                  E-post
+                  E-post{bådaKrav ? " *" : ""}
                 </label>
                 <input
                   id={fid("email")}
@@ -465,8 +441,9 @@ export default function LeadForm({
                   {...trackField(
                     "email",
                     register("email", {
+                      ...(bådaKrav && { required: "Ange din e-post" }),
                       validate: {
-                        kontakt: () => harKontaktvag() || KONTAKT_KRAV,
+                        kontakt: () => bådaKrav || harKontaktvag() || KONTAKT_KRAV,
                         format: (v?: string) =>
                           !v?.trim() ||
                           /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ||

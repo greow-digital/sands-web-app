@@ -387,7 +387,8 @@ export default function LpQuiz({
             variant="hero"
             formId="lp_hero"
             fields="minimal"
-            contact="phone-or-email"
+            // Telefon och e-post krävs båda (beslut 27 okt 2026).
+            contact="phone-and-email"
             stapla
             flat
             hideHeader
@@ -395,8 +396,7 @@ export default function LpQuiz({
             // många leads vill skriva något själva, och svaren från flödet
             // slås ihop med texten i LeadForm.
             showMessage
-            // Namn, telefon och e-post syns (Sands vill ha e-post, 26 okt
-            // 2026). Fritexten ligger bakom en länk.
+            // Fritexten ligger bakom en länk under knappen.
             meddelandeSomLank
             ovanforKnapp={
               fortroende && (
