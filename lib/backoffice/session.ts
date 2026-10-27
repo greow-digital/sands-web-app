@@ -6,9 +6,10 @@
   Sessionen är en signerad kaka (HMAC med BACKOFFICE_SESSION_SECRET) som
   gäller i 30 dagar. Byts hemligheten loggas alla ut.
 
-  BACKOFFICE_UTAN_INLOGGNING=<namn> släpper in alla utan lösenord, med
-  namnet i loggen. Bara för att prova i Preview: den gäller aldrig i
-  Vercel Production. Previewn skyddas då bara av Vercels egen inloggning.
+  Tills vidare krävs inloggning bara i Vercel Production. Överallt annars
+  (Preview och lokalt) släpps alla in utan lösenord, och loggen får namnet
+  i BACKOFFICE_UTAN_INLOGGNING, eller "Test". Previewn skyddas då bara av
+  Vercels egen inloggning.
 */
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
@@ -90,11 +91,10 @@ export async function avslutaSession() {
   (await cookies()).delete({ name: KAKA, path: "/admin" });
 }
 
-/** Namnet som används när inloggningen är avslagen, annars null. */
+/** Namnet som används när inloggningen är avslagen, null i Production. */
 export function utanInloggning(): string | null {
-  const v = process.env.BACKOFFICE_UTAN_INLOGGNING?.trim();
-  if (!v || process.env.VERCEL_ENV === "production") return null;
-  return v === "1" ? "Test" : v.replace(/[·,:]/g, "");
+  if (process.env.VERCEL_ENV === "production") return null;
+  return process.env.BACKOFFICE_UTAN_INLOGGNING?.replace(/[·,:]/g, "").trim() || "Test";
 }
 
 /** Inloggad användares namn, eller null. */
