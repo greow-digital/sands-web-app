@@ -4,11 +4,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { hamtaLead, uppdateraLead } from "@/lib/backoffice/ark";
 import { flode, LOGG } from "@/lib/backoffice/floden";
-import { KRYSSRUTOR, SKRIVBARA, loggRad, stockholmTid, type SkrivbartFalt } from "@/lib/backoffice/lead";
+import { KRYSSRUTOR, SKRIVBARA, loggRad, status, stockholmTid, type SkrivbartFalt } from "@/lib/backoffice/lead";
 import { flytt, type Steg } from "@/lib/backoffice/crm";
 import { avslutaSession, kontrollera, kravInloggning, skapaSession } from "@/lib/backoffice/session";
 import { korDagligt } from "@/lib/backoffice/dagligt";
-import { DAGAR_FRAM, boka, dagText, klockslag, ledigaTider } from "@/lib/backoffice/kalender";
+import { DAGAR_FRAM, boka, dagText, klockslag, ledigaTider, perDag, type LedigDag } from "@/lib/backoffice/kalender";
 import { skickaFlode } from "@/lib/backoffice/utskick";
 
 export type Resultat = { ok?: string; fel?: string } | null;
@@ -106,7 +106,7 @@ export async function flyttaSteg(id: string, till: Exclude<Steg, "ny">): Promise
     });
   if (!handelser.length) {
     // Från Ny till Kontaktad ändras ingen kryssruta, det är loggraden som gör det.
-    if (till !== "kontaktad" || lead.logg.length) return { ok: "Redan i det steget" };
+    if (till !== "kontaktad" || status(lead) !== "ny") return { ok: "Redan i det steget" };
     handelser.push("Kontaktad");
   }
   try {
@@ -130,20 +130,14 @@ export async function sattPaminnelse(id: string, datum: string): Promise<Resulta
   return { ok: datum ? `Påminnelse ${datum}` : "Påminnelse borttagen" };
 }
 
-export type LedigDag = { dag: string; rubrik: string; tider: { start: string; tid: string }[] };
+export type { LedigDag };
 
 /** Lediga pass för bokningsväljaren i leadvyn, grupperade per dag. */
 export async function hamtaLedigaTider(): Promise<{ dagar?: LedigDag[]; fel?: string }> {
   await kravInloggning();
   const nu = new Date();
   try {
-    const pass = await ledigaTider(nu, new Date(nu.getTime() + DAGAR_FRAM * 864e5));
-    const dagar: LedigDag[] = [];
-    for (const p of pass) {
-      const rubrik = dagText(p.start);
-      if (dagar.at(-1)?.rubrik !== rubrik) dagar.push({ dag: stockholmTid(new Date(p.start)).slice(0, 10), rubrik, tider: [] });
-      dagar.at(-1)!.tider.push({ start: p.start, tid: klockslag(p.start) });
-    }
+    const dagar = perDag(await ledigaTider(nu, new Date(nu.getTime() + DAGAR_FRAM * 864e5)));
     return { dagar };
   } catch (err) {
     return { fel: err instanceof Error ? err.message : "Kunde inte läsa kalendern" };

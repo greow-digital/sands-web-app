@@ -96,3 +96,24 @@ den vanliga kalendern. Kalender-ID:t finns under kalenderns inställningar,
 - Lägg variablerna i Vercel (Production, och Preview om det ska testas där)
   först när rätt kalender är vald. Byt till Sands riktiga kalender genom att
   göra om steg 5 inloggad på det kontot och byta de tre värdena.
+
+## Kunden bokar själv på /tack
+
+Efter offertflödet på landningssidorna (`components/LpQuiz.tsx`, formId
+`lp_hero`) kan kunden boka sin takkontroll direkt på `/tack`, eller välja
+"Jag föredrar att ni ringer upp mig".
+
+- Leadet skickas och `/tack` laddas precis som förut, så konverteringen
+  skickas innan bokaren visas. Gtag-koden på `/tack` är orörd.
+- `/api/lead` lämnar en signerad biljett (HMAC med
+  `BACKOFFICE_SESSION_SECRET`, giltig i sex timmar) när kalendern är
+  inställd. `LeadForm` lägger den i sessionStorage (`sands_lead_bokning`),
+  och `components/BokaTakkontroll.tsx` på `/tack` visas bara med den.
+  Utan kalender eller hemlighet ser `/tack` ut exakt som förut.
+- `/api/boka` (se `lib/backoffice/kundbokning.ts`) visar lediga tider från
+  i morgon och två veckor fram, och bokar. Leadet hittas i arket på
+  telefon eller e-post bland leads från i dag och i går. Adressen kunden
+  fyller i sparas på leaden om den saknas.
+- Loggraderna skrivs som "Kunden". De räknas inte som att Sands haft
+  kontakt, så en lead som bara bett om ett samtal står kvar som Ny och i
+  Att göra.

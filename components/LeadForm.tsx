@@ -228,6 +228,9 @@ export default function LeadForm({
         }),
       });
       if (!res.ok) throw new Error("Request failed");
+      // Biljett för att välja tid för takkontrollen på /tack (bara offertflödet
+      // på landningssidorna, och bara när kalendern är inställd).
+      const bokning: unknown = (await res.json().catch(() => null))?.bokning;
 
       setSubmitted(true);
       reset();
@@ -252,6 +255,8 @@ export default function LeadForm({
           sessionStorage.setItem("sands_lead_formid", formId);
           // Kanal-dimension, läses av /tack och skickas som lead_source till GA4.
           sessionStorage.setItem("sands_lead_leadsource", leadSourceFor(formId));
+          if (typeof bokning === "string") sessionStorage.setItem("sands_lead_bokning", bokning);
+          else sessionStorage.removeItem("sands_lead_bokning");
           // Suppression: visa inte inaktivitets-popupen för någon som
           // redan skickat ett formulär (30 dagar).
           document.cookie =

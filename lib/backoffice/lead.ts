@@ -201,6 +201,14 @@ export const STATUS_NAMN: Record<Status, string> = {
   arkiverad: "Arkiverad",
 };
 
+/** Namnet i loggen när kunden själv gjort något, t.ex. bokat en tid på /tack. */
+export const KUNDEN = "Kunden";
+
+/** Rader i loggen som Sands skrivit, inte kunden. */
+export function sandsLogg(lead: Lead): LoggRad[] {
+  return lead.logg.filter((r) => r.vem !== KUNDEN);
+}
+
 export function status(lead: Lead): Status {
   if (lead.arkiverad) return "arkiverad";
   if (lead.projektAvslutat) return "avslutad";
@@ -208,7 +216,8 @@ export function status(lead: Lead): Status {
   if (lead.offertAccepterad) return "vunnen";
   if (lead.offertSkickad) return "offert";
   if (lead.bokad) return "bokad";
-  if (lead.logg.length || lead.anteckning) return "kontaktad";
+  // Att kunden själv bokat eller bett om ett samtal betyder inte att någon pratat med dem.
+  if (sandsLogg(lead).length || lead.anteckning) return "kontaktad";
   return "ny";
 }
 

@@ -2,6 +2,9 @@ import { NextResponse, after } from "next/server";
 import { render } from "@react-email/render";
 import { Resend } from "resend";
 import LeadConfirmation from "@/emails/lead-confirmation";
+import { demolage } from "@/lib/backoffice/ark";
+import { demoNyttLead } from "@/lib/backoffice/demo";
+import { skapaBiljett } from "@/lib/backoffice/kundbokning";
 
 // Resend-klienten och @react-email/render kräver Node, inte Edge.
 export const runtime = "nodejs";
@@ -148,6 +151,17 @@ export async function POST(req: Request) {
     );
   }
 
+  // Offertflödet på landningssidorna får välja tid för takkontrollen själv på /tack.
+  // Biljetten finns bara när kalendern är inställd, annars ser /tack ut som förut.
+  const svar = () =>
+    NextResponse.json({ ok: true, ...(data.formId === "lp_hero" ? { bokning: skapaBiljett(data.phone, data.email) ?? undefined } : {}) });
+
+  // Lokalt demoläge: leadet hamnar i exempeldatan i stället för arket.
+  if (demolage()) {
+    demoNyttLead(data);
+    return svar();
+  }
+
   const webhook = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
   if (!webhook) {
     console.error("GOOGLE_SHEETS_WEBHOOK_URL saknas");
@@ -185,7 +199,7 @@ export async function POST(req: Request) {
     // Bekräftelsen till kunden skickas efter svaret, aldrig före.
     after(() => skickaBekraftelse(data));
 
-    return NextResponse.json({ ok: true });
+    return svar();
   } catch (err) {
     console.error("Webhook-fel:", err);
     return NextResponse.json(

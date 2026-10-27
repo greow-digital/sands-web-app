@@ -29,7 +29,7 @@ const tomma = {
   Arkiverad: false,
 };
 
-const rader: Record<string, unknown>[] = [
+const startrader: Record<string, unknown>[] = [
   {
     ...tomma,
     ID: "demo0001",
@@ -97,6 +97,11 @@ const rader: Record<string, unknown>[] = [
   },
 ];
 
+// På globalThis så att API-rutterna och sidorna delar samma rader i dev,
+// där de annars får var sin kopia av modulen.
+const delat = globalThis as unknown as { __sandsDemoRader?: Record<string, unknown>[] };
+const rader = (delat.__sandsDemoRader ??= startrader);
+
 export function demoLista() {
   return rader.map((r) => ({ ...r }));
 }
@@ -107,4 +112,20 @@ export function demoUppdatera(id: string, falt: Record<string, unknown>, logg?: 
   Object.assign(rad, falt);
   if (logg) rad.Logg = rad.Logg ? `${rad.Logg}\n${logg}` : logg;
   return { ...rad };
+}
+
+/** Ett lead från sajtens formulär i demoläget, som när webhooken skriver en rad i arket. */
+export function demoNyttLead(data: { name?: string; phone?: string; email?: string; roofType?: string; area?: string; message?: string; source?: string }) {
+  rader.unshift({
+    ...tomma,
+    ID: `demo${String(rader.length + 1).padStart(4, "0")}`,
+    Tidpunkt: stockholmTid() + ":00",
+    Namn: data.name ?? "",
+    Telefon: data.phone ?? "",
+    "E-post": data.email ?? "",
+    Taktyp: data.roofType ?? "",
+    "Yta m²": (data.area ?? "").replace(/\s*m²$/, ""),
+    Meddelande: data.message ?? "",
+    Källa: data.source ?? "",
+  });
 }
