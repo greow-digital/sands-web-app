@@ -13,8 +13,21 @@ import {
   SOURCE_META,
   TOTAL_REVIEWS,
   startsidaTestimonials,
+  takTestimonials,
 } from "@/lib/testimonials";
 import { company, nap, stats, telefon } from "@/lib/company";
+
+// Citatet ovanför knappen i formulärsteget. Kort, så att knappen syns utan
+// scroll på en mobil i 375×667. Hämtas ordagrant ur datan och
+// är inte ett av omdömena längre ner på sidan. Saknas det fallerar bygget,
+// hellre det än ett tomt eller påhittat citat.
+const CITAT = takTestimonials.find((t) => t.name === "Hasse" && t.ort === "Sollentuna");
+if (!CITAT) throw new Error("Landningssidan: hittar inte omdömet från Hasse i Sollentuna");
+const fortroende = {
+  betyg: AVG_RATING,
+  antal: TOTAL_REVIEWS,
+  citat: { text: CITAT.text, namn: CITAT.name, ort: CITAT.ort },
+};
 
 /*
   Annonslandningssida för kampanjen Takläggning Stockholm, för A/B-test mot
@@ -204,7 +217,7 @@ export default async function Landningssida({
               </div>
 
               <div id="formular" className="scroll-mt-3">
-                <LpQuiz sokord={v.sokord} forval={v.forval} />
+                <LpQuiz sokord={v.sokord} forval={v.forval} fortroende={fortroende} />
               </div>
             </div>
 

@@ -12,9 +12,16 @@ test.describe("Landningssidan /lp", () => {
     await knapp(page, "100–150 m²").click();
 
     const formular = page.locator("#formular");
-    await expect(formular.getByText("Få din gratis offert med fast pris")).toBeVisible();
+    await expect(formular.getByText("Få din offert med fast pris")).toBeVisible();
     // Inget riktpris på landningssidan (beslut 20 okt 2026).
     await expect(formular.getByText(/riktpris/i)).toHaveCount(0);
+
+    // Namn, telefon och e-post syns, fritexten ligger bakom en länk, och
+    // betyg plus ett kundcitat står ovanför knappen (26 okt 2026).
+    await expect(formular.locator('input[type="email"]')).toBeVisible();
+    await expect(formular.locator("textarea")).toHaveCount(0);
+    await expect(formular.getByText(/av 5 · \d+ omdömen/)).toBeVisible();
+    await expect(formular.getByText("Hasse, Sollentuna")).toBeVisible();
 
     // Formulärfixen 22 okt 2026: namnfältet och knappen syns direkt.
     await page.waitForTimeout(900);
@@ -44,6 +51,41 @@ test.describe("Landningssidan /lp", () => {
     await forbered(page);
     await page.goto("/lp/taklaggare?kw=takoml%C3%A4ggning");
     await expect(page.locator("h1")).toContainText("Takomläggning i Stockholm");
+  });
+
+  test("telefon och e-post krävs båda, och fälten är märkta för autofyll", async ({ page }) => {
+    const leads = await forbered(page);
+    await page.goto("/lp/takbyte");
+    await knapp(page, "Betongpannor").click();
+    await knapp(page, "Under 100 m²").click();
+    const formular = page.locator("#formular");
+
+    // Samma autofyllattribut som huvudformuläret, inuti ett <form>.
+    const namn = formular.locator('form input[type="text"]').first();
+    const tel = formular.locator('form input[type="tel"]');
+    const epost = formular.locator('form input[type="email"]');
+    await expect(namn).toHaveAttribute("autocomplete", "name");
+    await expect(tel).toHaveAttribute("autocomplete", "tel");
+    await expect(epost).toHaveAttribute("autocomplete", "email");
+    await expect(namn).toHaveAttribute("name", "name");
+    await expect(tel).toHaveAttribute("name", "phone");
+    await expect(epost).toHaveAttribute("name", "email");
+
+    // Utan e-post stoppas formuläret.
+    await namn.fill("Test Testsson");
+    await tel.fill("070-123 45 67");
+    await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
+    await expect(formular.getByText("Ange din e-post")).toBeVisible();
+    expect(leads).toHaveLength(0);
+
+    await epost.fill("test@example.com");
+    await formular.getByRole("button", { name: "+ Lägg till ett meddelande (valfritt)" }).click();
+    await formular.locator("textarea").fill("Kupor på baksidan");
+    await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
+    await page.waitForURL("**/tack");
+    expect(leads).toHaveLength(1);
+    expect(leads[0]).toMatchObject({ email: "test@example.com", phone: "070-123 45 67", formId: "lp_hero" });
+    expect(leads[0].message).toContain("Kupor på baksidan");
   });
 
   test("felaktigt mobilnummer stoppas innan det skickas", async ({ page }) => {

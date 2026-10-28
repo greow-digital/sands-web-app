@@ -47,7 +47,7 @@ interface LeadFormProps {
    * pris är sällan redo för ett säljsamtal, och krav på telefonnummer är
    * den dyraste friktionen i formuläret.
    */
-  contact?: "phone" | "phone-or-email";
+  contact?: "phone" | "phone-or-email" | "phone-and-email";
   /**
    * Renderar formuläret utan egen kort-chrome (bakgrund, ram, skugga,
    * padding). Används när det ligger inuti ett annat kort, t.ex. sista
@@ -77,6 +77,10 @@ interface LeadFormProps {
   notBindingNote?: boolean;
   /** Körs efter lyckad submit, innan redirect (t.ex. för calc_bridge_submit). */
   onSubmitSuccess?: () => void;
+  /** Med showMessage: fritexten ligger bakom en länk i stället för öppen. */
+  meddelandeSomLank?: boolean;
+  /** Innehåll direkt ovanför knappen, t.ex. betyg och ett kundcitat. */
+  ovanforKnapp?: React.ReactNode;
 }
 
 export default function LeadForm({
@@ -93,6 +97,8 @@ export default function LeadForm({
   confirmation,
   notBindingNote = false,
   onSubmitSuccess,
+  meddelandeSomLank = false,
+  ovanforKnapp,
 }: LeadFormProps) {
   const {
     register,
@@ -111,6 +117,10 @@ export default function LeadForm({
   const fid = (namn: string) => `${uid}-${namn}`;
 
   const valfriKontakt = contact === "phone-or-email";
+  // "phone-and-email": båda krävs (annonslandningssidan, beslut 27 okt 2026).
+  const bådaKrav = contact === "phone-and-email";
+  const visaEpostFalt = valfriKontakt || bådaKrav;
+  const [visaMeddelande, setVisaMeddelande] = useState(!meddelandeSomLank);
 
   // Minst en kontaktväg måste vara ifylld, men användaren väljer vilken.
   function harKontaktvag() {
@@ -372,7 +382,7 @@ export default function LeadForm({
         {fields === "minimal" ? (
           <div
             className={
-              valfriKontakt
+              visaEpostFalt
                 ? stapla
                   ? "grid grid-cols-1 sm:grid-cols-2 gap-3"
                   : "grid grid-cols-2 gap-3"
@@ -411,14 +421,14 @@ export default function LeadForm({
                 </p>
               )}
             </div>
-            {valfriKontakt && (
+            {visaEpostFalt && (
               <div className="min-w-0">
                 <label
                   htmlFor={fid("email")}
                   className={labelCls}
                   style={labelStyle}
                 >
-                  E-post
+                  E-post{bådaKrav ? " *" : ""}
                 </label>
                 <input
                   id={fid("email")}
@@ -431,8 +441,9 @@ export default function LeadForm({
                   {...trackField(
                     "email",
                     register("email", {
+                      ...(bådaKrav && { required: "Ange din e-post" }),
                       validate: {
-                        kontakt: () => harKontaktvag() || KONTAKT_KRAV,
+                        kontakt: () => bådaKrav || harKontaktvag() || KONTAKT_KRAV,
                         format: (v?: string) =>
                           !v?.trim() ||
                           /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ||
@@ -457,7 +468,7 @@ export default function LeadForm({
                 asterisk säger redan att de är valfria, och den som lämnar
                 båda tomma får kravet som felmeddelande precis när det
                 behövs. */}
-            {showMessage && (
+            {showMessage && visaMeddelande && (
               <div className="col-span-full">
                 <label
                   htmlFor={fid("message")}
@@ -569,6 +580,8 @@ export default function LeadForm({
           </>
         )}
 
+        {ovanforKnapp}
+
         {/* Submit */}
         <button
           type="submit"
@@ -588,6 +601,21 @@ export default function LeadForm({
             ? "Skickar..."
             : ctaText || "Få prisförslag"}
         </button>
+
+        {/* Länken ligger under knappen, så att knappen hamnar högre upp på
+            mobil. Fältet öppnas ovanför knappen när man trycker. */}
+        {showMessage && !visaMeddelande && (
+          <button
+            type="button"
+            className="block mx-auto text-xs font-semibold text-[#2B74FC] hover:underline"
+            onClick={() => {
+              setVisaMeddelande(true);
+              setTimeout(() => document.getElementById(fid("message"))?.focus(), 0);
+            }}
+          >
+            + Lägg till ett meddelande (valfritt)
+          </button>
+        )}
 
         {notBindingNote && (
           <p className="text-xs text-gray-500 text-center">

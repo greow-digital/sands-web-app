@@ -9,6 +9,7 @@ import {
   Hammer,
   Home,
   RefreshCw,
+  Star,
 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
 import type { MaterialKey } from "@/lib/material";
@@ -29,6 +30,13 @@ import type { MaterialKey } from "@/lib/material";
 */
 
 export type Arende = "byta" | "lagga-om" | "lackage" | "annat";
+
+/** Betyg och ett ordagrant kundcitat, hämtat ur lib/testimonials på servern. */
+export type Fortroende = {
+  betyg: string;
+  antal: number;
+  citat: { text: string; namn: string; ort?: string };
+};
 
 const ARENDEN: { value: Arende; label: string; sub: string; icon: typeof Home }[] = [
   { value: "byta", label: "Byta tak", sub: "Nytt tak med nya pannor", icon: Home },
@@ -66,9 +74,11 @@ type GtagFn = (event: string, name: string, params: object) => void;
 export default function LpQuiz({
   sokord,
   forval,
+  fortroende,
 }: {
   sokord: string;
   forval?: Arende;
+  fortroende?: Fortroende;
 }) {
   const [arende, setArende] = useState<Arende | undefined>(forval);
   const [taktyp, setTaktyp] = useState<string>();
@@ -345,10 +355,14 @@ export default function LpQuiz({
             className="text-[22px] font-extrabold tracking-[-0.02em] leading-tight outline-none"
             style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
           >
-            {offertSpar ? "Få din gratis offert med fast pris" : "Vart når vi dig?"}
+            {offertSpar ? "Få din offert med fast pris" : "Vart når vi dig?"}
           </p>
+          {/* 13 av 16 som nådde formuläret 19–25 okt rörde aldrig ett fält.
+              Texten säger vad som händer efter knappen, så att ett
+              telefonsamtal inte kommer som en överraskning. */}
           <p className="text-sm text-gray-600 mt-1 mb-3">
-            Vi hör av oss inom 24 timmar och bokar en kostnadsfri takkontroll.
+            Vi ringer upp så snart vi har fått din förfrågan och bokar en
+            kostnadsfri takkontroll.
           </p>
 
           {/* Svaren som en kort bekräftelse: förfrågan är redan halvvägs
@@ -373,7 +387,8 @@ export default function LpQuiz({
             variant="hero"
             formId="lp_hero"
             fields="minimal"
-            contact="phone-or-email"
+            // Telefon och e-post krävs båda (beslut 27 okt 2026).
+            contact="phone-and-email"
             stapla
             flat
             hideHeader
@@ -381,6 +396,29 @@ export default function LpQuiz({
             // många leads vill skriva något själva, och svaren från flödet
             // slås ihop med texten i LeadForm.
             showMessage
+            // Fritexten ligger bakom en länk under knappen.
+            meddelandeSomLank
+            ovanforKnapp={
+              fortroende && (
+                <div className="rounded-xl bg-[#F5F8FF] px-4 py-3">
+                  <p className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: "var(--color-dark)" }}>
+                    <span className="inline-flex gap-0.5" aria-hidden="true">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} size={12} className="fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </span>
+                    {fortroende.betyg} av 5 · {fortroende.antal} omdömen
+                  </p>
+                  <p className="text-[13px] text-gray-700 leading-snug mt-1.5">
+                    &rdquo;{fortroende.citat.text}&rdquo;{" "}
+                    <span className="text-gray-500">
+                      {fortroende.citat.namn}
+                      {fortroende.citat.ort ? `, ${fortroende.citat.ort}` : ""}
+                    </span>
+                  </p>
+                </div>
+              )
+            }
             ctaText="Få gratis offert"
             extraPayload={{
               roofType: taktyp ? taktypLabel : undefined,
