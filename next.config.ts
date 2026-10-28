@@ -177,6 +177,16 @@ const nextConfig: NextConfig = {
         source: "/projekt-sanity-poc",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
       },
+      // Backofficet: bakom inloggning, men ska aldrig indexeras ens om en
+      // länk läcker.
+      {
+        source: "/admin/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        source: "/admin",
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
     ];
   },
 };

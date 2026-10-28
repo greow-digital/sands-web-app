@@ -14,7 +14,7 @@ const VoiceSession = dynamic(() => import("@/components/VoiceSession"), {
 // Sidor där röst-widgeten inte ska visas: offertformuläret, tack-sidan samt
 // Studio/POC-sidor.
 // /lp är annonslandningssidor med ett enda mål, formuläret.
-const HIDDEN_PREFIXES = ["/offert", "/tack", "/studio", "/projekt-sanity-poc", "/lp"];
+const HIDDEN_PREFIXES = ["/offert", "/tack", "/studio", "/projekt-sanity-poc", "/lp", "/admin"];
 
 export default function ElevenLabsWidget() {
   const pathname = usePathname();
@@ -30,6 +30,8 @@ export default function ElevenLabsWidget() {
 
   // Stäng vid sidbyte.
   useEffect(() => {
+    // Befintligt mönster, lintregeln kom efter komponenten.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpen(false);
   }, [pathname]);
 

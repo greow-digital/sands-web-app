@@ -130,3 +130,9 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 16px;
   }
 }
+
+/* /tack i bokningsläge (se app/tack/page.tsx): bokaren visas, tackdelen döljs. */
+.tack-sida[data-bokning] .tack-vanlig,
+.tack-sida:not([data-bokning]) .tack-bokning {
+  display: none;
+}

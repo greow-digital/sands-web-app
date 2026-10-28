@@ -28,7 +28,9 @@ export default function MobileCTA() {
   // /taktest har samma offertflöde som /priser sedan 19 okt 2026.
   const hideOnPages = ["/offert", "/priser", "/taktest", "/tack"];
   // Landningssidorna under /lp har en egen fast knapp mot sitt formulär.
-  const shouldHide = hideOnPages.includes(pathname) || pathname.startsWith("/lp/");
+  // Backofficet under /admin är internt och ska inte ha någon CTA.
+  const shouldHide =
+    hideOnPages.includes(pathname) || pathname.startsWith("/lp/") || pathname.startsWith("/admin");
 
   useEffect(() => {
     const footer = document.querySelector("footer");
@@ -57,6 +59,8 @@ export default function MobileCTA() {
     );
 
     if (!heroCta) {
+      // Befintligt mönster, lintregeln kom efter komponenten.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPasseratHero(true);
       return;
     }
