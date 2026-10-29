@@ -76,8 +76,6 @@ export const svarslofte = "Svar inom 24 h, fast prisförslag inom 24 h efter tak
 export const kontaktperson = {
   namn: "Simon Stehlin",
   fornamn: "Simon",
-  telefonDisplay: "076-026 78 25",
-  telefonHref: "tel:0760267825",
   email: "simon@sandsab.se",
   fotoUrl: "",
 } as const;
