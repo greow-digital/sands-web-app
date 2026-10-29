@@ -4,7 +4,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CheckCircle, Phone, Clock, FileText, HardHat, Star } from "lucide-react";
-import { kontaktperson } from "@/lib/company";
+import { telefon } from "@/lib/company";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/tack" },
@@ -58,15 +58,15 @@ export default function TackPage() {
             <p className="text-gray-500 mb-10">
               Har du bråttom? Ring oss direkt, vi svarar vardagar 07–17.
             </p>
-            {/* Numret till Simon i stället för växeln (beslut 19 okt 2026),
-                så att den som har bråttom når en person direkt. */}
+            {/* Växelnumret, samma som på resten av sajten (beslut 29 okt
+                2026, ersätter Simons mobil från 19 okt). */}
             <a
-              href={kontaktperson.telefonHref}
+              href={telefon.href}
               className="inline-flex items-center gap-2 px-9 py-[18px] rounded-full text-white font-semibold text-base transition-all hover:scale-[1.02]"
               style={{ backgroundColor: "var(--color-primary)" }}
             >
               <Phone size={16} />
-              Ring {kontaktperson.telefonDisplay}
+              Ring {telefon.display}
             </a>
           </div>
         </section>

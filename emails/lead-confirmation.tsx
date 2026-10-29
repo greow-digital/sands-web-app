@@ -341,9 +341,9 @@ export default function LeadConfirmation({
                 Har du bråttom?
               </Text>
               <Text style={{ ...s.stepText, margin: 0 }}>
-                Ring mig direkt på{" "}
-                <Link href={kontaktperson.telefonHref} style={s.link}>
-                  {kontaktperson.telefonDisplay}
+                Ring oss på{" "}
+                <Link href={telefon.href} style={s.link}>
+                  {telefon.display}
                 </Link>{" "}
                 så tar vi det på en gång. Du kan också svara på det här mejlet,
                 det landar hos oss på kontoret och når mig samma dag.
@@ -388,8 +388,8 @@ export default function LeadConfirmation({
             </Text>
             <Text style={s.signatur}>{company.namn}</Text>
             <Text style={s.signatur}>
-              <Link href={kontaktperson.telefonHref} style={s.link}>
-                {kontaktperson.telefonDisplay}
+              <Link href={telefon.href} style={s.link}>
+                {telefon.display}
               </Link>{" "}
               ·{" "}
               <Link href={`mailto:${kontaktperson.email}`} style={s.link}>
