@@ -56,7 +56,9 @@ function granskaRad(fil, rad, radText) {
   if (/få gratis offert/i.test(text) && !offertUndantag && !fil.endsWith(".md"))
     regel(fel, fil, rad, text, "\"Få gratis offert\" är bara tillåtet i offertflödet och på /lp.");
   if (/\bfå offert\b/i.test(text) && !fil.endsWith(".md")) regel(fel, fil, rad, text, "\"Få offert\" är förbjudet. Använd \"Få prisförslag\" eller \"Boka kostnadsfri takkontroll\".");
-  if (/kontakta oss/i.test(text) && !/^app\/(kontakt|integritetspolicy)\//.test(fil) && !fil.endsWith(".md"))
+  // Mejlmallarna har inga CTA-knappar, och "kontakta oss" står där i löptext
+  // (bekräftelsemejlet, Samuels text 30 okt 2026).
+  if (/kontakta oss/i.test(text) && !/^(app\/(kontakt|integritetspolicy)\/|emails\/)/.test(fil) && !fil.endsWith(".md"))
     regel(fel, fil, rad, text, "\"Kontakta oss\" är förbjudet som CTA.");
 
   // Priser ska komma från lib/material.ts, inte skrivas in för hand.

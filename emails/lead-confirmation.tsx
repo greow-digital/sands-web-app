@@ -4,7 +4,6 @@ import {
   Container,
   Head,
   Heading,
-  Hr,
   Html,
   Img,
   Link,
@@ -14,14 +13,7 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-import {
-  company,
-  garanti,
-  granskning,
-  kontaktperson,
-  nap,
-  telefon,
-} from "../lib/company";
+import { company, nap, telefon } from "../lib/company";
 
 /**
  * Bekräftelsemejl till kunden efter inskickat formulär.
@@ -33,11 +25,6 @@ import {
  * Mejlklienter kan inte CSS-variabler, externa stylesheets eller SVG.
  * Därför är allt inline, färgerna är hårdkodade kopior av globals.css,
  * och loggan är JPG. Ändras varumärkesfärgerna måste de ändras här också.
- *
- * Trygghetsraderna är hämtade ordagrant från formuleringar som redan
- * står publikt på sajten (/om-oss, /tjanster, /tjanster/taklaggning).
- * Skriv aldrig in ett nytt påstående om certifiering, försäkring eller
- * garanti utan att Sands bekräftat det, det är deras ansvar.
  */
 export interface LeadConfirmationProps {
   name: string;
@@ -203,66 +190,38 @@ const s = {
 };
 
 /**
- * Den personliga hälsningen. Säger inte att förfrågan är besvarad, den
- * går ut några sekunder efter inskicket och då har ingen sett den ännu.
- * "Tagit emot" är både sant och lika varmt.
+ * Texten är Samuels (Sands), 30 okt 2026. Mejlet skickas i företagets namn
+ * och inte i en persons, så det står i vi-form och signeras av bolaget.
+ * Löftena (samma vardag, sms eller mejl om vi inte når dig, prisförslag
+ * inom 72 timmar efter besöket) är Sands egna. Ändra dem inte utan att
+ * Sands bekräftat det.
  */
-const HALSNING = `Tack för din förfrågan om ditt tak. Jag heter ${kontaktperson.fornamn} och det är jag som tar hand om den. Jag hör av mig inom kort för att boka in ett kostnadsfritt hembesök, då går jag upp på taket och tittar på skicket innan vi pratar pris.`;
+const INTRO = `Vi har tagit emot din förfrågan och tackar för ditt intresse för ${company.namn}. Vi återkommer till dig så snart som möjligt.`;
 
-/**
- * Så här går det till, speglar processen och löftet på sajten. Steg 1 är
- * skrivet i Simons röst eftersom det är han som står som avsändare, byts
- * personen ut måste texten skrivas om.
- */
 const STEG = [
   {
-    titel: "Jag hör av mig",
-    text: "Jag ringer eller mejlar dig inom 24 timmar och ställer några frågor om taket så jag vet vad jag ska titta efter.",
+    titel: "Vi kontaktar dig",
+    text: "Vi kontaktar dig i första hand via telefon, vanligtvis samma vardag, för att få en bättre bild av ditt tak och boka in en tid för takkontroll. Om vi inte når dig per telefon följer vi upp med sms eller mejl.",
   },
   {
-    titel: "Kostnadsfri takkontroll på plats",
-    text: "Vi kommer ut, går upp på taket och bedömer skicket. Du får en ärlig bild av vad som behöver göras, och vad som kan vänta. Helt utan förpliktelser.",
+    titel: "Kostnadsfri takkontroll",
+    text: "Vi besöker din fastighet och genomför en noggrann kontroll av takets skick. Därefter går vi tillsammans igenom vår bedömning och eventuella behov av åtgärder. Besöket är helt kostnadsfritt och utan förpliktelser.",
   },
   {
-    titel: "Fast prisförslag inom 24 timmar",
-    text: "Efter besöket får du ett skriftligt förslag med fast pris, tydlig omfattning och ROT-avdraget inräknat. Inga öppna poster som växer under jobbets gång.",
+    titel: "Fast prisförslag inom 72 timmar",
+    text: "Inom 72 timmar efter besöket får du en tydlig offert med fast pris, specificerade åtgärder och eventuellt ROT-avdrag inräknat.",
   },
 ];
 
-/** Redan publicerade påståenden på sajten. Lägg inte till nya här. */
-const TRYGGHET = [
-  `Certifierad Monier Takpartner, ${garanti.fras} på tätt tak`,
-  "F-skattsedel, ansvars- och allriskförsäkring",
-  "Vi arbetar enligt ABT-06",
-  "BraByggare 4,8 av 5 baserat på 54 omdömen",
-];
-
-function Detalj({ label, value }: { label: string; value?: string }) {
-  if (!value) return null;
-  return (
-    <>
-      <Text style={s.label}>{label}</Text>
-      <Text style={s.value}>{value}</Text>
-    </>
-  );
-}
-
-export default function LeadConfirmation({
-  name,
-  email,
-  phone,
-  roofType,
-  area,
-  message,
-}: LeadConfirmationProps) {
-  const fornamn = (name || "").trim().split(/\s+/)[0] || "";
-  const harSammanfattning = Boolean(phone || email || roofType || area || message);
-
+// Uppgifterna från formuläret skickas fortfarande med från /api/lead, men
+// visas inte i Samuels version av mejlet.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function LeadConfirmation(_props: LeadConfirmationProps) {
   return (
     <Html lang="sv">
       <Head />
       <Preview>
-        {`${kontaktperson.fornamn} hör av sig inom kort för att boka in ett kostnadsfritt hembesök.`}
+        Vi har tagit emot din förfrågan och återkommer så snart som möjligt.
       </Preview>
       <Body style={s.body}>
         <Container style={s.container}>
@@ -277,50 +236,10 @@ export default function LeadConfirmation({
           </Section>
 
           <Section style={s.content}>
-            <Heading style={s.h1}>
-              Hej{fornamn ? ` ${fornamn}` : ""}
-            </Heading>
+            <Heading style={s.h1}>Tack för din förfrågan!</Heading>
+            <Text style={s.p}>{INTRO}</Text>
 
-            {/*
-              Hälsningen är personlig och står i jag-form eftersom mejlet
-              skickas i Simons namn. Fotot visas bara om kontaktperson.fotoUrl
-              är satt, annars ligger texten i full bredd. Det är avsiktligt:
-              hellre ingen bild än en trasig bildruta hos mottagaren.
-            */}
-            {kontaktperson.fotoUrl ? (
-              <Row style={{ margin: "0 0 20px" }}>
-                <Column width={84} valign="top">
-                  <Img
-                    src={kontaktperson.fotoUrl}
-                    width={68}
-                    height={68}
-                    alt={kontaktperson.namn}
-                    style={s.foto}
-                  />
-                </Column>
-                <Column valign="top">
-                  <Text style={{ ...s.p, margin: 0 }}>{HALSNING}</Text>
-                </Column>
-              </Row>
-            ) : (
-              <Text style={s.p}>{HALSNING}</Text>
-            )}
-
-            {harSammanfattning && (
-              <Section style={s.summary}>
-                <Text style={{ ...s.label, color: brand.dark, fontSize: "12px", margin: "0 0 14px" }}>
-                  Det här skickade du in
-                </Text>
-                <Detalj label="Namn" value={name} />
-                <Detalj label="Telefon" value={phone} />
-                <Detalj label="E-post" value={email} />
-                <Detalj label="Område" value={area} />
-                <Detalj label="Taktyp" value={roofType} />
-                <Detalj label="Meddelande" value={message} />
-              </Section>
-            )}
-
-            <Text style={s.h2}>Så här går det till</Text>
+            <Text style={s.h2}>Så här går processen till</Text>
 
             {STEG.map((steg, i) => (
               <Row key={steg.titel}>
@@ -338,62 +257,37 @@ export default function LeadConfirmation({
               <Text
                 style={{ ...s.stepTitle, margin: "0 0 4px", fontSize: "15px" }}
               >
-                Har du bråttom?
+                Har du inte hört från oss?
+              </Text>
+              <Text style={{ ...s.stepText, margin: "0 0 10px" }}>
+                Vi försöker alltid nå dig via telefon i första hand och följer
+                upp med sms eller mejl om vi inte får svar.
               </Text>
               <Text style={{ ...s.stepText, margin: 0 }}>
-                Ring oss på{" "}
+                Du är även välkommen att kontakta oss direkt på{" "}
                 <Link href={telefon.href} style={s.link}>
                   {telefon.display}
                 </Link>{" "}
-                så tar vi det på en gång. Du kan också svara på det här mejlet,
-                det landar hos oss på kontoret och når mig samma dag.
+                om du har frågor eller önskar komma i kontakt med oss.
               </Text>
             </Section>
 
-            <Hr style={{ borderColor: brand.line, margin: "0 0 24px" }} />
-
-            <Text style={s.h2}>Bra att veta om oss</Text>
-            {TRYGGHET.map((rad) => (
-              <Text key={rad} style={s.trust}>
-                {rad}
-              </Text>
-            ))}
-
-            {/*
-              Länkad text, aldrig råa URL:er. En lista med fullängdsadresser
-              är en tydlig spamsignal, och allabolag-länken är närmare 90
-              tecken lång.
-            */}
-            <Text style={s.granskning}>
-              Kontrollera oss gärna hos{" "}
-              <Link href={granskning.brabyggare} style={s.link}>
-                BraByggare
-              </Link>{" "}
-              och{" "}
-              <Link href={granskning.allabolag} style={s.link}>
-                Allabolag
-              </Link>
-              .
+            <Text style={s.p}>
+              Vi ser fram emot att hjälpa dig med ditt takprojekt.
             </Text>
 
-            <Hr style={{ borderColor: brand.line, margin: "26px 0 22px" }} />
-
             <Text style={{ ...s.signatur, margin: "0 0 10px" }}>
-              Med vänlig hälsning,
+              Med vänliga hälsningar,
             </Text>
             <Text
               style={{ ...s.signatur, color: brand.dark, fontWeight: 700 }}
             >
-              {kontaktperson.namn}
+              {company.namn}
             </Text>
-            <Text style={s.signatur}>{company.namn}</Text>
             <Text style={s.signatur}>
+              Telefon:{" "}
               <Link href={telefon.href} style={s.link}>
                 {telefon.display}
-              </Link>{" "}
-              ·{" "}
-              <Link href={`mailto:${kontaktperson.email}`} style={s.link}>
-                {kontaktperson.email}
               </Link>
             </Text>
           </Section>
