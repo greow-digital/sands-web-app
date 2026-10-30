@@ -36,7 +36,7 @@ export const metadata: Metadata = pageMeta({
   path: "/tjanster/taklaggning",
   title: "Takbyte & takomläggning Stockholm | fast pris | Sands",
   description:
-    "Takbyte och takomläggning i Stockholm med fast pris och upp till 30 års Monier-garanti. Slipp bygglov sedan dec 2025. Prisförslag inom 24 h.",
+    "Takbyte och takomläggning i Stockholm med fast pris och upp till 30 års Monier-garanti. Slipp bygglov sedan dec 2025. Prisförslag inom 72 h efter besöket.",
 });
 
 // Pris-formel matchar Takräknaren (inkl 25 % moms, ROT-cap 50 000 kr).
@@ -1207,7 +1207,7 @@ export default async function TaklaggningPage() {
             </h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
               Boka kostnadsfri takkontroll så går vi tillsammans igenom vad just
-              ditt tak behöver. Fast pris inom 24 timmar.
+              ditt tak behöver. Fast pris inom 72 timmar efter besöket.
             </p>
             <div className="max-w-md mx-auto text-left">
               <LeadForm

@@ -56,7 +56,7 @@ export const garanti = {
   label: "Monier-garanti (upp till)",
 } as const;
 
-export const svarslofte = "Svar inom 24 h, fast prisförslag inom 24 h efter takkontrollen";
+export const svarslofte = "Svar inom 24 h, fast prisförslag inom 72 h efter takkontrollen";
 
 /**
  * Externa profiler där vem som helst kan kontrollera bolaget. Att bjuda
