@@ -9,6 +9,7 @@ import PageHero from "@/components/PageHero";
 import LeadForm from "@/components/LeadForm";
 import { tjanster, getTjanst } from "@/lib/tjanster";
 import { pageMeta } from "@/lib/seo";
+import { MATERIAL } from "@/lib/material";
 import OmradenInline from "@/components/OmradenInline";
 import OmdomenInline from "@/components/OmdomenInline";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
@@ -54,7 +55,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   tegeltak: {
     title: "Tegeltak Stockholm | från 1 500 kr/m² | Sands",
     description:
-      "Tegeltak i Stockholm från 1 500 kr/m². Tegelpannor med 30 års garanti, ROT-avdrag tillämpas. Certifierade takläggare, kostnadsfri offert inom 24 h.",
+      `Tegeltak i Stockholm från ${MATERIAL.tegel.prisM2.toLocaleString("sv-SE")} kr/m². Tegelpannor med 30 års garanti och ROT-avdrag. Certifierade takläggare, offert inom 72 h efter takkontroll.`,
   },
   plattak: {
     title: "Plåttak Stockholm | från 1 800 kr/m² | Sands",
@@ -64,7 +65,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   papptak: {
     title: "Papptak Stockholm | från 800 kr/m² | Sands",
     description:
-      "Papptak (takpapp) i Stockholm från 800 kr/m². Lång hållbarhet, fast pris och garanti på utförandet. ROT-avdrag tillämpas, offert inom 24 h.",
+      `Papptak (takpapp) i Stockholm från ${MATERIAL.papp.prisM2.toLocaleString("sv-SE")} kr/m². Lång hållbarhet, fast pris och garanti på utförandet. ROT-avdrag, offert inom 72 h efter takkontroll.`,
   },
   betongtak: {
     title: "Betongtak Stockholm | från 1 200 kr/m² | Sands",
