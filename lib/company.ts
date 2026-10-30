@@ -59,28 +59,6 @@ export const garanti = {
 export const svarslofte = "Svar inom 24 h, fast prisförslag inom 24 h efter takkontrollen";
 
 /**
- * Personen som skriver under bekräftelsemejlet till kunden.
- *
- * Byts personen ut måste även LEAD_FROM_EMAIL i Vercel ändras, annars
- * säger mejlet ett namn medan avsändaren visar ett annat.
- *
- * `email` är adressen som står i den synliga signaturen. Själva utskicket
- * går från och svaras till info@sandsab.se, som är den bevakade inkorgen.
- * Skriv därför aldrig i mejlet att ett svar går direkt till en person.
- *
- * `fotoUrl` måste vara en publik absolut URL på sandsab.se i JPG eller
- * PNG. Mejlklienter renderar inte SVG och blockerar okända domäner.
- * Är den tom visas hälsningen utan bild, vilket är avsiktligt så mejlet
- * aldrig får en trasig bildruta.
- */
-export const kontaktperson = {
-  namn: "Simon Stehlin",
-  fornamn: "Simon",
-  email: "simon@sandsab.se",
-  fotoUrl: "",
-} as const;
-
-/**
  * Externa profiler där vem som helst kan kontrollera bolaget. Att bjuda
  * in till granskning väger tyngre än att påstå att man är seriös, så de
  * hör hemma i trygghetsblock snarare än som lösa länkar.

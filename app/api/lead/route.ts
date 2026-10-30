@@ -74,13 +74,9 @@ async function skickaBekraftelse(data: LeadPayload) {
       from,
       to: epost,
       replyTo,
-      // Första meningen är allt som säkert syns på mobil, så bekräftelsen
-      // ligger först och löftet fyller ut i förhandsvisningen.
-      //
-      // Samma löfte som på sajten, "inom 24 timmar" (beslut 19 okt 2026).
-      // Det gäller även helger, så en förfrågan en lördagkväll ska besvaras
-      // senast söndag kväll.
-      subject: "Tack för din förfrågan. Jag hör av mig inom 24 timmar.",
+      // Samma rubrik som i mejlet, som skickas i företagets namn och inte
+      // längre lovar en tid för första kontakten (Samuels text, 30 okt 2026).
+      subject: "Tack för din förfrågan!",
       html,
       text,
       tags: [{ name: "type", value: "lead_confirmation" }],
