@@ -52,8 +52,8 @@ export default function TackPage() {
               Tack för din förfrågan!
             </h1>
             <p className="text-lg text-gray-600 leading-relaxed mb-4 max-w-xl mx-auto">
-              Vi har tagit emot dina uppgifter och en av våra projektledare
-              återkommer till dig inom 24 timmar med ett prisförslag.
+              Vi har tagit emot dina uppgifter. Vi kontaktar dig, vanligtvis
+              samma vardag, för att boka en kostnadsfri takkontroll.
             </p>
             <p className="text-gray-500 mb-10">
               Har du bråttom? Ring oss direkt, vi svarar vardagar 07–17.
