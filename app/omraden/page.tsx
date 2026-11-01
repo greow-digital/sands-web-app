@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMeta({
   path: "/omraden",
   title: "Vi tar tak i hela Stockholm | områden vi servar | Sands",
   description:
-    "Sands Entreprenad utför takbyte i hela Stockholmsregionen: Bromma, Nacka, Täby, Sollentuna, Norrtälje och 25+ områden. Få prisförslag inom 24 h.",
+    "Takbyte i hela Stockholmsregionen: Bromma, Nacka, Täby, Sollentuna, Norrtälje och 25+ områden. Fast pris inom 72 h efter kostnadsfri takkontroll.",
 });
 
 const regionOrder = [

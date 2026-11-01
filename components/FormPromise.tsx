@@ -66,7 +66,7 @@ export default function FormPromise({
         className="text-sm font-bold mb-3"
         style={{ color: "var(--color-dark)" }}
       >
-        Få ett fast prisförslag inom 24 h
+        Fast prisförslag inom 72 h efter takkontrollen
       </p>
       <ul className="space-y-2">
         {[

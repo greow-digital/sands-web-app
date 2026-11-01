@@ -683,7 +683,7 @@ export default async function Home() {
             </div>
             <p className="text-lg text-gray-600 mb-9 leading-relaxed">
               Vi inspekterar taket på plats och lämnar ett komplett fast
-              pris inom 24 timmar. Helt utan förpliktelser.
+              pris inom 72 timmar. Helt utan förpliktelser.
             </p>
             <div className="max-w-md mx-auto text-left">
               <LeadForm

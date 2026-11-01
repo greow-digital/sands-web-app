@@ -133,7 +133,7 @@ export default function TjansterPage() {
                 </h2>
                 <p className="text-gray-600 mb-8 leading-relaxed">
                   Vi gör en kostnadsfri takkontroll på plats och lämnar ett
-                  komplett fast pris inom 24 timmar. Inga dolda kostnader, inga
+                  komplett fast pris inom 72 timmar. Inga dolda kostnader, inga
                   säljsamtal i efterhand.
                 </p>
                 <ul className="space-y-3 mb-8">
