@@ -647,3 +647,19 @@ const TAK_TJANST = /tak|panno|plåt|papp|tegel|betong|nock|vindskiv|hängränn|s
 export const takTestimonials: Testimonial[] = testimonials.filter((t) =>
   TAK_TJANST.test(t.tjanst)
 );
+
+/*
+  Betyget och citatet ovanför knappen i frågeflödets formulärsteg, på /lp och
+  startsidan. Kort, så att knappen syns utan scroll på en mobil i 375×667.
+  Hämtas ordagrant ur datan och finns inte bland omdömena längre ner på
+  sidorna. Saknas det fallerar bygget, hellre det än ett tomt eller påhittat
+  citat.
+*/
+const FORMULAR_CITAT = takTestimonials.find((t) => t.name === "Hasse" && t.ort === "Sollentuna");
+if (!FORMULAR_CITAT) throw new Error("Hittar inte omdömet från Hasse i Sollentuna");
+
+export const formularFortroende = {
+  betyg: AVG_RATING,
+  antal: TOTAL_REVIEWS,
+  citat: { text: FORMULAR_CITAT.text, namn: FORMULAR_CITAT.name, ort: FORMULAR_CITAT.ort },
+};

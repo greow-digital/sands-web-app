@@ -26,7 +26,10 @@ import type { MaterialKey } from "@/lib/material";
   - Steget meddelas till den fasta knappen via "lp:steg", så att den kan
     säga "Fortsätt där du var".
 
-  Knappen säger "Få gratis offert", undantaget i SEO.md §5 för /lp.
+  Samma flöde ligger i startsidans hero (beslut 1 nov 2026), med egen
+  formId och källa så att leads och spårning går att skilja åt.
+
+  Knappen säger "Få kostnadsfri offert" (beslut 1 nov 2026).
 */
 
 export type Arende = "byta" | "lagga-om" | "lackage" | "annat";
@@ -71,15 +74,33 @@ const I_OFFERTEN = [
 
 type GtagFn = (event: string, name: string, params: object) => void;
 
+/** Var flödet ligger. Styr formId, källan i spårningen och meddelandet. */
+export type Plats = "lp" | "startsida";
+
+// scrollMt: startsidan har en fast meny på 64/80 px som kortet annars
+// hamnar under när det flyttas upp. /lp saknar meny.
+const PLATSER: Record<Plats, { formId: string; etikett: string; fran: string; scrollMt: string }> = {
+  lp: { formId: "lp_hero", etikett: "landningssida", fran: "Från landningssidan", scrollMt: "scroll-mt-3" },
+  startsida: {
+    formId: "home_hero",
+    etikett: "startsida",
+    fran: "Från startsidan",
+    scrollMt: "scroll-mt-[76px] lg:scroll-mt-[92px]",
+  },
+};
+
 export default function LpQuiz({
   sokord,
   forval,
   fortroende,
+  plats = "lp",
 }: {
-  sokord: string;
+  sokord?: string;
   forval?: Arende;
   fortroende?: Fortroende;
+  plats?: Plats;
 }) {
+  const { formId, etikett, fran, scrollMt } = PLATSER[plats];
   const [arende, setArende] = useState<Arende | undefined>(forval);
   const [taktyp, setTaktyp] = useState<string>();
   const [storlek, setStorlek] = useState<string>();
@@ -105,8 +126,8 @@ export default function LpQuiz({
     if (typeof window === "undefined" || !("gtag" in window)) return;
     (window as unknown as { gtag: GtagFn }).gtag("event", namn, {
       event_category: "engagement",
-      event_label: "landningssida",
-      form_id: "lp_hero",
+      event_label: etikett,
+      form_id: formId,
       sokord,
       ...params,
     });
@@ -147,8 +168,11 @@ export default function LpQuiz({
     setSteg(nasta);
     ga(`lp_step_${nasta}`, params);
     requestAnimationFrame(() => {
-      const topp = ref.current?.getBoundingClientRect().top ?? 0;
-      if (topp < 0 || tillFormular) ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const el = ref.current;
+      if (!el) return;
+      // Under en fast meny räknas kortet som utanför bild.
+      const meny = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+      if (el.getBoundingClientRect().top < meny || tillFormular) el.scrollIntoView({ behavior: "smooth", block: "start" });
       rubrikRef.current?.focus({ preventScroll: true });
     });
   }
@@ -182,10 +206,10 @@ export default function LpQuiz({
   const taktypLabel = TAKTYPER.find((t) => t.value === taktyp)?.label ?? "";
 
   const meddelande = [
-    `Från landningssidan: ${arendeLabel.toLowerCase()}`,
+    `${fran}: ${arendeLabel.toLowerCase()}`,
     taktyp ? `tak idag: ${taktypLabel.toLowerCase()}` : "",
     storlekLabel ? `boyta ${storlekLabel.toLowerCase()}` : "",
-    `sökord: ${sokord}`,
+    sokord ? `sökord: ${sokord}` : "",
     annonsSokord ? `annonssökord: ${annonsSokord}` : "",
   ]
     .filter(Boolean)
@@ -214,7 +238,7 @@ export default function LpQuiz({
   return (
     <div
       ref={ref}
-      className="scroll-mt-3 rounded-[28px] bg-white shadow-[0_24px_70px_-24px_rgba(0,0,0,0.55)] ring-1 ring-black/5 p-5 sm:p-7"
+      className={`${scrollMt} rounded-[28px] bg-white shadow-[0_24px_70px_-24px_rgba(0,0,0,0.55)] ring-1 ring-black/5 p-5 sm:p-7`}
     >
       {/* Progress och tillbaka */}
       <div className="flex items-center gap-3 mb-4">
@@ -251,7 +275,7 @@ export default function LpQuiz({
           >
             Vad behöver du hjälp med?
           </p>
-          <p className="text-sm text-gray-500 mt-1 mb-4">Tre snabba frågor, sedan får du en gratis offert.</p>
+          <p className="text-sm text-gray-500 mt-1 mb-4">Tre snabba frågor, sedan får du en kostnadsfri offert.</p>
           <div className="space-y-2.5">
             {ARENDEN.map((a) => {
               const Ikon = a.icon;
@@ -385,7 +409,7 @@ export default function LpQuiz({
 
           <LeadForm
             variant="hero"
-            formId="lp_hero"
+            formId={formId}
             fields="minimal"
             // Telefon och e-post krävs båda (beslut 27 okt 2026).
             contact="phone-and-email"
@@ -419,7 +443,7 @@ export default function LpQuiz({
                 </div>
               )
             }
-            ctaText="Få gratis offert"
+            ctaText="Få kostnadsfri offert"
             extraPayload={{
               roofType: taktyp ? taktypLabel : undefined,
               area: kvm ? `${kvm} m²` : undefined,
