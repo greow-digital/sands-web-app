@@ -80,7 +80,7 @@ const UPPLAGG: { value: Upplagg; label: string; sub: string; icon: typeof Home }
     sub: "Vi tittar på taket på plats och ger ett fast pris",
     icon: ClipboardCheck,
   },
-  { value: "prisforslag", label: "Endast prisförslag", sub: "Få en prisindikation utan hembesök", icon: Calculator },
+  { value: "prisforslag", label: "Endast prisförslag", sub: "Få ditt prisförslag utan hembesök", icon: Calculator },
 ];
 
 // Det offerten innehåller, samma punkter som "Det här ingår" hade på sidan.
