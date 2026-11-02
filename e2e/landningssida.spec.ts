@@ -31,12 +31,18 @@ test.describe("Landningssidan /lp", () => {
     await synsUtanScroll(page, formular.locator('input[type="text"]').first());
     await synsUtanScroll(page, formular.getByRole("button", { name: "Få kostnadsfri offert", exact: true }));
 
+    // Adressfältet för takkontrollen (2 nov 2026), frivilligt och märkt för autofyll.
+    const adress = formular.getByLabel(/Adress för takkontrollen/);
+    await expect(adress).toHaveAttribute("autocomplete", "street-address");
+    await adress.fill("Testvägen 1, Sollentuna");
+
     await skicka(page, formular, "Få kostnadsfri offert");
     expect(leads).toHaveLength(1);
     expect(leads[0]).toMatchObject({ formId: "lp_hero", leadSource: "landningssida", source: "/lp/taklaggare" });
     expect(leads[0].message).toContain("byta tak");
     expect(leads[0].message).toContain("tegelpannor");
     expect(leads[0].message).toContain("önskar: kostnadsfri takkontroll");
+    expect(leads[0].message).toContain("Adress: Testvägen 1, Sollentuna");
   });
 
   test("endast prisförslag ändrar formulärsteget och följer med leadet", async ({ page }) => {
@@ -51,6 +57,7 @@ test.describe("Landningssidan /lp", () => {
     await expect(formular.getByText("Få ditt prisförslag")).toBeVisible();
     // Listan över vad offerten efter takkontrollen innehåller visas inte.
     await expect(formular.getByText("Det här ingår i offerten")).toHaveCount(0);
+    await expect(formular.getByLabel(/Adress/)).toHaveCount(0);
     await page.waitForTimeout(900);
     await synsUtanScroll(page, formular.getByRole("button", { name: "Få prisförslag", exact: true }));
 

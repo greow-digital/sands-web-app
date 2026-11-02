@@ -141,6 +141,8 @@ export default function LpQuiz({
   const antalSteg = offertSpar || !arende ? 5 : 2;
   const kontaktSteg = offertSpar ? 5 : 2;
   const baraPris = offertSpar && upplagg === "prisforslag";
+  // Adressfältet visas bara för den som valt takkontroll på plats.
+  const medAdress = offertSpar && upplagg === "takkontroll";
 
   function ga(namn: string, params: object = {}) {
     if (typeof window === "undefined" || !("gtag" in window)) return;
@@ -456,7 +458,10 @@ export default function LpQuiz({
           {/* Svaren som en kort bekräftelse: förfrågan är redan halvvägs
               ifylld. Vad offerten innehåller står under knappen, så att
               fälten kommer upp direkt. */}
-          {offertSpar && (
+          {/* Med adressfältet (takkontroll) får etiketterna ge plats, så att
+              knappen fortfarande syns utan scroll i 375×667. Rubriken och
+              texten ovanför säger redan vad förfrågan gäller. */}
+          {offertSpar && !medAdress && (
             <div className="flex flex-wrap gap-1.5 mb-4">
               {[arendeLabel, taktypLabel, storlekLabel, upplaggLabel].filter(Boolean).map((t) => (
                 <span
@@ -486,6 +491,7 @@ export default function LpQuiz({
             showMessage
             // Fritexten ligger bakom en länk under knappen.
             meddelandeSomLank
+            adress={medAdress}
             ovanforKnapp={
               fortroende && (
                 <div className="rounded-xl bg-[#F5F8FF] px-4 py-3">

@@ -14,6 +14,7 @@ type FormData = {
   phone: string;
   email?: string;
   message?: string;
+  address?: string;
 };
 
 function getCookie(name: string): string | undefined {
@@ -81,6 +82,12 @@ interface LeadFormProps {
   meddelandeSomLank?: boolean;
   /** Innehåll direkt ovanför knappen, t.ex. betyg och ett kundcitat. */
   ovanforKnapp?: React.ReactNode;
+  /**
+   * Visar ett frivilligt adressfält (frågeflödet, när besökaren valt
+   * takkontroll på plats). Adressen följer med i meddelandet till Sands,
+   * eftersom arkets kolumner sätts av Apps Script.
+   */
+  adress?: boolean;
 }
 
 export default function LeadForm({
@@ -99,6 +106,7 @@ export default function LeadForm({
   onSubmitSuccess,
   meddelandeSomLank = false,
   ovanforKnapp,
+  adress = false,
 }: LeadFormProps) {
   const {
     register,
@@ -223,7 +231,11 @@ export default function LeadForm({
           // Ett meddelande från omslaget (t.ex. frågeflödets svar) och det
           // kunden själv skrivit slås ihop. Annars skrev det ena över det andra.
           message:
-            [extraPayload?.message, data.message?.trim()]
+            [
+              extraPayload?.message,
+              data.address?.trim() ? `Adress: ${data.address.trim()}` : "",
+              data.message?.trim(),
+            ]
               .filter(Boolean)
               .join("\n\n") || undefined,
           formId,
@@ -578,6 +590,23 @@ export default function LeadForm({
               />
             </div>
           </>
+        )}
+
+        {adress && (
+          <div>
+            <label htmlFor={fid("address")} className={labelCls} style={labelStyle}>
+              Adress för takkontrollen{" "}
+              <span className="text-gray-400 font-normal">(valfritt)</span>
+            </label>
+            <input
+              id={fid("address")}
+              type="text"
+              autoComplete="street-address"
+              placeholder="Gatuadress och ort"
+              className={inputCls(false)}
+              {...trackField("address", register("address"))}
+            />
+          </div>
         )}
 
         {ovanforKnapp}
