@@ -480,25 +480,6 @@ export default function LeadForm({
                 asterisk säger redan att de är valfria, och den som lämnar
                 båda tomma får kravet som felmeddelande precis när det
                 behövs. */}
-            {showMessage && visaMeddelande && (
-              <div className="col-span-full">
-                <label
-                  htmlFor={fid("message")}
-                  className={labelCls}
-                  style={labelStyle}
-                >
-                  Något vi bör veta{" "}
-                  <span className="text-gray-400 font-normal">(valfritt)</span>
-                </label>
-                <textarea
-                  id={fid("message")}
-                  rows={2}
-                  placeholder="Kupor, läckage, eternit eller annat"
-                  className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
-                  {...trackField("message", register("message"))}
-                />
-              </div>
-            )}
           </div>
         ) : (
           <>
@@ -609,6 +590,42 @@ export default function LeadForm({
           </div>
         )}
 
+        {fields === "minimal" && showMessage && visaMeddelande && (
+          <div>
+            <label
+              htmlFor={fid("message")}
+              className={labelCls}
+              style={labelStyle}
+            >
+              Något vi bör veta{" "}
+              <span className="text-gray-400 font-normal">(valfritt)</span>
+            </label>
+            <textarea
+              id={fid("message")}
+              rows={2}
+              placeholder="Kupor, läckage, eternit eller annat"
+              className="w-full px-4 py-3 rounded-[5px] text-sm outline-none border border-transparent bg-[#F1F4F7] focus:border-[#2B74FC] transition-colors resize-none"
+              {...trackField("message", register("message"))}
+            />
+          </div>
+        )}
+
+        {/* Länken direkt under sista fältet, ovanför knappen (beslut 2 nov
+            2026), tätt under fältet den hör till. Fältet öppnas på samma
+            plats när man trycker. */}
+        {showMessage && !visaMeddelande && (
+          <button
+            type="button"
+            className="block -mt-3 text-xs font-semibold text-[#2B74FC] hover:underline"
+            onClick={() => {
+              setVisaMeddelande(true);
+              setTimeout(() => document.getElementById(fid("message"))?.focus(), 0);
+            }}
+          >
+            + Lägg till ett meddelande (valfritt)
+          </button>
+        )}
+
         {ovanforKnapp}
 
         {/* Submit */}
@@ -630,21 +647,6 @@ export default function LeadForm({
             ? "Skickar..."
             : ctaText || "Få prisförslag"}
         </button>
-
-        {/* Länken ligger under knappen, så att knappen hamnar högre upp på
-            mobil. Fältet öppnas ovanför knappen när man trycker. */}
-        {showMessage && !visaMeddelande && (
-          <button
-            type="button"
-            className="block mx-auto text-xs font-semibold text-[#2B74FC] hover:underline"
-            onClick={() => {
-              setVisaMeddelande(true);
-              setTimeout(() => document.getElementById(fid("message"))?.focus(), 0);
-            }}
-          >
-            + Lägg till ett meddelande (valfritt)
-          </button>
-        )}
 
         {notBindingNote && (
           <p className="text-xs text-gray-500 text-center">

@@ -270,7 +270,7 @@ export default function LpQuiz({
       className={`${scrollMt} rounded-[28px] bg-white shadow-[0_24px_70px_-24px_rgba(0,0,0,0.55)] ring-1 ring-black/5 p-5 sm:p-7`}
     >
       {/* Progress och tillbaka */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-3">
         <div className="flex flex-1 gap-1.5" aria-hidden="true">
           {Array.from({ length: antalSteg }).map((_, i) => (
             <span
