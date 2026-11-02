@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
+  Calculator,
   CheckCircle,
   ChevronRight,
+  ClipboardCheck,
   Droplets,
   Hammer,
   Home,
@@ -23,13 +25,17 @@ import type { MaterialKey } from "@/lib/material";
   - Varianten i URL:en kan förvälja första svaret (/lp/takbyte börjar på
     steg 2), så den som sökt något specifikt slipper ett steg.
   - Läckage och annat takarbete går direkt till kontakt med fritext.
+  - Byte och omläggning har ett fjärde steg (beslut 2 nov 2026, Samuel):
+    kostnadsfri takkontroll eller endast prisförslag. Valet följer med
+    leaden och styr texten i formulärsteget.
   - Steget meddelas till den fasta knappen via "lp:steg", så att den kan
     säga "Fortsätt där du var".
 
   Samma flöde ligger i startsidans hero (beslut 1 nov 2026), med egen
   formId och källa så att leads och spårning går att skilja åt.
 
-  Knappen säger "Få kostnadsfri offert" (beslut 1 nov 2026).
+  Knappen säger "Få kostnadsfri offert" (beslut 1 nov 2026), eller "Få
+  prisförslag" när besökaren valt endast prisförslag.
 */
 
 export type Arende = "byta" | "lagga-om" | "lackage" | "annat";
@@ -63,6 +69,18 @@ const STORLEKAR = [
   { value: "125", label: "100–150 m²", boyta: 125 },
   { value: "175", label: "150–200 m²", boyta: 175 },
   { value: "225", label: "Över 200 m²", boyta: 225 },
+];
+
+export type Upplagg = "takkontroll" | "prisforslag";
+
+const UPPLAGG: { value: Upplagg; label: string; sub: string; icon: typeof Home }[] = [
+  {
+    value: "takkontroll",
+    label: "Kostnadsfri takkontroll",
+    sub: "Vi tittar på taket på plats och ger ett fast pris",
+    icon: ClipboardCheck,
+  },
+  { value: "prisforslag", label: "Endast prisförslag", sub: "Ett prisförslag först, utan besök", icon: Calculator },
 ];
 
 // Det offerten innehåller, samma punkter som "Det här ingår" hade på sidan.
@@ -104,6 +122,7 @@ export default function LpQuiz({
   const [arende, setArende] = useState<Arende | undefined>(forval);
   const [taktyp, setTaktyp] = useState<string>();
   const [storlek, setStorlek] = useState<string>();
+  const [upplagg, setUpplagg] = useState<Upplagg>();
   const [steg, setSteg] = useState(forval ? 2 : 1);
   const ref = useRef<HTMLDivElement>(null);
   const rubrikRef = useRef<HTMLParagraphElement>(null);
@@ -118,9 +137,10 @@ export default function LpQuiz({
 
   const offertSpar = arende === "byta" || arende === "lagga-om";
   // Innan ärendet är valt visas den längre vägen, annars hoppar raden från
-  // två till fyra steg efter första svaret.
-  const antalSteg = offertSpar || !arende ? 4 : 2;
-  const kontaktSteg = offertSpar ? 4 : 2;
+  // två till fem steg efter första svaret.
+  const antalSteg = offertSpar || !arende ? 5 : 2;
+  const kontaktSteg = offertSpar ? 5 : 2;
+  const baraPris = offertSpar && upplagg === "prisforslag";
 
   function ga(namn: string, params: object = {}) {
     if (typeof window === "undefined" || !("gtag" in window)) return;
@@ -192,9 +212,14 @@ export default function LpQuiz({
   function valjStorlek(s: string) {
     setStorlek(s);
     ga("lp_answer", { question: "storlek", answer: s });
+    setTimeout(() => till(4), 170);
+  }
+  function valjUpplagg(u: Upplagg) {
+    setUpplagg(u);
+    ga("lp_answer", { question: "upplagg", answer: u });
     setTimeout(() => {
-      till(4, {}, true);
-      ga("lp_form_view", { arende, taktyp, storlek: s });
+      till(5, {}, true);
+      ga("lp_form_view", { arende, taktyp, storlek, upplagg: u });
     }, 170);
   }
 
@@ -204,9 +229,11 @@ export default function LpQuiz({
 
   const arendeLabel = ARENDEN.find((a) => a.value === arende)?.label ?? "";
   const taktypLabel = TAKTYPER.find((t) => t.value === taktyp)?.label ?? "";
+  const upplaggLabel = UPPLAGG.find((u) => u.value === upplagg)?.label ?? "";
 
   const meddelande = [
     `${fran}: ${arendeLabel.toLowerCase()}`,
+    offertSpar && upplaggLabel ? `önskar: ${upplaggLabel.toLowerCase()}` : "",
     taktyp ? `tak idag: ${taktypLabel.toLowerCase()}` : "",
     storlekLabel ? `boyta ${storlekLabel.toLowerCase()}` : "",
     sokord ? `sökord: ${sokord}` : "",
@@ -371,6 +398,42 @@ export default function LpQuiz({
         </>
       )}
 
+      {steg === 4 && offertSpar && (
+        <>
+          <p
+            ref={rubrikRef}
+            tabIndex={-1}
+            className="text-[22px] font-extrabold tracking-[-0.02em] leading-tight outline-none mb-4"
+            style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
+          >
+            Hur vill du gå vidare?
+          </p>
+          <div className="space-y-2.5">
+            {UPPLAGG.map((u) => {
+              const Ikon = u.icon;
+              const aktiv = upplagg === u.value;
+              return (
+                <button key={u.value} type="button" aria-pressed={aktiv} onClick={() => valjUpplagg(u.value)} className={ruta(aktiv)}>
+                  <span
+                    className="h-10 w-10 shrink-0 rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: "rgba(43,116,252,0.08)", color: "var(--color-primary)" }}
+                  >
+                    <Ikon size={19} />
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span className="block font-bold text-[15px]" style={{ color: "var(--color-dark)" }}>
+                      {u.label}
+                    </span>
+                    <span className="block text-xs text-gray-500">{u.sub}</span>
+                  </span>
+                  <ChevronRight size={18} className="text-gray-300 group-hover:text-[#2B74FC]" />
+                </button>
+              );
+            })}
+          </div>
+        </>
+      )}
+
       {steg === kontaktSteg && (
         <>
           <p
@@ -379,14 +442,15 @@ export default function LpQuiz({
             className="text-[22px] font-extrabold tracking-[-0.02em] leading-tight outline-none"
             style={{ fontFamily: "var(--font-heading)", color: "var(--color-dark)" }}
           >
-            {offertSpar ? "Få din offert med fast pris" : "Vart når vi dig?"}
+            {baraPris ? "Få ditt prisförslag" : offertSpar ? "Få din offert med fast pris" : "Vart når vi dig?"}
           </p>
           {/* 13 av 16 som nådde formuläret 19–25 okt rörde aldrig ett fält.
               Texten säger vad som händer efter knappen, så att ett
               telefonsamtal inte kommer som en överraskning. */}
           <p className="text-sm text-gray-600 mt-1 mb-3">
-            Vi ringer upp så snart vi har fått din förfrågan och bokar en
-            kostnadsfri takkontroll.
+            {baraPris
+              ? "Vi hör av oss så snart vi har fått din förfrågan."
+              : "Vi ringer upp så snart vi har fått din förfrågan och bokar en kostnadsfri takkontroll."}
           </p>
 
           {/* Svaren som en kort bekräftelse: förfrågan är redan halvvägs
@@ -394,7 +458,7 @@ export default function LpQuiz({
               fälten kommer upp direkt. */}
           {offertSpar && (
             <div className="flex flex-wrap gap-1.5 mb-4">
-              {[arendeLabel, taktypLabel, storlekLabel].filter(Boolean).map((t) => (
+              {[arendeLabel, taktypLabel, storlekLabel, upplaggLabel].filter(Boolean).map((t) => (
                 <span
                   key={t}
                   className="inline-flex items-center gap-1 rounded-full bg-[#F5F8FF] px-2.5 py-1 text-xs font-semibold"
@@ -443,7 +507,9 @@ export default function LpQuiz({
                 </div>
               )
             }
-            ctaText="Få kostnadsfri offert"
+            // Den som valt endast prisförslag får sajtens vanliga knapptext,
+            // så att knappen säger samma sak som rubriken.
+            ctaText={baraPris ? "Få prisförslag" : "Få kostnadsfri offert"}
             extraPayload={{
               roofType: taktyp ? taktypLabel : undefined,
               area: kvm ? `${kvm} m²` : undefined,
@@ -454,6 +520,7 @@ export default function LpQuiz({
                 arende,
                 taktyp: taktyp ?? "ej angiven",
                 storlek: storlek ?? "ej angiven",
+                upplagg: upplagg ?? "ej angiven",
                 annonssokord: annonsSokord ?? "saknas",
               })
             }
@@ -462,7 +529,9 @@ export default function LpQuiz({
             Kostnadsfritt · Utan förpliktelser · Svar inom 24 timmar
           </p>
 
-          {offertSpar && (
+          {/* Listan beskriver offerten efter takkontrollen, så den visas
+              inte för den som valt endast prisförslag. */}
+          {offertSpar && !baraPris && (
             <div className="mt-5 pt-4 border-t border-gray-100">
               <p className="text-xs font-bold mb-2" style={{ color: "var(--color-dark)" }}>
                 Det här ingår i offerten

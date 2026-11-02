@@ -20,7 +20,8 @@ test("startsidan laddar och frågeflödet i heron skickar leadet", async ({ page
   await hero.getByRole("button", { name: /Byta tak/ }).click();
   await hero.getByRole("button", { name: "Betongpannor" }).click();
   await hero.getByRole("button", { name: "100–150 m²" }).click();
-  await skicka(page, hero, "Få kostnadsfri offert");
+  await hero.getByRole("button", { name: /Endast prisförslag/ }).click();
+  await skicka(page, hero, "Få prisförslag");
   expect(leads[0]).toMatchObject({ formId: "home_hero", source: "/" });
-  expect(leads[0].message).toContain("Från startsidan: byta tak");
+  expect(leads[0].message).toContain("Från startsidan: byta tak, önskar: endast prisförslag");
 });

@@ -13,7 +13,7 @@ Kort sammanfattning av det viktigaste:
   - **In-page primary** (hero, slutet av sektioner, mellan content): "Boka kostnadsfri takkontroll"
   - **Aldrig:** "Få gratis offert", "Kontakta oss", "Få offert", eller "Boka takkontroll" utan "kostnadsfri" (förutom som rubrik/eyebrow)
   - **Undantag (beslut 19 okt 2026):** offertflödet på /priser och /taktest (`components/Offertflode.tsx`) har knappen "Få gratis offert", eftersom det ligger närmast intentionen. Gäller bara där.
-  - **Frågeflödet (`components/LpQuiz.tsx`)** på /lp och i startsidans hero har knappen "Få kostnadsfri offert" (beslut 1 nov 2026).
+  - **Frågeflödet (`components/LpQuiz.tsx`)** på /lp och i startsidans hero har knappen "Få kostnadsfri offert" (beslut 1 nov 2026). Har besökaren valt "Endast prisförslag" i steg 4 säger knappen "Få prisförslag".
 - **Priser:** alltid med "från" eller "efter kostnadsfri takkontroll"
 - **Förbjudet:** "familjeföretag", "Järfälla", syntetiska recensioner
 - **Synonymer:** varje service-sida måste väva in minst 3 av: takbyte, byta tak, lägga om tak, lägga nytt tak, omläggning av tak
