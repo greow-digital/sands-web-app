@@ -10,6 +10,9 @@ test.describe("Landningssidan /lp", () => {
     await knapp(page, /Byta tak/).first().click();
     await knapp(page, "Tegelpannor").click();
     await knapp(page, "100–150 m²").click();
+    // Fjärde steget (2 nov 2026): takkontroll eller endast prisförslag.
+    await expect(page.getByText("Hur vill du gå vidare?")).toBeVisible();
+    await knapp(page, /Kostnadsfri takkontroll/).click();
 
     const formular = page.locator("#formular");
     await expect(formular.getByText("Få din offert med fast pris")).toBeVisible();
@@ -26,13 +29,40 @@ test.describe("Landningssidan /lp", () => {
     // Formulärfixen 22 okt 2026: namnfältet och knappen syns direkt.
     await page.waitForTimeout(900);
     await synsUtanScroll(page, formular.locator('input[type="text"]').first());
-    await synsUtanScroll(page, formular.getByRole("button", { name: "Få gratis offert", exact: true }));
+    await synsUtanScroll(page, formular.getByRole("button", { name: "Få kostnadsfri offert", exact: true }));
 
-    await skicka(page, formular, "Få gratis offert");
+    // Adressfältet för takkontrollen (2 nov 2026), frivilligt och märkt för autofyll.
+    const adress = formular.getByLabel(/Adress för takkontrollen/);
+    await expect(adress).toHaveAttribute("autocomplete", "street-address");
+    await adress.fill("Testvägen 1, Sollentuna");
+
+    await skicka(page, formular, "Få kostnadsfri offert");
     expect(leads).toHaveLength(1);
     expect(leads[0]).toMatchObject({ formId: "lp_hero", leadSource: "landningssida", source: "/lp/taklaggare" });
     expect(leads[0].message).toContain("byta tak");
     expect(leads[0].message).toContain("tegelpannor");
+    expect(leads[0].message).toContain("önskar: kostnadsfri takkontroll");
+    expect(leads[0].message).toContain("Adress: Testvägen 1, Sollentuna");
+  });
+
+  test("endast prisförslag ändrar formulärsteget och följer med leadet", async ({ page }) => {
+    const leads = await forbered(page);
+    await page.goto("/lp/taklaggare");
+    await knapp(page, /Lägga om tak/).first().click();
+    await knapp(page, "Betongpannor").click();
+    await knapp(page, "150–200 m²").click();
+    await knapp(page, /Endast prisförslag/).click();
+
+    const formular = page.locator("#formular");
+    await expect(formular.getByText("Få ditt prisförslag")).toBeVisible();
+    // Listan över vad offerten efter takkontrollen innehåller visas inte.
+    await expect(formular.getByText("Det här ingår i offerten")).toHaveCount(0);
+    await expect(formular.getByLabel(/Adress/)).toHaveCount(0);
+    await page.waitForTimeout(900);
+    await synsUtanScroll(page, formular.getByRole("button", { name: "Få prisförslag", exact: true }));
+
+    await skicka(page, formular, "Få prisförslag");
+    expect(leads[0].message).toContain("önskar: endast prisförslag");
   });
 
   test("sökordet från annonsen väljer variant och följer med leadet", async ({ page }) => {
@@ -43,7 +73,8 @@ test.describe("Landningssidan /lp", () => {
     // Varianten förväljer ärendet, så flödet börjar på taktyp.
     await knapp(page, "Betongpannor").click();
     await knapp(page, "150–200 m²").click();
-    await skicka(page, page.locator("#formular"), "Få gratis offert");
+    await knapp(page, /Kostnadsfri takkontroll/).click();
+    await skicka(page, page.locator("#formular"), "Få kostnadsfri offert");
     expect(leads[0].message).toContain("annonssökord: byta tak");
   });
 
@@ -58,6 +89,7 @@ test.describe("Landningssidan /lp", () => {
     await page.goto("/lp/takbyte");
     await knapp(page, "Betongpannor").click();
     await knapp(page, "Under 100 m²").click();
+    await knapp(page, /Kostnadsfri takkontroll/).click();
     const formular = page.locator("#formular");
 
     // Samma autofyllattribut som huvudformuläret, inuti ett <form>.
@@ -74,14 +106,14 @@ test.describe("Landningssidan /lp", () => {
     // Utan e-post stoppas formuläret.
     await namn.fill("Test Testsson");
     await tel.fill("070-123 45 67");
-    await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
+    await formular.getByRole("button", { name: "Få kostnadsfri offert", exact: true }).click();
     await expect(formular.getByText("Ange din e-post")).toBeVisible();
     expect(leads).toHaveLength(0);
 
     await epost.fill("test@example.com");
     await formular.getByRole("button", { name: "+ Lägg till ett meddelande (valfritt)" }).click();
     await formular.locator("textarea").fill("Kupor på baksidan");
-    await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
+    await formular.getByRole("button", { name: "Få kostnadsfri offert", exact: true }).click();
     await page.waitForURL("**/tack");
     expect(leads).toHaveLength(1);
     expect(leads[0]).toMatchObject({ email: "test@example.com", phone: "070-123 45 67", formId: "lp_hero" });
@@ -93,10 +125,11 @@ test.describe("Landningssidan /lp", () => {
     await page.goto("/lp/takbyte");
     await knapp(page, "Betongpannor").click();
     await knapp(page, "Under 100 m²").click();
+    await knapp(page, /Kostnadsfri takkontroll/).click();
     const formular = page.locator("#formular");
     await formular.locator('input[type="text"]').first().fill("Test Testsson");
     await formular.locator('input[type="tel"]').first().fill("07057819");
-    await formular.getByRole("button", { name: "Få gratis offert", exact: true }).click();
+    await formular.getByRole("button", { name: "Få kostnadsfri offert", exact: true }).click();
     await expect(formular.getByText(/Mobilnummer har 10 siffror/)).toBeVisible();
     expect(leads).toHaveLength(0);
   });

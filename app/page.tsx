@@ -8,6 +8,7 @@ import LatestProjekt from "@/components/LatestProjekt";
 import TaktestCta from "@/components/TaktestCta";
 import HeroCtaTracker from "@/components/HeroCtaTracker";
 import LeadForm from "@/components/LeadForm";
+import LpQuiz from "@/components/LpQuiz";
 import {
   Etikett,
   Fragor,
@@ -18,7 +19,7 @@ import {
   Stjarnor,
   Tidslinje,
 } from "@/components/Byggblock";
-import { AVG_RATING, TOTAL_REVIEWS, startsidaTestimonials } from "@/lib/testimonials";
+import { AVG_RATING, TOTAL_REVIEWS, formularFortroende, startsidaTestimonials } from "@/lib/testimonials";
 import { company, stats } from "@/lib/company";
 import { FLAGGSKEPP_KVM, MATERIAL } from "@/lib/material";
 
@@ -166,26 +167,45 @@ export default async function Home() {
             betalda trafiken.
           */}
           {/*
-            Samma behandling som annonslandningssidan (19 okt 2026): mörk
-            botten, bilden nedtonad och lätt oskarp, en blå glöd i hörnet.
-            Det röda tegeltaket med skorstenen hamnade annars rakt bakom
-            rubriken på mobil, och den blå accenten syntes dåligt mot rött.
-            Bilden är 61 KB i stället för 275 KB, vilket också hjälper LCP.
+            Mobil: samma behandling som annonslandningssidan (19 okt 2026),
+            mörk botten, bilden nedtonad och lätt oskarp, en blå glöd i
+            hörnet. Det röda tegeltaket med skorstenen hamnade annars rakt
+            bakom rubriken, och den blå accenten syntes dåligt mot rött.
+            Bilden är 61 KB, vilket hjälper LCP.
+
+            Desktop (beslut 1 nov 2026): samma hus i full ljusstyrka och
+            skärpa, mörkt bara bakom texten till vänster. Den nedtonade
+            bilden blev för mörk och tråkig på en stor skärm. Egen fil via
+            <picture>, så att mobilen inte laddar den större bilden. Next
+            avråder från preload när LCP-bilden skiljer sig mellan
+            skärmstorlekar, så bilden laddas direkt med hög prioritet.
           */}
-          <Image
-            src="/images/hero-start.webp"
-            alt=""
-            fill
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-            className="object-cover opacity-45"
-          />
+          <picture>
+            {/* Bilderna serveras ooptimerade (next.config), så det finns
+                ingen srcset att hämta via getImageProps. */}
+            <source media="(min-width: 1024px)" srcSet="/images/hero-start-desktop.webp" width={1440} height={1086} />
+            <img
+              src="/images/hero-start.webp"
+              width={1280}
+              height={965}
+              alt=""
+              loading="eager"
+              fetchPriority="high"
+              className="absolute inset-0 h-full w-full object-cover opacity-45 lg:opacity-100 lg:object-[center_30%]"
+            />
+          </picture>
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 lg:hidden"
             style={{
               background:
                 "radial-gradient(120% 70% at 85% 0%, rgba(43,116,252,0.35) 0%, rgba(7,9,13,0) 55%), linear-gradient(180deg, rgba(7,9,13,0.55) 0%, rgba(7,9,13,0.85) 70%, #07090D 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0 hidden lg:block"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(7,9,13,0.86) 0%, rgba(7,9,13,0.72) 34%, rgba(7,9,13,0.25) 62%, rgba(7,9,13,0.05) 100%), linear-gradient(180deg, rgba(7,9,13,0) 70%, rgba(7,9,13,0.35) 100%)",
             }}
           />
 
@@ -195,10 +215,10 @@ export default async function Home() {
                 till 5 juni och togs bort för att mäta hero-flöde mot
                 /offert-flöde. Det är tillbaka eftersom 96 procent av den
                 betalda trafiken aldrig nådde /offert. */}
-            <div className="grid lg:grid-cols-[1.1fr_400px] gap-6 lg:gap-x-14 lg:gap-y-6 items-start">
+            <div className="grid lg:grid-cols-[1fr_440px] gap-6 lg:gap-x-14 lg:gap-y-6 items-start">
             <div className="text-white max-w-3xl lg:col-start-1 lg:row-start-1">
               <h1
-                className="text-[34px] sm:text-[52px] lg:text-[66px] font-extrabold leading-[1.05] tracking-[-0.035em] mb-4"
+                className="text-[34px] sm:text-[52px] lg:text-[58px] font-extrabold leading-[1.05] tracking-[-0.035em] mb-4"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Din takläggare i Stockholm, med fast pris och{" "}
@@ -249,20 +269,17 @@ export default async function Home() {
 
             {/* data-hero-anchor: mobilbaren i botten tar över när det här
                 blocket skrollat ur bild. Tidigare satt ankaret på
-                CTA-knappen som nu är borttagen. */}
+                CTA-knappen som nu är borttagen.
+                Frågeflödet från landningssidan i stället för det korta
+                formuläret (beslut 1 nov 2026, Samuel). Leaden får formId
+                home_hero som tidigare, så källan i Sheets och GA4 är
+                densamma. */}
             <div
-              className="lg:pt-16 lg:col-start-2 lg:row-start-1 lg:row-span-2"
+              id="formular"
+              className="scroll-mt-20 lg:pt-6 lg:col-start-2 lg:row-start-1 lg:row-span-2"
               data-hero-anchor
             >
-              <LeadForm
-                variant="hero"
-                formId="home_hero"
-                fields="minimal"
-                contact="phone-or-email"
-                showMessage
-                ctaText="Få mitt prisförslag"
-                hideHeader="mobile"
-              />
+              <LpQuiz plats="startsida" fortroende={formularFortroende} />
             </div>
             </div>
 

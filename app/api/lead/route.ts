@@ -13,6 +13,9 @@ type LeadPayload = {
   roofType?: string;
   area?: string;
   message?: string;
+  // Frågeflödets adressfält. Står även i meddelandet, eftersom arkets
+  // kolumner sätts av Apps Script.
+  address?: string;
   source?: string;
   formId?: string;
   tag?: string;
