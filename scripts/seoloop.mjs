@@ -247,7 +247,7 @@ function test() {
     ok(e.sida === "*" || e.sida?.startsWith("/"), `${e.id}: sida ska vara en sökväg eller *`);
     ok(typer.includes(e.typ), `${e.id}: okänd typ "${e.typ}"`);
     ok(e.hypotes, `${e.id}: hypotes saknas`);
-    ok(["aktiv", "avslutad"].includes(e.status), `${e.id}: status ska vara aktiv eller avslutad`);
+    ok(["planerad", "aktiv", "avslutad"].includes(e.status), `${e.id}: status ska vara planerad, aktiv eller avslutad`);
     ok(e.status !== "avslutad" || (e.utfall && e.lardom), `${e.id}: ett avslutat experiment behöver utfall och lärdom`);
   }
   // En ändring per sida i taget: två aktiva ändringar på samma sida inom

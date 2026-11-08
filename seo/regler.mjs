@@ -78,6 +78,7 @@ export const AMNEN = [
   { amne: "shingel", monster: /shingel/, sida: "/tjanster/shingeltak" },
   { amne: "tegeltak", monster: /tegel/, sida: "/tjanster/tegeltak" },
   { amne: "betongtak", monster: /betong/, sida: "/tjanster/betongtak" },
+  { amne: "takreparation", monster: /reparat|reparera|laga tak|takarbete/, sida: "/tjanster/takreparation", alternativ: ["/blogg/taket-lacker"] },
   { amne: "takbyte", monster: /byt(a|e)|takbyte|lägga om|omläggning|nytt tak|lägga.*tak|renover/, sida: "/tjanster/taklaggning", alternativ: ["/"] },
   { amne: "takläggare", monster: /takl[äa]gg|takfirm|takföretag|tak ?företag|takentreprenad/, sida: "/", alternativ: ["/tjanster/taklaggning"] },
 ];

@@ -15,6 +15,11 @@ const tegel140 = prisEfterRot("tegel", FLAGGSKEPP_KVM);
 export type Artikel = {
   slug: string;
   titel: string;
+  /**
+   * Titel i sökresultatet, om den ska skilja sig från rubriken. Utan den
+   * blir det "<titel> | Sands".
+   */
+  seoTitel?: string;
   ingress: string;
   datum: string;
   kategori: string;
@@ -786,6 +791,10 @@ Vill du jämföra kostnader för olika takmaterial hittar du räkneexempel på v
   {
     slug: "certifierad-taklaggare",
     titel: "Certifierad takläggare: så kontrollerar du firman",
+    // SEO-loopen F2 (8 nov 2026, seo/experiment.json E8): "auktoriserad
+    // takläggare" låg på plats 5 med 1 % klickfrekvens. Ordet de sökte på
+    // fanns inte i titeln.
+    seoTitel: "Auktoriserad eller certifierad takläggare? Så kollar du",
     ingress:
       "Det finns ingen statlig auktorisation för takläggare i Sverige. Här är kontrollerna som säger något om kvaliteten, och varningstecknen.",
     datum: "2026-08-06",

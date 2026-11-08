@@ -20,7 +20,8 @@ import {
 import RelateradeProjekt from "@/components/RelateradeProjekt";
 import OmdomenInline from "@/components/OmdomenInline";
 import TrustBadgesRow from "@/components/TrustBadgesRow";
-import { takTestimonials } from "@/lib/testimonials";
+import { AVG_RATING, TOTAL_REVIEWS, takTestimonials } from "@/lib/testimonials";
+import { MATERIAL } from "@/lib/material";
 import TaktestInlineCta from "@/components/TaktestInlineCta";
 
 export async function generateStaticParams() {
@@ -45,6 +46,14 @@ const OMRADE_CONFIG: Record<
     customTitle: "Takläggare i Hässelby, villaspecialist | Sands",
     customDesc:
       "Takläggare i Hässelby villastad, gård och strand. Specialist på 50-60-talsvillor. Fast pris, 30 års garanti och ROT på fakturan.",
+  },
+  // SEO-loopen F1 (8 nov 2026, seo/experiment.json E7): Spånga låg på plats
+  // 6 med 167 visningar och 0 klick på mallens titel. Testet: betyget i
+  // titeln och tjänsterna i beskrivningen. Övriga områdessidor behåller
+  // mallen och är kontrollgrupp. Fungerar det blir det ny mall.
+  spanga: {
+    customTitle: `Takläggare i Spånga, ${AVG_RATING} av 5 i ${TOTAL_REVIEWS} omdömen | Sands`,
+    customDesc: `Takbyte och takomläggning i Spånga, Sundby och Solhem från ${MATERIAL.betong.prisM2.toLocaleString("sv-SE")} kr/m² efter ROT. Fast pris efter kostnadsfri takkontroll, upp till 30 års garanti.`,
   },
   "upplands-vasby": { shortTitle: true },
   "upplands-bro": { shortTitle: true },
