@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "regelkoll": "node scripts/regelkoll.mjs",
+    "sokord": "node scripts/sokordsloop.mjs",
+    "sokord:test": "node scripts/sokordsloop.mjs --test",
     "test:e2e": "playwright test"
   },
   "dependencies": {

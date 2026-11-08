@@ -2,6 +2,8 @@
 #
 # 1. Regelkontroll: projektreglerna i CLAUDE.md och SEO.md (CTA-texter,
 #    förbjudna ord, streck, hårdkodade priser, /tack och konverteringskoden).
+#    Sökordsreglerna för Google Ads provas mot sina spärrar
+#    (ads/sokordsregler.mjs).
 # 2. Lint på de filer som ändrats i PR:en (äldre filer har kända fel).
 # 3. Typkontroll och produktionsbygge.
 # 4. Flödestester i Playwright: landningssidan, /priser och startsidan.
@@ -40,6 +42,9 @@ jobs:
 
       - name: Regelkontroll
         run: node scripts/regelkoll.mjs --bas origin/${{ github.base_ref }}
+
+      - name: Sökordsreglerna
+        run: node scripts/sokordsloop.mjs --test
 
       - name: Lint (ändrade filer)
         run: |
