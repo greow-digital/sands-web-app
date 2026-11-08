@@ -53,10 +53,19 @@ sajten och inte gissar.
 - `npm run seo:test` kontrollerar experimentloggen och att varje ämne
   pekar på en sida som finns. Det körs i CI på varje PR.
 
-## Konkurrenter (inte igång)
+## Konkurrenter
 
-Kräver en lista med konkurrenter och nätverksåtkomst till deras sajter i
-den här miljön. Loopen läser då deras sitemaps varje vecka, ser nya och
-ändrade sidor, och jämför titlar och rubriker för kärnsökningarna med
-våra. Googles sökresultat läses inte, så placeringar finns bara för våra
-egna sidor.
+Loopen följer Vesivek, Villatakexperten och Takhero (`seo/konkurrenter.mjs`).
+
+- `npm run seo:konkurrenter -- --ut seo/varv/<datum>-konkurrenter.md` läser
+  deras sitemaps, jämför med förra veckans ögonblicksbild i
+  `seo/konkurrenter/<domän>.json` och läser titel, beskrivning och rubriker
+  på nya och ändrade sidor om tak. Första varvet läser de sidor om tak som
+  finns. Adresserna kopplas till våra ämnen i `seo/regler.mjs`.
+- robots.txt följs, högst 25 sidor läses per konkurrent och varv, med en
+  paus mellan anropen. Loopen presenterar sig som SandsSEOLoop, utan
+  personuppgifter.
+- Sajterna nås bara från environmentet **sands-web-app**, som tillåter dem.
+  En misslyckad hämtning skriver inte över förra veckans bild.
+- Googles sökresultat läses inte, så placeringar finns bara för våra egna
+  sidor.

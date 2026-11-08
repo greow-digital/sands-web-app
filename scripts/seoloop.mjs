@@ -41,7 +41,10 @@ export function agare(fraga) {
   const t = translit(q).replace(/\s+/g, "-");
   const ort = R.ORTER.find((o) => new RegExp(`(^|-)${o}($|-)`).test(t));
   if (ort && /tak/.test(q)) return { amne: `område ${ort}`, sida: `/omraden/${ort}`, alternativ: [] };
-  const a = R.AMNEN.find((x) => x.monster.test(q));
+  // Prova även utan å, ä och ö, så att "taklaggare" och adresser som
+  // /takomlaggning känns igen.
+  const tq = translit(q);
+  const a = R.AMNEN.find((x) => x.monster.test(q) || new RegExp(translit(x.monster.source)).test(tq));
   return a ? { amne: a.amne, sida: a.sida, alternativ: a.alternativ ?? [] } : null;
 }
 
