@@ -10,6 +10,8 @@
     "regelkoll": "node scripts/regelkoll.mjs",
     "sokord": "node scripts/sokordsloop.mjs",
     "sokord:test": "node scripts/sokordsloop.mjs --test",
+    "seo": "node scripts/seoloop.mjs",
+    "seo:test": "node scripts/seoloop.mjs --test",
     "test:e2e": "playwright test"
   },
   "dependencies": {
