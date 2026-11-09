@@ -22,12 +22,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const a = getArtikel(slug);
   if (!a) return {};
+  const titel = a.seoTitel ?? `${a.titel} | Sands`;
   return {
     alternates: { canonical: `/blogg/${slug}` },
-    title: `${a.titel} | Sands`,
+    title: titel,
     description: a.ingress,
     openGraph: {
-      title: `${a.titel} | Sands`,
+      title: titel,
       description: a.ingress,
       type: "article",
       publishedTime: a.datum,

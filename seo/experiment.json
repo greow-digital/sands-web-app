@@ -1,0 +1,129 @@
+{
+  "beskrivning": "Varje SEO-ändring på sajten, med hypotes och mål. scripts/seoloop.mjs mäter dem mot Search Console varje varv. Fält: id, datum (då ändringen gick live), sida (sökväg, eller * för hela sajten), typ (ny sida, innehåll, titel och beskrivning, internlänkar, teknisk, konvertering), hypotes, mal (sökfrågor som ska röra sig), pr, status (planerad tills ändringen är live, sedan aktiv, till sist avslutad), utfall och lardom fylls i när mätningen är klar.",
+  "experiment": [
+    {
+      "id": "E1",
+      "datum": "2026-10-09",
+      "sida": "/blogg/taket-lacker",
+      "typ": "ny sida",
+      "hypotes": "En artikel om läckande tak fångar sökningar från villaägare med ett akut problem, och uppmaningen till takkontroll gör några av dem till leads.",
+      "mal": [
+        "taket läcker",
+        "tak läcker",
+        "takläckage",
+        "läckande tak"
+      ],
+      "pr": "#22",
+      "status": "aktiv"
+    },
+    {
+      "id": "E2",
+      "datum": "2026-10-09",
+      "sida": "/blogg/betongpannor-eller-tegelpannor",
+      "typ": "ny sida",
+      "hypotes": "En jämförelse mellan betong och tegel fångar villaägare som planerar ett takbyte och har kommit till materialvalet.",
+      "mal": [
+        "betongpannor eller tegelpannor",
+        "tegel eller betongpannor",
+        "betongpannor vs tegelpannor"
+      ],
+      "pr": "#22",
+      "status": "aktiv"
+    },
+    {
+      "id": "E3",
+      "datum": "2026-10-10",
+      "sida": "/blogg/snorasskydd-krav-ansvar",
+      "typ": "ny sida",
+      "hypotes": "En artikel om krav och ansvar för snörasskydd inför vintern fångar säsongssökningar och leder till taksäkerhetstjänsten.",
+      "mal": [
+        "snörasskydd krav",
+        "snörasskydd ansvar",
+        "snörasskydd"
+      ],
+      "pr": "#23",
+      "status": "aktiv"
+    },
+    {
+      "id": "E4",
+      "datum": "2026-10-24",
+      "sida": "*",
+      "typ": "teknisk",
+      "hypotes": "robots.txt blockerade /_next/static/, så Google kunde inte rendera sidorna fullt ut. Utan blockeringen bör placeringarna förbättras över hela sajten.",
+      "mal": [],
+      "pr": "#37",
+      "status": "aktiv"
+    },
+    {
+      "id": "E5",
+      "datum": "2026-10-26",
+      "sida": "/",
+      "typ": "innehåll",
+      "hypotes": "Startsidan äger takläggare stockholm: FAQ-rubriken säger takläggare i Stockholm, en ny fråga om hela Stockholm, en text om områdena och en korrekt garanti. Startsidan bör klättra på kärnsökningarna.",
+      "mal": [
+        "takläggare stockholm",
+        "takläggare i stockholm",
+        "takläggning stockholm",
+        "takläggare"
+      ],
+      "pr": "#39",
+      "status": "aktiv",
+      "anteckning": "Startsidan ändrades igen 5 nov (E6), så mätningen efter det dagen blandar ihop de två ändringarna."
+    },
+    {
+      "id": "E6",
+      "datum": "2026-11-05",
+      "sida": "/",
+      "typ": "konvertering",
+      "hypotes": "Inte en SEO-ändring: frågeflödet ersatte formuläret i heron och desktopbilden blev ljusare. Loggas för att den påverkar mätningen av E5.",
+      "mal": [],
+      "pr": "#45",
+      "status": "aktiv"
+    },
+    {
+      "id": "E7",
+      "datum": "2026-11-09",
+      "sida": "/omraden/spanga",
+      "typ": "titel och beskrivning",
+      "hypotes": "Mallens titel sticker inte ut. Betyget i titeln och tjänsterna i beskrivningen ger fler klick på plats 6, där sidan hade 167 visningar och 0 klick.",
+      "mal": [
+        "takläggning spånga",
+        "takläggare spånga"
+      ],
+      "pr": "#46",
+      "status": "aktiv",
+      "anteckning": "Övriga områdessidor behåller mallen och är kontrollgrupp."
+    },
+    {
+      "id": "E8",
+      "datum": "2026-11-09",
+      "sida": "/blogg/certifierad-taklaggare",
+      "typ": "titel och beskrivning",
+      "hypotes": "Den som söker skriver auktoriserad, titeln sa bara certifierad. Med ordet i titeln stiger klickfrekvensen från 1 % mot förväntade 5 % på plats 5.",
+      "mal": [
+        "auktoriserad takläggare",
+        "certifierad takläggare",
+        "certifierade takläggare"
+      ],
+      "pr": "#46",
+      "status": "aktiv"
+    },
+    {
+      "id": "E9",
+      "datum": "2026-11-09",
+      "sida": "/tjanster/takreparation",
+      "typ": "ny sida",
+      "hypotes": "En egen sida för takreparation fångar sökningar som i dag landar på takbytessidan på plats 30 till 46, och ger leads från villaägare med ett konkret problem.",
+      "mal": [
+        "takreparation stockholm",
+        "takarbeten stockholm",
+        "reparera tak",
+        "laga tak",
+        "takreparation"
+      ],
+      "pr": "#46",
+      "status": "aktiv",
+      "anteckning": "Erik bekräftade 9 nov 2026 att Sands utför alla typer av takreparationer."
+    }
+  ]
+}

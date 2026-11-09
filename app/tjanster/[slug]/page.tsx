@@ -47,6 +47,11 @@ const REVIEW_MATCH: Record<string, string[]> = {
 // below; everything else falls back to the generic `${title} i Stockholm`
 // template further down.
 const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
+  takreparation: {
+    title: "Takreparation Stockholm | laga läckande tak | Sands",
+    description:
+      "Takreparation i Stockholm: alla typer av reparationer, från läckage till trasiga pannor. Fast pris efter kostnadsfri takkontroll, eller takbyte vid behov.",
+  },
   taklaggning: {
     title: "Takläggning Stockholm | fast pris, 30 års garanti | Sands",
     description:
