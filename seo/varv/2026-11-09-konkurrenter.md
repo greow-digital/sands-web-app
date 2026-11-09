@@ -112,3 +112,24 @@ Alla tre sitemaps gick att läsa (Vesivek 364 sidor, Villatakexperten 62, Takher
 - **Priser:** Vesivek har artikeln "Byta tak: vad påverkar priset och hur mycket kostar det?" och en kundberättelse om priset. Takhero har /rensa-hangrannor-pris ("Rensa hängrännor pris - prisguide och offert") och lovar fast pris på /rensa-hangrannor. Villatakexperten har ingen prissida bland de lästa.
 - **Övriga ämnen:** Vesivek har sidor om hängrännor, plåttak, taksäkerhet, eternittak, takgarantier, val av takläggare och livslängd. Vesivek har även ett eget spår för bostadsrättsföreningar. Takhero är inriktat på hängrännor och takvård (bland annat "Mossmedel för tak - Bäst i test 2026").
 - **Titlar och rubriker som sticker ut:** Vesiveks /husagare/boka-takkontroll/ har H1 "Boka kostnadsfri takkontroll", samma formulering som vår CTA. Villatakexperten använder mönstret "Takläggare [ort] - takomläggning & renovering" i titlarna. Flera av Vesiveks titlar har varumärket två gånger ("/ Vesivek / Vesivek").
+
+## Täckning per ämne i hela sitemaps
+
+Tabellerna ovan visar bara 25 sidor per konkurrent. Här är alla adresser i deras sitemaps kopplade till våra ämnen (bara utifrån adressen, sidorna är inte lästa).
+
+| Ämne | Vesivek (364) | Villatakexperten (62) | Takhero (107) | Sands |
+|---|---|---|---|---|
+| Takreparation | 0 | 0 | 0 | /tjanster/takreparation (ny 9 nov) |
+| Takomläggning, egen tjänstesida | 0 | 0 (bara referensobjekt) | 0 | avsnitt på /tjanster/taklaggning |
+| Takbyte | 13 | 8 | 0 | /tjanster/taklaggning |
+| Pris | 7 (artiklar) | 1 (/vad-kostar-det-att-byta-tak/) | 4 (/takbyte-pris, /takbesiktning-pris m.fl.) | /priser och artikel |
+| Ortssidor | 8 kommuner i Stockholms län | 22 orter (/taklaggning-ort/) | 22 orter, två tjänster per ort (takbesiktning, taktvätt) | 31 områdessidor |
+| Takbesiktning | 1 | 0 | 2 plus 22 ortssidor | /tjanster/takbesiktning |
+| Hängrännor | 2 | 0 | 26 (rensning, artiklar, orter) | /tjanster/hangrannorstupror |
+| Taksäkerhet | 5 | 0 | 0 | /tjanster/taksakerhet |
+
+Iakttagelser:
+
+- Ingen av de tre har en sida för takreparation, och ingen har en egen tjänstesida för takomläggning. Sands takomläggningssökningar (plats cirka 17, 465 visningar på 28 dagar) har alltså ingen konkurrent med en dedikerad sida bland de tre.
+- Villatakexperten och Takhero har lika många ortssidor som vi eller fler. Takhero gör två tjänster per ort.
+- Konkurrentdelen läser i dag de 25 första relevanta sidorna i bokstavsordning. Nästa förbättring är att välja en sida per ämne i stället, så att urvalet täcker fler ämnen.
