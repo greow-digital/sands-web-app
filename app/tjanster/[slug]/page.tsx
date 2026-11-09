@@ -50,7 +50,7 @@ const SEO_OVERRIDES: Record<string, { title: string; description: string }> = {
   takreparation: {
     title: "Takreparation Stockholm | laga läckande tak | Sands",
     description:
-      "Takreparation i Stockholm: vi lagar läckage och trasiga takpannor. Fast pris efter kostnadsfri takkontroll, och vid behov omläggning av tak eller takbyte.",
+      "Takreparation i Stockholm: alla typer av reparationer, från läckage till trasiga pannor. Fast pris efter kostnadsfri takkontroll, eller takbyte vid behov.",
   },
   taklaggning: {
     title: "Takläggning Stockholm | fast pris, 30 års garanti | Sands",

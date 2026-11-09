@@ -399,7 +399,7 @@ export const tjanster: Tjanst[] = [
     vad Sands gör kommer ur artikeln om läckande tak och FAQ:n på
     /tjanster/taklaggning: riktade reparationer, fast pris efter
     kostnadsfri takkontroll. Inga priser för reparationer finns, så inga
-    anges.
+    anges. Sands utför alla typer av takreparationer (Erik, 9 nov 2026).
   */
   {
     slug: "takreparation",
@@ -407,9 +407,9 @@ export const tjanster: Tjanst[] = [
     title: "Takreparation",
     h1: "Takreparation i Stockholm",
     intro:
-      "Vi lagar läckage och trasiga takpannor i hela Stockholm, så att du inte gör ett takbyte i onödan. Är taket för gammalt för en lagning får du i stället fast pris på att lägga om tak eller byta tak.",
+      "Vi utför alla typer av takreparationer i hela Stockholm, från läckage och trasiga takpannor till plåtarbeten runt skorsten och genomföringar, så att du inte gör ett takbyte i onödan. Är taket för gammalt för en lagning får du i stället fast pris på att lägga om tak eller byta tak.",
     text:
-      "En takreparation är en riktad insats på ett tak som i övrigt är i gott skick: en trasig eller förskjuten panna, en otät genomföring eller ett läckage med en tydlig, avgränsad orsak. Vid den kostnadsfria takkontrollen hittar vi orsaken och bedömer skicket på resten av taket.\n\nDe flesta läckor uppstår i övergångarna, inte mitt på takytan. Vanliga ställen är genomföringar för ventilation, plåten runt skorstenen, ränndalar där två takfall möts och pannor som har flyttat sig efter storm eller snölast. Igensatta hängrännor kan också få vatten att tränga in vid takfoten.\n\nEn lagning räcker inte alltid. Läcker det på flera ställen, eller är underlagspappen 25 år eller äldre, löser en reparation sällan problemet på sikt. Då är omläggning av tak eller ett komplett takbyte det hållbara valet, och du får fast pris på det i stället. Ett tydligt tecken är att det läcker igen på ett nytt ställe kort efter förra lagningen.\n\nPriset för en takreparation beror på vad som behöver göras och hur man kommer åt det. Därför får du fast pris efter den kostnadsfria takkontrollen, innan något arbete görs. Kostnaden för själva åtgärden är ett separat uppdrag, och du bestämmer själv om du vill gå vidare.",
+      "Vi utför alla typer av takreparationer, på tegel-, betong-, plåt- och papptak. En takreparation är en riktad insats på ett tak som i övrigt är i gott skick: en trasig eller förskjuten panna, en otät genomföring eller ett läckage med en tydlig, avgränsad orsak. Vid den kostnadsfria takkontrollen hittar vi orsaken och bedömer skicket på resten av taket.\n\nDe flesta läckor uppstår i övergångarna, inte mitt på takytan. Vanliga ställen är genomföringar för ventilation, plåten runt skorstenen, ränndalar där två takfall möts och pannor som har flyttat sig efter storm eller snölast. Igensatta hängrännor kan också få vatten att tränga in vid takfoten.\n\nEn lagning räcker inte alltid. Läcker det på flera ställen, eller är underlagspappen 25 år eller äldre, löser en reparation sällan problemet på sikt. Då är omläggning av tak eller ett komplett takbyte det hållbara valet, och du får fast pris på det i stället. Ett tydligt tecken är att det läcker igen på ett nytt ställe kort efter förra lagningen.\n\nPriset för en takreparation beror på vad som behöver göras och hur man kommer åt det. Därför får du fast pris efter den kostnadsfria takkontrollen, innan något arbete görs. Kostnaden för själva åtgärden är ett separat uppdrag, och du bestämmer själv om du vill gå vidare.",
     prisIntervall: "Fast pris efter kostnadsfri takkontroll",
     prism2: "Pris efter takkontroll",
     ingår: [
@@ -419,6 +419,10 @@ export const tjanster: Tjanst[] = [
       "Fast pris innan något arbete görs",
     ],
     faq: [
+      {
+        q: "Vilka reparationer gör ni?",
+        a: "Alla typer av takreparationer: läckage, trasiga eller förskjutna pannor, plåtarbeten runt skorsten och genomföringar, ränndalar, hängrännor och stuprör samt vindskivor. Vid den kostnadsfria takkontrollen hittar vi orsaken och du får fast pris på åtgärden.",
+      },
       {
         q: "Kan man laga ett läckande tak, eller måste hela taket bytas?",
         a: "Ett enstaka läckage på ett tak i gott skick kan oftast åtgärdas med en riktad reparation, till exempel runt en genomföring eller en trasig panna. Läcker det på flera ställen, eller är underlagspappen 25 år eller äldre, löser en lagning sällan problemet på sikt. Då är omläggning eller takbyte det hållbara alternativet.",
